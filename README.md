@@ -1,24 +1,24 @@
 # template
 
-##Objective
+## Objective
 This project template should serve as a starting point and framework for data analysis projects at The Data Center. 
 
-##Contents
+## Contents
 
-###inputs
+### inputs
 all static data input files that won't be altered - .rdata, .csv, .xlsx...
 
-###outputs
+### outputs
 vizzes, charts, data tables, our briefs and reports (stable/final versions)
 
-###documentation
+### documentation
 lit review, tutorials, code documentation/instructions
 
-###sandbox
+### sandbox
 exploring data - everyone can have their own folder in here
 
 
-##Inspiration
+## Inspiration
 https://github.com/stephenholzman/project-template
 https://community.rstudio.com/t/best-practice-for-good-documented-reproducible-analysis/1995
 https://github.com/Pakillo/template/blob/master/slides/Projects_as_Packages.pdf
