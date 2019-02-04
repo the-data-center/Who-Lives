@@ -60,9 +60,11 @@ knitr::opts_chunk$set(echo = FALSE)
 # Load required scripts in order. 
 # Note: here() uses the relative path to the same directory.
 source(here("css_helper.R"))
-source(here("who lives.R"))
-source(here("Pep Code.R"))
-source(here("who lives graphics.R"))
+source(here("01_libraries.R"))
+source(here("02_variables.R"))
+source(here("03_functions.R"))
+source(here("04_analysis.R"))
+source(here("05_graphics.R"))
 source(here("inline.R"))
 # For Asap font
 #font_add_google("Asap")

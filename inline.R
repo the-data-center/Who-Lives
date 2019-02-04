@@ -8,7 +8,7 @@ year <- year %>%
    select(year) %>% 
   pull()
 
-Overallpop <- AllParishes %>% 
+Overallpop <- allparishesRaw %>% 
 filter(date =="7/1/2017 population estimate") %>% 
 filter(sex =="Total") %>% 
 filter(hisp =="Total") %>% 
@@ -55,7 +55,7 @@ metro2017pop <-(getvalue.pop.no.2017 + getvalue.pop.jeff.2017  + getvalue.pop.pl
 
 #According to the U.S. Census Bureau’s 2017 population estimates, there are now 91,274 fewer African Americans living in New Orleans (Orleans Parish) 
 
-Overallpop2010 <- AllParishes %>% 
+Overallpop2010 <- allparishesRaw %>% 
   filter(date =="4/1/2010 Census population") %>% 
   filter(sex =="Total") %>% 
   filter(hisp =="Total") %>% 
