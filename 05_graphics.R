@@ -239,11 +239,10 @@ chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
-        legend.text = element_text(size = 16),
-        legend.key.size = unit(.7, "lines"),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12), 
         legend.spacing.y = unit(10, "lines"),
         plot.title = element_text(hjust = .5, size = 24),
-        axis.text.x = element_text(size = 12, vjust=1),
+        axis.text.x = element_text(size = 10, vjust=1),
         axis.text.y = element_text(size = 12)) +
   labs(title = "Hispanic population by year, Metro",
        x="",
