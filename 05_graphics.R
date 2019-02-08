@@ -778,32 +778,33 @@ chart.commute.allparishes <- commuteforGraphic %>%
        y="") 
 
 # #For checking graphics
-AAwhthispGraphic
-chart.demo.allparishes
-AAhistGraphic
-HispanicPopGraphic
-chart.HispanpopYears.allparishes
-chart.hispan2017.allparishes
-chart.agepop2000.allparishes
-chart.agepop2017.allparishes
-hwcGraphic
-singGraphic
-popunder18Graphic
-hsGraphic
-bachGraphic
-medhhGraphic
-chart.inta.allparishes
-povGraphic
-childpovGraphic
-vehGraphic
-forborGraphic
-chart.mob.allparishes
-hoGraphic
-honomoGraphic
-rentburGraphic
-hoburGraphic
-medrentGraphic
-chart.yrbuilt.allparishes
-chart.commute.allparishes
+# #ctrl+shift+c to un-#
+# AAwhthispGraphic
+# chart.demo.allparishes
+# AAhistGraphic
+# HispanicPopGraphic
+# chart.HispanpopYears.allparishes
+# chart.hispan2017.allparishes
+# chart.agepop2000.allparishes
+# chart.agepop2017.allparishes
+# hwcGraphic
+# singGraphic
+# popunder18Graphic
+# hsGraphic
+# bachGraphic
+# medhhGraphic
+# chart.inta.allparishes
+# povGraphic
+# childpovGraphic
+# vehGraphic
+# forborGraphic
+# chart.mob.allparishes
+# hoGraphic
+# honomoGraphic
+# rentburGraphic
+# hoburGraphic
+# medrentGraphic
+# chart.yrbuilt.allparishes
+# chart.commute.allparishes
 
 
