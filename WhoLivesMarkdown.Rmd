@@ -355,7 +355,7 @@ makeCSS_source(
 ## Foreign-born population and geographic mobility
 
 
-A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2017 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r year`, fully `r round(((getvalue.forbor.jeff.2017)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, statistically the same as the U.S. share. In Orleans Parish the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2017 - getvalue.forbor.no.2000)*100), digits = 1)` percentage point between 2000 and `r year` while St. Tammany Parish increased by `r round(((getvalue.forbor.tam.2017 - getvalue.forbor.tam.2000)*100), digits = 1)` percentage points.
+A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2017 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r year`, fully `r round(((getvalue.forbor.jeff.2017)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, statistically the same as the U.S. share. In Orleans Parish the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2017 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r year` while St. Tammany Parish increased by `r round(((getvalue.forbor.tam.2017 - getvalue.forbor.tam.2000)*100), digits = 1)` percentage points.
 
 ```{r forbor, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 forborGraphic
@@ -503,13 +503,12 @@ Data on race/ethnicity and age is from the Census Bureau vintage 2017 population
 
 Statistical tests of significance were computed at the 95% confidence level for all data from the American Community Survey and Census 2000 SF3. An “*” indicates that differences between two time periods or geographies are not significant, and therefore are the result of sampling variability rather than real change in characteristics of the population.
 
-The significance tests require both estimates and their standard errors. Standard errors for the ACS estimates were calculated using formulas in Appendix 3 of “What General Data Users Need to Know” available at: http://www.census.gov/acs/www/Downloads/handbooks/ACSGeneralHandbook.pdf.
+The significance tests require both estimates and their standard errors. Standard errors for the ACS estimates were calculated using formulas from section 7, “Understanding Error and Determining Statistical Signifigance” available at: https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018.pdf.
 
 Standard errors for Census 2000 SF3 data were calculated using formulas from Chapter 8 of the Technical Documentation available at: http://www.census.gov/prod/cen2000/doc/sf3.pdf.
 
 Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
-The test for significance was calculated using formulas in Appendix 4 of “What General Data Users Need to Know found at: http://www.census.gov/acs/www/Downloads/handbooks/ACSGeneralHandbook.pdf.”
 
 ## Endnotes
 
@@ -521,17 +520,17 @@ The test for significance was calculated using formulas in Appendix 4 of “What
 
 [4] Plyer, A. and Ortiz, E. (2011). Drivers of housing demand: Preparing for the impending elder boom. Retrieved July 8, 2013, from http:// www.datacenterresearch.org/reports_analysis/drivers-of-housing-demand.
 
-[5] Julian, T. and Kominski, R. (2011). Education and synthetic work-life earnings estimates. Retrieved September 18, 2012 from http:// www.census.gov/prod/2011pubs/acs-14.pdf; U.S. Department of Housing and Urban Development. (2012). Conceptualizing and measuring resilience. Retrieved September 18, 2012 from http://www.huduser.org/portal/periodicals/em/winter12/highlight2.html#title.
+[5] Julian, T. and Kominski, R. (2011). Education and synthetic work-life earnings estimates. Retrieved February 8, 2019 from https://www.census.gov/library/publications/2011/acs/acs-14.html; U.S. Department of Housing and Urban Development. (2012). Conceptualizing and measuring resilience. Retrieved September 18, 2012 from http://www.huduser.org/portal/periodicals/em/winter12/highlight2.html#title.
 
-[6] Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home Computer Technology and Student Achievement. Retrieved October 10, 2014 from http://www.urban.org/uploadedpdf/1001433-digital-divide.pdf.
+[6] Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home Computer Technology and Student Achievement. Retrieved February 8, 2019 from http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.6663&rep=rep1&type=pdf.
 
-[7] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The geography of immigrant skills: Educational profiles of metropolitan areas. Retrieved August 22, 2012 from http://www.brookings.edu/papers/2011/06_immigrants_singer.aspx.
+[7] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The geography of immigrant skills: Educational profiles of metropolitan areas. Retrieved AFebruary 8, 2019 from https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/.
 
-[8] Based on surveys conducted by the U.S. Census Bureau, employment-related reasons are the most frequent reason for inter-county moves of greater than 50 miles. For example, among people in the United States who moved over 500 miles, 52 percent moved for an employment-related reason compared to 23 percent for a family-related reason and 22 percent for a housing-related reason. Employment-related reasons include a new job or job transfer, to look for work, to be closer to work, retirement, and other job-related reasons. See U.S. Census Bureau. (n.d.). Geographic Mobility: 2011 to 2012 (Table 27). Retrieved September 23, 2013 from http://www.census. gov/hhes/migration/data/cps/cps2012.html.
+[8] Based on surveys conducted by the U.S. Census Bureau, employment-related reasons are the most frequent reason for inter-county moves of greater than 50 miles. For example, among people in the United States who moved over 500 miles, 52 percent moved for an employment-related reason compared to 23 percent for a family-related reason and 22 percent for a housing-related reason. Employment-related reasons include a new job or job transfer, to look for work, to be closer to work, retirement, and other job-related reasons. See U.S. Census Bureau. (n.d.). Geographic Mobility: 2011 to 2012 (Table 27). Retrieved February 8, 2019 from https://www.census.gov/topics/population/migration/data/tables/cps.2012.html.
 
-[9] Based on surveys conducted by the U.S. Census Bureau, people 25 to 29 years old were more likely than other age groups to be movers from a different county, state, region, or country. And people with a professional or graduate degree were also more likely than other educational groups to be movers from a different county, state, region, or country. See U.S. Census Bureau. (n.d.). Geographic Mobility: 2011 to 2012 (Table 1). Retrieved September 23, 2013 from http://www.census.gov/hhes/migration/data/cps/cps2012.html.
+[9] Based on surveys conducted by the U.S. Census Bureau, people 25 to 29 years old were more likely than other age groups to be movers from a different county, state, region, or country. And people with a professional or graduate degree were also more likely than other educational groups to be movers from a different county, state, region, or country. See U.S. Census Bureau. (n.d.). Geographic Mobility: 2011 to 2012 (Table 1). Retrieved September 23, 2013 from https://www.census.gov/topics/population/migration/data/tables/cps.2012.html.
 
-[10] State of Louisiana Office of Community Development. (2013). The Homeowner Assistance Program Week 375 Situation & Pipeline Report. Retrieved September 20, 2013 from http://www.road2la.org/Docs/Default/DefaultNewsUpdates/Week%20375%20Pipeline%20 and%20Status%20Report_09-10-2013.pdf.
+[10] State of Louisiana Office of Community Development. (2013). The Homeowner Assistance Program Week 375 Situation & Pipeline Report.
 
 [11] Plyer, A., Ortiz, E., and Pettit, K. (2009). Post-Katrina housing affordability challenges continue in 2008, worsening among Orleans Parish very low income renters. Retrieved September 17, 2013 from http://www.datacenterresearch.org/reports_analysis/housing-affordability.
 
