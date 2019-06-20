@@ -237,50 +237,54 @@ mystate <- "state:22"
 ######### Define your variables
 
 # Use API to generate the entire list of variables
-charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2017, type="variables")$name
+charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2018, type="variables")$name
 
 ######### Pull data
 
 allparishesRaw <- pullDataPEP(charagegroupsVars, 
                            api = "pep/charagegroups", 
-                           year = 2017, 
+                           year = 2018, 
                            counties = mycounties)
 save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
 
-popestVars <- c("POP","DATE_DESC","DATE", "GEONAME", "HISP")
+popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEONAME", "HISP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
+popestVars2000 <- c("POP","DATE_DESC","DATE", "GEONAME", "HISP")
 listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
 hisppopestRaw <- getCensus(name = "pep/charagegroups", # most recent
-                               vintage = 2017, 
+                               vintage = 2018, 
                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
                                vars = popestVars, 
                                region = "county: 071,051,075,087,089,093,095,103", 
                                regionin = "state:22") %>% 
+                    rename(DATE = DATE_CODE) %>% 
   bind_rows(getCensus(name = "pep/int_charagegroups", # Intercensal estimates
                       vintage = 2000, 
                       key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
-                      vars = popestVars, 
+                      vars = popestVars2000,
                       region = "county:071,051,075,087,089,093,095,103", 
                       regionin = "state:22")) %>% 
   mutate(place = str_sub(GEONAME, 1, nchar(GEONAME) - 18),
          year = str_sub(DATE_DESC, 5, 8)) %>% # Clean July 1 from every year
   select(-GEONAME, -DATE) %>% 
   filter(HISP == 2) %>% 
-  filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017) 
+  filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017 | year ==2018) 
 save(hisppopestRaw, file = "inputs/hisppopestRaw.RData")
 
 
-popestVars <- c("POP","DATE_DESC","DATE", "GEONAME", "HISP", "RACE")
+popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEONAME", "HISP", "RACE")
+popestVars2000 <- c("POP","DATE_DESC","DATE", "GEONAME", "HISP")
 listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
 blackpopestRaw <- getCensus(name = "pep/charagegroups", # most recent
-                                vintage = 2017, 
+                                vintage = 2018, 
                                 key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
                                 vars = popestVars, 
                                 region = "county: 071", 
                                 regionin = "state:22") %>% 
+                     rename(DATE = DATE_CODE) %>%
   bind_rows(getCensus(name = "pep/int_charagegroups", # Intercensal estimates
                       vintage = 2000, 
                       key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
-                      vars = popestVars, 
+                      vars = popestVars2000, 
                       region = "county:071", 
                       regionin = "state:22")) %>% 
   mutate(place = str_sub(GEONAME, 1, nchar(GEONAME) - 18),
@@ -288,6 +292,6 @@ blackpopestRaw <- getCensus(name = "pep/charagegroups", # most recent
   select(-GEONAME, -DATE) %>% 
   filter(HISP == 1) %>% 
   filter(RACE == 2) %>% 
-  filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017) 
+  filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017| year ==2018) 
 save(blackpopestRaw, file = "inputs/blackpopestRaw.RData")
 
