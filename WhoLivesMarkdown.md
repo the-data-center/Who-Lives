@@ -18,7 +18,7 @@ are now 91,274 fewer African Americans living in New Orleans (Orleans
 Parish) compared to 2000, but there are also 7,945 fewer whites.
 Meanwhile, the number of Hispanics grew by 7,498.\[2\]
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -44,7 +44,7 @@ the Baptist, and St. Tammany parishes, each. In fact, the number and
 share of Hispanics have increased in all eight parishes in the metro
 area.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/demoallparish-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/demoallparish-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -55,7 +55,7 @@ Although there are 91,274 fewer African Americans living in New Orleans
 in 2017 than in 2000, the number of African Americans has grown every
 year since 2006.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/AAhistorical-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/AAhistorical-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -77,7 +77,7 @@ metro area parishes is far below the average for the United States,
 which has grown from 12 percent to 18 percent of the total U.S.
 population over these 17 years.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/hispanpop-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hispanpop-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -90,7 +90,7 @@ since 2010, the Hispanic population has grown 25 percent such that
 Hispanics account for 27 percent of the metro’s population growth since
 2010.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/hispanpopyear-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hispanpopyear-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -113,7 +113,7 @@ Hispanic population in metro New Orleans. Nevertheless, the Mexican
 population is much less prominent in the metro than nationally, where it
 represents 62 percent of the Hispanic population.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/hispan2017-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hispan2017-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -133,14 +133,14 @@ Looking at the total population in the metro by five-year age groups for
 Consequently, the median age of the metro has risen to 38 in 2017 from
 34.8 in 2000.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/age2000-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/age2000-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000.</p>
 </div>
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/age2017-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/age2017-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -156,7 +156,7 @@ percent to 29 percent; the percent of Jefferson households with children
 declined from 33 percent to 24 percent; and the percent of Orleans
 households with children declined from 30 percent to 18 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/hwc-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hwc-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -169,7 +169,7 @@ of individuals living alone grew from 27 percent in 2000 to 34 percent
 in 2017 — similar to the trend for Jefferson Parish. The increase was
 larger in Orleans Parish, which jumped from 33 to 46 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/sing-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/sing-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -183,7 +183,7 @@ metro had 358,092 children under 18 years in 2000 and only 284,167 in
 population declined to 79,030 from 129,408. The under 18 population is
 now 22 percent of the metro population, down from 27 percent in 2000.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/popunder18-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/popunder18-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -209,7 +209,7 @@ New Orleans, the share of adults with less than a high school degree
 fell from 25 percent to 14 percent but is still higher than the U.S.
 average of 12 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/hs-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hs-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -224,7 +224,7 @@ percent, and up from 26 percent in 2000. The overall metro area share of
 adults with a bachelor’s degree grew from 23 to 30 percent — lower than
 the national average.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/bach-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/bach-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -236,7 +236,7 @@ for the city are significantly lower than the U.S. median of $60,336. In
 Jefferson Parish, median household income declined 7 percent between
 1999 and 2017, even after adjusting for inflation, falling to $51,494.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/medhh-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/medhh-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -276,7 +276,7 @@ This is compared to 11 percent nationwide.
 Inequalities between individuals, households, businesses, or geographic areas with regard to access, use of, or impact of information and communication technologies.
 </div>
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/inta-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/inta-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -298,7 +298,7 @@ the Jefferson Parish poverty rate increased from 14 to 17 percent
 between 1999 and 2017. Across the U.S., the poverty rate increased from
 12 to 13 percent between 1999 and 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/pov-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/pov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -313,7 +313,7 @@ poverty rate jumped from 20 percent in 1999 to 28 percent in 2017 —
 greatly surpassing the U.S. child poverty rate, which rose from 17 to 18
 percent between 1999 and 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/childpov-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/childpov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -329,7 +329,7 @@ high as in neighboring parishes and the nation, indicating the
 importance of a robust public transportation system and comprehensive
 evacuation plan.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/veh-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/veh-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -348,10 +348,10 @@ most populous metro parishes since 2000, led by a 5.4 percentage point
 gain in Jefferson Parish. By 2017, fully 12.9 percent of Jefferson
 Parish population was foreign-born, statistically the same as the U.S.
 share. In Orleans Parish the foreign-born share of the population
-increased by 1 percentage point between 2000 and 2017 while St. Tammany
+increased by 1 percentage points between 2000 and 2017 while St. Tammany
 Parish increased by 2.3 percentage points.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/forbor-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/forbor-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -370,7 +370,7 @@ Orleans Parish came from outside the state of Louisiana. In Jefferson
 Parish, the share of the population who were new movers into the parish
 was 5 percent in 2004, and has not significantly changed.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/mob-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/mob-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -392,7 +392,7 @@ St. Tammany from 80 percent to 77 and in Jefferson from 64 to 62 percent
 between 2000 and 2017. In contrast, homeownership rates in New Orleans
 have held steady, but at a much lower 47 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/ho-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/ho-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -414,7 +414,7 @@ proceeds to pay off their mortgage principal. In fact, Orleans and
 Jefferson received the first and second largest number of Road Home
 Option 1 grants among all Louisiana parishes.\[10\]
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/honomo-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/honomo-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -434,7 +434,7 @@ rising to only 25 percent nationally. In Jefferson Parish, the share of
 renters paying more than 50 percent of household income on housing and
 utilities is 26 percent in 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/rentbur-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/rentbur-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -449,7 +449,7 @@ unchanged in metro area parishes since 2004. There is a clear gap
 between the rate of housing cost burden for renters vs. homeowners, and
 that gap has widened.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/hoburGraphic-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hoburGraphic-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -467,7 +467,7 @@ rose from $742 to $962 in New Orleans, a 30 percent increase after
 adjusting for inflation. Meanwhile, median gross rents increased 19
 percent metrowide compared to only 11 percent nationwide.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/medrent-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/medrent-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -491,7 +491,7 @@ percent of housing stock has been built since 1990. In contrast, in
 St. Tammany, the majority of housing units are in structures that have
 been built since 1990.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/yrbuilt-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/yrbuilt-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -523,7 +523,7 @@ by a 60 to 67 percent rise in Orleans Parish. This goes against the
 national trend, where the share in driving alone remained steady between
 2000 and 2017 and where public transit use has also remained steady.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/02/commute-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/commute-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -548,19 +548,16 @@ sampling variability rather than real change in characteristics of the
 population.
 
 The significance tests require both estimates and their standard errors.
-Standard errors for the ACS estimates were calculated using formulas in
-Appendix 3 of “What General Data Users Need to Know” available at:
-<http://www.census.gov/acs/www/Downloads/handbooks/ACSGeneralHandbook.pdf>.
+Standard errors for the ACS estimates were calculated using formulas
+from section 7, “Understanding Error and Determining Statistical
+Signifigance” available at:
+<https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018.pdf>.
 
 Standard errors for Census 2000 SF3 data were calculated using formulas
 from Chapter 8 of the Technical Documentation available at:
 <http://www.census.gov/prod/cen2000/doc/sf3.pdf>.
 
 Standard errors for Census 2000 and Census 2010 SF1 data are zero.
-
-The test for significance was calculated using formulas in Appendix 4 of
-“What General Data Users Need to Know found at:
-<http://www.census.gov/acs/www/Downloads/handbooks/ACSGeneralHandbook.pdf>.”
 
 Endnotes {#endnotes}
 --------
@@ -588,20 +585,21 @@ Preparing for the impending elder boom. Retrieved July 8, 2013, from
 www.datacenterresearch.org/reports\_analysis/drivers-of-housing-demand.
 
 \[5\] Julian, T. and Kominski, R. (2011). Education and synthetic
-work-life earnings estimates. Retrieved September 18, 2012 from
-<http://> www.census.gov/prod/2011pubs/acs-14.pdf; U.S. Department of
-Housing and Urban Development. (2012). Conceptualizing and measuring
-resilience. Retrieved September 18, 2012 from
+work-life earnings estimates. Retrieved February 8, 2019 from
+<https://www.census.gov/library/publications/2011/acs/acs-14.html>; U.S.
+Department of Housing and Urban Development. (2012). Conceptualizing and
+measuring resilience. Retrieved September 18, 2012 from
 <http://www.huduser.org/portal/periodicals/em/winter12/highlight2.html#title>.
 
 \[6\] Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home
-Computer Technology and Student Achievement. Retrieved October 10, 2014
-from <http://www.urban.org/uploadedpdf/1001433-digital-divide.pdf>.
+Computer Technology and Student Achievement. Retrieved February 8, 2019
+from
+<http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.6663&rep=rep1&type=pdf>.
 
 \[7\] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The
 geography of immigrant skills: Educational profiles of metropolitan
-areas. Retrieved August 22, 2012 from
-<http://www.brookings.edu/papers/2011/06_immigrants_singer.aspx>.
+areas. Retrieved AFebruary 8, 2019 from
+<https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/>.
 
 \[8\] Based on surveys conducted by the U.S. Census Bureau,
 employment-related reasons are the most frequent reason for inter-county
@@ -612,8 +610,8 @@ reason and 22 percent for a housing-related reason. Employment-related
 reasons include a new job or job transfer, to look for work, to be
 closer to work, retirement, and other job-related reasons. See U.S.
 Census Bureau. (n.d.). Geographic Mobility: 2011 to 2012 (Table 27).
-Retrieved September 23, 2013 from <http://www.census>.
-gov/hhes/migration/data/cps/cps2012.html.
+Retrieved February 8, 2019 from
+<https://www.census.gov/topics/population/migration/data/tables/cps.2012.html>.
 
 \[9\] Based on surveys conducted by the U.S. Census Bureau, people 25 to
 29 years old were more likely than other age groups to be movers from a
@@ -622,13 +620,10 @@ professional or graduate degree were also more likely than other
 educational groups to be movers from a different county, state, region,
 or country. See U.S. Census Bureau. (n.d.). Geographic Mobility: 2011 to
 2012 (Table 1). Retrieved September 23, 2013 from
-<http://www.census.gov/hhes/migration/data/cps/cps2012.html>.
+<https://www.census.gov/topics/population/migration/data/tables/cps.2012.html>.
 
 \[10\] State of Louisiana Office of Community Development. (2013). The
 Homeowner Assistance Program Week 375 Situation & Pipeline Report.
-Retrieved September 20, 2013 from
-<http://www.road2la.org/Docs/Default/DefaultNewsUpdates/Week%20375%20Pipeline%20>
-and%20Status%20Report\_09-10-2013.pdf.
 
 \[11\] Plyer, A., Ortiz, E., and Pettit, K. (2009). Post-Katrina housing
 affordability challenges continue in 2008, worsening among Orleans
