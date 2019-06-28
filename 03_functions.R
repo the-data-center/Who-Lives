@@ -25,20 +25,20 @@ wholivesdatapull <- function(variables, names = variables, year = 2017){
 # Pull data. Note that this includes 2010-2017.
 pullDataPEP <- function(variables, api, year, counties, metro) {
   parish <- getCensus(name = api, 
-                      vintage = year, 
+                      vintage = 2018, 
                       key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
                       vars = variables, 
                       region = counties, 
                       regionin = "state:22")
   
   state <- getCensus(name = api, 
-                     vintage = year, 
+                     vintage = 2018, 
                      key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
                      vars = variables, 
                      region = "state:22")
   
   usa <- getCensus(name = api, 
-                   vintage = year, 
+                   vintage = 2018, 
                    key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
                    vars = variables, 
                    region = "us:1")
