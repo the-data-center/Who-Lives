@@ -97,7 +97,7 @@ AAwhthispGraphic <- AAWhiteHispan %>%
   mutate(race.fac = factor(.$raceSimple,levels = c("Black", "White","Hispanic"))) %>%
   select(est2000, population, raceSimple, race.fac) %>%
   gather(-raceSimple,-race.fac, key=variable, value =val) %>%
-  mutate(description = ifelse(variable == "est2000", "2000", "2017")) %>%
+  mutate(description = ifelse(variable == "est2000", "2000", "2018")) %>%
   ggplot(aes(race.fac, val, fill=description)) +
   geom_bar(stat="identity",
            position = position_dodge(),
@@ -128,7 +128,7 @@ ParishDemoforGraphic <- ParishDemo %>%
          description = ifelse(grepl("pct",variable), 2017, description),     #if variable contains 'pct'
          description = ifelse(grepl("2000", variable), 2000, description)) %>%     #if variable contains '2000'
   mutate(description.fac = factor(.$description, levels = c( "2000",
-                                                             "2017")))%>%
+                                                             "2018")))%>%
   mutate(race = NA,
          race = ifelse(grepl("white", variable),"White", race),
          race = ifelse(grepl("black", variable),"Black", race),
@@ -186,8 +186,8 @@ AAhistGraphic <- AAhistorical %>%
 HispanicPopforGraphic  <- HispanicPop %>%
   mutate(place.fac = factor(.$place,levels = c("Orleans", "Jefferson", "St. Tammany", "Plaquemines", "St. Bernard","St. Charles", "St. James", "St. John the Baptist"))) %>%
   gather(-place,-place.fac,key = variable, value = value) %>%
-  mutate(description = ifelse(variable == "est2000", "2000", "2017")) %>%
-mutate(description.fac = factor(.$description, levels = c( "2017",
+  mutate(description = ifelse(variable == "est2000", "2000", "2018")) %>%
+mutate(description.fac = factor(.$description, levels = c( "2018",
                                                            "2000")))
 
 HispanicPopGraphic <- HispanicPopforGraphic %>%
