@@ -7,7 +7,7 @@
 ##pull parish, metro, and US numbers with census api
 ##input: census api variable names, human-readable names, and vintage
 ##output: dataframe in same format as Who Lives data tables excel sheet
-wholivesdatapull <- function(variables, names = variables, year = 2017){
+wholivesdatapull <- function(variables, names = variables, year=2017){
   censuskey="530ce361defc2c476e5b5d5626d224d8354b9b9a"
   parishes <- getCensus(name = "acs/acs1", vintage = year, key = censuskey, vars = variables, region = "county:071,051,103", regionin = "state:22") ##pull parish data
   parishes$state = NULL  #state column pulled automatically & needs to be deleted
@@ -25,20 +25,20 @@ wholivesdatapull <- function(variables, names = variables, year = 2017){
 # Pull data. Note that this includes 2010-2017.
 pullDataPEP <- function(variables, api, year, counties, metro) {
   parish <- getCensus(name = api, 
-                      vintage = 2018, 
+                      vintage = 2017, 
                       key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
                       vars = variables, 
                       region = counties, 
                       regionin = "state:22")
   
   state <- getCensus(name = api, 
-                     vintage = 2018, 
+                     vintage = 2017, 
                      key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
                      vars = variables, 
                      region = "state:22")
   
   usa <- getCensus(name = api, 
-                   vintage = 2018, 
+                   vintage = 2017, 
                    key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
                    vars = variables, 
                    region = "us:1")
@@ -219,4 +219,3 @@ dodgedBar <- function(data,
          y="")
   return(chart)
 }
-
