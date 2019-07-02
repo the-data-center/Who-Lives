@@ -243,7 +243,7 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2018, ty
 
 allparishesRaw <- pullDataPEP(charagegroupsVars, 
                            api = "pep/charagegroups", 
-                           year = 2018, 
+                           year = 2017, 
                            counties = mycounties)
 save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
 
@@ -294,4 +294,195 @@ blackpopestRaw <- getCensus(name = "pep/charagegroups", # most recent
   filter(RACE == 2) %>% 
   filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017| year ==2018) 
 save(blackpopestRaw, file = "inputs/blackpopestRaw.RData")
+
+
+
+
+
+
+
+
+
+
+
+###2018 update
+
+popestVarsAGE <- c("POP", "GEONAME", "AGEGROUP", "DATE_DESC")
+
+popestVarsRACE <- c("POP", "GEONAME", "RACE", "HISP", "DATE_DESC")
+
+
+# Age codes for joining later
+ageGroupCodeName <- 
+  c("Total",
+    "Under 5 years",
+    "5 to 9",
+    "10 to 14",
+    "15 to 19",
+    "20 to 24",
+    "25 to 29",
+    "30 to 34",
+    "35 to 39",
+    "40 to 44",
+    "45 to 49",
+    "50 to 54",
+    "55 to 59",
+    "60 to 64",
+    "65 to 69",
+    "70 to 74",
+    "75 to 79",
+    "80 to 84",
+    "85 plus",
+    "Under 18 years",
+    "5 to 13 years",
+    "14 to 17 years",
+    "18 to 64 years",
+    "18 to 24 years",
+    "25 to 44 years",
+    "45 to 64 years",
+    "65 years and over",
+    "85 years and over",
+    "16 years and over",
+    "18 years and over",
+    "15 to 44 years",
+    "Median age (years)")
+ageGroupCode <- data.frame(AGEGROUP=as.character(0:31),ageGroupCodeName)
+
+# Race codes for joining later
+# See PEPSR6H and PEPSR5H on Am FactFinder, verified match for Orleans Parish
+raceCodeName <- 
+  c("Total",
+    "White alone",
+    "Black or African American alone",
+    "American Indian and Alaska Native alone",
+    "Asian alone",
+    "Native Hawaiian and Other Pacific Islander alone",
+    "Two or more races",
+    "White combo",
+    "Black or African American combo",
+    "American Indian and Alaska Native combo",
+    "Asian combo",
+    "Native Hawaiian and Other Pacific Islander combo")
+raceCode <- data.frame(RACE=as.character(0:11),raceCodeName)
+
+
+
+hispCodeName <- c("Total","Not Hispanic","Hispanic")
+hispCode <- data.frame(HISP=as.character(0:2),hispCodeName)
+
+
+
+
+
+
+# Pull data age
+
+parish_ageEstimates <- getCensus(name = "pep/charagegroups",
+                                 vintage = 2018,
+                                 key = mycensuskey,
+                                 vars = popestVarsAGE,
+                                 region = mycounties, 
+                                 regionin = "state:22")
+
+state_ageEstimates <- getCensus(name = "pep/charagegroups", 
+                                vintage = 2018, 
+                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
+                                vars = popestVarsAGE , 
+                                region = "state:22")
+
+usa_ageEstimates  <- getCensus(name = "pep/charagegroups", 
+                               vintage = 2018, 
+                               key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
+                               vars = popestVarsAGE , 
+                               region = "us:1")
+
+dfage <- parish_ageEstimates %>% bind_rows(state_ageEstimates) %>% bind_rows(usa_ageEstimates) # Bind rows for counties, metro, state, usa
+
+rm(parish_ageEstimates, state_ageEstimates, usa_ageEstimates)  # remove large objects from environment
+
+dfage <- dfage %>% 
+  left_join(ageGroupCode) %>% 
+  mutate(place = GEONAME) %>% 
+  mutate(POP = as.numeric(POP), 
+         place = GEONAME,
+         place = ifelse(!is.na(county),
+                        str_sub(GEONAME, 1, nchar(GEONAME) - 18),
+                        GEONAME))
+
+dfage <- dfage %>% 
+  select(place, DATE_DESC, ageGroupCodeName, POP) %>% 
+  rename(age = ageGroupCodeName, 
+         population = POP,
+         date = DATE_DESC) %>% 
+  mutatue(raceSimple = "Total",
+          race = "Total",
+          hisp= "Total")
+
+
+
+
+
+
+# Pull data race
+
+parish_raceEstimates <- getCensus(name = "pep/charagegroups",
+                                  vintage = 2018,
+                                  key = mycensuskey,
+                                  vars = popestVarsRACE,
+                                  region = mycounties, 
+                                  regionin = "state:22")
+
+state_raceEstimates <- getCensus(name = "pep/charagegroups", 
+                                 vintage = 2018, 
+                                 key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
+                                 vars = popestVarsRACE, 
+                                 region = "state:22")
+
+usa_raceEstimates  <- getCensus(name = "pep/charagegroups", 
+                                vintage = 2018, 
+                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
+                                vars = popestVarsRACE, 
+                                region = "us:1")
+
+dfrace <- parish_raceEstimates %>% bind_rows(state_raceEstimates) %>% bind_rows(usa_raceEstimates) # Bind rows for counties, metro, state, usa
+
+rm(parish_raceEstimates, state_raceEstimates, usa_raceEstimates)  # remove large objects from environment
+
+dfrace <- dfrace %>% 
+  left_join(raceCode) %>%
+  left_join(hispCode) %>%
+  mutate(place = GEONAME) %>% 
+  mutate(POP = as.numeric(POP), 
+         place = GEONAME,
+         place = ifelse(!is.na(county),
+                        str_sub(GEONAME, 1, nchar(GEONAME) - 18),
+                        GEONAME))
+
+dfrace <- dfrace %>% 
+  select(place, DATE_DESC, hispCodeName,  raceCodeName, POP) %>% 
+  rename(hisp = hispCodeName,
+         race = raceCodeName, 
+         population = POP,
+         date = DATE_DESC) %>% 
+  filter(race %in% c("Total",
+                     "White alone",
+                     "Black or African American alone",
+                     "Asian alone")) %>% 
+  mutate(raceSimple = NA, # make variable base on race alone that matches Who Lives races. 
+         raceSimple = ifelse(race == "Total" & hisp == "Total", "Total", raceSimple),
+         raceSimple = ifelse(race == "White alone" & hisp == "Not Hispanic", "White", raceSimple),
+         raceSimple = ifelse(race == "Black or African American alone" & hisp == "Not Hispanic", "Black", raceSimple),
+         raceSimple = ifelse(race == "Asian alone" & hisp == "Not Hispanic", "Asian", raceSimple),
+         raceSimple = ifelse(race == "Total" & hisp == "Hispanic", "Hispanic", raceSimple))  %>%
+  filter(!is.na(raceSimple)) %>% # Filter out other races 
+  mutate(age = "Total")
+
+
+return(dfrace)
+
+
+
+allparishesRawx <- bind_rows(dfrace, dfage)
+
+save(allparishesRawx, file = "inputs/allparishesRawx.Rdata")
 

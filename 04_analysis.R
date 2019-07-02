@@ -353,10 +353,10 @@ commute <- commuteRaw %>%
 load("inputs/allparishesRaw.RData")
 
 #Table 1 
-AAWhiteHispan <- allparishesRaw %>% 
+AAWhiteHispan <- allparishesRawx %>% 
   filter(place == "Orleans") %>% 
-  filter(date == "7/1/2017 population estimate") %>% 
-  filter(age == "Total" & sex == "Total" & (raceSimple == "Hispanic"|raceSimple == "White"|raceSimple == "Black")) %>%
+  filter(date == "7/1/2018 population estimate") %>% 
+  filter(age == "Total" & (raceSimple == "Hispanic"|raceSimple == "White"|raceSimple == "Black")) %>%
   mutate(est2000=c(14826, 128871, 323392)) %>%
   select(raceSimple, population, est2000) %>%
   arrange(-row_number())
@@ -364,15 +364,15 @@ AAWhiteHispan <- allparishesRaw %>%
 
 #Tables 2
 
-ParishDemo1<- allparishesRaw %>% 
-  filter(date == "7/1/2017 population estimate") %>% 
-  filter(age == "Total" & sex == "Total")  %>% 
+ParishDemo1<- allparishesRawx %>% 
+  filter(date == "7/1/2018 population estimate") %>% 
+  filter(age == "Total")  %>% 
   select(place, population, raceSimple)
 
 #Remove Louisiana and Us to be able to combine 8 parish estimates for each race/ethnicity to create Metro
-ParishDemo2<- allparishesRaw %>% 
-  filter(date == "7/1/2017 population estimate") %>% 
-  filter(age == "Total" & sex == "Total") %>% 
+ParishDemo2<- allparishesRawx %>% 
+  filter(date == "7/1/2018 population estimate") %>% 
+  filter(age == "Total") %>% 
   filter(place != "Louisiana" & place!= "United States")%>% 
   group_by(raceSimple)%>%
   summarise(population=sum(population)) %>%
@@ -395,21 +395,21 @@ ParishDemo <- spread(ParishDemo2, raceSimple, population) %>%
 #Table 3 African American Population, New Orleans, 2000-2017
 
 #Pulling population estimates for 2010-2017
-AAhistorical <- allparishesRaw %>% 
+AAhistorical <- allparishesRawx %>% 
   filter(place == "Orleans")%>% 
   filter(raceSimple=="Black")%>% 
-  filter(sex=="Total")%>% 
+ # filter(sex=="Total")%>% 
   filter(age=="Total")%>% 
   select(date, population) %>%
   .[-(2:3),] %>% #Remove 2010 estimates we don't need. We use Census Population for 2010 so we can delete 2010 population estimate
   bind_rows(data.frame(population = c(323392,0,0,0,0,0,133015,159887,181882,197337), row.names = (NULL)), .) %>%
   select(population) %>%
-  bind_cols(data.frame(year = as.factor(c(2000:2017))), .)
+  bind_cols(data.frame(year = as.factor(c(2000:2018))), .)
 
 
 #######AA historical part 2
-BlackPopyears <- allparishesRaw %>% 
-  filter(age == "Total" & sex == "Total")  %>% 
+BlackPopyears <- allparishesRawx %>% 
+  filter(age == "Total")  %>% 
   filter(raceSimple=="Black") %>%
   filter(place=="Jefferson"|place=="Orleans"|place=="Plaquemines"|place=="St. Bernard"|place=="St. Charles"|place=="St. James"|
            place=="St. John the Baptist"|place=="St. Tammany") 
@@ -421,10 +421,10 @@ BlackpopM <- blackpopestRaw %>%
 
 
 #Table 4 Hispanic population change by population
-
-HispanicPop <- allparishesRaw %>% 
-  filter(date == "7/1/2017 population estimate") %>% 
-  filter(age == "Total" & sex == "Total")  %>% 
+##error
+HispanicPop <- allparishesRawx %>% 
+  filter(date == "7/1/2018 population estimate") %>% 
+  filter(age == "Total")  %>% 
   filter(raceSimple=="Hispanic")%>% 
   select(place, population) %>%
   .[-(9:10),]%>%
@@ -432,8 +432,8 @@ HispanicPop <- allparishesRaw %>%
 
 #Table 5 Hispanic population for parishes in metro by year
 
-HispanicPopyears <- allparishesRaw %>% 
-  filter(age == "Total" & sex == "Total")  %>% 
+HispanicPopyears <- allparishesRawx %>% 
+  filter(age == "Total")  %>% 
   filter(raceSimple=="Hispanic") %>%
   filter(place=="Jefferson"|place=="Orleans"|place=="Plaquemines"|place=="St. Bernard"|place=="St. Charles"|place=="St. James"|
            place=="St. John the Baptist"|place=="St. Tammany") 
@@ -459,14 +459,14 @@ HiSPpopSheet <- spread(HISPpopSheet1, place, POP)
 
 #Table 5 Population by age group
 
-Agepop <- allparishesRaw %>% 
+Agepop <- allparishesRawx %>% 
   filter(age== "Under 5 years" | age== "5 to 9"| age== "10 to 14" | age== "15 to 19"|
            age=="20 to 24"| age== "25 to 29"| age== "30 to 34"| age== "35 to 39"| age== "40 to 44"
          | age== "45 to 49" | age=="50 to 54"| age== "55 to 59"| age== "60 to 64"| age== "65 to 69"| 
            age== "70 to 74"| age== "75 to 79"| age== "80 to 84"| age== "85 plus")%>% 
   filter(raceSimple=="Total")%>% 
-  filter(sex=="Total")%>% 
-  filter(date == "7/1/2017 population estimate") %>% 
+ # filter(sex=="Total")%>% 
+  filter(date == "7/1/2018 population estimate") %>% 
   filter(place=="Jefferson"|place=="Orleans"|place=="Plaquemines"|place=="St. Bernard"|place=="St. Charles"|place=="St. James"|place=="St. John the Baptist"|place=="St. Tammany")%>% 
   select(age, place, population) %>%
   mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,2197,1668,1621,2024,2271,2247,1855,1554,1272,1034,854,769,524,259,207,4242,4639,4996,5021,4257,4196,4584,5327,5530,4939,4398,3241,2597,2569,2714,2148,1051,780,3511,3994,4352,4063,2649,2662,3440,4407,4569,3732,2872,2025,1488,1345,1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
@@ -474,11 +474,11 @@ Agepop <- allparishesRaw %>%
 #Table 6 Under 18 population
 #Different than estimates from google sheets but aligns with American fact finder
 
-under18pars<-allparishesRaw %>% 
+under18pars<-allparishesRawx %>% 
   filter(age=="18 years and over" | age=="Total")%>% 
   filter(raceSimple=="Total")%>% 
-  filter(sex=="Total")%>% 
-  filter(date == "7/1/2017 population estimate") %>% 
+ # filter(sex=="Total")%>% 
+  filter(date == "7/1/2018 population estimate") %>% 
   filter(place=="Jefferson"|place=="Orleans"|place=="Plaquemines"|place=="St. Bernard"|place=="St. Charles"|place=="St. James"|place=="St. John the Baptist"|place=="St. Tammany")%>% 
   select(age, place, population)
 
