@@ -350,7 +350,7 @@ commute <- commuteRaw %>%
 # whatever geography you need: place
 # whatever year of estimate that you need: date
 
-load("inputs/allparishesRaw.RData")
+load("inputs/allparishesRawx.RData")
 
 #Table 1 
 AAWhiteHispan <- allparishesRawx %>% 
@@ -363,21 +363,22 @@ AAWhiteHispan <- allparishesRawx %>%
 
 
 #Tables 2
+load("inputs/allparishesRaw.RData") 
 
-ParishDemo1<- allparishesRawx %>% 
-  filter(date == "7/1/2018 population estimate") %>% 
+ParishDemo1<- allparishesRaw %>% 
+  filter(date == "7/1/2017 population estimate") %>% 
   filter(age == "Total")  %>% 
   select(place, population, raceSimple)
 
 #Remove Louisiana and Us to be able to combine 8 parish estimates for each race/ethnicity to create Metro
-ParishDemo2<- allparishesRawx %>% 
-  filter(date == "7/1/2018 population estimate") %>% 
+ParishDemo2<- allparishesRaw %>% 
+  filter(date == "7/1/2017 population estimate") %>% 
   filter(age == "Total") %>% 
   filter(place != "Louisiana" & place!= "United States")%>% 
   group_by(raceSimple)%>%
   summarise(population=sum(population)) %>%
   mutate(place = c("Metro", "Metro", "Metro", "Metro", "Metro")) %>%
-  bind_rows(.,ParishDemo1)
+  bind_rows(.,ParishDemo1) 
 
 #reshape data from long to wide for easy analysis
 ParishDemo <- spread(ParishDemo2, raceSimple, population) %>%
@@ -474,11 +475,13 @@ Agepop <- allparishesRawx %>%
 #Table 6 Under 18 population
 #Different than estimates from google sheets but aligns with American fact finder
 
-under18pars<-allparishesRawx %>% 
+load("inputs/allparishesRaw.RData")
+
+under18pars<-allparishesRaw %>% 
   filter(age=="18 years and over" | age=="Total")%>% 
   filter(raceSimple=="Total")%>% 
- # filter(sex=="Total")%>% 
-  filter(date == "7/1/2018 population estimate") %>% 
+  filter(sex=="Total")%>% 
+  filter(date == "7/1/2017 population estimate") %>% 
   filter(place=="Jefferson"|place=="Orleans"|place=="Plaquemines"|place=="St. Bernard"|place=="St. Charles"|place=="St. James"|place=="St. John the Baptist"|place=="St. Tammany")%>% 
   select(age, place, population)
 
