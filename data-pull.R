@@ -414,7 +414,7 @@ dfage <- dfage %>%
   rename(age = ageGroupCodeName, 
          population = POP,
          date = DATE_DESC) %>% 
-  mutatue(raceSimple = "Total",
+  mutate(raceSimple = "Total",
           race = "Total",
           hisp= "Total")
 
@@ -478,7 +478,6 @@ dfrace <- dfrace %>%
   mutate(age = "Total")
 
 
-return(dfrace)
 
 
 
