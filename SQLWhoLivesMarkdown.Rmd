@@ -1,36 +1,10 @@
 ---
-output: 
-  md_document:
-    variant: markdown_phpextra+backtick_code_blocks
+title: "SQL version of Who Lives"
+output: html_document
 ---
 
 
 ```{r, include=FALSE}
-
-## Configure outputs for easy cutting-and-pasting
-# In YAML header, specify output: md_document
-# For Wordpress, specify variant: markdown_phpextra+backtick_code_blocks
-
-## Configure URL paths for embedded charts and fig and table formatting for easy cutting-and-pasting
-
-# At present, charts called in this Rmd will be saved to a local subdirectory \wp-graphics\uploads.
-# The contents of this subdirectory will have to be uploaded manually in Wordpress. 
-
-# base.dir, base.url, and fig.path control where the figures will be saved locally and how the links will be written in markdown. The links should match where the files are uploaded to WP. 
-# base.dir and base.url fall under knit options; fig.path falls under chunk options
-
-base.dir <- "wp-graphics"
-base.url <- "http://www.datacenterresearch.org/a/wp-content/"
-
-# Set date path manually
-# fig.path <- "uploads/2018/07/" 
-
-# Set date path with auto generated month and year
-fig.path <- paste0("uploads/", 
-                   format(Sys.Date(), format="%Y"),"/",
-                   format(Sys.Date(), format="%m"),"/") 
-
-knitr::opts_knit$set(base.dir = base.dir, base.url = base.url)
 
 knitr::opts_chunk$set(fig.width=5, fig.height=5,  # use fig.width and fig.height to globally set figure sizes.
                fig.path = fig.path) 
@@ -60,11 +34,12 @@ knitr::opts_chunk$set(echo = FALSE)
 # Load required scripts in order. 
 # Note: here() uses the relative path to the same directory.
 source(here("css_helper.R"))
+source(here("data-pull_SQL.R"))
 source(here("01_libraries.R"))
 source(here("02_variables.R"))
 source(here("03_functions.R"))
-source(here("04_analysis.R"))
-source(here("05_graphics.R"))
+source(here("04_analysis_SQL.R"))
+source(here("05_graphics_SQL.R"))
 source(here("inline.R"))
 # For Asap font
 #font_add_google("Asap")
