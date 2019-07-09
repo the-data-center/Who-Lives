@@ -363,22 +363,24 @@ AAWhiteHispan <- allparishesRawx %>%
 
 
 #Tables 2
-load("inputs/allparishesRaw.RData") 
 
-ParishDemo1<- allparishesRaw %>% 
-  filter(date == "7/1/2017 population estimate") %>% 
+ParishDemo1<- allparishesRawx %>% 
+  filter(date == "7/1/2018 population estimate") %>% 
   filter(age == "Total")  %>% 
-  select(place, population, raceSimple)
+#  filter(sex == "Total") %>% 
+  select(raceSimple, population, place) 
 
 #Remove Louisiana and Us to be able to combine 8 parish estimates for each race/ethnicity to create Metro
-ParishDemo2<- allparishesRaw %>% 
-  filter(date == "7/1/2017 population estimate") %>% 
+ParishDemo2<- allparishesRawx %>% 
+  filter(date == "7/1/2018 population estimate") %>% 
   filter(age == "Total") %>% 
   filter(place != "Louisiana" & place!= "United States")%>% 
   group_by(raceSimple)%>%
   summarise(population=sum(population)) %>%
   mutate(place = c("Metro", "Metro", "Metro", "Metro", "Metro")) %>%
   bind_rows(.,ParishDemo1) 
+
+
 
 #reshape data from long to wide for easy analysis
 ParishDemo <- spread(ParishDemo2, raceSimple, population) %>%
@@ -394,18 +396,31 @@ ParishDemo <- spread(ParishDemo2, raceSimple, population) %>%
 
 
 #Table 3 African American Population, New Orleans, 2000-2017
-
+load("inputs/allparishesRaw.RData")
+##This needs to be reworked because the new allparishraw doesn't include historica
 #Pulling population estimates for 2010-2017
-AAhistorical <- allparishesRawx %>% 
+AAhistorical1 <- allparishesRaw %>% 
   filter(place == "Orleans")%>% 
   filter(raceSimple=="Black")%>% 
- # filter(sex=="Total")%>% 
+  filter(sex=="Total")%>% 
   filter(age=="Total")%>% 
   select(date, population) %>%
   .[-(2:3),] %>% #Remove 2010 estimates we don't need. We use Census Population for 2010 so we can delete 2010 population estimate
   bind_rows(data.frame(population = c(323392,0,0,0,0,0,133015,159887,181882,197337), row.names = (NULL)), .) %>%
   select(population) %>%
-  bind_cols(data.frame(year = as.factor(c(2000:2018))), .)
+  bind_cols(data.frame(year = as.factor(c(2000:2017))), .)
+
+##2018
+
+AAhistorical <- allparishesRawx %>% 
+  filter(place == "Orleans")%>% 
+  filter(raceSimple=="Black")%>% 
+  #filter(sex=="Total")%>% 
+  filter(age=="Total")%>% 
+  mutate(year= "2018",
+         year=(as.factor(year))) %>% 
+  select(year, population) %>% 
+  bind_rows(AAhistorical1)
 
 
 #######AA historical part 2
@@ -451,11 +466,11 @@ HISPpopM <- hisppopestRaw %>%
   add_row(year = 2000, place= "St. John the Baptist", POP=1230)
 
 #For excel
-HISPpopSheet1 <- HISPpopM %>%
-  select(year, place, POP) %>%
-  mutate(POP = as.numeric(POP))
+# HISPpopSheet1 <- HISPpopM %>%
+#   select(year, place, POP) %>%
+#   mutate(POP = as.numeric(POP))
 
-HiSPpopSheet <- spread(HISPpopSheet1, place, POP) 
+#HiSPpopSheet <- spread(HISPpopSheet1, place, POP) 
 
 
 #Table 5 Population by age group
@@ -477,11 +492,11 @@ Agepop <- allparishesRawx %>%
 
 load("inputs/allparishesRaw.RData")
 
-under18pars<-allparishesRaw %>% 
+under18pars<-allparishesRawx %>% 
   filter(age=="18 years and over" | age=="Total")%>% 
   filter(raceSimple=="Total")%>% 
-  filter(sex=="Total")%>% 
-  filter(date == "7/1/2017 population estimate") %>% 
+ # filter(sex=="Total")%>% 
+  filter(date == "7/1/2018 population estimate") %>% 
   filter(place=="Jefferson"|place=="Orleans"|place=="Plaquemines"|place=="St. Bernard"|place=="St. Charles"|place=="St. James"|place=="St. John the Baptist"|place=="St. Tammany")%>% 
   select(age, place, population)
 

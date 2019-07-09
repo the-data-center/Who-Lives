@@ -3,8 +3,8 @@
 This brief examines the most current demographic data released by the U.S. Census Bureau and identifies important trends in metro area parishes. Included are data on race and ethnicity, age, educational attainment, internet access, poverty, income, children, access to vehicles, foreign-born population, geographic mobility, homeownership, homeowners with a mortgage, housing costs and affordability, single-person households, commuting, and housing stock.
 </div>
 
-The U.S. Census Bureau estimates that 1,275,762 residents were living in
-metro New Orleans as of July 2017, a 7 percent increase from April
+The U.S. Census Bureau estimates that 1,270,399 residents were living in
+metro New Orleans as of July 2018, a 7 percent increase from April
 2010.\[1\] The metro area now has 95 percent of its 2000 population of
 1,337,726. In this brief, we examine demographic data released by the
 U.S. Census Bureau and identify important changes in metro area parishes
@@ -13,16 +13,16 @@ since 2000 (or the best benchmark available).
 Race/Ethnicity {#raceethnicity}
 --------------
 
-According to the U.S. Census Bureau’s 2017 population estimates, there
-are now 91,274 fewer African Americans living in New Orleans (Orleans
-Parish) compared to 2000, but there are also 7,945 fewer whites.
-Meanwhile, the number of Hispanics grew by 7,498.\[2\]
+According to the U.S. Census Bureau’s 2018 population estimates, there
+are now 92,245 fewer African Americans living in New Orleans (Orleans
+Parish) compared to 2000, but there are also 8,631 fewer whites.
+Meanwhile, the number of Hispanics grew by 7,137.\[2\]
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2017.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2018.</p>
 </div>
 
 <div class="highlight" markdown="1"> 
@@ -32,11 +32,11 @@ Meanwhile, the number of Hispanics grew by 7,498.\[2\]
 Orleans Parish is the city of New Orleans. New Orleans and Orleans Parish are interchangeable. Their boundaries are the same, and they contain the same population. 
 </div>
 
-In Orleans Parish, the share of the 2017 population that is African
+In Orleans Parish, the share of the 2018 population that is African
 American — while lower than in 2000 when it was 67 percent — continues
 to represent the majority of city residents at 59 percent. The share of
 Hispanics in the city increased from 3 percent in 2000 to 6 percent in
-2017; the share of Asians increased from 2 percent to 3 percent; and the
+2018; the share of Asians increased from 2 percent to 3 percent; and the
 share of whites increased from 27 percent to 31 percent. Meanwhile,
 Hispanic, Asian, and African American populations increased as a share
 of the total population in Jefferson, St. Bernard, St. Charles, St. John
@@ -44,57 +44,57 @@ the Baptist, and St. Tammany parishes, each. In fact, the number and
 share of Hispanics have increased in all eight parishes in the metro
 area.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/demoallparish-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/demoallparish-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2017.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2018.</p>
 </div>
 
-Although there are 91,274 fewer African Americans living in New Orleans
-in 2017 than in 2000, the number of African Americans has grown every
+Although there are 92,245 fewer African Americans living in New Orleans
+in 2018 than in 2000, the number of African Americans has grown every
 year since 2006.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/AAhistorical-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/AAhistorical-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2017.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2018.</p>
 </div>
 
-Between 2000 and 2017, the number of Hispanics in Jefferson Parish
-increased by 33,163 reaching over 15 percent of the total parish
-population. Orleans Parish and St. Tammany Parish gained 7,498 and
-10,021 Hispanics, respectively, such that the Hispanic share of the
+Between 2000 and 2018, the number of Hispanics in Jefferson Parish
+increased by 32,081 reaching over 15 percent of the total parish
+population. Orleans Parish and St. Tammany Parish gained 7,137 and
+10,074 Hispanics, respectively, such that the Hispanic share of the
 population was 6 percent in Orleans and 6 percent in St. Tammany by
-2017.
+2018.
 
-As of July 2017, there were 115,396 Hispanics in the metro area,
+As of July 2018, there were 114,295 Hispanics in the metro area,
 representing 9 percent of the metro population. This is up from 2000
 when there were 58,545, representing 4 percent of the metro population.
 Despite these recent gains, the Hispanic share of the population in
 metro area parishes is far below the average for the United States,
 which has grown from 12 percent to 18 percent of the total U.S.
-population over these 17 years.
+population over these 18 years.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hispanpop-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hispanpop-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2017.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2018.</p>
 </div>
 
 The number of Hispanics in New Orleans metro has grown every year since
 2006. Indeed while the overall metro population has grown 7 percent
-since 2010, the Hispanic population has grown 25 percent such that
-Hispanics account for 27 percent of the metro’s population growth since
+since 2010, the Hispanic population has grown 22 percent such that
+Hispanics account for 25 percent of the metro’s population growth since
 2010.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hispanpopyear-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hispanpopyear-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2017.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2018.</p>
 </div>
 
 Hispanic is an umbrella term comprising multiple nationalities and
@@ -103,7 +103,7 @@ identify by nationality rather than by pan-ethnic terms such as
 “Hispanic” and “Latino.”\[3\] The nationalities of Hispanics residing in
 metro New Orleans is quite distinct from the national Hispanic profile.
 
-In 2017, the largest Hispanic group in metro New Orleans was Honduran,
+In 2018, the largest Hispanic group in metro New Orleans was Honduran,
 representing 33 percent of the Hispanic population. In comparison,
 Hondurans represent only 2 percent of the national Hispanic population.
 These figures point to metro New Orleans as a hub of Honduran migration.
@@ -113,7 +113,7 @@ Hispanic population in metro New Orleans. Nevertheless, the Mexican
 population is much less prominent in the metro than nationally, where it
 represents 62 percent of the Hispanic population.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hispan2017-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hispan2017-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -129,22 +129,22 @@ The progression of the baby boomers through the age groups, along with
 falling birth rates, have brought massive changes to the metro — and
 indeed the whole country — with many more changes yet to come.\[4\]
 Looking at the total population in the metro by five-year age groups for
-2000 and 2017, the baby boomers are like a demographic tidal wave.
-Consequently, the median age of the metro has risen to 38 in 2017 from
+2000 and 2018, the baby boomers are like a demographic tidal wave.
+Consequently, the median age of the metro has risen to 38 in 2018 from
 34.8 in 2000.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/age2000-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/age2000-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000.</p>
 </div>
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/age2017-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/age2017-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2017.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2018.</p>
 </div>
 
 Meanwhile, the share of households with children is shrinking while the
@@ -156,7 +156,7 @@ percent to 29 percent; the percent of Jefferson households with children
 declined from 33 percent to 24 percent; and the percent of Orleans
 households with children declined from 30 percent to 18 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hwc-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hwc-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -169,7 +169,7 @@ of individuals living alone grew from 27 percent in 2000 to 34 percent
 in 2017 — similar to the trend for Jefferson Parish. The increase was
 larger in Orleans Parish, which jumped from 33 to 46 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/sing-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/sing-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -178,16 +178,16 @@ larger in Orleans Parish, which jumped from 33 to 46 percent.
 
 While the metro has regained much of the post-Katrina population losses,
 youth population is substantially lower than pre-Katrina levels. The
-metro had 358,092 children under 18 years in 2000 and only 284,167 in
-2017. Much of this loss was driven by Orleans Parish, where the under 18
-population declined to 79,030 from 129,408. The under 18 population is
+metro had 358,092 children under 18 years in 2000 and only 282,246 in
+2018. Much of this loss was driven by Orleans Parish, where the under 18
+population declined to 78,086 from 129,408. The under 18 population is
 now 22 percent of the metro population, down from 27 percent in 2000.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/popunder18-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/popunder18-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2017.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2018.</p>
 </div>
 
 <div class="highlight" markdown="1"> 
@@ -209,7 +209,7 @@ New Orleans, the share of adults with less than a high school degree
 fell from 25 percent to 14 percent but is still higher than the U.S.
 average of 12 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hs-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hs-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -224,7 +224,7 @@ percent, and up from 26 percent in 2000. The overall metro area share of
 adults with a bachelor’s degree grew from 23 to 30 percent — lower than
 the national average.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/bach-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/bach-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -236,7 +236,7 @@ for the city are significantly lower than the U.S. median of $60,336. In
 Jefferson Parish, median household income declined 7 percent between
 1999 and 2017, even after adjusting for inflation, falling to $51,494.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/medhh-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/medhh-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -276,7 +276,7 @@ This is compared to 11 percent nationwide.
 Inequalities between individuals, households, businesses, or geographic areas with regard to access, use of, or impact of information and communication technologies.
 </div>
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/inta-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/inta-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -298,7 +298,7 @@ the Jefferson Parish poverty rate increased from 14 to 17 percent
 between 1999 and 2017. Across the U.S., the poverty rate increased from
 12 to 13 percent between 1999 and 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/pov-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/pov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -313,7 +313,7 @@ poverty rate jumped from 20 percent in 1999 to 28 percent in 2017 —
 greatly surpassing the U.S. child poverty rate, which rose from 17 to 18
 percent between 1999 and 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/childpov-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/childpov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -329,7 +329,7 @@ high as in neighboring parishes and the nation, indicating the
 importance of a robust public transportation system and comprehensive
 evacuation plan.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/veh-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/veh-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -351,7 +351,7 @@ share. In Orleans Parish the foreign-born share of the population
 increased by 1 percentage points between 2000 and 2017 while St. Tammany
 Parish increased by 2.3 percentage points.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/forbor-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/forbor-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -370,7 +370,7 @@ Orleans Parish came from outside the state of Louisiana. In Jefferson
 Parish, the share of the population who were new movers into the parish
 was 5 percent in 2004, and has not significantly changed.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/mob-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/mob-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -392,7 +392,7 @@ St. Tammany from 80 percent to 77 and in Jefferson from 64 to 62 percent
 between 2000 and 2017. In contrast, homeownership rates in New Orleans
 have held steady, but at a much lower 47 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/ho-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/ho-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -414,7 +414,7 @@ proceeds to pay off their mortgage principal. In fact, Orleans and
 Jefferson received the first and second largest number of Road Home
 Option 1 grants among all Louisiana parishes.\[10\]
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/honomo-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/honomo-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -434,7 +434,7 @@ rising to only 25 percent nationally. In Jefferson Parish, the share of
 renters paying more than 50 percent of household income on housing and
 utilities is 26 percent in 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/rentbur-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/rentbur-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -449,7 +449,7 @@ unchanged in metro area parishes since 2004. There is a clear gap
 between the rate of housing cost burden for renters vs. homeowners, and
 that gap has widened.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/hoburGraphic-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hoburGraphic-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -467,7 +467,7 @@ rose from $742 to $962 in New Orleans, a 30 percent increase after
 adjusting for inflation. Meanwhile, median gross rents increased 19
 percent metrowide compared to only 11 percent nationwide.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/medrent-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/medrent-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -491,7 +491,7 @@ percent of housing stock has been built since 1990. In contrast, in
 St. Tammany, the majority of housing units are in structures that have
 been built since 1990.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/yrbuilt-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/yrbuilt-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -523,7 +523,7 @@ by a 60 to 67 percent rise in Orleans Parish. This goes against the
 national trend, where the share in driving alone remained steady between
 2000 and 2017 and where public transit use has also remained steady.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/03/commute-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/commute-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -538,7 +538,7 @@ Data Sources / Methodology {#data-sources-methodology}
 Data on race/ethnicity and age is from the Census Bureau vintage 2017
 population estimates and Census 2000 Summary File 1 (SF1). Other
 demographic data is from the Census 2000 Summary File 3 (SF3) and
-American Community Survey 2004, and 2017 (single-year files).
+American Community Survey 2004, and 2018 (single-year files).
 
 Statistical tests of significance were computed at the 95% confidence
 level for all data from the American Community Survey and Census 2000

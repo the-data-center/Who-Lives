@@ -35,5 +35,15 @@ opening the projects in RStudio and clicking "knit" on the WhoLivesMarkdown.Rmd 
 1. when iterating through data checking graphics, there's a list of the graphic names at the bottom of 05_graphics.R that you can un-# to quickly run through them
 2. you do have to delete the wp-graphics folder in your local directory whenever you re-knit if the knit involves updating the images. If the folder is already there, knitting won't save the updated graphics.
 
+### Fonts
+We have a custom data center font that requires download onto new computers
+1.  Download all ASAP fonts from https://www.fontsquirrel.com/fonts/asap
+2.  Your font files must be truetype fonts (not opentype). If you have otf, convert to ttf with an online converter. https://convertio.co/otf-ttf/
+3.  Move these fonts into your windows --> font folder on computer
+4.  Run this command --> extrafont::font_import()
+5.  Run Extrafonts library in 01_libraries.R
+
+
+
 
 

@@ -248,7 +248,7 @@ allparishesRaw <- pullDataPEP(charagegroupsVars,
 save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
 
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEONAME", "HISP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
-popestVars2000 <- c("POP","DATE_DESC","DATE", "GEONAME", "HISP")
+popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP")
 listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
 hisppopestRaw <- getCensus(name = "pep/charagegroups", # most recent
                                vintage = 2018, 
@@ -265,14 +265,14 @@ hisppopestRaw <- getCensus(name = "pep/charagegroups", # most recent
                       regionin = "state:22")) %>% 
   mutate(place = str_sub(GEONAME, 1, nchar(GEONAME) - 18),
          year = str_sub(DATE_DESC, 5, 8)) %>% # Clean July 1 from every year
-  select(-GEONAME, -DATE) %>% 
+  #select(-GEONAME, -DATE) %>% 
   filter(HISP == 2) %>% 
   filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017 | year ==2018) 
 save(hisppopestRaw, file = "inputs/hisppopestRaw.RData")
 
 
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEONAME", "HISP", "RACE")
-popestVars2000 <- c("POP","DATE_DESC","DATE", "GEONAME", "HISP")
+popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP")
 listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
 blackpopestRaw <- getCensus(name = "pep/charagegroups", # most recent
                                 vintage = 2018, 
@@ -481,7 +481,8 @@ dfrace <- dfrace %>%
 
 
 
-allparishesRawx <- bind_rows(dfrace, dfage)
+allparishesRawx <- bind_rows(dfrace, dfage) %>% 
+  distinct()
 
 save(allparishesRawx, file = "inputs/allparishesRawx.Rdata")
 

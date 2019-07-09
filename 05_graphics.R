@@ -125,7 +125,7 @@ ParishDemoforGraphic <- ParishDemo %>%
   mutate(place.fac = factor(.$place,levels = c("Orleans", "Jefferson", "Plaquemines", "St. Bernard","St. Charles", "St. James", "St. John the Baptist", "St. Tammany", "Metro", "United States"))) %>%
   gather(key = variable, value = value, contains("pct"), contains("2000")) %>% 
   mutate(description  = NA,
-         description = ifelse(grepl("pct",variable), 2017, description),     #if variable contains 'pct'
+         description = ifelse(grepl("pct",variable), 2018, description),     #if variable contains 'pct'
          description = ifelse(grepl("2000", variable), 2000, description)) %>%     #if variable contains '2000'
   mutate(description.fac = factor(.$description, levels = c( "2000",
                                                              "2018")))%>%
@@ -399,7 +399,7 @@ chart.agepop2017.allparishes <- agepop2017forGraphic %>%
         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5, size = 16))+
-  labs(title = "Population by age group, 2017",
+  labs(title = "Population by age group, 2018",
        x="",
        y="")
 ####9 - Households with own children under 18
@@ -420,7 +420,7 @@ singGraphic <- dodgedBar(sing,
 popunder18forGraphic <- popunder18 %>%
   mutate(place.fac = factor(.$place,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
   gather(-place,-place.fac, key=variable, value =val) %>% 
-  mutate(description = ifelse(variable == "est2000", "2000", "2017"))
+  mutate(description = ifelse(variable == "est2000", "2000", "2018"))
 
 popunder18Graphic <- popunder18forGraphic %>%
   ggplot(aes(place.fac, val, fill=description, label = comma(val))) + 

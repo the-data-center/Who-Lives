@@ -3,14 +3,21 @@ library(dplyr)
 
 #Year to be changed manually
 
-year <- data_frame("year" = 2017)
+#Aligns with pop est year
+year <- data_frame("year" = 2018)
 year <- year %>% 
    select(year) %>% 
   pull()
 
-Overallpop <- allparishesRaw %>% 
-filter(date =="7/1/2017 population estimate") %>% 
-filter(sex =="Total") %>% 
+#for 2nd update later in year -- aligns with ACS year
+yearu2 <- data_frame("yearu2" = 2017)
+yearu2 <- yearu2 %>% 
+  select(yearu2) %>% 
+  pull()
+
+Overallpop <- allparishesRawx %>% 
+filter(date =="7/1/2018 population estimate") %>% 
+#filter(sex =="Total") %>% 
 filter(hisp =="Total") %>% 
 filter(race =="Total") %>% 
 filter(age =="Total")
