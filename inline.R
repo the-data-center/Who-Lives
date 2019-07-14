@@ -69,6 +69,19 @@ Overallpop2010 <- allparishesRaw %>%
   filter(race =="Total") %>% 
   filter(age =="Total") 
 
+#The number of African Americans living In New Orleans grew every year post-Katrina (from 2006 to 2017) 
+#but decreased for the first time post-Katrina from 232,118 in 2017 to 231,147 In 2018.
+
+AA2017 <- AAhistorical %>% 
+  filter(year == 2017) %>% 
+  select(population) %>% 
+  pull()
+
+AA2018 <- AAhistorical %>% 
+  filter(year == 2018) %>% 
+  select(population) %>% 
+  pull()
+
 #The U.S. Census Bureau estimates that 1,275,762 residents were living in metro New Orleans as of July 2017
 getvalue.pop.no.2010 <- Overallpop2010 %>% 
   filter(place == "Orleans") %>% 

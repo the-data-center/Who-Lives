@@ -94,7 +94,7 @@ dodgedBar <- function(data,
 ###1 - African American, white, and Hispanic population
 
 AAwhthispGraphic <- AAWhiteHispan %>%
-  mutate(race.fac = factor(.$raceSimple,levels = c("Black", "White","Hispanic"))) %>%
+  mutate(race.fac = factor(.$raceSimple,levels = c("Black", "White","Hispanic", "Asian"))) %>%
   select(est2000, population, raceSimple, race.fac) %>%
   gather(-raceSimple,-race.fac, key=variable, value =val) %>%
   mutate(description = ifelse(variable == "est2000", "2000", "2018")) %>%
@@ -111,7 +111,7 @@ AAwhthispGraphic <- AAWhiteHispan %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10),
         plot.title = element_text(hjust = .5)) +
-  labs(title = "African American, white, and Hispanic population, Orleans Parish",
+  labs(title = "African American, white, Hispanic and Asian population, Orleans Parish",
        x="",
        y="")
 
@@ -460,7 +460,7 @@ bachGraphic <- dodgedBar(bach,
 
 medhhGraphic <- dodgedBar(medhh, 
                           quo(MedianHHIncome), 
-                          "Median household income, 2017 inflation adjusted", 
+                          "Median household income, 2017 inflation-adjusted", 
                           yscale = c(0,1.3*max(medhh$MedianHHIncome)), 
                           colors = c(DCcolor.p2teal50, DCcolor.p1mediumblue), 
                           pct = FALSE,  
@@ -510,7 +510,7 @@ chart.inta.allparishes <- intaforGraphic %>%
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10), 
         plot.title = element_text(hjust = .5)) +
-  labs(title = "Internet access",
+  labs(title = "Internet access, 2017 households",
        x="",
        y="") 
 ############################################

@@ -356,8 +356,8 @@ load("inputs/allparishesRawx.RData")
 AAWhiteHispan <- allparishesRawx %>% 
   filter(place == "Orleans") %>% 
   filter(date == "7/1/2018 population estimate") %>% 
-  filter(age == "Total" & (raceSimple == "Hispanic"|raceSimple == "White"|raceSimple == "Black")) %>%
-  mutate(est2000=c(14826, 128871, 323392)) %>%
+  filter(age == "Total" & (raceSimple == "Asian" |raceSimple == "Hispanic"|raceSimple == "White"|raceSimple == "Black")) %>%
+  mutate(est2000=c(14826, 128871, 323392, 10919)) %>%
   select(raceSimple, population, est2000) %>%
   arrange(-row_number())
 

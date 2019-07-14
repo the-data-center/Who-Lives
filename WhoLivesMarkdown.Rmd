@@ -119,7 +119,7 @@ makeCSS_source(
 )
 ```
 
-Although there are `r comma(getvalue.AA.no.2000-getvalue.AA.no.2017)` fewer African Americans living in New Orleans in `r year` than in 2000, the number of African Americans has grown every year since 2006.
+The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2017) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018.
 
 ```{r AAhistorical, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 AAhistGraphic 
@@ -130,7 +130,7 @@ makeCSS_source(
 )
 ```
 
-Between 2000 and `r year`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.2017-getvalue.hispan.jeff.2000)` reaching over `r round((getvalue.Hispanpct.jeff.2017)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.2017 - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.2017 - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population was `r round((getvalue.Hispanpct.no.2017)*100)` percent in Orleans and `r round((getvalue.Hispanpct.tam.2017)*100)` percent in St. Tammany by `r year`.
+Between 2000 and `r year`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.2017-getvalue.hispan.jeff.2000)` reaching over `r round((getvalue.Hispanpct.jeff.2017)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.2017 - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.2017 - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population was `r round((getvalue.Hispanpct.no.2017)*100)` percent in Orleans and `r round((getvalue.Hispanpct.tam.2017)*100)` percent in St. Tammany in `r year`.
 
 As of July `r year`, there were `r comma(getvalue.Hispan.metro.2017)` Hispanics in the metro area, representing `r round((getvalue.Hispanpct.metro.2017)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2017)`, representing `r round((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is far below the average for the United States, which has grown from `r round((getvalue.Hispanpct.us.2000)*100)` percent to `r round((getvalue.Hispanpct.us.2017)*100)` percent of the total U.S. population over these `r year-2000` years.
 
@@ -301,7 +301,7 @@ chart.inta.allparishes
 makeCSS_source(
 "&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Notes**: Accesss w/o subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
+**Notes**: Access w/o subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2017."
 )

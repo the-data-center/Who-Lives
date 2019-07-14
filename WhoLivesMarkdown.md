@@ -51,9 +51,9 @@ area.
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2018.</p>
 </div>
 
-Although there are 92,245 fewer African Americans living in New Orleans
-in 2018 than in 2000, the number of African Americans has grown every
-year since 2006.
+The number of African Americans living in New Orleans grew every year
+post-Katrina (from 2006 to 2017) but decreased for the first time
+post-Katrina from 232,118 in 2017 to 231,147 in 2018.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/AAhistorical-1.png" style="display: block; margin: auto;" />
 
@@ -66,7 +66,7 @@ Between 2000 and 2018, the number of Hispanics in Jefferson Parish
 increased by 32,081 reaching over 15 percent of the total parish
 population. Orleans Parish and St. Tammany Parish gained 7,137 and
 10,074 Hispanics, respectively, such that the Hispanic share of the
-population was 6 percent in Orleans and 6 percent in St. Tammany by
+population was 6 percent in Orleans and 6 percent in St. Tammany in
 2018.
 
 As of July 2018, there were 114,295 Hispanics in the metro area,
@@ -282,7 +282,7 @@ Inequalities between individuals, households, businesses, or geographic areas wi
 
 &ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Notes**: Accesss w/o subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
+**Notes**: Access w/o subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2017.</p>
 </div>
