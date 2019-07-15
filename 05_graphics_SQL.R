@@ -121,6 +121,7 @@ ParishDemoforGraphic <- ParishDemo %>%
   select(PlaceName,
          contains('pct'),
          contains('2000')) %>%
+  filter(PlaceName != "Louisiana") %>%
   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish",
                                                        "Da Parish (St. Bernard)","St. Charles Parish", "St. James Parish", 
                                                        "St. John The Baptist Parish", "St. Tammany Parish", "Metro", "United States"))) %>%
@@ -185,10 +186,11 @@ AAhistGraphic <- AAhistorical %>%
 ####4 - -Hispanic population change by parish
 
 HispanicPopforGraphic  <- HispanicPop %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "St. Tammany", "Plaquemines", "St. Bernard","St. Charles", "St. James", "St. John the Baptist"))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans Parish", "Jefferson Parish", "St. Tammany Parish", "Plaquemines Parish", 
+                                                       "Da Parish (St. Bernard)","St. Charles Parish", "St. James Parish", "St. John The Baptist Parish"))) %>%
   gather(-PlaceName,-PlaceName.fac,key = variable, value = value) %>%
-  mutate(description = ifelse(variable == "est2000", "2000", "2017")) %>%
-mutate(description.fac = factor(.$description, levels = c( "2017",
+  mutate(description = ifelse(variable == "est2000", "2000", "2018")) %>%
+mutate(description.fac = factor(.$description, levels = c( "2018",
                                                            "2000")))
 
 HispanicPopGraphic <- HispanicPopforGraphic %>%
@@ -344,9 +346,10 @@ chart.hispan2017.allparishes <- hispan2017 %>%
 
 ####7 - Population by age group, 2000
 agepop2000forGraphic <- Agepop %>%
-  select(-population) %>% 
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles", "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
-  mutate(age.fac = factor(.$age, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
+  select(-Population) %>% 
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John The Baptist Parish","St. James Parish", "St. Charles Parish", 
+                                                       "Da Parish (St. Bernard)", "Plaquemines Parish", "St. Tammany Parish","Jefferson Parish","Orleans Parish"))) %>%
+  mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
 
 chart.agepop2000.allparishes <- agepop2000forGraphic %>%
   ggplot(aes(age.fac, as.numeric(est2000), fill=PlaceName.fac)) +
@@ -377,11 +380,12 @@ chart.agepop2000.allparishes <- agepop2000forGraphic %>%
 
 agepop2017forGraphic <- Agepop %>%
   select(-est2000) %>% 
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles", "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
-  mutate(age.fac = factor(.$age, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John The Baptist Parish","St. James Parish", "St. Charles Parish", 
+                                                       "Da Parish (St. Bernard)", "Plaquemines Parish", "St. Tammany Parish","Jefferson Parish","Orleans Parish"))) %>%
+  mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
 
 chart.agepop2017.allparishes <- agepop2017forGraphic %>%
-  ggplot(aes(age.fac, as.numeric(population), fill=PlaceName.fac)) +
+  ggplot(aes(age.fac, as.numeric(Population), fill=PlaceName.fac)) +
   geom_bar(stat="identity", 
            position="stack", 
            color = "gray30") +
@@ -420,9 +424,9 @@ singGraphic <- dodgedBar(sing,
 ####11 - Under 18 population
 
 popunder18forGraphic <- popunder18 %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans Parish", "Jefferson Parish","St. Tammany Parish","Metro"))) %>%
   gather(-PlaceName,-PlaceName.fac, key=variable, value =val) %>% 
-  mutate(description = ifelse(variable == "est2000", "2000", "2017"))
+  mutate(description = ifelse(variable == "est2000", "2000", "2018"))
 
 popunder18Graphic <- popunder18forGraphic %>%
   ggplot(aes(PlaceName.fac, val, fill=description, label = comma(val))) + 
@@ -486,14 +490,14 @@ intaforGraphic <- inta %>%
                                                              "Cellular only",
                                                              "No Internet access",
                                                              "Broadband and all other")))%>% 
-  mutate(val = ifelse(value<.01,ifelse((variable == "broadbandpct" & broadbandSIG == "no" & PlaceName != "1")
-                                       |(variable == "noaccpct" & noaccSIG == "no" & PlaceName != "1")
-                                       |(variable == "cellonlypct" & cellonlySIG == "no" & PlaceName != "1")
-                                       |(variable == "nosubpct" & nosubSIG == "no" & PlaceName != "1"), "<1%*", ""),
-                      paste0(round(value*100),"%",ifelse((variable == "broadbandpct" & broadbandSIG == "no" & PlaceName != "1")
-                                                         |(variable == "noaccpct" & noaccSIG == "no" & PlaceName != "1")
-                                                         |(variable == "cellonlypct" & cellonlySIG == "no" & PlaceName != "1")
-                                                         |(variable == "nosubpct" & nosubSIG == "no" & PlaceName != "1"), "*", ""))))
+  mutate(val = ifelse(value<.01,ifelse((variable == "broadbandpct" & broadbandSIG == "no" & PlaceNames != "U.S.")
+                                       |(variable == "noaccpct" & noaccSIG == "no" & PlaceNames != "U.S.")
+                                       |(variable == "cellonlypct" & cellonlySIG == "no" & PlaceNames != "U.S.")
+                                       |(variable == "nosubpct" & nosubSIG == "no" & PlaceNames != "U.S."), "<1%*", ""),
+                      paste0(round(value*100),"%",ifelse((variable == "broadbandpct" & broadbandSIG == "no" & PlaceNames != "U.S.")
+                                                         |(variable == "noaccpct" & noaccSIG == "no" & PlaceNames != "U.S.")
+                                                         |(variable == "cellonlypct" & cellonlySIG == "no" & PlaceNames != "U.S.")
+                                                         |(variable == "nosubpct" & nosubSIG == "no" & PlaceNames != "U.S."), "*", ""))))
 
 
 #<1%",paste0(round(value*100),"%")))
@@ -668,11 +672,10 @@ medrentGraphic <- dodgedBar(medrent,
 ####26 - Year structure built, 201* housing units
 
 yrbuiltforGraphic <- yrbuilt %>% 
-  select(PlaceName,
-         contains('pct'),
+  select(contains('pct'),
          contains('SIG')) %>%
-  mutate(PlaceNames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
+  mutate(PlaceName = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
   gather(-PlaceName, -PlaceName.fac, -contains('SIG'), key=variable, value = value) %>% 
   mutate(description = NA,
          description = ifelse(variable == "orLater1990pct", "1990 or later", description),
@@ -681,12 +684,12 @@ yrbuiltforGraphic <- yrbuilt %>%
   mutate(description.fac = factor(.$description, levels = c( "1990 or later",
                                                              "1950-1989",
                                                              "1949 or earlier")))%>% 
-  mutate(val = ifelse(as.numeric(value)<.01,ifelse((variable == "orLater1990pct" & orLater1990SIG == "no" & PlaceName != "1")
-                                                   |(variable == "mid1950to1989pct" & mid1950to1989SIG == "no" & PlaceName != "1")
-                                                   |(variable == "orbefore1949pct" & orbefore1949SIG == "no" & PlaceName != "1"), "<1%*", "<1%"),
-                      paste0(round(as.numeric(value)*100), "%",ifelse((variable == "orLater1990pct" & orLater1990SIG == "no" & PlaceName != "1")
-                                                                      |(variable == "mid1950to1989pct" & mid1950to1989SIG == "no" & PlaceName != "1")
-                                                                      |(variable == "orbefore1949pct" & orbefore1949SIG == "no" & PlaceName != "1"), "*", ""))))
+  mutate(val = ifelse(as.numeric(value)<.01,ifelse((variable == "orLater1990pct" & orLater1990SIG == "no" & PlaceName != "U.S.")
+                                                   |(variable == "mid1950to1989pct" & mid1950to1989SIG == "no" & PlaceName != "U.S.")
+                                                   |(variable == "orbefore1949pct" & orbefore1949SIG == "no" & PlaceName != "U.S."), "<1%*", "<1%"),
+                      paste0(round(as.numeric(value)*100), "%",ifelse((variable == "orLater1990pct" & orLater1990SIG == "no" & PlaceName != "U.S.")
+                                                                      |(variable == "mid1950to1989pct" & mid1950to1989SIG == "no" & PlaceName != "U.S.")
+                                                                      |(variable == "orbefore1949pct" & orbefore1949SIG == "no" & PlaceName != "U.S."), "*", ""))))
 
 
 chart.yrbuilt.allparishes <- yrbuiltforGraphic %>% 
@@ -781,32 +784,31 @@ chart.commute.allparishes <- commuteforGraphic %>%
 
 # #For checking graphics
 # #ctrl+shift+c to un-#
-# AAwhthispGraphic
-# chart.demo.allparishes
-# AAhistGraphic
-# HispanicPopGraphic
-# chart.HispanpopYears.allparishes
-# chart.hispan2017.allparishes
-# chart.agepop2000.allparishes
-# chart.agepop2017.allparishes
-# hwcGraphic
-# singGraphic
-# popunder18Graphic
-# hsGraphic
-# bachGraphic
-# medhhGraphic
-# chart.inta.allparishes
-# povGraphic
-# childpovGraphic
-# vehGraphic
-# forborGraphic
-# chart.mob.allparishes
-# hoGraphic
-# honomoGraphic
-# rentburGraphic
-# hoburGraphic
-# medrentGraphic
-# chart.yrbuilt.allparishes
-# chart.commute.allparishes
-
+AAwhthispGraphic
+chart.demo.allparishes
+AAhistGraphic
+HispanicPopGraphic
+chart.HispanpopYears.allparishes
+chart.hispan2017.allparishes
+chart.agepop2000.allparishes
+chart.agepop2017.allparishes
+hwcGraphic
+singGraphic
+popunder18Graphic
+hsGraphic
+bachGraphic
+medhhGraphic
+chart.inta.allparishes
+povGraphic
+childpovGraphic
+vehGraphic
+forborGraphic
+chart.mob.allparishes
+hoGraphic
+honomoGraphic
+rentburGraphic
+hoburGraphic
+medrentGraphic
+chart.yrbuilt.allparishes
+chart.commute.allparishes
 

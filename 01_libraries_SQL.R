@@ -7,4 +7,7 @@ library(directlabels)
 library(grid)
 library(here)
 library(knitr)
+library(RODBC)
 #library(xlsx)
+
+load("inputs/allparishesRawx.RData")

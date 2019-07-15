@@ -2,10 +2,13 @@ library(RODBC)
 library(tidyverse)
 library(dplyr)
 
-IDS <- odbcConnect("IDS", uid = "rweinstein", pwd = "Stinge4s12")
+IDS <- odbcConnect("DC2 IDS", uid = "jlosh", pwd = "Ax244!?bB12")
 sqlColumns(IDS, "wholives.AllParishesRaw")
 sqlWL <- sqlQuery(IDS, "SELECT * FROM wholives.AllParishesRaw WHERE WhoLivesYear = 2018")
+sqlWLBach <- sqlQuery(IDS, "SELECT * FROM wholives.BachRaw WHERE WhoLivesYear = 2017")
+
 allparishesRaw <- sqlWL
+bachRawIDS <- sqlWLBach
 #Table 1 
 AAWhiteHispan <- allparishesRaw %>% 
   filter(PlaceName == "Orleans Parish") %>% 

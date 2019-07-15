@@ -84,17 +84,17 @@ sing <- singRaw %>%
 hs <- hsRaw %>%
   slice(match(order, PlaceName)) %>%
   mutate(census2000=c(0.2531,0.2073,0.1613,0.1536,0.196),
-         totless = Male9 + Male9to12 + Female9 + Female9to12,
+         totless = Male9 + Male9To12 + Female9 + Female9To12,
          pctless = totless/Total,
-         moeagg = moeagg(cbind(Male9MOE, Male9to12MOE, Female9MOE, Female9to12MOE)),
+         moeagg = moeagg(cbind(Male9MOE, Male9To12MOE, Female9MOE, Female9To12MOE)),
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctless),
          significant = stattest(x=census2000, y=pctless,moey=moeprop))
 
 
 #Bachelor's degree or higher, adults 25 and older
 
-bach <- bachRawIDS %>% 
-  slice(match(ord, PlaceName)) %>%
+bach <- bachRaw %>% 
+  slice(match(order, PlaceName)) %>%
   mutate(census2000=c(0.2575,0.2149,0.2832,0.2256,0.244),
          totbach = MaleBach + MaleGradProf + FemaleBach + FemaleGradProf,
          pctbach = totbach / Total,
@@ -178,8 +178,8 @@ veh <- vehRaw %>%
 forbor <- forborRaw %>%
   slice(match(order, PlaceName)) %>%
   mutate(census2000=c(0.0425,0.0748,0.0237,0.048,0.1105),
-         forborpct = (TotForeign00to09 + TotForeign90to99 + TotForeignPre90 + TotForeign10on) / TotalPop,
-         forbormoeagg = moeagg(cbind(TotForeign00to09MOE, TotForeign90to99MOE, TotForeignPre90MOE, TotForeign10onMOE)),
+         forborpct = (TotForeign00To09 + TotForeign90To99 + TotForeignPre90 + TotForeign10On) / TotalPop,
+         forbormoeagg = moeagg(cbind(TotForeign00To09MOE, TotForeign90To99MOE, TotForeignPre90MOE, TotForeign10OnMOE)),
          forbormoeprop = moeprop(y=TotalPop, moex = forbormoeagg, moey = TotalPopMOE, p=forborpct),
          significant = stattest(x=census2000,y=forborpct,moey=forbormoeprop))
 
@@ -194,16 +194,16 @@ mob <- mobRaw %>%
          sf2004withinparish=c(0.1131,0.0958,0.00,0.00,0.0973),
          sf2004samehouse=c(0.8565,0.8498,0.00,0.00,0.8430),
          
-         mobabroadpct = TotMovedfromAbroad / Total,
-         mobStatespct = TotMovedbtwnStates / Total,
-         difparishpct = TotMovedinState / Total,
-         withinparishpct = TotMovedinCty / Total,
+         mobabroadpct = TotMovedFromAbroad / Total,
+         mobStatespct = TotMovedBtwnStates / Total,
+         difparishpct = TotMovedInState / Total,
+         withinparishpct = TotMovedInCty / Total,
          samehousepct = TotSameHouse / Total,
          
-         mobabroadmoeprop = moeprop(y=Total,moex = TotMovedfromAbroadMOE,moey = TotalMOE,p=mobabroadpct),
-         mobStatesmoeprop = moeprop(y=Total,moex = TotMovedbtwnStatesMOE,moey = TotalMOE,p=mobStatespct),
-         difparishmoeprop = moeprop(y=Total,moex = TotMovedinStateMOE,moey = TotalMOE,p=difparishpct),
-         withinparishmoeprop = moeprop(y=Total,moex = TotMovedinCtyMOE,moey = TotalMOE,p=withinparishpct),
+         mobabroadmoeprop = moeprop(y=Total,moex = TotMovedFromAbroadMOE,moey = TotalMOE,p=mobabroadpct),
+         mobStatesmoeprop = moeprop(y=Total,moex = TotMovedBtwnStatesMOE,moey = TotalMOE,p=mobStatespct),
+         difparishmoeprop = moeprop(y=Total,moex = TotMovedInStateMOE,moey = TotalMOE,p=difparishpct),
+         withinparishmoeprop = moeprop(y=Total,moex = TotMovedInCtyMOE,moey = TotalMOE,p=withinparishpct),
          samehousemoeprop = moeprop(y=Total, moex = TotSameHouseMOE,moey = TotalMOE,p=samehousepct),
          
          abroadSIG = stattest (x=sf2004mobabroad, y=mobabroadpct, moey = mobabroadmoeprop),
@@ -215,13 +215,13 @@ mob <- mobRaw %>%
 
 ## mobility sig testing for written analysis
 
-OPmoeagg <- moeagg(cbind(mob$TotMovedinStateMOE[1],mob$TotMovedbtwnStatesMOE[1],mob$TotMovedfromAbroadMOE[1]))
-OPpct <- (mob$TotMovedinState[1]+mob$TotMovedbtwnStates[1]+mob$TotMovedfromAbroad[1])/mob$Total[1]
+OPmoeagg <- moeagg(cbind(mob$TotMovedInStateMOE[1],mob$TotMovedBtwnStatesMOE[1],mob$TotMovedFromAbroadMOE[1]))
+OPpct <- (mob$TotMovedInState[1]+mob$TotMovedBtwnStates[1]+mob$TotMovedFromAbroad[1])/mob$Total[1]
 OPmoeprop <- moeprop(y=mob$Total[1], moex = OPmoeagg, moey = mob$TotalMOE[1], p= OPpct)
 OPsig <- stattest(x = (mob$sf2004mobabroad[1]+mob$sf2004states[1]+mob$sf2004difparish[1]), y=OPpct, moey=OPmoeprop)
 
-jeffmoeagg <- moeagg(cbind(mob$TotMovedinStateMOE[2],mob$TotMovedbtwnStatesMOE[2],mob$TotMovedfromAbroadMOE[2]))
-jeffpct <- (mob$TotMovedinState[2]+mob$TotMovedbtwnStates[2]+mob$TotMovedfromAbroad[2])/mob$Total[2]
+jeffmoeagg <- moeagg(cbind(mob$TotMovedInStateMOE[2],mob$TotMovedBtwnStatesMOE[2],mob$TotMovedFromAbroadMOE[2]))
+jeffpct <- (mob$TotMovedInState[2]+mob$TotMovedBtwnStates[2]+mob$TotMovedFromAbroad[2])/mob$Total[2]
 jeffmoeprop <- moeprop(y=mob$Total[2], moex = jeffmoeagg, moey = mob$TotalMOE[2], p= jeffpct)
 jeffsig <- stattest(x = (mob$sf2004mobabroad[2]+mob$sf2004states[2]+mob$sf2004difparish[2]), y=jeffpct, moey=jeffmoeprop)
 
@@ -252,9 +252,9 @@ rentbur <- rentburRaw %>%
   slice(match(order, PlaceName)) %>%
   mutate(sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value
          sf2004lab =c(0.2432,0.2167," ",0.2161,0.2384),
-         rentburpct = `50orMore`/ (Total - NotComputed),
+         rentburpct = `50OrMore`/ (Total - NotComputed),
          moeagg = moeagg(cbind(TotalMOE, NotComputedMOE)),
-         moeprop = moeprop(y=(Total - NotComputed),moex=`50orMoreMOE`,moey = moeagg, p = rentburpct),
+         moeprop = moeprop(y=(Total - NotComputed),moex=`50OrMoreMOE`,moey = moeagg, p = rentburpct),
          significant = stattest(x=sf2004, y=rentburpct, moey=moeprop))
 
 
@@ -263,8 +263,8 @@ rentbur <- rentburRaw %>%
 hobur <- hoburRaw %>%
   slice(match(order, PlaceName)) %>%
   mutate(sf2004=c(0.1620,0.0891,0,0.1134,0.0988), #0 for St. tammany missing value,
-         hoburpct = (`50orMoreMortgage`+`50orMoreNoMortgage`)/(Total - NotComputedMortgage - NotComputedNoMortgage),
-         moexagg = moeagg(cbind(`50orMoreMortgageMOE`,`50orMoreNoMortgageMOE`)),
+         hoburpct = (`50OrMoreMortgage`+`50OrMoreNoMortgage`)/(Total - NotComputedMortgage - NotComputedNoMortgage),
+         moexagg = moeagg(cbind(`50OrMoreMortgageMOE`,`50OrMoreNoMortgageMOE`)),
          moeyagg = moeagg(cbind(TotalMOE, NotComputedMortgageMOE, NotComputedNoMortgageMOE)),
          moeprop = moeprop(y=Total,moex=moexagg,moey=moeyagg,p=hoburpct),
          significant = stattest(x=sf2004,y=hoburpct, moey=moeprop))
@@ -283,13 +283,13 @@ medrent <- medrentRaw %>%
 
 yrbuilt <- yrbuiltRaw %>%
   slice(match(order, PlaceName)) %>%
-  mutate(orLater1990pct = (`1990to1999` + `2000to2009` + `2010to2013` + `2014`)/Total,
-         mid1950to1989pct = (`1950to1959`+`1960to1969`+`1970to1979`+`1980to1989`)/Total,
-         orbefore1949pct = (`1940to1949`+`1939`)/Total,
+  mutate(orLater1990pct = (`1990To1999` + `2000To2009` + `2010To2013` + `2014`)/Total,
+         mid1950to1989pct = (`1950To1959`+`1960To1969`+`1970To1979`+`1980To1989`)/Total,
+         orbefore1949pct = (`1940To1949`+`1939`)/Total,
          
-         orlater1990moeagg = moeagg(cbind(`1990to1999MOE`,`2000to2009MOE`, `2010to2013MOE`,`2014MOE`)),
-         mid1950to1989moeagg =moeagg(cbind(`1950to1959MOE`,`1960to1969MOE`,`1970to1979MOE`,`1980to1989MOE`)),
-         orbefore1949moeagg = moeagg(cbind(`1940to1949MOE`,`1939MOE`)),
+         orlater1990moeagg = moeagg(cbind(`1990To1999MOE`,`2000To2009MOE`, `2010To2013MOE`,`2014MOE`)),
+         mid1950to1989moeagg =moeagg(cbind(`1950To1959MOE`,`1960To1969MOE`,`1970To1979MOE`,`1980To1989MOE`)),
+         orbefore1949moeagg = moeagg(cbind(`1940To1949MOE`,`1939MOE`)),
          
          orlater1990moeprop = moeprop(y=Total,moex = orlater1990moeagg, moey = TotalMOE,p=orLater1990pct),
          mid1950to1989moeprop = moeprop(y=Total,moex = mid1950to1989moeagg, moey = TotalMOE,p=mid1950to1989pct),
@@ -320,7 +320,7 @@ commute <- commuteRaw %>%
          PublicTransitpct = PublicTransit / Total,
          bikepct = Bike / Total,
          Walkpct = Walk / Total,
-         Workhomepct = Workhome / Total,
+         Workhomepct = WorkHome / Total,
          Otherpct = Other / Total,
          
          Drivemoeprop = moeprop(y=Total, moex=DroveAloneMOE, moey=TotalMOE, p=Drivepct),
@@ -328,7 +328,7 @@ commute <- commuteRaw %>%
          PublicTransitmoeprop = moeprop(y=Total, moex=PublicTransitMOE, moey=TotalMOE, p=PublicTransitpct),
          bikemoeprop = moeprop(y=Total, moex=BikeMOE, moey=TotalMOE, p=bikepct),
          Walkmoeprop = moeprop(y=Total, moex=WalkMOE, moey=TotalMOE, p=Walkpct),
-         workhomemoeprop = moeprop(y=Total, moex=WorkhomeMOE, moey=TotalMOE, p=Workhomepct),
+         workhomemoeprop = moeprop(y=Total, moex=WorkHomeMOE, moey=TotalMOE, p=Workhomepct),
          othermoeprop = moeprop(y=Total, moex=OtherMOE, moey=TotalMOE, p=Otherpct),
                   
          DriveSIG = stattest(x=census2000drive,y=Drivepct,moey = Drivemoeprop),
@@ -417,7 +417,7 @@ BlackPopyears <- allparishesRaw %>%
            PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish") 
 
 BlackpopM <- blackpopestRaw %>% 
-  add_row(year = 2000, PlaceName= "Orleans Parish", POP=323392) 
+  add_row(CensusYear = 2000, PlaceName= "Orleans Parish", Population=323392) 
 
 
 
@@ -428,8 +428,8 @@ HispanicPop <- allparishesRaw %>%
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Hispanic")%>% 
   select(PlaceName, Population) %>%
-  .[-(9:10),]%>%
-  mutate(est2000=c(32418,14826,433,3425,1346,130,1230,4737))
+  filter(PlaceName != "United States", PlaceName != "Louisiana") %>%
+  mutate(est2000=c(1346,433,32418,3425,14826,1230,4737,130))
 
 #Table 5 Hispanic population for parishes in metro by year
 
@@ -459,8 +459,10 @@ HISPpopM <- hisppopestRaw %>%
 
 
 #Table 5 Population by age group
-
-AgepopIDS <- allparishesRaw %>% 
+orderAge <- c(rep("Jefferson Parish",18),rep("Orleans Parish", 18),rep("Plaquemines Parish",18),
+              rep("Da Parish (St. Bernard)", 18),rep("St. Charles Parish", 18),rep("St. James Parish", 18),
+              rep("St. John The Baptist Parish", 18),rep("St. Tammany Parish",18))
+Agepop <- allparishesRaw %>% 
   filter(AgeGroupName== "Under 5 years" | AgeGroupName== "5 to 9"| AgeGroupName== "10 to 14" | AgeGroupName== "15 to 19"|
            AgeGroupName=="20 to 24"| AgeGroupName== "25 to 29"| AgeGroupName== "30 to 34"| AgeGroupName== "35 to 39"| AgeGroupName== "40 to 44"
          | AgeGroupName== "45 to 49" | AgeGroupName=="50 to 54"| AgeGroupName== "55 to 59"| AgeGroupName== "60 to 64"| AgeGroupName== "65 to 69"| 
@@ -471,8 +473,17 @@ AgepopIDS <- allparishesRaw %>%
   filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
            PlaceName=="Da Parish (St. Bernard)"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
            PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish")%>% 
+  arrange(factor(PlaceName, levels = c("Jefferson Parish","Orleans Parish","Plaquemines Parish",
+                 "Da Parish (St. Bernard)","St. Charles Parish","St. James Parish",
+                 "St. John The Baptist Parish","St. Tammany Parish"))) %>%
   select(AgeGroupName, PlaceName, Population) %>%
-  mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,2197,1668,1621,2024,2271,2247,1855,1554,1272,1034,854,769,524,259,207,4242,4639,4996,5021,4257,4196,4584,5327,5530,4939,4398,3241,2597,2569,2714,2148,1051,780,3511,3994,4352,4063,2649,2662,3440,4407,4569,3732,2872,2025,1488,1345,1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
+  mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,
+                     37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,
+                     2197,1668,1621,2024,2271,2247,1855,1554,1272,1034,854,769,524,259,207,4242,4639,4996,5021,4257,4196,4584,5327,5530,
+                     4939,4398,3241,2597,2569,2714,2148,1051,780,3511,3994,4352,4063,2649,2662,3440,4407,4569,3732,2872,2025,1488,1345,
+                     1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,
+                     3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,
+                     17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
 
 #Table 6 Under 18 population
 #Different than estimates from google sheets but aligns with American fact finder
