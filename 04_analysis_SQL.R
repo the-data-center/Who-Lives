@@ -351,6 +351,8 @@ commute <- commuteRaw %>%
 # whatever geography you need: place
 # whatever year of estimate that you need: date
 
+orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "Da Parish (St. Bernard)", "St. Charles Parish",
+               "St. James Parish", "St. John The Baptist Parish", "St. Tammany Parish", "Metro", "United States")
 
 #Table 1 
 AAWhiteHispan <- allparishesRaw %>% 
@@ -381,14 +383,16 @@ ParishDemo2<- allparishesRaw %>%
 
 #reshape data from long to wide for easy analysis
 ParishDemo <- spread(ParishDemo2, RaceSimple, Population) %>%
+  filter(PlaceName != "Louisiana") %>%
+  slice(match(orderDemo, PlaceName)) %>% 
   mutate(pctwhite = White / Total,
          pctblack = Black / Total,
          pctasian = Asian / Total,
          pcthisp = Hispanic / Total,
-         white2000=c(.645,0,.547,.266,.688,.844,.705,.497,.51,.853,.691),
-         black2000=c(.227,0,.373,.667,.233,.076,.251,.492,.446,.098,.121),
-         asian2000=c(.031,0,.021,.023,.026,.013,.006,0,.005,.008,.037),
-         hispanic2000=c(.071,0,.044,.031,.016,.051,.028,.006,.029,.025,.125)) #%>%
+         white2000=c(.266,.645,.688,.844,.705,.497,.51 ,.853,.547,.691),
+         black2000=c(.667,.227,.233,.076,.251,.492,.446,.098,.373,.121),
+         asian2000=c(.023,.031,.026,.013,.006,0   ,.005,.008,.021,.037),
+      hispanic2000=c(.031,.071,.016,.051,.028,.006,.029,.025,.044,.125)) #%>%
   #.[-2,]
 
 

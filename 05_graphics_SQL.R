@@ -96,7 +96,7 @@ AAwhthispGraphic <- AAWhiteHispan %>%
   mutate(race.fac = factor(.$RaceSimple,levels = c("Black", "White","Hispanic"))) %>%
   select(est2000, Population, RaceSimple, race.fac) %>%
   gather(-RaceSimple,-race.fac, key=variable, value =val) %>%
-  mutate(description = ifelse(variable == "est2000", "2000", "2017")) %>%
+  mutate(description = ifelse(variable == "est2000", "2000", "2018")) %>%
   ggplot(aes(race.fac, val, fill=description)) +
   geom_bar(stat="identity",
            position = position_dodge(),
@@ -127,10 +127,10 @@ ParishDemoforGraphic <- ParishDemo %>%
                                                        "St. John The Baptist Parish", "St. Tammany Parish", "Metro", "United States"))) %>%
   gather(key = variable, value = value, contains("pct"), contains("2000")) %>% 
   mutate(description  = NA,
-         description = ifelse(grepl("pct",variable), 2017, description),     #if variable contains 'pct'
+         description = ifelse(grepl("pct",variable), 2018, description),     #if variable contains 'pct'
          description = ifelse(grepl("2000", variable), 2000, description)) %>%     #if variable contains '2000'
   mutate(description.fac = factor(.$description, levels = c( "2000",
-                                                             "2017")))%>%
+                                                             "2018")))%>%
   mutate(race = NA,
          race = ifelse(grepl("white", variable),"White", race),
          race = ifelse(grepl("black", variable),"Black", race),
@@ -161,7 +161,7 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
         strip.text = element_text(size=12),
         axis.text.x = element_text(size = 12, vjust=1),
         axis.text.y = element_text(size = 12)) +
-  labs(title = element_blank(),
+  labs(title = "White, black, Hispanic, and Asian, Metro New Orleans parishes and U.S",
        x="",
        y="") 
 
@@ -405,7 +405,7 @@ chart.agepop2017.allparishes <- agepop2017forGraphic %>%
         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5, size = 16))+
-  labs(title = "Population by age group, 2017",
+  labs(title = "Population by age group, 2018",
        x="",
        y="")
 ####9 - Households with own children under 18

@@ -7,6 +7,11 @@ year <- data_frame("year" = 2017)
 year <- year %>% 
    select(year) %>% 
   pull()
+#for 2nd update later in year -- aligns with ACS year
+yearu2 <- data_frame("yearu2" = 2017)
+yearu2 <- yearu2 %>% 
+  select(yearu2) %>% 
+  pull()
 
 Overallpop <- allparishesRawx %>% 
 filter(date =="7/1/2017 population estimate") %>% 
@@ -102,7 +107,18 @@ metro2010pop <- (getvalue.pop.no.2010 + getvalue.pop.jeff.2010  + getvalue.pop.p
 pctincrease.metro.2017.2010 <- ((metro2017pop - metro2010pop)/metro2010pop)
 
 
+#The number of African Americans living In New Orleans grew every year post-Katrina (from 2006 to 2017) 
+#but decreased for the first time post-Katrina from 232,118 in 2017 to 231,147 In 2018.
 
+AA2017 <- AAhistorical %>% 
+  filter(year == 2017) %>% 
+  select(Population) %>% 
+  pull()
+
+AA2018 <- AAhistorical %>% 
+  filter(year == 2018) %>% 
+  select(Population) %>% 
+  pull()
 
 
 
