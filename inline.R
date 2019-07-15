@@ -68,6 +68,20 @@ Overallpop2010 <- allparishesRaw %>%
   filter(race =="Total") %>% 
   filter(age =="Total") 
 
+#and the number of asians grew by
+
+Asiancur <- AAWhiteHispan %>% 
+  filter(raceSimple == "Asian") %>% 
+  select(population) %>% 
+  pull()
+  
+Asiancomp <- AAWhiteHispan %>% 
+  filter(raceSimple == "Asian") %>% 
+  select(est2000) %>% 
+  pull()
+  
+Asianchange <- (Asiancur - Asiancomp)  
+  
 #The number of African Americans living In New Orleans grew every year post-Katrina (from 2006 to 2017) 
 #but decreased for the first time post-Katrina from 232,118 in 2017 to 231,147 In 2018.
 
@@ -695,6 +709,12 @@ getvalue.sing.2000 <- sing %>%
     select(-significant, -contains("moeprop")) %>%
     filter(place == "071") %>%
     select(MedianHHIncome) %>%
+    pull()
+  
+  getvalue.medhh.no.2000 <- medhh %>%
+    select(-significant, -contains("moeprop")) %>%
+    filter(place == "071") %>%
+    select(census2000) %>%
     pull()
   
   #In Jefferson Parish, median household income declined 10 percent between 1999 and 2016, falling to $49,678

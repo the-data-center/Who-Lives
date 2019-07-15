@@ -87,7 +87,7 @@ The U.S. Census Bureau estimates that `r comma(metro2017pop)` residents were liv
 
 ## Race/Ethnicity
 
-According to the U.S. Census Bureau’s `r year` population estimates, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.2017)` fewer African Americans living in New Orleans (Orleans Parish) compared to 2000, but there are also `r comma(getvalue.white.no.2000 - getvalue.white.no.2017)` fewer whites. Meanwhile, the number of Hispanics grew by `r comma(getvalue.Hispan.no.2017 - getvalue.Hispan.no.2000)`.[2]
+According to the U.S. Census Bureau’s `r year` population estimates, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.2017)` fewer African Americans living in New Orleans (Orleans Parish) compared to 2000, but there are also `r comma(getvalue.white.no.2000 - getvalue.white.no.2017)` fewer whites. Meanwhile, the number of Hispanics grew by `r comma(getvalue.Hispan.no.2017 - getvalue.Hispan.no.2000)` and the number of Asians grew by `r Asianchange`.[2]
 
 ```{r AAWhiteHispan, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 AAwhthispGraphic
@@ -266,7 +266,7 @@ makeCSS_source(
 )
 ```
 
-The `r yearu2` median household income of `r dollar(getvalue.medhh.metro.2017)` for the metro and `r dollar(getvalue.medhh.no.2017)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2017)`. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2017)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r yearu2`, even after adjusting for inflation, falling to `r dollar(round(getvalue.medhh.jeff.2017))`.
+The `r yearu2` median household income of `r dollar(getvalue.medhh.no.2017)` for the city of New Orleans is significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2017)`. Indeed, New Orleans' median household income has fallen `r round(((getvalue.medhh.no.2000 - getvalue.medhh.no.2017)/getvalue.medhh.no.2000)*100)` percent since 1999, after adjusting for inflation. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2017)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r yearu2`,, falling to `r dollar(round(getvalue.medhh.jeff.2017))`.
 
 
 ```{r medhh, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -400,7 +400,7 @@ makeCSS_source(
 )
 ```
 
-Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures. The proportion of metro area homeowners without a mortgage has increased from `r  round((getvalue.honomo.metro.2000)*100)` to `r  round((getvalue.honomo.metro.2017)*100)` percent between 2000 and `r yearu2`, driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from `r round((getvalue.honomo.no.2000)*100)` to `r round((getvalue.honomo.no.2017)*100)` percent in Orleans and from `r round((getvalue.honomo.jeff.2000)*100)` to `r round((getvalue.honomo.jeff.2017)*100)` percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisiana parishes.[10]
+Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time and helps shield neighborhoods from foreclosures. The proportion of metro area homeowners without a mortgage has increased from `r  round((getvalue.honomo.metro.2000)*100)` to `r  round((getvalue.honomo.metro.2017)*100)` percent between 2000 and `r yearu2`, driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from `r round((getvalue.honomo.no.2000)*100)` to `r round((getvalue.honomo.no.2017)*100)` percent in Orleans and from `r round((getvalue.honomo.jeff.2000)*100)` to `r round((getvalue.honomo.jeff.2017)*100)` percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisiana parishes.[10]
 
 
 
@@ -503,7 +503,7 @@ Data on race/ethnicity and age is from the Census Bureau vintage 2017 population
 
 Statistical tests of significance were computed at the 95% confidence level for all data from the American Community Survey and Census 2000 SF3. An “*” indicates that differences between two time periods or geographies are not significant, and therefore are the result of sampling variability rather than real change in characteristics of the population.
 
-The significance tests require both estimates and their standard errors. Standard errors for the ACS estimates were calculated using formulas from section 7, “Understanding Error and Determining Statistical Signifigance” available at: https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018.pdf.
+The significance tests require both estimates and their standard errors. Standard errors for the ACS estimates were calculated using formulas from section 7, “Understanding Error and Determining Statistical Significance” available at: https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018.pdf.
 
 Standard errors for Census 2000 SF3 data were calculated using formulas from Chapter 8 of the Technical Documentation available at: http://www.census.gov/prod/cen2000/doc/sf3.pdf.
 
@@ -514,7 +514,7 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 [1] The eight-parish New Orleans metro includes Jefferson, Orleans, Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist, and St. Tammany. From 2003-2012, the New Orleans metro was comprised of 7 parishes, excluding St. James. This brief has updated all 2000 metro data to reflect an 8-parish definition, however previous versions of this report will have used the 7-parish metro definition and accompanying numbers.
 
-[2] Throughout this brief “African American,” “Asian,” and “white” refer to individuals who report to be only one race and not Hispanic. However, “Hispanics” can be of any race(s).
+[2] Throughout this brief “African American,” “Asian,” and “white” refer to individuals who report to be only one race and not Hispanic. However, “Hispanics” can be of any race(s). Throughout this brief, "African American" and "black" are used interchangeably.
 
 [3] Taylor, P., Lopez M. H., Martinez, J., and Velasco, G. (2014). When Labels Don’t Fit: Hispanics and Their Views of Identity. Retrieved October 3, 2014 from http://www.pewhispanic.org/2012/04/04/when-labels-dont-fit-hispanics-and-their-views-of-identity.
 
@@ -524,7 +524,7 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 [6] Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home Computer Technology and Student Achievement. Retrieved February 8, 2019 from http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.6663&rep=rep1&type=pdf.
 
-[7] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The geography of immigrant skills: Educational profiles of metropolitan areas. Retrieved AFebruary 8, 2019 from https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/.
+[7] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The geography of immigrant skills: Educational profiles of metropolitan areas. Retrieved February 8, 2019 from https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/.
 
 [8] Based on surveys conducted by the U.S. Census Bureau, employment-related reasons are the most frequent reason for inter-county moves of greater than 50 miles. For example, among people in the United States who moved over 500 miles, 52 percent moved for an employment-related reason compared to 23 percent for a family-related reason and 22 percent for a housing-related reason. Employment-related reasons include a new job or job transfer, to look for work, to be closer to work, retirement, and other job-related reasons. See U.S. Census Bureau. (n.d.). Geographic Mobility: 2011 to 2012 (Table 27). Retrieved February 8, 2019 from https://www.census.gov/topics/population/migration/data/tables/cps.2012.html.
 

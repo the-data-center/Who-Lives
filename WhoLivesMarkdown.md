@@ -16,7 +16,8 @@ Race/Ethnicity {#raceethnicity}
 According to the U.S. Census Bureau’s 2018 population estimates, there
 are now 92,245 fewer African Americans living in New Orleans (Orleans
 Parish) compared to 2000, but there are also 8,631 fewer whites.
-Meanwhile, the number of Hispanics grew by 7,137.\[2\]
+Meanwhile, the number of Hispanics grew by 7,137 and the number of
+Asians grew by 390.\[2\]
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
 
@@ -231,10 +232,11 @@ the national average.
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017.</p>
 </div>
 
-The 2017 median household income of $50,528 for the metro and $36,999
-for the city are significantly lower than the U.S. median of $60,336. In
-Jefferson Parish, median household income declined 7 percent between
-1999 and 2017, even after adjusting for inflation, falling to $51,494.
+The 2017 median household income of $36,999 for the city of New Orleans
+is significantly lower than the U.S. median of $60,336. Indeed, New
+Orleans’ median household income has fallen 5 percent since 1999, after
+adjusting for inflation. In Jefferson Parish, median household income
+declined 7 percent between 1999 and 2017,, falling to $51,494.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/medhh-1.png" style="display: block; margin: auto;" />
 
@@ -403,7 +405,7 @@ have held steady, but at a much lower 47 percent.
 
 Homeowners without a mortgage own their homes free and clear of any type
 of loan. A high share of such homeowners usually indicates residents
-living in the same house for long periods of time, and helps shield
+living in the same house for long periods of time and helps shield
 neighborhoods from foreclosures. The proportion of metro area homeowners
 without a mortgage has increased from 35 to 43 percent between 2000 and
 2017, driven by changes in Orleans and Jefferson. The share of
@@ -550,7 +552,7 @@ population.
 The significance tests require both estimates and their standard errors.
 Standard errors for the ACS estimates were calculated using formulas
 from section 7, “Understanding Error and Determining Statistical
-Signifigance” available at:
+Significance” available at:
 <https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018.pdf>.
 
 Standard errors for Census 2000 SF3 data were calculated using formulas
@@ -572,7 +574,8 @@ accompanying numbers.
 
 \[2\] Throughout this brief “African American,” “Asian,” and “white”
 refer to individuals who report to be only one race and not Hispanic.
-However, “Hispanics” can be of any race(s).
+However, “Hispanics” can be of any race(s). Throughout this brief,
+“African American” and “black” are used interchangeably.
 
 \[3\] Taylor, P., Lopez M. H., Martinez, J., and Velasco, G. (2014).
 When Labels Don’t Fit: Hispanics and Their Views of Identity. Retrieved
@@ -598,7 +601,7 @@ from
 
 \[7\] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The
 geography of immigrant skills: Educational profiles of metropolitan
-areas. Retrieved AFebruary 8, 2019 from
+areas. Retrieved February 8, 2019 from
 <https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/>.
 
 \[8\] Based on surveys conducted by the U.S. Census Bureau,
