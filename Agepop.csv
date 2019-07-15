@@ -1,0 +1,145 @@
+"","age","place","population","est2000"
+"1","Under 5 years","Jefferson",28335,30226
+"2","5 to 9","Jefferson",26024,31811
+"3","10 to 14","Jefferson",26033,32657
+"4","15 to 19","Jefferson",23440,32436
+"5","20 to 24","Jefferson",24269,29793
+"6","25 to 29","Jefferson",31698,31838
+"7","30 to 34","Jefferson",31205,32713
+"8","35 to 39","Jefferson",29046,36367
+"9","40 to 44","Jefferson",25276,36834
+"10","45 to 49","Jefferson",25834,34166
+"11","50 to 54","Jefferson",28284,30658
+"12","55 to 59","Jefferson",30770,23741
+"13","60 to 64","Jefferson",29507,17911
+"14","65 to 69","Jefferson",24751,15034
+"15","70 to 74","Jefferson",19172,14991
+"16","75 to 79","Jefferson",12921,11973
+"17","80 to 84","Jefferson",8268,6942
+"18","85 plus","Jefferson",9218,5375
+"19","Under 5 years","Orleans",23087,33496
+"20","5 to 9","Orleans",21420,37133
+"21","10 to 14","Orleans",21574,36769
+"22","15 to 19","Orleans",21504,38312
+"23","20 to 24","Orleans",24177,38932
+"24","25 to 29","Orleans",34045,36416
+"25","30 to 34","Orleans",35788,34050
+"26","35 to 39","Orleans",29945,35053
+"27","40 to 44","Orleans",23393,36444
+"28","45 to 49","Orleans",22622,34562
+"29","50 to 54","Orleans",23975,29128
+"30","55 to 59","Orleans",25822,21068
+"31","60 to 64","Orleans",25894,16658
+"32","65 to 69","Orleans",21313,14648
+"33","70 to 74","Orleans",14576,14301
+"34","75 to 79","Orleans",9156,12458
+"35","80 to 84","Orleans",6091,7838
+"36","85 plus","Orleans",6624,7408
+"37","Under 5 years","Plaquemines",1589,1977
+"38","5 to 9","Plaquemines",1682,2183
+"39","10 to 14","Plaquemines",1760,2241
+"40","15 to 19","Plaquemines",1572,2197
+"41","20 to 24","Plaquemines",1466,1668
+"42","25 to 29","Plaquemines",1561,1621
+"43","30 to 34","Plaquemines",1511,2024
+"44","35 to 39","Plaquemines",1618,2271
+"45","40 to 44","Plaquemines",1451,2247
+"46","45 to 49","Plaquemines",1536,1855
+"47","50 to 54","Plaquemines",1580,1554
+"48","55 to 59","Plaquemines",1606,1272
+"49","60 to 64","Plaquemines",1335,1034
+"50","65 to 69","Plaquemines",1060,854
+"51","70 to 74","Plaquemines",782,769
+"52","75 to 79","Plaquemines",576,524
+"53","80 to 84","Plaquemines",392,259
+"54","85 plus","Plaquemines",333,207
+"55","Under 5 years","St. Bernard",3308,4242
+"56","5 to 9","St. Bernard",3698,4639
+"57","10 to 14","St. Bernard",3541,4996
+"58","15 to 19","St. Bernard",2881,5021
+"59","20 to 24","St. Bernard",2568,4257
+"60","25 to 29","St. Bernard",3838,4196
+"61","30 to 34","St. Bernard",3875,4584
+"62","35 to 39","St. Bernard",3476,5327
+"63","40 to 44","St. Bernard",2854,5530
+"64","45 to 49","St. Bernard",2631,4939
+"65","50 to 54","St. Bernard",2837,4398
+"66","55 to 59","St. Bernard",3092,3241
+"67","60 to 64","St. Bernard",2782,2597
+"68","65 to 69","St. Bernard",2006,2569
+"69","70 to 74","St. Bernard",1351,2714
+"70","75 to 79","St. Bernard",873,2148
+"71","80 to 84","St. Bernard",543,1051
+"72","85 plus","St. Bernard",567,780
+"73","Under 5 years","St. Charles",3347,3511
+"74","5 to 9","St. Charles",3522,3994
+"75","10 to 14","St. Charles",3847,4352
+"76","15 to 19","St. Charles",3458,4063
+"77","20 to 24","St. Charles",3176,2649
+"78","25 to 29","St. Charles",3417,2662
+"79","30 to 34","St. Charles",3379,3440
+"80","35 to 39","St. Charles",3574,4407
+"81","40 to 44","St. Charles",3279,4569
+"82","45 to 49","St. Charles",3357,3732
+"83","50 to 54","St. Charles",3806,2872
+"84","55 to 59","St. Charles",4077,2025
+"85","60 to 64","St. Charles",3466,1488
+"86","65 to 69","St. Charles",2674,1345
+"87","70 to 74","St. Charles",1783,1244
+"88","75 to 79","St. Charles",1191,859
+"89","80 to 84","St. Charles",796,462
+"90","85 plus","St. Charles",730,398
+"91","Under 5 years","St. James",1223,1483
+"92","5 to 9","St. James",1320,1711
+"93","10 to 14","St. James",1373,1863
+"94","15 to 19","St. James",1281,1936
+"95","20 to 24","St. James",1318,1346
+"96","25 to 29","St. James",1454,1142
+"97","30 to 34","St. James",1335,1439
+"98","35 to 39","St. James",1338,1671
+"99","40 to 44","St. James",1063,1713
+"100","45 to 49","St. James",1153,1496
+"101","50 to 54","St. James",1505,1220
+"102","55 to 59","St. James",1602,918
+"103","60 to 64","St. James",1462,916
+"104","65 to 69","St. James",1208,736
+"105","70 to 74","St. James",900,616
+"106","75 to 79","St. James",647,448
+"107","80 to 84","St. James",494,275
+"108","85 plus","St. James",361,287
+"109","Under 5 years","St. John the Baptist",2767,3463
+"110","5 to 9","St. John the Baptist",2815,3692
+"111","10 to 14","St. John the Baptist",3187,3874
+"112","15 to 19","St. John the Baptist",2935,3837
+"113","20 to 24","St. John the Baptist",2723,2721
+"114","25 to 29","St. John the Baptist",2988,2699
+"115","30 to 34","St. John the Baptist",2765,3118
+"116","35 to 39","St. John the Baptist",2771,3612
+"117","40 to 44","St. John the Baptist",2500,3588
+"118","45 to 49","St. John the Baptist",2595,3240
+"119","50 to 54","St. John the Baptist",2989,2503
+"120","55 to 59","St. John the Baptist",3201,1907
+"121","60 to 64","St. John the Baptist",2804,1434
+"122","65 to 69","St. John the Baptist",2222,1006
+"123","70 to 74","St. John the Baptist",1643,925
+"124","75 to 79","St. John the Baptist",1083,663
+"125","80 to 84","St. John the Baptist",624,416
+"126","85 plus","St. John the Baptist",572,346
+"127","Under 5 years","St. Tammany",15851,13556
+"128","5 to 9","St. Tammany",16159,15029
+"129","10 to 14","St. Tammany",18700,16147
+"130","15 to 19","St. Tammany",16915,14672
+"131","20 to 24","St. Tammany",13886,9045
+"132","25 to 29","St. Tammany",14392,10257
+"133","30 to 34","St. Tammany",15274,12729
+"134","35 to 39","St. Tammany",16961,16457
+"135","40 to 44","St. Tammany",15745,17655
+"136","45 to 49","St. Tammany",16779,16062
+"137","50 to 54","St. Tammany",17373,13641
+"138","55 to 59","St. Tammany",18677,9733
+"139","60 to 64","St. Tammany",17705,7125
+"140","65 to 69","St. Tammany",14984,5825
+"141","70 to 74","St. Tammany",11940,5168
+"142","75 to 79","St. Tammany",7712,4033
+"143","80 to 84","St. Tammany",4598,2296
+"144","85 plus","St. Tammany",4460,1838

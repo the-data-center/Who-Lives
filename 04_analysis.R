@@ -513,3 +513,8 @@ popunder18 <-bind_rows(under18pars,under18metro) %>%
   filter(place == "Orleans" | place=="Jefferson" | place == "St. Tammany" | place == "Metro")%>%
   select(place, under18) %>%
   mutate(est2000=c(115255,358092,129408,54399))
+
+
+##Print data frames one at a time to turn into spreadsheet we send out
+##write.csv(popunder18, "popunder18.csv")
+
