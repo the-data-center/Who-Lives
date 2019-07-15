@@ -111,7 +111,7 @@ AAwhthispGraphic <- AAWhiteHispan %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10),
         plot.title = element_text(hjust = .5)) +
-  labs(title = "African American, white, Hispanic and Asian population, Orleans Parish",
+  labs(title = "Black, white, Hispanic, and Asian population, Orleans Parish",
        x="",
        y="")
 
@@ -157,9 +157,10 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         panel.spacing = unit(6, "lines"),
         strip.text = element_text(size=12),
+        plot.title = element_text(hjust = .5, size = 20),
         axis.text.x = element_text(size = 12, vjust=1),
         axis.text.y = element_text(size = 12)) +
-  labs(title = element_blank(),
+  labs(title = "White, black, Hispanic, and Asian, Metro New Orleans parishes and U.S",
        x="",
        y="") 
 
