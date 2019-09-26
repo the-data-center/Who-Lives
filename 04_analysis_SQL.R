@@ -351,7 +351,7 @@ commute <- commuteRaw %>%
 # whatever geography you need: place
 # whatever year of estimate that you need: date
 
-orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "Da Parish (St. Bernard)", "St. Charles Parish",
+orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
                "St. James Parish", "St. John The Baptist Parish", "St. Tammany Parish", "Metro", "United States")
 
 #Table 1 
@@ -396,9 +396,9 @@ ParishDemo <- spread(ParishDemo2, RaceSimple, Population) %>%
   #.[-2,]
 
 
-#Table 3 African American Population, New Orleans, 2000-2017
+#Table 3 African American Population, New Orleans, 2000-2018
 
-#Pulling population estimates for 2010-2017
+#Pulling population estimates for 2010-2018
 AAhistorical <- allparishesRaw %>% 
   filter(PlaceName == "Orleans Parish")%>% 
   filter(RaceSimple=="Black")%>% 
@@ -417,7 +417,7 @@ BlackPopyears <- allparishesRaw %>%
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Black") %>%
   filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
-           PlaceName=="Da Parish (St. Bernard)"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
+           PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
            PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish") 
 
 BlackpopM <- blackpopestRaw %>% 
@@ -441,7 +441,7 @@ HispanicPopyears <- allparishesRaw %>%
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Hispanic") %>%
   filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
-           PlaceName=="Da Parish (St. Bernard)"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
+           PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
            PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish") 
 
 HISPpopM <- hisppopestRaw %>% 
@@ -449,7 +449,7 @@ HISPpopM <- hisppopestRaw %>%
   add_row(CensusYear = 2000, PlaceName= "Jefferson Parish", Population=32418) %>%
   add_row(CensusYear = 2000, PlaceName= "St. Tammany Parish", Population=4737) %>% 
   add_row(CensusYear = 2000, PlaceName= "Plaquemines Parish", Population=433) %>% 
-  add_row(CensusYear = 2000, PlaceName= "Da Parish (St. Bernard)", Population=3425) %>% 
+  add_row(CensusYear = 2000, PlaceName= "St. Bernard Parish", Population=3425) %>% 
   add_row(CensusYear = 2000, PlaceName= "St. Charles Parish", Population=1346) %>% 
   add_row(CensusYear = 2000, PlaceName= "St. James Parish", Population=130) %>% 
   add_row(CensusYear = 2000, PlaceName= "St. John The Baptist Parish", Population=1230)
@@ -464,7 +464,7 @@ HISPpopM <- hisppopestRaw %>%
 
 #Table 5 Population by age group
 orderAge <- c(rep("Jefferson Parish",18),rep("Orleans Parish", 18),rep("Plaquemines Parish",18),
-              rep("Da Parish (St. Bernard)", 18),rep("St. Charles Parish", 18),rep("St. James Parish", 18),
+              rep("St. Bernard Parish", 18),rep("St. Charles Parish", 18),rep("St. James Parish", 18),
               rep("St. John The Baptist Parish", 18),rep("St. Tammany Parish",18))
 Agepop <- allparishesRaw %>% 
   filter(AgeGroupName== "Under 5 years" | AgeGroupName== "5 to 9"| AgeGroupName== "10 to 14" | AgeGroupName== "15 to 19"|
@@ -475,10 +475,10 @@ Agepop <- allparishesRaw %>%
   filter(SexName=="Total")%>% 
   filter(DateDesc == "7/1/2018 population estimate") %>% 
   filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
-           PlaceName=="Da Parish (St. Bernard)"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
+           PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
            PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish")%>% 
   arrange(factor(PlaceName, levels = c("Jefferson Parish","Orleans Parish","Plaquemines Parish",
-                 "Da Parish (St. Bernard)","St. Charles Parish","St. James Parish",
+                 "St. Bernard Parish","St. Charles Parish","St. James Parish",
                  "St. John The Baptist Parish","St. Tammany Parish"))) %>%
   select(AgeGroupName, PlaceName, Population) %>%
   mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,
@@ -496,8 +496,8 @@ under18pars<-allparishesRaw %>%
   filter(AgeGroupName=="18 years and over" | AgeGroupName=="Total")%>% 
   filter(RaceSimple=="Total")%>% 
   filter(SexName=="Total")%>% 
-  filter(DateDesc == "7/1/2017 population estimate") %>% 
-  filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|PlaceName=="Da Parish (St. Bernard)"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish")%>% 
+  filter(DateDesc == "7/1/2018 population estimate") %>% 
+  filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish")%>% 
   select(AgeGroupName, PlaceName, Population)
 
 #Creating metro

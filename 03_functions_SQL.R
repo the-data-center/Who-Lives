@@ -7,7 +7,7 @@
 ##pull parish, metro, and US numbers with census api
 ##input: census api variable names, human-readable names, and vintage
 ##output: dataframe in same format as Who Lives data tables excel sheet
-wholivesdatapull <- function(variables, names = variables, year = 2017){
+wholivesdatapull <- function(variables, names = variables, year = 2018){
   censuskey="530ce361defc2c476e5b5d5626d224d8354b9b9a"
   parishes <- getCensus(name = "acs/acs1", vintage = year, key = censuskey, vars = variables, region = "county:071,051,103", regionin = "state:22") ##pull parish data
   parishes$state = NULL  #state column pulled automatically & needs to be deleted
@@ -22,7 +22,7 @@ wholivesdatapull <- function(variables, names = variables, year = 2017){
 }
 ########## Define function to pull variables
 
-# Pull data. Note that this includes 2010-2017.
+# Pull data. Note that this includes 2010-2018.
 pullDataPEP <- function(variables, api, year, counties, metro) {
   parish <- getCensus(name = api, 
                       vintage = 2018, 
@@ -180,7 +180,7 @@ dodgedBar <- function(data,
                       yscale = c(0,.45),      
                       pct = TRUE,      #used when formatting pct vals vs dollar vals
                       comparisonyear = "2000",
-                      year = "2017",
+                      year = "2018",
                       digits = 0){     #for rounding, specifically for forbor
   dataGraphic <-  data %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it
     mutate(placenames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
