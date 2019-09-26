@@ -269,8 +269,8 @@ hispan2018 <- hispan %>%
          SouthAmericanpct,
          Otherpct,
          contains('SIG')) %>%
-  mutate(PlaceNames = c("Orleans", "Jefferson", "Metro", "U.S."))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
+  mutate(PlaceNames = c("Orleans", "Jefferson", "Metro", "United States"))  %>% 
+  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson","Metro", "United States"))) %>%
   gather(-PlaceName, -PlaceName.fac, -contains('SIG'), key=variable, value = value) %>% 
   .[-(45:48),] %>%
   mutate(description = NA,
@@ -419,7 +419,7 @@ hwcGraphic <- dodgedBar(hwc,
 singGraphic <- dodgedBar(sing, 
                          quo(pctsing), 
                          "Single-person households",
-                         yscale = c(0,.5))
+                         yscale = c(0,.55))
 
 ####11 - Under 18 population
 
@@ -636,7 +636,7 @@ hoGraphic <- dodgedBar(ho,
 honomoGraphic <- dodgedBar(honomo, 
                            quo(honomopct), 
                            "Homeowners without a mortgage", 
-                           yscale = c(0,.5))
+                           yscale = c(0,.55))
 
 ############################################
 # # HOUSING COSTS & COMMUTING # #
