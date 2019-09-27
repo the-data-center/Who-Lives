@@ -1,6 +1,6 @@
 ---
 title: "SQL version of Who Lives"
-output: html_document
+output: word_document
 ---
 
 
@@ -110,7 +110,7 @@ makeCSS_source(
 )
 ```
 
-The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2018) but decreased for the first time post-Katrina from `r comma(AA2018)` in 2018 to `r comma(AA2018)` in 2018.
+The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2018) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018.
 
 ```{r AAhistorical, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 AAhistGraphic 
@@ -302,6 +302,8 @@ makeCSS_source(
 
 Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans is statistically unchanged comparing 1999 to `r yearu2`. Meanwhile, the Jefferson Parish poverty rate increased from `r round((getvalue.pov.jeff.1999)*100)` to `r round((getvalue.pov.jeff.2018)*100)` percent between 1999 and `r yearu2`. Across the U.S., the poverty rate increased from `r round((getvalue.pov.us.1999)*100)` to `r round((getvalue.pov.us.2018)*100)` percent between 1999 and `r yearu2`.
 
+Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round((getvalue.pov.no.1999 )*100)` to `r round((getvalue.pov.no.2018 )*100)` percent between 1999 and `r yearu2` while the Jefferson Parish poverty rate remained statistically unchanged. Across the U.S., the poverty rate increased from `r round((getvalue.pov.us.1999)*100)` to `r round((getvalue.pov.us.2018)*100)` percent between 1999 and `r yearu2`.
+
 
 ```{r pov, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 povGraphic
@@ -314,9 +316,7 @@ makeCSS_source(
 )
 ```
 
-
-Like the overall poverty rate, the child poverty rate in New Orleans is statistically unchanged from 1999. In Jefferson Parish, the child poverty rate jumped from `r round((getvalue.childpov.jeff.1999)*100)` percent in 1999 to `r round((getvalue.childpov.jeff.2018)*100)` percent in `r yearu2` — greatly surpassing the U.S. child poverty rate, which rose from `r  round((getvalue.childpov.us.1999)*100)` to `r  round((getvalue.childpov.us.2018)*100)` percent between 1999 and `r yearu2`.
-
+Like the overall poverty rate, the child poverty rate in New Orleans decreased between 1999 and 2018. In Jefferson Parish, the child poverty rate jumped from `r round((getvalue.childpov.jeff.1999)*100)` percent in 1999 to `r round((getvalue.childpov.jeff.2018)*100)` percent in `r yearu2` — greatly surpassing the U.S. child poverty rate, which rose from `r  round((getvalue.childpov.us.1999)*100)` to `r  round((getvalue.childpov.us.2018)*100)` percent between 1999 and `r yearu2`.
 
 ```{r childpov, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
 childpovGraphic
@@ -377,7 +377,7 @@ makeCSS_source(
 
 ## Homeownership
 
-Homeownership rates across the U.S. have fallen since 2000 from `r round((getvalue.ho.us.2000)*100)` to `r round((getvalue.ho.us.2018)*100)` percent in `r yearu2`. Homeownership rates have decreased slightly in St. Tammany from `r round((getvalue.ho.tam.2000)*100)` percent to `r round((getvalue.ho.tam.2018)*100)` and in Jefferson from `r round((getvalue.ho.jeff.2000)*100)` to `r round((getvalue.ho.jeff.2018)*100)` percent between 2000 and `r yearu2`. In contrast, homeownership rates in New Orleans have held steady, but at a much lower `r round((getvalue.ho.no.2018)*100)` percent.
+Homeownership rates across the U.S. have fallen since 2000 from `r round((getvalue.ho.us.2000)*100)` to `r round((getvalue.ho.us.2018)*100)` percent in `r yearu2`. Homeownership rates have held steady in St. Tammany at about `r round((getvalue.ho.tam.2000)*100)` percent since 2000. In contrast, homeownership rates in New Orleans have increased slightly, but still at a much lower `r round((getvalue.ho.no.2018)*100)` percent.
 
 
 ```{r ho, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -422,7 +422,7 @@ makeCSS_source(
 )
 ```
 
-The share of homeowners paying more than 50 percent of household income on their mortgage, taxes, utilities, and insurance is virtually unchanged in metro area parishes since 2004. There is a clear gap between the rate of housing cost burden for renters vs. homeowners, and that gap has widened.
+The share of homeowners paying more than 50 percent of household income on their mortgage, taxes, utilities, and insurance is `r round((getvalue.hobur.metro.20042018dif)*100)` percentage points less in metro area parishes since 2004. There is a clear gap between the rate of housing cost burden for renters vs. homeowners, and that gap has widened.
 
 ```{r hoburGraphic, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hoburGraphic

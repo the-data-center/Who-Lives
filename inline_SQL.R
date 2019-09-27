@@ -109,8 +109,8 @@ pctincrease.metro.2018.2010 <- ((metro2018pop - metro2010pop)/metro2010pop)
 #The number of African Americans living In New Orleans grew every year post-Katrina (from 2006 to 2018)
 #but decreased for the first time post-Katrina from 232,118 in 2018 to 231,147 In 2018.
 
-AA2018 <- AAhistorical %>%
-  filter(year == 2018) %>%
+AA2017 <- AAhistorical %>%
+  filter(year == 2017) %>%
   select(Population) %>%
   pull()
 
@@ -368,35 +368,25 @@ getvalue.growthpcthispanic.metro.2010.2018 <- (getvalue.hispangrowthCOUNT.metro.
 
 
 #This increase was part of a larger trend that has pushed the Central American Population of the metro to -- percent of the Hispanic metro Population.
-getvalue.Hon.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
- filter(PlaceName.fac == "Metro") %>%
- filter(description == "Honduran") %>%
- select(value) %>%
+getvalue.Hon.2018 <- hispan %>%
+ filter(PlaceName == "New Orleans Metro Area") %>%
+ select(HonduranPct) %>%
   pull()
-getvalue.sal.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "Metro") %>%
-  filter(description == "Salvadoran") %>%
-  select(value) %>%
+getvalue.sal.2018 <- hispan %>%
+  filter(PlaceName == "New Orleans Metro Area") %>%
+  select(SalvadoranPct) %>%
   pull()
-getvalue.guat.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "Metro") %>%
-  filter(description == "Guatemalan") %>%
-  select(value) %>%
+getvalue.guat.2018 <- hispan %>%
+  filter(PlaceName == "New Orleans Metro Area") %>%
+  select(GuatemalanPct) %>%
   pull()
-getvalue.nic.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "Metro") %>%
-  filter(description == "Nicaraguan") %>%
-  select(value) %>%
+getvalue.nic.2018 <- hispan %>%
+  filter(PlaceName == "New Orleans Metro Area") %>%
+  select(NicaraguanPct) %>%
   pull()
-getvalue.otherCA.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "Metro") %>%
-  filter(description == "Other Central American") %>%
-  select(value) %>%
+getvalue.otherCA.2018 <- hispan %>%
+  filter(PlaceName == "New Orleans Metro Area") %>%
+  select(OtherCAPct) %>%
   pull()
 
 getvalue.CA.metro.2018 <- (getvalue.Hon.2018 + getvalue.sal.2018 + getvalue.guat.2018 + getvalue.nic.2018 + getvalue.otherCA.2018)
@@ -404,55 +394,42 @@ getvalue.CA.metro.2018 <- (getvalue.Hon.2018 + getvalue.sal.2018 + getvalue.guat
 
 
 #In comparison, Central Americans represent only 9 percent of the national Hispanic Population.
-getvalue.Hon.us.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "United States") %>%
-  filter(description == "Honduran") %>%
-  select(value) %>%
+getvalue.Hon.us.2018 <- hispan %>%
+  filter(PlaceName == "United States") %>%
+  select(HonduranPct) %>%
   pull()
-getvalue.sal.us.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "United States") %>%
-  filter(description == "Salvadoran") %>%
-  select(value) %>%
+getvalue.sal.us.2018 <- hispan %>%
+#  mutate(value = as.numeric(value)) %>%
+  filter(PlaceName == "United States") %>%
+  select(SalvadoranPct) %>%
   pull()
-getvalue.guat.us.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "United States") %>%
-  filter(description == "Guatemalan") %>%
-  select(value) %>%
+getvalue.guat.us.2018 <- hispan %>%
+  filter(PlaceName == "United States") %>%
+  select(GuatemalanPct) %>%
   pull()
-getvalue.nic.us.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "United States") %>%
-  filter(description == "Nicaraguan") %>%
-  select(value) %>%
+getvalue.nic.us.2018 <- hispan %>%
+  filter(PlaceName == "United States") %>%
+  select(NicaraguanPct) %>%
   pull()
-getvalue.otherCA.us.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "United States") %>%
-  filter(description == "Other Central American") %>%
-  select(value) %>%
+getvalue.otherCA.us.2018 <- hispan %>%
+  filter(PlaceName == "United States") %>%
+  select(OtherCAPct) %>%
   pull()
 
 getvalue.CA.us.2018 <- (getvalue.Hon.us.2018 + getvalue.sal.us.2018 + getvalue.guat.us.2018 + getvalue.nic.us.2018 + getvalue.otherCA.us.2018)
 
 
 # Mexicans are now solidly the second largest group behind Hondurans in metro New Orleans Parish, representing - percent of the Hispanic Population.
-getvalue.Mex.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "Metro") %>%
-  filter(description == "Mexican") %>%
-  select(value) %>%
+getvalue.Mex.2018 <- hispan %>%
+  filter(PlaceName == "New Orleans Metro Area") %>%
+  select(MexicanPct) %>%
   pull()
 
 # Mexican Population is much less prominent in the metro than nationally, where it represents - percent of the Hispanic Population.
 
-getvalue.MexUS.2018 <- hispan2018 %>%
-  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName.fac == "United States") %>%
-  filter(description == "Mexican") %>%
-  select(value) %>%
+getvalue.MexUS.2018 <- hispan %>%
+  filter(PlaceName == "United States") %>%
+  select(MexicanPct) %>%
   pull()
 
 #The progression of the baby boomers through the AgeGroupName groups, along with falling birth rates, have brought massive changes to the metro —
@@ -1221,6 +1198,18 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   #in metro area parishes and the nation since 2004.
   #There is a clear gap between the rate of housing cost burden for renters vs. homeowners, and that gap has widened.
 
+  getvalue.hobur.metro.2004 <- hobur %>% 
+    filter(PlaceName == "New Orleans Metro Area") %>% 
+    select(sf2004) %>% 
+    pull()
+  
+  getvalue.hobur.metro.2018 <- hobur %>% 
+    filter(PlaceName == "New Orleans Metro Area") %>% 
+    select(hoburpct) %>% 
+    pull()
+  
+  getvalue.hobur.metro.20042018dif = (getvalue.hobur.metro.2004 - getvalue.hobur.metro.2018 )
+  
   #The surge in the share of severely cost-burdened renters in New Orleans Parish is reflective of the surge in the median gross rent (rent plus utilities) in the city.
   #From 2004 to 2016, monthly rent plus utilities rose from $724 to $934 in New Orleans Parish,
 
