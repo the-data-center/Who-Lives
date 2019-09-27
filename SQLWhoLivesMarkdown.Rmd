@@ -13,7 +13,7 @@ library(extrafont)
 # Load helper functions to control CSS styles. See below for examples of how to call the functions. 
 library(here)
 source(here("css_helper.R"))
-knitr::opts_chunk$set(fig.width=5, fig.height=5)  # use fig.width and fig.height to globally set figure sizes.
+knitr::opts_chunk$set(fig.width=5, fig.height=5, warning = FALSE)  # use fig.width and fig.height to globally set figure sizes.
               
 options(knitr.table.format = 'markdown') # Specify that kable will create md-formatted tables. 
 
@@ -35,13 +35,29 @@ knitr::opts_chunk$set(echo = FALSE)
 # Note: here() uses the relative path to the same directory.
 
 source(here("01_libraries_SQL.R"))
+```
+```{r}
 source(here("css_helper.R"))
+```
+```{r}
 source(here("data-pull_SQL.R"))
+```
+```{r}
 source(here("02_variables_SQL.R"))
+```
+```{r}
 source(here("03_functions_SQL.R"))
+```
+```{r}
 source(here("04_analysis_SQL.R"))
+```
+```{r}
 source(here("05_graphics_SQL.R"))
+```
+```{r}
 source(here("inline_SQL.R"))
+```
+```{r}
 # For Asap font
 #font_add_google("Asap")
 #showtext_auto() # Turns on showtext fonts
@@ -57,12 +73,12 @@ makeCSS_highlight(
 
 
 
-The U.S. Census Bureau estimates that `r comma(metro2017pop)` residents were living in metro New Orleans as of July `r year`, a `r round((pctincrease.metro.2017.2010)*100)` percent increase from April 2010.[1] The metro area now has `r round((metro2017pop / 1337726)*100)` percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available).
+The U.S. Census Bureau estimates that `r comma(metro2018pop)` residents were living in metro New Orleans as of July `r year`, a `r round((pctincrease.metro.2018.2010)*100)` percent increase from April 2010.[1] The metro area now has `r round((metro2018pop / 1337726)*100)` percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available).
 
 
 ## Race/Ethnicity
 
-According to the U.S. Census Bureau’s `r year` population estimates, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.2017)` fewer African Americans living in New Orleans (Orleans Parish) compared to 2000, but there are also `r comma(getvalue.white.no.2000 - getvalue.white.no.2017)` fewer whites. Meanwhile, the number of Hispanics grew by `r comma(getvalue.Hispan.no.2017 - getvalue.Hispan.no.2000)`.[2]
+According to the U.S. Census Bureau’s `r year` population estimates, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.2018)` fewer African Americans living in New Orleans (Orleans Parish) compared to 2000, but there are also `r comma(getvalue.white.no.2000 - getvalue.white.no.2018)` fewer whites. Meanwhile, the number of Hispanics grew by `r comma(getvalue.Hispan.no.2018 - getvalue.Hispan.no.2000)`.[2]
 
 ```{r AAWhiteHispan, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 AAwhthispGraphic
@@ -83,7 +99,7 @@ Orleans Parish is the city of New Orleans. New Orleans and Orleans Parish are in
 )
 ```
 
-In Orleans Parish, the share of the `r year` population that is African American — while lower than in 2000 when it was `r round((getvalue.AApct.no.2000)*100)` percent — continues to represent the majority of city residents at `r round((getvalue.AApct.no.2017)*100)` percent. The share of Hispanics in the city increased from `r round((getvalue.Hispanpct.no.2000)*100)` percent in 2000 to `r round((getvalue.Hispanpct.no.2017)*100)` percent in `r year`; the share of Asians increased from `r round((getvalue.Asianpct.no.2000)*100)` percent to `r round((getvalue.Asianpct.no.2017)*100)` percent; and the share of whites increased from `r round((getvalue.whitepct.no.2000)*100)` percent to `r round((getvalue.whitepct.no.2017)*100)` percent. Meanwhile, Hispanic, Asian, and African American populations increased as a share of the total population in Jefferson, St. Bernard, St. Charles, St. John the Baptist, and St. Tammany parishes, each. In fact, the number and share of Hispanics have increased in all eight parishes in the metro area.
+In Orleans Parish, the share of the `r year` population that is African American — while lower than in 2000 when it was `r round((getvalue.AApct.no.2000)*100)` percent — continues to represent the majority of city residents at `r round((getvalue.AApct.no.2018)*100)` percent. The share of Hispanics in the city increased from `r round((getvalue.Hispanpct.no.2000)*100)` percent in 2000 to `r round((getvalue.Hispanpct.no.2018)*100)` percent in `r year`; the share of Asians increased from `r round((getvalue.Asianpct.no.2000)*100)` percent to `r round((getvalue.Asianpct.no.2018)*100)` percent; and the share of whites increased from `r round((getvalue.whitepct.no.2000)*100)` percent to `r round((getvalue.whitepct.no.2018)*100)` percent. Meanwhile, Hispanic, Asian, and African American populations increased as a share of the total population in Jefferson, St. Bernard, St. Charles, St. John the Baptist, and St. Tammany parishes, each. In fact, the number and share of Hispanics have increased in all eight parishes in the metro area.
 
 ```{r demoallparish, fig.align='center', fig.width=10, fig.height=16, echo=FALSE, warning=FALSE, message=FALSE}
 chart.demo.allparishes
@@ -94,7 +110,7 @@ makeCSS_source(
 )
 ```
 
-The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2017) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018.
+The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2018) but decreased for the first time post-Katrina from `r comma(AA2018)` in 2018 to `r comma(AA2018)` in 2018.
 
 ```{r AAhistorical, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 AAhistGraphic 
@@ -105,9 +121,9 @@ makeCSS_source(
 )
 ```
 
-Between 2000 and `r year`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.2017-getvalue.hispan.jeff.2000)` reaching over `r round((getvalue.Hispanpct.jeff.2017)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.2017 - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.2017 - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population was `r round((getvalue.Hispanpct.no.2017)*100)` percent in Orleans and `r round((getvalue.Hispanpct.tam.2017)*100)` percent in St. Tammany in `r year`.
+Between 2000 and `r year`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.2018-getvalue.hispan.jeff.2000)` reaching over `r round((getvalue.Hispanpct.jeff.2018)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.2018 - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.2018 - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population was `r round((getvalue.Hispanpct.no.2018)*100)` percent in Orleans and `r round((getvalue.Hispanpct.tam.2018)*100)` percent in St. Tammany in `r year`.
 
-As of July `r year`, there were `r comma(getvalue.Hispan.metro.2017)` Hispanics in the metro area, representing `r round((getvalue.Hispanpct.metro.2017)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2017)`, representing `r round((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is far below the average for the United States, which has grown from `r round((getvalue.Hispanpct.us.2000)*100)` percent to `r round((getvalue.Hispanpct.us.2017)*100)` percent of the total U.S. population over these `r year-2000` years.
+As of July `r year`, there were `r comma(getvalue.Hispan.metro.2018)` Hispanics in the metro area, representing `r round((getvalue.Hispanpct.metro.2018)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2018)`, representing `r round((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is far below the average for the United States, which has grown from `r round((getvalue.Hispanpct.us.2000)*100)` percent to `r round((getvalue.Hispanpct.us.2018)*100)` percent of the total U.S. population over these `r year-2000` years.
 
 ```{r hispanpop, fig.align='center', fig.width=7, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 HispanicPopGraphic
@@ -118,7 +134,7 @@ makeCSS_source(
 )
 ```
 
-The number of Hispanics in New Orleans metro has grown every year since 2006. Indeed while the overall metro population has grown `r round((pctincrease.metro.2017.2010)*100)` percent since 2010, the Hispanic population has grown `r round((getvalue.Hispgrowth.metro.2010.2017)*100)` percent such that Hispanics account for `r round((getvalue.growthpcthispanic.metro.2010.2017)*100)` percent of the metro's population growth since 2010.
+The number of Hispanics in New Orleans metro has grown every year since 2006. Indeed while the overall metro population has grown `r round((pctincrease.metro.2018.2010)*100)` percent since 2010, the Hispanic population has grown `r round((getvalue.Hispgrowth.metro.2010.2018)*100)` percent such that Hispanics account for `r round((getvalue.growthpcthispanic.metro.2010.2018)*100)` percent of the metro's population growth since 2010.
 
 ```{r hispanpopyear, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 chart.HispanpopYears.allparishes
@@ -131,20 +147,20 @@ makeCSS_source(
 
 Hispanic is an umbrella term comprising multiple nationalities and ethnicities. Researchers have shown that most Hispanics prefer to identify by nationality rather than by pan-ethnic terms such as “Hispanic” and “Latino.”[3] The nationalities of Hispanics residing in metro New Orleans is quite distinct from the national Hispanic profile.
 
-In `r year`, the largest Hispanic group in metro New Orleans was Honduran, representing `r round((getvalue.Hon.2017)*100)` percent of the Hispanic population. In comparison, Hondurans represent only `r round((getvalue.Hon.us.2017)*100)` percent of the national Hispanic population. These figures point to metro New Orleans as a hub of Honduran migration.
+In `r year`, the largest Hispanic group in metro New Orleans was Honduran, representing `r round((getvalue.Hon.2018)*100)` percent of the Hispanic population. In comparison, Hondurans represent only `r round((getvalue.Hon.us.2018)*100)` percent of the national Hispanic population. These figures point to metro New Orleans as a hub of Honduran migration.
 
-Not to be ignored, the Mexican population represents `r round((getvalue.Mex.2017)*100)` percent of the Hispanic population in metro New Orleans. Nevertheless, the Mexican population is much less prominent in the metro than nationally, where it represents `r round((getvalue.MexUS.2017)*100)` percent of the Hispanic population.
+Not to be ignored, the Mexican population represents `r round((getvalue.Mex.2018)*100)` percent of the Hispanic population in metro New Orleans. Nevertheless, the Mexican population is much less prominent in the metro than nationally, where it represents `r round((getvalue.MexUS.2018)*100)` percent of the Hispanic population.
 
 
 
-```{r hispan2017, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
-chart.hispan2017.allparishes 
+```{r hispan2018, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
+chart.hispan2018.allparishes 
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
 "&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2018."
 )
 ```
 
@@ -162,8 +178,8 @@ makeCSS_source(
 )
 ```
 
-```{r age2017, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
-chart.agepop2017.allparishes
+```{r age2018, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
+chart.agepop2018.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
@@ -171,7 +187,7 @@ makeCSS_source(
 )
 ```
 
-Meanwhile, the share of households with children is shrinking while the share of individuals living alone is growing — both across the metro and nation. As of `r yearu2`, `r round((getvalue.hwc.2017)*100)` percent of households in metro New Orleans included children, down from `r round((getvalue.hwc.2000)*100)` percent in 2000. Between 2000 and `r yearu2`, the percent of St. Tammany households with children declined from `r round((getvalue.hwc.StTam.2000)*100)` percent to `r round((getvalue.hwc.StTam.2017)*100)` percent; the percent of Jefferson households with children declined from `r round((getvalue.hwc.Jeff.2000)*100)` percent to `r round((getvalue.hwc.Jeff.2017)*100)` percent; and the percent of Orleans households with children declined from `r round((getvalue.hwc.no.2000)*100)` percent to `r round((getvalue.hwc.no.2017)*100)` percent.
+Meanwhile, the share of households with children is shrinking while the share of individuals living alone is growing — both across the metro and nation. As of `r yearu2`, `r round((getvalue.hwc.2018)*100)` percent of households in metro New Orleans included children, down from `r round((getvalue.hwc.2000)*100)` percent in 2000. Between 2000 and `r yearu2`, the percent of St. Tammany households with children declined from `r round((getvalue.hwc.StTam.2000)*100)` percent to `r round((getvalue.hwc.StTam.2018)*100)` percent; the percent of Jefferson households with children declined from `r round((getvalue.hwc.Jeff.2000)*100)` percent to `r round((getvalue.hwc.Jeff.2018)*100)` percent; and the percent of Orleans households with children declined from `r round((getvalue.hwc.no.2000)*100)` percent to `r round((getvalue.hwc.no.2018)*100)` percent.
 
 
 ```{r hwc, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -179,10 +195,10 @@ hwcGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
-As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round((getvalue.sing.2000)*100)` percent in 2000 to `r round((getvalue.sing.2017)*100)` percent in `r yearu2` — similar to the trend for Jefferson Parish. The increase was larger in Orleans Parish, which jumped from `r round((getvalue.singNO.2000)*100)` to `r round((getvalue.singNO.2017)*100)` percent.
+As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round((getvalue.sing.2000)*100)` percent in 2000 to `r round((getvalue.sing.2018)*100)` percent in `r yearu2` — similar to the trend for Jefferson Parish. The increase was larger in Orleans Parish, which jumped from `r round((getvalue.singNO.2000)*100)` to `r round((getvalue.singNO.2018)*100)` percent.
 
 
 ```{r sing, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
@@ -190,11 +206,11 @@ singGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
-While the metro has regained much of the post-Katrina population losses, youth population is substantially lower than pre-Katrina levels. The metro had `r comma(getvalue.under18.metro.2000)` children under 18 years in 2000 and only `r comma(getvalue.under18.metro.2017)` in `r year`. Much of this loss was driven by Orleans Parish, where the under 18 population declined to `r comma(getvalue.under18.no.2017)` from `r comma(getvalue.under18.no.2000)`. The under 18 population is now `r round((getvalue.pct.under18.metro.2018)*100)` percent of the metro population, down from 27 percent in 2000.
+While the metro has regained much of the post-Katrina population losses, youth population is substantially lower than pre-Katrina levels. The metro had `r comma(getvalue.under18.metro.2000)` children under 18 years in 2000 and only `r comma(getvalue.under18.metro.2018)` in `r year`. Much of this loss was driven by Orleans Parish, where the under 18 population declined to `r comma(getvalue.under18.no.2018)` from `r comma(getvalue.under18.no.2000)`. The under 18 population is now `r round((getvalue.pct.under18.metro.2018)*100)` percent of the metro population, down from 27 percent in 2000.
 
 
 ```{r popunder18, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
@@ -216,7 +232,7 @@ Although race/ethnicity and age data is available for all eight parishes in metr
 
 ## Educational attainment, income, and internet access
 
-Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[5] The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from `r round((getvalue.hs.metro.2000)*100)` percent in 2000 to `r round((getvalue.hs.metro.2017)*100)` percent in `r yearu2`. In the city of New Orleans, the share of adults with less than a high school degree fell from `r round((getvalue.hs.no.2000)*100)` percent to `r round((getvalue.hs.no.2017)*100)` percent but is still higher than the U.S. average of `r round((getvalue.hs.us.2017)*100)` percent.
+Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[5] The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from `r round((getvalue.hs.metro.2000)*100)` percent in 2000 to `r round((getvalue.hs.metro.2018)*100)` percent in `r yearu2`. In the city of New Orleans, the share of adults with less than a high school degree fell from `r round((getvalue.hs.no.2000)*100)` percent to `r round((getvalue.hs.no.2018)*100)` percent but is still higher than the U.S. average of `r round((getvalue.hs.us.2018)*100)` percent.
 
 
 ```{r hs, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -224,12 +240,12 @@ hsGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
 
-The metro area decline in the share of adults with less than a high school degree has been coupled with an increase in the share with a bachelor’s degree or higher. In New Orleans, `r round((getvalue.bach.no.2017)*100)` percent of adults 25 and older had a college degree in `r yearu2` — higher than the U.S. average of `r round((getvalue.bach.us.2017)*100)` percent, and up from `r round((getvalue.bach.no.2000)*100)` percent in 2000. The overall metro area share of adults with a bachelor’s degree grew from `r round((getvalue.bach.metro.2000)*100)` to `r round((getvalue.bach.metro.2017)*100)` percent — lower than the national average.
+The metro area decline in the share of adults with less than a high school degree has been coupled with an increase in the share with a bachelor’s degree or higher. In New Orleans, `r round((getvalue.bach.no.2018)*100)` percent of adults 25 and older had a college degree in `r yearu2` — higher than the U.S. average of `r round((getvalue.bach.us.2018)*100)` percent, and up from `r round((getvalue.bach.no.2000)*100)` percent in 2000. The overall metro area share of adults with a bachelor’s degree grew from `r round((getvalue.bach.metro.2000)*100)` to `r round((getvalue.bach.metro.2018)*100)` percent — lower than the national average.
 
 
 ```{r bach, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -237,11 +253,11 @@ bachGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
-The `r yearu2` median household income of `r dollar(getvalue.medhh.metro.2017)` for the metro and `r dollar(getvalue.medhh.no.2017)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2017)`. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2017)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r yearu2`, even after adjusting for inflation, falling to `r dollar(round(getvalue.medhh.jeff.2017))`.
+The `r yearu2` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro and `r dollar(getvalue.medhh.no.2018)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2018)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r yearu2`, even after adjusting for inflation, falling to `r dollar(round(getvalue.medhh.jeff.2018))`.
 
 
 ```{r medhh, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -249,16 +265,16 @@ medhhGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2017 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
 
-Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and encompassing technology training services, workers and students are at a disadvantage in the job market and education system.[6] Only `r round((getvalue.inta.no.2017)*100)` percent of households in Orleans Parish and only `r round((getvalue.inta.jeff.2017)*100)` percent of households in Jefferson Parish are connected to the Internet through a home-based internet service, such as broadband (cable, DSL, or fiber), satellite, or dial-up service, compared to `r round((getvalue.inta.us.2017)*100)` percent nationwide. St. Tammany is above the national average at `r round((getvalue.inta.tam.2017)*100)` percent of households connected to the Internet by a home-based service internet connection. Internet access without a subscription refers to households who only have access through group access locations such as school, work, a library, or coffee shop.
+Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and encompassing technology training services, workers and students are at a disadvantage in the job market and education system.[6] Only `r round((getvalue.inta.no.2018)*100)` percent of households in Orleans Parish and only `r round((getvalue.inta.jeff.2018)*100)` percent of households in Jefferson Parish are connected to the Internet through a home-based internet service, such as broadband (cable, DSL, or fiber), satellite, or dial-up service, compared to `r round((getvalue.inta.us.2018)*100)` percent nationwide. St. Tammany is above the national average at `r round((getvalue.inta.tam.2018)*100)` percent of households connected to the Internet by a home-based service internet connection. Internet access without a subscription refers to households who only have access through group access locations such as school, work, a library, or coffee shop.
 
-An increasingly common way to access the Internet is through a smartphone or some other cellular device. While, in general, smartphone access contributes positively to lessening the Digital Divide, having access only through a smartphone restricts ability to fully leverage the Internet to complete common tasks such as writing and researching a resume, registering your kids for school, analyzing data about your neighborhood, or creating content for an internet business. `r round((getvalue.intacell.no.2017)*100)` percent of households in Orleans Parish only have access through a smartphone. This is compared to `r round((getvalue.intacell.us.2017)*100)` percent nationwide.
+An increasingly common way to access the Internet is through a smartphone or some other cellular device. While, in general, smartphone access contributes positively to lessening the Digital Divide, having access only through a smartphone restricts ability to fully leverage the Internet to complete common tasks such as writing and researching a resume, registering your kids for school, analyzing data about your neighborhood, or creating content for an internet business. `r round((getvalue.intacell.no.2018)*100)` percent of households in Orleans Parish only have access through a smartphone. This is compared to `r round((getvalue.intacell.us.2018)*100)` percent nationwide.
 
 ```{r, echo=FALSE}
 makeCSS_highlight(
@@ -278,13 +294,13 @@ makeCSS_source(
 
 **Notes**: Access w/o subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018."
 )
 ```
 
 ## Poverty and access to vehicles
 
-Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans is statistically unchanged comparing 1999 to `r yearu2`. Meanwhile, the Jefferson Parish poverty rate increased from `r round((getvalue.pov.jeff.1999)*100)` to `r round((getvalue.pov.jeff.2017)*100)` percent between 1999 and `r yearu2`. Across the U.S., the poverty rate increased from `r round((getvalue.pov.us.1999)*100)` to `r round((getvalue.pov.us.2017)*100)` percent between 1999 and `r yearu2`.
+Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans is statistically unchanged comparing 1999 to `r yearu2`. Meanwhile, the Jefferson Parish poverty rate increased from `r round((getvalue.pov.jeff.1999)*100)` to `r round((getvalue.pov.jeff.2018)*100)` percent between 1999 and `r yearu2`. Across the U.S., the poverty rate increased from `r round((getvalue.pov.us.1999)*100)` to `r round((getvalue.pov.us.2018)*100)` percent between 1999 and `r yearu2`.
 
 
 ```{r pov, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -292,14 +308,14 @@ povGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2017 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
 
-Like the overall poverty rate, the child poverty rate in New Orleans is statistically unchanged from 1999. In Jefferson Parish, the child poverty rate jumped from `r round((getvalue.childpov.jeff.1999)*100)` percent in 1999 to `r round((getvalue.childpov.jeff.2017)*100)` percent in `r yearu2` — greatly surpassing the U.S. child poverty rate, which rose from `r  round((getvalue.childpov.us.1999)*100)` to `r  round((getvalue.childpov.us.2017)*100)` percent between 1999 and `r yearu2`.
+Like the overall poverty rate, the child poverty rate in New Orleans is statistically unchanged from 1999. In Jefferson Parish, the child poverty rate jumped from `r round((getvalue.childpov.jeff.1999)*100)` percent in 1999 to `r round((getvalue.childpov.jeff.2018)*100)` percent in `r yearu2` — greatly surpassing the U.S. child poverty rate, which rose from `r  round((getvalue.childpov.us.1999)*100)` to `r  round((getvalue.childpov.us.2018)*100)` percent between 1999 and `r yearu2`.
 
 
 ```{r childpov, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
@@ -307,13 +323,13 @@ childpovGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2017 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
-Post-Katrina, the share of New Orleans households without access to a vehicle dropped from `r round((getvalue.veh.no.2000)*100)` percent in 2000 to `r round((getvalue.veh.no.2017)*100)` percent in `r yearu2`. Nonetheless, at `r round((getvalue.veh.no.2017)*100)` percent, New Orleans’ share is more than twice as high as in neighboring parishes and the nation, indicating the importance of a robust public transportation system and comprehensive evacuation plan.
+Post-Katrina, the share of New Orleans households without access to a vehicle dropped from `r round((getvalue.veh.no.2000)*100)` percent in 2000 to `r round((getvalue.veh.no.2018)*100)` percent in `r yearu2`. Nonetheless, at `r round((getvalue.veh.no.2018)*100)` percent, New Orleans’ share is more than twice as high as in neighboring parishes and the nation, indicating the importance of a robust public transportation system and comprehensive evacuation plan.
 
 
 ```{r veh, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -321,27 +337,27 @@ vehGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2017 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
 ## Foreign-born population and geographic mobility
 
 
-A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2017 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r yearu2`, fully `r round(((getvalue.forbor.jeff.2017)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, statistically the same as the U.S. share. In Orleans Parish the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2017 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r yearu2` while St. Tammany Parish increased by `r round(((getvalue.forbor.tam.2017 - getvalue.forbor.tam.2000)*100), digits = 1)` percentage points.
+A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2018 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r yearu2`, fully `r round(((getvalue.forbor.jeff.2018)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, statistically the same as the U.S. share. In Orleans Parish the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2018 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r yearu2` while St. Tammany Parish increased by `r round(((getvalue.forbor.tam.2018 - getvalue.forbor.tam.2000)*100), digits = 1)` percentage points.
 
 ```{r forbor, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 forborGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
-Like the foreign-born population, a rising share of the population who moved into Orleans Parish in the past year may reflect expanding economic opportunities. The most frequent reason people move long distances, such as from one state to another state, is for job opportunities.[8] In addition, the young and well-educated are more likely than others to move long distances.[9] In `r yearu2`, `r round((getvalue.mobabroadpct.no.2017 + getvalue.mobStatespct.no.2017 + getvalue.difparishpct.no.2017)*100)` percent of the population in Orleans Parish had moved into the parish in the past year, up from `r round((getvalue.mobabroadpct.no.2004 +  getvalue.mobStatespct.no.2004 + getvalue.difparishpct.no.2004)*100)` percent in 2004. Over `r round((getvalue.outsidestatepct.no.2017)*100)` percent of the new movers into Orleans Parish came from outside the state of Louisiana. In Jefferson Parish, the share of the population who were new movers into the parish was `r round((getvalue.moboutofparish.jeff.2004)*100)` percent in 2004, and has not significantly changed.
+Like the foreign-born population, a rising share of the population who moved into Orleans Parish in the past year may reflect expanding economic opportunities. The most frequent reason people move long distances, such as from one state to another state, is for job opportunities.[8] In addition, the young and well-educated are more likely than others to move long distances.[9] In `r yearu2`, `r round((getvalue.mobabroadpct.no.2018 + getvalue.mobStatespct.no.2018 + getvalue.difparishpct.no.2018)*100)` percent of the population in Orleans Parish had moved into the parish in the past year, up from `r round((getvalue.mobabroadpct.no.2004 +  getvalue.mobStatespct.no.2004 + getvalue.difparishpct.no.2004)*100)` percent in 2004. Over `r round((getvalue.outsidestatepct.no.2018)*100)` percent of the new movers into Orleans Parish came from outside the state of Louisiana. In Jefferson Parish, the share of the population who were new movers into the parish was `r round((getvalue.moboutofparish.jeff.2004)*100)` percent in 2004, and has not significantly changed.
 
 
 ```{r mob, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
@@ -349,19 +365,19 @@ chart.mob.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2017 is not significant at the 95% confidence interval for Jefferson. It is significant for all other geographies
+"**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2018 is not significant at the 95% confidence interval for Jefferson. It is significant for all other geographies
 
 **Notes**: Also, 2004 data is not available for St. Tammany Parish.
 
-&ast; = Difference between 2004 and 2017 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
 )
 ```
 
 ## Homeownership
 
-Homeownership rates across the U.S. have fallen since 2000 from `r round((getvalue.ho.us.2000)*100)` to `r round((getvalue.ho.us.2017)*100)` percent in `r yearu2`. Homeownership rates have decreased slightly in St. Tammany from `r round((getvalue.ho.tam.2000)*100)` percent to `r round((getvalue.ho.tam.2017)*100)` and in Jefferson from `r round((getvalue.ho.jeff.2000)*100)` to `r round((getvalue.ho.jeff.2017)*100)` percent between 2000 and `r yearu2`. In contrast, homeownership rates in New Orleans have held steady, but at a much lower `r round((getvalue.ho.no.2017)*100)` percent.
+Homeownership rates across the U.S. have fallen since 2000 from `r round((getvalue.ho.us.2000)*100)` to `r round((getvalue.ho.us.2018)*100)` percent in `r yearu2`. Homeownership rates have decreased slightly in St. Tammany from `r round((getvalue.ho.tam.2000)*100)` percent to `r round((getvalue.ho.tam.2018)*100)` and in Jefferson from `r round((getvalue.ho.jeff.2000)*100)` to `r round((getvalue.ho.jeff.2018)*100)` percent between 2000 and `r yearu2`. In contrast, homeownership rates in New Orleans have held steady, but at a much lower `r round((getvalue.ho.no.2018)*100)` percent.
 
 
 ```{r ho, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -369,13 +385,13 @@ hoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2017 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
-Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures. The proportion of metro area homeowners without a mortgage has increased from `r  round((getvalue.honomo.metro.2000)*100)` to `r  round((getvalue.honomo.metro.2017)*100)` percent between 2000 and `r yearu2`, driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from `r round((getvalue.honomo.no.2000)*100)` to `r round((getvalue.honomo.no.2017)*100)` percent in Orleans and from `r round((getvalue.honomo.jeff.2000)*100)` to `r round((getvalue.honomo.jeff.2017)*100)` percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisiana parishes.[10]
+Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures. The proportion of metro area homeowners without a mortgage has increased from `r  round((getvalue.honomo.metro.2000)*100)` to `r  round((getvalue.honomo.metro.2018)*100)` percent between 2000 and `r yearu2`, driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from `r round((getvalue.honomo.no.2000)*100)` to `r round((getvalue.honomo.no.2018)*100)` percent in Orleans and from `r round((getvalue.honomo.jeff.2000)*100)` to `r round((getvalue.honomo.jeff.2018)*100)` percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisiana parishes.[10]
 
 
 
@@ -384,7 +400,7 @@ honomoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
@@ -392,7 +408,7 @@ makeCSS_source(
 ## Housing costs and affordability, housing stock, and commuting
 
 
-High housing costs can limit a region’s ability to attract and retain the workforce essential for a healthy economy.[11] Severe housing cost burdens of more than 50 percent of household income indicate a serious problem in housing affordability. In 2004, the share of severely cost-burdened renters in New Orleans and the U.S. was `r round((getvalue.rentbur.no.2004)*100)` percent. In the `r yearu2-2004` years since, that share has spiked to `r round((getvalue.rentburpct.no.2017)*100)` percent in Orleans while rising to only `r round((getvalue.rentburpct.us.2017)*100)` percent nationally. In Jefferson Parish, the share of renters paying more than 50 percent of household income on housing and utilities is `r round((getvalue.rentbur.jeff.2017)*100)` percent in `r yearu2`.
+High housing costs can limit a region’s ability to attract and retain the workforce essential for a healthy economy.[11] Severe housing cost burdens of more than 50 percent of household income indicate a serious problem in housing affordability. In 2004, the share of severely cost-burdened renters in New Orleans and the U.S. was `r round((getvalue.rentbur.no.2004)*100)` percent. In the `r yearu2-2004` years since, that share has spiked to `r round((getvalue.rentburpct.no.2018)*100)` percent in Orleans while rising to only `r round((getvalue.rentburpct.us.2018)*100)` percent nationally. In Jefferson Parish, the share of renters paying more than 50 percent of household income on housing and utilities is `r round((getvalue.rentbur.jeff.2018)*100)` percent in `r yearu2`.
 
 
 ```{r rentbur, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -402,7 +418,7 @@ rentburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
 )
 ```
 
@@ -415,14 +431,14 @@ hoburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2017 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
 )
 ```
 
 
-The surge in the share of severely cost-burdened renters in New Orleans is reflective of the surge in the median gross rent (rent plus utilities) in the city. From 2004 to `r yearu2`, monthly rent plus utilities rose from `r dollar(round(getvalue.medrent.no.2004))` to `r dollar(getvalue.medrent.no.2017)` in New Orleans, a `r round(((getvalue.medrent.no.2017 - getvalue.medrent.no.2004) / getvalue.medrent.no.2004)*100)` percent increase after adjusting for inflation. Meanwhile, median gross rents increased `r round(((getvalue.medrent.metro.2017 - getvalue.medrent.metro.2004) / getvalue.medrent.metro.2004)*100)` percent metrowide compared to only `r round(((getvalue.medrent.us.2017 - getvalue.medrent.us.2004) / getvalue.medrent.us.2004)*100)` percent nationwide.
+The surge in the share of severely cost-burdened renters in New Orleans is reflective of the surge in the median gross rent (rent plus utilities) in the city. From 2004 to `r yearu2`, monthly rent plus utilities rose from `r dollar(round(getvalue.medrent.no.2004))` to `r dollar(getvalue.medrent.no.2018)` in New Orleans, a `r round(((getvalue.medrent.no.2018 - getvalue.medrent.no.2004) / getvalue.medrent.no.2004)*100)` percent increase after adjusting for inflation. Meanwhile, median gross rents increased `r round(((getvalue.medrent.metro.2018 - getvalue.medrent.metro.2004) / getvalue.medrent.metro.2004)*100)` percent metrowide compared to only `r round(((getvalue.medrent.us.2018 - getvalue.medrent.us.2004) / getvalue.medrent.us.2004)*100)` percent nationwide.
 
 
 ```{r medrent, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -432,14 +448,14 @@ medrentGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
 )
 ```
 
 
 America’s aging housing stock represents both a potential problem and an opportunity. Older homes are less energy-efficient and more expensive to maintain.[12] Moreover, research has shown that lead poisoning in children is correlated strongly with residing in pre-1950 homes.[13] Conversely, in New Orleans, many older homes are protected by preservation laws that have helped retain the historic character of the city.
 
-In Orleans Parish, fully `r round((getvalue.yrbuilt1950.nola.2017)*100)` percent of all housing units are in pre-1950 structures. Meanwhile, in Jefferson Parish, `r round((getvalue.yrbuilt1950to1989.jeff.2017)*100)` percent of the housing stock was built in the 1950s, 1960s, 1970s, and 1980s, and just `r round((getvalue.yrbuilt1990orlater.jeff.2017)*100)` percent of housing stock has been built since 1990. In contrast, in St. Tammany, the majority of housing units are in structures that have been built since 1990.
+In Orleans Parish, fully `r round((getvalue.yrbuilt1950.nola.2018)*100)` percent of all housing units are in pre-1950 structures. Meanwhile, in Jefferson Parish, `r round((getvalue.yrbuilt1950to1989.jeff.2018)*100)` percent of the housing stock was built in the 1950s, 1960s, 1970s, and 1980s, and just `r round((getvalue.yrbuilt1990orlater.jeff.2018)*100)` percent of housing stock has been built since 1990. In contrast, in St. Tammany, the majority of housing units are in structures that have been built since 1990.
 
 
 ```{r yrbuilt, fig.align='center', fig.width=6, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
@@ -449,15 +465,15 @@ chart.yrbuilt.allparishes
 makeCSS_source(
 "&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018."
 )
 ```
 
 A metro region is partially defined by the commuting patterns of its residents. Commuting has been studied more and more as the costs and burdens (physical, mental, familial, etc.) are uncovered. In addition, studies have shown that younger generations are less likely to drive cars, more likely to bike, and more likely to move into urban cores.[14]
 
-The share of commuters in New Orleans using public transportation declined sharply from `r round((getvalue.publictransit.no.2000)*100)` percent in 2000 to `r round((getvalue.publictransit.no.2017)*100)` percent in `r yearu2`, while the share in Jefferson Parish has fallen from `r round(( getvalue.publictransit.jeff.2000)*100)` percent in 2000, to `r round((getvalue.publictransit.jeff.2017)*100)` percent of commuters using public transportation in `r yearu2`. But the share of bike commuters in New Orleans rose to `r round((getvalue.bike.no.2017)*100)` percent, giving the city the fifth highest share of bike commuting of the largest 70 cities nationwide.[15] Meanwhile, the metro share of carpoolers fell from `r  round((getvalue.carpool.metro.2000)*100)` percent in 2000 to `r  round((getvalue.carpool.metro.2017)*100)` percent in `r yearu2`, as did the Orleans Parish share from `r round((getvalue.carpool.no.2000)*100)` percent to `r round((getvalue.carpool.no.2017)*100)` percent.
+The share of commuters in New Orleans using public transportation declined sharply from `r round((getvalue.publictransit.no.2000)*100)` percent in 2000 to `r round((getvalue.publictransit.no.2018)*100)` percent in `r yearu2`, while the share in Jefferson Parish has fallen from `r round(( getvalue.publictransit.jeff.2000)*100)` percent in 2000, to `r round((getvalue.publictransit.jeff.2018)*100)` percent of commuters using public transportation in `r yearu2`. But the share of bike commuters in New Orleans rose to `r round((getvalue.bike.no.2018)*100)` percent, giving the city the fifth highest share of bike commuting of the largest 70 cities nationwide.[15] Meanwhile, the metro share of carpoolers fell from `r  round((getvalue.carpool.metro.2000)*100)` percent in 2000 to `r  round((getvalue.carpool.metro.2018)*100)` percent in `r yearu2`, as did the Orleans Parish share from `r round((getvalue.carpool.no.2000)*100)` percent to `r round((getvalue.carpool.no.2018)*100)` percent.
 
-The percentage of workers who commute by driving alone has increased within the metro region since 2000 from `r round((getvalue.drivealone.metro.2000)*100)` percent to `r round((getvalue.drivealone.metro.2017)*100)` percent, driven by a `r round((getvalue.drivealone.no.2000)*100)` to `r round((getvalue.drivealone.no.2017)*100)` percent rise in Orleans Parish. This goes against the national trend, where the share in driving alone remained steady between 2000 and `r yearu2` and where public transit use has also remained steady.
+The percentage of workers who commute by driving alone has increased within the metro region since 2000 from `r round((getvalue.drivealone.metro.2000)*100)` percent to `r round((getvalue.drivealone.metro.2018)*100)` percent, driven by a `r round((getvalue.drivealone.no.2000)*100)` to `r round((getvalue.drivealone.no.2018)*100)` percent rise in Orleans Parish. This goes against the national trend, where the share in driving alone remained steady between 2000 and `r yearu2` and where public transit use has also remained steady.
 
 
 ```{r commute, fig.align='center', fig.width=10, fig.height=6,echo=FALSE, warning=FALSE, message=FALSE}
@@ -465,16 +481,16 @@ chart.commute.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 2000 and 2017 is not significant at 95% confidence interval.
+"&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2017."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
 
 ## Data Sources / Methodology
 
 
-Data on race/ethnicity and age is from the Census Bureau vintage 2017 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
+Data on race/ethnicity and age is from the Census Bureau vintage 2018 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
 
 Statistical tests of significance were computed at the 95% confidence level for all data from the American Community Survey and Census 2000 SF3. An “*” indicates that differences between two time periods or geographies are not significant, and therefore are the result of sampling variability rather than real change in characteristics of the population.
 
@@ -515,7 +531,7 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 [14] Davis, B., Dutzik, T. (2012). Transportation and the New Generation: Why Young People Are Driving Less and What It Means for Transportation Policy. Retrieved October 10, 2014 from http://www.uspirg.org/sites/pirg/files/reports/Transportation%20%26%20the%20 New%20Generation%20vUS_0.pdf.
 
-[15] The League of American Bicyclists. (2017). Where We Ride: Analysis of Bicycle Commuting in American Cities. Retrieved December 21, 2018 from http://www.bikeleague.org/sites/default/files/2015ACSlargecities.pdf
+[15] The League of American Bicyclists. (2018). Where We Ride: Analysis of Bicycle Commuting in American Cities. Retrieved December 21, 2018 from http://www.bikeleague.org/sites/default/files/2015ACSlargecities.pdf
 
 
 

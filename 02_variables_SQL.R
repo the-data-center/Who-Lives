@@ -5,6 +5,6 @@ cpi04 <- 1.311434621
 cpi00 <- 1.438617886
 
 # the current/most recent year - the year the data you're updating represents
-year <- 2017
+year <- 2018
 
 

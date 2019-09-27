@@ -19,7 +19,7 @@ Parish) compared to 2000, but there are also 8,631 fewer whites.
 Meanwhile, the number of Hispanics grew by 7,137 and the number of
 Asians grew by 390.\[2\]
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -45,7 +45,7 @@ the Baptist, and St. Tammany parishes, each. In fact, the number and
 share of Hispanics have increased in all eight parishes in the metro
 area.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/demoallparish-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/demoallparish-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -56,7 +56,7 @@ The number of African Americans living in New Orleans grew every year
 post-Katrina (from 2006 to 2017) but decreased for the first time
 post-Katrina from 232,118 in 2017 to 231,147 in 2018.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/AAhistorical-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/AAhistorical-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -78,7 +78,7 @@ metro area parishes is far below the average for the United States,
 which has grown from 12 percent to 18 percent of the total U.S.
 population over these 18 years.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hispanpop-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/hispanpop-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -91,7 +91,7 @@ since 2010, the Hispanic population has grown 22 percent such that
 Hispanics account for 25 percent of the metro’s population growth since
 2010.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hispanpopyear-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/hispanpopyear-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -114,7 +114,7 @@ Hispanic population in metro New Orleans. Nevertheless, the Mexican
 population is much less prominent in the metro than nationally, where it
 represents 62 percent of the Hispanic population.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hispan2017-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/hispan2017-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -134,14 +134,14 @@ Looking at the total population in the metro by five-year age groups for
 Consequently, the median age of the metro has risen to 38 in 2018 from
 34.8 in 2000.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/age2000-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/age2000-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000.</p>
 </div>
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/age2017-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/age2017-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -157,7 +157,7 @@ percent to 29 percent; the percent of Jefferson households with children
 declined from 33 percent to 24 percent; and the percent of Orleans
 households with children declined from 30 percent to 18 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hwc-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/hwc-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -170,7 +170,7 @@ of individuals living alone grew from 27 percent in 2000 to 34 percent
 in 2017 — similar to the trend for Jefferson Parish. The increase was
 larger in Orleans Parish, which jumped from 33 to 46 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/sing-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/sing-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -184,7 +184,7 @@ metro had 358,092 children under 18 years in 2000 and only 282,246 in
 population declined to 78,086 from 129,408. The under 18 population is
 now 22 percent of the metro population, down from 27 percent in 2000.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/popunder18-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/popunder18-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -210,7 +210,7 @@ New Orleans, the share of adults with less than a high school degree
 fell from 25 percent to 14 percent but is still higher than the U.S.
 average of 12 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hs-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/hs-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -225,7 +225,7 @@ percent, and up from 26 percent in 2000. The overall metro area share of
 adults with a bachelor’s degree grew from 23 to 30 percent — lower than
 the national average.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/bach-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/bach-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -238,7 +238,7 @@ Orleans’ median household income has fallen 5 percent since 1999, after
 adjusting for inflation. In Jefferson Parish, median household income
 declined 7 percent between 1999 and 2017,, falling to $51,494.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/medhh-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/medhh-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -278,7 +278,7 @@ This is compared to 11 percent nationwide.
 Inequalities between individuals, households, businesses, or geographic areas with regard to access, use of, or impact of information and communication technologies.
 </div>
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/inta-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/inta-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -300,7 +300,7 @@ the Jefferson Parish poverty rate increased from 14 to 17 percent
 between 1999 and 2017. Across the U.S., the poverty rate increased from
 12 to 13 percent between 1999 and 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/pov-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/pov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -315,7 +315,7 @@ poverty rate jumped from 20 percent in 1999 to 28 percent in 2017 —
 greatly surpassing the U.S. child poverty rate, which rose from 17 to 18
 percent between 1999 and 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/childpov-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/childpov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -331,7 +331,7 @@ high as in neighboring parishes and the nation, indicating the
 importance of a robust public transportation system and comprehensive
 evacuation plan.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/veh-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/veh-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -353,7 +353,7 @@ share. In Orleans Parish the foreign-born share of the population
 increased by 1 percentage points between 2000 and 2017 while St. Tammany
 Parish increased by 2.3 percentage points.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/forbor-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/forbor-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -372,7 +372,7 @@ Orleans Parish came from outside the state of Louisiana. In Jefferson
 Parish, the share of the population who were new movers into the parish
 was 5 percent in 2004, and has not significantly changed.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/mob-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/mob-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -394,7 +394,7 @@ St. Tammany from 80 percent to 77 and in Jefferson from 64 to 62 percent
 between 2000 and 2017. In contrast, homeownership rates in New Orleans
 have held steady, but at a much lower 47 percent.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/ho-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/ho-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -416,7 +416,7 @@ proceeds to pay off their mortgage principal. In fact, Orleans and
 Jefferson received the first and second largest number of Road Home
 Option 1 grants among all Louisiana parishes.\[10\]
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/honomo-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/honomo-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -436,7 +436,7 @@ rising to only 25 percent nationally. In Jefferson Parish, the share of
 renters paying more than 50 percent of household income on housing and
 utilities is 26 percent in 2017.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/rentbur-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/rentbur-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -451,7 +451,7 @@ unchanged in metro area parishes since 2004. There is a clear gap
 between the rate of housing cost burden for renters vs. homeowners, and
 that gap has widened.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/hoburGraphic-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/hoburGraphic-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -469,7 +469,7 @@ rose from $742 to $962 in New Orleans, a 30 percent increase after
 adjusting for inflation. Meanwhile, median gross rents increased 19
 percent metrowide compared to only 11 percent nationwide.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/medrent-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/medrent-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -493,7 +493,7 @@ percent of housing stock has been built since 1990. In contrast, in
 St. Tammany, the majority of housing units are in structures that have
 been built since 1990.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/yrbuilt-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/yrbuilt-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -525,7 +525,7 @@ by a 60 to 67 percent rise in Orleans Parish. This goes against the
 national trend, where the share in driving alone remained steady between
 2000 and 2017 and where public transit use has also remained steady.
 
-<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/07/commute-1.png" style="display: block; margin: auto;" />
+<img src="http://www.datacenterresearch.org/a/wp-content/uploads/2019/09/commute-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 

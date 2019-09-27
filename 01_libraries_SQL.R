@@ -10,4 +10,4 @@ library(knitr)
 library(RODBC)
 #library(xlsx)
 
-load("inputs/allparishesRawx.RData")
+#load("inputs/allparishesRawx.RData")
