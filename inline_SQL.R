@@ -345,14 +345,14 @@ getvalue.Hispanpct.us.2018 <- ParishDemo %>%
 #the Hispanic Population has grown 20%
 
 getvalue.Hispgrowth.metro.2010 <-HISPpopM %>%
-  filter(year ==2010) %>%
+  filter(CensusYear ==2010) %>%
   mutate(Population = as.numeric(Population)) %>%
   select(Population)%>%
   pull()
 # sum(getvalue.Hispgrowth.metro.2010)
 
 getvalue.Hispgrowth.metro.2018 <-HISPpopM %>%
-  filter(year ==2018) %>%
+  filter(CensusYear ==2018) %>%
   mutate(Population = as.numeric(Population)) %>%
   select(Population)%>%
   pull()
