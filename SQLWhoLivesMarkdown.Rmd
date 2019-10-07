@@ -198,7 +198,7 @@ makeCSS_source(
 "**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
 ```
-As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round((getvalue.sing.2000)*100)` percent in 2000 to `r round((getvalue.sing.2018)*100)` percent in `r yearu2` — similar to the trend for Jefferson Parish. The increase was larger in Orleans Parish, which jumped from `r round((getvalue.singNO.2000)*100)` to `r round((getvalue.singNO.2018)*100)` percent.
+As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round((getvalue.sing.2000)*100)` percent in 2000 to `r round((getvalue.sing.2018)*100)` percent in `r yearu2` — similar to the trend for Jefferson Parish where the share of households living alone grew from `r round(( getvalue.singJeff.2000)*100)` percent to `r round(( getvalue.singJeff.2018)*100)` percent. The increase was larger in Orleans Parish, which jumped from `r round((getvalue.singNO.2000)*100)` to `r round((getvalue.singNO.2018)*100)` percent.
 
 
 ```{r sing, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
@@ -257,7 +257,7 @@ makeCSS_source(
 )
 ```
 
-The `r yearu2` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro and `r dollar(getvalue.medhh.no.2018)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2018)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r yearu2`, even after adjusting for inflation, falling to `r dollar(round(getvalue.medhh.jeff.2018))`.
+The `r yearu2` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro, `r dollar(getvalue.medhh.jeff.2018)` for Jefferson, and `r dollar(getvalue.medhh.no.2018)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2018)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r yearu2`, even after adjusting for inflation, falling to `r dollar(round(getvalue.medhh.jeff.2018))`.
 
 
 ```{r medhh, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -299,8 +299,6 @@ makeCSS_source(
 ```
 
 ## Poverty and access to vehicles
-
-Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans is statistically unchanged comparing 1999 to `r yearu2`. Meanwhile, the Jefferson Parish poverty rate increased from `r round((getvalue.pov.jeff.1999)*100)` to `r round((getvalue.pov.jeff.2018)*100)` percent between 1999 and `r yearu2`. Across the U.S., the poverty rate increased from `r round((getvalue.pov.us.1999)*100)` to `r round((getvalue.pov.us.2018)*100)` percent between 1999 and `r yearu2`.
 
 Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round((getvalue.pov.no.1999 )*100)` to `r round((getvalue.pov.no.2018 )*100)` percent between 1999 and `r yearu2` while the Jefferson Parish poverty rate remained statistically unchanged. Across the U.S., the poverty rate increased from `r round((getvalue.pov.us.1999)*100)` to `r round((getvalue.pov.us.2018)*100)` percent between 1999 and `r yearu2`.
 
@@ -377,7 +375,7 @@ makeCSS_source(
 
 ## Homeownership
 
-Homeownership rates across the U.S. have fallen since 2000 from `r round((getvalue.ho.us.2000)*100)` to `r round((getvalue.ho.us.2018)*100)` percent in `r yearu2`. Homeownership rates have held steady in St. Tammany at about `r round((getvalue.ho.tam.2000)*100)` percent since 2000. In contrast, homeownership rates in New Orleans have increased slightly, but still at a much lower `r round((getvalue.ho.no.2018)*100)` percent.
+Homeownership rates across the U.S. have fallen since 2000 from `r round((getvalue.ho.us.2000)*100)` to `r round((getvalue.ho.us.2018)*100)` percent in `r yearu2`. Homeownership rates have held steady in St. Tammany around `r round((getvalue.ho.tam.2000)*100)` percent since 2000. In contrast, homeownership rates in New Orleans have increased slightly, but still are a much lower `r round((getvalue.ho.no.2018)*100)` percent.
 
 
 ```{r ho, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}

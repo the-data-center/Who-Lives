@@ -294,9 +294,9 @@ hispan2018 <- hispan %>%
                                                             "Salvadoran",
                                                             "Nicaraguan",
                                                             "Other Central American",
-                                                            "SouthAmerican",
+                                                            "South American",
                                                             "Other")))%>% 
-  mutate(val = ifelse(as.numeric(value)<.02,     #is too crowded with <.01
+  mutate(val = ifelse(as.numeric(value)<.01,     #is too crowded with <.01
                       "",
                       paste0(round(as.numeric(value)*100),"%",ifelse((variable == "Cubanpct" & CubanSIG == "no"& PlaceName != "United States")
                                                                      |(variable == "Dominicanpct" & DominicanSIG == "no"& PlaceName != "United States")
@@ -328,7 +328,7 @@ chart.hispan2018.allparishes <- hispan2018 %>%
                                DCcolor.p2magenta,
                                DCcolor.p2violet,
                                DCcolor.p2purple)) +
-  geom_text(size = 3, position = position_stack(vjust = .6), family="Asap") + 
+  geom_text(size = 3, position = position_stack(vjust = 0.5), family="Asap") + 
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,1)) + 
   themeDC_vertical() +
   theme(legend.position = "right",

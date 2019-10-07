@@ -433,7 +433,7 @@ HispanicPop <- allparishesRaw %>%
   filter(RaceSimple=="Hispanic")%>% 
   select(PlaceName, Population) %>%
   filter(PlaceName != "United States", PlaceName != "Louisiana") %>%
-  mutate(est2000=c(1346,433,32418,3425,14826,1230,4737,130))
+  mutate(est2000=c(433, 32418, 3425, 14826, 4737, 1230, 130, 1346))
 
 #Table 5 Hispanic population for parishes in metro by year
 

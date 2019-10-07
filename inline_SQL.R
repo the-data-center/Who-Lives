@@ -516,8 +516,24 @@ getvalue.sing.2000 <- sing %>%
     select(pctsing) %>%
   pull()
 
-  # similar to the trend for Jefferson Parish Parish. The increase was larger in Orleans Parish Parish, which jumped from 33 to 43 percent.
-  getvalue.singNO.2000 <- sing %>%
+
+  #similar to the trend for Jefferson Parish where the share of households living alone grew from
+  
+  getvalue.singJeff.2000 <- sing %>%
+    select(-significant, -contains("moeprop")) %>%
+    filter(grepl("Jefferson",PlaceName)) %>%
+    select(census2000) %>%
+    pull()
+  
+  getvalue.singJeff.2018 <- sing %>%
+    select(-significant, -contains("moeprop")) %>%
+    filter(grepl("Jefferson",PlaceName)) %>%
+    select(pctsing) %>%
+    pull()
+  
+  
+  #The increase was larger in Orleans Parish Parish, which jumped from 33 to 43 percent.
+  getvalue.sing.2000 <- sing %>%
     select(-significant, -contains("moeprop")) %>%
     filter(PlaceName == "Orleans Parish") %>%
     select(census2000) %>%
