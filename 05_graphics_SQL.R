@@ -269,8 +269,8 @@ hispan2018 <- hispan %>%
          SouthAmericanpct,
          Otherpct,
          contains('SIG')) %>%
-  mutate(PlaceNames = c("Orleans", "Jefferson", "Metro", "United States"))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson","Metro", "United States"))) %>%
+  mutate(PlaceNames = c( "Orleans","Jefferson", "Metro", "United States"))  %>% 
+  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c( "Orleans", "Jefferson","Metro","United States"))) %>%
   gather(-PlaceName, -PlaceName.fac, -contains('SIG'), key=variable, value = value) %>% 
   .[-(45:48),] %>%
   mutate(description = NA,
@@ -283,7 +283,7 @@ hispan2018 <- hispan %>%
          description = ifelse(variable == "Nicaraguanpct", "Nicaraguan", description),
          description = ifelse(variable == "Salvadoranpct", "Salvadoran", description),
          description = ifelse(variable == "OtherCApct", "Other Central American", description),
-         description = ifelse(variable == "SouthAmericanpct", "SouthAmerican", description),
+         description = ifelse(variable == "SouthAmericanpct", "South American", description),
          description = ifelse(variable == "Otherpct", "Other", description)) %>%
   mutate(description.fac = factor(.$description, levels = c("Puerto Rican",
                                                             "Cuban",
@@ -312,9 +312,9 @@ hispan2018 <- hispan %>%
 
 
 chart.hispan2018.allparishes <- hispan2018 %>% 
-  ggplot(aes(PlaceName.fac, as.numeric(value), fill=description.fac, label = val)) +
+  ggplot(aes(x=PlaceName.fac, y=as.numeric(value), label = val, fill=description.fac)) + #,
   geom_bar(stat="identity", 
-           position="fill",
+           position=position_stack(),
            width = .7,
            color="gray50") +
   scale_fill_manual(values = c(DCcolor.p1lightskyblue,
@@ -328,7 +328,7 @@ chart.hispan2018.allparishes <- hispan2018 %>%
                                DCcolor.p2magenta,
                                DCcolor.p2violet,
                                DCcolor.p2purple)) +
-  geom_text(size = 3, position = position_stack(vjust = 0.5), family="Asap") + 
+  geom_text(size = 3, position =position_stack(vjust = 0.5), family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,1)) + 
   themeDC_vertical() +
   theme(legend.position = "right",
@@ -338,7 +338,6 @@ chart.hispan2018.allparishes <- hispan2018 %>%
   labs(title = "Hispanic origin, 2018",
        x="",
        y="")
-
 ############################################
 # # POPULATION BY AGE AND HOUSEHOLD TYPES # #
 ############################################
