@@ -201,8 +201,8 @@ HispanicPopGraphic <- HispanicPopforGraphic %>%
            color="gray50") +
   geom_text(aes(label = comma(value)),position=position_dodge(width = .7), vjust = .5, hjust = -.5, size=2.75, family="Asap") +
   scale_y_continuous(labels = comma_format(), expand = c(0,0), limits = c(0,75000)) + 
-  scale_fill_manual(values = c(DCcolor.p1skyblue, 
-                               DCcolor.p1mediumblue)) + 
+  scale_fill_manual(values = c(DCcolor.p1mediumblue,
+                               DCcolor.p1skyblue)) + 
   themeDC_vertical() +
   coord_flip()+     #it's sideways
   theme(legend.title = element_blank(),

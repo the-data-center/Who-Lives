@@ -257,7 +257,7 @@ makeCSS_source(
 )
 ```
 
-The `r yearu2` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro, `r dollar(getvalue.medhh.jeff.2018)` for Jefferson, and `r dollar(getvalue.medhh.no.2018)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2018)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r yearu2`, even after adjusting for inflation, falling to `r dollar(round(getvalue.medhh.jeff.2018))`.
+The `r yearu2` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro, `r dollar(getvalue.medhh.jeff.2018)` for Jefferson Parish, and `r dollar(getvalue.medhh.no.2018)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2018)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r yearu2`, even after adjusting for inflation, falling to `r dollar(round(getvalue.medhh.jeff.2018))`.
 
 
 ```{r medhh, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -420,7 +420,7 @@ makeCSS_source(
 )
 ```
 
-The share of homeowners paying more than 50 percent of household income on their mortgage, taxes, utilities, and insurance is `r round((getvalue.hobur.metro.20042018dif)*100)` percentage points less in metro area parishes since 2004. There is a clear gap between the rate of housing cost burden for renters vs. homeowners, and that gap has widened.
+The share of homeowners paying more than 50 percent of household income on their mortgage, taxes, utilities, and insurance is `r round((getvalue.hobur.metro.20042018dif)*100, digits=1)` percentage points less in metro area since 2004. There is a clear gap between the rate of housing cost burden for renters vs. homeowners, and that gap has widened.
 
 ```{r hoburGraphic, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hoburGraphic
@@ -469,9 +469,9 @@ makeCSS_source(
 
 A metro region is partially defined by the commuting patterns of its residents. Commuting has been studied more and more as the costs and burdens (physical, mental, familial, etc.) are uncovered. In addition, studies have shown that younger generations are less likely to drive cars, more likely to bike, and more likely to move into urban cores.[14]
 
-The share of commuters in New Orleans using public transportation declined sharply from `r round((getvalue.publictransit.no.2000)*100)` percent in 2000 to `r round((getvalue.publictransit.no.2018)*100)` percent in `r yearu2`, while the share in Jefferson Parish has fallen from `r round(( getvalue.publictransit.jeff.2000)*100)` percent in 2000, to `r round((getvalue.publictransit.jeff.2018)*100)` percent of commuters using public transportation in `r yearu2`. But the share of bike commuters in New Orleans rose to `r round((getvalue.bike.no.2018)*100)` percent, giving the city the fifth highest share of bike commuting of the largest 70 cities nationwide.[15] Meanwhile, the metro share of carpoolers fell from `r  round((getvalue.carpool.metro.2000)*100)` percent in 2000 to `r  round((getvalue.carpool.metro.2018)*100)` percent in `r yearu2`, as did the Orleans Parish share from `r round((getvalue.carpool.no.2000)*100)` percent to `r round((getvalue.carpool.no.2018)*100)` percent.
+The share of commuters in New Orleans using public transportation declined sharply from `r round((getvalue.publictransit.no.2000)*100)` percent in 2000 to `r round((getvalue.publictransit.no.2018)*100)` percent in `r yearu2`, while the share in Jefferson Parish has fallen from `r round(( getvalue.publictransit.jeff.2000)*100)` percent in 2000, to `r round((getvalue.publictransit.jeff.2018)*100)` percent of commuters using public transportation in `r yearu2`. But the share of bike commuters in New Orleans rose to `r round((getvalue.bike.no.2018)*100)` percent. An analysis of 2017 ACS data found that New Orleans had the the fifth highest share of bike commuting of the largest 70 cities nationwide.[15] Meanwhile, the metro share of carpoolers fell from `r  round((getvalue.carpool.metro.2000)*100)` percent in 2000 to `r  round((getvalue.carpool.metro.2018)*100)` percent in `r yearu2`, as did the Orleans Parish share from `r round((getvalue.carpool.no.2000)*100)` percent to `r round((getvalue.carpool.no.2018)*100)` percent.
 
-The percentage of workers who commute by driving alone has increased within the metro region since 2000 from `r round((getvalue.drivealone.metro.2000)*100)` percent to `r round((getvalue.drivealone.metro.2018)*100)` percent, driven by a `r round((getvalue.drivealone.no.2000)*100)` to `r round((getvalue.drivealone.no.2018)*100)` percent rise in Orleans Parish. This goes against the national trend, where the share in driving alone remained steady between 2000 and `r yearu2` and where public transit use has also remained steady.
+The percentage of workers who commute by driving alone has increased within the metro region since 2000 from `r round((getvalue.drivealone.metro.2000)*100)` percent to `r round((getvalue.drivealone.metro.2018)*100)` percent, driven by a `r round((getvalue.drivealone.no.2000)*100)` to `r round((getvalue.drivealone.no.2018)*100)` percent rise in Orleans Parish. This goes against the national trend, where the share driving alone remained steady between 2000 and `r yearu2` and where public transit use has also remained steady.
 
 
 ```{r commute, fig.align='center', fig.width=10, fig.height=6,echo=FALSE, warning=FALSE, message=FALSE}
@@ -529,7 +529,8 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 [14] Davis, B., Dutzik, T. (2012). Transportation and the New Generation: Why Young People Are Driving Less and What It Means for Transportation Policy. Retrieved October 10, 2014 from http://www.uspirg.org/sites/pirg/files/reports/Transportation%20%26%20the%20 New%20Generation%20vUS_0.pdf.
 
-[15] The League of American Bicyclists. (2018). Where We Ride: Analysis of Bicycle Commuting in American Cities. Retrieved December 21, 2018 from http://www.bikeleague.org/sites/default/files/2015ACSlargecities.pdf
+[15] The League of American Bicyclists. (2017). Where We Ride: Analysis of Bicycle Commuting in American Cities. Retrieved December 21, 2018 from https://bikeleague.org/sites/default/files/Where_We_Ride_2017_KM_0.pdf
+
 
 
 
