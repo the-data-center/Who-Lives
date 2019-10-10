@@ -56,6 +56,9 @@ hispan <- hispanRaw %>%
          SouthAmericanSIG= stattest(x=SouthAmericanUS, y=SouthAmericanpct, moey = SouthAmericanMoeProp),
          OtherSIG = stattest(x=OtherUS, y=Otherpct, moey = OtherMoeProp))
 
+#hispan %>% 
+#  select(-(contains("SIG"))) %>% 
+#  write.csv("hispan.csv")
 
 #Households with own children under 18
 
@@ -68,6 +71,9 @@ hwc <- hwcRaw %>%
          moeprop = moeprop(y = TotalHH, moex = moeagg, moey = TotalHHMOE, p = pcthwc),
          significant = stattest(x=census2000,y=pcthwc,moey = moeprop)) 
 
+#hwc %>% 
+#  select(-significant) %>% 
+#  write.csv("hwc.csv")
 
 #One-person households
 
@@ -78,6 +84,9 @@ sing <- singRaw %>%
          moeprop = moeprop(y = Total, moex = SingleHHMOE, moey = TotalMOE, p = pctsing),
          significant = stattest(x=census2000, y=pctsing,moey = moeprop))
 
+#sing %>% 
+#  select(-significant) %>% 
+#  write.csv("sing.csv")
 
 #Less than a high school degree, adults 25 and older
 
@@ -90,6 +99,9 @@ hs <- hsRaw %>%
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctless),
          significant = stattest(x=census2000, y=pctless,moey=moeprop))
 
+#hs %>% 
+#  select(-significant) %>% 
+#  write.csv("hs.csv")
 
 #Bachelor's degree or higher, adults 25 and older
 
@@ -102,6 +114,9 @@ bach <- bachRaw %>%
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctbach),
          significant = stattest(x=census2000,y=pctbach,moey = moeprop))
 
+#bach %>% 
+#  select(-significant) %>% 
+#  write.csv("bach.csv")
 
 #Median household income, 201* inflation-adjusted dollars
 
@@ -111,6 +126,9 @@ medhh <- medhhRaw %>%
   bind_cols(.,census2000) %>%
   mutate(significant = stattest(x=census2000,y=MedianHHIncome,moey=MedianHHIncomeMOE))
 
+#medhh %>% 
+#  select(-significant) %>% 
+#  write.csv("medhh.csv")
 
 #Internet access
 
@@ -139,6 +157,10 @@ inta <- intaRaw %>%
          broadbandSIG = stattest(x = broadbandUS, y = broadbandpct, moey = broadbandmoeprop))
 
 
+intaforGraphic %>% 
+  select(-(contains("SIG")), -"val") %>% 
+  write.csv("inta.csv")
+
 #Poverty rate, population for whom poverty has been determined
 
 pov <- povRaw %>%
@@ -148,6 +170,10 @@ pov <- povRaw %>%
          moeprop = moeprop(y = Total, moex = BelowPovMOE, moey = TotalMOE, p = pctpov),
          significant = stattest(x=sf1999,y=pctpov,moey=moeprop))
 
+
+#pov %>% 
+#  select(-significant) %>% 
+#  write.csv("pov.csv")
 
 #Children in poverty, population for whom poverty has been determined			
 
@@ -163,6 +189,10 @@ childpov <- childpovRaw %>%
          significant = stattest(x=sf1999,y=pctBelowChildPov,moey=moeprop))
 
 
+#childpov %>% 
+#  select(-significant) %>% 
+#  write.csv("childpov.csv")
+
 #Households without access to a vehicle
 
 veh <- vehRaw %>%
@@ -172,6 +202,9 @@ veh <- vehRaw %>%
          moeprop = moeprop(y = Total, moex = NoVehAvailMOE, moey = TotalMOE, p = vehpct),
          significant = stattest(x=census2000,y=vehpct,moey = moeprop))
 
+#veh %>% 
+# select(-significant) %>% 
+#  write.csv("veh.csv")
 
 #Population not U.S. citizens at birth
 
@@ -183,6 +216,9 @@ forbor <- forborRaw %>%
          forbormoeprop = moeprop(y=TotalPop, moex = forbormoeagg, moey = TotalPopMOE, p=forborpct),
          significant = stattest(x=census2000,y=forborpct,moey=forbormoeprop))
 
+#forbor %>% 
+#  select(-significant) %>% 
+#  write.csv("forbor.csv")
 
 #Population who moved in the past year
 
@@ -212,6 +248,9 @@ mob <- mobRaw %>%
          withinparishSIG = stattest (x=sf2004withinparish, y=withinparishpct, moey = withinparishmoeprop),
          samhouseSIG = stattest (x=sf2004samehouse, y=samehousepct, moey = samehousemoeprop))
 
+#mob %>% 
+#  select(-(contains("SIG"))) %>% 
+#  write.csv("mob.csv")
 
 ## mobility sig testing for written analysis
 
@@ -235,6 +274,10 @@ ho <- hoRaw %>%
          Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
          significant = stattest(x=census2000,y=Ownerpct,moey = Ownermoeprop))
 
+#ho %>% 
+#  select(-significant) %>% 
+#  write.csv("ho.csv")
+
 
 #Homeowners without a mortgage
 
@@ -245,6 +288,9 @@ honomo <- honomoRaw %>%
          moeprop = moeprop(y=Total,moex =NoMortgageMOE,moey = TotalMOE,p=honomopct),
          significant = stattest(x=census2000,y=honomopct,moey=moeprop))
 
+#honomo %>% 
+#  select(-significant) %>% 
+#  write.csv("honomo.csv")
 
 #Renters with severe housing cost burdens
 
@@ -257,6 +303,9 @@ rentbur <- rentburRaw %>%
          moeprop = moeprop(y=(Total - NotComputed),moex=`50OrMoreMOE`,moey = moeagg, p = rentburpct),
          significant = stattest(x=sf2004, y=rentburpct, moey=moeprop))
 
+#rentbur %>% 
+#  select(-significant) %>%
+#  write.csv("rentbur.csv")
 
 #Homeowners with severe housing cost burdens
 
@@ -269,6 +318,10 @@ hobur <- hoburRaw %>%
          moeprop = moeprop(y=Total,moex=moexagg,moey=moeyagg,p=hoburpct),
          significant = stattest(x=sf2004,y=hoburpct, moey=moeprop))
 
+#hobur %>% 
+#  select(-significant) %>%
+#  write.csv("hobur.csv")
+
 
 #Median gross rent, 201* inflation-adjusted dollars
 
@@ -277,6 +330,10 @@ medrent <- medrentRaw %>%
   slice(match(order, PlaceName)) %>%
   bind_cols(.,sf2004) %>%
   mutate(significant = stattest(x=sf2004,y=Rent,moey=RentMOE)) 
+
+#medrent %>% 
+#  select(-significant) %>%
+#  write.csv("medrent.csv")
 
 
 #Year structure built, 201* housing units
@@ -303,6 +360,10 @@ yrbuilt <- yrbuiltRaw %>%
          mid1950to1989SIG = stattest(x= mid1950to1989US, y= mid1950to1989pct , moey = mid1950to1989moeprop),
          orbefore1949SIG = stattest(x=orbefore1949US, y= orbefore1949pct, moey = orbefore1949moeprop))
 
+
+#yrbuilt %>% 
+#  select(-(contains("SIG"))) %>% 
+#  write.csv("yrbuilt.csv")
 
 #Means of transportation to work, 
 commute <- commuteRaw %>%
@@ -339,6 +400,9 @@ commute <- commuteRaw %>%
          workhomeSIG = stattest ( x=census2000workhome, y=Workhomepct, moey = workhomemoeprop),
          otherSIG = stattest (x=census2000other, y= Otherpct, moey = othermoeprop))
 
+#commute %>% 
+#  select(-(contains("SIG"))) %>% 
+#  write.csv("commute.csv")
 
 ############################################
 # # PEP # #
