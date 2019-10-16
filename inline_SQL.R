@@ -533,7 +533,7 @@ getvalue.sing.2000 <- sing %>%
   
   
   #The increase was larger in Orleans Parish Parish, which jumped from 33 to 43 percent.
-  getvalue.sing.2000 <- sing %>%
+  getvalue.singNO.2000 <- sing %>%
     select(-significant, -contains("moeprop")) %>%
     filter(PlaceName == "Orleans Parish") %>%
     select(census2000) %>%
