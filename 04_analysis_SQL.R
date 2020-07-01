@@ -126,8 +126,8 @@ medhh <- medhhRaw %>%
   bind_cols(.,census2000) %>%
   mutate(significant = stattest(x=census2000,y=MedianHHIncome,moey=MedianHHIncomeMOE))
 
-#medhh %>% 
-#  select(-significant) %>% 
+# medhh %>%
+#  select(-significant) %>%
 #  write.csv("medhh.csv")
 
 #Internet access
@@ -331,9 +331,9 @@ medrent <- medrentRaw %>%
   bind_cols(.,sf2004) %>%
   mutate(significant = stattest(x=sf2004,y=Rent,moey=RentMOE)) 
 
-#medrent %>% 
-#  select(-significant) %>%
-#  write.csv("medrent.csv")
+medrent %>%
+ select(-significant) %>%
+ write.csv("medrent.csv")
 
 
 #Year structure built, 201* housing units
@@ -421,7 +421,7 @@ orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. 
 #Table 1 
 AAWhiteHispan <- allparishesRaw %>% 
   filter(PlaceName == "Orleans Parish") %>% 
-  filter(DateDesc == "7/1/2018 population estimate") %>% 
+  filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total" & (RaceSimple == "Black"|RaceSimple == "White"|RaceSimple == "Hispanic")) %>%
   mutate(est2000=c(128871, 323392, 14826)) %>% #check order of races in data frame. Order is bottom up
   select(RaceSimple, Population, est2000) %>%
@@ -431,13 +431,13 @@ AAWhiteHispan <- allparishesRaw %>%
 #Tables 2
 
 ParishDemo1<- allparishesRaw %>% 
-  filter(DateDesc == "7/1/2018 population estimate") %>% 
+  filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   select(PlaceName, Population, RaceSimple)
 
 #Remove Louisiana and Us to be able to combine 8 parish estimates for each race/ethnicity to create Metro
 ParishDemo2<- allparishesRaw %>% 
-  filter(DateDesc == "7/1/2018 population estimate") %>% 
+  filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total") %>% 
   filter(PlaceName != "Louisiana" & PlaceName!= "United States")%>% 
   group_by(RaceSimple)%>%
@@ -460,9 +460,9 @@ ParishDemo <- spread(ParishDemo2, RaceSimple, Population) %>%
   #.[-2,]
 
 
-#Table 3 African American Population, New Orleans, 2000-2018
+#Table 3 African American Population, New Orleans, 2000-current
 
-#Pulling population estimates for 2010-2018
+#Pulling population estimates for 2010-current
 AAhistorical <- allparishesRaw %>% 
   filter(PlaceName == "Orleans Parish")%>% 
   filter(RaceSimple=="Black")%>% 
@@ -473,7 +473,7 @@ AAhistorical <- allparishesRaw %>%
   .[-(2:3),] %>% #Remove 2010 estimates we don't need. We use Census Population for 2010 so we can delete 2010 Population estimate
   bind_rows(data.frame(Population = c(323392,0,0,0,0,0,133015,159887,181882,197337), row.names = (NULL)), .) %>%
   select(Population) %>%
-  bind_cols(data.frame(year = as.factor(c(2000:2018))), .)
+  bind_cols(data.frame(year = as.factor(c(2000:yearPEP))), .)
 
 
 #######AA historical part 2
@@ -492,7 +492,7 @@ BlackpopM <- blackpopestRaw %>%
 #Table 4 Hispanic population change by population
 
 HispanicPop <- allparishesRaw %>% 
-  filter(DateDesc == "7/1/2018 population estimate") %>% 
+  filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Hispanic")%>% 
   select(PlaceName, Population) %>%
@@ -537,7 +537,7 @@ Agepop <- allparishesRaw %>%
            AgeGroupName== "70 to 74"| AgeGroupName== "75 to 79"| AgeGroupName== "80 to 84"| AgeGroupName== "85 plus")%>% 
   filter(RaceSimple=="Total")%>% 
   filter(SexName=="Total")%>% 
-  filter(DateDesc == "7/1/2018 population estimate") %>% 
+  filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
            PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
            PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish")%>% 
@@ -560,7 +560,7 @@ under18pars<-allparishesRaw %>%
   filter(AgeGroupName=="18 years and over" | AgeGroupName=="Total")%>% 
   filter(RaceSimple=="Total")%>% 
   filter(SexName=="Total")%>% 
-  filter(DateDesc == "7/1/2018 population estimate") %>% 
+  filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish")%>% 
   select(AgeGroupName, PlaceName, Population)
 

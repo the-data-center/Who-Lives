@@ -6,5 +6,9 @@ cpi00 <- 1.468408827
 
 # the current/most recent year - the year the data you're updating represents
 year <- 2018
+yearPEP <- 2019
+
+year.char <- c("2018")
+yearPEP.char <- c("2019")
 
 

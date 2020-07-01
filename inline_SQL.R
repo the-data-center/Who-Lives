@@ -1,60 +1,60 @@
 
 library(dplyr)
 
-#Year to be changed manually
+#Year to be changed manually in 02_variables_SQL
 
-year <- data_frame("year" = 2018)
-year <- year %>%
-   select(year) %>%
-  pull()
-#for 2nd upDateDesc later in year -- aligns with ACS year
-yearu2 <- data_frame("yearu2" = 2018)
-yearu2 <- yearu2 %>%
-  select(yearu2) %>%
-  pull()
+# year <- data_frame("year" = yearPEP)
+# year <- year %>%
+#    select(year) %>%
+#   pull()
+# #for 2nd upDateDesc later in year -- aligns with ACS year
+# yearu2 <- data_frame("yearu2" = year)
+# yearu2 <- yearu2 %>%
+#   select(yearu2) %>%
+#   pull()
 
 Overallpop <- allparishesRaw %>%
-  filter(DateDesc =="7/1/2018 population estimate") %>%
+  filter(DateDesc =="7/1/2019 population estimate") %>% ## PEP update
   filter(SexName =="Total") %>%
   filter(HispName =="Total") %>%
   filter(RaceSimple =="Total") %>%
   filter(AgeGroupName =="Total")
 
 #The U.S. Census Bureau estimates that 1,275,762 residents were living in metro New Orleans Parish as of July 2018
-getvalue.pop.no.2018 <- Overallpop %>%
+getvalue.pop.no.current <- Overallpop %>%
   filter(PlaceName == "Orleans Parish") %>%
   select(Population) %>%
   pull()
-getvalue.pop.jeff.2018 <- Overallpop %>%
+getvalue.pop.jeff.current <- Overallpop %>%
   filter(PlaceName == "Jefferson Parish") %>%
   select(Population) %>%
   pull()
-getvalue.pop.plaq.2018 <- Overallpop %>%
+getvalue.pop.plaq.current <- Overallpop %>%
   filter(PlaceName == "Plaquemines Parish") %>%
   select(Population) %>%
   pull()
-getvalue.pop.bernard.2018 <- Overallpop %>%
+getvalue.pop.bernard.current <- Overallpop %>%
   filter(PlaceName == "St. Bernard Parish") %>%
   select(Population) %>%
   pull()
-getvalue.pop.charles.2018 <- Overallpop %>%
+getvalue.pop.charles.current <- Overallpop %>%
   filter(PlaceName == "St. Charles Parish") %>%
   select(Population) %>%
   pull()
-getvalue.pop.james.2018 <- Overallpop %>%
+getvalue.pop.james.current <- Overallpop %>%
   filter(PlaceName == "St. James Parish") %>%
   select(Population) %>%
   pull()
-getvalue.pop.john.2018 <- Overallpop %>%
+getvalue.pop.john.current <- Overallpop %>%
   filter(PlaceName == "St. John The Baptist Parish") %>%
   select(Population) %>%
   pull()
-getvalue.pop.tam.2018 <- Overallpop %>%
+getvalue.pop.tam.current <- Overallpop %>%
   filter(PlaceName == "St. Tammany Parish") %>%
   select(Population) %>%
   pull()
 
-metro2018pop <-(getvalue.pop.no.2018 + getvalue.pop.jeff.2018  + getvalue.pop.plaq.2018  + getvalue.pop.bernard.2018 + getvalue.pop.charles.2018 + getvalue.pop.james.2018 + getvalue.pop.john.2018 + getvalue.pop.tam.2018)
+metropop.current <-(getvalue.pop.no.current + getvalue.pop.jeff.current  + getvalue.pop.plaq.current  + getvalue.pop.bernard.current + getvalue.pop.charles.current + getvalue.pop.james.current + getvalue.pop.john.current + getvalue.pop.tam.current)
 
 
 #According to the U.S. Census Bureau’s 2018 Population estimates, there are now 91,274 fewer African Americans living in New Orleans Parish (Orleans Parish Parish)
@@ -103,13 +103,13 @@ getvalue.pop.tam.2010 <- Overallpop2010 %>%
 
 metro2010pop <- (getvalue.pop.no.2010 + getvalue.pop.jeff.2010  + getvalue.pop.plaq.2010  + getvalue.pop.bernard.2010 + getvalue.pop.charles.2010 + getvalue.pop.james.2010 + getvalue.pop.john.2010 + getvalue.pop.tam.2010)
 
-pctincrease.metro.2018.2010 <- ((metro2018pop - metro2010pop)/metro2010pop)
+pctincrease.metro.current.2010 <- ((metropop.current - metro2010pop)/metro2010pop)
 
 
 #The number of African Americans living In New Orleans grew every year post-Katrina (from 2006 to 2018)
 #but decreased for the first time post-Katrina from 232,118 in 2018 to 231,147 In 2018.
 
-AA2017 <- AAhistorical %>%
+AA2017 <- AAhistorical %>%   ### PEP update 
   filter(year == 2017) %>%
   select(Population) %>%
   pull()
@@ -119,13 +119,16 @@ AA2018 <- AAhistorical %>%
   select(Population) %>%
   pull()
 
+AA2019 <- AAhistorical %>%
+  filter(year == 2019) %>%
+  select(Population) %>%
+  pull()
 
 
 
 
 
-
-getvalue.AA.no.2018 <- AAWhiteHispan %>%
+getvalue.AA.no.current <- AAWhiteHispan %>%  ### PEP update
   filter(RaceSimple == "Black") %>%
   select(Population) %>%
   pull()
@@ -141,7 +144,7 @@ getvalue.AA.no.2000 <- AAWhiteHispan %>%
 #compared to 2000, but there are also 7,945 fewer whites. Meanwhile, the number of Hispanics grew by 7,498.[2]
 
 
-getvalue.white.no.2018 <- AAWhiteHispan %>%
+getvalue.white.no.current <- AAWhiteHispan %>%  ### PEP update
   filter(RaceSimple == "White") %>%
   select(Population) %>%
   pull()
@@ -154,7 +157,7 @@ getvalue.white.no.2000 <- AAWhiteHispan %>%
 #getvalue.white.no.2000 - getvalue.white.no.2018
 
 #the number of Hispanics grew by 7,498.[2]
-getvalue.Hispan.no.2018 <- AAWhiteHispan %>%
+getvalue.Hispan.no.current <- AAWhiteHispan %>% ### PEP update
   filter(RaceSimple == "Hispanic") %>%
   select(Population) %>%
   pull()
@@ -173,14 +176,14 @@ getvalue.AApct.no.2000 <- ParishDemo %>%
 
 #continues to represent the majority of city residents at 59.0 percent.
 
-getvalue.AApct.no.2018 <- ParishDemo %>%
+getvalue.AApct.no.current <- ParishDemo %>% ### PEP update
   filter(PlaceName == "Orleans Parish") %>%
   select(pctblack) %>%
   pull()
 
 #The share of Hispanics in the city increased from 3.1 percent in 2000 to 5.7 percent in 2018;
 
-getvalue.Hispanpct.no.2018 <- ParishDemo %>%
+getvalue.Hispanpct.no.current <- ParishDemo %>% ### PEP update
   filter(PlaceName == "Orleans Parish") %>%
   select(pcthisp) %>%
   pull()
@@ -191,7 +194,7 @@ getvalue.Hispanpct.no.2000 <- ParishDemo %>%
   pull()
 
 #the share of Asians increased from 2.3 percent to 3.0 percent;
-getvalue.Asianpct.no.2018 <- ParishDemo %>%
+getvalue.Asianpct.no.current <- ParishDemo %>% ### PEP update
   filter(PlaceName == "Orleans Parish") %>%
   select(pctasian) %>%
   pull()
@@ -202,7 +205,7 @@ getvalue.Asianpct.no.2000 <- ParishDemo %>%
   pull()
 #and the share of whites increased from 26.6 percent to 30.7 percent.
 
-getvalue.whitepct.no.2018 <- ParishDemo %>%
+getvalue.whitepct.no.current <- ParishDemo %>%  ### PEP update
   filter(PlaceName == "Orleans Parish") %>%
   select(pctwhite) %>%
   pull()
@@ -223,7 +226,7 @@ getvalue.hispan.jeff.2000 <- HispanicPop %>%
   select(est2000) %>%
   pull()
 
-getvalue.hispan.jeff.2018 <- HispanicPop %>%
+getvalue.hispan.jeff.current <- HispanicPop %>% ### PEP update
   filter(PlaceName == "Jefferson Parish") %>%
   select(Population) %>%
   pull()
@@ -231,7 +234,7 @@ getvalue.hispan.jeff.2018 <- HispanicPop %>%
 
 #reaching over 14.9 percent of the total parish Population.
 
-getvalue.Hispanpct.jeff.2018 <- ParishDemo %>%
+getvalue.Hispanpct.jeff.current <- ParishDemo %>% ### PEP update
   filter(PlaceName == "Jefferson Parish") %>%
   select(pcthisp) %>%
   pull()
@@ -246,7 +249,7 @@ getvalue.hispan.tam.2000 <- HispanicPop %>%
   select(est2000) %>%
   pull()
 
-getvalue.hispan.tam.2018 <- HispanicPop %>%
+getvalue.hispan.tam.current <- HispanicPop %>%  ### PEP update
   filter(PlaceName == "St. Tammany Parish") %>%
   select(Population) %>%
   pull()
@@ -255,7 +258,7 @@ getvalue.hispan.tam.2018 <- HispanicPop %>%
 
 #getvalue.Hispanpct.no.2018
 
-getvalue.Hispanpct.tam.2018 <- ParishDemo %>%
+getvalue.Hispanpct.tam.current <- ParishDemo %>%  ### PEP update
   filter(PlaceName == "St. Tammany Parish") %>%
   select(pcthisp) %>%
   pull()
@@ -263,7 +266,7 @@ getvalue.Hispanpct.tam.2018 <- ParishDemo %>%
 
 
 #As of July 2018, there were 115,396 Hispanics in the metro area,
-getvalue.Hispan.metro.2018 <- ParishDemo %>%
+getvalue.Hispan.metro.current <- ParishDemo %>%  ### PEP update
   filter(grepl("Metro",PlaceName)) %>%
   select(Hispanic) %>%
   pull()
@@ -271,47 +274,54 @@ getvalue.Hispan.metro.2018 <- ParishDemo %>%
 
 #representing 9.0 percent of the metro Population.
 
-getvalue.Hispanpct.metro.2018 <- ParishDemo %>%
+getvalue.Hispanpct.metro.current <- ParishDemo %>%  ### PEP update
   filter(grepl("Metro",PlaceName)) %>%
   select(pcthisp) %>%
   pull()
 
 #This is up from 2000 when there were 58,545,
 
-getvalue.Hispanpop.jeff.2018 <- HispanicPop %>%
+getvalue.Hispanpop.jeff.current <- HispanicPop %>%   ### PEP update
   filter(PlaceName == "Jefferson Parish") %>%
   select(est2000) %>%
   pull()
-getvalue.Hispanpop.no.2018 <- HispanicPop %>%
+getvalue.Hispanpop.no.current <- HispanicPop %>%
   filter(PlaceName == "Orleans Parish") %>%
   select(est2000) %>%
   pull()
-getvalue.Hispanpop.plaq.2018 <- HispanicPop %>%
+getvalue.Hispanpop.plaq.current <- HispanicPop %>%
   filter(PlaceName == "Plaquemines Parish") %>%
   select(est2000) %>%
   pull()
-getvalue.Hispanpop.bern.2018 <- HispanicPop %>%
+getvalue.Hispanpop.bern.current <- HispanicPop %>%
   filter(PlaceName == "St. Bernard Parish") %>%
   select(est2000) %>%
   pull()
-getvalue.Hispanpop.char.2018 <- HispanicPop %>%
+getvalue.Hispanpop.char.current <- HispanicPop %>%
   filter(PlaceName == "St. Charles Parish") %>%
   select(est2000) %>%
   pull()
-getvalue.Hispanpop.jam.2018 <- HispanicPop %>%
+getvalue.Hispanpop.jam.current <- HispanicPop %>%
   filter(PlaceName == "St. James Parish") %>%
   select(est2000) %>%
   pull()
-getvalue.Hispanpop.john.2018 <- HispanicPop %>%
+getvalue.Hispanpop.john.current <- HispanicPop %>%
   filter(PlaceName == "St. John The Baptist Parish") %>%
   select(est2000) %>%
   pull()
-getvalue.Hispanpop.tam.2018 <- HispanicPop %>%
+getvalue.Hispanpop.tam.current <- HispanicPop %>%
   filter(PlaceName == "St. Tammany Parish") %>%
   select(est2000) %>%
   pull()
 
-getvalue.hispanpop.metro.2018 <- (getvalue.Hispanpop.jeff.2018 + getvalue.Hispanpop.no.2018 + getvalue.Hispanpop.plaq.2018 + getvalue.Hispanpop.bern.2018 + getvalue.Hispanpop.char.2018 + getvalue.Hispanpop.jam.2018 + getvalue.Hispanpop.john.2018 + getvalue.Hispanpop.tam.2018)
+getvalue.hispanpop.metro.current <- (getvalue.Hispanpop.jeff.current + 
+                                    getvalue.Hispanpop.no.current + 
+                                    getvalue.Hispanpop.plaq.current + 
+                                    getvalue.Hispanpop.bern.current + 
+                                    getvalue.Hispanpop.char.current + 
+                                    getvalue.Hispanpop.jam.current + 
+                                    getvalue.Hispanpop.john.current + 
+                                    getvalue.Hispanpop.tam.current)
 
 
 
@@ -330,7 +340,7 @@ getvalue.Hispanpct.us.2000 <- ParishDemo %>%
   select(hispanic2000) %>%
   pull()
 
-getvalue.Hispanpct.us.2018 <- ParishDemo %>%
+getvalue.Hispanpct.us.current <- ParishDemo %>%  ### PEP update
   filter(PlaceName == "United States") %>%
   select(pcthisp) %>%
   pull()
@@ -351,19 +361,19 @@ getvalue.Hispgrowth.metro.2010 <-HISPpopM %>%
   pull()
 # sum(getvalue.Hispgrowth.metro.2010)
 
-getvalue.Hispgrowth.metro.2018 <-HISPpopM %>%
-  filter(CensusYear ==2018) %>%
+getvalue.Hispgrowth.metro.current <-HISPpopM %>%  ### PEP update
+  filter(CensusYear ==yearPEP) %>%
   mutate(Population = as.numeric(Population)) %>%
   select(Population)%>%
   pull()
 #sum(getvalue.Hispgrowth.metro.2018)
-getvalue.Hispgrowth.metro.2010.2018 <- ((sum(getvalue.Hispgrowth.metro.2018) - sum(getvalue.Hispgrowth.metro.2010)) / sum(getvalue.Hispgrowth.metro.2010))
+getvalue.Hispgrowth.metro.2010.current <- ((sum(getvalue.Hispgrowth.metro.current) - sum(getvalue.Hispgrowth.metro.2010)) / sum(getvalue.Hispgrowth.metro.2010))
 
 #such that Hispanics account for more than one-quarter of the metro's Population growth since 2010.
-getvalue.hispangrowthCOUNT.metro.2010.2018 <- (sum(getvalue.Hispgrowth.metro.2018) - sum(getvalue.Hispgrowth.metro.2010))
-getvalue.growthCOUNT.metro.2010.2018 <-(metro2018pop - metro2010pop)
+getvalue.hispangrowthCOUNT.metro.2010.current <- (sum(getvalue.Hispgrowth.metro.current) - sum(getvalue.Hispgrowth.metro.2010))
+getvalue.growthCOUNT.metro.2010.current <-(metropop.current - metro2010pop)
 
-getvalue.growthpcthispanic.metro.2010.2018 <- (getvalue.hispangrowthCOUNT.metro.2010.2018)/ getvalue.growthCOUNT.metro.2010.2018
+getvalue.growthpcthispanic.metro.2010.current <- (getvalue.hispangrowthCOUNT.metro.2010.current)/ getvalue.growthCOUNT.metro.2010.current
 
 
 
@@ -549,12 +559,12 @@ getvalue.sing.2000 <- sing %>%
   #While the metro has regained much of the post-Katrina Population losses, youth Population is substantially lower than pre-Katrina levels.
   #The metro had 358,092 children under 18 years in 2000 and only 284,231 in 2018.
 
-  getvalue.under18.metro.2000 <- popunder18 %>%
+  getvalue.under18.metro.2000 <- popunder18 %>%  ### PEP update
     filter(grepl("Metro",PlaceName)) %>%
     select(est2000) %>%
     pull()
 
-  getvalue.under18.metro.2018 <- popunder18 %>%
+  getvalue.under18.metro.current <- popunder18 %>%
     filter(grepl("Metro",PlaceName)) %>%
     select(under18) %>%
     pull()
@@ -566,23 +576,23 @@ getvalue.sing.2000 <- sing %>%
     select(est2000) %>%
     pull()
 
-  getvalue.under18.no.2018 <- popunder18 %>%
+  getvalue.under18.no.current <- popunder18 %>%
     filter(PlaceName == "Orleans Parish") %>%
     select(under18) %>%
     pull()
 
  #The under 18 Population is now 21 percent of the metro Population, down from 27 percent in 2000.
-  getvalue.over18.metro.2018 <- under18metro %>%
+  getvalue.over18.metro.current <- under18metro %>%
     filter(AgeGroupName == "18 years and over") %>%
     select(Population) %>%
     pull()
 
-  getvalue.under18totalpop.metro.2018 <- under18metro %>%
+  getvalue.under18totalpop.metro.current <- under18metro %>%
     filter(AgeGroupName == "Total") %>%
     select(Population) %>%
     pull()
 
-  getvalue.pct.under18.metro.2018 <- ( (getvalue.under18totalpop.metro.2018 - getvalue.over18.metro.2018) / getvalue.under18totalpop.metro.2018)
+  getvalue.pct.under18.metro.current <- ( (getvalue.under18totalpop.metro.current - getvalue.over18.metro.current) / getvalue.under18totalpop.metro.current)
 
   #The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes,
   #leading to a metrowide decrease from 15 percent in 2000 to 14 percent in 2016.

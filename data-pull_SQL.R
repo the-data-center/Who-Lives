@@ -2,7 +2,7 @@
 # # ACS # #
 ############################################
 
-IDS <- odbcConnect("DC2 IDS", uid = "jlosh", pwd = "September2019")
+IDS <- odbcConnect("DC2 IDS", uid = "jlosh", pwd = "IDSjune2020")
 
 #Hispanic Origin
 hispanRaw <- sqlQuery(IDS, "SELECT * FROM wholives.HispanRaw WHERE WhoLivesYear = 2018")# -3 removes St. Tammany because it is not included in this analysis
@@ -86,9 +86,9 @@ commuteRaw <- sqlQuery(IDS, "SELECT * FROM wholives.CommuteRaw WHERE WhoLivesYea
 #### Detailed age groups, race, sex, and hispanic origin from popest
 
 
-allparishesRaw <- sqlQuery(IDS, "SELECT * FROM wholives.AllParishesRaw WHERE WhoLivesYear = 2018")
+allparishesRaw <- sqlQuery(IDS, "SELECT * FROM wholives.AllParishesRaw WHERE WhoLivesYear = 2019")
 
-hisppopestRaw <- sqlQuery(IDS, "SELECT * FROM wholives.HispPopEstRaw WHERE WhoLivesYear = 2018")
+hisppopestRaw <- sqlQuery(IDS, "SELECT * FROM wholives.HispPopEstRaw WHERE WhoLivesYear = 2019")
 
-blackpopestRaw <- sqlQuery(IDS, "SELECT * FROM wholives.BlackPopEstRaw WHERE WhoLivesYear = 2018")
+blackpopestRaw <- sqlQuery(IDS, "SELECT * FROM wholives.BlackPopEstRaw WHERE WhoLivesYear = 2019")
 
