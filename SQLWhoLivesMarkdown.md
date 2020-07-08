@@ -52,9 +52,9 @@ area.
 </div>
 
 The number of African Americans living in New Orleans grew every year
-post-Katrina (from 2006 to 2019) but decreased for the first time
-post-Katrina from 231,943 in 2017 to 231,360 in 2018. \[HAS DECREASED
-AGAIN IN 2019 to 230,418.\]
+post-Katrina (from 2006 to 2018) but decreased for the first time
+post-Katrina from 231,943 in 2017 to 231,360 in 2018 and continued to
+decrease in 2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/07/AAhistorical-1.png" style="display: block; margin: auto;" />
 
@@ -66,7 +66,7 @@ AGAIN IN 2019 to 230,418.\]
 Between 2000 and 2019, the number of Hispanics in Jefferson Parish
 increased by 61,102 reaching over 15 percent of the total parish
 population. Orleans Parish and St. Tammany Parish gained 6,658 and
-15,186 Hispanics, respectively, such that the Hispanic share of the
+13,970 Hispanics, respectively, such that the Hispanic share of the
 population was 6 percent in Orleans and 6 percent in St. Tammany in
 2019.
 
@@ -131,7 +131,7 @@ falling birth rates, have brought massive changes to the metro — and
 indeed the whole country — with many more changes yet to come.\[4\]
 Looking at the total population in the metro by five-year age groups for
 2000 and 2019, the baby boomers are like a demographic tidal wave.
-Consequently, the median age of the metro has risen to 38 in 2019 from
+Consequently, the median age of the metro has risen to 38.8 in 2018 from
 34.8 in 2000.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/07/age2000-1.png" style="display: block; margin: auto;" />

@@ -144,7 +144,7 @@ makeCSS_source(
 )
 ```
 
-The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2019) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018. [HAS DECREASED AGAIN IN 2019 to `r comma(AA2019)`.]
+The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2018) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018 and continued to decrease in 2019.   
 
 ```{r AAhistorical, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 AAhistGraphic 
@@ -200,7 +200,7 @@ makeCSS_source(
 
 
 ## Population by age and household types
-The progression of the baby boomers through the age groups, along with falling birth rates, have brought massive changes to the metro — and indeed the whole country — with many more changes yet to come.[4] Looking at the total population in the metro by five-year age groups for 2000 and `r yearPEP`, the baby boomers are like a demographic tidal wave. Consequently, the median age of the metro has risen to 38 in `r yearPEP` from 34.8 in 2000.
+The progression of the baby boomers through the age groups, along with falling birth rates, have brought massive changes to the metro — and indeed the whole country — with many more changes yet to come.[4] Looking at the total population in the metro by five-year age groups for 2000 and `r yearPEP`, the baby boomers are like a demographic tidal wave. Consequently, the median age of the metro has risen to 38.8 in `r year` from 34.8 in 2000.
 
 
 ```{r age2000, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
