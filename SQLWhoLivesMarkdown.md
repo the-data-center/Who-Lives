@@ -64,7 +64,7 @@ decrease in 2019.
 </div>
 
 Between 2000 and 2019, the number of Hispanics in Jefferson Parish
-increased by 61,102 reaching over 15 percent of the total parish
+increased by 49,701 reaching over 15 percent of the total parish
 population. Orleans Parish and St. Tammany Parish gained 6,658 and
 13,970 Hispanics, respectively, such that the Hispanic share of the
 population was 6 percent in Orleans and 6 percent in St. Tammany in
