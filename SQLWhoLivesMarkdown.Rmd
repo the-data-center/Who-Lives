@@ -107,7 +107,7 @@ makeCSS_highlight(
 
 
 
-The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in metro New Orleans as of July `r yearPEP`, a `r round((pctincrease.metro.current.2010)*100)` percent increase from April 2010.[1] The metro area now has `r round((metropop.current / 1337726)*100)` percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available).
+The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in metro New Orleans as of July `r yearPEP`, a `r round((pctincrease.metro.current.2010)*100)` percent increase from April 2010.[^1] The metro area now has `r round((metropop.current / 1337726)*100)` percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available).
 
 
 ## Race/Ethnicity
@@ -144,7 +144,7 @@ makeCSS_source(
 )
 ```
 
-The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2018) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018 and continued to decrease in 2019.   
+The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2017) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018 and continued to decrease in 2019.   
 
 ```{r AAhistorical, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 AAhistGraphic 
@@ -192,7 +192,7 @@ chart.hispan2018.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+"\\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2018."
 )
@@ -299,7 +299,7 @@ medhhGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+"\\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
@@ -324,9 +324,9 @@ chart.inta.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+"\\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Notes**: Access w/o subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
+**Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018."
 )
@@ -342,7 +342,7 @@ povGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+"\\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
@@ -355,7 +355,7 @@ childpovGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+"\\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
@@ -369,7 +369,7 @@ vehGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+"\\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
@@ -401,7 +401,7 @@ makeCSS_source(
 
 **Notes**: Also, 2004 data is not available for St. Tammany Parish.
 
-&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+\\&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
 )
@@ -417,7 +417,7 @@ hoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+"\\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
@@ -463,7 +463,7 @@ hoburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+\\&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
 )
@@ -495,7 +495,7 @@ chart.yrbuilt.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+"\\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018."
 )
@@ -513,7 +513,7 @@ chart.commute.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
+"\\&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
 )
@@ -526,7 +526,7 @@ Data on race/ethnicity and age is from the Census Bureau vintage 2018 population
 
 Statistical tests of significance were computed at the 95% confidence level for all data from the American Community Survey and Census 2000 SF3. An “*” indicates that differences between two time periods or geographies are not significant, and therefore are the result of sampling variability rather than real change in characteristics of the population.
 
-The significance tests require both estimates and their standard errors. Standard errors for the ACS estimates were calculated using formulas from section 7, “Understanding Error and Determining Statistical Signifigance” available at: https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018.pdf.
+The significance tests require both estimates and their standard errors. Standard errors for the ACS estimates were calculated using formulas from section 7, “Understanding Error and Determining Statistical Significance” available at: https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018.pdf.
 
 Standard errors for Census 2000 SF3 data were calculated using formulas from Chapter 8 of the Technical Documentation available at: http://www.census.gov/prod/cen2000/doc/sf3.pdf.
 
@@ -535,19 +535,19 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 ## Endnotes
 
-[1] The eight-parish New Orleans metro includes Jefferson, Orleans, Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist, and St. Tammany. From 2003-2012, the New Orleans metro was comprised of 7 parishes, excluding St. James. This brief has updated all 2000 metro data to reflect an 8-parish definition, however previous versions of this report will have used the 7-parish metro definition and accompanying numbers.
+[^1]: The eight-parish New Orleans metro includes Jefferson, Orleans, Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist, and St. Tammany. From 2003-2012, the New Orleans metro was comprised of 7 parishes, excluding St. James. This brief has updated all 2000 metro data to reflect an 8-parish definition, however previous versions of this report will have used the 7-parish metro definition and accompanying numbers.
 
-[2] Throughout this brief “African American,” “Asian,” and “white” refer to individuals who report to be only one race and not Hispanic. However, “Hispanics” can be of any race(s).
+[2] Throughout this brief “African American/black,” “Asian,” and “white” refer to individuals who report to be only one race and not Hispanic. However, “Hispanics” can be of any race(s).
 
 [3] Taylor, P., Lopez M. H., Martinez, J., and Velasco, G. (2014). When Labels Don’t Fit: Hispanics and Their Views of Identity. Retrieved October 3, 2014 from http://www.pewhispanic.org/2012/04/04/when-labels-dont-fit-hispanics-and-their-views-of-identity.
 
-[4] Plyer, A. and Ortiz, E. (2011). Drivers of housing demand: Preparing for the impending elder boom. Retrieved July 8, 2013, from http:// www.datacenterresearch.org/reports_analysis/drivers-of-housing-demand.
+[4] Plyer, A. and Ortiz, E. (2011). Drivers of housing demand: Preparing for the impending elder boom. Retrieved July 8, 2013, from http://www.datacenterresearch.org/reports_analysis/drivers-of-housing-demand.
 
 [5] Julian, T. and Kominski, R. (2011). Education and synthetic work-life earnings estimates. Retrieved February 8, 2019 from https://www.census.gov/library/publications/2011/acs/acs-14.html; U.S. Department of Housing and Urban Development. (2012). Conceptualizing and measuring resilience. Retrieved September 18, 2012 from http://www.huduser.org/portal/periodicals/em/winter12/highlight2.html#title.
 
 [6] Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home Computer Technology and Student Achievement. Retrieved February 8, 2019 from http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.6663&rep=rep1&type=pdf.
 
-[7] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The geography of immigrant skills: Educational profiles of metropolitan areas. Retrieved AFebruary 8, 2019 from https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/.
+[7] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The geography of immigrant skills: Educational profiles of metropolitan areas. Retrieved February 8, 2019 from https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/.
 
 [8] Based on surveys conducted by the U.S. Census Bureau, employment-related reasons are the most frequent reason for inter-county moves of greater than 50 miles. For example, among people in the United States who moved over 500 miles, 52 percent moved for an employment-related reason compared to 23 percent for a family-related reason and 22 percent for a housing-related reason. Employment-related reasons include a new job or job transfer, to look for work, to be closer to work, retirement, and other job-related reasons. See U.S. Census Bureau. (n.d.). Geographic Mobility: 2011 to 2012 (Table 27). Retrieved February 8, 2019 from https://www.census.gov/topics/population/migration/data/tables/cps.2012.html.
 
@@ -561,7 +561,7 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 [13] Roberts, J.R., Hulsey, T.C., Curtis, G.B., and Reigart, J.R. (2003). Using Geographic Information Systems to Assess Risk for Elevated Blood Lead Levels in Children. Retrieved October 10, 2014. http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1497528/pdf/12766217.pdf
 
-[14] Davis, B., Dutzik, T. (2012). Transportation and the New Generation: Why Young People Are Driving Less and What It Means for Transportation Policy. Retrieved October 10, 2014 from http://www.uspirg.org/sites/pirg/files/reports/Transportation%20%26%20the%20 New%20Generation%20vUS_0.pdf.
+[14] Davis, B., Dutzik, T. (2012). Transportation and the New Generation: Why Young People Are Driving Less and What It Means for Transportation Policy. Retrieved October 10, 2014 from http://www.uspirg.org/sites/pirg/files/reports/Transportation%20%26%20the%20New%20Generation%20vUS_0.pdf.
 
 [15] The League of American Bicyclists. (2017). Where We Ride: Analysis of Bicycle Commuting in American Cities. Retrieved December 21, 2018 from https://bikeleague.org/sites/default/files/Where_We_Ride_2017_KM_0.pdf
 

@@ -151,7 +151,7 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
            width = .7,
            color="gray50") +
   facet_wrap(~PlaceName.fac, ncol = 2, scales = "free") + 
-  geom_text(aes(label = val), position=position_dodge(width = .7), vjust = -.7, size=4, family="Asap") +
+  geom_text(aes(label = val), position=position_dodge(width = .8), vjust = -.7, hjust = .4, size=4, family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,1)) +
   scale_fill_manual(values = c(DCcolor.p1skyblue, 
                                DCcolor.p1mediumblue)) +
@@ -162,7 +162,8 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
         panel.spacing = unit(6, "lines"),
         strip.text = element_text(size=12),
         axis.text.x = element_text(size = 12, vjust=1),
-        axis.text.y = element_text(size = 12)) +
+        axis.text.y = element_text(size = 12),
+        plot.title = element_text(size = 18)) +
   labs(title = "White, black, Hispanic, and Asian, Metro New Orleans parishes and U.S",
        x="",
        y="") 

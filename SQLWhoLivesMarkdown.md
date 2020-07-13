@@ -5,7 +5,7 @@ This brief examines the most current demographic data released by the U.S. Censu
 
 The U.S. Census Bureau estimates that 1,270,530 residents were living in
 metro New Orleans as of July 2019, a 7 percent increase from April
-2010.\[1\] The metro area now has 95 percent of its 2000 population of
+2010.[^1] The metro area now has 95 percent of its 2000 population of
 1,337,726. In this brief, we examine demographic data released by the
 U.S. Census Bureau and identify important changes in metro area parishes
 since 2000 (or the best benchmark available).
@@ -52,7 +52,7 @@ area.
 </div>
 
 The number of African Americans living in New Orleans grew every year
-post-Katrina (from 2006 to 2018) but decreased for the first time
+post-Katrina (from 2006 to 2017) but decreased for the first time
 post-Katrina from 231,943 in 2017 to 231,360 in 2018 and continued to
 decrease in 2019.
 
@@ -64,9 +64,9 @@ decrease in 2019.
 </div>
 
 Between 2000 and 2019, the number of Hispanics in Jefferson Parish
-increased by 49,701 reaching over 15 percent of the total parish
+increased by 61,102 reaching over 15 percent of the total parish
 population. Orleans Parish and St. Tammany Parish gained 6,658 and
-13,970 Hispanics, respectively, such that the Hispanic share of the
+15,186 Hispanics, respectively, such that the Hispanic share of the
 population was 6 percent in Orleans and 6 percent in St. Tammany in
 2019.
 
@@ -118,7 +118,7 @@ represents 62 percent of the Hispanic population.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2018.</p>
 </div>
@@ -243,7 +243,7 @@ inflation, falling to $50,766.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -283,9 +283,9 @@ Inequalities between individuals, households, businesses, or geographic areas wi
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Notes**: Access w/o subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
+**Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018.</p>
 </div>
@@ -305,7 +305,7 @@ and 2018.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -320,7 +320,7 @@ between 1999 and 2018.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -336,7 +336,7 @@ evacuation plan.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -381,7 +381,7 @@ was 5 percent in 2004, and has not significantly changed.
 
 **Notes**: Also, 2004 data is not available for St. Tammany Parish.
 
-&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+\&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018.</p>
 </div>
@@ -398,7 +398,7 @@ Orleans have increased slightly, but still are a much lower 48 percent.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -457,7 +457,7 @@ widened.
 
 **Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+\&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018.</p>
 </div>
@@ -497,7 +497,7 @@ been built since 1990.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018.</p>
 </div>
@@ -529,7 +529,7 @@ national trend, where the share driving alone remained steady between
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
+\&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -552,7 +552,7 @@ population.
 The significance tests require both estimates and their standard errors.
 Standard errors for the ACS estimates were calculated using formulas
 from section 7, “Understanding Error and Determining Statistical
-Signifigance” available at:
+Significance” available at:
 <https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018.pdf>.
 
 Standard errors for Census 2000 SF3 data were calculated using formulas
@@ -564,17 +564,9 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 Endnotes {#endnotes}
 --------
 
-\[1\] The eight-parish New Orleans metro includes Jefferson, Orleans,
-Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist,
-and St. Tammany. From 2003-2012, the New Orleans metro was comprised of
-7 parishes, excluding St. James. This brief has updated all 2000 metro
-data to reflect an 8-parish definition, however previous versions of
-this report will have used the 7-parish metro definition and
-accompanying numbers.
-
-\[2\] Throughout this brief “African American,” “Asian,” and “white”
-refer to individuals who report to be only one race and not Hispanic.
-However, “Hispanics” can be of any race(s).
+\[2\] Throughout this brief “African American/black,” “Asian,” and
+“white” refer to individuals who report to be only one race and not
+Hispanic. However, “Hispanics” can be of any race(s).
 
 \[3\] Taylor, P., Lopez M. H., Martinez, J., and Velasco, G. (2014).
 When Labels Don’t Fit: Hispanics and Their Views of Identity. Retrieved
@@ -583,8 +575,7 @@ October 3, 2014 from
 
 \[4\] Plyer, A. and Ortiz, E. (2011). Drivers of housing demand:
 Preparing for the impending elder boom. Retrieved July 8, 2013, from
-<http://>
-www.datacenterresearch.org/reports\_analysis/drivers-of-housing-demand.
+<http://www.datacenterresearch.org/reports_analysis/drivers-of-housing-demand>.
 
 \[5\] Julian, T. and Kominski, R. (2011). Education and synthetic
 work-life earnings estimates. Retrieved February 8, 2019 from
@@ -600,7 +591,7 @@ from
 
 \[7\] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The
 geography of immigrant skills: Educational profiles of metropolitan
-areas. Retrieved AFebruary 8, 2019 from
+areas. Retrieved February 8, 2019 from
 <https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/>.
 
 \[8\] Based on surveys conducted by the U.S. Census Bureau,
@@ -644,10 +635,17 @@ Blood Lead Levels in Children. Retrieved October 10, 2014.
 \[14\] Davis, B., Dutzik, T. (2012). Transportation and the New
 Generation: Why Young People Are Driving Less and What It Means for
 Transportation Policy. Retrieved October 10, 2014 from
-<http://www.uspirg.org/sites/pirg/files/reports/Transportation%20%26%20the%20>
-New%20Generation%20vUS\_0.pdf.
+<http://www.uspirg.org/sites/pirg/files/reports/Transportation%20%26%20the%20New%20Generation%20vUS_0.pdf>.
 
 \[15\] The League of American Bicyclists. (2017). Where We Ride:
 Analysis of Bicycle Commuting in American Cities. Retrieved December 21,
 2018 from
 <https://bikeleague.org/sites/default/files/Where_We_Ride_2017_KM_0.pdf>
+
+[^1]: The eight-parish New Orleans metro includes Jefferson, Orleans,
+    Plaquemines, St. Bernard, St. Charles, St. James, St. John the
+    Baptist, and St. Tammany. From 2003-2012, the New Orleans metro was
+    comprised of 7 parishes, excluding St. James. This brief has updated
+    all 2000 metro data to reflect an 8-parish definition, however
+    previous versions of this report will have used the 7-parish metro
+    definition and accompanying numbers.
