@@ -16,7 +16,7 @@ Race/Ethnicity {#raceethnicity}
 According to the U.S. Census Bureau’s 2019 population estimates, there
 are now 92,974 fewer African Americans living in New Orleans (Orleans
 Parish) compared to 2000, but there are also 8,289 fewer whites.
-Meanwhile, the number of Hispanics grew by 6,658.\[2\]
+Meanwhile, the number of Hispanics grew by 6,658.[^2]
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/07/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
 
@@ -64,7 +64,7 @@ decrease in 2019.
 </div>
 
 Between 2000 and 2019, the number of Hispanics in Jefferson Parish
-increased by 61,102 reaching over 15 percent of the total parish
+increased by 32,109 reaching over 15 percent of the total parish
 population. Orleans Parish and St. Tammany Parish gained 6,658 and
 15,186 Hispanics, respectively, such that the Hispanic share of the
 population was 6 percent in Orleans and 6 percent in St. Tammany in
@@ -101,7 +101,7 @@ Hispanics account for 28 percent of the metro’s population growth since
 Hispanic is an umbrella term comprising multiple nationalities and
 ethnicities. Researchers have shown that most Hispanics prefer to
 identify by nationality rather than by pan-ethnic terms such as
-“Hispanic” and “Latino.”\[3\] The nationalities of Hispanics residing in
+“Hispanic” and “Latino.”[^3] The nationalities of Hispanics residing in
 metro New Orleans is quite distinct from the national Hispanic profile.
 
 In 2018, the largest Hispanic group in metro New Orleans was Honduran,
@@ -118,7 +118,7 @@ represents 62 percent of the Hispanic population.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2018.</p>
 </div>
@@ -128,7 +128,7 @@ Population by age and household types {#population-by-age-and-household-types}
 
 The progression of the baby boomers through the age groups, along with
 falling birth rates, have brought massive changes to the metro — and
-indeed the whole country — with many more changes yet to come.\[4\]
+indeed the whole country — with many more changes yet to come.[^4]
 Looking at the total population in the metro by five-year age groups for
 2000 and 2019, the baby boomers are like a demographic tidal wave.
 Consequently, the median age of the metro has risen to 38.8 in 2018 from
@@ -203,7 +203,7 @@ Educational attainment, income, and internet access {#educational-attainment-inc
 ---------------------------------------------------
 
 Educational attainment is an important determinant of household incomes,
-workforce skills, and regional resiliency.\[5\] The proportion of adults
+workforce skills, and regional resiliency.[^5] The proportion of adults
 25 years and older with less than a high school education declined
 across all three of the largest parishes, leading to a metrowide
 decrease from 15 percent in 2000 to 12 percent in 2018. In the city of
@@ -243,7 +243,7 @@ inflation, falling to $50,766.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -251,16 +251,15 @@ inflation, falling to $50,766.
 Internet access is an important indicator of access to information.
 Studies have shown that without broadband, computer access, and
 encompassing technology training services, workers and students are at a
-disadvantage in the job market and education system.\[6\] Only 61
-percent of households in Orleans Parish and only 69 percent of
-households in Jefferson Parish are connected to the Internet through a
-home-based internet service, such as broadband (cable, DSL, or fiber),
-satellite, or dial-up service, compared to 74 percent nationwide.
-St. Tammany is above the national average at 78 percent of households
-connected to the Internet by a home-based service internet connection.
-Internet access without a subscription refers to households who only
-have access through group access locations such as school, work, a
-library, or coffee shop.
+disadvantage in the job market and education system.[^6] Only 61 percent
+of households in Orleans Parish and only 69 percent of households in
+Jefferson Parish are connected to the Internet through a home-based
+internet service, such as broadband (cable, DSL, or fiber), satellite,
+or dial-up service, compared to 74 percent nationwide. St. Tammany is
+above the national average at 78 percent of households connected to the
+Internet by a home-based service internet connection. Internet access
+without a subscription refers to households who only have access through
+group access locations such as school, work, a library, or coffee shop.
 
 An increasingly common way to access the Internet is through a
 smartphone or some other cellular device. While, in general, smartphone
@@ -283,7 +282,7 @@ Inequalities between individuals, households, businesses, or geographic areas wi
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
 **Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
@@ -305,7 +304,7 @@ and 2018.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -320,7 +319,7 @@ between 1999 and 2018.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -336,7 +335,7 @@ evacuation plan.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -346,7 +345,7 @@ Foreign-born population and geographic mobility {#foreign-born-population-and-ge
 
 A rising foreign-born share of the population may reflect expanding
 economic opportunities for both high-skilled and low-skilled
-workers.\[7\] That share of the population has grown in all three of the
+workers.[^7] That share of the population has grown in all three of the
 most populous metro parishes since 2000, led by a 5.9 percentage point
 gain in Jefferson Parish. By 2018, fully 13.4 percent of Jefferson
 Parish population was foreign-born, statistically the same as the U.S.
@@ -365,10 +364,10 @@ Like the foreign-born population, a rising share of the population who
 moved into Orleans Parish in the past year may reflect expanding
 economic opportunities. The most frequent reason people move long
 distances, such as from one state to another state, is for job
-opportunities.\[8\] In addition, the young and well-educated are more
-likely than others to move long distances.\[9\] In 2018, 6 percent of
-the population in Orleans Parish had moved into the parish in the past
-year, up from 3 percent in 2004. Over 61 percent of the new movers into
+opportunities.[^8] In addition, the young and well-educated are more
+likely than others to move long distances.[^9] In 2018, 6 percent of the
+population in Orleans Parish had moved into the parish in the past year,
+up from 3 percent in 2004. Over 61 percent of the new movers into
 Orleans Parish came from outside the state of Louisiana. In Jefferson
 Parish, the share of the population who were new movers into the parish
 was 5 percent in 2004, and has not significantly changed.
@@ -381,7 +380,7 @@ was 5 percent in 2004, and has not significantly changed.
 
 **Notes**: Also, 2004 data is not available for St. Tammany Parish.
 
-\&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018.</p>
 </div>
@@ -398,7 +397,7 @@ Orleans have increased slightly, but still are a much lower 48 percent.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -414,7 +413,7 @@ and from 35 to 47 percent in Jefferson. One reason for the surge may be
 that homeowners who returned after Katrina used insurance or Road Home
 proceeds to pay off their mortgage principal. In fact, Orleans and
 Jefferson received the first and second largest number of Road Home
-Option 1 grants among all Louisiana parishes.\[10\]
+Option 1 grants among all Louisiana parishes.[^10]
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/07/honomo-1.png" style="display: block; margin: auto;" />
 
@@ -427,7 +426,7 @@ Housing costs and affordability, housing stock, and commuting {#housing-costs-an
 -------------------------------------------------------------
 
 High housing costs can limit a region’s ability to attract and retain
-the workforce essential for a healthy economy.\[11\] Severe housing cost
+the workforce essential for a healthy economy.[^11] Severe housing cost
 burdens of more than 50 percent of household income indicate a serious
 problem in housing affordability. In 2004, the share of severely
 cost-burdened renters in New Orleans and the U.S. was 24 percent. In the
@@ -457,7 +456,7 @@ widened.
 
 **Notes**: 2004 data is not available for St. Tammany Parish
 
-\&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018.</p>
 </div>
@@ -480,8 +479,8 @@ percent metrowide compared to only 14 percent nationwide.
 
 America’s aging housing stock represents both a potential problem and an
 opportunity. Older homes are less energy-efficient and more expensive to
-maintain.\[12\] Moreover, research has shown that lead poisoning in
-children is correlated strongly with residing in pre-1950 homes.\[13\]
+maintain.[^12] Moreover, research has shown that lead poisoning in
+children is correlated strongly with residing in pre-1950 homes.[^13]
 Conversely, in New Orleans, many older homes are protected by
 preservation laws that have helped retain the historic character of the
 city.
@@ -497,7 +496,7 @@ been built since 1990.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018.</p>
 </div>
@@ -507,7 +506,7 @@ residents. Commuting has been studied more and more as the costs and
 burdens (physical, mental, familial, etc.) are uncovered. In addition,
 studies have shown that younger generations are less likely to drive
 cars, more likely to bike, and more likely to move into urban
-cores.\[14\]
+cores.[^14]
 
 The share of commuters in New Orleans using public transportation
 declined sharply from 13 percent in 2000 to 7 percent in 2018, while the
@@ -515,9 +514,9 @@ share in Jefferson Parish has fallen from 2 percent in 2000, to 1
 percent of commuters using public transportation in 2018. But the share
 of bike commuters in New Orleans rose to 4 percent. An analysis of 2017
 ACS data found that New Orleans had the the fifth highest share of bike
-commuting of the largest 70 cities nationwide.\[15\] Meanwhile, the
-metro share of carpoolers fell from 15 percent in 2000 to 9 percent in
-2018, as did the Orleans Parish share from 16 percent to 8 percent.
+commuting of the largest 70 cities nationwide.[^15] Meanwhile, the metro
+share of carpoolers fell from 15 percent in 2000 to 9 percent in 2018,
+as did the Orleans Parish share from 16 percent to 8 percent.
 
 The percentage of workers who commute by driving alone has increased
 within the metro region since 2000 from 73 percent to 79 percent, driven
@@ -529,7 +528,7 @@ national trend, where the share driving alone remained steady between
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-\&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
 </div>
@@ -564,84 +563,6 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 Endnotes {#endnotes}
 --------
 
-\[2\] Throughout this brief “African American/black,” “Asian,” and
-“white” refer to individuals who report to be only one race and not
-Hispanic. However, “Hispanics” can be of any race(s).
-
-\[3\] Taylor, P., Lopez M. H., Martinez, J., and Velasco, G. (2014).
-When Labels Don’t Fit: Hispanics and Their Views of Identity. Retrieved
-October 3, 2014 from
-<http://www.pewhispanic.org/2012/04/04/when-labels-dont-fit-hispanics-and-their-views-of-identity>.
-
-\[4\] Plyer, A. and Ortiz, E. (2011). Drivers of housing demand:
-Preparing for the impending elder boom. Retrieved July 8, 2013, from
-<http://www.datacenterresearch.org/reports_analysis/drivers-of-housing-demand>.
-
-\[5\] Julian, T. and Kominski, R. (2011). Education and synthetic
-work-life earnings estimates. Retrieved February 8, 2019 from
-<https://www.census.gov/library/publications/2011/acs/acs-14.html>; U.S.
-Department of Housing and Urban Development. (2012). Conceptualizing and
-measuring resilience. Retrieved September 18, 2012 from
-<http://www.huduser.org/portal/periodicals/em/winter12/highlight2.html#title>.
-
-\[6\] Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home
-Computer Technology and Student Achievement. Retrieved February 8, 2019
-from
-<http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.6663&rep=rep1&type=pdf>.
-
-\[7\] De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The
-geography of immigrant skills: Educational profiles of metropolitan
-areas. Retrieved February 8, 2019 from
-<https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/>.
-
-\[8\] Based on surveys conducted by the U.S. Census Bureau,
-employment-related reasons are the most frequent reason for inter-county
-moves of greater than 50 miles. For example, among people in the United
-States who moved over 500 miles, 52 percent moved for an
-employment-related reason compared to 23 percent for a family-related
-reason and 22 percent for a housing-related reason. Employment-related
-reasons include a new job or job transfer, to look for work, to be
-closer to work, retirement, and other job-related reasons. See U.S.
-Census Bureau. (n.d.). Geographic Mobility: 2011 to 2012 (Table 27).
-Retrieved February 8, 2019 from
-<https://www.census.gov/topics/population/migration/data/tables/cps.2012.html>.
-
-\[9\] Based on surveys conducted by the U.S. Census Bureau, people 25 to
-29 years old were more likely than other age groups to be movers from a
-different county, state, region, or country. And people with a
-professional or graduate degree were also more likely than other
-educational groups to be movers from a different county, state, region,
-or country. See U.S. Census Bureau. (n.d.). Geographic Mobility: 2011 to
-2012 (Table 1). Retrieved September 23, 2013 from
-<https://www.census.gov/topics/population/migration/data/tables/cps.2012.html>.
-
-\[10\] State of Louisiana Office of Community Development. (2013). The
-Homeowner Assistance Program Week 375 Situation & Pipeline Report.
-
-\[11\] Plyer, A., Ortiz, E., and Pettit, K. (2009). Post-Katrina housing
-affordability challenges continue in 2008, worsening among Orleans
-Parish very low income renters. Retrieved September 17, 2013 from
-<http://www.datacenterresearch.org/reports_analysis/housing-affordability>.
-
-\[12\] Joint Center for Housing Studies of Harvard University (2013).
-The US Housing Stock: Ready for Renewal. Retrieved October 10, 2014 from
-<http://www.jchs.harvard.edu/sites/jchs.harvard.edu/files/harvard_jchs_remodeling_report_2013.pdf>.
-
-\[13\] Roberts, J.R., Hulsey, T.C., Curtis, G.B., and Reigart, J.R.
-(2003). Using Geographic Information Systems to Assess Risk for Elevated
-Blood Lead Levels in Children. Retrieved October 10, 2014.
-<http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1497528/pdf/12766217.pdf>
-
-\[14\] Davis, B., Dutzik, T. (2012). Transportation and the New
-Generation: Why Young People Are Driving Less and What It Means for
-Transportation Policy. Retrieved October 10, 2014 from
-<http://www.uspirg.org/sites/pirg/files/reports/Transportation%20%26%20the%20New%20Generation%20vUS_0.pdf>.
-
-\[15\] The League of American Bicyclists. (2017). Where We Ride:
-Analysis of Bicycle Commuting in American Cities. Retrieved December 21,
-2018 from
-<https://bikeleague.org/sites/default/files/Where_We_Ride_2017_KM_0.pdf>
-
 [^1]: The eight-parish New Orleans metro includes Jefferson, Orleans,
     Plaquemines, St. Bernard, St. Charles, St. James, St. John the
     Baptist, and St. Tammany. From 2003-2012, the New Orleans metro was
@@ -649,3 +570,83 @@ Analysis of Bicycle Commuting in American Cities. Retrieved December 21,
     all 2000 metro data to reflect an 8-parish definition, however
     previous versions of this report will have used the 7-parish metro
     definition and accompanying numbers.
+
+[^2]: Throughout this brief “African American/black,” “Asian,” and
+    “white” refer to individuals who report to be only one race and not
+    Hispanic. However, “Hispanics” can be of any race(s).
+
+[^3]: Taylor, P., Lopez M. H., Martinez, J., and Velasco, G. (2014).
+    When Labels Don’t Fit: Hispanics and Their Views of Identity.
+    Retrieved October 3, 2014 from
+    <http://www.pewhispanic.org/2012/04/04/when-labels-dont-fit-hispanics-and-their-views-of-identity>.
+
+[^4]: Plyer, A. and Ortiz, E. (2011). Drivers of housing demand:
+    Preparing for the impending elder boom. Retrieved July 8, 2013, from
+    <http://www.datacenterresearch.org/reports_analysis/drivers-of-housing-demand>.
+
+[^5]: Julian, T. and Kominski, R. (2011). Education and synthetic
+    work-life earnings estimates. Retrieved February 8, 2019 from
+    <https://www.census.gov/library/publications/2011/acs/acs-14.html>;
+    U.S. Department of Housing and Urban Development. (2012).
+    Conceptualizing and measuring resilience. Retrieved September 18,
+    2012 from
+    <http://www.huduser.org/portal/periodicals/em/winter12/highlight2.html#title>.
+
+[^6]: Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home
+    Computer Technology and Student Achievement. Retrieved February 8,
+    2019 from
+    <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.6663&rep=rep1&type=pdf>.
+
+[^7]: De Jong, G.F., Graefe, D.R., Hall, M., and Singer, A. (2001). The
+    geography of immigrant skills: Educational profiles of metropolitan
+    areas. Retrieved February 8, 2019 from
+    <https://www.brookings.edu/research/the-geography-of-immigrant-skills-educational-profiles-of-metropolitan-areas/>.
+
+[^8]: Based on surveys conducted by the U.S. Census Bureau,
+    employment-related reasons are the most frequent reason for
+    inter-county moves of greater than 50 miles. For example, among
+    people in the United States who moved over 500 miles, 52 percent
+    moved for an employment-related reason compared to 23 percent for a
+    family-related reason and 22 percent for a housing-related reason.
+    Employment-related reasons include a new job or job transfer, to
+    look for work, to be closer to work, retirement, and other
+    job-related reasons. See U.S. Census Bureau. (n.d.). Geographic
+    Mobility: 2011 to 2012 (Table 27). Retrieved February 8, 2019 from
+    <https://www.census.gov/topics/population/migration/data/tables/cps.2012.html>.
+
+[^9]: Based on surveys conducted by the U.S. Census Bureau, people 25 to
+    29 years old were more likely than other age groups to be movers
+    from a different county, state, region, or country. And people with
+    a professional or graduate degree were also more likely than other
+    educational groups to be movers from a different county, state,
+    region, or country. See U.S. Census Bureau. (n.d.). Geographic
+    Mobility: 2011 to 2012 (Table 1). Retrieved September 23, 2013 from
+    <https://www.census.gov/topics/population/migration/data/tables/cps.2012.html>.
+
+[^10]: State of Louisiana Office of Community Development. (2013). The
+    Homeowner Assistance Program Week 375 Situation & Pipeline Report.
+
+[^11]: Plyer, A., Ortiz, E., and Pettit, K. (2009). Post-Katrina housing
+    affordability challenges continue in 2008, worsening among Orleans
+    Parish very low income renters. Retrieved September 17, 2013 from
+    <http://www.datacenterresearch.org/reports_analysis/housing-affordability>.
+
+[^12]: Joint Center for Housing Studies of Harvard University (2013).
+    The US Housing Stock: Ready for Renewal. Retrieved October 10, 2014
+    from
+    <http://www.jchs.harvard.edu/sites/jchs.harvard.edu/files/harvard_jchs_remodeling_report_2013.pdf>.
+
+[^13]: Roberts, J.R., Hulsey, T.C., Curtis, G.B., and Reigart, J.R.
+    (2003). Using Geographic Information Systems to Assess Risk for
+    Elevated Blood Lead Levels in Children. Retrieved October 10, 2014.
+    <http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1497528/pdf/12766217.pdf>
+
+[^14]: Davis, B., Dutzik, T. (2012). Transportation and the New
+    Generation: Why Young People Are Driving Less and What It Means for
+    Transportation Policy. Retrieved October 10, 2014 from
+    <http://www.uspirg.org/sites/pirg/files/reports/Transportation%20%26%20the%20New%20Generation%20vUS_0.pdf>.
+
+[^15]: The League of American Bicyclists. (2017). Where We Ride:
+    Analysis of Bicycle Commuting in American Cities. Retrieved December
+    21, 2018 from
+    <https://bikeleague.org/sites/default/files/Where_We_Ride_2017_KM_0.pdf>
