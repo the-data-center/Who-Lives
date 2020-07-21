@@ -12,3 +12,4 @@ year.char <- c("2018")
 yearPEP.char <- c("2019")
 
 
+windowsFonts("Asap" = windowsFont("Asap"))
