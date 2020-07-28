@@ -427,6 +427,10 @@ AAWhiteHispan <- allparishesRaw %>%
   select(RaceSimple, Population, est2000) %>%
   arrange(-row_number())
 
+AAWhiteHispan %>% 
+  write.csv("outputs/spreadsheets/AAWhiteHispan.csv")
+
+
 
 #Tables 2
 
@@ -460,6 +464,11 @@ ParishDemo <- spread(ParishDemo2, RaceSimple, Population) %>%
   #.[-2,]
 
 
+ParishDemo %>% 
+  write.csv("outputs/spreadsheets/ParishDemo.csv")
+
+
+
 #Table 3 African American Population, New Orleans, 2000-current
 
 #Pulling population estimates for 2010-current
@@ -487,7 +496,9 @@ BlackPopyears <- allparishesRaw %>%
 BlackpopM <- blackpopestRaw %>% 
   add_row(CensusYear = 2000, PlaceName= "Orleans Parish", Population=323392) 
 
-
+BlackpopM %>% 
+  select(CensusYear, Population) %>% 
+  write.csv("outputs/spreadsheets/BlackpopM.csv")
 
 #Table 4 Hispanic population change by population
 
@@ -507,6 +518,12 @@ HispanicPopyears <- allparishesRaw %>%
   filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
            PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
            PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish") 
+
+HispanicPopyears %>%
+  select(PlaceName, DateDesc, Population) %>% 
+  pivot_wider(id_cols = DateDesc, names_from = PlaceName, values_from = Population ) %>% 
+  write.csv("outputs/spreadsheets/HispanicPopyears.csv")
+
 
 HISPpopM <- hisppopestRaw %>% 
   add_row(CensusYear = 2000, PlaceName= "Orleans Parish", Population=14826) %>% 
@@ -556,6 +573,12 @@ Agepop <- allparishesRaw %>%
                      1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,
                      3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,
                      17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
+
+Agepop %>%
+  select(-est2000) %>% 
+  pivot_wider(id_cols = AgeGroupName, names_from = PlaceName, values_from = Population ) %>% 
+  write.csv("outputs/spreadsheets/Agepop.csv")
+
 
 #Table 6 Under 18 population
 #Different than estimates from google sheets but aligns with American fact finder
