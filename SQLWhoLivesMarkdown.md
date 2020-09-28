@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
     ## `summarise()` ungrouping output (override with `.groups` argument)
     ## `summarise()` ungrouping output (override with `.groups` argument)
 
