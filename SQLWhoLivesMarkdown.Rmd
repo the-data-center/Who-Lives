@@ -240,7 +240,7 @@ singGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -274,7 +274,7 @@ hsGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -287,7 +287,7 @@ bachGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -301,7 +301,7 @@ medhhGraphic
 makeCSS_source(
 "&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -328,7 +328,7 @@ makeCSS_source(
 
 **Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2019."
 )
 ```
 
@@ -344,7 +344,7 @@ povGraphic
 makeCSS_source(
 "&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -357,7 +357,7 @@ childpovGraphic
 makeCSS_source(
 "&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -371,7 +371,7 @@ vehGraphic
 makeCSS_source(
 "&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -385,7 +385,7 @@ forborGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -403,7 +403,7 @@ makeCSS_source(
 
 &ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
 )
 ```
 
@@ -419,7 +419,7 @@ hoGraphic
 makeCSS_source(
 "&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -432,7 +432,7 @@ honomoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 
@@ -450,7 +450,7 @@ rentburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
 )
 ```
 
@@ -465,7 +465,7 @@ makeCSS_source(
 
 &ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
 )
 ```
 
@@ -480,7 +480,7 @@ medrentGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
 )
 ```
 
@@ -497,7 +497,7 @@ chart.yrbuilt.allparishes
 makeCSS_source(
 "&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2019."
 )
 ```
 
@@ -515,7 +515,7 @@ chart.commute.allparishes
 makeCSS_source(
 "&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 

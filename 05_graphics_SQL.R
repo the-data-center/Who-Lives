@@ -474,7 +474,7 @@ bachGraphic <- dodgedBar(bach,
 
 medhhGraphic <- dodgedBar(medhh, 
                           quo(MedianHHIncome), 
-                          "Median household income, 2018 inflation adjusted", 
+                          "Median household income, 2019 inflation adjusted", 
                           yscale = c(0,1.3*max(medhh$MedianHHIncome)), 
                           colors = c(DCcolor.p2teal50, DCcolor.p1mediumblue), 
                           pct = FALSE,  
