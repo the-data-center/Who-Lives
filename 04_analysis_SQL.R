@@ -1,11 +1,12 @@
 ############################################
 # # ACS # #
 ############################################
-order <- c("Orleans Parish", "Jefferson Parish", "St. Tammany Parish", "New Orleans Metro Area", "United States")
-orderHisp <- c("Orleans Parish", "Jefferson Parish", "New Orleans Metro Area", "United States")
+order <- c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")
+orderHisp <- c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")
 
 #Hispanic Origin
 hispan <- hispanRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
   slice(match(orderHisp, PlaceName)) %>%
   mutate(Cubanpct = TotCuba / TotalHispOrLat,
          Dominicanpct = TotDomin / TotalHispOrLat,
@@ -63,6 +64,7 @@ hispan <- hispanRaw %>%
 #Households with own children under 18
 
 hwc <- hwcRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000 = c(0.3007,0.3251,0.397,0.3353,0.3339),
          tothwc = Married + MaleHH + FemaleHH,
@@ -78,6 +80,7 @@ hwc <- hwcRaw %>%
 #One-person households
 
 sing <- singRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000 = c(0.331,0.2665,0.1968,0.2707,0.2578),
          pctsing = SingleHH/Total,
@@ -91,6 +94,7 @@ sing <- singRaw %>%
 #Less than a high school degree, adults 25 and older
 
 hs <- hsRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000=c(0.2531,0.2073,0.1613,0.1536,0.196),
          totless = Male9 + Male9To12 + Female9 + Female9To12,
@@ -106,6 +110,7 @@ hs <- hsRaw %>%
 #Bachelor's degree or higher, adults 25 and older
 
 bach <- bachRaw %>% 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000=c(0.2575,0.2149,0.2832,0.2256,0.244),
          totbach = MaleBach + MaleGradProf + FemaleBach + FemaleGradProf,
@@ -122,6 +127,7 @@ bach <- bachRaw %>%
 
 census2000 <- data.frame(census2000 = cpi00*c(27133,38435,47883,35317,41994))
 medhh <- medhhRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   bind_cols(.,census2000) %>%
   mutate(significant = stattest(x=census2000,y=MedianHHIncome,moey=MedianHHIncomeMOE))
@@ -133,6 +139,7 @@ medhh <- medhhRaw %>%
 #Internet access
 
 inta <- intaRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(cellonlypct = CellOnly / Total, 
          cellmoeprop = moeprop(y = Total, moex = CellOnlyMOE, moey = TotalMOE, p = cellonlypct),
@@ -164,6 +171,7 @@ inta <- intaRaw %>%
 #Poverty rate, population for whom poverty has been determined
 
 pov <- povRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(sf1999=c(0.2794,0.1365,0.0972,0.1838,0.1238),
          pctpov = BelowPov / Total,
@@ -178,6 +186,7 @@ pov <- povRaw %>%
 #Children in poverty, population for whom poverty has been determined			
 
 childpov <- childpovRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(sf1999=c(0.4053,0.2034,0.123,0.2623,0.1656),
          TotChildPov = BelowPovFemaleChild + BelowPovMaleChild + AbovePovFemaleChild + AbovePovMaleChild,
@@ -196,6 +205,7 @@ childpov <- childpovRaw %>%
 #Households without access to a vehicle
 
 veh <- vehRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000=c(0.2732,0.0930,0.0442,0.1532,0.1030),
          vehpct = NoVehAvail / Total,
@@ -209,6 +219,7 @@ veh <- vehRaw %>%
 #Population not U.S. citizens at birth
 
 forbor <- forborRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000=c(0.0425,0.0748,0.0237,0.048,0.1105),
          forborpct = (TotForeign00To09 + TotForeign90To99 + TotForeignPre90 + TotForeign10On) / TotalPop,
@@ -223,6 +234,7 @@ forbor <- forborRaw %>%
 #Population who moved in the past year
 
 mob <- mobRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(sf2004mobabroad =c(0.0013,0.0044,0.00,0.00,0.006), #zero filled in for metro and St. Tammany 2004 because of missing data,
          sf2004states=c(0.0206,0.02,0.00,0.00,0.0235),
@@ -268,6 +280,7 @@ jeffsig <- stattest(x = (mob$sf2004mobabroad[2]+mob$sf2004states[2]+mob$sf2004di
 #Homeownership rates
 
 ho <- hoRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000=c(0.465,0.6385,0.8048,0.6183,0.6619),
          Ownerpct = Owner / Total,
@@ -282,6 +295,7 @@ ho <- hoRaw %>%
 #Homeowners without a mortgage
 
 honomo <- honomoRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000 = c(0.3298,0.3458,0.2967,0.3476,0.3259),
          honomopct = NoMortgage / Total,
@@ -295,6 +309,7 @@ honomo <- honomoRaw %>%
 #Renters with severe housing cost burdens
 
 rentbur <- rentburRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value
          sf2004lab =c(0.2432,0.2167," ",0.2161,0.2384),
@@ -310,6 +325,7 @@ rentbur <- rentburRaw %>%
 #Homeowners with severe housing cost burdens
 
 hobur <- hoburRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(sf2004=c(0.1620,0.0891,0,0.1134,0.0988), #0 for St. tammany missing value,
          hoburpct = (`50OrMoreMortgage`+`50OrMoreNoMortgage`)/(Total - NotComputedMortgage - NotComputedNoMortgage),
@@ -327,6 +343,7 @@ hobur <- hoburRaw %>%
 
 sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))
 medrent <- medrentRaw %>% 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   bind_cols(.,sf2004) %>%
   mutate(significant = stattest(x=sf2004,y=Rent,moey=RentMOE)) 
@@ -339,6 +356,7 @@ medrent %>%
 #Year structure built, 201* housing units
 
 yrbuilt <- yrbuiltRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(orLater1990pct = (`1990To1999` + `2000To2009` + `2010To2013` + `2014`)/Total,
          mid1950to1989pct = (`1950To1959`+`1960To1969`+`1970To1979`+`1980To1989`)/Total,
@@ -367,6 +385,7 @@ yrbuilt <- yrbuiltRaw %>%
 
 #Means of transportation to work, 
 commute <- commuteRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   mutate(census2000drive=c(0.6028,0.7855,0.8021,0.7301,0.7570),
          census2000carpool=c(0.1614,0.1372,0.1366,0.1465,0.1219),
@@ -415,12 +434,12 @@ commute <- commuteRaw %>%
 # whatever geography you need: place
 # whatever year of estimate that you need: date
 
-orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
-               "St. James Parish", "St. John The Baptist Parish", "St. Tammany Parish", "Metro", "United States")
+orderDemo <- c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+               "St. James", "St. John the Baptist", "St. Tammany", "Metro", "United States")
 
 #Table 1 
 AAWhiteHispan <- allparishesRaw %>% 
-  filter(PlaceName == "Orleans Parish") %>% 
+  filter(PlaceName == "Orleans") %>% 
   filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total" & (RaceSimple == "Black"|RaceSimple == "White"|RaceSimple == "Hispanic")) %>%
   mutate(est2000=c(128871, 323392, 14826)) %>% #check order of races in data frame. Order is bottom up
@@ -435,15 +454,18 @@ AAWhiteHispan %>%
 #Tables 2
 
 ParishDemo1<- allparishesRaw %>% 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany", "United States")) %>% 
   filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   select(PlaceName, Population, RaceSimple)
 
 #Remove Louisiana and Us to be able to combine 8 parish estimates for each race/ethnicity to create Metro
 ParishDemo2<- allparishesRaw %>% 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                 "St. James", "St. John the Baptist", "St. Tammany")) %>% 
   filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total") %>% 
-  filter(PlaceName != "Louisiana" & PlaceName!= "United States")%>% 
   group_by(RaceSimple)%>%
   summarise(Population=sum(Population)) %>%
   mutate(PlaceName = c("Metro", "Metro", "Metro", "Metro", "Metro")) %>%
@@ -473,7 +495,7 @@ ParishDemo %>%
 
 #Pulling population estimates for 2010-current
 AAhistorical <- allparishesRaw %>% 
-  filter(PlaceName == "Orleans Parish")%>% 
+  filter(PlaceName == "Orleans")%>% 
   filter(RaceSimple=="Black")%>% 
   filter(SexName=="Total")%>% 
   filter(AgeGroupName=="Total")%>% 
@@ -489,12 +511,11 @@ AAhistorical <- allparishesRaw %>%
 BlackPopyears <- allparishesRaw %>% 
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Black") %>%
-  filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
-           PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
-           PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish") 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany"))
 
 BlackpopM <- blackpopestRaw %>% 
-  add_row(CensusYear = 2000, PlaceName= "Orleans Parish", Population=323392) 
+  add_row(CensusYear = 2000, PlaceName= "Orleans", Population=323392) 
 
 BlackpopM %>% 
   select(CensusYear, Population) %>% 
@@ -503,11 +524,12 @@ BlackpopM %>%
 #Table 4 Hispanic population change by population
 
 HispanicPop <- allparishesRaw %>% 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>% 
   filter(DateDesc == "7/1/2019 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Hispanic")%>% 
   select(PlaceName, Population) %>%
-  filter(PlaceName != "United States", PlaceName != "Louisiana") %>%
   mutate(est2000=c(433, 32418, 3425, 14826, 4737, 1230, 130, 1346))
 
 #Table 5 Hispanic population for parishes in metro by year
@@ -515,9 +537,8 @@ HispanicPop <- allparishesRaw %>%
 HispanicPopyears <- allparishesRaw %>% 
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Hispanic") %>%
-  filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
-           PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
-           PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish") 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany")) 
 
 HispanicPopyears %>%
   select(PlaceName, DateDesc, Population) %>% 
@@ -526,14 +547,14 @@ HispanicPopyears %>%
 
 
 HISPpopM <- hisppopestRaw %>% 
-  add_row(CensusYear = 2000, PlaceName= "Orleans Parish", Population=14826) %>% 
-  add_row(CensusYear = 2000, PlaceName= "Jefferson Parish", Population=32418) %>%
-  add_row(CensusYear = 2000, PlaceName= "St. Tammany Parish", Population=4737) %>% 
-  add_row(CensusYear = 2000, PlaceName= "Plaquemines Parish", Population=433) %>% 
-  add_row(CensusYear = 2000, PlaceName= "St. Bernard Parish", Population=3425) %>% 
-  add_row(CensusYear = 2000, PlaceName= "St. Charles Parish", Population=1346) %>% 
-  add_row(CensusYear = 2000, PlaceName= "St. James Parish", Population=130) %>% 
-  add_row(CensusYear = 2000, PlaceName= "St. John The Baptist Parish", Population=1230)
+  add_row(CensusYear = 2000, PlaceName= "Orleans", Population=14826) %>% 
+  add_row(CensusYear = 2000, PlaceName= "Jefferson", Population=32418) %>%
+  add_row(CensusYear = 2000, PlaceName= "St. Tammany", Population=4737) %>% 
+  add_row(CensusYear = 2000, PlaceName= "Plaquemines", Population=433) %>% 
+  add_row(CensusYear = 2000, PlaceName= "St. Bernard", Population=3425) %>% 
+  add_row(CensusYear = 2000, PlaceName= "St. Charles", Population=1346) %>% 
+  add_row(CensusYear = 2000, PlaceName= "St. James", Population=130) %>% 
+  add_row(CensusYear = 2000, PlaceName= "St. John the Baptist", Population=1230)
 
 #For excel
 # HISPpopSheet1 <- HISPpopM %>%
@@ -548,9 +569,9 @@ HISPpopM <- hisppopestRaw %>%
 
 
 #Table 5 Population by age group
-orderAge <- c(rep("Jefferson Parish",18),rep("Orleans Parish", 18),rep("Plaquemines Parish",18),
-              rep("St. Bernard Parish", 18),rep("St. Charles Parish", 18),rep("St. James Parish", 18),
-              rep("St. John The Baptist Parish", 18),rep("St. Tammany Parish",18))
+orderAge <- c(rep("Jefferson",18),rep("Orleans", 18),rep("Plaquemines",18),
+              rep("St. Bernard", 18),rep("St. Charles", 18),rep("St. James", 18),
+              rep("St. John The Baptist", 18),rep("St. Tammany",18))
 Agepop <- allparishesRaw %>% 
   filter(AgeGroupName== "Under 5 years" | AgeGroupName== "5 to 9"| AgeGroupName== "10 to 14" | AgeGroupName== "15 to 19"|
            AgeGroupName=="20 to 24"| AgeGroupName== "25 to 29"| AgeGroupName== "30 to 34"| AgeGroupName== "35 to 39"| AgeGroupName== "40 to 44"
@@ -559,12 +580,11 @@ Agepop <- allparishesRaw %>%
   filter(RaceSimple=="Total")%>% 
   filter(SexName=="Total")%>% 
   filter(DateDesc == "7/1/2019 population estimate") %>% 
-  filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|
-           PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|
-           PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish")%>% 
-  arrange(factor(PlaceName, levels = c("Jefferson Parish","Orleans Parish","Plaquemines Parish",
-                 "St. Bernard Parish","St. Charles Parish","St. James Parish",
-                 "St. John The Baptist Parish","St. Tammany Parish"))) %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>% 
+  arrange(factor(PlaceName, levels = c("Jefferson","Orleans","Plaquemines",
+                 "St. Bernard","St. Charles","St. James",
+                 "St. John the Baptist","St. Tammany"))) %>%
   select(AgeGroupName, PlaceName, Population) %>%
   mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,
                      37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,
@@ -588,7 +608,8 @@ under18pars<-allparishesRaw %>%
   filter(RaceSimple=="Total")%>% 
   filter(SexName=="Total")%>% 
   filter(DateDesc == "7/1/2019 population estimate") %>% 
-  filter(PlaceName=="Jefferson Parish"|PlaceName=="Orleans Parish"|PlaceName=="Plaquemines Parish"|PlaceName=="St. Bernard Parish"|PlaceName=="St. Charles Parish"|PlaceName=="St. James Parish"|PlaceName=="St. John The Baptist Parish"|PlaceName=="St. Tammany Parish")%>% 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%  
   select(AgeGroupName, PlaceName, Population)
 
 #Creating metro
@@ -601,7 +622,7 @@ under18metro<- under18pars %>%
 popunder18 <-bind_rows(under18pars,under18metro) %>%
   spread(., AgeGroupName, Population) %>%
   mutate(under18 = Total-`18 years and over`) %>%
-  filter(PlaceName == "Orleans Parish" | PlaceName=="Jefferson Parish" | PlaceName == "St. Tammany Parish" | PlaceName == "Metro")%>%
+  filter(PlaceName == "Orleans" | PlaceName=="Jefferson" | PlaceName == "St. Tammany" | PlaceName == "Metro")%>%
   select(PlaceName, under18) %>%
   mutate(est2000=c(115255,358092,129408,54399))
 

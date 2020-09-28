@@ -124,9 +124,9 @@ ParishDemoforGraphic <- ParishDemo %>%
          contains('pct'),
          contains('2000')) %>%
   filter(PlaceName != "Louisiana") %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish",
-                                                       "St. Bernard Parish","St. Charles Parish", "St. James Parish", 
-                                                       "St. John The Baptist Parish", "St. Tammany Parish", "Metro", "United States"))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "Plaquemines",
+                                                       "St. Bernard","St. Charles", "St. James", 
+                                                       "St. John the Baptist", "St. Tammany", "Metro", "United States"))) %>%
   gather(key = variable, value = value, contains("pct"), contains("2000")) %>% 
   mutate(description  = NA,
          description = ifelse(grepl("pct",variable), yearPEP, description),     #if variable contains 'pct'
@@ -159,7 +159,7 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
   theme(legend.position = "right",
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
-        panel.spacing = unit(6, "lines"),
+        #panel.spacing = unit(6, "lines"),
         strip.text = element_text(size=12),
         axis.text.x = element_text(size = 12, vjust=1),
         axis.text.y = element_text(size = 12),
@@ -191,8 +191,8 @@ AAhistGraphic <- AAhistorical %>%
 
 ### PEP ###
 HispanicPopforGraphic  <- HispanicPop %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans Parish", "Jefferson Parish", "St. Tammany Parish", "Plaquemines Parish", 
-                                                       "St. Bernard Parish","St. Charles Parish", "St. James Parish", "St. John The Baptist Parish"))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "St. Tammany", "Plaquemines", 
+                                                       "St. Bernard","St. Charles", "St. James", "St. John the Baptist"))) %>%
   gather(-PlaceName,-PlaceName.fac,key = variable, value = value) %>%
   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char)) %>%
 mutate(description.fac = factor(.$description, levels = c(yearPEP.char,
@@ -215,22 +215,24 @@ HispanicPopGraphic <- HispanicPopforGraphic %>%
         axis.text.x = element_text(size = 12, vjust=1),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5)) + 
-  labs(title = "Hispanic population change by parish",
+  labs(title = "Hispanic population change by",
        x="",
        y="")
 
 
-####5- Hispanic population of parishes in metro by year
+####5- Hispanic population ofes in metro by year
 
 ### PEP ###
 HispanpopYearsforGraphic <- HISPpopM  %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. James Parish", "Plaquemines Parish", "St. John The Baptist Parish", 
-                                                       "St. Charles Parish", "St. Bernard Parish", "St. Tammany Parish", "Orleans Parish", "Jefferson Parish"))) %>%
-add_row(CensusYear = 2001, PlaceName.fac = "Jefferson Parish", Population = 0) %>%
-  add_row(CensusYear = 2002, PlaceName.fac = "Jefferson Parish", Population = 0) %>%
-  add_row(CensusYear = 2003, PlaceName.fac = "Jefferson Parish", Population = 0) %>%
-  add_row(CensusYear = 2004, PlaceName.fac = "Jefferson Parish", Population = 0) %>%
-  add_row(CensusYear = 2005, PlaceName.fac = "Jefferson Parish", Population = 0)
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%  
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. James", "Plaquemines", "St. John the Baptist", 
+                                                       "St. Charles", "St. Bernard", "St. Tammany", "Orleans", "Jefferson"))) %>%
+add_row(CensusYear = 2001, PlaceName.fac = "Jefferson", Population = 0) %>%
+  add_row(CensusYear = 2002, PlaceName.fac = "Jefferson", Population = 0) %>%
+  add_row(CensusYear = 2003, PlaceName.fac = "Jefferson", Population = 0) %>%
+  add_row(CensusYear = 2004, PlaceName.fac = "Jefferson", Population = 0) %>%
+  add_row(CensusYear = 2005, PlaceName.fac = "Jefferson", Population = 0)
 
 chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
   ggplot(aes(CensusYear, as.numeric(Population), fill=PlaceName.fac)) +
@@ -341,7 +343,7 @@ chart.hispan2018.allparishes <- hispan2018 %>%
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12), 
         plot.title = element_text(hjust = .5, size = 14)) +
-  labs(title = "Hispanic origin, 2018",
+  labs(title = "Hispanic origin, 2019",
        x="",
        y="")
 ############################################
@@ -352,8 +354,8 @@ chart.hispan2018.allparishes <- hispan2018 %>%
 ####7 - Population by age group, 2000
 agepop2000forGraphic <- Agepop %>%
   select(-Population) %>% 
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John The Baptist Parish","St. James Parish", "St. Charles Parish", 
-                                                       "St. Bernard Parish", "Plaquemines Parish", "St. Tammany Parish","Jefferson Parish","Orleans Parish"))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles", 
+                                                       "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
   mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
 
 chart.agepop2000.allparishes <- agepop2000forGraphic %>%
@@ -387,8 +389,8 @@ chart.agepop2000.allparishes <- agepop2000forGraphic %>%
 ### PEP ###
 agepopCurrentforGraphic <- Agepop %>%
   select(-est2000) %>% 
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John The Baptist Parish","St. James Parish", "St. Charles Parish", 
-                                                       "St. Bernard Parish", "Plaquemines Parish", "St. Tammany Parish","Jefferson Parish","Orleans Parish"))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles", 
+                                                       "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
   mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
 
 chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
@@ -432,7 +434,7 @@ singGraphic <- dodgedBar(sing,
 
 ### PEP ###
 popunder18forGraphic <- popunder18 %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans Parish", "Jefferson Parish","St. Tammany Parish","Metro"))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
   gather(-PlaceName,-PlaceName.fac, key=variable, value =val) %>% 
   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char))
 
@@ -524,7 +526,7 @@ chart.inta.allparishes <- intaforGraphic %>%
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10), 
         plot.title = element_text(hjust = .5)) +
-  labs(title = "Internet access, 2018 households",
+  labs(title = "Internet access, 2019 households",
        x="",
        y="") 
 ############################################
@@ -614,7 +616,7 @@ chart.mob.allparishes <- mobforGraphic %>%
             position = position_stack(vjust = 0.6), 
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,.18)) +
-  scale_x_discrete(labels = c("2004","2018"))+
+  scale_x_discrete(labels = c("2004","2019"))+
   themeDC_horizontal() +
   theme(plot.title = element_text(hjust = .5, size = 18),
         strip.text = element_text(size=12),
@@ -718,7 +720,7 @@ chart.yrbuilt.allparishes <- yrbuiltforGraphic %>%
         axis.text.x = element_text(size = 10, vjust = 1),
         axis.text.y = element_text(size = 10),
         plot.title = element_text(hjust = .5)) +
-  labs(title = "Year structure built, 2018 housing units",
+  labs(title = "Year structure built, 2019 housing units",
        x="",
        y="") 
 
@@ -778,7 +780,7 @@ chart.commute.allparishes <- commuteforGraphic %>%
   geom_text(size = 4, position = position_stack(vjust = 0.6), family="Asap") + 
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,1)) +
   scale_x_discrete(labels = c("2000",
-                              "2018"))+
+                              "2019"))+
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
