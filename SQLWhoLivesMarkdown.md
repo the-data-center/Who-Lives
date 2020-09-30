@@ -11,12 +11,12 @@ output:
 This brief examines the most current demographic data released by the U.S. Census Bureau and identifies important trends in metro area parishes. Included are data on race and ethnicity, age, educational attainment, internet access, poverty, income, children, access to vehicles, foreign-born population, geographic mobility, homeownership, homeowners with a mortgage, housing costs and affordability, single-person households, commuting, and housing stock.
 </div>
 
-The U.S. Census Bureau estimates that residents were living in metro New
-Orleans as of July 2019, a percent increase from April 2010.[^1] The
-metro area now has percent of its 2000 population of 1,337,726. In this
-brief, we examine demographic data released by the U.S. Census Bureau
-and identify important changes in metro area parishes since 2000 (or the
-best benchmark available).
+The U.S. Census Bureau estimates that 1,270,530 residents were living in
+metro New Orleans as of July 2019, a 7 percent increase from April
+2010.[^1] The metro area now has 95 percent of its 2000 population of
+1,337,726. In this brief, we examine demographic data released by the
+U.S. Census Bureau and identify important changes in metro area parishes
+since 2000 (or the best benchmark available).
 
 Race/Ethnicity {#raceethnicity}
 --------------
@@ -41,15 +41,16 @@ Orleans Parish is the city of New Orleans. New Orleans and Orleans Parish are in
 </div>
 
 In Orleans Parish, the share of the 2019 population that is African
-American — while lower than in 2000 when it was percent — continues to
-represent the majority of city residents at percent. The share of
-Hispanics in the city increased from percent in 2000 to percent in 2019;
-the share of Asians increased from percent to percent; and the share of
-whites increased from percent to percent. Meanwhile, Hispanic, Asian,
-and African American populations increased as a share of the total
-population in Jefferson, St. Bernard, St. Charles, St. John the Baptist,
-and St. Tammany parishes, each. In fact, the number and share of
-Hispanics have increased in all eight parishes in the metro area.
+American — while lower than in 2000 when it was 67 percent — continues
+to represent the majority of city residents at 59 percent. The share of
+Hispanics in the city increased from 3 percent in 2000 to 6 percent in
+2019; the share of Asians increased from 2 percent to 3 percent; and the
+share of whites increased from 27 percent to 31 percent. Meanwhile,
+Hispanic, Asian, and African American populations increased as a share
+of the total population in Jefferson, St. Bernard, St. Charles, St. John
+the Baptist, and St. Tammany parishes, each. In fact, the number and
+share of Hispanics have increased in all eight parishes in the metro
+area.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/demoallparish-1.png" style="display: block; margin: auto;" />
 
@@ -71,14 +72,15 @@ decrease in 2019.
 </div>
 
 Between 2000 and 2019, the number of Hispanics in Jefferson Parish
-increased by reaching over percent of the total parish population.
-Orleans Parish and St. Tammany Parish gained 6,658 and Hispanics,
-respectively, such that the Hispanic share of the population was percent
-in Orleans and percent in St. Tammany in 2019.
+increased by 64,094 reaching over 15 percent of the total parish
+population. Orleans Parish and St. Tammany Parish gained 6,658 and
+13,970 Hispanics, respectively, such that the Hispanic share of the
+population was 6 percent in Orleans and 6 percent in St. Tammany in
+2019.
 
 As of July 2019, there were 114,657 Hispanics in the metro area,
 representing 9 percent of the metro population. This is up from 2000
-when there were , representing 4 percent of the metro population.
+when there were 58,545, representing 4 percent of the metro population.
 Despite these recent gains, the Hispanic share of the population in
 metro area parishes is far below the average for the United States,
 which has grown from 12 percent to 18 percent of the total U.S.
@@ -92,9 +94,10 @@ population over these 19 years.
 </div>
 
 The number of Hispanics in New Orleans metro has grown every year since
-2006. Indeed while the overall metro population has grown percent since
-2010, the Hispanic population has grown 20 percent such that Hispanics
-account for percent of the metro’s population growth since 2010.
+2006. Indeed while the overall metro population has grown 7 percent
+since 2010, the Hispanic population has grown 20 percent such that
+Hispanics account for 1.264910^{4} percent of the metro’s population
+growth since 2010.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/hispanpopyear-1.png" style="display: block; margin: auto;" />
 
@@ -125,7 +128,7 @@ represents 61 percent of the Hispanic population.
 
 &ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2018.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2019.</p>
 </div>
 
 Population by age and household types {#population-by-age-and-household-types}
@@ -157,16 +160,16 @@ Meanwhile, the share of households with children is shrinking while the
 share of individuals living alone is growing — both across the metro and
 nation. As of 2019, 23 percent of households in metro New Orleans
 included children, down from 34 percent in 2000. Between 2000 and 2019,
-the percent of St. Tammany households with children declined from
-percent to percent; the percent of Jefferson households with children
-declined from percent to percent; and the percent of Orleans households
-with children declined from percent to percent.
+the percent of St. Tammany households with children declined from 40
+percent to 29 percent; the percent of Jefferson households with children
+declined from 33 percent to 23 percent; and the percent of Orleans
+households with children declined from 30 percent to 17 percent.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/hwc-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>
 
 As households with children have declined, the share of single-person
@@ -174,7 +177,7 @@ households has grown in the metro and nationwide. The metro area share
 of individuals living alone grew from 27 percent in 2000 to 34 percent
 in 2019 — similar to the trend for Jefferson Parish where the share of
 households living alone grew from 27 percent to 31 percent. The increase
-was larger in Orleans Parish, which jumped from to percent.
+was larger in Orleans Parish, which jumped from 33 to 47 percent.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/sing-1.png" style="display: block; margin: auto;" />
 
@@ -187,8 +190,8 @@ While the metro has regained much of the post-Katrina population losses,
 youth population is substantially lower than pre-Katrina levels. The
 metro had 358,092 children under 18 years in 2000 and only 280,958 in
 2019. Much of this loss was driven by Orleans Parish, where the under 18
-population declined to from . The under 18 population is now 22 percent
-of the metro population, down from 27 percent in 2000.
+population declined to 77,280 from 129,408. The under 18 population is
+now 22 percent of the metro population, down from 27 percent in 2000.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/popunder18-1.png" style="display: block; margin: auto;" />
 
@@ -213,8 +216,8 @@ workforce skills, and regional resiliency.[^5] The proportion of adults
 across all three of the largest parishes, leading to a metrowide
 decrease from 15 percent in 2000 to 12 percent in 2019. In the city of
 New Orleans, the share of adults with less than a high school degree
-fell from percent to percent but is still higher than the U.S. average
-of 11 percent.
+fell from 25 percent to 12 percent but is still higher than the U.S.
+average of 11 percent.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/hs-1.png" style="display: block; margin: auto;" />
 
@@ -225,9 +228,9 @@ of 11 percent.
 
 The metro area decline in the share of adults with less than a high
 school degree has been coupled with an increase in the share with a
-bachelor’s degree or higher. In New Orleans, percent of adults 25 and
+bachelor’s degree or higher. In New Orleans, 40 percent of adults 25 and
 older had a college degree in 2019 — higher than the U.S. average of 33
-percent, and up from percent in 2000. The overall metro area share of
+percent, and up from 26 percent in 2000. The overall metro area share of
 adults with a bachelor’s degree grew from 23 to 32 percent — lower than
 the national average.
 
@@ -238,10 +241,11 @@ the national average.
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>
 
-The 2019 median household income of $55,710 for the metro, for Jefferson
-Parish, and for the city are significantly lower than the U.S. median of
-$65,712. In Jefferson Parish, median household income declined percent
-between 1999 and 2019, even after adjusting for inflation, falling to .
+The 2019 median household income of $55,710 for the metro, $56,069 for
+Jefferson Parish, and $45,615 for the city are significantly lower than
+the U.S. median of $65,712. In Jefferson Parish, median household income
+declined 1 percent between 1999 and 2019, even after adjusting for
+inflation, falling to $56,069.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/medhh-1.png" style="display: block; margin: auto;" />
 
@@ -255,15 +259,15 @@ between 1999 and 2019, even after adjusting for inflation, falling to .
 Internet access is an important indicator of access to information.
 Studies have shown that without broadband, computer access, and
 encompassing technology training services, workers and students are at a
-disadvantage in the job market and education system.[^6] Only percent of
-households in Orleans Parish and only percent of households in Jefferson
-Parish are connected to the Internet through a home-based internet
-service, such as broadband (cable, DSL, or fiber), satellite, or dial-up
-service, compared to 75 percent nationwide. St. Tammany is above the
-national average at percent of households connected to the Internet by a
-home-based service internet connection. Internet access without a
-subscription refers to households who only have access through group
-access locations such as school, work, a library, or coffee shop.
+disadvantage in the job market and education system.[^6] Only 65 percent
+of households in Orleans Parish and only 70 percent of households in
+Jefferson Parish are connected to the Internet through a home-based
+internet service, such as broadband (cable, DSL, or fiber), satellite,
+or dial-up service, compared to 75 percent nationwide. St. Tammany is
+above the national average at 81 percent of households connected to the
+Internet by a home-based service internet connection. Internet access
+without a subscription refers to households who only have access through
+group access locations such as school, work, a library, or coffee shop.
 
 An increasingly common way to access the Internet is through a
 smartphone or some other cellular device. While, in general, smartphone
@@ -271,9 +275,9 @@ access contributes positively to lessening the Digital Divide, having
 access only through a smartphone restricts ability to fully leverage the
 Internet to complete common tasks such as writing and researching a
 resume, registering your kids for school, analyzing data about your
-neighborhood, or creating content for an internet business. percent of
-households in Orleans Parish only have access through a smartphone. This
-is compared to 12 percent nationwide.
+neighborhood, or creating content for an internet business. 14 percent
+of households in Orleans Parish only have access through a smartphone.
+This is compared to 12 percent nationwide.
 
 <div class="highlight" markdown="1"> 
 
@@ -299,7 +303,7 @@ Poverty and access to vehicles {#poverty-and-access-to-vehicles}
 Individuals living below the poverty level indicate the economy is not
 providing all residents with the ability to meet their most basic needs,
 including food, housing, and transportation. The poverty rate in New
-Orleans decreased from to percent between 1999 and 2019 while the
+Orleans decreased from 28 to 23 percent between 1999 and 2019 while the
 Jefferson Parish poverty rate remained statistically unchanged. Across
 the U.S., the poverty rate increased from 12 to 12 percent between 1999
 and 2019.
@@ -315,9 +319,9 @@ and 2019.
 
 Like the overall poverty rate, the child poverty rate in New Orleans
 decreased between 1999 and 2018. In Jefferson Parish, the child poverty
-rate jumped from percent in 1999 to percent in 2019 — greatly surpassing
-the U.S. child poverty rate, which rose from 17 to 17 percent between
-1999 and 2019.
+rate jumped from 20 percent in 1999 to 22 percent in 2019 — greatly
+surpassing the U.S. child poverty rate, which rose from 17 to 17 percent
+between 1999 and 2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/childpov-1.png" style="display: block; margin: auto;" />
 
@@ -329,10 +333,11 @@ the U.S. child poverty rate, which rose from 17 to 17 percent between
 </div>
 
 Post-Katrina, the share of New Orleans households without access to a
-vehicle dropped from percent in 2000 to percent in 2019. Nonetheless, at
-percent, New Orleans’ share is more than twice as high as in neighboring
-parishes and the nation, indicating the importance of a robust public
-transportation system and comprehensive evacuation plan.
+vehicle dropped from 27 percent in 2000 to 16 percent in 2019.
+Nonetheless, at 16 percent, New Orleans’ share is more than twice as
+high as in neighboring parishes and the nation, indicating the
+importance of a robust public transportation system and comprehensive
+evacuation plan.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/veh-1.png" style="display: block; margin: auto;" />
 
@@ -349,12 +354,12 @@ Foreign-born population and geographic mobility {#foreign-born-population-and-ge
 A rising foreign-born share of the population may reflect expanding
 economic opportunities for both high-skilled and low-skilled
 workers.[^7] That share of the population has grown in all three of the
-most populous metro parishes since 2000, led by a percentage point gain
-in Jefferson Parish. By 2019, fully percent of Jefferson Parish
-population was foreign-born, statistically the same as the U.S. share.
-In Orleans Parish the foreign-born share of the population increased by
-percentage points between 2000 and 2019 while St. Tammany Parish
-increased by percentage points.
+most populous metro parishes since 2000, led by a 5.4 percentage point
+gain in Jefferson Parish. By 2019, fully 12.9 percent of Jefferson
+Parish population was foreign-born, statistically the same as the U.S.
+share. In Orleans Parish the foreign-born share of the population
+increased by 1.6 percentage points between 2000 and 2019 while
+St. Tammany Parish increased by 1.6 percentage points.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/forbor-1.png" style="display: block; margin: auto;" />
 
@@ -368,12 +373,12 @@ moved into Orleans Parish in the past year may reflect expanding
 economic opportunities. The most frequent reason people move long
 distances, such as from one state to another state, is for job
 opportunities.[^8] In addition, the young and well-educated are more
-likely than others to move long distances.[^9] In 2019, percent of the
+likely than others to move long distances.[^9] In 2019, 6 percent of the
 population in Orleans Parish had moved into the parish in the past year,
-up from percent in 2004. Over percent of the new movers into Orleans
-Parish came from outside the state of Louisiana. In Jefferson Parish,
-the share of the population who were new movers into the parish was
-percent in 2004, and has not significantly changed.
+up from 3 percent in 2004. Over 57 percent of the new movers into
+Orleans Parish came from outside the state of Louisiana. In Jefferson
+Parish, the share of the population who were new movers into the parish
+was 5 percent in 2004, and has not significantly changed.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/mob-1.png" style="display: block; margin: auto;" />
 
@@ -393,8 +398,8 @@ Homeownership {#homeownership}
 
 Homeownership rates across the U.S. have fallen since 2000 from 66 to 64
 percent in 2019. Homeownership rates have held steady in St. Tammany
-around percent since 2000. In contrast, homeownership rates in New
-Orleans have increased slightly, but still are a much lower percent.
+around 80 percent since 2000. In contrast, homeownership rates in New
+Orleans have increased slightly, but still are a much lower 50 percent.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/ho-1.png" style="display: block; margin: auto;" />
 
@@ -411,12 +416,12 @@ living in the same house for long periods of time, and helps shield
 neighborhoods from foreclosures. The proportion of metro area homeowners
 without a mortgage has increased from 35 to 44 percent between 2000 and
 2019, driven by changes in Orleans and Jefferson. The share of
-homeowners without a mortgage jumped from to percent in Orleans and from
-to percent in Jefferson. One reason for the surge may be that homeowners
-who returned after Katrina used insurance or Road Home proceeds to pay
-off their mortgage principal. In fact, Orleans and Jefferson received
-the first and second largest number of Road Home Option 1 grants among
-all Louisiana parishes.[^10]
+homeowners without a mortgage jumped from 33 to 43 percent in Orleans
+and from 35 to 48 percent in Jefferson. One reason for the surge may be
+that homeowners who returned after Katrina used insurance or Road Home
+proceeds to pay off their mortgage principal. In fact, Orleans and
+Jefferson received the first and second largest number of Road Home
+Option 1 grants among all Louisiana parishes.[^10]
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/honomo-1.png" style="display: block; margin: auto;" />
 
@@ -432,11 +437,11 @@ High housing costs can limit a region’s ability to attract and retain
 the workforce essential for a healthy economy.[^11] Severe housing cost
 burdens of more than 50 percent of household income indicate a serious
 problem in housing affordability. In 2004, the share of severely
-cost-burdened renters in New Orleans and the U.S. was percent. In the 15
-years since, that share has spiked to percent in Orleans while rising to
-only 24 percent nationally. In Jefferson Parish, the share of renters
-paying more than 50 percent of household income on housing and utilities
-is percent in 2019.
+cost-burdened renters in New Orleans and the U.S. was 24 percent. In the
+15 years since, that share has spiked to 34 percent in Orleans while
+rising to only 24 percent nationally. In Jefferson Parish, the share of
+renters paying more than 50 percent of household income on housing and
+utilities is 25 percent in 2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/rentbur-1.png" style="display: block; margin: auto;" />
 
@@ -467,9 +472,9 @@ widened.
 The surge in the share of severely cost-burdened renters in New Orleans
 is reflective of the surge in the median gross rent (rent plus
 utilities) in the city. From 2004 to 2019, monthly rent plus utilities
-rose from to in New Orleans, a percent increase after adjusting for
-inflation. Meanwhile, median gross rents increased 19 percent metrowide
-compared to only 18 percent nationwide.
+rose from $758 to $1,010 in New Orleans, a 33 percent increase after
+adjusting for inflation. Meanwhile, median gross rents increased 19
+percent metrowide compared to only 18 percent nationwide.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/medrent-1.png" style="display: block; margin: auto;" />
 
@@ -488,12 +493,12 @@ Conversely, in New Orleans, many older homes are protected by
 preservation laws that have helped retain the historic character of the
 city.
 
-In Orleans Parish, fully percent of all housing units are in pre-1950
-structures. Meanwhile, in Jefferson Parish, percent of the housing stock
-was built in the 1950s, 1960s, 1970s, and 1980s, and just percent of
-housing stock has been built since 1990. In contrast, in St. Tammany,
-the majority of housing units are in structures that have been built
-since 1990.
+In Orleans Parish, fully 40 percent of all housing units are in pre-1950
+structures. Meanwhile, in Jefferson Parish, 76 percent of the housing
+stock was built in the 1950s, 1960s, 1970s, and 1980s, and just 16
+percent of housing stock has been built since 1990. In contrast, in
+St. Tammany, the majority of housing units are in structures that have
+been built since 1990.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/yrbuilt-1.png" style="display: block; margin: auto;" />
 
@@ -512,26 +517,26 @@ cars, more likely to bike, and more likely to move into urban
 cores.[^14]
 
 The share of commuters in New Orleans using public transportation
-declined sharply from percent in 2000 to percent in 2019, while the
-share in Jefferson Parish has fallen from percent in 2000, to percent of
-commuters using public transportation in 2019. But the share of bike
-commuters in New Orleans rose to percent. An analysis of 2017 ACS data
-found that New Orleans had the the fifth highest share of bike commuting
-of the largest 70 cities nationwide.[^15] Meanwhile, the metro share of
-carpoolers fell from 15 percent in 2000 to 10 percent in 2019, as did
-the Orleans Parish share from percent to percent.
+declined sharply from 13 percent in 2000 to 5 percent in 2019, while the
+share in Jefferson Parish has fallen from 2 percent in 2000, to 1
+percent of commuters using public transportation in 2019. But the share
+of bike commuters in New Orleans rose to 3 percent. An analysis of 2017
+ACS data found that New Orleans had the the fifth highest share of bike
+commuting of the largest 70 cities nationwide.[^15] Meanwhile, the metro
+share of carpoolers fell from 15 percent in 2000 to 10 percent in 2019,
+as did the Orleans Parish share from 16 percent to 10 percent.
 
 The percentage of workers who commute by driving alone has increased
 within the metro region since 2000 from 73 percent to 77 percent, driven
-by a to percent rise in Orleans Parish. This goes against the national
-trend, where the share driving alone remained steady between 2000 and
-2019 and where public transit use has also remained steady.
+by a 60 to 67 percent rise in Orleans Parish. This goes against the
+national trend, where the share driving alone remained steady between
+2000 and 2019 and where public transit use has also remained steady.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/commute-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 2000 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>

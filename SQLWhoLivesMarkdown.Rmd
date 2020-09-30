@@ -194,7 +194,7 @@ chart.hispan2018.allparishes
 makeCSS_source(
 "&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2018."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and American Community Survey 2019."
 )
 ```
 
@@ -229,7 +229,7 @@ hwcGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2018."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
 ```
 As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round((getvalue.sing.2000)*100)` percent in 2000 to `r round((getvalue.sing.2018)*100)` percent in `r year` — similar to the trend for Jefferson Parish where the share of households living alone grew from `r round(( getvalue.singJeff.2000)*100)` percent to `r round(( getvalue.singJeff.2018)*100)` percent. The increase was larger in Orleans Parish, which jumped from `r round((getvalue.singNO.2000)*100)` to `r round((getvalue.singNO.2018)*100)` percent.
@@ -513,7 +513,7 @@ chart.commute.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 2000 and 2018 is not significant at 95% confidence interval.
+"&ast; = Difference between 2000 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
 )
