@@ -1,8 +1,3 @@
----
-output:
-  word_document: default
-  html_document: default
----
     ## `summarise()` ungrouping output (override with `.groups` argument)
     ## `summarise()` ungrouping output (override with `.groups` argument)
 
@@ -95,9 +90,9 @@ population over these 19 years.
 
 The number of Hispanics in New Orleans metro has grown every year since
 2006. Indeed while the overall metro population has grown 7 percent
-since 2010, the Hispanic population has grown 20 percent such that
-Hispanics account for 1.264910^{4} percent of the metro’s population
-growth since 2010.
+since 2010, the Hispanic population has grown 24 percent such that
+Hispanics account for 28 percent of the metro’s population growth since
+2010.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/09/hispanpopyear-1.png" style="display: block; margin: auto;" />
 
@@ -384,11 +379,11 @@ was 5 percent in 2004, and has not significantly changed.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2018 is not significant at the 95% confidence interval for Jefferson. It is significant for all other geographies
+**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2019 is not significant at the 95% confidence interval for Orleans Parish. It is significant for all other geographies
 
 **Notes**: Also, 2004 data is not available for St. Tammany Parish.
 
-&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019.</p>
 </div>
@@ -449,6 +444,8 @@ utilities is 25 percent in 2019.
 
 **Notes**: 2004 data is not available for St. Tammany Parish
 
+&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
+
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019.</p>
 </div>
 
@@ -464,7 +461,7 @@ widened.
 
 **Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019.</p>
 </div>
@@ -544,7 +541,7 @@ national trend, where the share driving alone remained steady between
 Data Sources / Methodology {#data-sources-methodology}
 --------------------------
 
-Data on race/ethnicity and age is from the Census Bureau vintage 2018
+Data on race/ethnicity and age is from the Census Bureau vintage 2019
 population estimates and Census 2000 Summary File 1 (SF1). Other
 demographic data is from the Census 2000 Summary File 3 (SF3) and
 American Community Survey 2004, and 2019 (single-year files).

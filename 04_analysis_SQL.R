@@ -547,6 +547,8 @@ HispanicPopyears %>%
 
 
 HISPpopM <- hisppopestRaw %>% 
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>% 
   add_row(CensusYear = 2000, PlaceName= "Orleans", Population=14826) %>% 
   add_row(CensusYear = 2000, PlaceName= "Jefferson", Population=32418) %>%
   add_row(CensusYear = 2000, PlaceName= "St. Tammany", Population=4737) %>% 

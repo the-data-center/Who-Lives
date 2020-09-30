@@ -168,7 +168,7 @@ makeCSS_source(
 )
 ```
 
-The number of Hispanics in New Orleans metro has grown every year since 2006. Indeed while the overall metro population has grown `r round((pctincrease.metro.current.2010)*100)` percent since 2010, the Hispanic population has grown `r round((getvalue.Hispgrowth.metro.2010.current)*100)` percent such that Hispanics account for `r round((getvalue.growthpcthispanic.metro.2010.current)*100)` percent of the metro's population growth since 2010.
+The number of Hispanics in New Orleans metro has grown every year since 2006. Indeed while the overall metro population has grown `r round((pctincrease.metro.current.2010)*100)` percent since 2010, the Hispanic population has grown `r round((getvalue.Hispgrowth.metro.2010.current)*100)` percent such that Hispanics account for `r comma(round((getvalue.growthpcthispanic.metro.2010.current)*100))` percent of the metro's population growth since 2010.
 
 ```{r hispanpopyear, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 chart.HispanpopYears.allparishes
@@ -397,11 +397,11 @@ chart.mob.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2018 is not significant at the 95% confidence interval for Jefferson. It is significant for all other geographies
+"**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2019 is not significant at the 95% confidence interval for Orleans Parish. It is significant for all other geographies
 
 **Notes**: Also, 2004 data is not available for St. Tammany Parish.
 
-&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
 )
@@ -450,6 +450,8 @@ rentburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
+&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
+
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
 )
 ```
@@ -463,7 +465,7 @@ hoburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
 )
@@ -522,7 +524,7 @@ makeCSS_source(
 ## Data Sources / Methodology
 
 
-Data on race/ethnicity and age is from the Census Bureau vintage 2018 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
+Data on race/ethnicity and age is from the Census Bureau vintage 2019 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
 
 Statistical tests of significance were computed at the 95% confidence level for all data from the American Community Survey and Census 2000 SF3. An “*” indicates that differences between two time periods or geographies are not significant, and therefore are the result of sampling variability rather than real change in characteristics of the population.
 
