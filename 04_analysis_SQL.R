@@ -530,7 +530,15 @@ HispanicPop <- allparishesRaw %>%
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Hispanic")%>% 
   select(PlaceName, Population) %>%
-  mutate(est2000=c(433, 32418, 3425, 14826, 4737, 1230, 130, 1346))
+  mutate(est2000 = 0,
+         est2000 = ifelse(PlaceName == "St. Tammany", 4737, est2000),
+         est2000 = ifelse(PlaceName == "St. John the Baptist", 1230, est2000),
+         est2000 = ifelse(PlaceName == "St. James", 130, est2000),
+         est2000 = ifelse(PlaceName == "St. Charles", 1346, est2000),
+         est2000 = ifelse(PlaceName == "St. Bernard", 3425, est2000),
+         est2000 = ifelse(PlaceName == "Plaquemines", 433, est2000),
+         est2000 = ifelse(PlaceName == "Orleans", 14826, est2000),
+         est2000 = ifelse(PlaceName == "Jefferson", 32418, est2000))
 
 #Table 5 Hispanic population for parishes in metro by year
 

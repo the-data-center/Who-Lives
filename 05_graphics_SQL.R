@@ -215,7 +215,7 @@ HispanicPopGraphic <- HispanicPopforGraphic %>%
         axis.text.x = element_text(size = 12, vjust=1),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5)) + 
-  labs(title = "Hispanic population change by",
+  labs(title = "Hispanic population change by parish",
        x="",
        y="")
 
