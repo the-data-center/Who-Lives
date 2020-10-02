@@ -164,7 +164,7 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
         axis.text.x = element_text(size = 12, vjust=1),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(size = 20)) +
-  labs(title = "White, black, Hispanic, and Asian, Metro New Orleans parishes and U.S",
+  labs(title = "White, black, Hispanic, and Asian, Metro New Orleans parishes and U.S.",
        x="",
        y="") 
 

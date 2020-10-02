@@ -334,7 +334,7 @@ makeCSS_source(
 
 ## Poverty and access to vehicles
 
-Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round((getvalue.pov.no.1999 )*100)` to `r round((getvalue.pov.no.2018 )*100)` percent between 1999 and `r year` while the Jefferson Parish poverty rate remained statistically unchanged. Across the U.S., the poverty rate increased from `r round((getvalue.pov.us.1999)*100)` to `r round((getvalue.pov.us.2018)*100)` percent between 1999 and `r year`.
+Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round((getvalue.pov.no.1999 )*100)` to `r round((getvalue.pov.no.2018 )*100)` percent between 1999 and `r year` while the Jefferson Parish poverty rate remained statistically unchanged. Across the U.S., the poverty rate has stayed the same between 1999 and `r year`.
 
 
 ```{r pov, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -348,7 +348,7 @@ makeCSS_source(
 )
 ```
 
-Like the overall poverty rate, the child poverty rate in New Orleans decreased between 1999 and 2018. In Jefferson Parish, the child poverty rate jumped from `r round((getvalue.childpov.jeff.1999)*100)` percent in 1999 to `r round((getvalue.childpov.jeff.2018)*100)` percent in `r year` — greatly surpassing the U.S. child poverty rate, which rose from `r  round((getvalue.childpov.us.1999)*100)` to `r  round((getvalue.childpov.us.2018)*100)` percent between 1999 and `r year`.
+Like the overall poverty rate, the child poverty rate in New Orleans decreased between 1999 and `r year`. In Jefferson Parish, the child poverty rate jumped from `r round((getvalue.childpov.jeff.1999)*100)` percent in 1999 to `r round((getvalue.childpov.jeff.2018)*100)` percent in `r year` — greatly surpassing the U.S. child poverty rate, which is the same in 1999 and `r year`.
 
 ```{r childpov, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
 childpovGraphic
@@ -361,7 +361,7 @@ makeCSS_source(
 )
 ```
 
-Post-Katrina, the share of New Orleans households without access to a vehicle dropped from `r round((getvalue.veh.no.2000)*100)` percent in 2000 to `r round((getvalue.veh.no.2018)*100)` percent in `r year`. Nonetheless, at `r round((getvalue.veh.no.2018)*100)` percent, New Orleans’ share is more than twice as high as in neighboring parishes and the nation, indicating the importance of a robust public transportation system and comprehensive evacuation plan.
+Post-Katrina, the share of New Orleans households without access to a vehicle dropped from `r round((getvalue.veh.no.2000)*100)` percent in 2000 to `r round((getvalue.veh.no.2018)*100)` percent in `r year`. Nonetheless, at `r round((getvalue.veh.no.2018)*100)` percent, New Orleans’ share is more than twice as high as in neighboring parishes, indicating the importance of a robust public transportation system and comprehensive evacuation plan.
 
 
 ```{r veh, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -378,7 +378,7 @@ makeCSS_source(
 ## Foreign-born population and geographic mobility
 
 
-A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[^7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2018 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r year`, fully `r round(((getvalue.forbor.jeff.2018)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, statistically the same as the U.S. share. In Orleans Parish the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2018 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r year` while St. Tammany Parish increased by `r round(((getvalue.forbor.tam.2018 - getvalue.forbor.tam.2000)*100), digits = 1)` percentage points.
+A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[^7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2018 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r year`, fully `r round(((getvalue.forbor.jeff.2018)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, similar to the U.S. share. In Orleans Parish the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2018 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r year` while St. Tammany Parish increased by `r round(((getvalue.forbor.tam.2018 - getvalue.forbor.tam.2000)*100), digits = 1)` percentage points.
 
 ```{r forbor, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 forborGraphic
@@ -440,7 +440,7 @@ makeCSS_source(
 ## Housing costs and affordability, housing stock, and commuting
 
 
-High housing costs can limit a region’s ability to attract and retain the workforce essential for a healthy economy.[^11] Severe housing cost burdens of more than 50 percent of household income indicate a serious problem in housing affordability. In 2004, the share of severely cost-burdened renters in New Orleans and the U.S. was `r round((getvalue.rentbur.no.2004)*100)` percent. In the `r year-2004` years since, that share has spiked to `r round((getvalue.rentburpct.no.2018)*100)` percent in Orleans while rising to only `r round((getvalue.rentburpct.us.2018)*100)` percent nationally. In Jefferson Parish, the share of renters paying more than 50 percent of household income on housing and utilities is `r round((getvalue.rentbur.jeff.2018)*100)` percent in `r year`.
+High housing costs can limit a region’s ability to attract and retain the workforce essential for a healthy economy.[^11] Severe housing cost burdens of more than 50 percent of household income indicate a serious problem in housing affordability. In 2004, the share of severely cost-burdened renters in New Orleans and the U.S. was `r round((getvalue.rentbur.no.2004)*100)` percent. In the `r year-2004` years since, that share has spiked to `r round((getvalue.rentburpct.no.2018)*100)` percent in Orleans while remaining at `r round((getvalue.rentburpct.us.2018)*100)` percent nationally. In Jefferson Parish, the share of renters paying more than 50 percent of household income on housing and utilities is `r round((getvalue.rentbur.jeff.2018)*100)` percent in `r year`.
 
 
 ```{r rentbur, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
