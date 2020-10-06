@@ -351,7 +351,7 @@ makeCSS_source(
 Like the overall poverty rate, the child poverty rate in New Orleans decreased between 1999 and `r year`. In Jefferson Parish, the child poverty rate jumped from `r round((getvalue.childpov.jeff.1999)*100)` percent in 1999 to `r round((getvalue.childpov.jeff.2018)*100)` percent in `r year` — greatly surpassing the U.S. child poverty rate, which is the same in 1999 and `r year`.
 
 ```{r childpov, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
-childpovGraphic
+childpovGraphicf
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
