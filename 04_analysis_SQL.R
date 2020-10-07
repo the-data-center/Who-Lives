@@ -4,6 +4,7 @@
 order <- c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")
 orderHisp <- c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")
 
+hispanRaw[hispanRaw == -555555555] <- 0 
 #Hispanic Origin
 hispan <- hispanRaw %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
@@ -221,6 +222,7 @@ veh <- vehRaw %>%
 forbor <- forborRaw %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
+  mutate(TotalPopMOE = ifelse(TotalPopMOE < 0, 0, TotalPopMOE)) %>%
   mutate(census2000=c(0.0425,0.0748,0.0237,0.048,0.1105),
          forborpct = (TotForeign00To09 + TotForeign90To99 + TotForeignPre90 + TotForeign10On) / TotalPop,
          forbormoeagg = moeagg(cbind(TotForeign00To09MOE, TotForeign90To99MOE, TotForeignPre90MOE, TotForeign10OnMOE)),

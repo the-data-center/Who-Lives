@@ -300,8 +300,7 @@ providing all residents with the ability to meet their most basic needs,
 including food, housing, and transportation. The poverty rate in New
 Orleans decreased from 28 to 23 percent between 1999 and 2019 while the
 Jefferson Parish poverty rate remained statistically unchanged. Across
-the U.S., the poverty rate increased from 12 to 12 percent between 1999
-and 2019.
+the U.S., the poverty rate has stayed the same between 1999 and 2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/10/pov-1.png" style="display: block; margin: auto;" />
 
@@ -313,10 +312,10 @@ and 2019.
 </div>
 
 Like the overall poverty rate, the child poverty rate in New Orleans
-decreased between 1999 and 2018. In Jefferson Parish, the child poverty
+decreased between 1999 and 2019. In Jefferson Parish, the child poverty
 rate jumped from 20 percent in 1999 to 22 percent in 2019 — greatly
-surpassing the U.S. child poverty rate, which rose from 17 to 17 percent
-between 1999 and 2019.
+surpassing the U.S. child poverty rate, which is the same in 1999 and
+2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/10/childpov-1.png" style="display: block; margin: auto;" />
 
@@ -330,9 +329,8 @@ between 1999 and 2019.
 Post-Katrina, the share of New Orleans households without access to a
 vehicle dropped from 27 percent in 2000 to 16 percent in 2019.
 Nonetheless, at 16 percent, New Orleans’ share is more than twice as
-high as in neighboring parishes and the nation, indicating the
-importance of a robust public transportation system and comprehensive
-evacuation plan.
+high as in neighboring parishes, indicating the importance of a robust
+public transportation system and comprehensive evacuation plan.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/10/veh-1.png" style="display: block; margin: auto;" />
 
@@ -351,10 +349,10 @@ economic opportunities for both high-skilled and low-skilled
 workers.[^7] That share of the population has grown in all three of the
 most populous metro parishes since 2000, led by a 5.4 percentage point
 gain in Jefferson Parish. By 2019, fully 12.9 percent of Jefferson
-Parish population was foreign-born, statistically the same as the U.S.
-share. In Orleans Parish the foreign-born share of the population
-increased by 1.6 percentage points between 2000 and 2019 while
-St. Tammany Parish increased by 1.6 percentage points.
+Parish population was foreign-born, similar to the U.S. share. In
+Orleans Parish the foreign-born share of the population increased by 1.6
+percentage points between 2000 and 2019 while St. Tammany Parish
+increased by 1.6 percentage points.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/10/forbor-1.png" style="display: block; margin: auto;" />
 
@@ -434,7 +432,7 @@ burdens of more than 50 percent of household income indicate a serious
 problem in housing affordability. In 2004, the share of severely
 cost-burdened renters in New Orleans and the U.S. was 24 percent. In the
 15 years since, that share has spiked to 34 percent in Orleans while
-rising to only 24 percent nationally. In Jefferson Parish, the share of
+remaining at 24 percent nationally. In Jefferson Parish, the share of
 renters paying more than 50 percent of household income on housing and
 utilities is 25 percent in 2019.
 
