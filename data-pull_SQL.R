@@ -88,7 +88,7 @@ commuteRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.CommuteRaw
 
 allparishesRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.AllParishesRaw WHERE WhoLivesYear = 2019")
 
-hisppopestRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.HispPopEstRaw WHERE WhoLivesYear = 2019")
+hisppopestRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.HispPopEstRaw WHERE WhoLivesYear IN (2000, 2019)")
 
 blackpopestRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.BlackPopEstRaw WHERE WhoLivesYear = 2019")
 
