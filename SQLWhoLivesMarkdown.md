@@ -238,9 +238,7 @@ the national average.
 
 The 2019 median household income of $55,710 for the metro, $56,069 for
 Jefferson Parish, and $45,615 for the city are significantly lower than
-the U.S. median of $65,712. In Jefferson Parish, median household income
-declined 1 percent between 1999 and 2019, even after adjusting for
-inflation, falling to $56,069.
+the U.S. median of $65,712.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/10/medhh-1.png" style="display: block; margin: auto;" />
 
@@ -313,9 +311,7 @@ the U.S., the poverty rate has stayed the same between 1999 and 2019.
 
 Like the overall poverty rate, the child poverty rate in New Orleans
 decreased between 1999 and 2019. In Jefferson Parish, the child poverty
-rate jumped from 20 percent in 1999 to 22 percent in 2019 — greatly
-surpassing the U.S. child poverty rate, which is the same in 1999 and
-2019.
+rate at 22 percent in 2019 is higher than the U.S. child poverty rate.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/10/childpov-1.png" style="display: block; margin: auto;" />
 
@@ -350,9 +346,8 @@ workers.[^7] That share of the population has grown in all three of the
 most populous metro parishes since 2000, led by a 5.4 percentage point
 gain in Jefferson Parish. By 2019, fully 12.9 percent of Jefferson
 Parish population was foreign-born, similar to the U.S. share. In
-Orleans Parish the foreign-born share of the population increased by 1.6
-percentage points between 2000 and 2019 while St. Tammany Parish
-increased by 1.6 percentage points.
+Orleans and in St. Tammany parishes the foreign-born share of the
+population increased by 1.6 percentage points between 2000 and 2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/10/forbor-1.png" style="display: block; margin: auto;" />
 
@@ -469,7 +464,7 @@ is reflective of the surge in the median gross rent (rent plus
 utilities) in the city. From 2004 to 2019, monthly rent plus utilities
 rose from $758 to $1,010 in New Orleans, a 33 percent increase after
 adjusting for inflation. Meanwhile, median gross rents increased 19
-percent metrowide compared to only 18 percent nationwide.
+percent metrowide compared to 18 percent nationwide.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2020/10/medrent-1.png" style="display: block; margin: auto;" />
 

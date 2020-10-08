@@ -291,7 +291,7 @@ makeCSS_source(
 )
 ```
 
-The `r year` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro, `r dollar(getvalue.medhh.jeff.2018)` for Jefferson Parish, and `r dollar(getvalue.medhh.no.2018)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`. In Jefferson Parish, median household income declined `r round(((getvalue.medhh.jeff.2000 - getvalue.medhh.jeff.2018)/getvalue.medhh.jeff.2000)*100)` percent between 1999 and `r year`, even after adjusting for inflation, falling to `r dollar(round(getvalue.medhh.jeff.2018))`.
+The `r year` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro, `r dollar(getvalue.medhh.jeff.2018)` for Jefferson Parish, and `r dollar(getvalue.medhh.no.2018)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`.
 
 
 ```{r medhh, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -348,7 +348,7 @@ makeCSS_source(
 )
 ```
 
-Like the overall poverty rate, the child poverty rate in New Orleans decreased between 1999 and `r year`. In Jefferson Parish, the child poverty rate jumped from `r round((getvalue.childpov.jeff.1999)*100)` percent in 1999 to `r round((getvalue.childpov.jeff.2018)*100)` percent in `r year` — greatly surpassing the U.S. child poverty rate, which is the same in 1999 and `r year`.
+Like the overall poverty rate, the child poverty rate in New Orleans decreased between 1999 and `r year`. In Jefferson Parish, the child poverty rate at `r round((getvalue.childpov.jeff.2018)*100)` percent in `r year` is higher than the U.S. child poverty rate.
 
 ```{r childpov, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
 childpovGraphic
@@ -378,7 +378,7 @@ makeCSS_source(
 ## Foreign-born population and geographic mobility
 
 
-A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[^7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2018 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r year`, fully `r round(((getvalue.forbor.jeff.2018)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, similar to the U.S. share. In Orleans Parish the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2018 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r year` while St. Tammany Parish increased by `r round(((getvalue.forbor.tam.2018 - getvalue.forbor.tam.2000)*100), digits = 1)` percentage points.
+A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[^7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2018 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r year`, fully `r round(((getvalue.forbor.jeff.2018)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, similar to the U.S. share. In Orleans and in St. Tammany parishes the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2018 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r year`.
 
 ```{r forbor, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 forborGraphic
@@ -472,7 +472,7 @@ makeCSS_source(
 ```
 
 
-The surge in the share of severely cost-burdened renters in New Orleans is reflective of the surge in the median gross rent (rent plus utilities) in the city. From 2004 to `r year`, monthly rent plus utilities rose from `r dollar(round(getvalue.medrent.no.2004))` to `r dollar(getvalue.medrent.no.2018)` in New Orleans, a `r round(((getvalue.medrent.no.2018 - getvalue.medrent.no.2004) / getvalue.medrent.no.2004)*100)` percent increase after adjusting for inflation. Meanwhile, median gross rents increased `r round(((getvalue.medrent.metro.2018 - getvalue.medrent.metro.2004) / getvalue.medrent.metro.2004)*100)` percent metrowide compared to only `r round(((getvalue.medrent.us.2018 - getvalue.medrent.us.2004) / getvalue.medrent.us.2004)*100)` percent nationwide.
+The surge in the share of severely cost-burdened renters in New Orleans is reflective of the surge in the median gross rent (rent plus utilities) in the city. From 2004 to `r year`, monthly rent plus utilities rose from `r dollar(round(getvalue.medrent.no.2004))` to `r dollar(getvalue.medrent.no.2018)` in New Orleans, a `r round(((getvalue.medrent.no.2018 - getvalue.medrent.no.2004) / getvalue.medrent.no.2004)*100)` percent increase after adjusting for inflation. Meanwhile, median gross rents increased `r round(((getvalue.medrent.metro.2018 - getvalue.medrent.metro.2004) / getvalue.medrent.metro.2004)*100)` percent metrowide compared to `r round(((getvalue.medrent.us.2018 - getvalue.medrent.us.2004) / getvalue.medrent.us.2004)*100)` percent nationwide.
 
 
 ```{r medrent, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
