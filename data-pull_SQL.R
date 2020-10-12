@@ -2,7 +2,7 @@
 # # ACS # #
 ############################################
 
-IDS <- odbcConnect("DC2 IDS", uid = "rweinstein", pwd = "August312020")
+IDS <- odbcConnect("DC2 IDS", uid = "rweinstein", pwd = "October2020!")
 
 #Hispanic Origin
 hispanRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.HispanRaw WHERE WhoLivesYear = 2019")# -3 removes St. Tammany because it is not included in this analysis

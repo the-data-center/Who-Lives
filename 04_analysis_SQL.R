@@ -58,9 +58,9 @@ hispan <- hispanRaw %>%
          SouthAmericanSIG= stattest(x=SouthAmericanUS, y=SouthAmericanpct, moey = SouthAmericanMoeProp),
          OtherSIG = stattest(x=OtherUS, y=Otherpct, moey = OtherMoeProp))
 
-#hispan %>% 
-#  select(-(contains("SIG"))) %>% 
-#  write.csv("hispan.csv")
+hispan %>% 
+  select(-(contains("SIG"))) %>% 
+  write.csv("hispan.csv")
 
 #Households with own children under 18
 
