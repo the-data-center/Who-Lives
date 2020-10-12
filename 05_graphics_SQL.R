@@ -159,7 +159,7 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
   theme(legend.position = "right",
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
-        #panel.spacing = unit(6, "lines"),
+        panel.spacing = unit(6, "lines"),
         strip.text = element_text(size=12),
         axis.text.x = element_text(size = 12, vjust=1),
         axis.text.y = element_text(size = 12),
