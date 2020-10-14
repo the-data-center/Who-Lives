@@ -310,9 +310,18 @@ mob <- mobRaw %>%
          withinparishSIG = stattest (x=sf2004withinparish, y=withinparishpct, moey = withinparishmoeprop),
          samhouseSIG = stattest (x=sf2004samehouse, y=samehousepct, moey = samehousemoeprop))
 
-#mob %>% 
-#  select(-(contains("SIG"))) %>% 
-#  write.csv("mob.csv")
+mobCSV <- mob %>% 
+select(PlaceName, (contains("pct")), (contains("sf2004"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "mob", values_to = "Value") %>% 
+  mutate(year = ifelse(grepl("2004", mob), "2004", "2019"),
+         header = paste(PlaceName, year, sep = "-"),
+         mobfinal = ifelse(grepl("abroad", mob), "abroad", mob),
+         mobfinal = ifelse(grepl("tates", mob), "tates", mobfinal),
+         mobfinal = ifelse(grepl("difparish", mob), "difparish", mobfinal),
+         mobfinal = ifelse(grepl("withinparish", mob), "withinparish", mobfinal),
+         mobfinal = ifelse(grepl("samehouse", mob), "samehouse", mobfinal)) %>% 
+  pivot_wider(id_cols = c("mobfinal"), names_from = "header", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/mob.csv")
 
 ## mobility sig testing for written analysis
 
@@ -378,9 +387,14 @@ rentbur <- rentburRaw %>%
          moeprop = moeprop(y=(Total - NotComputed),moex=`50OrMoreMOE`,moey = moeagg, p = rentburpct),
          significant = stattest(x=sf2004, y=rentburpct, moey=moeprop))
 
-#rentbur %>% 
-#  select(-significant) %>%
-#  write.csv("rentbur.csv")
+rentburCSV <- rentbur %>% 
+select(PlaceName, sf2004, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "rentbur", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, rentbur, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/rentbur.csv")
 
 #Homeowners with severe housing cost burdens
 
@@ -394,9 +408,14 @@ hobur <- hoburRaw %>%
          moeprop = moeprop(y=Total,moex=moexagg,moey=moeyagg,p=hoburpct),
          significant = stattest(x=sf2004,y=hoburpct, moey=moeprop))
 
-#hobur %>% 
-#  select(-significant) %>%
-#  write.csv("hobur.csv")
+hoburCSV <- hobur %>% 
+select(PlaceName, sf2004, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "hobur", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, hobur, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/hobur.csv")
 
 
 #Median gross rent, 201* inflation-adjusted dollars
@@ -408,9 +427,14 @@ medrent <- medrentRaw %>%
   bind_cols(.,sf2004) %>%
   mutate(significant = stattest(x=sf2004,y=Rent,moey=RentMOE)) 
 
-medrent %>%
- select(-significant) %>%
- write.csv("medrent.csv")
+medrentCSV <- medrent %>%
+  select(PlaceName, sf2004, Rent) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "medrent", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, medrent, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/medrent.csv")
 
 
 #Year structure built, 201* housing units
@@ -439,9 +463,11 @@ yrbuilt <- yrbuiltRaw %>%
          orbefore1949SIG = stattest(x=orbefore1949US, y= orbefore1949pct, moey = orbefore1949moeprop))
 
 
-#yrbuilt %>% 
-#  select(-(contains("SIG"))) %>% 
-#  write.csv("yrbuilt.csv")
+yrbuiltCSV <- yrbuilt %>% 
+select(PlaceName, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "yrbuilt", values_to = "Value") %>% 
+  pivot_wider(id_cols = c("yrbuilt"), names_from = "PlaceName", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/yrbuilt.csv")
 
 #Means of transportation to work, 
 commute <- commuteRaw %>%
@@ -479,9 +505,21 @@ commute <- commuteRaw %>%
          workhomeSIG = stattest ( x=census2000workhome, y=Workhomepct, moey = workhomemoeprop),
          otherSIG = stattest (x=census2000other, y= Otherpct, moey = othermoeprop))
 
-#commute %>% 
-#  select(-(contains("SIG"))) %>% 
-#  write.csv("commute.csv")
+commuteCSV <- commute %>% 
+select(PlaceName, (contains("pct")), (contains("census2000"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "commute", values_to = "Value") %>% 
+  mutate(year = ifelse(grepl("2000", commute), 2000, 2019),
+         header = paste(PlaceName, year, sep = "-"),
+         commutefinal = ifelse(grepl("ive", commute), "DroveAlone", commute),
+         commutefinal = ifelse(grepl("arpool", commute), "Carpool", commutefinal),
+         commutefinal = ifelse(grepl("ublic", commute), "PublicTransit", commutefinal),
+         commutefinal = ifelse(grepl("Motorcycle", commute), "Motorcycle", commutefinal),
+         commutefinal = ifelse(grepl("ike", commute), "Bike", commutefinal),
+         commutefinal = ifelse(grepl("alk", commute), "Walk", commutefinal),
+         commutefinal = ifelse(grepl("home", commute), "Workhome", commutefinal),
+         commutefinal = ifelse(grepl("ther", commute), "Other", commutefinal)) %>% 
+  pivot_wider(id_cols = c("commutefinal"), names_from = "header", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/commute.csv")
 
 ############################################
 # # PEP # #
