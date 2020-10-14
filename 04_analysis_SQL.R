@@ -58,9 +58,11 @@ hispan <- hispanRaw %>%
          SouthAmericanSIG= stattest(x=SouthAmericanUS, y=SouthAmericanpct, moey = SouthAmericanMoeProp),
          OtherSIG = stattest(x=OtherUS, y=Otherpct, moey = OtherMoeProp))
 
-hispan %>% 
-  select(-(contains("SIG"))) %>% 
-  write.csv("hispan.csv")
+hispanCSV <- hispan %>% 
+  select(PlaceName, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "Hispanic origin", values_to = "Value") %>% 
+  pivot_wider(id_cols = c("Hispanic origin"), names_from = "PlaceName", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/hispan.csv")
 
 #Households with own children under 18
 
@@ -74,9 +76,14 @@ hwc <- hwcRaw %>%
          moeprop = moeprop(y = TotalHH, moex = moeagg, moey = TotalHHMOE, p = pcthwc),
          significant = stattest(x=census2000,y=pcthwc,moey = moeprop)) 
 
-#hwc %>% 
-#  select(-significant) %>% 
-#  write.csv("hwc.csv")
+hwcCSV <- hwc %>% 
+  select(PlaceName, census2000, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "hwc", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, hwc, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/hwc.csv")
 
 #One-person households
 
@@ -88,9 +95,14 @@ sing <- singRaw %>%
          moeprop = moeprop(y = Total, moex = SingleHHMOE, moey = TotalMOE, p = pctsing),
          significant = stattest(x=census2000, y=pctsing,moey = moeprop))
 
-#sing %>% 
-#  select(-significant) %>% 
-#  write.csv("sing.csv")
+singCSV <- sing %>% 
+select(PlaceName, census2000, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "sing", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, sing, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/sing.csv")
 
 #Less than a high school degree, adults 25 and older
 
@@ -104,9 +116,14 @@ hs <- hsRaw %>%
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctless),
          significant = stattest(x=census2000, y=pctless,moey=moeprop))
 
-#hs %>% 
-#  select(-significant) %>% 
-#  write.csv("hs.csv")
+hsCSV <- hs %>% 
+select(PlaceName, census2000, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "hs", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, hs, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/hs.csv")
 
 #Bachelor's degree or higher, adults 25 and older
 
@@ -120,22 +137,33 @@ bach <- bachRaw %>%
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctbach),
          significant = stattest(x=census2000,y=pctbach,moey = moeprop))
 
-#bach %>% 
-#  select(-significant) %>% 
-#  write.csv("bach.csv")
+bachCSV <- bach  %>% 
+select(PlaceName, census2000, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "bach", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, bach, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/bach.csv")
 
 #Median household income, 201* inflation-adjusted dollars
 
 census2000 <- data.frame(census2000 = cpi00*c(27133,38435,47883,35317,41994))
+
 medhh <- medhhRaw %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   slice(match(order, PlaceName)) %>%
   bind_cols(.,census2000) %>%
   mutate(significant = stattest(x=census2000,y=MedianHHIncome,moey=MedianHHIncomeMOE))
 
-# medhh %>%
-#  select(-significant) %>%
-#  write.csv("medhh.csv")
+ medhhCSV <- medhh %>%
+select(PlaceName, census2000, MedianHHIncome) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "medhh", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, medhh, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/medhh.csv")
 
 #Internet access
 
@@ -180,9 +208,14 @@ pov <- povRaw %>%
          significant = stattest(x=sf1999,y=pctpov,moey=moeprop))
 
 
-#pov %>% 
-#  select(-significant) %>% 
-#  write.csv("pov.csv")
+povCSV <- pov %>% 
+select(PlaceName, sf1999, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "pov", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, pov, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/pov.csv")
 
 #Children in poverty, population for whom poverty has been determined			
 
@@ -199,9 +232,14 @@ childpov <- childpovRaw %>%
          significant = stattest(x=sf1999,y=pctBelowChildPov,moey=moeprop))
 
 
-#childpov %>% 
-#  select(-significant) %>% 
-#  write.csv("childpov.csv")
+childpovCSV <- childpov %>% 
+select(PlaceName, sf1999, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "childpov", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, childpov, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/childpov.csv")
 
 #Households without access to a vehicle
 
@@ -213,9 +251,14 @@ veh <- vehRaw %>%
          moeprop = moeprop(y = Total, moex = NoVehAvailMOE, moey = TotalMOE, p = vehpct),
          significant = stattest(x=census2000,y=vehpct,moey = moeprop))
 
-#veh %>% 
-# select(-significant) %>% 
-#  write.csv("veh.csv")
+vehCSV <- veh %>% 
+select(PlaceName, census2000, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "veh", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, veh, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/veh.csv")
 
 #Population not U.S. citizens at birth
 
@@ -229,9 +272,14 @@ forbor <- forborRaw %>%
          forbormoeprop = moeprop(y=TotalPop, moex = forbormoeagg, moey = TotalPopMOE, p=forborpct),
          significant = stattest(x=census2000,y=forborpct,moey=forbormoeprop))
 
-#forbor %>% 
-#  select(-significant) %>% 
-#  write.csv("forbor.csv")
+forborCSV <- forbor %>% 
+select(PlaceName, census2000, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "forbor", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, forbor, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/forbor.csv")
 
 #Population who moved in the past year
 
@@ -289,9 +337,14 @@ ho <- hoRaw %>%
          Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
          significant = stattest(x=census2000,y=Ownerpct,moey = Ownermoeprop))
 
-#ho %>% 
-#  select(-significant) %>% 
-#  write.csv("ho.csv")
+hoCSV <- ho %>% 
+select(PlaceName, census2000, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "ho", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, ho, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/ho.csv")
 
 
 #Homeowners without a mortgage
@@ -304,9 +357,14 @@ honomo <- honomoRaw %>%
          moeprop = moeprop(y=Total,moex =NoMortgageMOE,moey = TotalMOE,p=honomopct),
          significant = stattest(x=census2000,y=honomopct,moey=moeprop))
 
-#honomo %>% 
-#  select(-significant) %>% 
-#  write.csv("honomo.csv")
+honomoCSV <- honomo %>% 
+select(PlaceName, census2000, (contains("pct"))) %>% 
+  pivot_longer(-c("PlaceName"), names_to = "honomo", values_to = "Value") %>% 
+  mutate(name = paste( PlaceName, honomo, sep = "-"),
+         year = 2019) %>% 
+  select(-PlaceName) %>% 
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+  write.csv("outputs/spreadsheets/honomo.csv")
 
 #Renters with severe housing cost burdens
 

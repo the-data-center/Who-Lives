@@ -244,7 +244,7 @@ the U.S. median of $65,712.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>
@@ -304,7 +304,7 @@ the U.S., the poverty rate has stayed the same between 1999 and 2019.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>
@@ -317,7 +317,7 @@ rate at 22 percent in 2019 is higher than the U.S. child poverty rate.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>
@@ -332,7 +332,7 @@ public transportation system and comprehensive evacuation plan.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>
@@ -393,7 +393,7 @@ Orleans have increased slightly, but still are a much lower 50 percent.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-&ast; = Difference between 1999 and 2018 is not significant at 95% confidence interval.
+&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>
