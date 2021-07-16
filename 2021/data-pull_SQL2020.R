@@ -86,9 +86,49 @@ commuteRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.CommuteRaw
 #### Detailed age groups, race, sex, and hispanic origin from popest
 
 
-allparishesRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.AllParishesRaw WHERE WhoLivesYear = 2019")
+#allparishesRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.AllParishesRaw WHERE WhoLivesYear = 2019")
 
 hisppopestRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.HispPopEstRaw WHERE WhoLivesYear IN (2000, 2019)")
 
 blackpopestRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.BlackPopEstRaw WHERE WhoLivesYear = 2019")
+
+
+
+##For 2020 update
+
+PEP2020raw <- read.csv(file = "inputs/CC-EST2020-ALLDATA-22.csv")
+
+PEPage2020crosswalk <- read.csv(file = "inputs/PEPage2021crosswalk.csv")
+
+PEPover18raw<- read.csv(file = "inputs/CC-EST2020-AGESEX-22.csv")
+
+PEPyear2020crosswalk <- read.csv(file = "inputs/PEPyear2021crosswalk.csv")
+
+PEPsexrace2020crosswalk <- read.csv(file = "inputs/PEPsexrace2021crosswalk.csv")
+
+PEPUS2020raw <- read.csv(file = "inputs/NC-EST2020-ALLDATA-R-File22.csv")
+
+##For hisp inter years
+
+
+popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP")
+hisppopestINTRaw <- getCensus(name = "pep/int_charagegroups", # Intercensal estimates
+                              vintage = 2000, 
+                              key = "530ce361defc2c476e5b5d5626d224d8354b9b9a", 
+                              vars = popestVars2000,
+                              region = "county:071,051,075,087,089,093,095,103", 
+                              regionin = "state:22") %>% 
+  mutate(PlaceName = str_sub(GEONAME, 1, nchar(GEONAME) - 18),
+         year = str_sub(DATE_DESC, 5, 8)) %>% # Clean July 1 from every year
+  #select(-GEONAME, -DATE) %>% 
+  filter(HISP == 2) %>% 
+  filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009) %>% 
+  rename(Population = POP,
+         DateDesc = DATE_DESC,
+         CensusYear = year) %>% 
+  mutate(HispName = "Hispanic") %>% 
+  mutate(WhoLivesYear = 2000) %>% 
+  mutate(Population = as.numeric(Population)) %>% 
+  select(WhoLivesYear, PlaceName, DateDesc, CensusYear, HispName, Population)
+
 

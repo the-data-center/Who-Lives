@@ -1,0 +1,14 @@
+Variable,HispName,RaceName,SexName,RaceSimple
+TOT_POP,Total,Total,Total,Total
+NHWA_MALE,Not Hispanic,White alone,Male,White
+NHWA_FEMALE,Not Hispanic,White alone,Female,White
+NHBA_MALE,Not Hispanic,Black or African American alone,Male,Black
+NHBA_FEMALE,Not Hispanic,Black or African American alone,Female,Black
+NHAA_MALE,Not Hispanic,Asian alone,Male,Asian
+NHAA_FEMALE,Not Hispanic,Asian alone,Female,Asian
+H_MALE,Hispanic,Total,Male,Hispanic
+H_FEMALE,Hispanic,Total,Female,Hispanic
+NHWA_TOTAL,Not Hispanic,White alone,Total,White
+NHBA_TOTAL,Not Hispanic,Black or African American alone,Total,Black
+NHAA_TOTAL,Not Hispanic,Asian alone,Total,Asian
+H_TOTAL,Hispanic,Total,Total,Hispanic

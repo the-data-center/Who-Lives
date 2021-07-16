@@ -540,7 +540,7 @@ orderDemo <- c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charle
 #Table 1 
 AAWhiteHispan <- allparishesRaw %>% 
   filter(PlaceName == "Orleans") %>% 
-  filter(DateDesc == "7/1/2019 population estimate") %>% 
+  filter(DateDesc == "7/1/2020 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total" & (RaceSimple == "Black"|RaceSimple == "White"|RaceSimple == "Hispanic")) %>%
   mutate(est2000=c(128871, 323392, 14826)) %>% #check order of races in data frame. Order is bottom up
   select(RaceSimple, Population, est2000) %>%
@@ -556,7 +556,7 @@ AAWhiteHispan %>%
 ParishDemo1<- allparishesRaw %>% 
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany", "United States")) %>% 
-  filter(DateDesc == "7/1/2019 population estimate") %>% 
+  filter(DateDesc == "7/1/2020 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   select(PlaceName, Population, RaceSimple)
 
@@ -564,7 +564,7 @@ ParishDemo1<- allparishesRaw %>%
 ParishDemo2<- allparishesRaw %>% 
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                  "St. James", "St. John the Baptist", "St. Tammany")) %>% 
-  filter(DateDesc == "7/1/2019 population estimate") %>% 
+  filter(DateDesc == "7/1/2020 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total") %>% 
   group_by(RaceSimple)%>%
   summarise(Population=sum(Population)) %>%
@@ -573,7 +573,7 @@ ParishDemo2<- allparishesRaw %>%
 
 #reshape data from long to wide for easy analysis
 ParishDemo <- spread(ParishDemo2, RaceSimple, Population) %>%
-  filter(PlaceName != "Louisiana") %>%
+#  filter(PlaceName != "Louisiana") %>%
   slice(match(orderDemo, PlaceName)) %>% 
   mutate(pctwhite = White / Total,
          pctblack = Black / Total,
@@ -626,7 +626,7 @@ BlackpopM %>%
 HispanicPop <- allparishesRaw %>% 
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>% 
-  filter(DateDesc == "7/1/2019 population estimate") %>% 
+  filter(DateDesc == "7/1/2020 population estimate") %>% 
   filter(AgeGroupName == "Total" & SexName == "Total")  %>% 
   filter(RaceSimple=="Hispanic")%>% 
   select(PlaceName, Population) %>%
@@ -689,7 +689,7 @@ Agepop <- allparishesRaw %>%
            AgeGroupName== "70 to 74"| AgeGroupName== "75 to 79"| AgeGroupName== "80 to 84"| AgeGroupName== "85 plus")%>% 
   filter(RaceSimple=="Total")%>% 
   filter(SexName=="Total")%>% 
-  filter(DateDesc == "7/1/2019 population estimate") %>% 
+  filter(DateDesc == "7/1/2020 population estimate") %>% 
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>% 
   arrange(factor(PlaceName, levels = c("Jefferson","Orleans","Plaquemines",
@@ -717,7 +717,7 @@ under18pars<-allparishesRaw %>%
   filter(AgeGroupName=="18 years and over" | AgeGroupName=="Total")%>% 
   filter(RaceSimple=="Total")%>% 
   filter(SexName=="Total")%>% 
-  filter(DateDesc == "7/1/2019 population estimate") %>% 
+  filter(DateDesc == "7/1/2020 population estimate") %>% 
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>%  
   select(AgeGroupName, PlaceName, Population)
