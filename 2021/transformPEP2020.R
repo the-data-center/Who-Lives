@@ -65,11 +65,6 @@ allparishesRaw <- PEP2020raw %>%
 
 
 
-
-
-
-
-
 hisppopestRaw <- allparishesRaw %>% 
   filter(AgeGroupName == "Total" ) %>% 
   filter(HispName == "Hispanic") %>% 
