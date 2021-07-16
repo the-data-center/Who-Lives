@@ -1,3 +1,54 @@
+    ## Parsed with column specification:
+    ## cols(
+    ##   .default = col_double(),
+    ##   SUMLEV = col_character(),
+    ##   COUNTY = col_character(),
+    ##   STNAME = col_character(),
+    ##   CTYNAME = col_character()
+    ## )
+
+    ## See spec(...) for full column specifications.
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   AGEGRP = col_double(),
+    ##   AgeGroupName = col_character()
+    ## )
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   .default = col_double(),
+    ##   SUMLEV = col_character(),
+    ##   COUNTY = col_character(),
+    ##   STNAME = col_character(),
+    ##   CTYNAME = col_character()
+    ## )
+
+    ## See spec(...) for full column specifications.
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   YEAR = col_double(),
+    ##   DateDesc = col_character()
+    ## )
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   Variable = col_character(),
+    ##   HispName = col_character(),
+    ##   RaceName = col_character(),
+    ##   SexName = col_character(),
+    ##   RaceSimple = col_character()
+    ## )
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   .default = col_double(),
+    ##   UNIVERSE = col_character()
+    ## )
+
+    ## See spec(...) for full column specifications.
+
     ## `summarise()` ungrouping output (override with `.groups` argument)
     ## `summarise()` ungrouping output (override with `.groups` argument)
 
@@ -25,7 +76,7 @@ Meanwhile, the number of Hispanics grew by 6,838.[^2]
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2019.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2020.</p>
 </div>
 
 <div class="highlight" markdown="1"> 
@@ -51,7 +102,7 @@ area.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2019.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2020.</p>
 </div>
 
 The number of African Americans living in New Orleans grew every year
@@ -63,7 +114,7 @@ decrease in 2019.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2019.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2020.</p>
 </div>
 
 Between 2000 and 2020, the number of Hispanics in Jefferson Parish
@@ -85,7 +136,7 @@ population over these 20 years.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2019.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2020.</p>
 </div>
 
 The number of Hispanics in New Orleans metro has grown every year since
@@ -98,7 +149,7 @@ Hispanics account for 29 percent of the metro’s population growth since
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2019.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2020.</p>
 </div>
 
 Hispanic is an umbrella term comprising multiple nationalities and
@@ -148,7 +199,7 @@ Consequently, the median age of the metro has risen to 38.8 in 2020 from
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2019.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2020.</p>
 </div>
 
 Meanwhile, the share of households with children is shrinking while the
@@ -192,7 +243,7 @@ now 22 percent of the metro population, down from 27 percent in 2000.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2019.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2020.</p>
 </div>
 
 <div class="highlight" markdown="1"> 

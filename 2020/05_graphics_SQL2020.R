@@ -414,7 +414,7 @@ chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5, size = 16))+
-  labs(title = "Population by age group, 2019",
+  labs(title = "Population by age group, 2020",
        x="",
        y="")
 ####9 - Households with own children under 18

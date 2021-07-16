@@ -78,8 +78,8 @@ hisppopestRaw <- allparishesRaw %>%
 
 #### upload transformed data to Azure
 
-write_csv(allparishesRaw, file = "2020/outputs/transformed data/allparishesRaw.csv")
-write_csv(hisppopestRaw, file = "2020/outputs/transformed data/hisppopestRaw.csv")
+#write_csv(allparishesRaw, file = "2020/outputs/transformed data/allparishesRaw.csv")
+#write_csv(hisppopestRaw, file = "2020/outputs/transformed data/hisppopestRaw.csv")
 
 
-storage_multiupload(cont_scp2t, "2020/outputs/transformed data/*.csv")
+#storage_multiupload(cont_scp2t, "2020/outputs/transformed data/*.csv")
