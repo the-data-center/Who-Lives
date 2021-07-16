@@ -96,17 +96,28 @@ blackpopestRaw <- sqlQuery(IDS, "SELECT * FROM PROD_CensusBureau.wholives.BlackP
 
 ##For 2020 update
 
-PEP2020raw <- read.csv(file = "inputs/CC-EST2020-ALLDATA-22.csv")
+library(AzureKeyVault)
+library(AzureAuth)
+library(AzureStor)
 
-PEPage2020crosswalk <- read.csv(file = "inputs/PEPage2021crosswalk.csv")
+endp_key <- storage_endpoint("https://datacenterdc2datalake.blob.core.windows.net/", key = "ZwDaNK83wJT4qhRkQvbIsqyfEH2MdHSpYiDzWIQ3nKMyleefFiSmqm2yV7JD6WgCmaY7zOHpGw+R0NtRZ5VavQ==")
 
-PEPover18raw<- read.csv(file = "inputs/CC-EST2020-AGESEX-22.csv")
+cont_s <- storage_container(endp_key, "source")
+cont_scp2t <- storage_container(endp_key, "source/census/pep/2021 update (2020 data)/transformed data")
 
-PEPyear2020crosswalk <- read.csv(file = "inputs/PEPyear2021crosswalk.csv")
+# iris_csv <- storage_read_csv(cont_s, "census/pep/2021 update (2020 data)/ "github/ids-process-test-main/inputs/iris.csv")
 
-PEPsexrace2020crosswalk <- read.csv(file = "inputs/PEPsexrace2021crosswalk.csv")
+PEP2020raw <- storage_read_csv(cont_s, "census/pep/2021 update (2020 data)/CC-EST2020-ALLDATA-22.csv")
 
-PEPUS2020raw <- read.csv(file = "inputs/NC-EST2020-ALLDATA-R-File22.csv")
+PEPage2020crosswalk <- storage_read_csv(cont_s, "census/pep/2021 update (2020 data)/PEPage2021crosswalk.csv")
+
+PEPover18raw<- storage_read_csv(cont_s, "census/pep/2021 update (2020 data)/CC-EST2020-AGESEX-22.csv")
+
+PEPyear2020crosswalk <- storage_read_csv(cont_s, "census/pep/2021 update (2020 data)/PEPyear2021crosswalk.csv")
+
+PEPsexrace2020crosswalk <- storage_read_csv(cont_s, "census/pep/2021 update (2020 data)/PEPsexrace2021crosswalk.csv")
+
+PEPUS2020raw <- storage_read_csv(cont_s, "census/pep/2021 update (2020 data)/NC-EST2020-ALLDATA-R-File22.csv")
 
 ##For hisp inter years
 
