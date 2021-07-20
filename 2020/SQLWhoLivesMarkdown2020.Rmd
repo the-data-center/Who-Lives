@@ -147,7 +147,7 @@ makeCSS_source(
 )
 ```
 
-The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2017) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018 and continued to decrease in 2019.   
+The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2017) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018 and continued to decrease in 2020.   
 
 ```{r AAhistorical, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 AAhistGraphic 

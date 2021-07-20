@@ -174,7 +174,7 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
 AAhistGraphic <- AAhistorical %>%
   ggplot(aes(year, Population, label = comma(Population, accuracy = 1))) +
   geom_bar(stat="identity", fill = DCcolor.p2blue, width = .7) +
-  geom_text(data = subset(AAhistorical,  year %in% c("2000", "2006", "2018", "2020")),      #remove labels for years without data
+  geom_text(data = subset(AAhistorical,  year %in% c("2000", "2006", "2017", "2020")),      #remove labels for years without data
             size = 3.75,
             position = position_stack(vjust = 1.05), 
             family="Asap") + 

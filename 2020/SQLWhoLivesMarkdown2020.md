@@ -108,7 +108,7 @@ area.
 The number of African Americans living in New Orleans grew every year
 post-Katrina (from 2006 to 2017) but decreased for the first time
 post-Katrina from 232,189 in 2017 to 231,740 in 2018 and continued to
-decrease in 2019.
+decrease in 2020.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/AAhistorical-1.png" style="display: block; margin: auto;" />
 
