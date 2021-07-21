@@ -104,7 +104,7 @@ source(here("2020/inline_SQL2020.R"))
 
 ```{r, echo=FALSE}
 makeCSS_highlight(
-"This brief examines the most current demographic data released by the U.S. Census Bureau and identifies important trends in metro area parishes. Included are data on race and ethnicity, age, educational attainment, internet access, poverty, income, children, access to vehicles, foreign-born population, geographic mobility, homeownership, homeowners with a mortgage, housing costs and affordability, single-person households, commuting, and housing stock.") 
+"This brief examines the most current demographic data released by the U.S. Census Bureau and identifies important trends in metro area parishes. Included are data on race and ethnicity, age, educational attainment, Internet access, poverty, income, children, access to vehicles, foreign-born population, geographic mobility, homeownership, homeowners with a mortgage, housing costs and affordability, single-person households, commuting, and housing stock.") 
 ```
 
 
@@ -184,7 +184,7 @@ makeCSS_source(
 
 Hispanic is an umbrella term comprising multiple nationalities and ethnicities. Researchers have shown that most Hispanics prefer to identify by nationality rather than by pan-ethnic terms such as “Hispanic” and “Latino.”[^3] The nationalities of Hispanics residing in metro New Orleans is quite distinct from the national Hispanic profile.
 
-In `r year`, the largest Hispanic group in metro New Orleans was Honduran, representing `r round((getvalue.Hon.2018)*100)` percent of the Hispanic population. In comparison, Hondurans represent only `r round((getvalue.Hon.us.2018)*100)` percent of the national Hispanic population. These figures point to metro New Orleans as a hub of Honduran migration.
+In `r year.char`, the largest Hispanic group in metro New Orleans was Honduran, representing `r round((getvalue.Hon.2018)*100)` percent of the Hispanic population. In comparison, Hondurans represent only `r round((getvalue.Hon.us.2018)*100)` percent of the national Hispanic population. These figures point to metro New Orleans as a hub of Honduran migration.
 
 Not to be ignored, the Mexican population represents `r round((getvalue.Mex.2018)*100)` percent of the Hispanic population in metro New Orleans. Nevertheless, the Mexican population is much less prominent in the metro than nationally, where it represents `r round((getvalue.MexUS.2018)*100)` percent of the Hispanic population.
 
@@ -267,7 +267,7 @@ Although race/ethnicity and age data is available for all eight parishes in metr
 )
 ```
 
-## Educational attainment, income, and internet access
+## Educational attainment, income, and Internet access
 
 Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^5] The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from `r round((getvalue.hs.metro.2000)*100)` percent in 2000 to `r round((getvalue.hs.metro.2018)*100)` percent in `r year`. In the city of New Orleans, the share of adults with less than a high school degree fell from `r round((getvalue.hs.no.2000)*100)` percent to `r round((getvalue.hs.no.2018)*100)` percent but is still higher than the U.S. average of `r round((getvalue.hs.us.2018)*100)` percent.
 
@@ -309,9 +309,9 @@ makeCSS_source(
 ```
 
 
-Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and encompassing technology training services, workers and students are at a disadvantage in the job market and education system.[^6] Only `r round((getvalue.inta.no.2018)*100)` percent of households in Orleans Parish and only `r round((getvalue.inta.jeff.2018)*100)` percent of households in Jefferson Parish are connected to the Internet through a home-based internet service, such as broadband (cable, DSL, or fiber), satellite, or dial-up service, compared to `r round((getvalue.inta.us.2018)*100)` percent nationwide. St. Tammany is above the national average at `r round((getvalue.inta.tam.2018)*100)` percent of households connected to the Internet by a home-based service internet connection. Internet access without a subscription refers to households who only have access through group access locations such as school, work, a library, or coffee shop.
+Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and encompassing technology training services, workers and students are at a disadvantage in the job market and education system.[^6] Only `r round((getvalue.inta.no.2018)*100)` percent of households in Orleans Parish and only `r round((getvalue.inta.jeff.2018)*100)` percent of households in Jefferson Parish are connected to the Internet through a home-based Internet service, such as broadband (cable, DSL, or fiber), satellite, or dial-up service, compared to `r round((getvalue.inta.us.2018)*100)` percent nationwide. St. Tammany is above the national average at `r round((getvalue.inta.tam.2018)*100)` percent of households connected to the Internet by a home-based service Internet connection. Internet access without a subscription refers to households who only have access through group access locations such as school, work, a library, or coffee shop.
 
-An increasingly common way to access the Internet is through a smartphone or some other cellular device. While, in general, smartphone access contributes positively to lessening the Digital Divide, having access only through a smartphone restricts ability to fully leverage the Internet to complete common tasks such as writing and researching a resume, registering your kids for school, analyzing data about your neighborhood, or creating content for an internet business. `r round((getvalue.intacell.no.2018)*100)` percent of households in Orleans Parish only have access through a smartphone. This is compared to `r round((getvalue.intacell.us.2018)*100)` percent nationwide.
+An increasingly common way to access the Internet is through a smartphone or some other cellular device. While, in general, smartphone access contributes positively to lessening the Digital Divide, having access only through a smartphone restricts ability to fully leverage the Internet to complete common tasks such as writing and researching a resume, registering your kids for school, analyzing data about your neighborhood, or creating content for an Internet business. `r round((getvalue.intacell.no.2018)*100)` percent of households in Orleans Parish only have access through a smartphone. This is compared to `r round((getvalue.intacell.us.2018)*100)` percent nationwide.
 
 ```{r, echo=FALSE}
 makeCSS_highlight(
@@ -329,7 +329,7 @@ chart.inta.allparishes
 makeCSS_source(
 "&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
+**Notes**: Access with no subscription refers to those who receive free Internet from their housing environment (e.g. college dorms).
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2019."
 )

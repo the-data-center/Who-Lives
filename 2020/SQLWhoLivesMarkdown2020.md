@@ -54,7 +54,7 @@
 
 <div class="highlight" markdown="1"> 
 
-This brief examines the most current demographic data released by the U.S. Census Bureau and identifies important trends in metro area parishes. Included are data on race and ethnicity, age, educational attainment, internet access, poverty, income, children, access to vehicles, foreign-born population, geographic mobility, homeownership, homeowners with a mortgage, housing costs and affordability, single-person households, commuting, and housing stock.
+This brief examines the most current demographic data released by the U.S. Census Bureau and identifies important trends in metro area parishes. Included are data on race and ethnicity, age, educational attainment, Internet access, poverty, income, children, access to vehicles, foreign-born population, geographic mobility, homeownership, homeowners with a mortgage, housing costs and affordability, single-person households, commuting, and housing stock.
 </div>
 
 The U.S. Census Bureau estimates that 1,273,979 residents were living in
@@ -158,7 +158,7 @@ identify by nationality rather than by pan-ethnic terms such as
 “Hispanic” and “Latino.”[^3] The nationalities of Hispanics residing in
 metro New Orleans is quite distinct from the national Hispanic profile.
 
-In 2020, the largest Hispanic group in metro New Orleans was Honduran,
+In 2019, the largest Hispanic group in metro New Orleans was Honduran,
 representing 25 percent of the Hispanic population. In comparison,
 Hondurans represent only 2 percent of the national Hispanic population.
 These figures point to metro New Orleans as a hub of Honduran migration.
@@ -253,7 +253,7 @@ now 22 percent of the metro population, down from 27 percent in 2000.
 Although race/ethnicity and age data is available for all eight parishes in metro New Orleans, most other demographic data (such as educational attainment, poverty, and homeownership) is available for only the three most populous parishes of Jefferson, Orleans, and St. Tammany, as well as the metro.
 </div>
 
-Educational attainment, income, and internet access {#educational-attainment-income-and-internet-access}
+Educational attainment, income, and Internet access {#educational-attainment-income-and-internet-access}
 ---------------------------------------------------
 
 Educational attainment is an important determinant of household incomes,
@@ -306,10 +306,10 @@ encompassing technology training services, workers and students are at a
 disadvantage in the job market and education system.[^6] Only 65 percent
 of households in Orleans Parish and only 70 percent of households in
 Jefferson Parish are connected to the Internet through a home-based
-internet service, such as broadband (cable, DSL, or fiber), satellite,
+Internet service, such as broadband (cable, DSL, or fiber), satellite,
 or dial-up service, compared to 75 percent nationwide. St. Tammany is
 above the national average at 81 percent of households connected to the
-Internet by a home-based service internet connection. Internet access
+Internet by a home-based service Internet connection. Internet access
 without a subscription refers to households who only have access through
 group access locations such as school, work, a library, or coffee shop.
 
@@ -319,7 +319,7 @@ access contributes positively to lessening the Digital Divide, having
 access only through a smartphone restricts ability to fully leverage the
 Internet to complete common tasks such as writing and researching a
 resume, registering your kids for school, analyzing data about your
-neighborhood, or creating content for an internet business. 14 percent
+neighborhood, or creating content for an Internet business. 14 percent
 of households in Orleans Parish only have access through a smartphone.
 This is compared to 12 percent nationwide.
 
@@ -336,7 +336,7 @@ Inequalities between individuals, households, businesses, or geographic areas wi
 
 &ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
+**Notes**: Access with no subscription refers to those who receive free Internet from their housing environment (e.g. college dorms).
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2019.</p>
 </div>
