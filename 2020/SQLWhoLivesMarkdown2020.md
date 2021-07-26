@@ -1,4 +1,5 @@
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   .default = col_double(),
     ##   SUMLEV = col_character(),
@@ -6,16 +7,17 @@
     ##   STNAME = col_character(),
     ##   CTYNAME = col_character()
     ## )
+    ## i Use `spec()` for the full column specifications.
 
-    ## See spec(...) for full column specifications.
-
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   AGEGRP = col_double(),
     ##   AgeGroupName = col_character()
     ## )
 
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   .default = col_double(),
     ##   SUMLEV = col_character(),
@@ -23,16 +25,17 @@
     ##   STNAME = col_character(),
     ##   CTYNAME = col_character()
     ## )
+    ## i Use `spec()` for the full column specifications.
 
-    ## See spec(...) for full column specifications.
-
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   YEAR = col_double(),
     ##   DateDesc = col_character()
     ## )
 
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   Variable = col_character(),
     ##   HispName = col_character(),
@@ -41,16 +44,13 @@
     ##   RaceSimple = col_character()
     ## )
 
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   .default = col_double(),
     ##   UNIVERSE = col_character()
     ## )
-
-    ## See spec(...) for full column specifications.
-
-    ## `summarise()` ungrouping output (override with `.groups` argument)
-    ## `summarise()` ungrouping output (override with `.groups` argument)
+    ## i Use `spec()` for the full column specifications.
 
 <div class="highlight" markdown="1"> 
 
@@ -185,7 +185,11 @@ falling birth rates, have brought massive changes to the metro — and
 indeed the whole country — with many more changes yet to come.[^4]
 Looking at the total population in the metro by five-year age groups for
 2000 and 2020, the baby boomers are like a demographic tidal wave.
+<<<<<<< HEAD
 Consequently, the median age of the metro has risen to 38.8 in 2019 from
+=======
+Consequently, the median age of the metro has risen to 39.0 in 2020 from
+>>>>>>> fc8cece2ed93783b725c43e919b3461f07fa8d54
 34.8 in 2000.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/age2000-1.png" style="display: block; margin: auto;" />
