@@ -547,7 +547,7 @@ povGraphic <- dodgedBar(pov,
 
 childpovGraphic <- dodgedBar(childpov, 
                              quo(pctBelowChildPov), 
-                             "Children in poverty, population for whom poverty has been determined",
+                             "Children in poverty,\npopulation for whom poverty has been determined",
                              colors = c(DCcolor.p2teal50, DCcolor.p1mediumblue),
                              comparisonyear = "1999")
 
