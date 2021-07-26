@@ -19,7 +19,7 @@ allparishes <- allparishesRaw %>%
 
 
 Overallpop <- allparishes %>%
-  filter(DateDesc =="7/1/2019 population estimate") %>% ## PEP update
+  filter(DateDesc =="7/1/2020 population estimate") %>% ## PEP update
   filter(SexName =="Total") %>%
   filter(HispName =="Total") %>%
   filter(RaceSimple =="Total") %>%

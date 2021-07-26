@@ -57,7 +57,7 @@
 This brief examines the most current demographic data released by the U.S. Census Bureau and identifies important trends in metro area parishes. Included are data on race and ethnicity, age, educational attainment, Internet access, poverty, income, children, access to vehicles, foreign-born population, geographic mobility, homeownership, homeowners with a mortgage, housing costs and affordability, single-person households, commuting, and housing stock.
 </div>
 
-The U.S. Census Bureau estimates that 1,273,979 residents were living in
+The U.S. Census Bureau estimates that 1,272,258 residents were living in
 metro New Orleans as of July 2020, a 7 percent increase from April
 2010.[^1] The metro area now has 95 percent of its 2000 population of
 1,337,726. In this brief, we examine demographic data released by the
@@ -130,7 +130,7 @@ when there were 58,545, representing 4 percent of the metro population.
 Despite these recent gains, the Hispanic share of the population in
 metro area parishes is far below the average for the United States,
 which has grown from 12 percent to 19 percent of the total U.S.
-population over these 20 years.
+population over these 19 years.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/hispanpop-1.png" style="display: block; margin: auto;" />
 
@@ -185,7 +185,7 @@ falling birth rates, have brought massive changes to the metro — and
 indeed the whole country — with many more changes yet to come.[^4]
 Looking at the total population in the metro by five-year age groups for
 2000 and 2020, the baby boomers are like a demographic tidal wave.
-Consequently, the median age of the metro has risen to 38.8 in 2020 from
+Consequently, the median age of the metro has risen to 38.8 in 2019 from
 34.8 in 2000.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/age2000-1.png" style="display: block; margin: auto;" />
@@ -204,8 +204,8 @@ Consequently, the median age of the metro has risen to 38.8 in 2020 from
 
 Meanwhile, the share of households with children is shrinking while the
 share of individuals living alone is growing — both across the metro and
-nation. As of 2020, 23 percent of households in metro New Orleans
-included children, down from 34 percent in 2000. Between 2000 and 2020,
+nation. As of 2019, 23 percent of households in metro New Orleans
+included children, down from 34 percent in 2000. Between 2000 and 2019,
 the percent of St. Tammany households with children declined from 40
 percent to 29 percent; the percent of Jefferson households with children
 declined from 33 percent to 23 percent; and the percent of Orleans
@@ -221,7 +221,7 @@ households with children declined from 30 percent to 17 percent.
 As households with children have declined, the share of single-person
 households has grown in the metro and nationwide. The metro area share
 of individuals living alone grew from 27 percent in 2000 to 34 percent
-in 2020 — similar to the trend for Jefferson Parish where the share of
+in 2019 — similar to the trend for Jefferson Parish where the share of
 households living alone grew from 27 percent to 31 percent. The increase
 was larger in Orleans Parish, which jumped from 33 to 47 percent.
 
@@ -260,7 +260,7 @@ Educational attainment is an important determinant of household incomes,
 workforce skills, and regional resiliency.[^5] The proportion of adults
 25 years and older with less than a high school education declined
 across all three of the largest parishes, leading to a metrowide
-decrease from 15 percent in 2000 to 12 percent in 2020. In the city of
+decrease from 15 percent in 2000 to 12 percent in 2019. In the city of
 New Orleans, the share of adults with less than a high school degree
 fell from 25 percent to 12 percent but is still higher than the U.S.
 average of 11 percent.
@@ -275,7 +275,7 @@ average of 11 percent.
 The metro area decline in the share of adults with less than a high
 school degree has been coupled with an increase in the share with a
 bachelor’s degree or higher. In New Orleans, 40 percent of adults 25 and
-older had a college degree in 2020 — higher than the U.S. average of 33
+older had a college degree in 2019 — higher than the U.S. average of 33
 percent, and up from 26 percent in 2000. The overall metro area share of
 adults with a bachelor’s degree grew from 23 to 32 percent — lower than
 the national average.
@@ -287,7 +287,7 @@ the national average.
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019.</p>
 </div>
 
-The 2020 median household income of $55,710 for the metro, $56,069 for
+The 2019 median household income of $55,710 for the metro, $56,069 for
 Jefferson Parish, and $45,615 for the city are significantly lower than
 the U.S. median of $65,712.
 
@@ -347,9 +347,9 @@ Poverty and access to vehicles {#poverty-and-access-to-vehicles}
 Individuals living below the poverty level indicate the economy is not
 providing all residents with the ability to meet their most basic needs,
 including food, housing, and transportation. The poverty rate in New
-Orleans decreased from 28 to 23 percent between 1999 and 2020 while the
+Orleans decreased from 28 to 23 percent between 1999 and 2019 while the
 Jefferson Parish poverty rate remained statistically unchanged. Across
-the U.S., the poverty rate has stayed the same between 1999 and 2020.
+the U.S., the poverty rate has stayed the same between 1999 and 2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/pov-1.png" style="display: block; margin: auto;" />
 
@@ -361,8 +361,8 @@ the U.S., the poverty rate has stayed the same between 1999 and 2020.
 </div>
 
 Like the overall poverty rate, the child poverty rate in New Orleans
-decreased between 1999 and 2020. In Jefferson Parish, the child poverty
-rate at 22 percent in 2020 is higher than the U.S. child poverty rate.
+decreased between 1999 and 2019. In Jefferson Parish, the child poverty
+rate at 22 percent in 2019 is higher than the U.S. child poverty rate.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/childpov-1.png" style="display: block; margin: auto;" />
 
@@ -374,7 +374,7 @@ rate at 22 percent in 2020 is higher than the U.S. child poverty rate.
 </div>
 
 Post-Katrina, the share of New Orleans households without access to a
-vehicle dropped from 27 percent in 2000 to 16 percent in 2020.
+vehicle dropped from 27 percent in 2000 to 16 percent in 2019.
 Nonetheless, at 16 percent, New Orleans’ share is more than twice as
 high as in neighboring parishes, indicating the importance of a robust
 public transportation system and comprehensive evacuation plan.
@@ -395,10 +395,10 @@ A rising foreign-born share of the population may reflect expanding
 economic opportunities for both high-skilled and low-skilled
 workers.[^7] That share of the population has grown in all three of the
 most populous metro parishes since 2000, led by a 5.4 percentage point
-gain in Jefferson Parish. By 2020, fully 12.9 percent of Jefferson
+gain in Jefferson Parish. By 2019, fully 12.9 percent of Jefferson
 Parish population was foreign-born, similar to the U.S. share. In
 Orleans and in St. Tammany parishes the foreign-born share of the
-population increased by 1.6 percentage points between 2000 and 2020.
+population increased by 1.6 percentage points between 2000 and 2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/forbor-1.png" style="display: block; margin: auto;" />
 
@@ -412,7 +412,7 @@ moved into Orleans Parish in the past year may reflect expanding
 economic opportunities. The most frequent reason people move long
 distances, such as from one state to another state, is for job
 opportunities.[^8] In addition, the young and well-educated are more
-likely than others to move long distances.[^9] In 2020, 6 percent of the
+likely than others to move long distances.[^9] In 2019, 6 percent of the
 population in Orleans Parish had moved into the parish in the past year,
 up from 3 percent in 2004. Over 57 percent of the new movers into
 Orleans Parish came from outside the state of Louisiana. In Jefferson
@@ -436,7 +436,7 @@ Homeownership {#homeownership}
 -------------
 
 Homeownership rates across the U.S. have fallen since 2000 from 66 to 64
-percent in 2020. Homeownership rates have held steady in St. Tammany
+percent in 2019. Homeownership rates have held steady in St. Tammany
 around 80 percent since 2000. In contrast, homeownership rates in New
 Orleans have increased slightly, but still are a much lower 50 percent.
 
@@ -454,7 +454,7 @@ of loan. A high share of such homeowners usually indicates residents
 living in the same house for long periods of time, and helps shield
 neighborhoods from foreclosures. The proportion of metro area homeowners
 without a mortgage has increased from 35 to 44 percent between 2000 and
-2020, driven by changes in Orleans and Jefferson. The share of
+2019, driven by changes in Orleans and Jefferson. The share of
 homeowners without a mortgage jumped from 33 to 43 percent in Orleans
 and from 35 to 48 percent in Jefferson. One reason for the surge may be
 that homeowners who returned after Katrina used insurance or Road Home
@@ -477,10 +477,10 @@ the workforce essential for a healthy economy.[^11] Severe housing cost
 burdens of more than 50 percent of household income indicate a serious
 problem in housing affordability. In 2004, the share of severely
 cost-burdened renters in New Orleans and the U.S. was 24 percent. In the
-16 years since, that share has spiked to 34 percent in Orleans while
+15 years since, that share has spiked to 34 percent in Orleans while
 remaining at 24 percent nationally. In Jefferson Parish, the share of
 renters paying more than 50 percent of household income on housing and
-utilities is 25 percent in 2020.
+utilities is 25 percent in 2019.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/rentbur-1.png" style="display: block; margin: auto;" />
 
@@ -512,7 +512,7 @@ widened.
 
 The surge in the share of severely cost-burdened renters in New Orleans
 is reflective of the surge in the median gross rent (rent plus
-utilities) in the city. From 2004 to 2020, monthly rent plus utilities
+utilities) in the city. From 2004 to 2019, monthly rent plus utilities
 rose from $758 to $1,010 in New Orleans, a 33 percent increase after
 adjusting for inflation. Meanwhile, median gross rents increased 19
 percent metrowide compared to 18 percent nationwide.
@@ -558,20 +558,20 @@ cars, more likely to bike, and more likely to move into urban
 cores.[^14]
 
 The share of commuters in New Orleans using public transportation
-declined sharply from 13 percent in 2000 to 5 percent in 2020, while the
+declined sharply from 13 percent in 2000 to 5 percent in 2019, while the
 share in Jefferson Parish has fallen from 2 percent in 2000, to 1
-percent of commuters using public transportation in 2020. But the share
+percent of commuters using public transportation in 2019. But the share
 of bike commuters in New Orleans rose to 3 percent. An analysis of 2017
-ACS data found that New Orleans had the the fifth highest share of bike
+ACS data found that New Orleans had the fifth highest share of bike
 commuting of the largest 70 cities nationwide.[^15] Meanwhile, the metro
-share of carpoolers fell from 15 percent in 2000 to 10 percent in 2020,
+share of carpoolers fell from 15 percent in 2000 to 10 percent in 2019,
 as did the Orleans Parish share from 16 percent to 10 percent.
 
 The percentage of workers who commute by driving alone has increased
 within the metro region since 2000 from 73 percent to 77 percent, driven
 by a 60 to 67 percent rise in Orleans Parish. This goes against the
 national trend, where the share driving alone remained steady between
-2000 and 2020 and where public transit use has also remained steady.
+2000 and 2019 and where public transit use has also remained steady.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/commute-1.png" style="display: block; margin: auto;" />
 
@@ -585,10 +585,10 @@ national trend, where the share driving alone remained steady between
 Data Sources / Methodology {#data-sources-methodology}
 --------------------------
 
-Data on race/ethnicity and age is from the Census Bureau vintage 2019
+Data on race/ethnicity and age is from the Census Bureau vintage 2020
 population estimates and Census 2000 Summary File 1 (SF1). Other
 demographic data is from the Census 2000 Summary File 3 (SF3) and
-American Community Survey 2004, and 2020 (single-year files).
+American Community Survey 2004, and 2019 (single-year files).
 
 Statistical tests of significance were computed at the 95% confidence
 level for all data from the American Community Survey and Census 2000
