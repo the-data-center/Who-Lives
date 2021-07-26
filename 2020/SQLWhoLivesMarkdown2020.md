@@ -185,7 +185,7 @@ falling birth rates, have brought massive changes to the metro — and
 indeed the whole country — with many more changes yet to come.[^4]
 Looking at the total population in the metro by five-year age groups for
 2000 and 2020, the baby boomers are like a demographic tidal wave.
-Consequently, the median age of the metro has risen to 39.0 in 2019 from
+Consequently, the median age of the metro has risen to 39.0 in 2020 from
 34.8 in 2000.
 
 <img src="http://www.datacenterresearch.org/a/wp-content/uploads/2021/07/age2000-1.png" style="display: block; margin: auto;" />
