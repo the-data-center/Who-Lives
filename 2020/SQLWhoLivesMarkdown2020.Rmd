@@ -203,7 +203,7 @@ makeCSS_source(
 
 
 ## Population by age and household types
-The progression of the baby boomers through the age groups, along with falling birth rates, have brought massive changes to the metro — and indeed the whole country — with many more changes yet to come.[^4] Looking at the total population in the metro by five-year age groups for 2000 and `r yearPEP`, the baby boomers are like a demographic tidal wave. Consequently, the median age of the metro has risen to 39.0 in `r year` from 34.8 in 2000.
+The progression of the baby boomers through the age groups, along with falling birth rates, have brought massive changes to the metro — and indeed the whole country — with many more changes yet to come.[^4] Looking at the total population in the metro by five-year age groups for 2000 and `r yearPEP`, the baby boomers are like a demographic tidal wave. Consequently, the median age of the metro has risen to 39.0 in `r yearPEP` from 34.8 in 2000.
 
 
 ```{r age2000, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
@@ -508,7 +508,7 @@ makeCSS_source(
 
 A metro region is partially defined by the commuting patterns of its residents. Commuting has been studied more and more as the costs and burdens (physical, mental, familial, etc.) are uncovered. In addition, studies have shown that younger generations are less likely to drive cars, more likely to bike, and more likely to move into urban cores.[^14]
 
-The share of commuters in New Orleans using public transportation declined sharply from `r round((getvalue.publictransit.no.2000)*100)` percent in 2000 to `r round((getvalue.publictransit.no.2018)*100)` percent in `r year`, while the share in Jefferson Parish has fallen from `r round(( getvalue.publictransit.jeff.2000)*100)` percent in 2000, to `r round((getvalue.publictransit.jeff.2018)*100)` percent of commuters using public transportation in `r year`. But the share of bike commuters in New Orleans rose to `r round((getvalue.bike.no.2018)*100)` percent. An analysis of 2017 ACS data found that New Orleans had the the fifth highest share of bike commuting of the largest 70 cities nationwide.[^15] Meanwhile, the metro share of carpoolers fell from `r  round((getvalue.carpool.metro.2000)*100)` percent in 2000 to `r  round((getvalue.carpool.metro.2018)*100)` percent in `r year`, as did the Orleans Parish share from `r round((getvalue.carpool.no.2000)*100)` percent to `r round((getvalue.carpool.no.2018)*100)` percent.
+The share of commuters in New Orleans using public transportation declined sharply from `r round((getvalue.publictransit.no.2000)*100)` percent in 2000 to `r round((getvalue.publictransit.no.2018)*100)` percent in `r year`, while the share in Jefferson Parish has fallen from `r round(( getvalue.publictransit.jeff.2000)*100)` percent in 2000, to `r round((getvalue.publictransit.jeff.2018)*100)` percent of commuters using public transportation in `r year`. But the share of bike commuters in New Orleans rose to `r round((getvalue.bike.no.2018)*100)` percent. An analysis of 2017 ACS data found that New Orleans had the fifth highest share of bike commuting of the largest 70 cities nationwide.[^15] Meanwhile, the metro share of carpoolers fell from `r  round((getvalue.carpool.metro.2000)*100)` percent in 2000 to `r  round((getvalue.carpool.metro.2018)*100)` percent in `r year`, as did the Orleans Parish share from `r round((getvalue.carpool.no.2000)*100)` percent to `r round((getvalue.carpool.no.2018)*100)` percent.
 
 The percentage of workers who commute by driving alone has increased within the metro region since 2000 from `r round((getvalue.drivealone.metro.2000)*100)` percent to `r round((getvalue.drivealone.metro.2018)*100)` percent, driven by a `r round((getvalue.drivealone.no.2000)*100)` to `r round((getvalue.drivealone.no.2018)*100)` percent rise in Orleans Parish. This goes against the national trend, where the share driving alone remained steady between 2000 and `r year` and where public transit use has also remained steady.
 
@@ -527,7 +527,7 @@ makeCSS_source(
 ## Data Sources / Methodology
 
 
-Data on race/ethnicity and age is from the Census Bureau vintage 2019 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
+Data on race/ethnicity and age is from the Census Bureau vintage 2020 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
 
 Statistical tests of significance were computed at the 95% confidence level for all data from the American Community Survey and Census 2000 SF3. An “*” indicates that differences between two time periods or geographies are not significant, and therefore are the result of sampling variability rather than real change in characteristics of the population.
 
