@@ -1,4 +1,5 @@
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   .default = col_double(),
     ##   SUMLEV = col_character(),
@@ -6,16 +7,17 @@
     ##   STNAME = col_character(),
     ##   CTYNAME = col_character()
     ## )
+    ## i Use `spec()` for the full column specifications.
 
-    ## See spec(...) for full column specifications.
-
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   AGEGRP = col_double(),
     ##   AgeGroupName = col_character()
     ## )
 
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   .default = col_double(),
     ##   SUMLEV = col_character(),
@@ -23,16 +25,17 @@
     ##   STNAME = col_character(),
     ##   CTYNAME = col_character()
     ## )
+    ## i Use `spec()` for the full column specifications.
 
-    ## See spec(...) for full column specifications.
-
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   YEAR = col_double(),
     ##   DateDesc = col_character()
     ## )
 
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   Variable = col_character(),
     ##   HispName = col_character(),
@@ -41,16 +44,13 @@
     ##   RaceSimple = col_character()
     ## )
 
-    ## Parsed with column specification:
+    ## 
+    ## -- Column specification --------------------------------------------------------
     ## cols(
     ##   .default = col_double(),
     ##   UNIVERSE = col_character()
     ## )
-
-    ## See spec(...) for full column specifications.
-
-    ## `summarise()` ungrouping output (override with `.groups` argument)
-    ## `summarise()` ungrouping output (override with `.groups` argument)
+    ## i Use `spec()` for the full column specifications.
 
 <div class="highlight" markdown="1"> 
 
@@ -319,8 +319,8 @@ access contributes positively to lessening the Digital Divide, having
 access only through a smartphone restricts ability to fully leverage the
 Internet to complete common tasks such as writing and researching a
 resume, registering your kids for school, analyzing data about your
-neighborhood, or creating content for an Internet business. 14 percent
-of households in Orleans Parish only have access through a smartphone.
+neighborhood, or creating content for an Internet business. In Orleans
+Parish, 14 percent of households only have access through a smartphone.
 This is compared to 12 percent nationwide.
 
 <div class="highlight" markdown="1"> 
