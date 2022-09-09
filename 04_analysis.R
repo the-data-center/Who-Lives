@@ -432,7 +432,7 @@ BlackPopyears <- allparishesRawx %>%
 
 load("inputs/blackpopestRaw.Rdata")
 BlackpopM <- blackpopestRaw %>% 
-  add_row(year = 2000, place= "Orleans", POP=323392) 
+  add_row(year = "2000", place= "Orleans", POP="323392") 
 
 
 
@@ -456,14 +456,14 @@ HispanicPopyears <- allparishesRawx %>%
 
 load("inputs/hisppopestRaw.RData")
 HISPpopM <- hisppopestRaw %>% 
-  add_row(year = 2000, place= "Orleans", POP=14826) %>% 
-  add_row(year = 2000, place= "Jefferson", POP=32418) %>%
-  add_row(year = 2000, place= "St. Tammany", POP=4737) %>% 
-  add_row(year = 2000, place= "Plaquemines", POP=433) %>% 
-  add_row(year = 2000, place= "St. Bernard", POP=3425) %>% 
-  add_row(year = 2000, place= "St. Charles", POP=1346) %>% 
-  add_row(year = 2000, place= "St. James", POP=130) %>% 
-  add_row(year = 2000, place= "St. John the Baptist", POP=1230)
+  add_row(year = "2000", place= "Orleans", POP="14826") %>% 
+  add_row(year = "2000", place= "Jefferson", POP="32418") %>%
+  add_row(year = "2000", place= "St. Tammany", POP="4737") %>% 
+  add_row(year = "2000", place= "Plaquemines", POP="433") %>% 
+  add_row(year = "2000", place= "St. Bernard", POP="3425") %>% 
+  add_row(year = "2000", place= "St. Charles", POP="1346") %>% 
+  add_row(year = "2000", place= "St. James", POP="130") %>% 
+  add_row(year = "2000", place= "St. John the Baptist", POP="1230")
 
 #For excel
 # HISPpopSheet1 <- HISPpopM %>%
