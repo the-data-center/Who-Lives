@@ -486,3 +486,9 @@ allparishesRawx <- bind_rows(dfrace, dfage) %>%
 
 save(allparishesRawx, file = "inputs/allparishesRawx.Rdata")
 
+#Pulling 2010 and 2016 Edu. Attainment by Race
+bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M','C15002_017E','C15002_017M')
+bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  "MaleGradProfMOE", "FemaleBach", "FemaleBachMOE", "FemaleGradProf", "FemaleGradProfMOE")
+bachRaw <- wholivesdatapull(bachvars, bachnames, year = 2016)
+save(bachRaw, file = "inputs/bachRaw.RData")
+
