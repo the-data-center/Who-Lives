@@ -1,5 +1,6 @@
-library(ggrepel)
-
+###
+### Median household income ###
+###
 load("indicator expansion drafts/medhhRaw.RData")
 medhh <- medhhRaw  %>%
   mutate(placenames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
@@ -7,6 +8,7 @@ medhh <- medhhRaw  %>%
   select(-place, -placenames, -contains("MOE")) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val")
 
+### Across geos median hh income bar chart ###
 medhh.totals <- medhh%>%
   filter(var == "MedianHHIncome")%>%
   mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
@@ -64,7 +66,9 @@ medhh.raceGeos_chart <- medhh.race %>%
 ggsave(medhh.raceGeos_chart,filename = "indicator expansion drafts/graphics/medhh.raceGeos.png",
        width = 10, height = 6, units = "in")
 
-
+###
+### Educational attainment ###
+###
 load("indicator expansion drafts/bachRaw.RData")
 bach <- bachRaw %>%
   mutate(totbach = MaleBach + FemaleBach,
@@ -93,6 +97,7 @@ bach <- bachRaw %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
+### Across geos educational attainment bar chart ###
 
 bach.totals <- bach %>%
   filter(var == "pctbach") %>%
@@ -153,7 +158,9 @@ bach.raceGeos_chart <- bach.race %>%
 ggsave(bach.raceGeos_chart,filename = "indicator expansion drafts/graphics/bach.raceGeos.png",
        width = 10, height = 6, units = "in")
   
-
+###
+### Poverty ###
+###
 load("indicator expansion drafts/povRaw.RData")
 pov <- povRaw %>%
   mutate(
@@ -174,6 +181,7 @@ pov <- povRaw %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
+### Across geos pov bar chart ###
 pov.totals <- pov %>% 
   filter(var == "pctpov") %>%
   mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
@@ -231,8 +239,9 @@ pov.raceGeos_chart <- pov.race %>%
 ggsave(pov.raceGeos_chart,filename = "indicator expansion drafts/graphics/pov.raceGeos.png",
        width = 10, height = 6, units = "in")
 
-
-
+###
+### Child poverty ###
+###
 load("indicator expansion drafts/childpovRaw.RData")
 childpov <- childpovRaw %>%
   mutate(
@@ -273,6 +282,7 @@ childpov <- childpovRaw %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
+### Across geos child pov bar chart ###
 childpov.totals <- childpov %>% 
   filter(var == "pctBelowChildPov") %>%
   mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
@@ -329,3 +339,35 @@ childpov.raceGeos_chart <- childpov.race %>%
        y="")
 ggsave(childpov.raceGeos_chart,filename = "indicator expansion drafts/graphics/childpov.raceGeos.png",
        width = 10, height = 6, units = "in")
+
+### Historical child pov line chart ###
+childPov.hist <- childPovProspInd %>% 
+  rename(val = childPov) %>%
+  mutate(var = Race,
+         var = ifelse(grepl("Bla",var), "Black", var),
+         var = ifelse(grepl("Lat",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("Whi",var), "White,\nnon-Hispanic", var)) %>%
+  select (-Geography, -Race) %>% ## some of the tables include US in the geography, so you'll have to filter those
+  bind_rows(childpov %>%
+              filter(place.fac == "Orleans",
+                     !grepl("asian",var)) %>% ## remove asian numbers 
+              select(-place.fac) %>%
+              mutate(Year = 2021, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+                      var = ifelse(var == "pctBelowChildPov", "All", var),
+                      var = ifelse(grepl("blk",var), "Black", var),
+                      var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+                      var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)))%>%
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+childPov.hist_chart <- childPov.hist %>%
+  ggplot()+
+  geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16)) + 
+  labs(title = "Child poverty rate by race/ethnicity since 1980, Orleans Parish",
+       x="",
+       y="")
