@@ -8,6 +8,21 @@ medhh <- medhhRaw  %>%
   select(-place, -placenames, -contains("MOE")) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val")
 
+### median hh income adjusted to 2021 dollars HT ###
+
+#using https://data.bls.gov/cgi-bin/cpicalc.pl from january to january
+#1979 to 2021 = 3.83
+#1989 to 2021 = 2.16
+#1999 to 2021 = 1.59
+#2010 to 2021 = 1.21
+#2016 to 2021 = 1.10
+
+medhhinc_adjusted21 <- medHHincProspInd %>% mutate(inc_adj21 = case_when(Year == 1979 ~ `Median Household Income` * 3.83,
+                                                                         Year == 1989 ~ `Median Household Income` * 2.16,
+                                                                         Year == 1999 ~ `Median Household Income` * 1.59,
+                                                                         Year == 2010 ~ `Median Household Income` * 1.21,
+                                                                         Year == 2016 ~ `Median Household Income` * 1.10))
+
 ### Across geos median hh income bar chart ###
 medhh.totals <- medhh%>%
   filter(var == "MedianHHIncome")%>%
@@ -363,7 +378,7 @@ childPov.hist_chart <- childPov.hist %>%
   ggplot()+
   geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2yellow)) +
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -382,7 +397,7 @@ totalPov.hist_chart <- totalPov.hist %>%
   ggplot()+
   geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2yellow)) +
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -402,7 +417,7 @@ EduAtt.hist_chart <- EduAtt.hist %>%
   ggplot()+
   geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2yellow)) +
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
