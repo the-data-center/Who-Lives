@@ -46,7 +46,78 @@ Bach00 <- Bach00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is 
   pivot_longer(cols = pctWhiteBach:pctHispBach, values_to = "val") %>% 
   select(year, val, name)
 
-Bach_TS <- rbind(Bach80, Bach90, Bach00) %>% mutate(var = case_when(name == "pctWhiteBach" ~ "White, non-Hispanic",
-                                                                           name == "pctBlackBach" ~ "Black",
-                                                                           name == "pctHispBach" ~ "Hispanic, any race")) %>% select(-name)
+
+#pulling ACS1 for 2010 data
+
+# library(tidycensus)
+# View(load_variables(year = 2016, dataset = "acs1"))
+
+
+#Bachelor's degree or higher, adults 25 and older
+
+bachvars10 <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M',
+              'C15002_017E','C15002_017M',
+              'C15002B_001E','C15002B_001M','C15002B_006E','C15002B_006M','C15002B_011E','C15002B_011M',
+              'C15002D_001E','C15002D_001M','C15002D_006E','C15002D_006M','C15002D_011E','C15002D_011M',
+              'C15002H_001E','C15002H_001M','C15002H_006E','C15002H_006M','C15002H_011E','C15002H_011M',
+              'C15002I_001E','C15002I_001M','C15002I_006E','C15002I_006M','C15002I_011E','C15002I_011M')
+bachnames10 <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  "MaleGradProfMOE", "FemaleBach", 
+               "FemaleBachMOE", "FemaleGradProf", "FemaleGradProfMOE",
+               "Total_blk", "TotalMOE_blk", "MaleBach_blk", "MaleBachMOE_blk",  "FemaleBach_blk", 
+               "FemaleBachMOE_blk",
+               "Total_asian", "TotalMOE_asian", "MaleBach_asian", "MaleBachMOE_asian", "FemaleBach_asian", 
+               "FemaleBachMOE_asian", 
+               "Total_wht", "TotalMOE_wht", "MaleBach_wht", "MaleBachMOE_wht",  "FemaleBach_wht", 
+               "FemaleBachMOE_wht", 
+               "Total_hisp", "TotalMOE_hisp", "MaleBach_hisp", "MaleBachMOE_hisp", "FemaleBach_hisp", 
+               "FemaleBachMOE_hisp")
+Bach10 <- wholivesdatapull(bachvars10, bachnames10, year = 2010)
+
+Bach10 <- Bach10 %>%
+  filter(place == "071") %>% 
+  transmute(year = 2010,
+            pctWhiteBach = (MaleBach_wht + FemaleBach_wht) / Total_wht,
+            pctBlackBach = (MaleBach_blk + FemaleBach_blk) / Total_blk,
+            pctHispBach = (MaleBach_hisp + FemaleBach_hisp) / Total_hisp) %>%
+  pivot_longer(cols = pctWhiteBach:pctHispBach, values_to = "val") %>% 
+  select(year, val, name)
+
+# Pulling ACS1 for 2016 data
+
+#Bachelor's degree or higher, adults 25 and older
+
+bachvars16 <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M',
+              'C15002_017E','C15002_017M',
+              'C15002B_001E','C15002B_001M','C15002B_006E','C15002B_006M','C15002B_011E','C15002B_011M',
+              'C15002D_001E','C15002D_001M','C15002D_006E','C15002D_006M','C15002D_011E','C15002D_011M',
+              'C15002H_001E','C15002H_001M','C15002H_006E','C15002H_006M','C15002H_011E','C15002H_011M',
+              'C15002I_001E','C15002I_001M','C15002I_006E','C15002I_006M','C15002I_011E','C15002I_011M')
+bachnames16 <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  "MaleGradProfMOE", "FemaleBach", 
+               "FemaleBachMOE", "FemaleGradProf", "FemaleGradProfMOE",
+               "Total_blk", "TotalMOE_blk", "MaleBach_blk", "MaleBachMOE_blk",  "FemaleBach_blk", 
+               "FemaleBachMOE_blk",
+               "Total_asian", "TotalMOE_asian", "MaleBach_asian", "MaleBachMOE_asian", "FemaleBach_asian", 
+               "FemaleBachMOE_asian", 
+               "Total_wht", "TotalMOE_wht", "MaleBach_wht", "MaleBachMOE_wht",  "FemaleBach_wht", 
+               "FemaleBachMOE_wht", 
+               "Total_hisp", "TotalMOE_hisp", "MaleBach_hisp", "MaleBachMOE_hisp", "FemaleBach_hisp", 
+               "FemaleBachMOE_hisp")
+Bach16<- wholivesdatapull(bachvars16, bachnames16, year = 2016)
+
+Bach16 <- Bach16 %>%
+  filter(place == "071") %>% 
+  transmute(year = 2016,
+            pctWhiteBach = (MaleBach_wht + FemaleBach_wht) / Total_wht,
+            pctBlackBach = (MaleBach_blk + FemaleBach_blk) / Total_blk,
+            pctHispBach = (MaleBach_hisp + FemaleBach_hisp) / Total_hisp) %>%
+  pivot_longer(cols = pctWhiteBach:pctHispBach, values_to = "val") %>% 
+  select(year, val, name)
+
+
+#joining the TS data
+Bach_TS <- rbind(Bach80, Bach90, Bach00, Bach10, Bach16) %>%
+  mutate(var = case_when(name == "pctWhiteBach" ~ "White, non-Hispanic",
+                         name == "pctBlackBach" ~ "Black",
+                         name == "pctHispBach" ~ "Hispanic, any race")) %>% select(-name)
+
 write_csv(Bach_TS, "educationalAttainment_byrace.csv")
