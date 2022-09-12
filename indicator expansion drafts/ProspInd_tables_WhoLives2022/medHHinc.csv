@@ -1,76 +1,21 @@
-Geography,Year,Race of Head of Household,Median Household Income,inc_adj21
-Metro New Orleans,1979,All,53526,205004.58000000002
-Metro New Orleans,1989,All,48151,104006.16
-Metro New Orleans,1999,All,51916,82546.44
-Metro New Orleans,2010,All,51670,62520.7
-Metro New Orleans,2016,All,48804,53684.4
-Metro New Orleans,1979,Black or African American,31617,121093.11
-Metro New Orleans,1989,Black or African American,27444,59279.04
-Metro New Orleans,1999,Black or African American,33997,54055.23
-Metro New Orleans,2010,Black or African American,33787,40882.27
-Metro New Orleans,2016,Black or African American,29296,32225.600000000002
-Metro New Orleans,1979,Hispanic or Latino,51504,197260.32
-Metro New Orleans,1989,Hispanic or Latino,46721,100917.36
-Metro New Orleans,1999,Hispanic or Latino,49695,79015.05
-Metro New Orleans,2010,Hispanic or Latino,49093,59402.53
-Metro New Orleans,2016,Hispanic or Latino,37463,41209.3
-Metro New Orleans,1979,White,63818,244422.94
-Metro New Orleans,1989,White,59238,127954.08
-Metro New Orleans,1999,White,63747,101357.73000000001
-Metro New Orleans,2010,White,63439,76761.19
-Metro New Orleans,2016,White,62126,68338.6
-Metro New Orleans,1979,"White, not Hispanic",NA,NA
-Metro New Orleans,1989,"White, not Hispanic",59549,128625.84000000001
-Metro New Orleans,1999,"White, not Hispanic",64264,102179.76000000001
-Metro New Orleans,2010,"White, not Hispanic",64504,78049.84
-Metro New Orleans,2016,"White, not Hispanic",64152,70567.20000000001
-New Orleans,1979,All,39813,152483.79
-New Orleans,1989,All,36400,78624
-New Orleans,1999,All,39886,63418.740000000005
-New Orleans,2010,All,42253,51126.13
-New Orleans,2016,All,38681,42549.100000000006
-New Orleans,1979,Black or African American,29814,114187.62
-New Orleans,1989,Black or African American,25675,55458.00000000001
-New Orleans,1999,Black or African American,31548,50161.32
-New Orleans,2010,Black or African American,30139,36468.19
-New Orleans,2016,Black or African American,25324,27856.4
-New Orleans,1979,Hispanic or Latino,39062,149607.46
-New Orleans,1989,Hispanic or Latino,37619,81257.04000000001
-New Orleans,1999,Hispanic or Latino,41961,66717.99
-New Orleans,2010,Hispanic or Latino,40593,49117.53
-New Orleans,2016,Hispanic or Latino,35683,39251.3
-New Orleans,1979,White,52589,201415.87
-New Orleans,1989,White,53941,116512.56000000001
-New Orleans,1999,White,58872,93606.48000000001
-New Orleans,2010,White,63304,76597.84
-New Orleans,2016,White,65689,72257.90000000001
-New Orleans,1979,"White, not Hispanic",NA,NA
-New Orleans,1989,"White, not Hispanic",54736,118229.76000000001
-New Orleans,1999,"White, not Hispanic",59373,94403.07
-New Orleans,2010,"White, not Hispanic",63875,77288.75
-New Orleans,2016,"White, not Hispanic",67884,74672.40000000001
-United States,1979,All,56754,217367.82
-United States,1989,All,59210,127893.6
-United States,1999,All,61731,98152.29000000001
-United States,2010,All,56052,67822.92
-United States,2016,All,57617,63378.700000000004
-United States,1979,Black or African American,36878,141242.74
-United States,1989,Black or African American,38923,84073.68000000001
-United States,1999,Black or African American,43252,68770.68000000001
-United States,2010,Black or African American,37607,45504.47
-United States,2016,Black or African American,38555,42410.5
-United States,1979,Hispanic or Latino,NA,NA
-United States,1989,Hispanic or Latino,47587,102787.92000000001
-United States,1999,Hispanic or Latino,49504,78711.36
-United States,2010,Hispanic or Latino,44985,54431.85
-United States,2016,Hispanic or Latino,46882,51570.200000000004
-United States,1979,White,59582,228199.06
-United States,1989,White,61927,133762.32
-United States,1999,White,65690,104447.1
-United States,2010,White,58778,71121.38
-United States,2016,White,61349,67483.90000000001
-United States,1979,"White, not Hispanic",NA,NA
-United States,1989,"White, not Hispanic",62394,134771.04
-United States,1999,"White, not Hispanic",66689,106035.51000000001
-United States,2010,"White, not Hispanic",60668,73408.28
-United States,2016,"White, not Hispanic",63155,69470.5
+var,Year,value,inc_adj21
+Overall,1979,11814,45247.62
+Overall,1989,18477,39910.32
+Overall,1999,27133,43141.47
+Overall,2010,37726,45648.46
+Overall,2016,38681,42549.100000000006
+Black,1979,8847,33884.01
+Black,1989,13033,28151.280000000002
+Black,1999,21461,34122.990000000005
+Black,2010,26910,32561.1
+Black,2016,25324,27856.4
+"Hispanic, Any Race",1979,11591,44393.53
+"Hispanic, Any Race",1989,19096,41247.36
+"Hispanic, Any Race",1999,28545,45386.55
+"Hispanic, Any Race",2010,36244,43855.24
+"Hispanic, Any Race",2016,35683,39251.3
+"White, Alone",1979,15605,59767.15
+"White, Alone",1989,27381,59142.96000000001
+"White, Alone",1999,40049,63677.91
+"White, Alone",2010,56521,68390.41
+"White, Alone",2016,65689,72257.90000000001

@@ -13,6 +13,17 @@ medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE",
 medhhRaw <- wholivesdatapull(medhhvars, medhhnames)
 save(medhhRaw, file = "indicator expansion drafts/medhhRaw.RData")
 
+medhh_unadjusted <- read_xlsx("indicator expansion drafts/ProspInd_tables_WhoLives2022/Copy_MedianInc.xlsx", range = "A1:H7") %>%
+  transmute("var" = `...1`,
+            `1979` = as.character(`1979 (1979$)`),
+            `1989`= as.character(`1989 (1989$)`),
+            `1999` = as.character(`1999 (1999$)`),
+            `2010` = `2010 (2010$)...5`,
+            `2016` = `2016 (2016$)...7`,
+            `2010MOE` = `2010 (2010$)...6`,
+            `2016MOE` = `2016 (2016$)...8`) %>% na.omit()
+medhh_unadjusted <- medhh_unadjusted %>% pivot_longer(cols = `1979`:`2016`, names_to = "Year") %>% select(-c(`2010MOE`, `2016MOE`))
+
 #Bachelor's degree or higher, adults 25 and older
 
 bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M',

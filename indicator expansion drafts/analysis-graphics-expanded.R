@@ -17,12 +17,13 @@ medhh <- medhhRaw  %>%
 #2010 to 2021 = 1.21
 #2016 to 2021 = 1.10
 
-medhhinc_adjusted21 <- medHHincProspInd %>% mutate(inc_adj21 = case_when(Year == 1979 ~ `Median Household Income` * 3.83,
-                                                                         Year == 1989 ~ `Median Household Income` * 2.16,
-                                                                         Year == 1999 ~ `Median Household Income` * 1.59,
-                                                                         Year == 2010 ~ `Median Household Income` * 1.21,
-                                                                         Year == 2016 ~ `Median Household Income` * 1.10))
-write_csv(medhhinc_adjusted21, "ProspInd_tables_WhoLives2022/medHHinc.csv")
+medhhinc_adjusted21 <- medhh_unadjusted %>% mutate(value = as.numeric(value),
+                                                   inc_adj21 = case_when(Year == 1979 ~ value * 3.83,
+                                                                         Year == 1989 ~ value * 2.16,
+                                                                         Year == 1999 ~ value * 1.59,
+                                                                         Year == 2010 ~ value * 1.21,
+                                                                         Year == 2016 ~ value * 1.10))
+write_csv(medhhinc_adjusted21, "indicator expansion drafts/ProspInd_tables_WhoLives2022/medHHinc.csv")
 
 ### Across geos median hh income bar chart ###
 medhh.totals <- medhh%>%
