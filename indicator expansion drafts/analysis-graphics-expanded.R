@@ -22,6 +22,7 @@ medhhinc_adjusted21 <- medHHincProspInd %>% mutate(inc_adj21 = case_when(Year ==
                                                                          Year == 1999 ~ `Median Household Income` * 1.59,
                                                                          Year == 2010 ~ `Median Household Income` * 1.21,
                                                                          Year == 2016 ~ `Median Household Income` * 1.10))
+write_csv(medhhinc_adjusted21, "ProspInd_tables_WhoLives2022/medHHinc.csv")
 
 ### Across geos median hh income bar chart ###
 medhh.totals <- medhh%>%
