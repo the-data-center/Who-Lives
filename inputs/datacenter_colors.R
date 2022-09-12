@@ -96,3 +96,4 @@ for (i in 1:dim(DCcolors)[1]){
 DCcolorsPrimary <- as.character(DCcolors$hex[1:5])
 DCcolorsSecondary <- as.character(DCcolors$hex[6:length(DCcolors$hex)])
 
+DCcolor.p3yellowochre <- "#D7892C"
