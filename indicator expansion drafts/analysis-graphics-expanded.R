@@ -363,7 +363,7 @@ childPov.hist_chart <- childPov.hist %>%
   ggplot()+
   geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2yellow)) +
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -374,7 +374,7 @@ childPov.hist_chart <- childPov.hist %>%
 
 ### Historical total pov line chart ###
 
-totalPov <- read_csv("C:/Users/HaleighTomlin/OneDrive - Nonprofit Knowledge Works/Desktop/Who-Lives/indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
+totalPov <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
  totalPov.hist <- totalPov %>% 
    mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
 
@@ -394,7 +394,7 @@ totalPov.hist_chart <- totalPov.hist %>%
 
 ### Historical educational attainment line chart ###
 
-EduAtt <- read_csv("C:/Users/HaleighTomlin/OneDrive - Nonprofit Knowledge Works/Desktop/Who-Lives/indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
+EduAtt <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
 EduAtt.hist <- EduAtt %>% 
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
 
@@ -402,7 +402,7 @@ EduAtt.hist_chart <- EduAtt.hist %>%
   ggplot()+
   geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2yellow)) +
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
