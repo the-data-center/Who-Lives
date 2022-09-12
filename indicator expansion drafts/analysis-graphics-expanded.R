@@ -390,7 +390,7 @@ childPov.hist_chart <- childPov.hist %>%
 
 ### Historical total pov line chart ###
 
-totalPov <- read_csv("C:/Users/HaleighTomlin/OneDrive - Nonprofit Knowledge Works/Desktop/Who-Lives/indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
+totalPov <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
  totalPov.hist <- totalPov %>% 
    mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
 
@@ -410,7 +410,7 @@ totalPov.hist_chart <- totalPov.hist %>%
 
 ### Historical educational attainment line chart ###
 
-EduAtt <- read_csv("C:/Users/HaleighTomlin/OneDrive - Nonprofit Knowledge Works/Desktop/Who-Lives/indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
+EduAtt <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
 EduAtt.hist <- EduAtt %>% 
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
 

@@ -132,4 +132,4 @@ Bach_TS <- rbind(Bach80, Bach90, Bach00, Bach10, Bach16) %>%
                          name == "pctBlackBach" ~ "Black",
                          name == "pctHispBach" ~ "Hispanic,\nany race")) %>% select(-name)
 
-write_csv(Bach_TS, "educationalAttainment_byrace.csv")
+write_csv(Bach_TS, "indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")

@@ -104,4 +104,4 @@ pov_TS <- rbind(pov80, hisppov80, pov90, pov00, pov10, pov16) %>% mutate(var = c
                                                                            name == "pctBlackpov" ~ "Black",
                                                                            name == "pctHisppov" ~ "Hispanic,\nany race")) %>% select(-name)
 
-write_csv(pov_TS, "C:/Users/HaleighTomlin/OneDrive - Nonprofit Knowledge Works/Desktop/Who-Lives/indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
+write_csv(pov_TS, "indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
