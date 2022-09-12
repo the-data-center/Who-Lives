@@ -308,7 +308,7 @@ childpov.raceGeos_chart <- childpov.race %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2violet,DCcolor.p3yellowochre),
+  scale_fill_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2violet,DCcolor.p2yellow), #yellowochre wasn't found for me
                     limits = levels(childpov.race$var.fac)) +
   geom_segment(data= childpov.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray") +
   geom_label(data= childpov.totals %>% filter(place.fac=="Orleans"),
@@ -363,7 +363,7 @@ childPov.hist_chart <- childPov.hist %>%
   ggplot()+
   geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2yellow)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -371,3 +371,43 @@ childPov.hist_chart <- childPov.hist %>%
   labs(title = "Child poverty rate by race/ethnicity since 1980, Orleans Parish",
        x="",
        y="")
+
+### Historical total pov line chart ###
+
+totalPov <- read_csv("C:/Users/HaleighTomlin/OneDrive - Nonprofit Knowledge Works/Desktop/Who-Lives/indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
+ totalPov.hist <- totalPov %>% 
+   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+totalPov.hist_chart <- totalPov.hist %>%
+  ggplot()+
+  geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2yellow)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16)) + 
+  labs(title = "Poverty rate by race/ethnicity since 1980, Orleans Parish",
+       x="",
+       y="") + xlim(1980,2021)
+
+
+### Historical educational attainment line chart ###
+
+EduAtt <- read_csv("C:/Users/HaleighTomlin/OneDrive - Nonprofit Knowledge Works/Desktop/Who-Lives/indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
+EduAtt.hist <- EduAtt %>% 
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+EduAtt.hist_chart <- EduAtt.hist %>%
+  ggplot()+
+  geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2yellow)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16)) + 
+  labs(title = "Educational Attainment by race/ethnicity since 1980, Orleans Parish",
+       x="",
+       y="") + xlim(1980,2021)
+
