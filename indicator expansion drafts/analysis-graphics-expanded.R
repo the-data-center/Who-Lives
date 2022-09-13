@@ -3,27 +3,11 @@
 ###
 load("indicator expansion drafts/medhhRaw.RData")
 medhh <- medhhRaw  %>%
-  mutate(placenames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
+  mutate(placenames = c( "St. Tammany","Jefferson", "Orleans", "Metro", "U.S."))  %>% 
   mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
   select(-place, -placenames, -contains("MOE")) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val")
 
-### median hh income adjusted to 2021 dollars HT ###
-
-#using https://data.bls.gov/cgi-bin/cpicalc.pl from january to january
-#1979 to 2021 = 3.83
-#1989 to 2021 = 2.16
-#1999 to 2021 = 1.59
-#2010 to 2021 = 1.21
-#2016 to 2021 = 1.10
-
-medhhinc_adjusted21 <- medhh_unadjusted %>% mutate(value = as.numeric(value),
-                                                   inc_adj21 = case_when(Year == 1979 ~ value * 3.83,
-                                                                         Year == 1989 ~ value * 2.16,
-                                                                         Year == 1999 ~ value * 1.59,
-                                                                         Year == 2010 ~ value * 1.21,
-                                                                         Year == 2016 ~ value * 1.10))
-write_csv(medhhinc_adjusted21, "indicator expansion drafts/ProspInd_tables_WhoLives2022/medHHinc.csv")
 
 ### Across geos median hh income bar chart ###
 medhh.totals <- medhh%>%
@@ -83,12 +67,67 @@ medhh.raceGeos_chart <- medhh.race %>%
 ggsave(medhh.raceGeos_chart,filename = "indicator expansion drafts/graphics/medhh.raceGeos.png",
        width = 10, height = 6, units = "in")
 
+### Historical educational attainment line chart ###
+
+## median hh income adjusted to 2021 dollars HT ###
+
+#using https://data.bls.gov/cgi-bin/cpicalc.pl from january to january
+#1979 to 2021 = 3.83
+#1989 to 2021 = 2.16
+#1999 to 2021 = 1.59
+#2010 to 2021 = 1.21
+#2016 to 2021 = 1.10
+
+medhhinc_adjusted21 <- medhh_unadjusted %>% mutate(value = as.numeric(value),
+                                                   inc_adj21 = case_when(Year == 1979 ~ value * 3.83,
+                                                                         Year == 1989 ~ value * 2.16,
+                                                                         Year == 1999 ~ value * 1.59,
+                                                                         Year == 2010 ~ value * 1.21,
+                                                                         Year == 2016 ~ value * 1.10))
+write_csv(medhhinc_adjusted21, "indicator expansion drafts/ProspInd_tables_WhoLives2022/medHHinc.csv")
+
+medhh.hist <- medhhinc_adjusted21 %>% 
+  select(-value) %>%
+  rename(val = inc_adj21) %>%
+  mutate(Year = as.numeric(Year),
+         var = ifelse(var == "Overall", "All", var),
+         var = ifelse(grepl("Bla",var), "Black", var),
+         var = ifelse(grepl("Hispanic,",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("Whi",var), "White,\nnon-Hispanic", var)) %>%
+  bind_rows(medhh %>%
+              filter(place.fac == "Orleans",
+                     !grepl("asian",var)) %>% ## remove asian numbers 
+              select(-place.fac) %>%
+              mutate(Year = 2021, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+                     var = ifelse(var == "MedianHHIncome", "All", var),
+                     var = ifelse(grepl("blk",var), "Black", var),
+                     var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+                     var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)))%>%
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+medhh.hist_chart <- medhh.hist %>%
+  ggplot()+
+  geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
+  scale_y_continuous(labels = dollar_format(accuracy = 1)) + 
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16)) + 
+  labs(title = "Median household income by race/ethnicity since 1980, Orleans Parish",
+       x="",
+       y="")
+
+ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hist.png",
+       width = 10, height = 6, units = "in")
+
+
 ###
 ### Educational attainment ###
 ###
 load("indicator expansion drafts/bachRaw.RData")
 bach <- bachRaw %>%
-  mutate(totbach = MaleBach + FemaleBach,
+  mutate(totbach = MaleBach + FemaleBach + MaleGradProf + FemaleGradProf,
          totbach_blk = MaleBach_blk + FemaleBach_blk,
          totbach_wht = MaleBach_wht + FemaleBach_wht,
          totbach_hisp = MaleBach_hisp + FemaleBach_hisp,
@@ -98,7 +137,7 @@ bach <- bachRaw %>%
          pctbach_wht = totbach_wht / Total_wht,
          pctbach_hisp = totbach_hisp / Total_hisp,
          pctbach_asian = totbach_asian / Total_asian,
-         moeagg = moeagg(cbind(MaleBachMOE, FemaleBachMOE)),
+         moeagg = moeagg(cbind(MaleBachMOE, FemaleBachMOE, MaleGradProfMOE, FemaleGradProfMOE)),
          moeagg_blk = moeagg(cbind(MaleBachMOE_blk, FemaleBachMOE_blk)),
          moeagg_wht = moeagg(cbind(MaleBachMOE_wht, FemaleBachMOE_wht)),
          moeagg_hisp = moeagg(cbind(MaleBachMOE_hisp, FemaleBachMOE_hisp)),
@@ -174,7 +213,29 @@ bach.raceGeos_chart <- bach.race %>%
        y="")
 ggsave(bach.raceGeos_chart,filename = "indicator expansion drafts/graphics/bach.raceGeos.png",
        width = 10, height = 6, units = "in")
-  
+
+### Historical educational attainment line chart ###
+
+EduAtt <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
+EduAtt.hist <- EduAtt %>% 
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+EduAtt.hist_chart <- EduAtt.hist %>%
+  ggplot()+
+  geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16)) + 
+  labs(title = "Bachelor's degree or higher, adults 25 years or older by race/ethnicity since 1980,\nOrleans Parish",
+       x="",
+       y="") + xlim(1980,2021)
+
+ggsave(EduAtt.hist_chart,filename = "indicator expansion drafts/graphics/bach.hist.png",
+       width = 10, height = 6, units = "in")
+
 ###
 ### Poverty ###
 ###
@@ -256,6 +317,28 @@ pov.raceGeos_chart <- pov.race %>%
 ggsave(pov.raceGeos_chart,filename = "indicator expansion drafts/graphics/pov.raceGeos.png",
        width = 10, height = 6, units = "in")
 
+
+### Historical total pov line chart ###
+
+totalPov <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
+totalPov.hist <- totalPov %>% 
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+totalPov.hist_chart <- totalPov.hist %>%
+  ggplot()+
+  geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16)) + 
+  labs(title = "Poverty rate by race/ethnicity since 1980, Orleans Parish",
+       x="",
+       y="") + xlim(1980,2021)
+
+ggsave(totalPov.hist_chart,filename = "indicator expansion drafts/graphics/pov.hist.png",
+       width = 10, height = 6, units = "in")
 ###
 ### Child poverty ###
 ###
@@ -389,42 +472,122 @@ childPov.hist_chart <- childPov.hist %>%
        x="",
        y="")
 
-### Historical total pov line chart ###
+ggsave(childPov.hist_chart,filename = "indicator expansion drafts/graphics/childpov.hist.png",
+       width = 10, height = 6, units = "in")
 
-totalPov <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
- totalPov.hist <- totalPov %>% 
-   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
 
-totalPov.hist_chart <- totalPov.hist %>%
-  ggplot()+
-  geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
+###
+### Homeownership ###
+###
+load("indicator expansion drafts/hoRaw.RData")
+ho <- hoRaw %>%
+  mutate(Ownerpct = Owner / Total,
+         Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
+         Ownerpct_blk = Owner_blk / Total_blk,
+         Ownermoeprop_blk = moeprop(y=Total_blk,moex = OwnerMOE_blk,moey = TotalMOE_blk,p=Ownerpct_blk),
+         Ownerpct_wht = Owner_wht / Total_wht,
+         Ownermoeprop_wht = moeprop(y=Total_wht,moex = OwnerMOE_wht,moey = TotalMOE_wht,p=Ownerpct_wht),
+         Ownerpct_hisp = Owner_hisp / Total_hisp,
+         Ownermoeprop_hisp = moeprop(y=Total_hisp,moex = OwnerMOE_hisp,moey = TotalMOE_hisp,p=Ownerpct_hisp),
+         Ownerpct_asian = Owner_asian / Total_asian,
+         #Ownermoeprop_asian = moeprop(y=Total_asian,moex = OwnerMOE_asian,moey = TotalMOE_asian,p=Ownerpct_asian)
+  )%>%
+  select(place,contains("pct")) %>%
+  mutate(placenames = c("St. Tammany", "Jefferson","Orleans",  "Metro", "U.S."))  %>% 
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
+  select(-place,-placenames) %>%
+  pivot_longer(-place.fac,names_to = "var",values_to = "val") 
+
+### Across geos homeownership bar chart ###
+ho.totals <- ho %>% 
+  filter(var == "Ownerpct") %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+ho.race <- ho %>%
+  filter(var != "Ownerpct") %>%
+  mutate(var = ifelse(grepl("asian",var), "Asian",var),
+         var = ifelse(grepl("blk",var), "Black", var),
+         var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+ho.raceGeos_chart <- ho.race %>%
+  ggplot(aes(x=place.fac, y=val, fill=var.fac)) + 
+  geom_bar(stat="identity",
+           position = position_dodge(),
+           width = .6,
+           color='gray50') +    #bar outlineas.factor
+  geom_text(data = subset(ho.race, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = scales::percent(val,accuracy = 1)),
+            position=position_dodge(width = .7),
+            vjust = -.7,
+            size=2.75,
+            family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
+  scale_fill_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2violet,DCcolor.p3yellowochre),
+                    limits = levels(ho.race$var.fac)) +
+  geom_segment(data= ho.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray") +
+  geom_label(data= ho.totals %>% filter(place.fac=="Orleans"),
+             aes(label = paste0("Overall:",scales::percent(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray") +
+  geom_segment(data= ho.totals %>% filter(place.fac=="Jefferson"),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2) +
+  geom_label(data= ho.totals %>% filter(place.fac=="Jefferson"),
+             aes(label = paste0("Overall:",scales::percent(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap") +
+  geom_segment(data= ho.totals %>% filter(place.fac=="St. Tammany"),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2) +
+  geom_label(data= ho.totals %>% filter(place.fac=="St. Tammany"),
+             aes(label = paste0("Overall:",scales::percent(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap") +
+  geom_segment(data= ho.totals %>% filter(place.fac=="Metro"),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2) +
+  geom_label(data= ho.totals %>% filter(place.fac=="Metro"),
+             aes(label = paste0("Overall:",scales::percent(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap") +
+  geom_segment(data= ho.totals %>% filter(place.fac=="U.S."),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2) +
+  geom_label(data= ho.totals %>% filter(place.fac=="U.S."),
+             aes(label = paste0("Overall:",scales::percent(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap") +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16)) + 
-  labs(title = "Poverty rate by race/ethnicity since 1980, Orleans Parish",
+  labs(title = "Homeownership rate by race/ethnicity",
        x="",
-       y="") + xlim(1980,2021)
+       y="")
+ggsave(ho.raceGeos_chart,filename = "indicator expansion drafts/graphics/homeownership.raceGeos.png",
+       width = 10, height = 6, units = "in")
 
-
-### Historical educational attainment line chart ###
-
-EduAtt <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
-EduAtt.hist <- EduAtt %>% 
+### Historical child homeownership line chart ###
+homeownership.hist <- homeownershipProspInd %>% 
+  filter(Geography == "New Orleans") %>%
+  rename(val = pctHomeownership) %>%
+  mutate(var = Race,
+         var = ifelse(grepl("Bla",var), "Black", var),
+         var = ifelse(grepl("Lat",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("Whi",var), "White,\nnon-Hispanic", var)) %>%
+  select (-Geography, -Race) %>% ## some of the tables include US in the geography, so you'll have to filter those
+  bind_rows(ho %>%
+              filter(place.fac == "Orleans",
+                     !grepl("asian",var)) %>% ## remove asian numbers 
+              select(-place.fac) %>%
+              mutate(Year = 2021, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+                     var = ifelse(var == "Ownerpct", "All", var),
+                     var = ifelse(grepl("blk",var), "Black", var),
+                     var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+                     var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)))%>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
 
-EduAtt.hist_chart <- EduAtt.hist %>%
+homeownership.hist_chart <- homeownership.hist %>%
   ggplot()+
-  geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
+  geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
   scale_color_manual(values = c(DCcolor.p1skyblue, DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16)) + 
-  labs(title = "Educational Attainment by race/ethnicity since 1980, Orleans Parish",
+  labs(title = "Homeownership rate by race/ethnicity since 1980, Orleans Parish",
        x="",
-       y="") + xlim(1980,2021)
+       y="")
 
+ggsave(homeownership.hist_chart,filename = "indicator expansion drafts/graphics/homeownership.hist.png",
+       width = 10, height = 6, units = "in")
