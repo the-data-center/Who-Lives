@@ -5,11 +5,11 @@ cpi04 <- 1.338591848
 cpi00 <- 1.468408827
 
 # the current/most recent year - the year the data you're updating represents
-year <- 2019
-yearPEP <- 2019
+year <- 2021
+yearPEP <- 2021
 
-year.char <- c("2019")
-yearPEP.char <- c("2019")
+year.char <- c("2021")
+yearPEP.char <- c("2021")
 
 
 windowsFonts("Asap" = windowsFont("Asap"))
