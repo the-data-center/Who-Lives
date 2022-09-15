@@ -23,10 +23,9 @@
 # }
 
 ########## Define function to pull from data warehouse
+## set dataframe = df to match the data pull file
 
-wholivesdatapull <- function(variables, names = variables, dataframe = "who_lives/2022/WhoLives_longer.csv", year = 2019){
-  cont_proj <- storage_container(ad_endp_tok2, "project") 
-  df <- storage_read_csv(cont_proj, dataframe) %>% select(-1)
+wholivesdatapull <- function(variables, names = variables, dataframe = df, year = 2019){
   df<- df %>% select(-c(row_num, variable_name)) %>% filter(vintage == year, key %in% variables)
   df <- df %>% pivot_wider(names_from = key, values_from = value)
   df <-  df %>% select(geo_name, county_fips, variables)
@@ -37,6 +36,7 @@ wholivesdatapull <- function(variables, names = variables, dataframe = "who_live
   df <- df %>% select(-geo_name)
   return(df)
 }
+
 
 ########## Define function to pull variables
 
