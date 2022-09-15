@@ -68,28 +68,28 @@ knitr::opts_chunk$set(echo = FALSE)
 # Load required scripts in order. 
 # Note: here() uses the relative path to the same directory.
 
-source(here("01_libraries_SQL.R"))
+source(here("01_libraries.R"))
 ```
 ```{r}
 source(here("css_helper.R"))
 ```
 ```{r}
-source(here("data-pull_SQL.R"))
+source(here("data-pull.R"))
 ```
 ```{r}
-source(here("02_variables_SQL.R"))
+source(here("02_variables.R"))
 ```
 ```{r}
-source(here("03_functions_SQL.R"))
+source(here("03_functions.R"))
 ```
 ```{r}
-source(here("04_analysis_SQL.R"))
+source(here("04_analysis.R"))
 ```
 ```{r}
-source(here("05_graphics_SQL.R"))
+source(here("05_graphics.R"))
 ```
 ```{r}
-source(here("inline_SQL.R"))
+source(here("inline.R"))
 ```
 ```{r}
 # For Asap font

@@ -3,15 +3,15 @@ library(dplyr)
 
 #Year to be changed manually in 02_variables_SQL
 
-# year <- data_frame("year" = yearPEP)
-# year <- year %>%
-#    select(year) %>%
-#   pull()
-# #for 2nd upDateDesc later in year -- aligns with ACS year
-# yearu2 <- data_frame("yearu2" = year)
-# yearu2 <- yearu2 %>%
-#   select(yearu2) %>%
-#   pull()
+year <- data_frame("year" = yearPEP)
+year <- year %>%
+   select(year) %>%
+  pull()
+#for 2nd upDateDesc later in year -- aligns with ACS year
+yearu2 <- data_frame("yearu2" = year)
+yearu2 <- yearu2 %>%
+  select(yearu2) %>%
+  pull()
 
 allparishes <- allparishesRaw %>% 
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",

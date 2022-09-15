@@ -125,9 +125,9 @@ ParishDemoforGraphic <- ParishDemo %>%
          contains('2000')) %>%
   filter(PlaceName != "Louisiana") %>%
   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "Plaquemines",
-                                                       "St. Bernard","St. Charles", "St. James", 
+                                                       "St. Bernard","St. Charles", "St. James",
                                                        "St. John the Baptist", "St. Tammany", "Metro", "United States"))) %>%
-  gather(key = variable, value = value, contains("pct"), contains("2000")) %>% 
+  gather(key = variable, value = value, contains("pct"), contains("2000")) %>%
   mutate(description  = NA,
          description = ifelse(grepl("pct",variable), yearPEP, description),     #if variable contains 'pct'
          description = ifelse(grepl("2000", variable), 2000, description)) %>%     #if variable contains '2000'
@@ -150,10 +150,10 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
            position = position_dodge(),
            width = .7,
            color="gray50") +
-  facet_wrap(~PlaceName.fac, ncol = 2, scales = "free") + 
+  facet_wrap(~PlaceName.fac, ncol = 2, scales = "free") +
   geom_text(aes(label = val), position=position_dodge(width = .8), vjust = -.7, hjust = .4, size=4, family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,1)) +
-  scale_fill_manual(values = c(DCcolor.p1skyblue, 
+  scale_fill_manual(values = c(DCcolor.p1skyblue,
                                DCcolor.p1mediumblue)) +
   themeDC_horizontal() +
   theme(legend.position = "right",
@@ -166,7 +166,7 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
         plot.title = element_text(size = 20)) +
   labs(title = "White, black, Hispanic, and Asian, Metro New Orleans parishes and U.S.",
        x="",
-       y="") 
+       y="")
 
 #### 3 - African American population, New Orleans
 
@@ -176,22 +176,22 @@ AAhistGraphic <- AAhistorical %>%
   geom_bar(stat="identity", fill = DCcolor.p2blue, width = .7) +
   geom_text(data = subset(AAhistorical,  year %in% c("2000", "2006", "2017", "2020")),      #remove labels for years without data
             size = 3.75,
-            position = position_stack(vjust = 1.05), 
-            family="Asap") + 
-  scale_y_continuous(labels = comma_format(), expand = c(0,0), limits = c(0,350000)) + 
+            position = position_stack(vjust = 1.05),
+            family="Asap") +
+  scale_y_continuous(labels = comma_format(), expand = c(0,0), limits = c(0,350000)) +
   themeDC_horizontal() +
   theme(legend.position = "none",
         plot.title = element_text(hjust = .5, size = 24)) +
   labs(title = "African American population, New Orleans",
        x="",
-       y="") 
+       y="")
 
 
 ####4 - -Hispanic population change by parish
 
 ### PEP ###
 HispanicPopforGraphic  <- HispanicPop %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "St. Tammany", "Plaquemines", 
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "St. Tammany", "Plaquemines",
                                                        "St. Bernard","St. Charles", "St. James", "St. John the Baptist"))) %>%
   gather(-PlaceName,-PlaceName.fac,key = variable, value = value) %>%
   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char)) %>%
@@ -199,22 +199,22 @@ mutate(description.fac = factor(.$description, levels = c(yearPEP.char,
                                                            "2000")))
 
 HispanicPopGraphic <- HispanicPopforGraphic %>%
-  ggplot(aes(PlaceName.fac, value, fill=description.fac, label = comma(value))) + 
+  ggplot(aes(PlaceName.fac, value, fill=description.fac, label = comma(value))) +
   geom_bar(stat="identity",
            position = position_dodge(),
            width = .7,
            color="gray50") +
   geom_text(aes(label = comma(value)),position=position_dodge(width = .7), vjust = .5, hjust = -.5, size=2.75, family="Asap") +
-  scale_y_continuous(labels = comma_format(), expand = c(0,0), limits = c(0,75000)) + 
+  scale_y_continuous(labels = comma_format(), expand = c(0,0), limits = c(0,75000)) +
   scale_fill_manual(values = c(DCcolor.p1mediumblue,
-                               DCcolor.p1skyblue)) + 
+                               DCcolor.p1skyblue)) +
   themeDC_vertical() +
   coord_flip()+     #it's sideways
   theme(legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),  
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         axis.text.x = element_text(size = 12, vjust=1),
         axis.text.y = element_text(size = 12),
-        plot.title = element_text(hjust = .5)) + 
+        plot.title = element_text(hjust = .5)) +
   labs(title = "Hispanic population change by parish",
        x="",
        y="")
@@ -225,8 +225,8 @@ HispanicPopGraphic <- HispanicPopforGraphic %>%
 ### PEP ###
 HispanpopYearsforGraphic <- HISPpopM  %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist", "St. Tammany")) %>%  
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. James", "Plaquemines", "St. John the Baptist", 
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. James", "Plaquemines", "St. John the Baptist",
                                                        "St. Charles", "St. Bernard", "St. Tammany", "Orleans", "Jefferson"))) %>%
 add_row(CensusYear = 2001, PlaceName.fac = "Jefferson", Population = 0) %>%
   add_row(CensusYear = 2002, PlaceName.fac = "Jefferson", Population = 0) %>%
@@ -236,8 +236,8 @@ add_row(CensusYear = 2001, PlaceName.fac = "Jefferson", Population = 0) %>%
 
 chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
   ggplot(aes(CensusYear, as.numeric(Population), fill=PlaceName.fac)) +
-  geom_bar(stat="identity", 
-           position="stack", 
+  geom_bar(stat="identity",
+           position="stack",
            color = "gray30") +
   scale_fill_manual(values = c(DCcolor.p2orangered,
                                DCcolor.p2orange,
@@ -246,12 +246,12 @@ chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
                                DCcolor.p2purple,
                                DCcolor.p2violet,
                                DCcolor.p2limegreen,
-                               DCcolor.p1darkblue90)) +  
-  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,130000)) + 
+                               DCcolor.p1darkblue90)) +
+  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,130000)) +
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12), 
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         legend.spacing.y = unit(10, "lines"),
         plot.title = element_text(hjust = .5, size = 24),
         axis.text.x = element_text(size = 10, vjust=1),
@@ -353,8 +353,8 @@ chart.hispan2018.allparishes <- hispan2018 %>%
 
 ####7 - Population by age group, 2000
 agepop2000forGraphic <- Agepop %>%
-  select(-Population) %>% 
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles", 
+  select(-Population) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
                                                        "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
   mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
 
@@ -370,33 +370,33 @@ chart.agepop2000.allparishes <- agepop2000forGraphic %>%
                                DCcolor.p2blue70,
                                DCcolor.p1mediumblue,
                                DCcolor.p2blue90,
-                               DCcolor.p1darkblue90)) + 
-  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,120000)) + 
+                               DCcolor.p1darkblue90)) +
+  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,120000)) +
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),  
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5, size = 16)) +
   labs(title = "Population by age group, 2000",
        x="",
        y="")
-  
+#   
 ####8 - Population by age group, 2018
 
 
 ### PEP ###
 agepopCurrentforGraphic <- Agepop %>%
-  select(-est2000) %>% 
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles", 
+  select(-est2000) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
                                                        "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
   mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
 
 chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
   ggplot(aes(age.fac, as.numeric(Population), fill=PlaceName.fac)) +
-  geom_bar(stat="identity", 
-           position="stack", 
+  geom_bar(stat="identity",
+           position="stack",
            color = "gray30") +
   scale_fill_manual(values = c(DCcolor.p2teal50,
                                DCcolor.p2teal,
@@ -405,18 +405,20 @@ chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
                                DCcolor.p2blue70,
                                DCcolor.p1mediumblue,
                                DCcolor.p2blue90,
-                               DCcolor.p1darkblue90)) +  
-  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,120000)) + 
+                               DCcolor.p1darkblue90)) +
+  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,120000)) +
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),  
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5, size = 16))+
   labs(title = "Population by age group, 2019",
        x="",
        y="")
+
+
 ####9 - Households with own children under 18
 
 hwcGraphic <- dodgedBar(hwc, 
@@ -435,22 +437,22 @@ singGraphic <- dodgedBar(sing,
 ### PEP ###
 popunder18forGraphic <- popunder18 %>%
   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
-  gather(-PlaceName,-PlaceName.fac, key=variable, value =val) %>% 
+  gather(-PlaceName,-PlaceName.fac, key=variable, value =val) %>%
   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char))
 
 popunder18Graphic <- popunder18forGraphic %>%
-  ggplot(aes(PlaceName.fac, val, fill=description, label = comma(val))) + 
+  ggplot(aes(PlaceName.fac, val, fill=description, label = comma(val))) +
   geom_bar(stat="identity",
            position = position_dodge(),
            width = .7,
            color="gray50") +
   geom_text(position=position_dodge(width = .7), vjust = -.7, size=3, family="Asap") +
-  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,400000)) + 
-  scale_fill_manual(values = c(DCcolor.p1skyblue, DCcolor.p1mediumblue)) + 
+  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,400000)) +
+  scale_fill_manual(values = c(DCcolor.p1skyblue, DCcolor.p1mediumblue)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10),
-        plot.title = element_text(hjust = .5)) + 
+        plot.title = element_text(hjust = .5)) +
   labs(title = "Under 18 population",
        x="",
        y="")
@@ -731,8 +733,8 @@ commuteforGraphic <- commute %>%
          contains('pct'),
          contains('2000'),
          contains('SIG')) %>%
-  mutate(PlaceNames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
+  mutate(PlaceNames = c("Orleans", "Jefferson", "Metro", "U.S."))  %>% 
+  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "Metro", "U.S."))) %>%
   gather(key = variable, value = value, contains("pct"), contains("2000")) %>% 
   mutate(description = NA,
          description = ifelse(variable == "Drivepct"|variable == "census2000drive", "Drive Alone", description),
