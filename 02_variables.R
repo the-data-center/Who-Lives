@@ -1,4 +1,4 @@
-mycensuskey = "530ce361defc2c476e5b5d5626d224d8354b9b9a"
+mycensuskey = "b6844db29933c9dce9e13fa37f1d015281001b95"
 
 #CPI numbers, calculated in the nbhd profiles google sheet 'Neighborhood Analysis," documentation in Box
 cpi04 <- 1.338591848
