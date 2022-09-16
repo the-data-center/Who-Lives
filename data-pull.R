@@ -241,11 +241,61 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2019, ty
 
 ######### Pull data
 
-allparishesRaw <- pullDataPEP(charagegroupsVars,
-                           api = "pep/charagegroups",
-                           year = 2019,
-                           counties = mycounties)
-save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
+# allparishesRaw <- pullDataPEP(charagegroupsVars,
+#                            api = "pep/charagegroups",
+#                            year = 2018,
+#                            counties = mycounties)
+# save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
+
+### 2021 PEP data not available by API yet, pulling it in directly.
+allparishesRaw2 <- read_csv("PEP2021charagegroups.csv") 
+d <- allparishesRaw2 %>%
+  filter(COUNTY %in% c(071,051,075,087,089,093,095,103)) %>%
+  pivot_longer(cols = TOT_POP:HNAC_FEMALE, names_sep = "_", names_to = c("race", "sex")) %>%
+  mutate(place = CTYNAME,
+         age = case_when(AGEGRP == 0 ~ "Total",
+                         AGEGRP == 1 ~ "Under 5 years",
+                         AGEGRP == 2 ~ "5 to 9",
+                         AGEGRP == 3 ~ "10 to 14",
+                         AGEGRP == 4 ~ "15 to 19",
+                         AGEGRP == 5 ~ "20 to 24",
+                         AGEGRP == 6 ~ "25 to 29",
+                         AGEGRP == 7 ~ "30 to 34",
+                         AGEGRP == 8 ~ "35 to 39",
+                         AGEGRP == 9 ~ "40 to 44",
+                         AGEGRP == 10 ~ "45 to 49",
+                         AGEGRP == 11 ~"50 to 54",
+                         AGEGRP == 12 ~ "55 to 59",
+                         AGEGRP == 13 ~ "60 to 64",
+                         AGEGRP == 14 ~ "65 to 69",
+                         AGEGRP == 15 ~ "70 to 74",
+                         AGEGRP == 16 ~ "75 to 79",
+                         AGEGRP == 17 ~ "80 to 84",
+                         AGEGRP == 18 ~ "85 plus"))
+  #        date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
+  #                         YEAR == 2 ~ "7/1/2020 population estimate",
+  #                         YEAR == 3 ~ "7/1/2021 population estimate"),
+  #        sex = case_when(sex == "POP" ~ "Total",
+  #                        sex == "MALE" ~ "Male",
+  #                        sex == "FEMALE" ~ "Female"),
+  #        population = value) %>%
+  # select(place, date, sex,race, age, population) %>% 
+  # mutate(hisp = case_when(substr(d$race,1,1) == "H" ~ "Hispanic",
+  #                         d$race == "TOT" ~ "Total",
+  #                         substr(d$race,1,1) != "H" & d$race != "TOT" ~ "Not Hispanic"))
+
+d <- d %>% filter(race %in% c("TOT", "WA", "BA", "A")) %>% 
+  mutate(race = case_when(race == "TOT" ~ "Total",
+                          race == "WA" ~ "White alone",
+                          race == "BA" ~ "Black or African American alone",
+                          race == "A" ~ "Asian alone"),
+                  raceSimple = case_when(race == "TOT" ~ "Total",
+                                         race == "WA" ~ "White",
+                                         race == "BA" ~ "Black",
+                                         race == "A" ~ "Asian",
+                                         hisp == "Hispanic" ~ "Hispanic"))
+d <- d %>% select(place, date, hisp, sex, race, age, population, raceSimple)
+
 
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEONAME", "HISP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
 popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP")
