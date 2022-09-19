@@ -248,11 +248,44 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2019, ty
 # save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
 
 ### 2021 PEP data not available by API yet, pulling it in directly.
-allparishesRaw <- read_csv("PEP2021charagegroups.csv") 
-d <- allparishesRaw
-d <- d %>%
-  filter(COUNTY %in% c("071","051","075","087","089","093","095","103")) %>%
-  pivot_longer(cols = TOT_POP:HNAC_FEMALE, names_sep = "_", names_to = c("race", "sex")) %>%
+
+allparishesRaw <- read_csv("PEP2021charagegroups.csv") %>% 
+  filter(COUNTY %in% c("071","051","075","087","089","093","095","103")) %>% #making a total column for each sex.  revise unneeded ones later
+  mutate(WA_Total = WA_MALE + WA_FEMALE,
+         BA_Total = BA_MALE + BA_FEMALE,
+         IA_Total = IA_MALE + IA_FEMALE,
+         AA_Total = AA_MALE + AA_FEMALE,
+         NA_Total = NA_MALE + NA_FEMALE,
+         TOM_Total = TOM_MALE + TOM_FEMALE,
+         WAC_Total = WAC_MALE + WAC_FEMALE,
+         BAC_Total = BAC_MALE + BAC_FEMALE,
+         IAC_Total = IAC_MALE + IAC_FEMALE,
+         AAC_Total = AAC_MALE + AAC_FEMALE,
+         NAC_Total = NAC_MALE + NAC_FEMALE,
+         NH_Total = NH_MALE + NH_FEMALE,
+         NHWA_Total = NHWA_MALE + NHWA_FEMALE,
+         NHBA_Total = NHBA_MALE + NHBA_FEMALE,
+         NHIA_Total = NHIA_MALE + NHIA_FEMALE,
+         NHAA_Total = NHAA_MALE + NHAA_FEMALE,
+         NHTOM_Total = NHTOM_MALE + NHTOM_FEMALE,
+         NHWAC_Total = NHWAC_MALE + NHWAC_FEMALE,
+         NHBAC_Total = NHBAC_MALE + NHBAC_FEMALE,
+         NHIAC_Total = NHIAC_MALE + NHIAC_FEMALE,
+         NHAAC_Total = NHAAC_MALE + NHAAC_FEMALE,
+         NHNAC_Total = NHNAC_MALE + NHNAC_FEMALE,
+         
+         H_Total = H_MALE + H_FEMALE,
+         HWA_Total = HWA_MALE + HWA_FEMALE,
+         HBA_Total = HBA_MALE + HBA_FEMALE,
+         HIA_Total = HIA_MALE + HIA_FEMALE,
+         HAA_Total = HAA_MALE + HAA_FEMALE,
+         HTOM_Total = HTOM_MALE + HTOM_FEMALE,
+         HWAC_Total = HWAC_MALE + HWAC_FEMALE,
+         HBAC_Total = HBAC_MALE + HBAC_FEMALE,
+         HIAC_Total = HIAC_MALE + HIAC_FEMALE,
+         HAAC_Total = HAAC_MALE + HAAC_FEMALE,
+         HNAC_Total = HNAC_MALE + HNAC_FEMALE) %>%
+  pivot_longer(cols = TOT_POP:HNAC_Total, names_sep = "_", names_to = c("race", "sex"))%>%
   mutate(place = CTYNAME,
          age = case_when(AGEGRP == 0 ~ "Total",
                          AGEGRP == 1 ~ "Under 5 years",
@@ -276,36 +309,69 @@ d <- d %>%
          date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
                           YEAR == 2 ~ "7/1/2020 population estimate",
                           YEAR == 3 ~ "7/1/2021 population estimate"),
-         sex = case_when(sex == "POP" ~ "Total",
+         sex = case_when(sex == "POP" | sex == "Total" ~ "Total",
                          sex == "MALE" ~ "Male",
                          sex == "FEMALE" ~ "Female"),
          population = value) %>%
   select(place, date, sex,race, age, population)
 
-d <- d %>% mutate(hisp = case_when(substr(d$race,1,1) == "H" ~ "Hispanic",
-                          d$race == "TOT" ~ "Total",
-                          substr(d$race,1,1) != "H" & d$race != "TOT" ~ "Not Hispanic"))
+allparishesRaw <- allparishesRaw %>% #for some reason this is working only when I keep it separate
+  mutate(hisp = case_when(substr(allparishesRaw$race,1,1) == "H" ~ "Hispanic",
+                          allparishesRaw$race == "TOT" ~ "Total",
+                          substr(allparishesRaw$race,1,1) != "H" ~ "Not Hispanic"))
 
-d <- d %>% filter(race %in% c("TOT", "WA", "BA", "A")) %>% 
+allparishesRaw <- allparishesRaw %>% filter(race %in% c("TOT", "WA", "BA", "A", "H")) %>% 
   mutate(race = case_when(race == "TOT" ~ "Total",
                           race == "WA" ~ "White alone",
                           race == "BA" ~ "Black or African American alone",
-                          race == "A" ~ "Asian alone"),
-                  raceSimple = case_when(race == "Total" ~ "Total",
-                                         race == "White alone" ~ "White",
-                                         race == "Black or African American alone" ~ "Black",
-                                         race == "Asian alone" ~ "Asian",
-                                         hisp == "Hispanic" ~ "Hispanic"))
-allparishesRaw <- d %>% select(place, date, hisp, sex, race, age, population, raceSimple)
+                          race == "A" ~ "Asian alone",
+                          race == "H" ~ "Hispanic"),
+         raceSimple = case_when(race == "Total" ~ "Total",
+                                race == "White alone" ~ "White",
+                                race == "Black or African American alone" ~ "Black",
+                                race == "Asian alone" ~ "Asian",
+                                hisp == "Hispanic" ~ "Hispanic")) %>%
+  select(place, date, hisp, sex, race, age, population, raceSimple)
 
-#pulling in entire US PEP data, then binding to allparishesRaw.
+#pulling in entire US PEP data, then binding to allparishesRaw.  Doing this with the exact same code as from above.
 
-US_pep <- read_xlsx("PEP2021charagegroups_US.xlsx")
-allstates_pep <- read_csv("PEP2021charagegroups_allstates.csv")
-d <- allstates_pep
-d <- d %>% 
-  pivot_longer(cols = TOT_POP:HNAC_FEMALE, names_sep = "_", names_to = c("race", "sex")) %>%
-  mutate(place = STNAME,
+allstates_pep <- read_csv("PEP2021charagegroups_allstates.csv") %>% 
+  mutate(WA_Total = WA_MALE + WA_FEMALE,
+         BA_Total = BA_MALE + BA_FEMALE,
+         IA_Total = IA_MALE + IA_FEMALE,
+         AA_Total = AA_MALE + AA_FEMALE,
+         NA_Total = NA_MALE + NA_FEMALE,
+         TOM_Total = TOM_MALE + TOM_FEMALE,
+         WAC_Total = WAC_MALE + WAC_FEMALE,
+         BAC_Total = BAC_MALE + BAC_FEMALE,
+         IAC_Total = IAC_MALE + IAC_FEMALE,
+         AAC_Total = AAC_MALE + AAC_FEMALE,
+         NAC_Total = NAC_MALE + NAC_FEMALE,
+         NH_Total = NH_MALE + NH_FEMALE,
+         NHWA_Total = NHWA_MALE + NHWA_FEMALE,
+         NHBA_Total = NHBA_MALE + NHBA_FEMALE,
+         NHIA_Total = NHIA_MALE + NHIA_FEMALE,
+         NHAA_Total = NHAA_MALE + NHAA_FEMALE,
+         NHTOM_Total = NHTOM_MALE + NHTOM_FEMALE,
+         NHWAC_Total = NHWAC_MALE + NHWAC_FEMALE,
+         NHBAC_Total = NHBAC_MALE + NHBAC_FEMALE,
+         NHIAC_Total = NHIAC_MALE + NHIAC_FEMALE,
+         NHAAC_Total = NHAAC_MALE + NHAAC_FEMALE,
+         NHNAC_Total = NHNAC_MALE + NHNAC_FEMALE,
+         
+         H_Total = H_MALE + H_FEMALE,
+         HWA_Total = HWA_MALE + HWA_FEMALE,
+         HBA_Total = HBA_MALE + HBA_FEMALE,
+         HIA_Total = HIA_MALE + HIA_FEMALE,
+         HAA_Total = HAA_MALE + HAA_FEMALE,
+         HTOM_Total = HTOM_MALE + HTOM_FEMALE,
+         HWAC_Total = HWAC_MALE + HWAC_FEMALE,
+         HBAC_Total = HBAC_MALE + HBAC_FEMALE,
+         HIAC_Total = HIAC_MALE + HIAC_FEMALE,
+         HAAC_Total = HAAC_MALE + HAAC_FEMALE,
+         HNAC_Total = HNAC_MALE + HNAC_FEMALE) %>%
+  pivot_longer(cols = TOT_POP:HNAC_Total, names_sep = "_", names_to = c("race", "sex"))%>%
+  mutate(place = CTYNAME,
          age = case_when(AGEGRP == 0 ~ "Total",
                          AGEGRP == 1 ~ "Under 5 years",
                          AGEGRP == 2 ~ "5 to 9",
@@ -328,36 +394,42 @@ d <- d %>%
          date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
                           YEAR == 2 ~ "7/1/2020 population estimate",
                           YEAR == 3 ~ "7/1/2021 population estimate"),
-         sex = case_when(sex == "POP" ~ "Total",
+         sex = case_when(sex == "POP" | sex == "Total" ~ "Total",
                          sex == "MALE" ~ "Male",
                          sex == "FEMALE" ~ "Female"),
          population = value) %>%
   select(place, date, sex,race, age, population)
 
-d <- d %>% mutate(hisp = case_when(substr(d$race,1,1) == "H" ~ "Hispanic",
-                                   d$race == "TOT" ~ "Total",
-                                   substr(d$race,1,1) != "H" & d$race != "TOT" ~ "Not Hispanic"))
+allstates_pep  <- allstates_pep  %>% #for some reason this is working only when I keep it separate
+  mutate(hisp = case_when(substr(allstates_pep$race,1,1) == "H" ~ "Hispanic",
+                          allstates_pep$race == "TOT" ~ "Total",
+                          substr(allstates_pep$race,1,1) != "H" ~ "Not Hispanic"))
 
-d <- d %>% filter(race %in% c("TOT", "WA", "BA", "A")) %>% 
+allstates_pep  <- allstates_pep  %>% filter(race %in% c("TOT", "WA", "BA", "A", "H")) %>% 
   mutate(race = case_when(race == "TOT" ~ "Total",
                           race == "WA" ~ "White alone",
                           race == "BA" ~ "Black or African American alone",
-                          race == "A" ~ "Asian alone"),
+                          race == "A" ~ "Asian alone",
+                          race == "H" ~ "Hispanic"),
          raceSimple = case_when(race == "Total" ~ "Total",
                                 race == "White alone" ~ "White",
                                 race == "Black or African American alone" ~ "Black",
                                 race == "Asian alone" ~ "Asian",
-                                hisp == "Hispanic" ~ "Hispanic"))
-
-allstates_pep <- d %>% group_by(date, hisp, sex, race, age, raceSimple) %>% 
-  summarize(place = "United States", 
-            population = sum(population)) %>%
+                                hisp == "Hispanic" ~ "Hispanic")) %>%
   select(place, date, hisp, sex, race, age, population, raceSimple)
 
-allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimates")
+allstates_pep <- allstates_pep  %>% group_by(date, hisp, sex, race, age, raceSimple) %>% 
+  summarize(place = "United States", 
+            population = sum(population)) %>%
+  select(place, date, hisp, sex, race, age, population, raceSimple) %>%
+  ungroup()
 
+allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimates")
 save(allparishesRaw, file = "inputs/allparishesRaw.RData")
 
+
+allparishesRaw2020 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2020 population estimates")
+save(allparishesRaw2020, file = "inputs/allparishesRaw.RData")
 
 
 
