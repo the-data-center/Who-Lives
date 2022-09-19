@@ -251,7 +251,7 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2019, ty
 allparishesRaw <- read_csv("PEP2021charagegroups.csv") 
 d <- allparishesRaw
 d <- d %>%
-  filter(COUNTY %in% c(071,051,075,087,089,093,095,103) ) %>%
+  filter(COUNTY %in% c("071","051","075","087","089","093","095","103")) %>%
   pivot_longer(cols = TOT_POP:HNAC_FEMALE, names_sep = "_", names_to = c("race", "sex")) %>%
   mutate(place = CTYNAME,
          age = case_when(AGEGRP == 0 ~ "Total",
@@ -297,7 +297,66 @@ d <- d %>% filter(race %in% c("TOT", "WA", "BA", "A")) %>%
                                          race == "Asian alone" ~ "Asian",
                                          hisp == "Hispanic" ~ "Hispanic"))
 allparishesRaw <- d %>% select(place, date, hisp, sex, race, age, population, raceSimple)
-save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
+
+#pulling in entire US PEP data, then binding to allparishesRaw.
+
+US_pep <- read_xlsx("PEP2021charagegroups_US.xlsx")
+allstates_pep <- read_csv("PEP2021charagegroups_allstates.csv")
+d <- allstates_pep
+d <- d %>% 
+  pivot_longer(cols = TOT_POP:HNAC_FEMALE, names_sep = "_", names_to = c("race", "sex")) %>%
+  mutate(place = STNAME,
+         age = case_when(AGEGRP == 0 ~ "Total",
+                         AGEGRP == 1 ~ "Under 5 years",
+                         AGEGRP == 2 ~ "5 to 9",
+                         AGEGRP == 3 ~ "10 to 14",
+                         AGEGRP == 4 ~ "15 to 19",
+                         AGEGRP == 5 ~ "20 to 24",
+                         AGEGRP == 6 ~ "25 to 29",
+                         AGEGRP == 7 ~ "30 to 34",
+                         AGEGRP == 8 ~ "35 to 39",
+                         AGEGRP == 9 ~ "40 to 44",
+                         AGEGRP == 10 ~ "45 to 49",
+                         AGEGRP == 11 ~"50 to 54",
+                         AGEGRP == 12 ~ "55 to 59",
+                         AGEGRP == 13 ~ "60 to 64",
+                         AGEGRP == 14 ~ "65 to 69",
+                         AGEGRP == 15 ~ "70 to 74",
+                         AGEGRP == 16 ~ "75 to 79",
+                         AGEGRP == 17 ~ "80 to 84",
+                         AGEGRP == 18 ~ "85 plus"),
+         date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
+                          YEAR == 2 ~ "7/1/2020 population estimate",
+                          YEAR == 3 ~ "7/1/2021 population estimate"),
+         sex = case_when(sex == "POP" ~ "Total",
+                         sex == "MALE" ~ "Male",
+                         sex == "FEMALE" ~ "Female"),
+         population = value) %>%
+  select(place, date, sex,race, age, population)
+
+d <- d %>% mutate(hisp = case_when(substr(d$race,1,1) == "H" ~ "Hispanic",
+                                   d$race == "TOT" ~ "Total",
+                                   substr(d$race,1,1) != "H" & d$race != "TOT" ~ "Not Hispanic"))
+
+d <- d %>% filter(race %in% c("TOT", "WA", "BA", "A")) %>% 
+  mutate(race = case_when(race == "TOT" ~ "Total",
+                          race == "WA" ~ "White alone",
+                          race == "BA" ~ "Black or African American alone",
+                          race == "A" ~ "Asian alone"),
+         raceSimple = case_when(race == "Total" ~ "Total",
+                                race == "White alone" ~ "White",
+                                race == "Black or African American alone" ~ "Black",
+                                race == "Asian alone" ~ "Asian",
+                                hisp == "Hispanic" ~ "Hispanic"))
+
+allstates_pep <- d %>% group_by(date, hisp, sex, race, age, raceSimple) %>% 
+  summarize(place = "United States", 
+            population = sum(population)) %>%
+  select(place, date, hisp, sex, race, age, population, raceSimple)
+
+allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimates")
+
+save(allparishesRaw, file = "inputs/allparishesRaw.RData")
 
 
 
