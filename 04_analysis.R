@@ -538,15 +538,15 @@ select(place, (contains("pct")), (contains("census2000"))) %>%
 # whatever geography you need: place
 # whatever year of estimate that you need: date
 
-orderDemo <- c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-               "St. James", "St. John the Baptist", "St. Tammany", "Metro", "United States")
+orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
+               "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish", "Metro", "United States")
 #allparishesRaw <- load("inputs/allparishesRaw.RData")
 
 #Table 1
 AAWhiteHispan <- allparishesRaw %>%
   filter(place == "Orleans Parish") %>%
   filter(date == "7/1/2021 population estimate") %>%
-  filter(age == "Total" & sex == "Total" & (raceSimple == "Black"|raceSimple == "White"|hisp == "Hispanic"))# %>%
+  filter(age == "Total" & sex == "Total" & (raceSimple == "Black"|raceSimple == "White"|hisp == "Hispanic")) %>%
   mutate(est2000=c(128871, 323392, 14826)) %>% #check order of races in data frame. Order is bottom up
   select(raceSimple, population, est2000) %>%
   arrange(-row_number())
@@ -567,27 +567,25 @@ ParishDemo1<- allparishesRaw %>%
 
 #Remove Louisiana and Us to be able to combine 8 parish estimates for each race/ethnicity to create Metro
 ParishDemo2<- allparishesRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                 "St. James", "St. John the Baptist", "St. Tammany")) %>%
+  filter(place %in% c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
+                 "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish")) %>%
   filter(date == "7/1/2021 population estimate") %>%
   filter(age == "Total" & sex == "Total") %>%
   group_by(raceSimple)%>%
-  summarise(population=sum(population)) %>%
-  bind_rows(.,ParishDemo1)
-ParishDemo2$place <- "Metro"
+  summarise(population=sum(population),
+            place = "Metro") %>%
+ bind_rows(.,ParishDemo1)
 
 #reshape data from long to wide for easy analysis
-ParishDemo <- spread(ParishDemo2, raceSimple, population) %>%
-  filter(place != "Louisiana") %>%
-  slice(match(orderDemo, place)) %>%
-  mutate(pctwhite = White / Total,
-         pctblack = Black / Total,
-         pctasian = Asian / Total,
-         pcthisp = Hispanic / Total,
-         white2000=c(.266,.645,.688,.844,.705,.497,.51 ,.853,.547,.691),
-         black2000=c(.667,.227,.233,.076,.251,.492,.446,.098,.373,.121),
-         asian2000=c(.023,.031,.026,.013,.006,0   ,.005,.008,.021,.037),
-      hispanic2000=c(.031,.071,.016,.051,.028,.006,.029,.025,.044,.125)) #%>%
+ParishDemo <- pivot_wider(ParishDemo2, names_from = raceSimple, values_from = population) %>%
+  mutate(pctwhite = as.numeric(White)/ as.numeric(Total),
+         pctblack = as.numeric(Black) / as.numeric(Total),
+         pctasian = as.numeric(Asian) / as.numeric(Total),
+         pcthisp = as.numeric(Hispanic) / as.numeric(Total),     
+     white2000=c(.266,.645,.688,.844,.705,.497,.51 ,.853,.547,.691),
+     black2000=c(.667,.227,.233,.076,.251,.492,.446,.098,.373,.121),
+     asian2000=c(.023,.031,.026,.013,.006,0   ,.005,.008,.021,.037),
+  hispanic2000=c(.031,.071,.016,.051,.028,.006,.029,.025,.044,.125)) #%>%
   #.[-2,]
 
 
@@ -599,17 +597,13 @@ ParishDemo %>%
 #Table 3 African American Population, New Orleans, 2000-current
 
 #Pulling population estimates for 2010-current
-AAhistorical <- allparishesRaw %>%
-  filter(place == "Orleans")%>%
-  filter(raceSimple=="Black")%>%
-  filter(sex=="Total")%>%
-  filter(age=="Total")%>%
-  select(date, population) %>%
-  arrange(date) %>%
-  .[-(2:3),] %>% #Remove 2010 estimates we don't need. We use Census Population for 2010 so we can delete 2010 Population estimate
-  bind_rows(data.frame(Population = c(323392,0,0,0,0,0,133015,159887,181882,197337), row.names = (NULL)), .) %>%
-  select(Population) %>%
-  bind_cols(data.frame(year = as.factor(c(2000:yearPEP))), .)
+AAhistorical <- blackpopestRaw %>%
+  select(year, POP) %>%
+  arrange(year) %>%
+  #.[-(2:3),] %>% #Remove 2010 estimates we don't need. We use Census Population for 2010 so we can delete 2010 Population estimate
+  bind_rows(data.frame(POP = c(323392,0,0,0,0,0,133015,159887,181882,197337), row.names = (NULL)), .) %>%
+  select(POP) %>%
+  bind_cols(data.frame(year = as.factor(c(2000:2021))), .)
 
 
 #######AA historical part 2
@@ -620,7 +614,7 @@ BlackPopyears <- allparishesRaw %>%
                           "St. James", "St. John the Baptist", "St. Tammany"))
 
 BlackpopM <- blackpopestRaw %>%
-  add_row(year = "2000", place= "Orleans", POP=323392)
+  add_row(year = "2000", place= "Orleans", POP=323392) 
 
 BlackpopM %>%
   select(year, POP) %>%
@@ -629,29 +623,28 @@ BlackpopM %>%
 #Table 4 Hispanic population change by population
 
 HispanicPop <- allparishesRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
-  filter(date == "7/1/2021 population estimate") %>%
+  filter(place %in% c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
+                          "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish")) %>%
   filter(age == "Total" & sex == "Total")  %>%
   filter(raceSimple=="Hispanic")%>%
   select(place, population) %>%
   mutate(est2000 = 0,
-         est2000 = ifelse(place == "St. Tammany", 4737, est2000),
-         est2000 = ifelse(place == "St. John the Baptist", 1230, est2000),
-         est2000 = ifelse(place == "St. James", 130, est2000),
-         est2000 = ifelse(place == "St. Charles", 1346, est2000),
-         est2000 = ifelse(place == "St. Bernard", 3425, est2000),
-         est2000 = ifelse(place == "Plaquemines", 433, est2000),
-         est2000 = ifelse(place == "Orleans", 14826, est2000),
-         est2000 = ifelse(place == "Jefferson", 32418, est2000))
+         est2000 = ifelse(place == "St. Tammany Parish", 4737, est2000),
+         est2000 = ifelse(place == "St. John the Baptist Parish", 1230, est2000),
+         est2000 = ifelse(place == "St. James Parish", 130, est2000),
+         est2000 = ifelse(place == "St. Charles Parish", 1346, est2000),
+         est2000 = ifelse(place == "St. Bernard Parish", 3425, est2000),
+         est2000 = ifelse(place == "Plaquemines Parish", 433, est2000),
+         est2000 = ifelse(place == "Orleans Parish", 14826, est2000),
+         est2000 = ifelse(place == "Jefferson Parish", 32418, est2000))
 
 #Table 5 Hispanic population for parishes in metro by year
 
 HispanicPopyears <- allparishesRaw %>%
-  filter(age == "Total" & sex == "Total")  #%>%
+  filter(age == "Total" & sex == "Total") %>%
   filter(raceSimple=="Hispanic") %>%
-  filter(place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist", "St. Tammany"))
+  filter(place %in% c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
+                          "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish"))
 
 HispanicPopyears %>%
   select(place, date, population) %>%
@@ -661,16 +654,16 @@ HispanicPopyears %>%
 
 HISPpopM <- hisppopestRaw %>%
   mutate(year = as.numeric(year)) %>%
-  filter(place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
-  add_row(year = 2000, place= "Orleans", POP=14826) %>%
-  add_row(year = 2000, place= "Jefferson", POP=32418) %>%
-  add_row(year = 2000, place= "St. Tammany", POP=4737) %>%
-  add_row(year = 2000, place= "Plaquemines", POP=433) %>%
-  add_row(year = 2000, place= "St. Bernard", POP=3425) %>%
-  add_row(year = 2000, place= "St. Charles", POP=1346) %>%
-  add_row(year = 2000, place= "St. James", POP=130) %>%
-  add_row(year = 2000, place= "St. John the Baptist", POP=1230)
+  filter(place %in% c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
+                          "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish")) %>%
+  add_row(year = 2000, place= "Orleans Parish", POP=14826) %>%
+  add_row(year = 2000, place= "Jefferson Parish", POP=32418) %>%
+  add_row(year = 2000, place= "St. Tammany Parish", POP=4737) %>%
+  add_row(year = 2000, place= "Plaquemines Parish", POP=433) %>%
+  add_row(year = 2000, place= "St. Bernard Parish", POP=3425) %>%
+  add_row(year = 2000, place= "St. Charles Parish", POP=1346) %>%
+  add_row(year = 2000, place= "St. James Parish", POP=130) %>%
+  add_row(year = 2000, place= "St. John the Baptist Parish", POP=1230)
 
 #For excel
 # HISPpopSheet1 <- HISPpopM %>%
