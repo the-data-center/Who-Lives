@@ -427,7 +427,16 @@ allstates_pep <- allstates_pep  %>% group_by(date, hisp, sex, race, age, raceSim
 allparishesRaw2020 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2020 population estimate")
 save(allparishesRaw2020, file = "inputs/allparishesRaw.RData")
 
-allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimate")
+allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimate") %>%
+  mutate(PlaceName = case_when(place == "Orleans Parish" ~ "Orleans",
+                               place =="Jefferson Parish" ~ "Jefferson",
+                               place =="Plaquemines Parish" ~ "Plaquemines", 
+                               place == "St. Bernard Parish" ~ "St. Bernard",
+                               place == "St. Charles Parish" ~ "St. Charles",
+                               place == "St. James Parish" ~ "St. James",
+                               place == "St. John the Baptist Parish" ~ "St. John the Baptist",
+                               place == "St. Tammany Parish" ~ "St. Tammany",
+                               place == "United States" ~ "United States"))
 save(allparishesRaw, file = "inputs/allparishesRaw.RData")
 
 

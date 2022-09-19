@@ -94,9 +94,9 @@ source(here("inputs/datacenter_colors.R"))
 
 ### PEP ###
 AAwhthispGraphic <- AAWhiteHispan %>%
-  mutate(race.fac = factor(.$RaceSimple,levels = c("Black", "White","Hispanic"))) %>%
-  select(est2000, Population, RaceSimple, race.fac) %>%
-  gather(-RaceSimple,-race.fac, key=variable, value =val) %>%
+  mutate(race.fac = factor(.$raceSimple,levels = c("Black", "White","Hispanic"))) %>%
+  select(est2000, population, raceSimple, race.fac) %>%
+  gather(-raceSimple,-race.fac, key=variable, value =val) %>%
   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char)) %>%
   ggplot(aes(race.fac, val, fill=description)) +
   geom_bar(stat="identity",
@@ -224,18 +224,18 @@ HispanicPopGraphic <- HispanicPopforGraphic %>%
 
 ### PEP ###
 HispanpopYearsforGraphic <- HISPpopM  %>%
-  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+  filter(place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. James", "Plaquemines", "St. John the Baptist",
+  mutate(PlaceName.fac = factor(.$place,levels = c("St. James", "Plaquemines", "St. John the Baptist",
                                                        "St. Charles", "St. Bernard", "St. Tammany", "Orleans", "Jefferson"))) %>%
-add_row(CensusYear = 2001, PlaceName.fac = "Jefferson", Population = 0) %>%
-  add_row(CensusYear = 2002, PlaceName.fac = "Jefferson", Population = 0) %>%
-  add_row(CensusYear = 2003, PlaceName.fac = "Jefferson", Population = 0) %>%
-  add_row(CensusYear = 2004, PlaceName.fac = "Jefferson", Population = 0) %>%
-  add_row(CensusYear = 2005, PlaceName.fac = "Jefferson", Population = 0)
+add_row(year = 2001, PlaceName.fac = "Jefferson", POP = 0) %>%
+  add_row(year = 2002, PlaceName.fac = "Jefferson", POP = 0) %>%
+  add_row(year = 2003, PlaceName.fac = "Jefferson", POP = 0) %>%
+  add_row(year = 2004, PlaceName.fac = "Jefferson", POP = 0) %>%
+  add_row(year = 2005, PlaceName.fac = "Jefferson", POP = 0)
 
 chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
-  ggplot(aes(CensusYear, as.numeric(Population), fill=PlaceName.fac)) +
+  ggplot(aes(year, as.numeric(POP), fill=PlaceName.fac)) +
   geom_bar(stat="identity",
            position="stack",
            color = "gray30") +
@@ -264,7 +264,7 @@ chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
 ####6 - Hispanic Origin, 2018
 
 hispan2018 <- hispan %>%
-  select(PlaceName, 
+  select(place, 
          Cubanpct,
          Dominicanpct,
          Mexicanpct,
@@ -277,9 +277,9 @@ hispan2018 <- hispan %>%
          SouthAmericanpct,
          Otherpct,
          contains('SIG')) %>%
-  mutate(PlaceNames = c( "Orleans","Jefferson", "Metro", "United States"))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c( "Orleans", "Jefferson","Metro","United States"))) %>%
-  gather(-PlaceName, -PlaceName.fac, -contains('SIG'), key=variable, value = value) %>% 
+  mutate(place = c( "Orleans","Jefferson", "Metro", "United States"))  %>% 
+  mutate(PlaceName.fac = factor(.$place,levels = c( "Orleans", "Jefferson","Metro","United States"))) %>%
+  gather(-place, -PlaceName.fac, -contains('SIG'), key=variable, value = value) %>% 
   .[-(45:48),] %>%
   mutate(description = NA,
          description = ifelse(variable == "Cubanpct", "Cuban", description),
@@ -306,17 +306,17 @@ hispan2018 <- hispan %>%
                                                             "Other")))%>% 
   mutate(val = ifelse(as.numeric(value)<.01,     #is too crowded with <.01
                       "",
-                      paste0(round(as.numeric(value)*100),"%",ifelse((variable == "Cubanpct" & CubanSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "Dominicanpct" & DominicanSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "Mexicanpct" & MexicanSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "PuertoRicanpct" & PuertoRicanSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "Honduranpct"& HonduranSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "Guatemalanpct" & GuatemalanSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "Nicaraguanpct" & NicaraguanSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "Salvadoranpct" & SalvadoranSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "OtherCApct" & OtherCASIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "SouthAmericanpct" & SouthAmericanSIG == "no"& PlaceName != "United States")
-                                                                     |(variable == "Otherpct" & OtherSIG == "no"& PlaceName != "United States"), "*", ""))))
+                      paste0(round(as.numeric(value)*100),"%",ifelse((variable == "Cubanpct" & CubanSIG == "no"& place != "United States")
+                                                                     |(variable == "Dominicanpct" & DominicanSIG == "no"& place != "United States")
+                                                                     |(variable == "Mexicanpct" & MexicanSIG == "no"& place != "United States")
+                                                                     |(variable == "PuertoRicanpct" & PuertoRicanSIG == "no"& place != "United States")
+                                                                     |(variable == "Honduranpct"& HonduranSIG == "no"& place != "United States")
+                                                                     |(variable == "Guatemalanpct" & GuatemalanSIG == "no"& place != "United States")
+                                                                     |(variable == "Nicaraguanpct" & NicaraguanSIG == "no"& place != "United States")
+                                                                     |(variable == "Salvadoranpct" & SalvadoranSIG == "no"& place != "United States")
+                                                                     |(variable == "OtherCApct" & OtherCASIG == "no"& place != "United States")
+                                                                     |(variable == "SouthAmericanpct" & SouthAmericanSIG == "no"& place != "United States")
+                                                                     |(variable == "Otherpct" & OtherSIG == "no"& place != "United States"), "*", ""))))
 
 
 chart.hispan2018.allparishes <- hispan2018 %>% 
@@ -352,71 +352,72 @@ chart.hispan2018.allparishes <- hispan2018 %>%
 
 
 ####7 - Population by age group, 2000
-agepop2000forGraphic <- Agepop %>%
-  select(-Population) %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
-                                                       "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
-  mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
+# agepop2000forGraphic <- Agepop %>%
+#   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
+#                                                        "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
+#   mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
+# 
+# chart.agepop2000.allparishes <- agepop2000forGraphic %>%
+#   ggplot(aes(age.fac, as.numeric(est2000), fill=PlaceName.fac)) +
+#   geom_bar(stat="identity",
+#            position="stack",
+#            color = "gray30") +
+#   scale_fill_manual(values = c(DCcolor.p2teal50,
+#                                DCcolor.p2teal,
+#                                DCcolor.p1lightskyblue,
+#                                DCcolor.p1skyblue,
+#                                DCcolor.p2blue70,
+#                                DCcolor.p1mediumblue,
+#                                DCcolor.p2blue90,
+#                                DCcolor.p1darkblue90)) +
+#   scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,120000)) +
+#   themeDC_horizontal() +
+#   theme(legend.position = "right",
+#         legend.title = element_blank(),
+#         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+#         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
+#         axis.text.y = element_text(size = 12),
+#         plot.title = element_text(hjust = .5, size = 16)) +
+#   labs(title = "Population by age group, 2000",
+#        x="",
+#        y="")
 
-chart.agepop2000.allparishes <- agepop2000forGraphic %>%
-  ggplot(aes(age.fac, as.numeric(est2000), fill=PlaceName.fac)) +
-  geom_bar(stat="identity",
-           position="stack",
-           color = "gray30") +
-  scale_fill_manual(values = c(DCcolor.p2teal50,
-                               DCcolor.p2teal,
-                               DCcolor.p1lightskyblue,
-                               DCcolor.p1skyblue,
-                               DCcolor.p2blue70,
-                               DCcolor.p1mediumblue,
-                               DCcolor.p2blue90,
-                               DCcolor.p1darkblue90)) +
-  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,120000)) +
-  themeDC_horizontal() +
-  theme(legend.position = "right",
-        legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
-        axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
-        axis.text.y = element_text(size = 12),
-        plot.title = element_text(hjust = .5, size = 16)) +
-  labs(title = "Population by age group, 2000",
-       x="",
-       y="")
+
+
 #   
 ####8 - Population by age group, 2018
 
 
 ### PEP ###
-agepopCurrentforGraphic <- Agepop %>%
-  select(-est2000) %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
-                                                       "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
-  mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
-
-chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
-  ggplot(aes(age.fac, as.numeric(Population), fill=PlaceName.fac)) +
-  geom_bar(stat="identity",
-           position="stack",
-           color = "gray30") +
-  scale_fill_manual(values = c(DCcolor.p2teal50,
-                               DCcolor.p2teal,
-                               DCcolor.p1lightskyblue,
-                               DCcolor.p1skyblue,
-                               DCcolor.p2blue70,
-                               DCcolor.p1mediumblue,
-                               DCcolor.p2blue90,
-                               DCcolor.p1darkblue90)) +
-  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,120000)) +
-  themeDC_horizontal() +
-  theme(legend.position = "right",
-        legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
-        axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
-        axis.text.y = element_text(size = 12),
-        plot.title = element_text(hjust = .5, size = 16))+
-  labs(title = "Population by age group, 2019",
-       x="",
-       y="")
+# agepopCurrentforGraphic <- Agepop %>%
+#   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
+#                                                        "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
+#   mutate(age.fac = factor(.$AgeGroupName, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
+# 
+# chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
+#   ggplot(aes(age.fac, as.numeric(Population), fill=PlaceName.fac)) +
+#   geom_bar(stat="identity",
+#            position="stack",
+#            color = "gray30") +
+#   scale_fill_manual(values = c(DCcolor.p2teal50,
+#                                DCcolor.p2teal,
+#                                DCcolor.p1lightskyblue,
+#                                DCcolor.p1skyblue,
+#                                DCcolor.p2blue70,
+#                                DCcolor.p1mediumblue,
+#                                DCcolor.p2blue90,
+#                                DCcolor.p1darkblue90)) +
+#   scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,120000)) +
+#   themeDC_horizontal() +
+#   theme(legend.position = "right",
+#         legend.title = element_blank(),
+#         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+#         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
+#         axis.text.y = element_text(size = 12),
+#         plot.title = element_text(hjust = .5, size = 16))+
+#   labs(title = "Population by age group, 2019",
+#        x="",
+#        y="")
 
 
 ####9 - Households with own children under 18
@@ -435,27 +436,27 @@ singGraphic <- dodgedBar(sing,
 ####11 - Under 18 population
 
 ### PEP ###
-popunder18forGraphic <- popunder18 %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
-  gather(-PlaceName,-PlaceName.fac, key=variable, value =val) %>%
-  mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char))
-
-popunder18Graphic <- popunder18forGraphic %>%
-  ggplot(aes(PlaceName.fac, val, fill=description, label = comma(val))) +
-  geom_bar(stat="identity",
-           position = position_dodge(),
-           width = .7,
-           color="gray50") +
-  geom_text(position=position_dodge(width = .7), vjust = -.7, size=3, family="Asap") +
-  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,400000)) +
-  scale_fill_manual(values = c(DCcolor.p1skyblue, DCcolor.p1mediumblue)) +
-  themeDC_horizontal() +
-  theme(legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10),
-        plot.title = element_text(hjust = .5)) +
-  labs(title = "Under 18 population",
-       x="",
-       y="")
+# popunder18forGraphic <- popunder18 %>%
+#   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
+#   gather(-PlaceName,-PlaceName.fac, key=variable, value =val) %>%
+#   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char))
+# 
+# popunder18Graphic <- popunder18forGraphic %>%
+#   ggplot(aes(PlaceName.fac, val, fill=description, label = comma(val))) +
+#   geom_bar(stat="identity",
+#            position = position_dodge(),
+#            width = .7,
+#            color="gray50") +
+#   geom_text(position=position_dodge(width = .7), vjust = -.7, size=3, family="Asap") +
+#   scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,400000)) +
+#   scale_fill_manual(values = c(DCcolor.p1skyblue, DCcolor.p1mediumblue)) +
+#   themeDC_horizontal() +
+#   theme(legend.title = element_blank(),
+#         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10),
+#         plot.title = element_text(hjust = .5)) +
+#   labs(title = "Under 18 population",
+#        x="",
+#        y="")
   
 ############################################
 # # EDUCATIONAL ATTAINMENT, INCOME, AND INTERNET ACCESS # #
@@ -487,7 +488,7 @@ medhhGraphic <- dodgedBar(medhh,
 ####15 - Internet Access
 
 intaforGraphic <- inta %>% 
-  select(PlaceName,
+  select(place,
          contains('pct'),
          contains('SIG')) %>%
   mutate(PlaceNames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
@@ -571,12 +572,12 @@ forborGraphic <- dodgedBar(forbor, quo(forborpct),"Population not U.S. citizens 
 ####20 - Population who moved in the past year
 
 mobforGraphic <- mob %>% 
-  select(PlaceName, 
+  select(place, 
          contains('SIG'),
          contains('pct'),
          contains('2004')) %>%
   mutate(PlaceNames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
+  mutate(PlaceName.fac = factor(.$place,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
   select(-samehousepct, -sf2004samehouse) %>% 
   gather(key = variable, value = value, contains("pct"), contains("2004")) %>% 
   mutate(description = NA,
@@ -729,7 +730,7 @@ chart.yrbuilt.allparishes <- yrbuiltforGraphic %>%
 ####27 Means of transportation to work, workers 16 years and older
 
 commuteforGraphic <- commute %>% 
-  select(PlaceName,
+  select(place,
          contains('pct'),
          contains('2000'),
          contains('SIG')) %>%
