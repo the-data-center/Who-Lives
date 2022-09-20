@@ -18,7 +18,7 @@ wholivesdatapull <- function(variables, names = variables, year = 2021){
   colnames(us) <- c("place",names)
   df <- switch(rbind(parishes, metro, us))
   df[df == -555555555] <- 0
-  df <- df %>% mutate(PlaceName = case_when(place == "051" ~ "Jefferson",
+  df <- df %>% mutate(place = case_when(place == "051" ~ "Jefferson",
                                             place == "071" ~ "Orleans",
                                             place == "103" ~ "St. Tammany",
                                             place == "35380" ~ "New Orleans Metro Area",

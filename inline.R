@@ -7,7 +7,7 @@ year <- data_frame("year" = yearPEP)
 year <- year %>%
    select(year) %>%
   pull()
-#for 2nd upDateDesc later in year -- aligns with ACS year
+#for 2nd update later in year -- aligns with ACS year
 yearu2 <- data_frame("yearu2" = year)
 yearu2 <- yearu2 %>%
   select(yearu2) %>%
@@ -19,90 +19,90 @@ allparishes <- allparishesRaw %>%
 
 
 Overallpop <- allparishes %>%
-  filter(DateDesc =="7/1/2019 population estimate") %>% ## PEP update
-  filter(SexName =="Total") %>%
-  filter(HispName =="Total") %>%
-  filter(RaceSimple =="Total") %>%
-  filter(AgeGroupName =="Total")
+  filter(date =="7/1/2021 population estimate") %>% ## PEP update
+  filter(sex =="Total") %>%
+  filter(hisp =="Total") %>%
+  filter(raceSimple =="Total") %>%
+  filter(age =="Total")
 
 #The U.S. Census Bureau estimates that 1,275,762 residents were living in metro New Orleans as of July 2018
 getvalue.pop.no.current <- Overallpop %>%
   filter(PlaceName == "Orleans") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.jeff.current <- Overallpop %>%
   filter(PlaceName == "Jefferson") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.plaq.current <- Overallpop %>%
   filter(PlaceName == "Plaquemines") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.bernard.current <- Overallpop %>%
   filter(PlaceName == "St. Bernard") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.charles.current <- Overallpop %>%
   filter(PlaceName == "St. Charles") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.james.current <- Overallpop %>%
   filter(PlaceName == "St. James") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.john.current <- Overallpop %>%
   filter(PlaceName == "St. John the Baptist") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.tam.current <- Overallpop %>%
   filter(PlaceName == "St. Tammany") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 
 metropop.current <-(getvalue.pop.no.current + getvalue.pop.jeff.current  + getvalue.pop.plaq.current  + getvalue.pop.bernard.current + getvalue.pop.charles.current + getvalue.pop.james.current + getvalue.pop.john.current + getvalue.pop.tam.current)
 
 
-#According to the U.S. Census Bureau’s 2018 Population estimates, there are now 91,274 fewer African Americans living in New Orleans (Orleans)
+#According to the U.S. Census Bureau’s 2018 population estimates, there are now 91,274 fewer African Americans living in New Orleans (Orleans)
 
 Overallpop2010 <- allparishes %>%
-  filter(DateDesc =="4/1/2010 Census population") %>%
-  filter(SexName =="Total") %>%
-  filter(HispName =="Total") %>%
-  filter(RaceSimple =="Total") %>%
-  filter(AgeGroupName =="Total")
+  filter(date =="4/1/2010 Census population") %>%
+  filter(sex =="Total") %>%
+  filter(hisp =="Total") %>%
+  filter(raceSimple =="Total") %>%
+  filter(age =="Total")
 
 #The U.S. Census Bureau estimates that 1,275,762 residents were living in metro New Orleans as of July 2018
 getvalue.pop.no.2010 <- Overallpop2010 %>%
   filter(PlaceName == "Orleans") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.jeff.2010 <- Overallpop2010 %>%
   filter(PlaceName == "Jefferson") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.plaq.2010 <- Overallpop2010 %>%
   filter(PlaceName == "Plaquemines") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.bernard.2010 <- Overallpop2010 %>%
   filter(PlaceName == "St. Bernard") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.charles.2010 <- Overallpop2010 %>%
   filter(PlaceName == "St. Charles") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.james.2010 <- Overallpop2010 %>%
   filter(PlaceName == "St. James") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.john.2010 <- Overallpop2010 %>%
   filter(PlaceName == "St. John the Baptist") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 getvalue.pop.tam.2010 <- Overallpop2010 %>%
   filter(PlaceName == "St. Tammany") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 
 
@@ -116,17 +116,17 @@ pctincrease.metro.current.2010 <- ((metropop.current - metro2010pop)/metro2010po
 
 AA2017 <- AAhistorical %>%   ### PEP update 
   filter(year == 2017) %>%
-  select(Population) %>%
+  select(POP) %>%
   pull()
 
 AA2018 <- AAhistorical %>%
   filter(year == 2018) %>%
-  select(Population) %>%
+  select(POP) %>%
   pull()
 
 AA2019 <- AAhistorical %>%
   filter(year == 2019) %>%
-  select(Population) %>%
+  select(POP) %>%
   pull()
 
 
@@ -134,12 +134,12 @@ AA2019 <- AAhistorical %>%
 
 
 getvalue.AA.no.current <- AAWhiteHispan %>%  ### PEP update
-  filter(RaceSimple == "Black") %>%
-  select(Population) %>%
+  filter(raceSimple == "Black") %>%
+  select(population) %>%
   pull()
 
 getvalue.AA.no.2000 <- AAWhiteHispan %>%
-  filter(RaceSimple == "Black") %>%
+  filter(raceSimple == "Black") %>%
   select(est2000) %>%
   pull()
 
@@ -150,12 +150,12 @@ getvalue.AA.no.2000 <- AAWhiteHispan %>%
 
 
 getvalue.white.no.current <- AAWhiteHispan %>%  ### PEP update
-  filter(RaceSimple == "White") %>%
-  select(Population) %>%
+  filter(raceSimple == "White") %>%
+  select(population) %>%
   pull()
 
 getvalue.white.no.2000 <- AAWhiteHispan %>%
-  filter(RaceSimple == "White") %>%
+  filter(raceSimple == "White") %>%
   select(est2000) %>%
   pull()
 
@@ -163,16 +163,16 @@ getvalue.white.no.2000 <- AAWhiteHispan %>%
 
 #the number of Hispanics grew by 7,498.[2]
 getvalue.Hispan.no.current <- AAWhiteHispan %>% ### PEP update
-  filter(RaceSimple == "Hispanic") %>%
-  select(Population) %>%
+  filter(raceSimple == "Hispanic") %>%
+  select(population) %>%
   pull()
 
 getvalue.Hispan.no.2000 <- AAWhiteHispan %>%
-  filter(RaceSimple == "Hispanic") %>%
+  filter(raceSimple == "Hispanic") %>%
   select(est2000) %>%
   pull()
 
-#In Orleans, the share of the 2018 Population that is African American — while lower than in 2000 when it was 66.7 percent —
+#In Orleans, the share of the 2018 population that is African American — while lower than in 2000 when it was 66.7 percent —
 
 getvalue.AApct.no.2000 <-ParishDemo %>%
   filter(PlaceName == "Orleans") %>%
@@ -220,7 +220,7 @@ getvalue.whitepct.no.2000 <-ParishDemo %>%
   select(white2000) %>%
   pull()
 
-#Meanwhile, Hispanic, Asian, and African American Populations increased as a share of the total Population in Jefferson, St. Bernard, St. Charles, St. John the Baptist, and St. Tammanyes, each.
+#Meanwhile, Hispanic, Asian, and African American populations increased as a share of the total population in Jefferson, St. Bernard, St. Charles, St. John the Baptist, and St. Tammanyes, each.
 #In fact, the number and share of Hispanics have increased in all eightes in the metro area.
 
 
@@ -233,11 +233,11 @@ getvalue.hispan.jeff.2000 <- HispanicPop %>%
 
 getvalue.hispan.jeff.current <- HispanicPop %>% ### PEP update
   filter(PlaceName == "Jefferson") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 #getvalue.hispan.jeff.2018-getvalue.hispan.jeff.2000
 
-#reaching over 14.9 percent of the total Population.
+#reaching over 14.9 percent of the total population.
 
 getvalue.Hispanpct.jeff.current <-ParishDemo %>% ### PEP update
   filter(PlaceName == "Jefferson") %>%
@@ -256,10 +256,10 @@ getvalue.hispan.tam.2000 <- HispanicPop %>%
 
 getvalue.hispan.tam.current <- HispanicPop %>%  ### PEP update
   filter(PlaceName == "St. Tammany") %>%
-  select(Population) %>%
+  select(population) %>%
   pull()
 
-#such that the Hispanic share of the Population was 5.7 percent in Orleans and 5.8 percent in St. Tammany by 2018.
+#such that the Hispanic share of the population was 5.7 percent in Orleans and 5.8 percent in St. Tammany by 2018.
 
 #getvalue.Hispanpct.no.2018
 
@@ -277,7 +277,7 @@ getvalue.Hispan.metro.current <-ParishDemo %>%  ### PEP update
   pull()
 
 
-#representing 9.0 percent of the metro Population.
+#representing 9.0 percent of the metro population.
 
 getvalue.Hispanpct.metro.current <-ParishDemo %>%  ### PEP update
   filter(grepl("Metro",PlaceName)) %>%
@@ -330,15 +330,15 @@ getvalue.hispanpop.metro.current <- (getvalue.Hispanpop.jeff.current +
 
 
 
-# representing 4.4 percent of the metro Population.
+# representing 4.4 percent of the metro population.
 getvalue.Hispanpct.metro.2000 <-ParishDemo %>%
   filter(grepl("Metro",PlaceName)) %>%
   select(hispanic2000) %>%
   pull()
 
 
-#Despite these recent gains, the Hispanic share of the Population in metro areaes is far below the averAgeGroupName for the United States,
-#which has grown from 12.5 percent to 18.1 percent of the total U.S. Population over these 17 years.
+#Despite these recent gains, the Hispanic share of the population in metro areaes is far below the average for the United States,
+#which has grown from 12.5 percent to 18.1 percent of the total U.S. population over these 17 years.
 
 getvalue.Hispanpct.us.2000 <-ParishDemo %>%
   filter(PlaceName == "United States") %>%
@@ -354,27 +354,27 @@ getvalue.Hispanpct.us.current <-ParishDemo %>%  ### PEP update
 
 
 #The number of Hispanics in New Orleans metro has grown every year since 2006.
-#Indeed while the overall metro Population has grown 7% since 2010,
+#Indeed while the overall metro population has grown 7% since 2010,
 # pctincrease.metro.2018.2010
 
-#the Hispanic Population has grown 20%
+#the Hispanic population has grown 20%
 
 getvalue.Hispgrowth.metro.2010 <-HISPpopM %>%
-  filter(CensusYear ==2010) %>%
-  mutate(Population = as.numeric(Population)) %>%
-  select(Population)%>%
+  filter(year ==2010) %>%
+  mutate(POP = as.numeric(POP)) %>%
+  select(POP)%>%
   pull()
 # sum(getvalue.Hispgrowth.metro.2010)
 
 getvalue.Hispgrowth.metro.current <-HISPpopM %>%  ### PEP update
-  filter(CensusYear ==yearPEP) %>%
-  mutate(Population = as.numeric(Population)) %>%
-  select(Population)%>%
+  filter(year ==yearPEP) %>%
+  mutate(POP = as.numeric(POP)) %>%
+  select(POP)%>%
   pull()
 #sum(getvalue.Hispgrowth.metro.2018)
 getvalue.Hispgrowth.metro.2010.current <- ((sum(getvalue.Hispgrowth.metro.current) - sum(getvalue.Hispgrowth.metro.2010)) / sum(getvalue.Hispgrowth.metro.2010))
 
-#such that Hispanics account for more than one-quarter of the metro's Population growth since 2010.
+#such that Hispanics account for more than one-quarter of the metro's population growth since 2010.
 getvalue.hispangrowthCOUNT.metro.2010.current <- (sum(getvalue.Hispgrowth.metro.current) - sum(getvalue.Hispgrowth.metro.2010))
 getvalue.growthCOUNT.metro.2010.current <-(metropop.current - metro2010pop)
 
@@ -382,74 +382,74 @@ getvalue.growthpcthispanic.metro.2010.current <- (getvalue.hispangrowthCOUNT.met
 
 
 
-#This increase was part of a larger trend that has pushed the Central American Population of the metro to -- percent of the Hispanic metro Population.
+#This increase was part of a larger trend that has pushed the Central American population of the metro to -- percent of the Hispanic metro population.
 getvalue.Hon.2018 <- hispan %>%
- filter(PlaceName == "New Orleans Metro Area") %>%
- select(HonduranPct) %>%
+ filter(place == "New Orleans Metro Area") %>%
+ select(Honduranpct) %>%
   pull()
 getvalue.sal.2018 <- hispan %>%
-  filter(PlaceName == "New Orleans Metro Area") %>%
-  select(SalvadoranPct) %>%
+  filter(place == "New Orleans Metro Area") %>%
+  select(Salvadoranpct) %>%
   pull()
 getvalue.guat.2018 <- hispan %>%
-  filter(PlaceName == "New Orleans Metro Area") %>%
-  select(GuatemalanPct) %>%
+  filter(place == "New Orleans Metro Area") %>%
+  select(Guatemalanpct) %>%
   pull()
 getvalue.nic.2018 <- hispan %>%
-  filter(PlaceName == "New Orleans Metro Area") %>%
-  select(NicaraguanPct) %>%
+  filter(place == "New Orleans Metro Area") %>%
+  select(Nicaraguanpct) %>%
   pull()
 getvalue.otherCA.2018 <- hispan %>%
-  filter(PlaceName == "New Orleans Metro Area") %>%
-  select(OtherCAPct) %>%
+  filter(place == "New Orleans Metro Area") %>%
+  select(OtherCApct) %>%
   pull()
 
 getvalue.CA.metro.2018 <- (getvalue.Hon.2018 + getvalue.sal.2018 + getvalue.guat.2018 + getvalue.nic.2018 + getvalue.otherCA.2018)
 
 
 
-#In comparison, Central Americans represent only 9 percent of the national Hispanic Population.
+#In comparison, Central Americans represent only 9 percent of the national Hispanic population.
 getvalue.Hon.us.2018 <- hispan %>%
-  filter(PlaceName == "United States") %>%
-  select(HonduranPct) %>%
+  filter(place == "United States") %>%
+  select(Honduranpct) %>%
   pull()
 getvalue.sal.us.2018 <- hispan %>%
 #  mutate(value = as.numeric(value)) %>%
-  filter(PlaceName == "United States") %>%
-  select(SalvadoranPct) %>%
+  filter(place == "United States") %>%
+  select(Salvadoranpct) %>%
   pull()
 getvalue.guat.us.2018 <- hispan %>%
-  filter(PlaceName == "United States") %>%
-  select(GuatemalanPct) %>%
+  filter(place == "United States") %>%
+  select(Guatemalanpct) %>%
   pull()
 getvalue.nic.us.2018 <- hispan %>%
-  filter(PlaceName == "United States") %>%
-  select(NicaraguanPct) %>%
+  filter(place == "United States") %>%
+  select(Nicaraguanpct) %>%
   pull()
 getvalue.otherCA.us.2018 <- hispan %>%
-  filter(PlaceName == "United States") %>%
-  select(OtherCAPct) %>%
+  filter(place == "United States") %>%
+  select(OtherCApct) %>%
   pull()
 
 getvalue.CA.us.2018 <- (getvalue.Hon.us.2018 + getvalue.sal.us.2018 + getvalue.guat.us.2018 + getvalue.nic.us.2018 + getvalue.otherCA.us.2018)
 
 
-# Mexicans are now solidly the second largest group behind Hondurans in metro New Orleans, representing - percent of the Hispanic Population.
+# Mexicans are now solidly the second largest group behind Hondurans in metro New Orleans, representing - percent of the Hispanic population.
 getvalue.Mex.2018 <- hispan %>%
-  filter(PlaceName == "New Orleans Metro Area") %>%
-  select(MexicanPct) %>%
+  filter(place == "New Orleans Metro Area") %>%
+  select(Mexicanpct) %>%
   pull()
 
-# Mexican Population is much less prominent in the metro than nationally, where it represents - percent of the Hispanic Population.
+# Mexican population is much less prominent in the metro than nationally, where it represents - percent of the Hispanic population.
 
 getvalue.MexUS.2018 <- hispan %>%
-  filter(PlaceName == "United States") %>%
-  select(MexicanPct) %>%
+  filter(place == "United States") %>%
+  select(Mexicanpct) %>%
   pull()
 
-#The progression of the baby boomers through the AgeGroupName groups, along with falling birth rates, have brought massive changes to the metro —
-#and indeed the whole country — with many more changes yet to come.[4] Looking at the total Population in the metro by five-year AgeGroupName groups for 2000 and 2018,
-#the baby boomers are like a ParishDemographic tidal wave. Consequently, the median AgeGroupName of the metro has risen to 37.7 in 2016 from 34.8 in 2000.
+#The progression of the baby boomers through the age groups, along with falling birth rates, have brought massive changes to the metro —
+#and indeed the whole country — with many more changes yet to come.[4] Looking at the total population in the metro by five-year age groups for 2000 and 2018,
+#the baby boomers are like a ParishDemographic tidal wave. Consequently, the median age of the metro has risen to 37.7 in 2016 from 34.8 in 2000.
 
 
 
@@ -460,13 +460,13 @@ getvalue.MexUS.2018 <- hispan %>%
 
 getvalue.hwc.2018 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(grepl("Metro",PlaceName)) %>%
+  filter(grepl("Metro",place)) %>%
   select(pcthwc) %>%
 pull()
 
 getvalue.hwc.2000 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(grepl("Metro",PlaceName)) %>%
+  filter(grepl("Metro",place)) %>%
   select(census2000) %>%
 pull()
 
@@ -474,13 +474,13 @@ pull()
 
 getvalue.hwc.StTam.2000 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(PlaceName == "St. Tammany") %>%
+  filter(place == "St. Tammany") %>%
   select(census2000) %>%
 pull()
 
 getvalue.hwc.StTam.2018 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(PlaceName == "St. Tammany") %>%
+  filter(place == "St. Tammany") %>%
   select(pcthwc) %>%
 pull()
 
@@ -489,13 +489,13 @@ pull()
 
 getvalue.hwc.Jeff.2000 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(PlaceName == "Jefferson") %>%
+  filter(place == "Jefferson") %>%
   select(census2000) %>%
 pull()
 
 getvalue.hwc.Jeff.2018 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(PlaceName == "Jefferson") %>%
+  filter(place == "Jefferson") %>%
   select(pcthwc) %>%
 pull()
 
@@ -504,13 +504,13 @@ pull()
 
 getvalue.hwc.no.2000 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(PlaceName == "Orleans") %>%
+  filter(place == "Orleans") %>%
   select(census2000) %>%
 pull()
 
 getvalue.hwc.no.2018 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(PlaceName == "Orleans") %>%
+  filter(place == "Orleans") %>%
   select(pcthwc) %>%
 pull()
 
@@ -521,13 +521,13 @@ pull()
 
 getvalue.sing.2000 <- sing %>%
   select(-significant, -contains("moeprop")) %>%
-  filter(grepl("Metro",PlaceName)) %>%
+  filter(grepl("Metro",place)) %>%
   select(census2000) %>%
   pull()
 
   getvalue.sing.2018 <- sing %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(pctsing) %>%
   pull()
 
@@ -536,13 +536,13 @@ getvalue.sing.2000 <- sing %>%
   
   getvalue.singJeff.2000 <- sing %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Jefferson",PlaceName)) %>%
+    filter(grepl("Jefferson",place)) %>%
     select(census2000) %>%
     pull()
   
   getvalue.singJeff.2018 <- sing %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Jefferson",PlaceName)) %>%
+    filter(grepl("Jefferson",place)) %>%
     select(pctsing) %>%
     pull()
   
@@ -550,32 +550,32 @@ getvalue.sing.2000 <- sing %>%
   #The increase was larger in Orleans, which jumped from 33 to 43 percent.
   getvalue.singNO.2000 <- sing %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(census2000) %>%
   pull()
 
   getvalue.singNO.2018 <- sing %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(pctsing) %>%
   pull()
 
 
-  #While the metro has regained much of the post-Katrina Population losses, youth Population is substantially lower than pre-Katrina levels.
+  #While the metro has regained much of the post-Katrina population losses, youth population is substantially lower than pre-Katrina levels.
   #The metro had 358,092 children under 18 years in 2000 and only 284,231 in 2018.
 
-  getvalue.under18.metro.2000 <- popunder18 %>%  ### PEP update
-    filter(grepl("Metro",PlaceName)) %>%
-    select(est2000) %>%
-    pull()
-
+ getvalue.under18.metro.2000 <- popunder18 %>%  ### PEP update
+   filter(grepl("Metro",PlaceName)) %>%
+   select(est2000) %>%
+   pull()
+ # 
   getvalue.under18.metro.current <- popunder18 %>%
     filter(grepl("Metro",PlaceName)) %>%
     select(under18) %>%
     pull()
-
-  #Much of this loss was driven by Orleans, where the under 18 Population declined to 79,264 from 129,408. The under 18 Population is now 21 percent of the metro Population, down from 27 percent in 2000.
-
+ # 
+ #  #Much of this loss was driven by Orleans, where the under 18 population declined to 79,264 from 129,408. The under 18 population is now 21 percent of the metro population, down from 27 percent in 2000.
+ # 
   getvalue.under18.no.2000 <- popunder18 %>%
     filter(PlaceName == "Orleans") %>%
     select(est2000) %>%
@@ -585,18 +585,18 @@ getvalue.sing.2000 <- sing %>%
     filter(PlaceName == "Orleans") %>%
     select(under18) %>%
     pull()
-
- #The under 18 Population is now 21 percent of the metro Population, down from 27 percent in 2000.
+ # 
+ #The under 18 population is now 21 percent of the metro population, down from 27 percent in 2000.
   getvalue.over18.metro.current <- under18metro %>%
-    filter(AgeGroupName == "18 years and over") %>%
-    select(Population) %>%
+    filter(age == "18 years and over") %>%
+    select(population) %>%
     pull()
-
+ # 
   getvalue.under18totalpop.metro.current <- under18metro %>%
-    filter(AgeGroupName == "Total") %>%
-    select(Population) %>%
+    filter(age == "Total") %>%
+    select(population) %>%
     pull()
-
+ # 
   getvalue.pct.under18.metro.current <- ( (getvalue.under18totalpop.metro.current - getvalue.over18.metro.current) / getvalue.under18totalpop.metro.current)
 
   #The proportion of adults 25 years and older with less than a high school education declined across all three of the largestes,
@@ -605,128 +605,128 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.hs.metro.2000 <- hs %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(census2000) %>%
   pull()
 
   getvalue.hs.metro.2018 <- hs %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(pctless) %>%
   pull()
 
-  #New Orleans, the share of adults with less than a high school degree fell from 25 percent to 14 percent but is still higher than the U.S. averAgeGroupName of 13 percent.
+  #New Orleans, the share of adults with less than a high school degree fell from 25 percent to 14 percent but is still higher than the U.S. average of 13 percent.
 
   getvalue.hs.no.2000 <- hs %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(census2000) %>%
   pull()
 
   getvalue.hs.no.2018 <- hs %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(pctless) %>%
   pull()
 
   getvalue.hs.us.2018 <- hs %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(pctless) %>%
   pull()
 
   # In New Orleans, 38 percent of adults 25 and older had a college degree in 2016
   getvalue.bach.no.2018 <- bach %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(pctbach) %>%
     pull()
 
-  #higher than the U.S. averAgeGroupName of 31 percent
+  #higher than the U.S. average of 31 percent
   getvalue.bach.us.2018 <- bach %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(pctbach) %>%
     pull()
 
   # up from 26 percent in 2000.
   getvalue.bach.no.2000 <- bach %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(census2000) %>%
     pull()
 
   # The overall metro area share of adults with a bachelor’s degree grew from 23 to 29 percent
   getvalue.bach.metro.2000 <- bach %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(census2000) %>%
     pull()
 
   getvalue.bach.metro.2018 <- bach %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(pctbach) %>%
     pull()
 
   # pushed household income down 5 percent in the nation between 1999 and 2016
   getvalue.medhh.us.2000 <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(census2000) %>%
     pull()
 
   getvalue.medhh.us.2018 <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(MedianHHIncome) %>%
     pull()
 
   #and 4 percent across the metro
   getvalue.medhh.metro.2000 <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(census2000) %>%
     pull()
 
   getvalue.medhh.metro.2018 <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(MedianHHIncome) %>%
     pull()
 
   getvalue.medhh.no.2018 <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(MedianHHIncome) %>%
     pull()
 
   #In Jefferson, median household income declined 10 percent between 1999 and 2016, falling to $49,678
   getvalue.medhh.jeff.2000 <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(census2000) %>%
     pull()
 
   getvalue.medhh.jeff.2018 <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(MedianHHIncome) %>%
     pull()
 
   #Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and
-  # encompassing technology training services, workers and students are at a disadvantAgeGroupName in the job market and education system.
+  # encompassing technology training services, workers and students are at a disadvantage in the job market and education system.
   #[6] Only 60 percent of households in Orleans and only 67 percent of households in Jefferson are connected to the
 
   getvalue.inta.no.2018 <- inta %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(broadbandpct) %>%
     pull()
 
   getvalue.inta.jeff.2018 <- inta %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(broadbandpct) %>%
     pull()
 
@@ -736,14 +736,14 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.inta.us.2018 <- inta %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(broadbandpct) %>%
     pull()
 
-  #St. Tammany is above the national averAgeGroupName at 75 percent of households connected to the
+  #St. Tammany is above the national average at 75 percent of households connected to the
   getvalue.inta.tam.2018 <- inta %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "St. Tammany") %>%
+    filter(place == "St. Tammany") %>%
     select(broadbandpct) %>%
     pull()
   #Internet by a home-based service internet connection. Internet access without a subscription refers to households who only
@@ -751,7 +751,7 @@ getvalue.sing.2000 <- sing %>%
 
   #An increasingly common way to access the Internet is through a smartphone or some other cellular device. While,
   #in general, smartphone access contributes positively to lessening the Digital Divide, having access only through a
-  #smartphone restricts ability to fully leverAgeGroupName the Internet to complete common tasks such as writing and researching
+  #smartphone restricts ability to fully leverage the Internet to complete common tasks such as writing and researching
   #a resume, registering your kids for school, analyzing data about your neighborhood, or creating content for an internet
   #business.
 
@@ -760,19 +760,19 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.intacell.no.2018 <- inta %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(cellonlypct) %>%
     pull()
 
   getvalue.intacell.jeff.2018 <- inta %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(cellonlypct) %>%
     pull()
 
   getvalue.intacell.us.2018 <- inta %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(cellonlypct) %>%
     pull()
 
@@ -783,13 +783,13 @@ getvalue.sing.2000 <- sing %>%
   #The poverty rate in New Orleans declined from 28 percent in 1999 to 24 percent in 2016.
   getvalue.pov.no.1999 <- pov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf1999) %>%
     pull()
 
   getvalue.pov.no.2018 <- pov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(pctpov) %>%
     pull()
 
@@ -798,13 +798,13 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.pov.jeff.1999 <- pov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(sf1999) %>%
     pull()
 
   getvalue.pov.jeff.2018 <- pov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(pctpov) %>%
     pull()
 
@@ -812,13 +812,13 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.pov.tam.1999 <- pov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "St. Tammany") %>%
+    filter(place == "St. Tammany") %>%
     select(sf1999) %>%
     pull()
 
   getvalue.pov.tam.2018 <- pov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "St. Tammany") %>%
+    filter(place == "St. Tammany") %>%
     select(pctpov) %>%
     pull()
 
@@ -827,13 +827,13 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.pov.us.1999 <- pov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(sf1999) %>%
     pull()
 
   getvalue.pov.us.2018 <- pov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(pctpov) %>%
     pull()
 
@@ -843,26 +843,26 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.childpov.no.1999 <- childpov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf1999) %>%
     pull()
 
   getvalue.childpov.no.2018 <- childpov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(pctBelowChildPov) %>%
     pull()
 
   #In Jefferson, the child poverty rate jumped from 20 percent in 1999 to 26 percent in 2016 —
   getvalue.childpov.jeff.1999 <- childpov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(sf1999) %>%
     pull()
 
   getvalue.childpov.jeff.2018 <- childpov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(pctBelowChildPov) %>%
     pull()
 
@@ -870,13 +870,13 @@ getvalue.sing.2000 <- sing %>%
   #greatly surpassing the U.S. child poverty rate, which rose from 17 to 19 percent between 1999 and 2016.
   getvalue.childpov.us.1999 <- childpov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(sf1999) %>%
     pull()
 
   getvalue.childpov.us.2018 <- childpov %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(pctBelowChildPov) %>%
     pull()
 
@@ -887,30 +887,30 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.veh.no.2000 <- veh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(census2000) %>%
     pull()
 
   getvalue.veh.no.2018 <- veh %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(vehpct) %>%
     pull()
 
-  #A rising foreign-born share of the Population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[7]
-  #That share of the Population has grown in all three of the most populous metroes since 2000,
-  #led by a 5 percentAgeGroupName point gain in Jefferson.
-  #By 2016, fully 13 percent of Jefferson Population was foreign-born
+  #A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[7]
+  #That share of the population has grown in all three of the most populous metroes since 2000,
+  #led by a 5 percentage point gain in Jefferson.
+  #By 2016, fully 13 percent of Jefferson population was foreign-born
 
   getvalue.forbor.jeff.2000 <- forbor %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(census2000) %>%
     pull()
 
   getvalue.forbor.jeff.2018 <- forbor %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(forborpct) %>%
     pull()
 
@@ -918,73 +918,73 @@ getvalue.sing.2000 <- sing %>%
   #statistically the same as the U.S. share.
   #Need to test if this is true********************************
 
-  #In Orleans and St. Tammany, the foreign-born share of the Population increased by 2 percentAgeGroupName point between
+  #In Orleans and St. Tammany, the foreign-born share of the population increased by 2 percentage point between
   #2000 and 2016 each.
   getvalue.forbor.no.2000 <- forbor %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(census2000) %>%
     pull()
 
   getvalue.forbor.no.2018 <- forbor %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(forborpct) %>%
     pull()
 
   getvalue.forbor.tam.2000 <- forbor %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "St. Tammany") %>%
+    filter(place == "St. Tammany") %>%
     select(census2000) %>%
     pull()
 
   getvalue.forbor.tam.2018 <- forbor %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "St. Tammany") %>%
+    filter(place == "St. Tammany") %>%
     select(forborpct) %>%
     pull()
 
-  #Like the foreign-born Population, a rising share of the Population who moved into Orleans in the past year may
+  #Like the foreign-born population, a rising share of the population who moved into Orleans in the past year may
   #reflect expanding economic opportunities. The most frequent reason people move long distances, such as from one state
   #to another state, is for job opportunities.[8] In addition, the young and well-educated are more likely than others to
   #move long distances.[9]
 
-  #In 2016, 7 percent of the Population in Orleans had moved into the in the past year,
+  #In 2016, 7 percent of the population in Orleans had moved into the in the past year,
 
   getvalue.mobabroadpct.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(mobabroadpct) %>%
     pull()
 
   getvalue.mobStatespct.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(mobStatespct) %>%
     pull()
 
   getvalue.difparishpct.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(difparishpct) %>%
     pull()
 
   #up from 3 percent in 2004.
   getvalue.mobabroadpct.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf2004mobabroad) %>%
     pull()
 
   getvalue.mobStatespct.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf2004states) %>%
     pull()
 
   getvalue.difparishpct.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf2004difparish) %>%
     pull()
 
@@ -996,25 +996,25 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.mobsamehouse.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(samehousepct) %>%
     pull()
 
   getvalue.mobbtwnparish.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(withinparishpct) %>%
     pull()
 
   getvalue.mobsamehouse.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf2004samehouse) %>%
     pull()
 
   getvalue.mobbtwnparish.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf2004withinparish) %>%
     pull()
 
@@ -1024,55 +1024,55 @@ getvalue.sing.2000 <- sing %>%
 
   getvalue.mobTotMovedbtwnStates.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
-    select(TotMovedBtwnStates) %>%
+    filter(place == "Orleans") %>%
+    select(TotMovedbtwnStates) %>%
     pull()
 
   getvalue.mobTotMovedfromAbroad.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
-    select(TotMovedFromAbroad) %>%
+    filter(place == "Orleans") %>%
+    select(TotMovedfromAbroad) %>%
     pull()
 
   getvalue.mobTotal.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(Total) %>%
     pull()
 
   getvalue.mobTotSameHouse.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(TotSameHouse) %>%
     pull()
 
 
   getvalue.mobTotMovedInCity.no.2018 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
-    select(TotMovedInCty) %>%
+    filter(place == "Orleans") %>%
+    select(TotMovedinCty) %>%
     pull()
 
 getvalue.outsidestatepct.no.2018 <- (getvalue.mobTotMovedbtwnStates.no.2018 + getvalue.mobTotMovedfromAbroad.no.2018)/(getvalue.mobTotal.no.2018-getvalue.mobTotSameHouse.no.2018 -  getvalue.mobTotMovedInCity.no.2018)
 
-  #In Jefferson, the share of the Population who were new movers into the was 5 percent in 2004,
+  #In Jefferson, the share of the population who were new movers into the was 5 percent in 2004,
   #and has not significantly changed for 2016.
 
   getvalue.abroad.jeff.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(sf2004mobabroad) %>%
     pull()
 
   getvalue.states.jeff.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(sf2004states) %>%
     pull()
 
   getvalue.difparish.jeff.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(sf2004difparish) %>%
     pull()
 
@@ -1086,13 +1086,13 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.ho.us.2000 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(census2000) %>%
     pull()
 
   getvalue.ho.us.2018 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(Ownerpct) %>%
     pull()
 
@@ -1100,26 +1100,26 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   #*************Need to test signifigance********
   getvalue.ho.tam.2000 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "St. Tammany") %>%
+    filter(place == "St. Tammany") %>%
     select(census2000) %>%
     pull()
 
   getvalue.ho.tam.2018 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "St. Tammany") %>%
+    filter(place == "St. Tammany") %>%
     select(Ownerpct) %>%
     pull()
 
   #and more dramatically dropped in Jefferson from 64 to 59 percent between 2000 and 2016.
   getvalue.ho.jeff.2000 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(census2000) %>%
     pull()
 
   getvalue.ho.jeff.2018 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(Ownerpct) %>%
     pull()
 
@@ -1127,61 +1127,61 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.ho.no.2000 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(census2000) %>%
     pull()
 
   getvalue.ho.no.2018 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(Ownerpct) %>%
     pull()
 
 
 
 
-  #Homeowners without a mortgAgeGroupName own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures.
-  #The proportion of metro area homeowners without a mortgAgeGroupName has increased from 35 to 42 percent between 2000 and 2016,
+  #Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures.
+  #The proportion of metro area homeowners without a mortgage has increased from 35 to 42 percent between 2000 and 2016,
 
 
   getvalue.honomo.metro.2018 <- honomo %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(honomopct) %>%
     pull()
 
   getvalue.honomo.metro.2000 <- honomo %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(census2000) %>%
     pull()
 
 
-  #driven by changes in Orleans and Jefferson. The share of homeowners without a mortgAgeGroupName jumped from 33 to 43 percent in Orleans
+  #driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from 33 to 43 percent in Orleans
 
   getvalue.honomo.no.2018 <- honomo %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(honomopct) %>%
     pull()
 
   getvalue.honomo.no.2000 <- honomo %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(census2000) %>%
     pull()
 
-  #and from 35 to 42 percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgAgeGroupName principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisianaes.[10]
+  #and from 35 to 42 percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisianaes.[10]
 
   getvalue.honomo.jeff.2018 <- honomo %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(honomopct) %>%
     pull()
 
   getvalue.honomo.jeff.2000 <- honomo %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(census2000) %>%
     pull()
 
@@ -1192,13 +1192,13 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.rentbur.no.2004 <- rentbur %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf2004) %>%
     pull()
 
   getvalue.rentbur.us.2004 <- rentbur %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(sf2004) %>%
     pull()
 
@@ -1206,13 +1206,13 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.rentburpct.no.2018 <- rentbur %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(rentburpct) %>%
     pull()
 
   getvalue.rentburpct.us.2018 <- rentbur %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(rentburpct) %>%
     pull()
 
@@ -1221,21 +1221,21 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.rentbur.jeff.2018 <- rentbur %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(rentburpct) %>%
     pull()
 
-  #The share of homeowners paying more than 50 percent of household income on their mortgAgeGroupName, taxes, utilities, and insurance is virtually unchanged
+  #The share of homeowners paying more than 50 percent of household income on their mortgage, taxes, utilities, and insurance is virtually unchanged
   #in metro areaes and the nation since 2004.
   #There is a clear gap between the rate of housing cost burden for renters vs. homeowners, and that gap has widened.
 
   getvalue.hobur.metro.2004 <- hobur %>% 
-    filter(PlaceName == "New Orleans Metro Area") %>% 
+    filter(place == "New Orleans Metro Area") %>% 
     select(sf2004) %>% 
     pull()
   
   getvalue.hobur.metro.2018 <- hobur %>% 
-    filter(PlaceName == "New Orleans Metro Area") %>% 
+    filter(place == "New Orleans Metro Area") %>% 
     select(hoburpct) %>% 
     pull()
   
@@ -1246,13 +1246,13 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.medrent.no.2004 <- medrent %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(sf2004) %>%
     pull()
 
   getvalue.medrent.no.2018 <- medrent %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(Rent) %>%
     pull()
 
@@ -1264,13 +1264,13 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   # Meanwhile, median gross rents increased 18 percent metrowide
   getvalue.medrent.metro.2004 <- medrent %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(sf2004) %>%
     pull()
 
   getvalue.medrent.metro.2018 <- medrent %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(grepl("Metro",PlaceName)) %>%
+    filter(grepl("Metro",place)) %>%
     select(Rent) %>%
     pull()
   #((getvalue.medrent.metro.2018 - getvalue.medrent.metro.2004) / getvalue.medrent.metro.2004)
@@ -1278,13 +1278,13 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   #compared to only 10 percent nationwide.
   getvalue.medrent.us.2004 <- medrent %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(sf2004) %>%
     pull()
 
   getvalue.medrent.us.2018 <- medrent %>%
     select(-significant, -contains("moeprop")) %>%
-    filter(PlaceName == "United States") %>%
+    filter(place == "United States") %>%
     select(Rent) %>%
     pull()
   #((getvalue.medrent.us.2018 - getvalue.medrent.us.2004) / getvalue.medrent.us.2004)
@@ -1296,7 +1296,7 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.yrbuilt1950.nola.2018 <- yrbuilt %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(orbefore1949pct) %>%
     pull()
 
@@ -1306,14 +1306,14 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.yrbuilt1950to1989.jeff.2018 <- yrbuilt %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(mid1950to1989pct) %>%
     pull()
 
   #and just 16 percent of housing stock has been built since 1990.
   getvalue.yrbuilt1990orlater.jeff.2018 <- yrbuilt %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "Jefferson") %>%
+    filter(place == "Jefferson") %>%
     select(orLater1990pct) %>%
     pull()
 
@@ -1322,7 +1322,7 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.yrbuilt1990orlater.tam.2018 <- yrbuilt %>%
     select( -contains("moeprop")) %>%
-    filter(PlaceName == "St. Tammany") %>%
+    filter(place == "St. Tammany") %>%
     select(orLater1990pct) %>%
     pull()
 
@@ -1330,14 +1330,14 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
   getvalue.publictransit.no.2000 <- commute %>%
     select(-contains("SIG"), -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(census2000publictransit) %>%
     pull()
 
 
    getvalue.publictransit.no.2018 <- commute %>%
     select(-contains("SIG"), -contains("moeprop")) %>%
-    filter(PlaceName == "Orleans") %>%
+    filter(place == "Orleans") %>%
     select(PublicTransitpct) %>%
     pull()
 
@@ -1347,14 +1347,14 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
    getvalue.publictransit.jeff.2000 <- commute %>%
      select(-contains("SIG"), -contains("moeprop")) %>%
-     filter(PlaceName == "Jefferson") %>%
+     filter(place == "Jefferson") %>%
      select(census2000publictransit) %>%
      pull()
 
 
    getvalue.publictransit.jeff.2018 <- commute %>%
      select(-contains("SIG"), -contains("moeprop")) %>%
-     filter(PlaceName == "Jefferson") %>%
+     filter(place == "Jefferson") %>%
      select(PublicTransitpct) %>%
      pull()
 
@@ -1362,7 +1362,7 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
    getvalue.bike.no.2018 <- commute %>%
      select(-contains("SIG"), -contains("moeprop")) %>%
-     filter(PlaceName == "Orleans") %>%
+     filter(place == "Orleans") %>%
      select(bikepct) %>%
      pull()
 
@@ -1370,13 +1370,13 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
    getvalue.carpool.metro.2000 <- commute %>%
      select(-contains("SIG"), -contains("moeprop")) %>%
-     filter(grepl("Metro",PlaceName)) %>%
+     filter(grepl("Metro",place)) %>%
      select(census2000carpool) %>%
      pull()
 
     getvalue.carpool.metro.2018 <- commute %>%
      select(-contains("SIG"), -contains("moeprop")) %>%
-     filter(grepl("Metro",PlaceName)) %>%
+     filter(grepl("Metro",place)) %>%
      select(Carpoolpct) %>%
      pull()
 
@@ -1384,27 +1384,27 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
     getvalue.carpool.no.2000 <- commute %>%
       select(-contains("SIG"), -contains("moeprop")) %>%
-      filter(PlaceName == "Orleans") %>%
+      filter(place == "Orleans") %>%
       select(census2000carpool) %>%
       pull()
 
     getvalue.carpool.no.2018 <- commute %>%
       select(-contains("SIG"), -contains("moeprop")) %>%
-      filter(PlaceName == "Orleans") %>%
+      filter(place == "Orleans") %>%
       select(Carpoolpct) %>%
       pull()
 
-    #The percentAgeGroupName of workers who commute by driving alone has increased within the metro region since 2000 from 73 percent to 77 percent,
+    #The percentage of workers who commute by driving alone has increased within the metro region since 2000 from 73 percent to 77 percent,
 
     getvalue.drivealone.metro.2000 <- commute %>%
       select(-contains("SIG"), -contains("moeprop")) %>%
-      filter(grepl("Metro",PlaceName)) %>%
+      filter(grepl("Metro",place)) %>%
       select(census2000drive) %>%
       pull()
 
     getvalue.drivealone.metro.2018 <- commute %>%
       select(-contains("SIG"), -contains("moeprop")) %>%
-      filter(grepl("Metro",PlaceName)) %>%
+      filter(grepl("Metro",place)) %>%
       select(Drivepct) %>%
       pull()
 
@@ -1412,13 +1412,13 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
 
     getvalue.drivealone.no.2000 <- commute %>%
       select(-contains("SIG"), -contains("moeprop")) %>%
-      filter(PlaceName == "Orleans") %>%
+      filter(place == "Orleans") %>%
       select(census2000drive) %>%
       pull()
 
     getvalue.drivealone.no.2018 <- commute %>%
       select(-contains("SIG"), -contains("moeprop")) %>%
-      filter(PlaceName == "Orleans") %>%
+      filter(place == "Orleans") %>%
       select(Drivepct) %>%
       pull()
     #This goes against the national trend, where the share in driving alone remained steady between 2000 and 2016
