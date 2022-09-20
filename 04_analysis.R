@@ -662,9 +662,9 @@ HISPpopM <- hisppopestRaw %>%
 #Table 5 Population by age group
 # HT: Why are we doing this? repeating and adding the numbers manually with mutate?
 
-orderAge <- c(rep("Jefferson Parish",18),rep("Orleans Parish", 18),rep("Plaquemines Parish",18),
-              rep("St. Bernard Parish", 18),rep("St. Charles Parish", 18),rep("St. James Parish", 18),
-              rep("St. John The Baptist Parish", 18),rep("St. Tammany Parish",18))
+orderAge <- c(rep("Jefferson",18),rep("Orleans", 18),rep("Plaquemines",18),
+              rep("St. Bernard", 18),rep("St. Charles", 18),rep("St. James", 18),
+              rep("St. John The Baptist", 18),rep("St. Tammany",18))
 Agepop <- allparishesRaw %>%
   filter(age== "Under 5 years" | age== "5 to 9"| age== "10 to 14" | age== "15 to 19"|
            age=="20 to 24"| age== "25 to 29"| age== "30 to 34"| age== "35 to 39"| age== "40 to 44"
@@ -673,22 +673,22 @@ Agepop <- allparishesRaw %>%
   filter(raceSimple=="Total")%>%
   filter(sex=="Total")%>%
   filter(date == "7/1/2021 population estimate") %>%
-  filter(place %in% c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
-                          "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish")) %>%
-  arrange(factor(place, levels = c("Jefferson Parish","Orleans Parish","Plaquemines Parish",
-                 "St. Bernard Parish","St. Charles Parish","St. James Parish",
-                 "St. John the Baptist Parish","St. Tammany Parish"))) %>%
-  select(age, place, population) #%>%
- # mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,
- # 37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,
- # 2197,1668,1621,2024,2271,2247,1855,1554,1272,1034,854,769,524,259,207,4242,4639,4996,5021,4257,4196,4584,5327,5530,
- # 4939,4398,3241,2597,2569,2714,2148,1051,780,3511,3994,4352,4063,2649,2662,3440,4407,4569,3732,2872,2025,1488,1345,
- # 1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,
- # 3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,
- # 17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
-
-Agepop <-  Agepop %>%
-  pivot_wider(id_cols = age, names_from = place, values_from = population ) #%>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
+  arrange(factor(PlaceName, levels = c("Jefferson","Orleans","Plaquemines",
+                 "St. Bernard","St. Charles","St. James",
+                 "St. John the Baptist","St. Tammany"))) %>%
+  select(age, PlaceName, population) %>%
+ mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,
+ 37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,
+ 2197,1668,1621,2024,2271,2247,1855,1554,1272,1034,854,769,524,259,207,4242,4639,4996,5021,4257,4196,4584,5327,5530,
+ 4939,4398,3241,2597,2569,2714,2148,1051,780,3511,3994,4352,4063,2649,2662,3440,4407,4569,3732,2872,2025,1488,1345,
+ 1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,
+ 3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,
+ 17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
+# 
+# Agepop <-  Agepop %>%
+#   pivot_wider(id_cols = age, names_from = PlaceName, values_from = population ) #%>%
 write.csv("outputs/spreadsheets/Agepop.csv")
 
 

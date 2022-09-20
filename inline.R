@@ -54,6 +54,7 @@ getvalue.pop.john.current <- Overallpop %>%
   filter(PlaceName == "St. John the Baptist") %>%
   select(population) %>%
   pull()
+
 getvalue.pop.tam.current <- Overallpop %>%
   filter(PlaceName == "St. Tammany") %>%
   select(population) %>%
@@ -64,18 +65,18 @@ metropop.current <-(getvalue.pop.no.current + getvalue.pop.jeff.current  + getva
 
 #According to the U.S. Census Bureau’s 2018 population estimates, there are now 91,274 fewer African Americans living in New Orleans (Orleans)
 
-Overallpop2010 <- allparishes %>%
+Overallpop2010 <- allparishes_retro %>%
   filter(date =="4/1/2010 Census population") %>%
   filter(sex =="Total") %>%
   filter(hisp =="Total") %>%
-  filter(raceSimple =="Total") %>%
-  filter(age =="Total")
+  filter(raceSimple =="Total") 
 
 #The U.S. Census Bureau estimates that 1,275,762 residents were living in metro New Orleans as of July 2018
 getvalue.pop.no.2010 <- Overallpop2010 %>%
   filter(PlaceName == "Orleans") %>%
   select(population) %>%
   pull()
+
 getvalue.pop.jeff.2010 <- Overallpop2010 %>%
   filter(PlaceName == "Jefferson") %>%
   select(population) %>%
@@ -84,6 +85,7 @@ getvalue.pop.plaq.2010 <- Overallpop2010 %>%
   filter(PlaceName == "Plaquemines") %>%
   select(population) %>%
   pull()
+
 getvalue.pop.bernard.2010 <- Overallpop2010 %>%
   filter(PlaceName == "St. Bernard") %>%
   select(population) %>%
@@ -129,7 +131,15 @@ AA2019 <- AAhistorical %>%
   select(POP) %>%
   pull()
 
+AA2020 <- AAhistorical %>%
+  filter(year == 2020) %>%
+  select(POP) %>%
+  pull()
 
+AA2021 <- AAhistorical %>%
+  filter(year == 2021) %>%
+  select(POP) %>%
+  pull()
 
 
 
