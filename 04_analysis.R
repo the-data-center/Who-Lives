@@ -680,12 +680,12 @@ Agepop <- allparishesRaw %>%
                  "St. John the Baptist Parish","St. Tammany Parish"))) %>%
   select(age, place, population) #%>%
  # mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,
-                     # 37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,
-                     # 2197,1668,1621,2024,2271,2247,1855,1554,1272,1034,854,769,524,259,207,4242,4639,4996,5021,4257,4196,4584,5327,5530,
-                     # 4939,4398,3241,2597,2569,2714,2148,1051,780,3511,3994,4352,4063,2649,2662,3440,4407,4569,3732,2872,2025,1488,1345,
-                     # 1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,
-                     # 3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,
-                     # 17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
+ # 37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,
+ # 2197,1668,1621,2024,2271,2247,1855,1554,1272,1034,854,769,524,259,207,4242,4639,4996,5021,4257,4196,4584,5327,5530,
+ # 4939,4398,3241,2597,2569,2714,2148,1051,780,3511,3994,4352,4063,2649,2662,3440,4407,4569,3732,2872,2025,1488,1345,
+ # 1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,
+ # 3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,
+ # 17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
 
 Agepop <-  Agepop %>%
   pivot_wider(id_cols = age, names_from = place, values_from = population ) #%>%
@@ -698,36 +698,36 @@ write.csv("outputs/spreadsheets/Agepop.csv")
 
 
 
-#### waiting to hear back from US census bureau for 2021 PEP
-# under18pars<-allparishesRaw %>%
-#   filter(age=="18 years and over" | age=="Total")%>%
-#   filter(raceSimple=="Total")%>%
-#   filter(sex=="Total")%>%
-#   filter(date == "7/1/2021 population estimate") %>%
-#   filter(place %in% c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
-#                           "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish")) %>%
-#   select(age, place, population)
-# 
-# #Creating metro
-# under18metro<- under18pars %>%
-#   group_by(age)%>%
-#   summarise(population=sum(population))
-# under18metro$place <- "Metro"
-# 
-# #stack back with other under 18
-# popunder18 <-bind_rows(under18pars,under18metro) %>%
-#   spread(., age, Population) %>%
-#   mutate(under18 = Total-`18 years and over`) %>%
-#   filter(place == "Orleans Parish" | place=="Jefferson Parish" | place == "St. Tammany Parish" | place == "Metro")%>%
-#   select(place, under18) %>%
-#   mutate(est2000=c(115255,358092,129408,54399))
-# 
-# popunder18CSV <- popunder18 %>%
-#   select(place, est2000, under18) %>%
-#   pivot_longer(-c("place"), names_to = "under18", values_to = "Value") %>%
-#   mutate(name = paste( place, under18, sep = "-"),
-#          year = 2019) %>%
-#   select(-place) %>%
-  # pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  # write.csv("outputs/spreadsheets/under18.csv")
-  # 
+### waiting to hear back from US census bureau for 2021 PEP
+under18pars<-allparishesRaw %>%
+  filter(age=="18 years and over" | age=="Total")%>%
+  filter(raceSimple=="Total")%>%
+  filter(sex=="Total")%>%
+  filter(date == "7/1/2021 population estimate") %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
+  select(age, PlaceName, population)
+
+#Creating metro
+under18metro<- under18pars %>%
+  group_by(age)%>%
+  summarise(population=sum(population))
+under18metro$PlaceName <- "Metro"
+
+#stack back with other under 18
+popunder18 <-bind_rows(under18pars,under18metro) %>%
+  spread(., age, population) %>%
+  mutate(under18 = Total-`18 years and over`) %>%
+  filter(PlaceName == "Orleans" | PlaceName =="Jefferson" | PlaceName == "St. Tammany" | PlaceName == "Metro")%>%
+  select(PlaceName, under18) %>%
+  mutate(est2000=c(115255,358092,129408,54399))
+
+popunder18CSV <- popunder18 %>%
+  select(PlaceName, est2000, under18) %>%
+  pivot_longer(-c("PlaceName"), names_to = "under18", values_to = "Value") %>%
+  mutate(name = paste(PlaceName, under18, sep = "-"),
+         year = 2019) %>%
+  select(-PlaceName) %>%
+pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
+write.csv("outputs/spreadsheets/under18.csv")
+

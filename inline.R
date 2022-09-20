@@ -564,40 +564,40 @@ getvalue.sing.2000 <- sing %>%
   #While the metro has regained much of the post-Katrina population losses, youth population is substantially lower than pre-Katrina levels.
   #The metro had 358,092 children under 18 years in 2000 and only 284,231 in 2018.
 
- #  getvalue.under18.metro.2000 <- popunder18 %>%  ### PEP update
- #    filter(grepl("Metro",PlaceName)) %>%
- #    select(est2000) %>%
- #    pull()
+ getvalue.under18.metro.2000 <- popunder18 %>%  ### PEP update
+   filter(grepl("Metro",PlaceName)) %>%
+   select(est2000) %>%
+   pull()
  # 
- #  getvalue.under18.metro.current <- popunder18 %>%
- #    filter(grepl("Metro",PlaceName)) %>%
- #    select(under18) %>%
- #    pull()
+  getvalue.under18.metro.current <- popunder18 %>%
+    filter(grepl("Metro",PlaceName)) %>%
+    select(under18) %>%
+    pull()
  # 
  #  #Much of this loss was driven by Orleans, where the under 18 population declined to 79,264 from 129,408. The under 18 population is now 21 percent of the metro population, down from 27 percent in 2000.
  # 
- #  getvalue.under18.no.2000 <- popunder18 %>%
- #    filter(PlaceName == "Orleans") %>%
- #    select(est2000) %>%
- #    pull()
+  getvalue.under18.no.2000 <- popunder18 %>%
+    filter(PlaceName == "Orleans") %>%
+    select(est2000) %>%
+    pull()
+
+  getvalue.under18.no.current <- popunder18 %>%
+    filter(PlaceName == "Orleans") %>%
+    select(under18) %>%
+    pull()
  # 
- #  getvalue.under18.no.current <- popunder18 %>%
- #    filter(PlaceName == "Orleans") %>%
- #    select(under18) %>%
- #    pull()
+ #The under 18 population is now 21 percent of the metro population, down from 27 percent in 2000.
+  getvalue.over18.metro.current <- under18metro %>%
+    filter(age == "18 years and over") %>%
+    select(population) %>%
+    pull()
  # 
- # #The under 18 population is now 21 percent of the metro population, down from 27 percent in 2000.
- #  getvalue.over18.metro.current <- under18metro %>%
- #    filter(age == "18 years and over") %>%
- #    select(population) %>%
- #    pull()
+  getvalue.under18totalpop.metro.current <- under18metro %>%
+    filter(age == "Total") %>%
+    select(population) %>%
+    pull()
  # 
- #  getvalue.under18totalpop.metro.current <- under18metro %>%
- #    filter(age == "Total") %>%
- #    select(population) %>%
- #    pull()
- # 
- #  getvalue.pct.under18.metro.current <- ( (getvalue.under18totalpop.metro.current - getvalue.over18.metro.current) / getvalue.under18totalpop.metro.current)
+  getvalue.pct.under18.metro.current <- ( (getvalue.under18totalpop.metro.current - getvalue.over18.metro.current) / getvalue.under18totalpop.metro.current)
 
   #The proportion of adults 25 years and older with less than a high school education declined across all three of the largestes,
   #leading to a metrowide decrease from 15 percent in 2000 to 14 percent in 2016.

@@ -249,7 +249,9 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2019, ty
 
 ### 2021 PEP data not available by API yet, pulling it in directly.
 
-allparishesRaw <- read_csv("PEP2021charagegroups.csv") %>% 
+allparishesRaw <- read_csv("PEP2021charagegroups.csv")
+
+allparishesRaw <-  allparishesRaw %>% 
   filter(COUNTY %in% c("071","051","075","087","089","093","095","103")) %>% #making a total column for each sex.  revise unneeded ones later
   mutate(WA_Total = WA_MALE + WA_FEMALE,
          BA_Total = BA_MALE + BA_FEMALE,
@@ -333,9 +335,25 @@ allparishesRaw <- allparishesRaw %>% filter(race %in% c("TOT", "WA", "BA", "AA",
                                 hisp == "Hispanic" ~ "Hispanic")) %>%
   select(place, date, hisp, sex, race, age, population, raceSimple)
 
+popunder18co <- read_csv("county_pep_age2021.csv") #for popunder18 measure
+popunder18co <- popunder18co %>% 
+  filter(COUNTY %in% c("071","051","075","087","089","093","095","103"))  %>% select(CTYNAME, YEAR, AGE18PLUS_TOT) %>% mutate(place = CTYNAME,
+                                                                                 date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
+                                                                                                  YEAR == 2 ~ "7/1/2020 population estimate",
+                                                                                                  YEAR == 3 ~ "7/1/2021 population estimate"),
+                                                                                 age = "18 years and over",
+                                                                                 race = "Total",
+                                                                                 raceSimple = "Total",
+                                                                                 sex = "Total",
+                                                                                 population = AGE18PLUS_TOT)
+
+allparishesRaw <- allparishesRaw %>% full_join(popunder18co, by = c("place", "date", "age", "sex", "race","raceSimple", "population")) %>%
+  select(place, date, hisp, sex, race, age, population, raceSimple)
 #pulling in entire US PEP data, then binding to allparishesRaw.  Doing this with the exact same code as from above.
 
-allstates_pep <- read_csv("PEP2021charagegroups_allstates.csv") %>% 
+allstates_pep <- read_csv("PEP2021charagegroups_allstates.csv")
+
+allstates_pep <- allstates_pep %>% 
   mutate(WA_Total = WA_MALE + WA_FEMALE,
          BA_Total = BA_MALE + BA_FEMALE,
          IA_Total = IA_MALE + IA_FEMALE,
@@ -418,6 +436,20 @@ allstates_pep  <- allstates_pep  %>% filter(race %in% c("TOT", "WA", "BA", "AA",
                                 hisp == "Hispanic" ~ "Hispanic")) %>%
   select(place, date, hisp, sex, race, age, population, raceSimple)
 
+popunder18US <- read_csv("US_pep_age2021.csv") #for popunder18 measure
+popunder18US <- popunder18US %>% select(CTYNAME, YEAR, AGE18PLUS_TOT) %>% mutate(place = CTYNAME,
+                                                                                 date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
+                                                                                                  YEAR == 2 ~ "7/1/2020 population estimate",
+                                                                                                  YEAR == 3 ~ "7/1/2021 population estimate"),
+                                                                                 age = "18 years and over",
+                                                                                 race = "Total",
+                                                                                 raceSimple = "Total",
+                                                                                 sex = "Total",
+                                                                                 population = AGE18PLUS_TOT)
+
+allstates_pep <- allstates_pep %>% full_join(popunder18US, by = c("place", "date", "sex", "race", "raceSimple", "age", "population"))
+
+
 allstates_pep <- allstates_pep  %>% group_by(date, hisp, sex, race, age, raceSimple) %>% 
   summarize(place = "United States", 
             population = sum(population)) %>%
@@ -440,6 +472,12 @@ allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2
 save(allparishesRaw, file = "inputs/allparishesRaw.RData")
 
 
+
+### Importing the PEP Age and Sex data for the under 18 measure
+
+popunder18co <- read_csv("county_pep_age2021.csv")
+
+popunder18co <- popunder18co %>% select(CTYNAME, YEAR, AGE18PLUS_TOT, AGE18PLUS_MALE, AGE18PLUS_FEM)
 
 
 

@@ -44,7 +44,7 @@ source(here("inputs/datacenter_colors.R"))
 #                       yscale = c(0,.45),      
 #                       pct = TRUE,      #used when formatting pct vals vs dollar vals
 #                       comparisonyear = "2000",
-#                       year = "2018",
+#                       year = "2021",
 #                       digits = 0){     #for rounding, specifically for forbor
 #   dataGraphic <-  data %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it
 #     mutate(PlaceNames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
@@ -261,7 +261,7 @@ chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
        y="")
 
 
-####6 - Hispanic Origin, 2018
+####6 - Hispanic Origin, 2021
 
 hispan2018 <- hispan %>%
   select(place, 
@@ -343,15 +343,15 @@ chart.hispan2018.allparishes <- hispan2018 %>%
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12), 
         plot.title = element_text(hjust = .5, size = 14)) +
-  labs(title = "Hispanic origin, 2019",
+  labs(title = "Hispanic origin, 2021",
        x="",
        y="")
 ############################################
 # # POPULATION BY AGE AND HOUSEHOLD TYPES # #
 ############################################
 
-
-####7 - Population by age group, 2000
+# 
+# ###7 - Population by age group, 2000
 # agepop2000forGraphic <- Agepop %>%
 #   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
 #                                                        "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
@@ -385,7 +385,7 @@ chart.hispan2018.allparishes <- hispan2018 %>%
 
 
 #   
-####8 - Population by age group, 2018
+####8 - Population by age group, 2021
 
 
 ### PEP ###
@@ -415,7 +415,7 @@ chart.hispan2018.allparishes <- hispan2018 %>%
 #         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
 #         axis.text.y = element_text(size = 12),
 #         plot.title = element_text(hjust = .5, size = 16))+
-#   labs(title = "Population by age group, 2019",
+#   labs(title = "Population by age group, 2021",
 #        x="",
 #        y="")
 
@@ -436,27 +436,28 @@ singGraphic <- dodgedBar(sing,
 ####11 - Under 18 population
 
 ### PEP ###
-# popunder18forGraphic <- popunder18 %>%
-#   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
-#   gather(-PlaceName,-PlaceName.fac, key=variable, value =val) %>%
-#   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char))
-# 
-# popunder18Graphic <- popunder18forGraphic %>%
-#   ggplot(aes(PlaceName.fac, val, fill=description, label = comma(val))) +
-#   geom_bar(stat="identity",
-#            position = position_dodge(),
-#            width = .7,
-#            color="gray50") +
-#   geom_text(position=position_dodge(width = .7), vjust = -.7, size=3, family="Asap") +
-#   scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,400000)) +
-#   scale_fill_manual(values = c(DCcolor.p1skyblue, DCcolor.p1mediumblue)) +
-#   themeDC_horizontal() +
-#   theme(legend.title = element_blank(),
-#         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10),
-#         plot.title = element_text(hjust = .5)) +
-#   labs(title = "Under 18 population",
-#        x="",
-#        y="")
+popunder18forGraphic <- popunder18 %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
+  pivot_longer(cols = c(under18, est2000), names_to = "variable", values_to = "val") %>%
+  #gather(PlaceName,-PlaceName.fac, key=variable, value =val) %>%
+  mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char))
+
+popunder18Graphic <- popunder18forGraphic %>%
+  ggplot(aes(PlaceName.fac, val, fill=description, label = comma(val))) +
+  geom_bar(stat="identity",
+           position = position_dodge(),
+           width = .7,
+           color="gray50") +
+  geom_text(position=position_dodge(width = .7), vjust = -.7, size=3, family="Asap") +
+  scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,400000)) +
+  scale_fill_manual(values = c(DCcolor.p1skyblue, DCcolor.p1mediumblue)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10),
+        plot.title = element_text(hjust = .5)) +
+  labs(title = "Under 18 population",
+       x="",
+       y="")
   
 ############################################
 # # EDUCATIONAL ATTAINMENT, INCOME, AND INTERNET ACCESS # #
@@ -479,7 +480,7 @@ bachGraphic <- dodgedBar(bach,
 
 medhhGraphic <- dodgedBar(medhh, 
                           quo(MedianHHIncome), 
-                          "Median household income, 2019 inflation adjusted", 
+                          "Median household income, 2021 inflation adjusted", 
                           yscale = c(0,1.3*max(medhh$MedianHHIncome)), 
                           colors = c(DCcolor.p2teal50, DCcolor.p1mediumblue), 
                           pct = FALSE,  
@@ -529,7 +530,7 @@ chart.inta.allparishes <- intaforGraphic %>%
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10), 
         plot.title = element_text(hjust = .5)) +
-  labs(title = "Internet access, 2019 households",
+  labs(title = "Internet access, 2021 households",
        x="",
        y="") 
 ############################################
@@ -619,7 +620,7 @@ chart.mob.allparishes <- mobforGraphic %>%
             position = position_stack(vjust = 0.6), 
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,.18)) +
-  scale_x_discrete(labels = c("2004","2019"))+
+  scale_x_discrete(labels = c("2004","2021"))+
   themeDC_horizontal() +
   theme(plot.title = element_text(hjust = .5, size = 18),
         strip.text = element_text(size=12),
@@ -723,7 +724,7 @@ chart.yrbuilt.allparishes <- yrbuiltforGraphic %>%
         axis.text.x = element_text(size = 10, vjust = 1),
         axis.text.y = element_text(size = 10),
         plot.title = element_text(hjust = .5)) +
-  labs(title = "Year structure built, 2019 housing units",
+  labs(title = "Year structure built, 2021 housing units",
        x="",
        y="") 
 
@@ -746,7 +747,7 @@ commuteforGraphic <- commute %>%
          description = ifelse(variable == "Workhomepct"|variable == "census2000workhome", "Work at home", description),
          description = ifelse(variable == "Otherpct"|variable == "census2000other", "Other", description)) %>%
   mutate(year = NA,
-         year = ifelse(grepl("pct",variable), 2018, year),
+         year = ifelse(grepl("pct",variable), 2021, year),
          year = ifelse(grepl("2000", variable), 2000,year)) %>%
   mutate(description.fac = factor(.$description, levels = c("Drive Alone",
                                                             "Carpool",
@@ -756,7 +757,7 @@ commuteforGraphic <- commute %>%
                                                             "Work at home",
                                                             "Other")))%>% 
   mutate(year.fac = factor(.$year, levels = c("2000",
-                                              "2018"))) %>%
+                                              "2021"))) %>%
   mutate(val = ifelse(value<.02, "",
                     paste0(round(value*100),"%",ifelse((DriveSIG == "no" & variable == "Drivepct")
                                                        |(carpoolSIG ==  "no" & variable == "Carpoolpct")
@@ -783,7 +784,7 @@ chart.commute.allparishes <- commuteforGraphic %>%
   geom_text(size = 4, position = position_stack(vjust = 0.6), family="Asap") + 
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,1)) +
   scale_x_discrete(labels = c("2000",
-                              "2019"))+
+                              "2021"))+
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
@@ -802,7 +803,7 @@ chart.commute.allparishes <- commuteforGraphic %>%
 # AAhistGraphic #PEP
 # HispanicPopGraphic #PEP
 # chart.HispanpopYears.allparishes  #PEP
-# chart.hispan2018.allparishes 
+# chart.hispan2021.allparishes 
 # chart.agepop2000.allparishes
 # chart.agepopCurrrent.allparishes #PEP
 # hwcGraphic

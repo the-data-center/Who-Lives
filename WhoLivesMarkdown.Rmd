@@ -1,9 +1,7 @@
 ---
 output: 
-  md_document:
-    variant: markdown_phpextra+backtick_code_blocks
+  word_document
 ---
-
 
 ```{r, include=FALSE}
 
@@ -19,8 +17,8 @@ output:
 # base.dir, base.url, and fig.path control where the figures will be saved locally and how the links will be written in markdown. The links should match where the files are uploaded to WP. 
 # base.dir and base.url fall under knit options; fig.path falls under chunk options
 
-base.dir <- "wp-graphics"
-base.url <- "http://www.datacenterresearch.org/a/wp-content/"
+#base.dir <- "wp-graphics"
+#base.url <- "http://www.datacenterresearch.org/a/wp-content/"
 
 # Set date path manually
 # fig.path <- "uploads/2018/07/" 
@@ -30,7 +28,7 @@ fig.path <- paste0("uploads/",
                    format(Sys.Date(), format="%Y"),"/",
                    format(Sys.Date(), format="%m"),"/") 
 
-knitr::opts_knit$set(base.dir = base.dir, base.url = base.url)
+#knitr::opts_knit$set(base.dir = base.dir, base.url = base.url)
 
 knitr::opts_chunk$set(fig.width=5, fig.height=5,  # use fig.width and fig.height to globally set figure sizes.
                fig.path = fig.path) 
@@ -72,6 +70,12 @@ source(here("01_libraries.R"))
 ```
 ```{r}
 source(here("css_helper.R"))
+```
+```{r}
+source(here("02_variables.R"))
+```
+```{r}
+source(here("03_functions.R"))
 ```
 ```{r}
 source(here("data-pull.R"))
@@ -204,7 +208,7 @@ The progression of the baby boomers through the age groups, along with falling b
 
 
 ```{r age2000, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
-chart.agepop2000.allparishes
+#chart.agepop2000.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
@@ -213,7 +217,7 @@ makeCSS_source(
 ```
 
 ```{r agecurrent, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
-chart.agepopCurrent.allparishes
+#chart.agepopCurrent.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
