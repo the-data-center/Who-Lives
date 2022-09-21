@@ -155,6 +155,12 @@ commuteRaw <- wholivesdatapull(commutevars, commutenames)
 save(commuteRaw, file = "inputs/commuteRaw.RData")
 
 
+#Pulling 2010 and 2016 Edu. Attainment by Race
+bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M','C15002_017E','C15002_017M')
+bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  "MaleGradProfMOE", "FemaleBach", "FemaleBachMOE", "FemaleGradProf", "FemaleGradProfMOE")
+bachRaw16 <- wholivesdatapull(bachvars, bachnames, year = 2016)
+save(bachRaw16, file = "inputs/bachRaw.RData")
+
 ############################################
 # # PEP # #
 ############################################
@@ -250,44 +256,21 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2019, ty
 ### 2021 PEP data not available by API yet, pulling it in directly.
 
 allparishesRaw <- read_csv("PEP2021charagegroups.csv")
-
 allparishesRaw <-  allparishesRaw %>% 
   filter(COUNTY %in% c("071","051","075","087","089","093","095","103")) %>% #making a total column for each sex.  revise unneeded ones later
   mutate(WA_Total = WA_MALE + WA_FEMALE,
          BA_Total = BA_MALE + BA_FEMALE,
-         IA_Total = IA_MALE + IA_FEMALE,
          AA_Total = AA_MALE + AA_FEMALE,
-         NA_Total = NA_MALE + NA_FEMALE,
-         TOM_Total = TOM_MALE + TOM_FEMALE,
-         WAC_Total = WAC_MALE + WAC_FEMALE,
-         BAC_Total = BAC_MALE + BAC_FEMALE,
-         IAC_Total = IAC_MALE + IAC_FEMALE,
-         AAC_Total = AAC_MALE + AAC_FEMALE,
-         NAC_Total = NAC_MALE + NAC_FEMALE,
          NH_Total = NH_MALE + NH_FEMALE,
          NHWA_Total = NHWA_MALE + NHWA_FEMALE,
          NHBA_Total = NHBA_MALE + NHBA_FEMALE,
-         NHIA_Total = NHIA_MALE + NHIA_FEMALE,
          NHAA_Total = NHAA_MALE + NHAA_FEMALE,
-         NHTOM_Total = NHTOM_MALE + NHTOM_FEMALE,
-         NHWAC_Total = NHWAC_MALE + NHWAC_FEMALE,
-         NHBAC_Total = NHBAC_MALE + NHBAC_FEMALE,
-         NHIAC_Total = NHIAC_MALE + NHIAC_FEMALE,
-         NHAAC_Total = NHAAC_MALE + NHAAC_FEMALE,
-         NHNAC_Total = NHNAC_MALE + NHNAC_FEMALE,
          
          H_Total = H_MALE + H_FEMALE,
          HWA_Total = HWA_MALE + HWA_FEMALE,
          HBA_Total = HBA_MALE + HBA_FEMALE,
-         HIA_Total = HIA_MALE + HIA_FEMALE,
-         HAA_Total = HAA_MALE + HAA_FEMALE,
-         HTOM_Total = HTOM_MALE + HTOM_FEMALE,
-         HWAC_Total = HWAC_MALE + HWAC_FEMALE,
-         HBAC_Total = HBAC_MALE + HBAC_FEMALE,
-         HIAC_Total = HIAC_MALE + HIAC_FEMALE,
-         HAAC_Total = HAAC_MALE + HAAC_FEMALE,
-         HNAC_Total = HNAC_MALE + HNAC_FEMALE) %>%
-  pivot_longer(cols = TOT_POP:HNAC_Total, names_sep = "_", names_to = c("race", "sex"))%>%
+         HAA_Total = HAA_MALE + HAA_FEMALE) %>%
+  pivot_longer(cols = TOT_POP:HAA_Total, names_sep = "_", names_to = c("race", "sex"))%>%
   mutate(place = CTYNAME,
          age = case_when(AGEGRP == 0 ~ "Total",
                          AGEGRP == 1 ~ "Under 5 years",
@@ -356,39 +339,17 @@ allstates_pep <- read_csv("PEP2021charagegroups_allstates.csv")
 allstates_pep <- allstates_pep %>% 
   mutate(WA_Total = WA_MALE + WA_FEMALE,
          BA_Total = BA_MALE + BA_FEMALE,
-         IA_Total = IA_MALE + IA_FEMALE,
          AA_Total = AA_MALE + AA_FEMALE,
-         NA_Total = NA_MALE + NA_FEMALE,
-         TOM_Total = TOM_MALE + TOM_FEMALE,
-         WAC_Total = WAC_MALE + WAC_FEMALE,
-         BAC_Total = BAC_MALE + BAC_FEMALE,
-         IAC_Total = IAC_MALE + IAC_FEMALE,
-         AAC_Total = AAC_MALE + AAC_FEMALE,
-         NAC_Total = NAC_MALE + NAC_FEMALE,
          NH_Total = NH_MALE + NH_FEMALE,
          NHWA_Total = NHWA_MALE + NHWA_FEMALE,
          NHBA_Total = NHBA_MALE + NHBA_FEMALE,
-         NHIA_Total = NHIA_MALE + NHIA_FEMALE,
          NHAA_Total = NHAA_MALE + NHAA_FEMALE,
-         NHTOM_Total = NHTOM_MALE + NHTOM_FEMALE,
-         NHWAC_Total = NHWAC_MALE + NHWAC_FEMALE,
-         NHBAC_Total = NHBAC_MALE + NHBAC_FEMALE,
-         NHIAC_Total = NHIAC_MALE + NHIAC_FEMALE,
-         NHAAC_Total = NHAAC_MALE + NHAAC_FEMALE,
-         NHNAC_Total = NHNAC_MALE + NHNAC_FEMALE,
          
          H_Total = H_MALE + H_FEMALE,
          HWA_Total = HWA_MALE + HWA_FEMALE,
          HBA_Total = HBA_MALE + HBA_FEMALE,
-         HIA_Total = HIA_MALE + HIA_FEMALE,
-         HAA_Total = HAA_MALE + HAA_FEMALE,
-         HTOM_Total = HTOM_MALE + HTOM_FEMALE,
-         HWAC_Total = HWAC_MALE + HWAC_FEMALE,
-         HBAC_Total = HBAC_MALE + HBAC_FEMALE,
-         HIAC_Total = HIAC_MALE + HIAC_FEMALE,
-         HAAC_Total = HAAC_MALE + HAAC_FEMALE,
-         HNAC_Total = HNAC_MALE + HNAC_FEMALE) %>%
-  pivot_longer(cols = TOT_POP:HNAC_Total, names_sep = "_", names_to = c("race", "sex"))%>%
+         HAA_Total = HAA_MALE + HAA_FEMALE) %>%
+  pivot_longer(cols = TOT_POP:HAA_Total, names_sep = "_", names_to = c("race", "sex"))%>%
   mutate(place = CTYNAME,
          age = case_when(AGEGRP == 0 ~ "Total",
                          AGEGRP == 1 ~ "Under 5 years",
@@ -489,7 +450,7 @@ save(allparishesRaw, file = "inputs/allparishesRaw.RData")
 ## this is just for the 2010 inline measures - probably could be done differently but for now..
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP", "RACE", "SEX", "POP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
 popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP", "HISP", "RACE", "SEX", "POP")
-listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
+#listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
 allparishes_retro <- getCensus(name = "pep/charagegroups", # most recent
                                vintage = 2019,
                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
@@ -529,7 +490,7 @@ save(allparishes_retro, file = "inputs/allparishes_retro.RData")
 
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
 popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP")
-listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
+#listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
 hisppopestRaw <- getCensus(name = "pep/charagegroups", # most recent
                                vintage = 2019,
                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
@@ -594,182 +555,178 @@ blackpopestRaw <- rbind(blackpopestRaw, blackpopest20, blackpopest21)
 save(blackpopestRaw, file = "inputs/blackpopestRaw.RData")
 
 
-###2019 update
+# ###2019 update
+# 
+# popestVarsAGE <- c("POP", "GEO_ID", "AGEGROUP", "DATE_DESC")
+# 
+# popestVarsRACE <- c("POP", "GEO_ID", "RACE", "HISP", "DATE_DESC")
+# 
+# 
+# # Age codes for joining later
+# ageGroupCodeName <-
+#   c("Total",
+#     "Under 5 years",
+#     "5 to 9",
+#     "10 to 14",
+#     "15 to 19",
+#     "20 to 24",
+#     "25 to 29",
+#     "30 to 34",
+#     "35 to 39",
+#     "40 to 44",
+#     "45 to 49",
+#     "50 to 54",
+#     "55 to 59",
+#     "60 to 64",
+#     "65 to 69",
+#     "70 to 74",
+#     "75 to 79",
+#     "80 to 84",
+#     "85 plus",
+#     "Under 18 years",
+#     "5 to 13 years",
+#     "14 to 17 years",
+#     "18 to 64 years",
+#     "18 to 24 years",
+#     "25 to 44 years",
+#     "45 to 64 years",
+#     "65 years and over",
+#     "85 years and over",
+#     "16 years and over",
+#     "18 years and over",
+#     "15 to 44 years",
+#     "Median age (years)")
+# ageGroupCode <- data.frame(AGEGROUP=as.character(0:31),ageGroupCodeName)
+# 
+# # Race codes for joining later
+# # See PEPSR6H and PEPSR5H on Am FactFinder, verified match for Orleans Parish
+# raceCodeName <-
+#   c("Total",
+#     "White alone",
+#     "Black or African American alone",
+#     "American Indian and Alaska Native alone",
+#     "Asian alone",
+#     "Native Hawaiian and Other Pacific Islander alone",
+#     "Two or more races",
+#     "White combo",
+#     "Black or African American combo",
+#     "American Indian and Alaska Native combo",
+#     "Asian combo",
+#     "Native Hawaiian and Other Pacific Islander combo")
+# raceCode <- data.frame(RACE=as.character(0:11),raceCodeName)
+# 
+# 
+# 
+# hispCodeName <- c("Total","Not Hispanic","Hispanic")
+# hispCode <- data.frame(HISP=as.character(0:2),hispCodeName)
+# 
 
-popestVarsAGE <- c("POP", "GEO_ID", "AGEGROUP", "DATE_DESC")
-
-popestVarsRACE <- c("POP", "GEO_ID", "RACE", "HISP", "DATE_DESC")
-
-
-# Age codes for joining later
-ageGroupCodeName <-
-  c("Total",
-    "Under 5 years",
-    "5 to 9",
-    "10 to 14",
-    "15 to 19",
-    "20 to 24",
-    "25 to 29",
-    "30 to 34",
-    "35 to 39",
-    "40 to 44",
-    "45 to 49",
-    "50 to 54",
-    "55 to 59",
-    "60 to 64",
-    "65 to 69",
-    "70 to 74",
-    "75 to 79",
-    "80 to 84",
-    "85 plus",
-    "Under 18 years",
-    "5 to 13 years",
-    "14 to 17 years",
-    "18 to 64 years",
-    "18 to 24 years",
-    "25 to 44 years",
-    "45 to 64 years",
-    "65 years and over",
-    "85 years and over",
-    "16 years and over",
-    "18 years and over",
-    "15 to 44 years",
-    "Median age (years)")
-ageGroupCode <- data.frame(AGEGROUP=as.character(0:31),ageGroupCodeName)
-
-# Race codes for joining later
-# See PEPSR6H and PEPSR5H on Am FactFinder, verified match for Orleans Parish
-raceCodeName <-
-  c("Total",
-    "White alone",
-    "Black or African American alone",
-    "American Indian and Alaska Native alone",
-    "Asian alone",
-    "Native Hawaiian and Other Pacific Islander alone",
-    "Two or more races",
-    "White combo",
-    "Black or African American combo",
-    "American Indian and Alaska Native combo",
-    "Asian combo",
-    "Native Hawaiian and Other Pacific Islander combo")
-raceCode <- data.frame(RACE=as.character(0:11),raceCodeName)
-
-
-
-hispCodeName <- c("Total","Not Hispanic","Hispanic")
-hispCode <- data.frame(HISP=as.character(0:2),hispCodeName)
-
-
-
-
-
-
-# Pull data age
-
-parish_ageEstimates <- getCensus(name = "pep/charagegroups",
-                                 vintage = 2019,
-                                 key = mycensuskey,
-                                 vars = popestVarsAGE,
-                                 region = mycounties,
-                                 regionin = "state:22")
-
-state_ageEstimates <- getCensus(name = "pep/charagegroups",
-                                vintage = 2019,
-                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
-                                vars = popestVarsAGE ,
-                                region = "state:22")
-
-usa_ageEstimates  <- getCensus(name = "pep/charagegroups",
-                               vintage = 2019,
-                               key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
-                               vars = popestVarsAGE ,
-                               region = "us:1")
-
-dfage <- parish_ageEstimates %>% bind_rows(state_ageEstimates) %>% bind_rows(usa_ageEstimates) # Bind rows for counties, metro, state, usa
-
-rm(parish_ageEstimates, state_ageEstimates, usa_ageEstimates)  # remove large objects from environment
-
-dfage <- dfage %>%
-  left_join(ageGroupCode) %>%
-  mutate(place = GEO_ID) %>%
-  mutate(POP = as.numeric(POP))
-
-dfage <- dfage %>%
-  select(place, DATE_DESC, ageGroupCodeName, POP) %>%
-  rename(age = ageGroupCodeName,
-         population = POP,
-         date = DATE_DESC) %>%
-  mutate(raceSimple = "Total",
-          race = "Total",
-          hisp= "Total")
-
-
-
-
-
-
-# Pull data race
-
-parish_raceEstimates <- getCensus(name = "pep/charagegroups",
-                                  vintage = 2019,
-                                  key = mycensuskey,
-                                  vars = popestVarsRACE,
-                                  region = mycounties,
-                                  regionin = "state:22")
-
-state_raceEstimates <- getCensus(name = "pep/charagegroups",
-                                 vintage = 2019,
-                                 key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
-                                 vars = popestVarsRACE,
-                                 region = "state:22")
-
-usa_raceEstimates  <- getCensus(name = "pep/charagegroups",
-                                vintage = 2019,
-                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
-                                vars = popestVarsRACE,
-                                region = "us:1")
-
-dfrace <- parish_raceEstimates %>% bind_rows(state_raceEstimates) %>% bind_rows(usa_raceEstimates) # Bind rows for counties, metro, state, usa
-
-rm(parish_raceEstimates, state_raceEstimates, usa_raceEstimates)  # remove large objects from environment
-
-dfrace <- dfrace %>%
-  left_join(raceCode) %>%
-  left_join(hispCode) %>%
-  mutate(place = GEO_ID) %>%
-  mutate(POP = as.numeric(POP))
-
-dfrace <- dfrace %>%
-  select(place, DATE_DESC, hispCodeName,  raceCodeName, POP) %>%
-  rename(hisp = hispCodeName,
-         race = raceCodeName,
-         population = POP,
-         date = DATE_DESC) %>%
-  filter(race %in% c("Total",
-                     "White alone",
-                     "Black or African American alone",
-                     "Asian alone")) %>%
-  mutate(raceSimple = NA, # make variable base on race alone that matches Who Lives races.
-         raceSimple = ifelse(race == "Total" & hisp == "Total", "Total", raceSimple),
-         raceSimple = ifelse(race == "White alone" & hisp == "Not Hispanic", "White", raceSimple),
-         raceSimple = ifelse(race == "Black or African American alone" & hisp == "Not Hispanic", "Black", raceSimple),
-         raceSimple = ifelse(race == "Asian alone" & hisp == "Not Hispanic", "Asian", raceSimple),
-         raceSimple = ifelse(race == "Total" & hisp == "Hispanic", "Hispanic", raceSimple))  %>%
-  filter(!is.na(raceSimple)) %>% # Filter out other races
-  mutate(age = "Total")
+# 
+# 
+# 
+# 
+# # Pull data age
+# 
+# parish_ageEstimates <- getCensus(name = "pep/charagegroups",
+#                                  vintage = 2019,
+#                                  key = mycensuskey,
+#                                  vars = popestVarsAGE,
+#                                  region = mycounties,
+#                                  regionin = "state:22")
+# 
+# state_ageEstimates <- getCensus(name = "pep/charagegroups",
+#                                 vintage = 2019,
+#                                 key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+#                                 vars = popestVarsAGE ,
+#                                 region = "state:22")
+# 
+# usa_ageEstimates  <- getCensus(name = "pep/charagegroups",
+#                                vintage = 2019,
+#                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+#                                vars = popestVarsAGE ,
+#                                region = "us:1")
+# 
+# dfage <- parish_ageEstimates %>% bind_rows(state_ageEstimates) %>% bind_rows(usa_ageEstimates) # Bind rows for counties, metro, state, usa
+# 
+# rm(parish_ageEstimates, state_ageEstimates, usa_ageEstimates)  # remove large objects from environment
+# 
+# dfage <- dfage %>%
+#   left_join(ageGroupCode) %>%
+#   mutate(place = GEO_ID) %>%
+#   mutate(POP = as.numeric(POP))
+# 
+# dfage <- dfage %>%
+#   select(place, DATE_DESC, ageGroupCodeName, POP) %>%
+#   rename(age = ageGroupCodeName,
+#          population = POP,
+#          date = DATE_DESC) %>%
+#   mutate(raceSimple = "Total",
+#           race = "Total",
+#           hisp= "Total")
 
 
 
 
 
-allparishesRawx <- bind_rows(dfrace, dfage) %>%
-  distinct()
 
-save(allparishesRawx, file = "inputs/allparishesRawx.Rdata")
+# # Pull data race
+# 
+# parish_raceEstimates <- getCensus(name = "pep/charagegroups",
+#                                   vintage = 2019,
+#                                   key = mycensuskey,
+#                                   vars = popestVarsRACE,
+#                                   region = mycounties,
+#                                   regionin = "state:22")
+# 
+# state_raceEstimates <- getCensus(name = "pep/charagegroups",
+#                                  vintage = 2019,
+#                                  key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+#                                  vars = popestVarsRACE,
+#                                  region = "state:22")
+# 
+# usa_raceEstimates  <- getCensus(name = "pep/charagegroups",
+#                                 vintage = 2019,
+#                                 key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+#                                 vars = popestVarsRACE,
+#                                 region = "us:1")
+# 
+# dfrace <- parish_raceEstimates %>% bind_rows(state_raceEstimates) %>% bind_rows(usa_raceEstimates) # Bind rows for counties, metro, state, usa
+# 
+# rm(parish_raceEstimates, state_raceEstimates, usa_raceEstimates)  # remove large objects from environment
+# 
+# dfrace <- dfrace %>%
+#   left_join(raceCode) %>%
+#   left_join(hispCode) %>%
+#   mutate(place = GEO_ID) %>%
+#   mutate(POP = as.numeric(POP))
+# 
+# dfrace <- dfrace %>%
+#   select(place, DATE_DESC, hispCodeName,  raceCodeName, POP) %>%
+#   rename(hisp = hispCodeName,
+#          race = raceCodeName,
+#          population = POP,
+#          date = DATE_DESC) %>%
+#   filter(race %in% c("Total",
+#                      "White alone",
+#                      "Black or African American alone",
+#                      "Asian alone")) %>%
+#   mutate(raceSimple = NA, # make variable base on race alone that matches Who Lives races.
+#          raceSimple = ifelse(race == "Total" & hisp == "Total", "Total", raceSimple),
+#          raceSimple = ifelse(race == "White alone" & hisp == "Not Hispanic", "White", raceSimple),
+#          raceSimple = ifelse(race == "Black or African American alone" & hisp == "Not Hispanic", "Black", raceSimple),
+#          raceSimple = ifelse(race == "Asian alone" & hisp == "Not Hispanic", "Asian", raceSimple),
+#          raceSimple = ifelse(race == "Total" & hisp == "Hispanic", "Hispanic", raceSimple))  %>%
+#   filter(!is.na(raceSimple)) %>% # Filter out other races
+#   mutate(age = "Total")
+# 
+# 
+# 
+# 
+# 
+# allparishesRawx <- bind_rows(dfrace, dfage) %>%
+#   distinct()
+# 
+# save(allparishesRawx, file = "inputs/allparishesRawx.Rdata")
 
-#Pulling 2010 and 2016 Edu. Attainment by Race
-bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M','C15002_017E','C15002_017M')
-bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  "MaleGradProfMOE", "FemaleBach", "FemaleBachMOE", "FemaleGradProf", "FemaleGradProfMOE")
-bachRaw <- wholivesdatapull(bachvars, bachnames, year = 2016)
-save(bachRaw, file = "inputs/bachRaw.RData")
+
 
