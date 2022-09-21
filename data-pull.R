@@ -159,7 +159,7 @@ save(commuteRaw, file = "inputs/commuteRaw.RData")
 bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M','C15002_017E','C15002_017M')
 bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  "MaleGradProfMOE", "FemaleBach", "FemaleBachMOE", "FemaleGradProf", "FemaleGradProfMOE")
 bachRaw16 <- wholivesdatapull(bachvars, bachnames, year = 2016)
-save(bachRaw16, file = "inputs/bachRaw.RData")
+save(bachRaw16, file = "inputs/bachRaw16.RData")
 
 ############################################
 # # PEP # #

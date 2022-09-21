@@ -64,7 +64,7 @@ metropop.current <-(getvalue.pop.no.current + getvalue.pop.jeff.current  + getva
 
 
 #According to the U.S. Census Bureau’s 2018 population estimates, there are now 91,274 fewer African Americans living in New Orleans (Orleans)
-
+load("inputs/allparishes_retro.RData")
 Overallpop2010 <- allparishes_retro %>%
   filter(date =="4/1/2010 Census population") %>%
   filter(sex =="Total") %>%
