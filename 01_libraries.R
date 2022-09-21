@@ -8,6 +8,7 @@ library(grid)
 library(here)
 library(knitr)
 library(RODBC)
+library(readxl)
 #library(xlsx)
 
 #load("inputs/allparishesRawx.RData")
