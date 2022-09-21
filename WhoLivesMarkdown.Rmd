@@ -80,7 +80,7 @@ source(here("02_variables.R"))
 ```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("03_functions.R"))
 ```
-```{r, echo=FALSE, include=FALSE, results = FALSE}
+```{r, echo=FALSE, include=FALSE, results = FALSE, cache = T}
 source(here("data-pull.R"))
 ```
 ```{r, echo=FALSE, include=FALSE, results = FALSE}
@@ -89,7 +89,7 @@ source(here("02_variables.R"))
 ```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("03_functions.R"))
 ```
-```{r, echo=FALSE, include=FALSE, results = FALSE}
+```{r, echo=FALSE, include=FALSE, results = FALSE, cache = T}
 source(here("04_analysis.R"))
 ```
 ```{r, echo=FALSE, include=FALSE, results = FALSE}
@@ -165,7 +165,7 @@ makeCSS_source(
 
 Between 2000 and `r yearPEP`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.current-getvalue.hispan.jeff.2000)` reaching over `r round((getvalue.Hispanpct.jeff.current)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.current - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population was `r round((getvalue.Hispanpct.no.current)*100)` percent in Orleans and `r round((getvalue.Hispanpct.tam.current)*100)` percent in St. Tammany in `r yearPEP`.
 
-As of July `r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)` Hispanics in the metro area, representing `r round((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.current)`, representing `r round((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is far below the average for the United States, which has grown from `r round((getvalue.Hispanpct.us.2000)*100)` percent to `r round((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r year-2000` years.
+As of July `r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)` Hispanics in the metro area, representing `r round((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2000)`, representing `r round((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is far below the average for the United States, which has grown from `r round((getvalue.Hispanpct.us.2000)*100)` percent to `r round((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r year-2000` years.
 
 ```{r hispanpop, fig.align='center', fig.width=7, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 HispanicPopGraphic

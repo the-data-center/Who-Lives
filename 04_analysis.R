@@ -540,27 +540,33 @@ AAWhiteHispan %>%
 
 #Tables 2
 
-ParishDemo1<- allparishesRaw %>%
-  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist", "St. Tammany", "United States")) %>%
-  filter(date == "7/1/2021 population estimate") %>%
-  filter(age == "Total" & sex == "Total")  %>%
-  select(PlaceName, population, raceSimple)
 
 #Remove Louisiana and Us to be able to combine 8 parish estimates for each race/ethnicity to create Metro
+
+#HT : I just switched these around so it would make Metro last... The dataframe is not ordered by the levels of placename factor 
+#that's the order that the 2000 numbers are going in.
 ParishDemo2<- allparishesRaw %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist", "St. Tammany", "United States")) %>%
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
   filter(date == "7/1/2021 population estimate") %>%
   filter(age == "Total" & sex == "Total") %>%
   group_by(raceSimple)%>%
-  summarise(population=sum(population),
-            PlaceName = "Metro") %>%
- bind_rows(.,ParishDemo1)
+  summarise(population=sum(population)) %>% mutate(PlaceName = "Metro") %>% select(PlaceName, population, raceSimple)
+
+ParishDemo1<- allparishesRaw %>%
+  filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
+                          "St. James", "St. John the Baptist", "St. Tammany", "United States")) %>% arrange((PlaceName)) %>%
+  filter(date == "7/1/2021 population estimate") %>%
+  filter(age == "Total" & sex == "Total")  %>%
+  select(PlaceName, population, raceSimple)  %>%
+  bind_rows(.,ParishDemo2)
 
 #reshape data from long to wide for easy analysis
-ParishDemo <- pivot_wider(ParishDemo2, names_from = raceSimple, values_from = population) %>%
-  mutate(pctwhite = as.numeric(White)/ as.numeric(Total),
+ParishDemo <- pivot_wider(ParishDemo1, names_from = raceSimple, values_from = population) %>%
+  mutate(PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
+                                                  "St. Bernard","St. Charles", "St. James",
+                                                  "St. John the Baptist", "St. Tammany", "Metro", "United States"))) %>%
+         mutate(pctwhite = as.numeric(White)/ as.numeric(Total),
          pctblack = as.numeric(Black) / as.numeric(Total),
          pctasian = as.numeric(Asian) / as.numeric(Total),
          pcthisp = as.numeric(Hispanic) / as.numeric(Total),     

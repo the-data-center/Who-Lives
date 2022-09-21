@@ -465,7 +465,10 @@ allparishesRaw2020 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7
                                place == "St. James Parish" ~ "St. James",
                                place == "St. John the Baptist Parish" ~ "St. John the Baptist",
                                place == "St. Tammany Parish" ~ "St. Tammany",
-                               place == "United States" ~ "United States"))
+                               place == "United States" ~ "United States"),
+         PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
+                                                  "St. Bernard","St. Charles", "St. James",
+                                                  "St. John the Baptist", "St. Tammany", "Metro", "United States")))
 save(allparishesRaw2020, file = "inputs/allparishesRaw.RData")
 
 allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimate") %>%
@@ -477,7 +480,10 @@ allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2
                                place == "St. James Parish" ~ "St. James",
                                place == "St. John the Baptist Parish" ~ "St. John the Baptist",
                                place == "St. Tammany Parish" ~ "St. Tammany",
-                               place == "United States" ~ "United States"))
+                               place == "United States" ~ "United States"),
+         PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
+                                                  "St. Bernard","St. Charles", "St. James",
+                                                  "St. John the Baptist", "St. Tammany", "Metro", "United States")))
 save(allparishesRaw, file = "inputs/allparishesRaw.RData")
 
 ## this is just for the 2010 inline measures - probably could be done differently but for now..
