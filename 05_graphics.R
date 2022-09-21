@@ -248,14 +248,14 @@ chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
                                DCcolor.p2limegreen,
                                DCcolor.p1darkblue90)) +
   scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,130000)) +
-  scale_x_continuous(breaks = c(2000,2006,2011,2016,2021))+
+  scale_x_continuous(breaks = 2000:2021)+
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         legend.spacing.y = unit(10, "lines"),
         plot.title = element_text(hjust = .5, size = 24),
-        axis.text.x = element_text(size = 10, vjust=1),
+        axis.text.x = element_text(size = 12, angle = -45, vjust = -.5, hjust = 1, family="Asap"),
         axis.text.y = element_text(size = 12)) +
   labs(title = "Hispanic population by year, Metro",
        x="",

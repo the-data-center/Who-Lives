@@ -557,13 +557,20 @@ ParishDemo2<- allparishesRaw %>%
   group_by(raceSimple)%>%
   summarise(population=sum(population)) %>% mutate(PlaceName = "Metro") %>% select(PlaceName, population, raceSimple)
 
+ParishDemo3 <- allparishesRaw %>% filter(PlaceName == "United States") %>%
+  filter(date == "7/1/2021 population estimate") %>%
+  filter(age == "Total" & sex == "Total")  %>%
+  select(PlaceName, population, raceSimple)
+
 ParishDemo1<- allparishesRaw %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist", "St. Tammany", "United States")) %>% arrange((PlaceName)) %>%
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>% arrange((PlaceName)) %>%
   filter(date == "7/1/2021 population estimate") %>%
   filter(age == "Total" & sex == "Total")  %>%
   select(PlaceName, population, raceSimple)  %>%
-  bind_rows(.,ParishDemo2)
+  bind_rows(.,ParishDemo2, ParishDemo3) 
+
+
 
 #reshape data from long to wide for easy analysis
 ParishDemo <- pivot_wider(ParishDemo1, names_from = raceSimple, values_from = population) %>%
