@@ -4,6 +4,8 @@
 order <- c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")
 orderHisp <- c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")
 
+load("inputs/hispanRaw.RData")
+
 hispanRaw[hispanRaw == -555555555] <- 0 
 #Hispanic Origin
 hispan <- hispanRaw %>%
@@ -65,7 +67,7 @@ hispanCSV <- hispan %>%
   write.csv("outputs/spreadsheets/hispan.csv")
 
 #Households with own children under 18
-
+load("inputs/hwcRaw.RData")
 hwc <- hwcRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
   mutate(census2000 = c(0.3007,0.3251,0.397,0.3353,0.3339),
@@ -85,7 +87,7 @@ hwcCSV <- hwc %>%
   write.csv("outputs/spreadsheets/hwc.csv")
 
 #One-person households
-
+load("inputs/singRaw.RData")
 sing <- singRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000 = c(0.331,0.2665,0.1968,0.2707,0.2578),
@@ -103,7 +105,7 @@ select(place, census2000, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/sing.csv")
 
 #Less than a high school degree, adults 25 and older
-
+load("inputs/hsRaw.RData")
 hs <- hsRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000=c(0.2531,0.2073,0.1613,0.1536,0.196),
@@ -123,7 +125,7 @@ select(place, census2000, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/hs.csv")
 
 #Bachelor's degree or higher, adults 25 and older
-
+load("inputs/bachRaw.RData")
 bach <- bachRaw %>% 
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000=c(0.2575,0.2149,0.2832,0.2256,0.244),
@@ -145,7 +147,7 @@ select(place, census2000, (contains("pct"))) %>%
 #Median household income, 201* inflation-adjusted dollars
 
 census2000 <- data.frame(census2000 = cpi00*c(27133,38435,47883,35317,41994))
-
+load("inputs/medhhRaw.RData")
 medhh <- medhhRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   bind_cols(.,census2000) %>%
@@ -161,7 +163,7 @@ select(place, census2000, MedianHHIncome) %>%
   write.csv("outputs/spreadsheets/medhh.csv")
 
 #Internet access
-
+load("inputs/intaRaw.RData")
 inta <- intaRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(cellonlypct = CellOnly / Total, 
@@ -194,7 +196,7 @@ select(place, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/inta.csv")
 
 #Poverty rate, population for whom poverty has been determined
-
+load("inputs/povRaw.RData")
 pov <- povRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(sf1999=c(0.2794,0.1365,0.0972,0.1838,0.1238),
@@ -213,7 +215,7 @@ select(place, sf1999, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/pov.csv")
 
 #Children in poverty, population for whom poverty has been determined			
-
+load("inputs/childpovRaw.RData")
 childpov <- childpovRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(sf1999=c(0.4053,0.2034,0.123,0.2623,0.1656),
@@ -236,7 +238,7 @@ select(place, sf1999, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/childpov.csv")
 
 #Households without access to a vehicle
-
+load("inputs/vehRaw.RData")
 veh <- vehRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000=c(0.2732,0.0930,0.0442,0.1532,0.1030),
@@ -254,7 +256,7 @@ select(place, census2000, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/veh.csv")
 
 #Population not U.S. citizens at birth
-
+load("inputs/forborRaw.RData")
 forbor <- forborRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(TotalPopMOE = ifelse(TotalPopMOE < 0, 0, TotalPopMOE)) %>%
@@ -274,7 +276,7 @@ select(place, census2000, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/forbor.csv")
 
 #Population who moved in the past year
-
+load("inputs/mobRaw.RData")
 mob <- mobRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(sf2004mobabroad =c(0.0013,0.0044,0.00,0.00,0.006), #zero filled in for metro and St. Tammany 2004 because of missing data,
@@ -328,7 +330,7 @@ jeffsig <- stattest(x = (mob$sf2004mobabroad[2]+mob$sf2004states[2]+mob$sf2004di
 
 
 #Homeownership rates
-
+load("inputs/hoRaw.RData")
 ho <- hoRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
   mutate(census2000=c(0.465,0.6385,0.8048,0.6183,0.6619),
@@ -347,7 +349,7 @@ select(place, census2000, (contains("pct"))) %>%
 
 
 #Homeowners without a mortgage
-
+load("inputs/honomoRaw.RData")
 honomo <- honomoRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000 = c(0.3298,0.3458,0.2967,0.3476,0.3259),
@@ -365,7 +367,7 @@ select(place, census2000, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/honomo.csv")
 
 #Renters with severe housing cost burdens
-
+load("inputs/rentburRaw.RData")
 rentbur <- rentburRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
   mutate(sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value
@@ -385,7 +387,7 @@ select(place, sf2004, (contains("pct"))) %>%
   write.csv("outputs/spreadsheets/rentbur.csv")
 
 #Homeowners with severe housing cost burdens
-
+load("inputs/hoburRaw.RData")
 hobur <- hoburRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(sf2004=c(0.1620,0.0891,0,0.1134,0.0988), #0 for St. tammany missing value,
@@ -406,7 +408,7 @@ select(place, sf2004, (contains("pct"))) %>%
 
 
 #Median gross rent, 201* inflation-adjusted dollars
-
+load("inputs/medrentRaw.RData")
 sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))
 medrent <- medrentRaw %>% 
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
@@ -424,7 +426,7 @@ medrentCSV <- medrent %>%
 
 
 #Year structure built, 201* housing units
-
+load("inputs/yrbuiltRaw.RData")
 yrbuilt <- yrbuiltRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(orLater1990pct = (`1990to1999` + `2000to2009` + `2010to2013` + `2014`)/Total,
@@ -457,6 +459,7 @@ select(place, (contains("pct"))) %>%
 
 
 #Means of transportation to work, 
+load("inputs/commuteRaw.RData")
 commute <- commuteRaw %>%
   filter(place %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000drive=c(0.6028,0.7855,0.7301,0.7570),
@@ -525,6 +528,7 @@ orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. 
 #allparishesRaw <- load("inputs/allparishesRaw.RData")
 
 #Table 1
+load("inputs/allparishesRaw.RData")
 AAWhiteHispan <- allparishesRaw %>%
   filter(place == "Orleans Parish") %>%
   filter(date == "7/1/2021 population estimate") %>%
@@ -585,6 +589,7 @@ ParishDemo %>%
 #Table 3 African American Population, New Orleans, 2000-current
 
 #Pulling population estimates for 2010-current
+load("inputs/blackpopestRaw.RData")
 AAhistorical <- blackpopestRaw %>%
   select(year, POP) %>%
   arrange(year) %>%
@@ -639,7 +644,7 @@ HispanicPopyears %>%
   pivot_wider(id_cols = date, names_from = PlaceName, values_from = population ) %>%
   write.csv("outputs/spreadsheets/HispanicPopyears.csv")
 
-
+load("inputs/hisppopestRaw.RData")
 HISPpopM <- hisppopestRaw %>%
   mutate(year = as.numeric(year)) %>%
   filter(place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
