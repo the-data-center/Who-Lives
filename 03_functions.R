@@ -129,12 +129,13 @@ moeprop <- function(y, moex, moey, p){
 ##stat testing for 2000 vs 201* data
 ##input: columns of estimates and their MOEs (zeros for Census 2000)
 ##output: column of yes or no if significant
-stattest <- function(x, moex = matrix(0, length(x)), y, moey){
+stattest <- function(x, moex = matrix(0, length(x)), y, moey, zscore = 1.645){
   significant <- matrix(0, length(x))
-  v <- abs((x-y)/sqrt((moex/1.645)^2+(moey/1.645)^2))
-  significant <- ifelse(v>1.645,"yes","no")
+  v <- abs((x-y)/sqrt((moex/zscore)^2+(moey/zscore)^2))
+  significant <- ifelse(v>zscore,"yes","no")
   return(as.list(significant))
 }
+
 
 
 ############################################

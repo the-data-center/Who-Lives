@@ -10,7 +10,7 @@ medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE",
                 "MedianHHIncome_asian", "MedianHHIncomeMOE_asian",
                 "MedianHHIncome_wht", "MedianHHIncomeMOE_wht",
                 "MedianHHIncome_hisp", "MedianHHIncomeMOE_hisp")
-medhhRaw <- wholivesdatapull(medhhvars, medhhnames)
+medhhRaw <- wholivesdatapull(medhhvars, medhhnames, year = 2021)
 save(medhhRaw, file = "indicator expansion drafts/medhhRaw.RData")
 
 medhh_unadjusted <- read_xlsx("indicator expansion drafts/ProspInd_tables_WhoLives2022/Copy_MedianInc.xlsx", range = "A1:H7") %>%
@@ -42,7 +42,7 @@ bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  
                "FemaleBachMOE_wht", 
                "Total_hisp", "TotalMOE_hisp", "MaleBach_hisp", "MaleBachMOE_hisp", "FemaleBach_hisp", 
                "FemaleBachMOE_hisp")
-bachRaw <- wholivesdatapull(bachvars, bachnames)
+bachRaw <- wholivesdatapull(bachvars, bachnames, year = 2021)
 save(bachRaw, file = "indicator expansion drafts/bachRaw.RData")
 
 #Historial Educational Attainment. 1980-2000 from NHGIS
@@ -172,7 +172,7 @@ Bach16 <- Bach16 %>%
 
 #most recent year
 
-bachRaw <- bachRaw %>%
+bachRaw <- bachRaw %>% ## something's going on here where this is names the same as bachRaw above and so can't be used in the analysis piece as it was before
   filter(place == "071") %>% 
   transmute(year = 2021,
             pctTotalBach = (MaleBach + FemaleBach + MaleGradProf + FemaleGradProf) / Total,
@@ -203,7 +203,7 @@ povnames <- c("Total", "TotalMOE", "BelowPov", "BelowPovMOE",
               "Total_asian", "TotalMOE_asian", "BelowPov_asian", "BelowPovMOE_asian",
               "Total_wht", "TotalMOE_wht", "BelowPov_wht", "BelowPovMOE_wht",
               "Total_hisp", "TotalMOE_hisp", "BelowPov_hisp", "BelowPovMOE_hisp")
-povRaw <- wholivesdatapull(povvars, povnames)
+povRaw <- wholivesdatapull(povvars, povnames, year = 2021)
 save(povRaw, file = "indicator expansion drafts/povRaw.RData")
 
 # Creating a time series for total poverty - had to get 1980-2000 from IPUMS NHGIS
@@ -305,7 +305,7 @@ pov16 <- pov16 %>%
   select(year, val, name)
 
 #current year
-povraw <- povraw %>%
+povraw <- povRaw %>%
   filter(place == "071") %>% 
   transmute(year = 2021, 
             pctTotalpov = BelowPov / Total,
@@ -342,7 +342,7 @@ childpovnames <- c("BelowPovMaleChild", "BelowPovMaleChildMOE", "BelowPovFemaleC
                     "AbovePovMaleChildMOE_wht", "AbovePovFemaleChild_wht", "AbovePovFemaleChildMOE_wht",
                     "BelowPovMaleChild_hisp", "BelowPovMaleChildMOE_hisp", "BelowPovFemaleChild_hisp", "BelowPovFemaleChildMOE_hisp", "AbovePovMaleChild_hisp", 
                     "AbovePovMaleChildMOE_hisp", "AbovePovFemaleChild_hisp", "AbovePovFemaleChildMOE_hisp")
-childpovRaw <- wholivesdatapull(childpovvars, childpovnames)
+childpovRaw <- wholivesdatapull(childpovvars, childpovnames, year = 2021)
 save(childpovRaw, file = "indicator expansion drafts/childpovRaw.RData")
 
 #Homeownership rates
