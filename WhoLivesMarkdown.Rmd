@@ -31,7 +31,10 @@ fig.path <- paste0("uploads/",
 #knitr::opts_knit$set(base.dir = base.dir, base.url = base.url)
 
 knitr::opts_chunk$set(fig.width=5, fig.height=5,  # use fig.width and fig.height to globally set figure sizes.
-               fig.path = fig.path) 
+               fig.path = fig.path,
+               message = F,
+               warning = F,
+               error =  F) 
 options(knitr.table.format = 'markdown') # Specify that kable will create md-formatted tables. 
 
 ```
@@ -62,37 +65,37 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-```{r, echo=FALSE, include=FALSE}
+```{r, echo=FALSE, include=FALSE, results = FALSE}
 # Load required scripts in order. 
 # Note: here() uses the relative path to the same directory.
 
 source(here("01_libraries.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("css_helper.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("02_variables.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("03_functions.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE, cache = T}
 source(here("data-pull.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("02_variables.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("03_functions.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE, cache = T}
 source(here("04_analysis.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("05_graphics.R"))
 ```
-```{r}
+```{r, echo=FALSE, include=FALSE, results = FALSE}
 source(here("inline.R"))
 ```
 ```{r}
@@ -121,6 +124,7 @@ According to the U.S. Census Bureau’s `r yearPEP` population estimates, there 
 ```{r AAWhiteHispan, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 AAwhthispGraphic
 ```
+
 ```{r, echo=FALSE}
 makeCSS_source(
 "**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2019."
@@ -161,7 +165,7 @@ makeCSS_source(
 
 Between 2000 and `r yearPEP`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.current-getvalue.hispan.jeff.2000)` reaching over `r round((getvalue.Hispanpct.jeff.current)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.current - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population was `r round((getvalue.Hispanpct.no.current)*100)` percent in Orleans and `r round((getvalue.Hispanpct.tam.current)*100)` percent in St. Tammany in `r yearPEP`.
 
-As of July `r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)` Hispanics in the metro area, representing `r round((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.current)`, representing `r round((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is far below the average for the United States, which has grown from `r round((getvalue.Hispanpct.us.2000)*100)` percent to `r round((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r year-2000` years.
+As of July `r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)` Hispanics in the metro area, representing `r round((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2000)`, representing `r round((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is far below the average for the United States, which has grown from `r round((getvalue.Hispanpct.us.2000)*100)` percent to `r round((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r year-2000` years.
 
 ```{r hispanpop, fig.align='center', fig.width=7, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 HispanicPopGraphic
@@ -208,7 +212,7 @@ The progression of the baby boomers through the age groups, along with falling b
 
 
 ```{r age2000, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
-#chart.agepop2000.allparishes
+chart.agepop2000.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
@@ -217,11 +221,11 @@ makeCSS_source(
 ```
 
 ```{r agecurrent, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
-#chart.agepopCurrent.allparishes
+chart.agepopCurrent.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2019."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2021."
 )
 ```
 
@@ -233,7 +237,7 @@ hwcGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round((getvalue.sing.2000)*100)` percent in 2000 to `r round((getvalue.sing.2018)*100)` percent in `r year` — similar to the trend for Jefferson Parish where the share of households living alone grew from `r round(( getvalue.singJeff.2000)*100)` percent to `r round(( getvalue.singJeff.2018)*100)` percent. The increase was larger in Orleans Parish, which jumped from `r round((getvalue.singNO.2000)*100)` to `r round((getvalue.singNO.2018)*100)` percent.
@@ -244,7 +248,7 @@ singGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -256,7 +260,7 @@ popunder18Graphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2019."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2021."
 )
 ```
 
@@ -278,7 +282,7 @@ hsGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -291,7 +295,7 @@ bachGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -303,9 +307,9 @@ medhhGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -332,7 +336,7 @@ makeCSS_source(
 
 **Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2021."
 )
 ```
 
@@ -346,9 +350,9 @@ povGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -359,9 +363,9 @@ childpovGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -373,9 +377,9 @@ vehGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -389,7 +393,7 @@ forborGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -401,13 +405,13 @@ chart.mob.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2019 is not significant at the 95% confidence interval for Orleans Parish. It is significant for all other geographies
+"**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2021 is not significant at the 95% confidence interval for Orleans Parish. It is significant for all other geographies
 
 **Notes**: Also, 2004 data is not available for St. Tammany Parish.
 
-&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2021."
 )
 ```
 
@@ -421,9 +425,9 @@ hoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2019 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -436,7 +440,7 @@ honomoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
@@ -454,9 +458,9 @@ rentburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2021."
 )
 ```
 
@@ -469,9 +473,9 @@ hoburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2019 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2021."
 )
 ```
 
@@ -486,7 +490,7 @@ medrentGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2021."
 )
 ```
 
@@ -503,7 +507,7 @@ chart.yrbuilt.allparishes
 makeCSS_source(
 "&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2021."
 )
 ```
 
@@ -519,16 +523,16 @@ chart.commute.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 2000 and 2019 is not significant at 95% confidence interval.
+"&ast; = Difference between 2000 and 2021 is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2019."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
 
 ## Data Sources / Methodology
 
 
-Data on race/ethnicity and age is from the Census Bureau vintage 2019 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
+Data on race/ethnicity and age is from the Census Bureau vintage 2021 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
 
 Statistical tests of significance were computed at the 95% confidence level for all data from the American Community Survey and Census 2000 SF3. An “*” indicates that differences between two time periods or geographies are not significant, and therefore are the result of sampling variability rather than real change in characteristics of the population.
 

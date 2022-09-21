@@ -200,7 +200,7 @@ dodgedBar <- function(data,
                       yscale = c(0,.45),      
                       pct = TRUE,      #used when formatting pct vals vs dollar vals
                       comparisonyear = "2000",
-                      year = "2019",
+                      year = "2021",
                       digits = 0){     #for rounding, specifically for forbor
   dataGraphic <-  data %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it
     mutate(placenames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 

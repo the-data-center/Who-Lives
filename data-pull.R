@@ -109,7 +109,7 @@ save(hoRaw, file = "inputs/hoRaw.RData")
 
 #Homeowners without a mortgage
 
-honomovars <- c('B25081_001E','B25081_001M','B25081_002E','B25081_002M','B25081_008E','B25081_008M')
+honomovars <- c('B25081_001E','B25081_001M','B25081_002E','B25081_002M','B25081_009E','B25081_009M')
 honomonames <- c("Total","TotalMOE","Mortgage","MortgageMOE","NoMortgage","NoMortgageMOE")
 honomoRaw <- wholivesdatapull(honomovars, honomonames)
 save(honomoRaw, file = "inputs/honomoRaw.RData")
@@ -243,7 +243,7 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2019, ty
 
 # allparishesRaw <- pullDataPEP(charagegroupsVars,
 #                            api = "pep/charagegroups",
-#                            year = 2018,
+#                            year = 2019,
 #                            counties = mycounties)
 # save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
 
@@ -456,7 +456,19 @@ allstates_pep <- allstates_pep  %>% group_by(date, hisp, sex, race, age, raceSim
   select(place, date, hisp, sex, race, age, population, raceSimple) %>%
   ungroup()
 
-allparishesRaw2020 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2020 population estimate")
+allparishesRaw2020 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2020 population estimate") %>%
+  mutate(PlaceName = case_when(place == "Orleans Parish" ~ "Orleans",
+                               place =="Jefferson Parish" ~ "Jefferson",
+                               place =="Plaquemines Parish" ~ "Plaquemines", 
+                               place == "St. Bernard Parish" ~ "St. Bernard",
+                               place == "St. Charles Parish" ~ "St. Charles",
+                               place == "St. James Parish" ~ "St. James",
+                               place == "St. John the Baptist Parish" ~ "St. John the Baptist",
+                               place == "St. Tammany Parish" ~ "St. Tammany",
+                               place == "United States" ~ "United States"),
+         PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
+                                                  "St. Bernard","St. Charles", "St. James",
+                                                  "St. John the Baptist", "St. Tammany", "Metro", "United States")))
 save(allparishesRaw2020, file = "inputs/allparishesRaw.RData")
 
 allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimate") %>%
@@ -468,25 +480,58 @@ allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2
                                place == "St. James Parish" ~ "St. James",
                                place == "St. John the Baptist Parish" ~ "St. John the Baptist",
                                place == "St. Tammany Parish" ~ "St. Tammany",
-                               place == "United States" ~ "United States"))
+                               place == "United States" ~ "United States"),
+         PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
+                                                  "St. Bernard","St. Charles", "St. James",
+                                                  "St. John the Baptist", "St. Tammany", "Metro", "United States")))
 save(allparishesRaw, file = "inputs/allparishesRaw.RData")
 
+## this is just for the 2010 inline measures - probably could be done differently but for now..
+popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP", "RACE", "SEX", "POP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
+popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP", "HISP", "RACE", "SEX", "POP")
+listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
+allparishes_retro <- getCensus(name = "pep/charagegroups", # most recent
+                               vintage = 2019,
+                               key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+                               vars = popestVars,
+                               region = "county: 071,051,075,087,089,093,095,103",
+                               regionin = "state:22") %>%
+  rename(DATE = DATE_CODE) %>%
+  bind_rows(getCensus(name = "pep/int_charagegroups", # Intercensal estimates
+                      vintage = 2000,
+                      key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+                      vars = popestVars2000,
+                      region = "county:071,051,075,087,089,093,095,103",
+                      regionin = "state:22")) %>%
+  mutate(place = case_when(county == "071" ~ "Orleans",
+                           county == "051" ~ "Jefferson",
+                           county == "075" ~ "Plaquemines",
+                           county == "087" ~ "St. Bernard",
+                           county == "089" ~ "St. Charles",
+                           county == "093" ~ "St. James",
+                           county == "095" ~ "St. John the Baptist",
+                           county == "103" ~ "St. Tammany"),
+         year = str_sub(DATE_DESC, 5, 8)) %>% # Clean July 1 from every year
+  select(-GEO_ID, -DATE_, -DATE, -GEONAME) %>%
+  filter(HISP == 0) %>%
+  filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017 | year ==2018 | year == 2019)
+allparishes_retro <- allparishes_retro %>% transmute(PlaceName = place,
+                                                     date = DATE_DESC,
+                                                     sex = case_when(SEX == 0 ~ "Total"),
+                                                     race = case_when(RACE == 0 ~ "Total"),
+                                                     hisp = case_when(HISP == 0 ~ "Total"),
+                                                     raceSimple = case_when(RACE == 0 ~ "Total"),
+                                                     population = POP) %>% filter(sex == "Total" & race == "Total" & hisp == "Total")
+
+save(allparishes_retro, file = "inputs/allparishes_retro.RData")
 
 
-### Importing the PEP Age and Sex data for the under 18 measure
 
-popunder18co <- read_csv("county_pep_age2021.csv")
-
-popunder18co <- popunder18co %>% select(CTYNAME, YEAR, AGE18PLUS_TOT, AGE18PLUS_MALE, AGE18PLUS_FEM)
-
-
-
-
-popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEONAME", "HISP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
+popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
 popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP")
 listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
 hisppopestRaw <- getCensus(name = "pep/charagegroups", # most recent
-                               vintage = 2018,
+                               vintage = 2019,
                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
                                vars = popestVars,
                                region = "county: 071,051,075,087,089,093,095,103",
@@ -498,14 +543,21 @@ hisppopestRaw <- getCensus(name = "pep/charagegroups", # most recent
                       vars = popestVars2000,
                       region = "county:071,051,075,087,089,093,095,103",
                       regionin = "state:22")) %>%
-  mutate(place = str_sub(GEONAME, 1, nchar(GEONAME) - 18),
+  mutate(place = case_when(county == "071" ~ "Orleans",
+                           county == "051" ~ "Jefferson",
+                           county == "075" ~ "Plaquemines",
+                           county == "087" ~ "St. Bernard",
+                           county == "089" ~ "St. Charles",
+                           county == "093" ~ "St. James",
+                           county == "095" ~ "St. John the Baptist",
+                           county == "103" ~ "St. Tammany"),
          year = str_sub(DATE_DESC, 5, 8)) %>% # Clean July 1 from every year
-  select(-GEONAME, -DATE_, -DATE) %>%
+  select(-GEO_ID, -DATE_, -DATE, -GEONAME) %>%
   filter(HISP == 2) %>%
   filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017 | year ==2018 | year == 2019)
 
-hisppopest20 <- allparishesRaw2020 %>% filter(race == "Hispanic"  & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% mutate(state = "", county = "", year = 2020) %>% select(state, county, POP, DATE_DESC, HISP, place, year)
-hisppopest21 <- allparishesRaw %>% filter(race == "Hispanic"  & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place)  %>% mutate(state = "", county = "", year = 2021) %>% select(state, county, POP, DATE_DESC, HISP, place, year)
+hisppopest20 <- allparishesRaw2020 %>% filter(race == "Hispanic"  & age == "Total" & sex == "Total") %>% mutate(place = PlaceName) %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% mutate(state = "", county = "", year = 2020) %>% select(state, county, POP, DATE_DESC, HISP, place, year)
+hisppopest21 <- allparishesRaw %>% filter(race == "Hispanic"  & age == "Total" & sex == "Total") %>% mutate(place = PlaceName) %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place)  %>% mutate(state = "", county = "", year = 2021) %>% select(state, county, POP, DATE_DESC, HISP, place, year)
 hisppopestRaw <- rbind(hisppopestRaw, hisppopest20, hisppopest21)
 
 save(hisppopestRaw, file = "inputs/hisppopestRaw.RData")
