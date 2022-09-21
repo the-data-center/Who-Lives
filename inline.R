@@ -298,33 +298,66 @@ getvalue.Hispanpct.metro.current <-ParishDemo %>%  ### PEP update
 
 getvalue.Hispanpop.jeff.current <- HispanicPop %>%   ### PEP update
   filter(PlaceName == "Jefferson") %>%
-  select(est2000) %>%
+  select(population) %>%
   pull()
 getvalue.Hispanpop.no.current <- HispanicPop %>%
   filter(PlaceName == "Orleans") %>%
-  select(est2000) %>%
+  select(population) %>%
   pull()
 getvalue.Hispanpop.plaq.current <- HispanicPop %>%
   filter(PlaceName == "Plaquemines") %>%
-  select(est2000) %>%
+  select(population) %>%
   pull()
 getvalue.Hispanpop.bern.current <- HispanicPop %>%
   filter(PlaceName == "St. Bernard") %>%
-  select(est2000) %>%
+  select(population) %>%
   pull()
 getvalue.Hispanpop.char.current <- HispanicPop %>%
   filter(PlaceName == "St. Charles") %>%
-  select(est2000) %>%
+  select(population) %>%
   pull()
 getvalue.Hispanpop.jam.current <- HispanicPop %>%
   filter(PlaceName == "St. James") %>%
-  select(est2000) %>%
+  select(population) %>%
   pull()
 getvalue.Hispanpop.john.current <- HispanicPop %>%
   filter(PlaceName == "St. John the Baptist") %>%
-  select(est2000) %>%
+  select(population) %>%
   pull()
 getvalue.Hispanpop.tam.current <- HispanicPop %>%
+  filter(PlaceName == "St. Tammany") %>%
+  select(population) %>%
+  pull()
+
+getvalue.Hispanpop.jeff.2000 <- HispanicPop %>%   ### PEP update
+  filter(PlaceName == "Jefferson") %>%
+  select(est2000) %>%
+  pull()
+getvalue.Hispanpop.no.2000 <- HispanicPop %>%
+  filter(PlaceName == "Orleans") %>%
+  select(est2000) %>%
+  pull()
+getvalue.Hispanpop.plaq.2000 <- HispanicPop %>%
+  filter(PlaceName == "Plaquemines") %>%
+  select(est2000) %>%
+  pull()
+getvalue.Hispanpop.bern.2000 <- HispanicPop %>%
+  filter(PlaceName == "St. Bernard") %>%
+  select(est2000) %>%
+  pull()
+getvalue.Hispanpop.char.2000 <- HispanicPop %>%
+  filter(PlaceName == "St. Charles") %>%
+  select(est2000) %>%
+  pull()
+getvalue.Hispanpop.jam.2000 <- HispanicPop %>%
+  filter(PlaceName == "St. James") %>%
+  select(est2000) %>%
+  pull()
+getvalue.Hispanpop.john.2000 <- HispanicPop %>%
+  filter(PlaceName == "St. John the Baptist") %>%
+  select(est2000) %>%
+  pull()
+getvalue.Hispanpop.tam.2000 <- HispanicPop %>%
   filter(PlaceName == "St. Tammany") %>%
   select(est2000) %>%
   pull()
@@ -339,7 +372,14 @@ getvalue.hispanpop.metro.current <- (getvalue.Hispanpop.jeff.current +
                                     getvalue.Hispanpop.tam.current)
 
 
-
+getvalue.hispanpop.metro.2000 <- (getvalue.Hispanpop.jeff.2000 + 
+                                     getvalue.Hispanpop.no.2000 + 
+                                     getvalue.Hispanpop.plaq.2000 + 
+                                     getvalue.Hispanpop.bern.2000 + 
+                                     getvalue.Hispanpop.char.2000 + 
+                                     getvalue.Hispanpop.jam.2000 + 
+                                     getvalue.Hispanpop.john.2000 + 
+                                     getvalue.Hispanpop.tam.2000)
 # representing 4.4 percent of the metro population.
 getvalue.Hispanpct.metro.2000 <-ParishDemo %>%
   filter(grepl("Metro",PlaceName)) %>%
