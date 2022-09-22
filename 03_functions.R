@@ -203,8 +203,13 @@ dodgedBar <- function(data,
                       comparisonyear = "2000",
                       year = "2021",
                       digits = 0){     #for rounding, specifically for forbor
-  dataGraphic <-  data %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it
-    mutate(placenames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
+  dataGraphic <-  data %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it  mutate(placenames = NA,
+    mutate(placenames = NA,
+           placenames = ifelse(place == "103", "St. Tammany", placenames),
+           placenames = ifelse(place == "051", "Jefferson", placenames),
+           placenames = ifelse(place == "071", "Orleans", placenames),
+           placenames = ifelse(place == "35380","Metro",placenames),
+           placenames = ifelse(place == "1", "U.S.", placenames)) %>%
     mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%     #vars of type "factor" allow you to control order
     select(one_of("census2000", "sf2004", "sf1999"), !!stattograph, placenames, place.fac, significant) %>%     #one_of() chooses correct comparison vals/!! is the second part or the quo() tool
     gather(-placenames,-place.fac, -significant, key=variable, value=value) %>% 
