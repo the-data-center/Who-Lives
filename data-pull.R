@@ -7,7 +7,7 @@
 
 hispanvars <-c("B03001_001E","B03001_001M","B03001_002E","B03001_002M","B03001_003E","B03001_003M","B03001_004E","B03001_004M","B03001_005E","B03001_005M","B03001_006E","B03001_006M","B03001_007E","B03001_007M","B03001_008E","B03001_008M","B03001_009E","B03001_009M","B03001_010E","B03001_010M","B03001_011E","B03001_011M","B03001_012E","B03001_012M","B03001_013E","B03001_013M","B03001_014E","B03001_014M","B03001_015E","B03001_015M","B03001_016E","B03001_016M","B03001_027E","B03001_027M")
 hispannames <-c("Total","TotalMOE","TotalNotHIsporLat","TotalNotHIsporLatMOE","TotalHisporLat","TotalHisporLatMOE","TotMex","TotMexMOE","TotPR","TotPRMOE","TotCuba","TotCubaMOE","TotDomin","TotDominMOE","TotCentrAm","TotCentrAmMOE","TotCostaR","TotCostaRMOE","TotGuat","TotGuatMOE","TotHond","TotHondMOE","TotNicarag","TotNicaragMOE","TotPanama","TotPanamaMOE","TotSalva","TotSalvaMOE","TotOtherCA","TotOtherCAMOE","TotSA","TotSAMOE","TotOtherHisporLat","TotOtherHisporLatMOE")
-hispanRaw <- wholivesdatapull(hispanvars,hispannames)[-3,]
+hispanRaw <- wholivesdatapull(hispanvars,hispannames)#[-3,]
 save(hispanRaw, file = "inputs/hispanRaw.RData") # -3 removes St. Tammany because it is not included in this analysis
 
 
@@ -155,11 +155,6 @@ commuteRaw <- wholivesdatapull(commutevars, commutenames)
 save(commuteRaw, file = "inputs/commuteRaw.RData")
 
 
-#Pulling 2010 and 2016 Edu. Attainment by Race
-bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M','C15002_017E','C15002_017M')
-bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  "MaleGradProfMOE", "FemaleBach", "FemaleBachMOE", "FemaleGradProf", "FemaleGradProfMOE")
-bachRaw16 <- wholivesdatapull(bachvars, bachnames, year = 2016)
-save(bachRaw16, file = "inputs/bachRaw16.RData")
 
 ############################################
 # # PEP # #
@@ -446,6 +441,9 @@ allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2
                                                   "St. Bernard","St. Charles", "St. James",
                                                   "St. John the Baptist", "St. Tammany", "Metro", "United States")))
 save(allparishesRaw, file = "inputs/allparishesRaw.RData")
+
+
+#### Pulling PEP
 
 ## this is just for the 2010 inline measures - probably could be done differently but for now..
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP", "RACE", "SEX", "POP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
