@@ -81,6 +81,12 @@ source(here("02_variables.R"))
 source(here("03_functions.R"))
 ```
 ```{r, echo=FALSE, include=FALSE, results = FALSE}
+source(here("02_variables.R"))
+```
+```{r, echo=FALSE, include=FALSE, results = FALSE}
+source(here("03_functions.R"))
+```
+```{r, echo=FALSE, include=FALSE, results = FALSE, cache = T}
 source(here("04_analysis.R"))
 ```
 ```{r, echo=FALSE, include=FALSE, results = FALSE}
