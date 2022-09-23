@@ -73,7 +73,7 @@ ggsave(medhh.raceGeos_chart,filename = "indicator expansion drafts/graphics/medh
        width = 10, height = 6, units = "in")
 
 
-### Historical educational attainment line chart ###
+### Historical median hh income line chart ###
 
 ## median hh income adjusted to 2021 dollars HT ###
 
