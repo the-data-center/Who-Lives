@@ -1,0 +1,13 @@
+library(censusapi) 
+library(tidyverse)
+library(dplyr)
+library(extrafont)
+library(scales)
+library(directlabels)
+library(grid)
+library(here)
+library(knitr)
+library(readxl)
+#library(xlsx)
+
+#load("inputs/allparishesRawx.RData")
