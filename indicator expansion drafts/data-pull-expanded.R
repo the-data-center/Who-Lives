@@ -84,6 +84,7 @@ Bach90 <- Bach90 %>% filter(STATEA == "22" & COUNTYA == "071") %>%
   pivot_longer(cols = pctTotalBach:pctHispBach, values_to = "val") %>% 
   select(year, val, name)
 
+
 Bach00 <- Bach00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is by sex
   transmute(year = 2000,
             totBach = GRW006 + GRW007 + GRW013 + GRW014 + GRW020 + GRW021 + GRW027 + GRW028 + GRW034 + GRW035 + GRW041 + GRW042 + GRW048 + GRW049 + GRW055 + GRW056 + GRW062 + GRW063 + GRW069 + GRW070 + GRW076 + GRW077 + GRW083 + GRW084 + GRW090 + GRW091 + GRW097 + GRW098,

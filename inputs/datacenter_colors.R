@@ -47,7 +47,8 @@ DCcolors <- data.frame(stringsAsFactors = TRUE, # Factors are a pain, but this m
                                      "p2orangered",
                                      "p2magenta",
                                      "p2violet",
-                                     "p2purple"),
+                                     "p2purple",
+                                     "p3yellowochre"),
                        hex = c("#002F45",
                                "#4A6576",
                                "#6892AB",
@@ -62,7 +63,8 @@ DCcolors <- data.frame(stringsAsFactors = TRUE, # Factors are a pain, but this m
                                "#E65E3F",
                                "#E61C43",
                                "#B13F80",
-                               "#71266E"))
+                               "#71266E",
+                               "#D7892C"))
 
 DCcolors <- DCcolors %>% 
   mutate(palette = ifelse(str_sub(colorName, 1,2) == "p1", "primary","secondary"))

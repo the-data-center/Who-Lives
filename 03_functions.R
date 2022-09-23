@@ -7,45 +7,45 @@
 ##pull parish, metro, and US numbers with census api
 ##input: census api variable names, human-readable names, and vintage
 ##output: dataframe in same format as Who Lives data tables excel sheet
-# wholivesdatapull <- function(variables, names = variables, year = 2021){
-#   censuskey="530ce361defc2c476e5b5d5626d224d8354b9b9a"
-#   parishes <- getCensus(name = "acs/acs1", vintage = year, key = censuskey, vars = variables, region = "county:071,051,103", regionin = "state:22") ##pull parish data
-#   parishes$state = NULL  #state column pulled automatically & needs to be deleted
-#   colnames(parishes) <- c("place",names)  #so names match between the three pulls for rbind
-#   metro <- getCensus(name = "acs/acs1", vintage = year, key = censuskey, vars = variables, region = "metropolitan statistical area/micropolitan statistical area:35380")
-#   colnames(metro) <- c("place",names)
-#   us <- getCensus(name = "acs/acs1", vintage = year, key = censuskey, vars = variables, region = "us:1")
-#   colnames(us) <- c("place",names)
-#   df <- switch(rbind(parishes, metro, us))
-#   df[df == -555555555] <- 0
-#   df <- df %>% mutate(place = case_when(place == "051" ~ "Jefferson",
-#                                             place == "071" ~ "Orleans",
-#                                             place == "103" ~ "St. Tammany",
-#                                             place == "35380" ~ "New Orleans Metro Area",
-#                                             place == "1" ~ "United States"))
-#   return(df)  #combine the three pulls, rows 1 & 2 (Jeff & Orl) switched
-# }
+wholivesdatapull <- function(variables, names = variables, year = 2021){
+  censuskey="530ce361defc2c476e5b5d5626d224d8354b9b9a"
+  parishes <- getCensus(name = "acs/acs1", vintage = year, key = censuskey, vars = variables, region = "county:071,051,103", regionin = "state:22") ##pull parish data
+  parishes$state = NULL  #state column pulled automatically & needs to be deleted
+  colnames(parishes) <- c("place",names)  #so names match between the three pulls for rbind
+  metro <- getCensus(name = "acs/acs1", vintage = year, key = censuskey, vars = variables, region = "metropolitan statistical area/micropolitan statistical area:35380")
+  colnames(metro) <- c("place",names)
+  us <- getCensus(name = "acs/acs1", vintage = year, key = censuskey, vars = variables, region = "us:1")
+  colnames(us) <- c("place",names)
+  df <- switch(rbind(parishes, metro, us))
+  df[df == -555555555] <- 0
+  # df <- df %>% mutate(place = case_when(place == "051" ~ "Jefferson",
+  #                                           place == "071" ~ "Orleans",
+  #                                           place == "103" ~ "St. Tammany",
+  #                                           place == "35380" ~ "New Orleans Metro Area",
+  #                                           place == "1" ~ "United States"))
+  return(df)  #combine the three pulls, rows 1 & 2 (Jeff & Orl) switched
+}
 
 #warehouse who lives datapull - make sure WhoLives.csv in datalake is updated, and run the datalake-connection.R first
 
-wholivesdatapull <- function(variables, names = variables, dataframe = df, year = 2021){
-  df <- df %>% select(-c(row_num, variable_name)) %>% filter(vintage == year, key %in% variables)
-  df <- df %>% pivot_wider(names_from = key, values_from = value, values_fn = as.numeric)
-  df <-  df %>% select(geo_name, county_fips, variables)
-  df$county_fips[df$geo_name == "United States"] <- 1
-  df$county_fips[df$geo_name == "New Orleans-Metairie, LA Metro Area"] <- 35380 #doing this with case_when was giving me trouble
-  colnames(df) <- c("geo_name", "place", names)
-  df[df == -555555555] <- 0
-  df <- df %>% select(-geo_name)
-  df <- df %>% mutate(place = (case_when(place == "051" ~ "Jefferson",
-                                        place == "071" ~ "Orleans",
-                                        place == "103" ~ "St. Tammany",
-                                        place == "35380" ~ "New Orleans Metro Area",
-                                        place == "1" ~ "United States"))) %>%
-    filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
-    mutate(place = factor(place, levels = c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"))) %>% arrange(place)
-  return(df)
-}
+# wholivesdatapull <- function(variables, names = variables, dataframe = df, year = 2021){
+#   df <- df %>% select(-c(row_num, variable_name)) %>% filter(vintage == year, key %in% variables)
+#   df <- df %>% pivot_wider(names_from = key, values_from = value, values_fn = as.numeric)
+#   df <-  df %>% select(geo_name, county_fips, variables)
+#   df$county_fips[df$geo_name == "United States"] <- 1
+#   df$county_fips[df$geo_name == "New Orleans-Metairie, LA Metro Area"] <- 35380 #doing this with case_when was giving me trouble
+#   colnames(df) <- c("geo_name", "place", names)
+#   df[df == -555555555] <- 0
+#   df <- df %>% select(-geo_name)
+#   df <- df %>% mutate(place = (case_when(place == "051" ~ "Jefferson",
+#                                         place == "071" ~ "Orleans",
+#                                         place == "103" ~ "St. Tammany",
+#                                         place == "35380" ~ "New Orleans Metro Area",
+#                                         place == "1" ~ "United States"))) %>%
+#     filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
+#     mutate(place = factor(place, levels = c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"))) %>% arrange(place)
+#   return(df)
+# }
 
 
 
