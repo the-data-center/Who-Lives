@@ -57,7 +57,7 @@ hsvars2000 <- c('P037001', 'P037003', 'P037004', 'P037005', 'P037006', 'P037007'
             'P037020', 'P037021', 'P037022', 'P037023', 'P037024', 'P037025', 'P037026', 'P037027')
 hsnames2000 <- c("Total", "Male0", "Male0to4", "Male5to6", "Male7to8", "Male9", "Male10", "Male11", "Male12",
              "Female0", "Female0to4", "Female5to6", "Female7to8", "Female9", "Female10", "Female11", "Female12")
-hsRaw2000 <- wholivesdatapull(hsvars2000, hsnames2000)
+hsRaw2000 <- wholivesdatapull(hsvars2000, hsnames2000, censusname = "dec/sf3", year = 2000)
 
 #Bachelor's degree or higher, adults 25 and older
 
@@ -68,7 +68,7 @@ save(bachRaw, file = "inputs/bachRaw.RData")
 
 bachvars2000 <- c('P037001', 'P037015', 'P037016', 'P037017', 'P037018', 'P037032', 'P037033', 'P037034', 'P037035')
 bachnames2000 <- c("Total", "MaleBach", "MaleMaster",  "MaleProf", "MaleDoc", "FemaleBach", "FemaleMaster",  "FemaleProf", "FemaleDoc")
-bachRaw2000 <- wholivesdatapull(bachvars2000, bachnames2000)
+bachRaw2000 <- wholivesdatapull(bachvars2000, bachnames2000, censusname = "dec/sf3", year = 2000)
 
 #Median household income, inflation-adjusted dollars
 
@@ -77,6 +77,9 @@ medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE")
 medhhRaw <- wholivesdatapull(medhhvars, medhhnames)
 save(medhhRaw, file = "inputs/medhhRaw.RData")
 
+medhhvars2000 <- c('HCT012001')
+medhhnames2000 <- c("MedianHHIncome")
+medhhRaw2000 <- wholivesdatapull(medhhvars2000, medhhnames2000, censusname = "dec/sf3", year = 2000)
 
 #Internet access
 
@@ -93,6 +96,11 @@ povnames <- c("Total", "TotalMOE", "BelowPov", "BelowPovMOE")
 povRaw <- wholivesdatapull(povvars, povnames)
 save(povRaw, file = "inputs/povRaw.RData")
 
+#2000 - Poverty rate, population for whom poverty has been determined
+
+povvars2000 <- c('P087001','P087002')
+povnames2000 <- c("Total","BelowPov")
+povRaw2000 <- wholivesdatapull(povvars2000, povnames2000)
 
 #Children in poverty, population for whom poverty has been determined	
 
@@ -101,6 +109,11 @@ childpovnames <- c( "BelowPovMaleChild", "BelowPovMaleChildMOE", "BelowPovFemale
 childpovRaw <- wholivesdatapull(childpovvars, childpovnames)
 save(childpovRaw, file = "inputs/childpovRaw.RData")
 
+#2000 - Children in poverty, population for whom poverty has been determined	
+
+childpovvars2000 <- c('P087003','P087004','P087005','P087006','P0870011','P087012','P087013', 'P087014')
+childpovnames2000 <- c("BelowPovChild0to5", "BelowPovChild5", "BelowPovChild6to11", "BelowPovChild12to17", "AbovePovChild0to5", "AbovePovChild5", "AbovePovChild6to11", "AbovePovChild12to17")
+childpovRaw2000 <- wholivesdatapull(childpovvars2000, childpovnames2000)
 
 #Households without access to a vehicle
 
