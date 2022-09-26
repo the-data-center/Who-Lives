@@ -18,6 +18,11 @@ hwcnames <- c("TotalHH", "TotalHHMOE","Married", "MarriedMOE", "MaleHH", "MaleHH
 hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
 save(hwcRaw, file = "inputs/hwcRaw.RData")
 
+### 2000 data pull
+hwc2000vars <- c('P009001E', 'P009001M')
+hwcnames <- c("TotalHH", "TotalHHMOE","Married", "MarriedMOE", "MaleHH", "MaleHHMOE", "FemaleHH" ,"FemaleHHMOE")
+hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
+
 
 #One-person households
 
