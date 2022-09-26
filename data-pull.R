@@ -18,19 +18,32 @@ hwcnames <- c("TotalHH", "TotalHHMOE","Married", "MarriedMOE", "MaleHH", "MaleHH
 hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
 save(hwcRaw, file = "inputs/hwcRaw.RData")
 
-### 2000 data pull
-hwc2000vars <- c('P009001E', 'P009001M')
-hwcnames <- c("TotalHH", "TotalHHMOE","Married", "MarriedMOE", "MaleHH", "MaleHHMOE", "FemaleHH" ,"FemaleHHMOE")
-hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
+### 2000 data pull - using family type by presence of related children under 18
+hwcvars2000 <- c('P017001', 'P017002', 'P017009', 'P017015')
+hwcnames2000 <- c("TotalHH", "Married", "MaleHH", "FemaleHH")
+hwcRaw2000 <- wholivesdatapull(hwc2000vars, hwc2000names, censusname = "dec/sf3", year = 2000) %>%
+  mutate(TotalHHMOE = moe2000(TotalHH, TotalHH), #how to get MOE for universe total?
+         MarriedMOE = moe2000(Married, TotalHH),
+         MaleHHMOE = moe2000(MaleHH, TotalHH),
+         FemaleHHMOE = moe2000(FemaleHH, TotalHH)) 
 
 
 #One-person households
 
 singvars <- c('B11001_001E','B11001_001M','B11001_008E','B11001_008M')
-singnames <- c("Total","TotalMOE","SingleHH","SingleHHMOE")
+singnames <- c("TotalHH","TotalMOE","SingleHH","SingleHHMOE")
 singRaw <- wholivesdatapull(singvars, singnames)
 save(singRaw, file = "inputs/singRaw.RData")
 
+# 2000 - one-person households #adding male and female householder no spouse present and no children?
+singvars2000 <- c('P017001','P017020','P017014')
+singnames2000 <- c("TotalHH","SingleMaleHH", "SingleFemaleHH")
+singRaw2000 <- wholivesdatapull(singvars2000, singnames2000, censusname = "dec/sf3", year = 2000) %>%
+  mutate(TotalMOE = moe2000(TotalHH, TotalHH), #how to get MOE for universe total?
+         SingleMaleHHMOE = moe2000(SingleMaleHH, TotalHH),
+         SingleFemaleHHMOE = moe2000(SingleFemaleHH, TotalHH),
+         SingleHH =SingleMaleHH + SingleFemaleHH,
+         SingleHHMOE = moeagg(SingleMaleHHMOE, SingleFemaleHHMOE))
 
 #Less than a high school degree, adults 25 and older
 
@@ -39,6 +52,12 @@ hsnames <- c("Total", "TotalMOE", "Male9", "Male9MOE", "Male9to12", "Male9to12MO
 hsRaw <- wholivesdatapull(hsvars, hsnames)
 save(hsRaw, file = "inputs/hsRaw.RData")
 
+# 2000 - Less than a high school degree , adults 25 and older
+hsvars2000 <- c('P037001', 'P037003', 'P037004', 'P037005', 'P037006', 'P037007', 'P037008', 'P037009', 'P037010',
+            'P037020', 'P037021', 'P037022', 'P037023', 'P037024', 'P037025', 'P037026', 'P037027')
+hsnames2000 <- c("Total", "Male0", "Male0to4", "Male5to6", "Male7to8", "Male9", "Male10", "Male11", "Male12",
+             "Female0", "Female0to4", "Female5to6", "Female7to8", "Female9", "Female10", "Female11", "Female12")
+hsRaw2000 <- wholivesdatapull(hsvars2000, hsnames2000)
 
 #Bachelor's degree or higher, adults 25 and older
 
@@ -47,8 +66,11 @@ bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  
 bachRaw <- wholivesdatapull(bachvars, bachnames)
 save(bachRaw, file = "inputs/bachRaw.RData")
 
+bachvars2000 <- c('P037001', 'P037015', 'P037016', 'P037017', 'P037018', 'P037032', 'P037033', 'P037034', 'P037035')
+bachnames2000 <- c("Total", "MaleBach", "MaleMaster",  "MaleProf", "MaleDoc", "FemaleBach", "FemaleMaster",  "FemaleProf", "FemaleDoc")
+bachRaw2000 <- wholivesdatapull(bachvars2000, bachnames2000)
 
-#Median household income, 201* inflation-adjusted dollars
+#Median household income, inflation-adjusted dollars
 
 medhhvars <- c('B19013_001E','B19013_001M')
 medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE")
