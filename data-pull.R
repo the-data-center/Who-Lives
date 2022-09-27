@@ -7,14 +7,14 @@
 
 hispanvars <-c("B03001_001E","B03001_001M","B03001_002E","B03001_002M","B03001_003E","B03001_003M","B03001_004E","B03001_004M","B03001_005E","B03001_005M","B03001_006E","B03001_006M","B03001_007E","B03001_007M","B03001_008E","B03001_008M","B03001_009E","B03001_009M","B03001_010E","B03001_010M","B03001_011E","B03001_011M","B03001_012E","B03001_012M","B03001_013E","B03001_013M","B03001_014E","B03001_014M","B03001_015E","B03001_015M","B03001_016E","B03001_016M","B03001_027E","B03001_027M")
 hispannames <-c("Total","TotalMOE","TotalNotHIsporLat","TotalNotHIsporLatMOE","TotalHisporLat","TotalHisporLatMOE","TotMex","TotMexMOE","TotPR","TotPRMOE","TotCuba","TotCubaMOE","TotDomin","TotDominMOE","TotCentrAm","TotCentrAmMOE","TotCostaR","TotCostaRMOE","TotGuat","TotGuatMOE","TotHond","TotHondMOE","TotNicarag","TotNicaragMOE","TotPanama","TotPanamaMOE","TotSalva","TotSalvaMOE","TotOtherCA","TotOtherCAMOE","TotSA","TotSAMOE","TotOtherHisporLat","TotOtherHisporLatMOE")
-hispanRaw <- wholivesdatapull(hispanvars,hispannames, censusname = "dec/sf3", year = 2000)#[-3,]
+hispanRaw <- wholivesdatapull(hispanvars,hispannames)#[-3,]
 save(hispanRaw, file = "inputs/hispanRaw.RData") # -3 removes St. Tammany because it is not included in this analysis
 
 #2000 - Hispanic Origin
 
 hispanvars2000 <-c("P007001", "P007010")
 hispannames2000 <-c("Total", "TotHisporLat")
-hispanRaw2000 <- wholivesdatapull(hispanvars2000,hispannames2000)#[-3,]
+hispanRaw2000 <- wholivesdatapull(hispanvars2000,hispannames2000, censusname = "dec/sf3", year = 2000)#[-3,]
 
 #Households with own children under 18
 ### *** something went wrong here pulling from the warehouse!!!!!! ***
@@ -42,7 +42,7 @@ save(singRaw, file = "inputs/singRaw.RData")
 
 # 2000 - one-person households #adding male and female householder no spouse present and no children?
 singvars2000 <- c('P017001','P017020','P017014')
-singnames2000 <- c("TotalHH","SingleMaleHH", "SingleFemaleHH")
+singnames2000 <- c("TotalHH","SingleFemaleHH", "SingleMaleHH")
 singRaw2000 <- wholivesdatapull(singvars2000, singnames2000, censusname = "dec/sf3", year = 2000)# %>%
   # mutate(TotalMOE = moe2000(TotalHH, TotalHH), #how to get MOE for universe total?
   #        SingleMaleHHMOE = moe2000(SingleMaleHH, TotalHH),
@@ -105,7 +105,7 @@ save(povRaw, file = "inputs/povRaw.RData")
 
 povvars2000 <- c('P087001','P087002')
 povnames2000 <- c("Total","BelowPov")
-povRaw2000 <- wholivesdatapull(povvars2000, povnames2000)
+povRaw2000 <- wholivesdatapull(povvars2000, povnames2000, censusname = "dec/sf3", year = 2000)
 
 #Children in poverty, population for whom poverty has been determined	
 
@@ -116,9 +116,9 @@ save(childpovRaw, file = "inputs/childpovRaw.RData")
 
 #2000 - Children in poverty, population for whom poverty has been determined	
 
-childpovvars2000 <- c('P087003','P087004','P087005','P087006','P0870011','P087012','P087013', 'P087014')
+childpovvars2000 <- c('P087003','P087004','P087005','P087006','P087011','P087012','P087013', 'P087014')
 childpovnames2000 <- c("BelowPovChild0to5", "BelowPovChild5", "BelowPovChild6to11", "BelowPovChild12to17", "AbovePovChild0to5", "AbovePovChild5", "AbovePovChild6to11", "AbovePovChild12to17")
-childpovRaw2000 <- wholivesdatapull(childpovvars2000, childpovnames2000)
+childpovRaw2000 <- wholivesdatapull(childpovvars2000, childpovnames2000, censusname = "dec/sf3", year = 2000)
 
 #Households without access to a vehicle
 
@@ -131,7 +131,7 @@ save(vehRaw, file = "inputs/vehRaw.RData")
 
 vehvars2000 <- c('H045001','H045003','H045020')
 vehnames2000 <- c("Total", "OwnerOcc_NoVehAvail", "RenterOcc_NoVehAvail")
-vehRaw2000 <- wholivesdatapull(vehvars2000, vehnames2000)
+vehRaw2000 <- wholivesdatapull(vehvars2000, vehnames2000, censusname = "dec/sf3", year = 2000)
 
 #Population not U.S. citizens at birth
 
@@ -144,7 +144,7 @@ save(forborRaw, file = "inputs/forborRaw.RData")
 
 forborvars2000 <- c('P021013', 'P021001')
 forbornames2000 <- c("TotForeignBorn","TotalPop")
-forborRaw2000 <- wholivesdatapull(forborvars2000, forbornames2000)
+forborRaw2000 <- wholivesdatapull(forborvars2000, forbornames2000, censusname = "dec/sf3", year = 2000)
 
 #Population who moved in the past year
 
@@ -164,9 +164,9 @@ save(hoRaw, file = "inputs/hoRaw.RData")
 
 #2000 - Homeownership rates
 
-hovars <- c('H007001','H007002')
-honames <- c("Total","Owner")
-hoRaw <- wholivesdatapull(hovars, honames)
+hovars2000 <- c('H007001','H007002')
+honames2000 <- c("Total","Owner")
+hoRaw2000 <- wholivesdatapull(hovars2000, honames2000, censusname = "dec/sf3", year = 2000)
 
 #Homeowners without a mortgage
 
@@ -177,9 +177,9 @@ save(honomoRaw, file = "inputs/honomoRaw.RData")
 
 #2000 - Homeowners without a mortgage
 
-honomovars <- c('H080001','H080002','H080008')
-honomonames <- c("Total","Mortgage","NoMortgage")
-honomoRaw <- wholivesdatapull(honomovars, honomonames)
+honomovars2000 <- c('H080001','H080002','H080008')
+honomonames2000 <- c("Total","Mortgage","NoMortgage")
+honomoRaw2000 <- wholivesdatapull(honomovars2000, honomonames2000, censusname = "dec/sf3", year = 2000)
 
 
 #Renters with severe housing cost burdens

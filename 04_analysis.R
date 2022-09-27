@@ -9,7 +9,7 @@ load("inputs/hispanRaw.RData")
 hispanRaw[hispanRaw == -555555555] <- 0 
 #Hispanic Origin
 hispan <- hispanRaw %>%
-  filter(place%in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>%
+  filter(placename %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>%
   slice(match(orderHisp, place)) %>%
   mutate(Cubanpct = TotCuba / TotalHisporLat,
          Dominicanpct = TotDomin / TotalHisporLat,
@@ -69,7 +69,7 @@ hispanCSV <- hispan %>%
 #Households with own children under 18
 load("inputs/hwcRaw.RData")
 hwc <- hwcRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
+  filter(placename %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
   mutate(census2000 = c(0.3007,0.3251,0.397,0.3353,0.3339),
          tothwc = Married + MaleHH + FemaleHH,
          pcthwc = tothwc/TotalHH,
