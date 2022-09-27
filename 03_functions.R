@@ -12,7 +12,7 @@ wholivesdatapull <- function(variables, names = variables, year = 2021, censusna
   parishes <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "county:071,051,103", regionin = "state:22") ##pull parish data
   parishes$state = NULL  #state column pulled automatically & needs to be deleted
   colnames(parishes) <- c("place",names)  #so names match between the three pulls for rbind
-  metro <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "metropolitan statistical area/micropolitan statistical area:35380")
+  metro <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = ifelse(year == 2000, "urban area:35380","metropolitan statistical area/micropolitan statistical area:35380"))
   colnames(metro) <- c("place",names)
   us <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "us:1")
   colnames(us) <- c("place",names)
