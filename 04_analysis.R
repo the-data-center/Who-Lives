@@ -10,7 +10,7 @@ hispanRaw[hispanRaw == -555555555] <- 0
 #Hispanic Origin
 hispan <- hispanRaw %>%
   filter(placename %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>%
-  slice(match(orderHisp, place)) %>%
+  #slice(match(orderHisp, place)) %>%
   mutate(Cubanpct = TotCuba / TotalHisporLat,
          Dominicanpct = TotDomin / TotalHisporLat,
          Mexicanpct = TotMex / TotalHisporLat,
@@ -69,19 +69,21 @@ hispanCSV <- hispan %>%
 #Households with own children under 18
 load("inputs/hwcRaw.RData")
 hwc <- hwcRaw %>%
-  filter(placename %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
   mutate(census2000 = c(0.3007,0.3251,0.397,0.3353,0.3339),
+         census2000SE = c(0.00259888,0.002743002, 0.004572234,0.001643334,9.24E-05),
          tothwc = Married + MaleHH + FemaleHH,
          pcthwc = tothwc/TotalHH,
          moeagg = moeagg(cbind(MarriedMOE, MaleHHMOE, FemaleHHMOE)),
+        # moeagg2000 = moeagg(cbind(MarriedMOE, MaleHHMOE, FemaleHHMOE)),
          moeprop = moeprop(y = TotalHH, moex = moeagg, moey = TotalHHMOE, p = pcthwc),
-         significant = stattest(x=census2000,y=pcthwc,moey = moeprop)) 
+         #moeprop2000 = moeprop(y = TotalHH2000, moex = moeagg2000, moey = TotalHHMOE2000, p = pcthwc2000),
+         significant = stattest(x=census2000,moex = census2000SE*1.645, y=pcthwc,moey = moeprop)) 
 
 hwcCSV <- hwc %>% 
   select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "hwc", values_to = "Value") %>% 
   mutate(name = paste( place, hwc, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/hwc.csv")
@@ -89,17 +91,17 @@ hwcCSV <- hwc %>%
 #One-person households
 load("inputs/singRaw.RData")
 sing <- singRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000 = c(0.331,0.2665,0.1968,0.2707,0.2578),
-         pctsing = SingleHH/Total,
-         moeprop = moeprop(y = Total, moex = SingleHHMOE, moey = TotalMOE, p = pctsing),
-         significant = stattest(x=census2000, y=pctsing,moey = moeprop))
+         census2000SE = c(0.002666846, 0.00258897, 0.003715052, 0.001549686, 8.57E-05),
+         pctsing = SingleHH/TotalHH,
+         moeprop = moeprop(y = TotalHH, moex = SingleHHMOE, moey = TotalMOE, p = pctsing),
+         significant = stattest(x=census2000, moex = census2000SE *1.645, y=pctsing,moey = moeprop))
 
 singCSV <- sing %>% 
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "sing", values_to = "Value") %>% 
   mutate(name = paste( place, sing, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/sing.csv")
@@ -107,19 +109,19 @@ select(place, census2000, (contains("pct"))) %>%
 #Less than a high school degree, adults 25 and older
 load("inputs/hsRaw.RData")
 hs <- hsRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000=c(0.2531,0.2073,0.1613,0.1536,0.196),
+         census2000SE = c(0.002128079, 0.001990165, 0.002814633, 0.001219893, 6.58E-05),
          totless = Male9 + Male9to12 + Female9 + Female9to12,
          pctless = totless/Total,
          moeagg = moeagg(cbind(Male9MOE, Male9to12MOE, Female9MOE, Female9to12MOE)),
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctless),
-         significant = stattest(x=census2000, y=pctless,moey=moeprop))
+         significant = stattest(x=census2000, moex = census2000SE*1.645, y=pctless,moey=moeprop))
 
 hsCSV <- hs %>% 
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "hs", values_to = "Value") %>% 
   mutate(name = paste( place, hs, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/hs.csv")
@@ -127,29 +129,28 @@ select(place, census2000, (contains("pct"))) %>%
 #Bachelor's degree or higher, adults 25 and older
 load("inputs/bachRaw.RData")
 bach <- bachRaw %>% 
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
-  mutate(census2000=c(0.2575,0.2149,0.2832,0.2256,0.244),
+  mutate(census2000=c(0.2575,0.2149,0.2832,0.2256,0.244), #are we sure about MSA number
+         census2000SE = c(0.002140185, 0.002016578, 0.003447718,0.001228988, 7.11E-05),
          totbach = MaleBach + MaleGradProf + FemaleBach + FemaleGradProf,
          pctbach = totbach / Total,
          moeagg = moeagg(cbind(MaleBachMOE, MaleGradProfMOE, FemaleBachMOE, FemaleGradProfMOE)),
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctbach),
-         significant = stattest(x=census2000,y=pctbach,moey = moeprop))
+         significant = stattest(x=census2000, moex = census2000SE*1.645, y=pctbach,moey = moeprop))
 
 bachCSV <- bach  %>% 
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "bach", values_to = "Value") %>% 
   mutate(name = paste( place, bach, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/bach.csv")
 
 #Median household income, 201* inflation-adjusted dollars
-
+#***************NEED MOE FOR 2000 DATA**********************
 census2000 <- data.frame(census2000 = cpi00*c(27133,38435,47883,35317,41994))
 load("inputs/medhhRaw.RData")
 medhh <- medhhRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   bind_cols(.,census2000) %>%
   mutate(significant = stattest(x=census2000,y=MedianHHIncome,moey=MedianHHIncomeMOE))
 
@@ -157,7 +158,7 @@ medhh <- medhhRaw %>%
 select(place, census2000, MedianHHIncome) %>% 
   pivot_longer(-c("place"), names_to = "medhh", values_to = "Value") %>% 
   mutate(name = paste( place, medhh, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/medhh.csv")
@@ -165,7 +166,6 @@ select(place, census2000, MedianHHIncome) %>%
 #Internet access
 load("inputs/intaRaw.RData")
 inta <- intaRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(cellonlypct = CellOnly / Total, 
          cellmoeprop = moeprop(y = Total, moex = CellOnlyMOE, moey = TotalMOE, p = cellonlypct),
          nosubpct = NoSubscript / Total,
@@ -198,18 +198,18 @@ select(place, (contains("pct"))) %>%
 #Poverty rate, population for whom poverty has been determined
 load("inputs/povRaw.RData")
 pov <- povRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(sf1999=c(0.2794,0.1365,0.0972,0.1838,0.1238),
+         sf1999SE = c(0.002198943, 0.001714384, 0.002287413, 0.001142575,5.78E-05),
          pctpov = BelowPov / Total,
          moeprop = moeprop(y = Total, moex = BelowPovMOE, moey = TotalMOE, p = pctpov),
-         significant = stattest(x=sf1999,y=pctpov,moey=moeprop))
+         significant = stattest(x=sf1999, moex = sf1999SE*1.645, y=pctpov,moey=moeprop))
 
 
 povCSV <- pov %>% 
 select(place, sf1999, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "pov", values_to = "Value") %>% 
   mutate(name = paste( place, pov, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/pov.csv")
@@ -217,22 +217,22 @@ select(place, sf1999, (contains("pct"))) %>%
 #Children in poverty, population for whom poverty has been determined			
 load("inputs/childpovRaw.RData")
 childpov <- childpovRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(sf1999=c(0.4053,0.2034,0.123,0.2623,0.1656),
+         sf1999SE = c(0.004610543, 0.00401331, 0.004760158, 0.002505787, 1.28E-04),
          TotChildPov = BelowPovFemaleChild + BelowPovMaleChild + AbovePovFemaleChild + AbovePovMaleChild,
          moeaggtot = moeagg(cbind(BelowPovFemaleChildMOE, BelowPovMaleChildMOE, AbovePovFemaleChildMOE, AbovePovMaleChildMOE)),
          TotBelowChildPov = BelowPovFemaleChild + BelowPovMaleChild,
          moeaggbelow = moeagg(cbind(BelowPovFemaleChildMOE, BelowPovMaleChildMOE)),
          pctBelowChildPov = TotBelowChildPov / TotChildPov,
          moeprop = moeprop(y=TotChildPov, moex = moeaggbelow, moey = moeaggtot, p=pctBelowChildPov),
-         significant = stattest(x=sf1999,y=pctBelowChildPov,moey=moeprop))
+         significant = stattest(x=sf1999, moex = sf1999SE*1.645, y=pctBelowChildPov,moey=moeprop))
 
 
 childpovCSV <- childpov %>% 
 select(place, sf1999, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "childpov", values_to = "Value") %>% 
   mutate(name = paste( place, childpov, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/childpov.csv")
@@ -240,17 +240,17 @@ select(place, sf1999, (contains("pct"))) %>%
 #Households without access to a vehicle
 load("inputs/vehRaw.RData")
 veh <- vehRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000=c(0.2732,0.0930,0.0442,0.1532,0.1030),
+         census2000SE = c(0.002755866, 0.001856238, 0.002095766, 0.001371385, 6.62E-05),
          vehpct = NoVehAvail / Total,
          moeprop = moeprop(y = Total, moex = NoVehAvailMOE, moey = TotalMOE, p = vehpct),
-         significant = stattest(x=census2000,y=vehpct,moey = moeprop))
+         significant = stattest(x=census2000, moex= census2000SE*1.645,y=vehpct,moey = moeprop))
 
 vehCSV <- veh %>% 
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "veh", values_to = "Value") %>% 
   mutate(name = paste( place, veh, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/veh.csv")
@@ -258,19 +258,19 @@ select(place, census2000, (contains("pct"))) %>%
 #Population not U.S. citizens at birth
 load("inputs/forborRaw.RData")
 forbor <- forborRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(TotalPopMOE = ifelse(TotalPopMOE < 0, 0, TotalPopMOE)) %>%
   mutate(census2000=c(0.0425,0.0748,0.0237,0.048,0.1105),
+         census2000SE =c(0.001036254, 0.001394458, 0.001243694, 0.000671199, 5.85E-05),
          forborpct = (TotForeign00to09 + TotForeign90to99 + TotForeignPre90 + TotForeign10on) / TotalPop,
          forbormoeagg = moeagg(cbind(TotForeign00to09MOE, TotForeign90to99MOE, TotForeignPre90MOE, TotForeign10onMOE)),
          forbormoeprop = moeprop(y=TotalPop, moex = forbormoeagg, moey = TotalPopMOE, p=forborpct),
-         significant = stattest(x=census2000,y=forborpct,moey=forbormoeprop))
+         significant = stattest(x=census2000,moex = census2000SE*1.645, y=forborpct,moey=forbormoeprop))
 
 forborCSV <- forbor %>% 
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "forbor", values_to = "Value") %>% 
   mutate(name = paste( place, forbor, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/forbor.csv")
@@ -278,7 +278,6 @@ select(place, census2000, (contains("pct"))) %>%
 #Population who moved in the past year
 load("inputs/mobRaw.RData")
 mob <- mobRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(sf2004mobabroad =c(0.0013,0.0044,0.00,0.00,0.006), #zero filled in for metro and St. Tammany 2004 because of missing data,
          sf2004states=c(0.0206,0.02,0.00,0.00,0.0235),
          sf2004difparish=c(0.0085,0.03,0.00,0.00,0.0302),
@@ -332,17 +331,17 @@ jeffsig <- stattest(x = (mob$sf2004mobabroad[2]+mob$sf2004states[2]+mob$sf2004di
 #Homeownership rates
 load("inputs/hoRaw.RData")
 ho <- hoRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
   mutate(census2000=c(0.465,0.6385,0.8048,0.6183,0.6619),
+         census2000SE = c(0.00282756, 0.002814847, 0.0037049, 0.001695053, 1.03E-04),
          Ownerpct = Owner / Total,
          Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
-         significant = stattest(x=census2000,y=Ownerpct,moey = Ownermoeprop))
+         significant = stattest(x=census2000, moex = census2000SE*1.645,y=Ownerpct,moey = Ownermoeprop))
 
 hoCSV <- ho %>% 
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "ho", values_to = "Value") %>% 
   mutate(name = paste( place, ho, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/ho.csv")
@@ -351,17 +350,17 @@ select(place, census2000, (contains("pct"))) %>%
 #Homeowners without a mortgage
 load("inputs/honomoRaw.RData")
 honomo <- honomoRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000 = c(0.3298,0.3458,0.2967,0.3476,0.3259),
+         census2000SE = c(0.004263821, 0.003804423, 0.005191947, 0.002300568, 1.25E-04),
          honomopct = NoMortgage / Total,
          moeprop = moeprop(y=Total,moex =NoMortgageMOE,moey = TotalMOE,p=honomopct),
-         significant = stattest(x=census2000,y=honomopct,moey=moeprop))
+         significant = stattest(x=census2000, moex = census2000SE*1.645, y=honomopct,moey=moeprop))
 
 honomoCSV <- honomo %>% 
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "honomo", values_to = "Value") %>% 
   mutate(name = paste( place, honomo, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/honomo.csv")
@@ -369,7 +368,6 @@ select(place, census2000, (contains("pct"))) %>%
 #Renters with severe housing cost burdens
 load("inputs/rentburRaw.RData")
 rentbur <- rentburRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
   mutate(sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value
          sf2004lab =c(0.2432,0.2167," ",0.2161,0.2384),
          rentburpct = `50orMore`/ (Total - NotComputed),
@@ -381,7 +379,7 @@ rentburCSV <- rentbur %>%
 select(place, sf2004, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "rentbur", values_to = "Value") %>% 
   mutate(name = paste( place, rentbur, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/rentbur.csv")
@@ -389,7 +387,6 @@ select(place, sf2004, (contains("pct"))) %>%
 #Homeowners with severe housing cost burdens
 load("inputs/hoburRaw.RData")
 hobur <- hoburRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(sf2004=c(0.1620,0.0891,0,0.1134,0.0988), #0 for St. tammany missing value,
          hoburpct = (`50orMoreMortgage`+`50orMoreNoMortgage`)/(Total - NotComputedMortgage - NotComputedNoMortgage),
          moexagg = moeagg(cbind(`50orMoreMortgageMOE`,`50orMoreNoMortgageMOE`)),
@@ -401,7 +398,7 @@ hoburCSV <- hobur %>%
 select(place, sf2004, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "hobur", values_to = "Value") %>% 
   mutate(name = paste( place, hobur, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/hobur.csv")
@@ -411,7 +408,6 @@ select(place, sf2004, (contains("pct"))) %>%
 load("inputs/medrentRaw.RData")
 sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))
 medrent <- medrentRaw %>% 
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   bind_cols(.,sf2004) %>%
   mutate(significant = stattest(x=sf2004,y=Rent,moey=RentMOE)) 
 
@@ -419,7 +415,7 @@ medrentCSV <- medrent %>%
   select(place, sf2004, Rent) %>% 
   pivot_longer(-c("place"), names_to = "medrent", values_to = "Value") %>% 
   mutate(name = paste( place, medrent, sep = "-"),
-         year = 2019) %>% 
+         year = 2021) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/medrent.csv")
@@ -428,7 +424,6 @@ medrentCSV <- medrent %>%
 #Year structure built, 201* housing units
 load("inputs/yrbuiltRaw.RData")
 yrbuilt <- yrbuiltRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(orLater1990pct = (`1990to1999` + `2000to2009` + `2010to2013` + `2014`)/Total,
          mid1950to1989pct = (`1950to1959`+`1960to1969`+`1970to1979`+`1980to1989`)/Total,
          orbefore1949pct = (`1940to1949`+`1939`)/Total,
@@ -461,7 +456,7 @@ select(place, (contains("pct"))) %>%
 #Means of transportation to work, 
 load("inputs/commuteRaw.RData")
 commute <- commuteRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
+  filter(place != "103") %>%
   mutate(census2000drive=c(0.6028,0.7855,0.7301,0.7570),
          census2000carpool=c(0.1614,0.1372,0.1465,0.1219),
          census2000publictransit=c(0.1322,0.0023,0.0530,0.0457),
@@ -497,7 +492,7 @@ commute <- commuteRaw %>%
 commuteCSV <- commute %>% 
 select(place, (contains("pct")), (contains("census2000"))) %>% 
   pivot_longer(-c("place"), names_to = "commute", values_to = "Value") %>% 
-  mutate(year = ifelse(grepl("2000", commute), 2000, 2019),
+  mutate(year = ifelse(grepl("2000", commute), 2000, 2021),
          header = paste(place, year, sep = "-"),
          commutefinal = ifelse(grepl("ive", commute), "DroveAlone", commute),
          commutefinal = ifelse(grepl("arpool", commute), "Carpool", commutefinal),
@@ -748,4 +743,466 @@ popunder18CSV <- popunder18 %>%
   select(-PlaceName) %>%
 pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
 write.csv("outputs/spreadsheets/under18.csv")
+
+
+###########################
+# Jenna's analysis expanded
+###########################
+
+### Median household income ###
+###
+load("inputs/medhhRaw_exp.RData")
+medhh_exp <- medhhRaw_exp  %>%
+  mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
+         placenames = ifelse(place == "051", "Jefferson", placenames),
+         placenames = ifelse(place == "071", "Orleans", placenames),
+         placenames = ifelse(place == "35380","Metro",placenames),
+         placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
+  select(-place, -placenames, -placename, -contains("MOE")) %>%
+  pivot_longer(-place.fac,names_to = "var",values_to = "val")
+
+
+### Across geos median hh income bar chart ###
+medhh.totals <- medhh_exp %>%
+  filter(var == "MedianHHIncome")%>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+medhh.race <- medhh_exp %>%
+  filter(var != "MedianHHIncome") %>%
+  mutate(var = ifelse(grepl("asian",var), "Asian",var),
+         var = ifelse(grepl("blk",var), "Black", var),
+         var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+### Historical median hh income line chart ###
+
+## median hh income adjusted to 2021 dollars ###
+
+#using https://data.bls.gov/cgi-bin/cpicalc.pl from january to january
+#1979 to 2021 = 3.83
+#1989 to 2021 = 2.16
+#1999 to 2021 = 1.59
+#2010 to 2021 = 1.21
+#2016 to 2021 = 1.10
+
+medhhinc_adjusted21 <- medhh_unadjusted %>% mutate(value = as.numeric(value),
+                                                   inc_adj21 = case_when(Year == 1979 ~ value * 3.83,
+                                                                         Year == 1989 ~ value * 2.16,
+                                                                         Year == 1999 ~ value * 1.59,
+                                                                         Year == 2010 ~ value * 1.21,
+                                                                         Year == 2016 ~ value * 1.10))
+# write_csv(medhhinc_adjusted21, "inputs/medHHinc_exp.csv")
+
+medhh.hist <- medhhinc_adjusted21 %>% 
+  select(-value) %>%
+  rename(val = inc_adj21) %>%
+  mutate(Year = as.numeric(Year),
+         var = ifelse(var == "Overall", "All", var),
+         var = ifelse(grepl("Bla",var), "Black", var),
+         var = ifelse(grepl("Hispanic,",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("Whi",var), "White,\nnon-Hispanic", var)) %>%
+  bind_rows(medhh_exp %>%
+              filter(place.fac == "Orleans",
+                     !grepl("asian",var)) %>% ## remove asian numbers 
+              select(-place.fac) %>%
+              mutate(Year = 2021, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+                     var = ifelse(var == "MedianHHIncome", "All", var),
+                     var = ifelse(grepl("blk",var), "Black", var),
+                     var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+                     var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)))%>%
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+
+### stat testing ###
+
+medhh.race_stattest <- medhhRaw_exp %>%
+  mutate(sig_wht_blk = stattest(x = MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y = MedianHHIncome_blk, moey = MedianHHIncomeMOE_blk),
+         sig_hisp_wht = stattest(x = MedianHHIncome_hisp, moex = MedianHHIncomeMOE_hisp, y = MedianHHIncome_wht, moey = MedianHHIncomeMOE_wht),
+         sig_hisp_blk = stattest(x = MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y = MedianHHIncome_hisp, moey = MedianHHIncomeMOE_hisp)
+  )
+
+medhh.hist_stattest.EST <- medhhRaw_exp %>% 
+  filter(place == "071") %>%
+  select(-place, -placename,-contains("MOE")) %>%
+  pivot_longer(everything(),names_to = "var",values_to = "val")%>%
+  filter(grepl("wht", var) | grepl("blk", var) | grepl("hisp", var)) 
+
+medhh.hist_stattest.MOE <- medhhRaw_exp %>% 
+  filter(place == "071")%>%
+  select(contains("MOE"), -placename) %>%
+  pivot_longer(everything(),names_to = "var",values_to = "moe")%>%
+  filter(grepl("wht", var) | grepl("blk", var) | grepl("hisp", var)) 
+
+medhh.hist_stattest <- medhh.hist_stattest.EST %>%
+  bind_cols(medhh.hist_stattest.MOE) %>%
+  bind_cols(medhh.hist %>% filter(Year == "1979", var != "All") %>%
+              mutate(order = c(1,3,2)) %>% arrange(order)) %>%
+  mutate(sig_79_21= stattest(x=val...7,y=val...2,moey = moe, zscore=1.96))
+
+### Educational attainment ###
+###
+load("inputs/bachRaw_exp.RData")
+bach_exp <- bachRaw_exp %>%
+  mutate(totbach = MaleBach + FemaleBach + MaleGradProf + FemaleGradProf,
+         totbach_blk = MaleBach_blk + FemaleBach_blk,
+         totbach_wht = MaleBach_wht + FemaleBach_wht,
+         totbach_hisp = MaleBach_hisp + FemaleBach_hisp,
+         totbach_asian = MaleBach_asian + FemaleBach_asian,
+         pctbach = totbach / Total,
+         pctbach_blk = totbach_blk / Total_blk,
+         pctbach_wht = totbach_wht / Total_wht,
+         pctbach_hisp = totbach_hisp / Total_hisp,
+         pctbach_asian = totbach_asian / Total_asian,
+         moeagg = moeagg(cbind(MaleBachMOE, FemaleBachMOE, MaleGradProfMOE, FemaleGradProfMOE)),
+         moeagg_blk = moeagg(cbind(MaleBachMOE_blk, FemaleBachMOE_blk)),
+         moeagg_wht = moeagg(cbind(MaleBachMOE_wht, FemaleBachMOE_wht)),
+         moeagg_hisp = moeagg(cbind(MaleBachMOE_hisp, FemaleBachMOE_hisp)),
+         moeagg_asian = moeagg(cbind(MaleBachMOE_asian, FemaleBachMOE_asian)),
+         moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctbach),
+         moeprop_blk = moeprop(y = Total_blk, moex = moeagg_blk, moey = TotalMOE_blk, p = pctbach_blk),
+         moeprop_wht = moeprop(y = Total_wht, moex = moeagg_wht, moey = TotalMOE_wht, p = pctbach_wht),
+         # moeprop_asian = moeprop(y = Total_asian, moex = moeagg_asian, moey = TotalMOE_asian, p = pctbach_asian),
+         moeprop_hisp = moeprop(y = Total_hisp, moex = moeagg_hisp, moey = TotalMOE_hisp, p = pctbach_hisp))%>%
+  select(place,contains("pct")) %>%
+  mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
+         placenames = ifelse(place == "051", "Jefferson", placenames),
+         placenames = ifelse(place == "071", "Orleans", placenames),
+         placenames = ifelse(place == "35380","Metro",placenames),
+         placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
+  select(-place,-placenames) %>%
+  pivot_longer(-place.fac,names_to = "var",values_to = "val") 
+
+bach.totals <- bach_exp %>%
+  filter(var == "pctbach") %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+bach.race <- bach_exp %>%
+  filter(var!="pctbach") %>%
+  mutate(var = ifelse(grepl("asian",var), "Asian",var),
+         var = ifelse(grepl("blk",var), "Black", var),
+         var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+# Historical Educational Attainment Line Chart
+
+EduAtt <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
+EduAtt.hist <- EduAtt %>% 
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race"))) %>%
+  bind_rows(bach.race %>%
+              filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2021))
+
+### stat test ### 
+
+bach.race_stattest.data <-  bachRaw_exp %>%
+  mutate(totbach = MaleBach + FemaleBach + MaleGradProf + FemaleGradProf,
+         totbach_blk = MaleBach_blk + FemaleBach_blk,
+         totbach_wht = MaleBach_wht + FemaleBach_wht,
+         totbach_hisp = MaleBach_hisp + FemaleBach_hisp,
+         totbach_asian = MaleBach_asian + FemaleBach_asian,
+         pctbach = totbach / Total,
+         pctbach_blk = totbach_blk / Total_blk,
+         pctbach_wht = totbach_wht / Total_wht,
+         pctbach_hisp = totbach_hisp / Total_hisp,
+         pctbach_asian = totbach_asian / Total_asian,
+         moeagg = moeagg(cbind(MaleBachMOE, FemaleBachMOE, MaleGradProfMOE, FemaleGradProfMOE)),
+         moeagg_blk = moeagg(cbind(MaleBachMOE_blk, FemaleBachMOE_blk)),
+         moeagg_wht = moeagg(cbind(MaleBachMOE_wht, FemaleBachMOE_wht)),
+         moeagg_hisp = moeagg(cbind(MaleBachMOE_hisp, FemaleBachMOE_hisp)),
+         moeagg_asian = moeagg(cbind(MaleBachMOE_asian, FemaleBachMOE_asian)),
+         moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctbach),
+         moeprop_blk = moeprop(y = Total_blk, moex = moeagg_blk, moey = TotalMOE_blk, p = pctbach_blk),
+         moeprop_wht = moeprop(y = Total_wht, moex = moeagg_wht, moey = TotalMOE_wht, p = pctbach_wht),
+         # moeprop_asian = moeprop(y = Total_asian, moex = moeagg_asian, moey = TotalMOE_asian, p = pctbach_asian),
+         moeprop_hisp = moeprop(y = Total_hisp, moex = moeagg_hisp, moey = TotalMOE_hisp, p = pctbach_hisp))
+bach.race_stattest.race <- bach.race_stattest.data%>%
+  mutate(sig_wht_blk = stattest(x = pctbach_wht, moex = moeprop_wht, y = pctbach_blk, moey = moeprop_blk))
+bach.race_stattest.geoEST <- bach.race_stattest.data %>%
+  select(place,pctbach_blk, pctbach_wht) %>%
+  pivot_longer(-place, names_to = "var", values_to = "val")
+bach.race_stattest.geoMOE <- bach.race_stattest.data %>%
+  select(place,moeprop_blk, moeprop_wht) %>%
+  pivot_longer(-place, names_to = "var", values_to = "moe")
+bach.race_stattest.geo <- left_join(bach.race_stattest.geoEST,bach.race_stattest.geoMOE, by = "place") %>%
+  pivot_wider(names_from = place,values_from = c(val, moe)) %>%
+  mutate(sig_no_us = stattest(x=val_071, moex = moe_071, y = val_1, moey = moe_1),
+         sig_no_metro =stattest(x=val_071, moex = moe_071, y = val_35380, moey = moe_35380),
+         sig_no_stt = stattest(x=val_071, moex = moe_071, y = val_103, moey = moe_103),
+         sig_no_jeff = stattest(x=val_071, moex = moe_071, y = val_051, moey = moe_051))
+
+
+# Poverty
+
+load("inputs/povRaw_exp.RData")
+pov_exp <- povRaw_exp %>%
+  mutate(
+    pctpov = BelowPov / Total,
+    pctpov_blk = BelowPov_blk / Total_blk,
+    pctpov_wht = BelowPov_wht / Total_wht,
+    pctpov_hisp = BelowPov_hisp / Total_hisp,
+    pctpov_asian = BelowPov_asian / Total_asian,
+    moeprop = moeprop(y = Total, moex = BelowPovMOE, moey = TotalMOE, p = pctpov),
+    moeprop_blk = moeprop(y = Total_blk, moex = BelowPovMOE_blk, moey = TotalMOE_blk, p = pctpov_blk),
+    moeprop_wht = moeprop(y = Total_wht, moex = BelowPovMOE_wht, moey = TotalMOE_wht, p = pctpov_wht),
+    moeprop_hisp = moeprop(y = Total_hisp, moex = BelowPovMOE_hisp, moey = TotalMOE_hisp, p = pctpov_hisp),
+    # moeprop_asian = moeprop(y = Total_asian, moex = BelowPovMOE_asian, moey = TotalMOE_asian, p = pctpov_asian)
+  )%>%
+  select(place,contains("pct")) %>%
+  mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
+         placenames = ifelse(place == "051", "Jefferson", placenames),
+         placenames = ifelse(place == "071", "Orleans", placenames),
+         placenames = ifelse(place == "35380","Metro",placenames),
+         placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
+  select(-place,-placenames) %>%
+  pivot_longer(-place.fac,names_to = "var",values_to = "val") 
+
+### Across geos pov bar chart ###
+pov.totals <- pov_exp %>% 
+  filter(var == "pctpov") %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+pov.race <- pov_exp %>%
+  filter(var != "pctpov") %>%
+  mutate(var = ifelse(grepl("asian",var), "Asian",var),
+         var = ifelse(grepl("blk",var), "Black", var),
+         var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+totalPov <- read_csv("inputs/hist_pov.csv")
+totalPov.hist <- totalPov %>% 
+  mutate(year = ifelse(year != 2010, year - 1, year)) %>%
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))%>%
+  bind_rows(pov.race %>%
+              filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2021))
+
+### stat test ###
+pov_stattest <- povRaw_exp %>%
+  filter(place != "103") %>%
+  mutate(
+    pctpov = BelowPov / Total,
+    pctpov_blk = BelowPov_blk / Total_blk,
+    pctpov_wht = BelowPov_wht / Total_wht,
+    pctpov_hisp = BelowPov_hisp / Total_hisp,
+    pctpov_asian = BelowPov_asian / Total_asian,
+    moeprop = moeprop(y = Total, moex = BelowPovMOE, moey = TotalMOE, p = pctpov),
+    moeprop_blk = moeprop(y = Total_blk, moex = BelowPovMOE_blk, moey = TotalMOE_blk, p = pctpov_blk),
+    moeprop_wht = moeprop(y = Total_wht, moex = BelowPovMOE_wht, moey = TotalMOE_wht, p = pctpov_wht),
+    moeprop_hisp = moeprop(y = Total_hisp, moex = BelowPovMOE_hisp, moey = TotalMOE_hisp, p = pctpov_hisp),
+    moeprop_asian = moeprop(y = Total_asian, moex = BelowPovMOE_asian, moey = TotalMOE_asian, p = pctpov_asian)
+  ) %>%
+  mutate(sig_blk_wht = stattest(x=pctpov_blk,moex = moeprop_blk, y = pctpov_wht, moey = moeprop_wht),
+         sig_blk_hisp = stattest(x=pctpov_blk,moex = moeprop_blk, y = pctpov_hisp, moey = moeprop_hisp),
+         sig_hisp_wht = stattest(x=pctpov_hisp,moex = moeprop_hisp, y = pctpov_wht, moey = moeprop_wht),
+         sig_hisp_asian = stattest(x=pctpov_hisp,moex = moeprop_hisp, y = pctpov_asian, moey = moeprop_asian),
+         sig_blk_asian = stattest(x=pctpov_blk,moex = moeprop_blk, y = pctpov_asian, moey = moeprop_asian))
+
+
+### Child poverty ###
+###
+# load("inputs/childpovRaw_exp.RData")
+childpov_exp <- childpovRaw_exp %>%
+  mutate(
+    TotChildPov = BelowPovFemaleChild + BelowPovMaleChild + AbovePovFemaleChild + AbovePovMaleChild,
+    moeaggtot = moeagg(cbind(BelowPovFemaleChildMOE, BelowPovMaleChildMOE, AbovePovFemaleChildMOE, AbovePovMaleChildMOE)),
+    TotBelowChildPov = BelowPovFemaleChild + BelowPovMaleChild,
+    moeaggbelow = moeagg(cbind(BelowPovFemaleChildMOE, BelowPovMaleChildMOE)),
+    pctBelowChildPov = TotBelowChildPov / TotChildPov,
+    moeprop = moeprop(y=TotChildPov, moex = moeaggbelow, moey = moeaggtot, p=pctBelowChildPov),
+    TotChildPov_blk = BelowPovFemaleChild_blk + BelowPovMaleChild_blk + AbovePovFemaleChild_blk + AbovePovMaleChild_blk,
+    moeaggtot_blk = moeagg(cbind(BelowPovFemaleChildMOE_blk, BelowPovMaleChildMOE_blk, AbovePovFemaleChildMOE_blk, AbovePovMaleChildMOE_blk)),
+    TotBelowChildPov_blk = BelowPovFemaleChild_blk + BelowPovMaleChild_blk,
+    moeaggbelow_blk = moeagg(cbind(BelowPovFemaleChildMOE_blk, BelowPovMaleChildMOE_blk)),
+    pctBelowChildPov_blk = TotBelowChildPov_blk / TotChildPov_blk,
+    moeprop_blk = moeprop(y=TotChildPov_blk, moex = moeaggbelow_blk, moey = moeaggtot_blk, p=pctBelowChildPov_blk),
+    TotChildPov_wht = BelowPovFemaleChild_wht + BelowPovMaleChild_wht + AbovePovFemaleChild_wht + AbovePovMaleChild_wht,
+    moeaggtot_wht = moeagg(cbind(BelowPovFemaleChildMOE_wht, BelowPovMaleChildMOE_wht, AbovePovFemaleChildMOE_wht, AbovePovMaleChildMOE_wht)),
+    TotBelowChildPov_wht = BelowPovFemaleChild_wht + BelowPovMaleChild_wht,
+    moeaggbelow_wht = moeagg(cbind(BelowPovFemaleChildMOE_wht, BelowPovMaleChildMOE_wht)),
+    pctBelowChildPov_wht = TotBelowChildPov_wht / TotChildPov_wht,
+    moeprop_wht = moeprop(y=TotChildPov_wht, moex = moeaggbelow_wht, moey = moeaggtot_wht, p=pctBelowChildPov_wht),
+    TotChildPov_hisp = BelowPovFemaleChild_hisp + BelowPovMaleChild_hisp + AbovePovFemaleChild_hisp + AbovePovMaleChild_hisp,
+    moeaggtot_hisp = moeagg(cbind(BelowPovFemaleChildMOE_hisp, BelowPovMaleChildMOE_hisp, AbovePovFemaleChildMOE_hisp, AbovePovMaleChildMOE_hisp)),
+    TotBelowChildPov_hisp = BelowPovFemaleChild_hisp + BelowPovMaleChild_hisp,
+    moeaggbelow_hisp = moeagg(cbind(BelowPovFemaleChildMOE_hisp, BelowPovMaleChildMOE_hisp)),
+    pctBelowChildPov_hisp = TotBelowChildPov_hisp / TotChildPov_hisp,
+    moeprop_hisp = moeprop(y=TotChildPov_hisp, moex = moeaggbelow_hisp, moey = moeaggtot_hisp, p=pctBelowChildPov_hisp),
+    TotChildPov_asian = BelowPovFemaleChild_asian + BelowPovMaleChild_asian + AbovePovFemaleChild_asian + AbovePovMaleChild_asian,
+    moeaggtot_asian = moeagg(cbind(BelowPovFemaleChildMOE_asian, BelowPovMaleChildMOE_asian, AbovePovFemaleChildMOE_asian, AbovePovMaleChildMOE_asian)),
+    TotBelowChildPov_asian = BelowPovFemaleChild_asian + BelowPovMaleChild_asian,
+    moeaggbelow_asian = moeagg(cbind(BelowPovFemaleChildMOE_asian, BelowPovMaleChildMOE_asian)),
+    pctBelowChildPov_asian = TotBelowChildPov_asian / TotChildPov_asian,
+    # moeprop_asian = moeprop(y=TotChildPov_asian, moex = moeaggbelow_asian, moey = moeaggtot_asian, p=pctBelowChildPov_asian)
+  )%>%
+  select(place,contains("pct")) %>%
+  mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
+         placenames = ifelse(place == "051", "Jefferson", placenames),
+         placenames = ifelse(place == "071", "Orleans", placenames),
+         placenames = ifelse(place == "35380","Metro",placenames),
+         placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
+  select(-place,-placenames) %>%
+  pivot_longer(-place.fac,names_to = "var",values_to = "val") 
+
+### Across geos child pov bar chart ###
+childpov.totals <- childpov_exp %>% 
+  filter(var == "pctBelowChildPov") %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+childpov.race <- childpov_exp %>%
+  filter(var != "pctBelowChildPov") %>%
+  mutate(var = ifelse(grepl("asian",var), "Asian",var),
+         var = ifelse(grepl("blk",var), "Black", var),
+         var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+### Historical child pov line chart ###
+childPov.hist <- childPovProspInd %>% 
+  mutate(year = ifelse(Year != 2010, Year - 1, Year)) %>%
+  rename(val = childPov) %>%
+  mutate(var = Race,
+         var = ifelse(grepl("Bla",var), "Black", var),
+         var = ifelse(grepl("Lat",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("Whi",var), "White,\nnon-Hispanic", var)) %>%
+  select (-Geography, -Race) %>% ## some of the tables include US in the geography, so you'll have to filter those
+  bind_rows(childpov_exp %>%
+              filter(place.fac == "Orleans",
+                     !grepl("asian",var)) %>% ## remove asian numbers 
+              select(-place.fac) %>%
+              mutate(Year = 2021, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+                     var = ifelse(var == "pctBelowChildPov", "All", var),
+                     var = ifelse(grepl("blk",var), "Black", var),
+                     var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+                     var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)))%>%
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+
+### stat test ###
+
+childpov_stattest <- childpovRaw_exp %>%
+  mutate(
+    TotChildPov = BelowPovFemaleChild + BelowPovMaleChild + AbovePovFemaleChild + AbovePovMaleChild,
+    moeaggtot = moeagg(cbind(BelowPovFemaleChildMOE, BelowPovMaleChildMOE, AbovePovFemaleChildMOE, AbovePovMaleChildMOE)),
+    TotBelowChildPov = BelowPovFemaleChild + BelowPovMaleChild,
+    moeaggbelow = moeagg(cbind(BelowPovFemaleChildMOE, BelowPovMaleChildMOE)),
+    pctBelowChildPov = TotBelowChildPov / TotChildPov,
+    moeprop = moeprop(y=TotChildPov, moex = moeaggbelow, moey = moeaggtot, p=pctBelowChildPov),
+    TotChildPov_blk = BelowPovFemaleChild_blk + BelowPovMaleChild_blk + AbovePovFemaleChild_blk + AbovePovMaleChild_blk,
+    moeaggtot_blk = moeagg(cbind(BelowPovFemaleChildMOE_blk, BelowPovMaleChildMOE_blk, AbovePovFemaleChildMOE_blk, AbovePovMaleChildMOE_blk)),
+    TotBelowChildPov_blk = BelowPovFemaleChild_blk + BelowPovMaleChild_blk,
+    moeaggbelow_blk = moeagg(cbind(BelowPovFemaleChildMOE_blk, BelowPovMaleChildMOE_blk)),
+    pctBelowChildPov_blk = TotBelowChildPov_blk / TotChildPov_blk,
+    moeprop_blk = moeprop(y=TotChildPov_blk, moex = moeaggbelow_blk, moey = moeaggtot_blk, p=pctBelowChildPov_blk),
+    TotChildPov_wht = BelowPovFemaleChild_wht + BelowPovMaleChild_wht + AbovePovFemaleChild_wht + AbovePovMaleChild_wht,
+    moeaggtot_wht = moeagg(cbind(BelowPovFemaleChildMOE_wht, BelowPovMaleChildMOE_wht, AbovePovFemaleChildMOE_wht, AbovePovMaleChildMOE_wht)),
+    TotBelowChildPov_wht = BelowPovFemaleChild_wht + BelowPovMaleChild_wht,
+    moeaggbelow_wht = moeagg(cbind(BelowPovFemaleChildMOE_wht, BelowPovMaleChildMOE_wht)),
+    pctBelowChildPov_wht = TotBelowChildPov_wht / TotChildPov_wht,
+    moeprop_wht = moeprop(y=TotChildPov_wht, moex = moeaggbelow_wht, moey = moeaggtot_wht, p=pctBelowChildPov_wht),
+    TotChildPov_hisp = BelowPovFemaleChild_hisp + BelowPovMaleChild_hisp + AbovePovFemaleChild_hisp + AbovePovMaleChild_hisp,
+    moeaggtot_hisp = moeagg(cbind(BelowPovFemaleChildMOE_hisp, BelowPovMaleChildMOE_hisp, AbovePovFemaleChildMOE_hisp, AbovePovMaleChildMOE_hisp)),
+    TotBelowChildPov_hisp = BelowPovFemaleChild_hisp + BelowPovMaleChild_hisp,
+    moeaggbelow_hisp = moeagg(cbind(BelowPovFemaleChildMOE_hisp, BelowPovMaleChildMOE_hisp)),
+    pctBelowChildPov_hisp = TotBelowChildPov_hisp / TotChildPov_hisp,
+    moeprop_hisp = moeprop(y=TotChildPov_hisp, moex = moeaggbelow_hisp, moey = moeaggtot_hisp, p=pctBelowChildPov_hisp),
+    TotChildPov_asian = BelowPovFemaleChild_asian + BelowPovMaleChild_asian + AbovePovFemaleChild_asian + AbovePovMaleChild_asian,
+    moeaggtot_asian = moeagg(cbind(BelowPovFemaleChildMOE_asian, BelowPovMaleChildMOE_asian, AbovePovFemaleChildMOE_asian, AbovePovMaleChildMOE_asian)),
+    TotBelowChildPov_asian = BelowPovFemaleChild_asian + BelowPovMaleChild_asian,
+    moeaggbelow_asian = moeagg(cbind(BelowPovFemaleChildMOE_asian, BelowPovMaleChildMOE_asian)),
+    pctBelowChildPov_asian = TotBelowChildPov_asian / TotChildPov_asian,
+    # moeprop_asian = moeprop(y=TotChildPov_asian, moex = moeaggbelow_asian, moey = moeaggtot_asian, p=pctBelowChildPov_asian)
+  )%>%
+  mutate(sig_wht_blk = stattest(x=pctBelowChildPov_wht, moex = moeprop_wht,y=pctBelowChildPov_blk, moey = moeprop_blk))
+
+
+# Homeownership
+
+
+load("inputs/hoRaw_exp.RData")
+ho_exp <- hoRaw_exp %>%
+  mutate(Ownerpct = Owner / Total,
+         Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
+         Ownerpct_blk = Owner_blk / Total_blk,
+         Ownermoeprop_blk = moeprop(y=Total_blk,moex = OwnerMOE_blk,moey = TotalMOE_blk,p=Ownerpct_blk),
+         Ownerpct_wht = Owner_wht / Total_wht,
+         Ownermoeprop_wht = moeprop(y=Total_wht,moex = OwnerMOE_wht,moey = TotalMOE_wht,p=Ownerpct_wht),
+         Ownerpct_hisp = Owner_hisp / Total_hisp,
+         Ownermoeprop_hisp = moeprop(y=Total_hisp,moex = OwnerMOE_hisp,moey = TotalMOE_hisp,p=Ownerpct_hisp),
+         Ownerpct_asian = Owner_asian / Total_asian,
+         #Ownermoeprop_asian = moeprop(y=Total_asian,moex = OwnerMOE_asian,moey = TotalMOE_asian,p=Ownerpct_asian)
+  )%>%
+  select(place,contains("pct")) %>%
+  mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
+         placenames = ifelse(place == "051", "Jefferson", placenames),
+         placenames = ifelse(place == "071", "Orleans", placenames),
+         placenames = ifelse(place == "35380","Metro",placenames),
+         placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
+  select(-place,-placenames) %>%
+  pivot_longer(-place.fac,names_to = "var",values_to = "val") 
+
+### Across geos homeownership bar chart ###
+ho.totals <- ho_exp %>% 
+  filter(var == "Ownerpct") %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+ho.race <- ho_exp %>%
+  filter(var != "Ownerpct") %>%
+  mutate(var = ifelse(grepl("asian",var), "Asian",var),
+         var = ifelse(grepl("blk",var), "Black", var),
+         var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+### Historical child homeownership line chart ###
+homeownership.hist <- homeownershipProspInd %>% 
+  filter(Geography == "New Orleans") %>%
+  rename(val = pctHomeownership) %>%
+  mutate(var = Race,
+         var = ifelse(grepl("Bla",var), "Black", var),
+         var = ifelse(grepl("Lat",var), "Hispanic,\nany race", var),
+         var = ifelse(grepl("Whi",var), "White,\nnon-Hispanic", var)) %>%
+  select (-Geography, -Race) %>% ## some of the tables include US in the geography, so you'll have to filter those
+  bind_rows(ho %>%
+              filter(place.fac == "Orleans",
+                     !grepl("asian",var)) %>% ## remove asian numbers 
+              select(-place.fac) %>%
+              mutate(Year = 2021, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+                     var = ifelse(var == "Ownerpct", "All", var),
+                     var = ifelse(grepl("blk",var), "Black", var),
+                     var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
+                     var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)))%>%
+  mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))
+
+
+
+### stat test
+
+ho_stattest <- hoRaw_exp %>%
+  mutate(Ownerpct = Owner / Total,
+         Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
+         Ownerpct_blk = Owner_blk / Total_blk,
+         Ownermoeprop_blk = moeprop(y=Total_blk,moex = OwnerMOE_blk,moey = TotalMOE_blk,p=Ownerpct_blk),
+         Ownerpct_wht = Owner_wht / Total_wht,
+         Ownermoeprop_wht = moeprop(y=Total_wht,moex = OwnerMOE_wht,moey = TotalMOE_wht,p=Ownerpct_wht),
+         Ownerpct_hisp = Owner_hisp / Total_hisp,
+         Ownermoeprop_hisp = moeprop(y=Total_hisp,moex = OwnerMOE_hisp,moey = TotalMOE_hisp,p=Ownerpct_hisp),
+         Ownerpct_asian = Owner_asian / Total_asian,
+         #Ownermoeprop_asian = moeprop(y=Total_asian,moex = OwnerMOE_asian,moey = TotalMOE_asian,p=Ownerpct_asian)
+  )%>%
+  mutate(sig_blk_wht = stattest(x = Ownerpct_blk, moex = Ownermoeprop_blk, y = Ownerpct_wht, moey = Ownermoeprop_wht))
+
+
+
+
 
