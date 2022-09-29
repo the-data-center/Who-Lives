@@ -274,6 +274,27 @@ Although race/ethnicity and age data is available for all eight parishes in metr
 Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^5] The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from `r round((getvalue.hs.metro.2000)*100)` percent in 2000 to `r round((getvalue.hs.metro.2018)*100)` percent in `r year`. In the city of New Orleans, the share of adults with less than a high school degree fell from `r round((getvalue.hs.no.2000)*100)` percent to `r round((getvalue.hs.no.2018)*100)` percent but is still higher than the U.S. average of `r round((getvalue.hs.us.2018)*100)` percent.
 
 
+```{r bach, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
+bachGraphic
+```
+```{r, echo=FALSE}
+makeCSS_source(
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+)
+```
+
+The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while more than 69 percent of white adults in New Orleans have a bachelor’s, only 21 percent of Black adults have a bachelor’s as of 2021.    The share of White adults in Orleans Parish who have a bachelor’s degree is substantially higher than the US or metro area overall: 69 percent of White adults in New Orleans have a bachelor’s degree while that number is 44 percent or lower in neighboring parishes and the nation. Like in Orleans, only 20 and 19 percent of Black adults have a bachelor’s degree or higher in Jefferson and St. Tammany, respectively.
+
+```{r bach by loc, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
+bach.raceGeos_chart
+```
+
+```{r bach over time, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
+EduAtt.hist_chart
+```
+
+The  metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from 15 percent in 2000 to 12 percent in 2021. In the city of New Orleans, the share of adults with less than a high school degree fell from 25 percent to 10 percent.
+
 ```{r hs, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hsGraphic
 ```
@@ -283,18 +304,6 @@ makeCSS_source(
 )
 ```
 
-
-The metro area decline in the share of adults with less than a high school degree has been coupled with an increase in the share with a bachelor’s degree or higher. In New Orleans, `r round((getvalue.bach.no.2018)*100)` percent of adults 25 and older had a college degree in `r year` — higher than the U.S. average of `r round((getvalue.bach.us.2018)*100)` percent, and up from `r round((getvalue.bach.no.2000)*100)` percent in 2000. The overall metro area share of adults with a bachelor’s degree grew from `r round((getvalue.bach.metro.2000)*100)` to `r round((getvalue.bach.metro.2018)*100)` percent — lower than the national average.
-
-
-```{r bach, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
-bachGraphic
-```
-```{r, echo=FALSE}
-makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
-)
-```
 
 The `r year` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro, `r dollar(getvalue.medhh.jeff.2018)` for Jefferson Parish, and `r dollar(getvalue.medhh.no.2018)` for the city are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`.
 
@@ -308,6 +317,18 @@ makeCSS_source(
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
+```
+
+In 1979, households with higher incomes were disproportionately in the parishes surrounding New Orleans, while lower income white, Hispanic, and Black households were more likely to live in the city. By 2021, these patterns had changed with higher income white households more often living in the city such that income disparity within the city has escalated. In 2021, Black households in New Orleans had a median income of only \$30,292, while Hispanic households were at $60,358 and White households had a median income of \$83,727.
+
+```{r med hh over time, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
+medhh.hist_chart
+```
+
+In New Orleans, Black households earn XX percent less than White households. In St. Tammany, Black households have a median income of \$52,849 such that Black households earn 27 percent less than White households. In Jefferson, Black households have a median income of \$40,168 which is 37 percent less than White households in that parish. Hispanic households have a median of \$58,930 across the metro which is relatively consistent across the 3 large parishes.
+
+```{r med hh by race/eth, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
+medhh.raceGeos_chart
 ```
 
 
@@ -353,6 +374,18 @@ makeCSS_source(
 )
 ```
 
+As we  look at these statistics broken down by race and ethnicity, we see large disparities in the poverty rate at all geographic levels. For example, in metro New Orleans 29 percent of Black people and 19 percent of Hispanic   people live in poverty compared to 9 percent of White people and 10 percent of Asian people.
+
+```{r pov hist, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
+totalPov.hist_chart
+```
+
+
+```{r pov by race/eth, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
+pov.raceGeos_chart
+```
+
+
 Like the overall poverty rate, the child poverty rate in New Orleans decreased between 1999 and `r year`. In Jefferson Parish, the child poverty rate at `r round((getvalue.childpov.jeff.2018)*100)` percent in `r year` is higher than the U.S. child poverty rate.
 
 ```{r childpov, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
@@ -365,6 +398,19 @@ makeCSS_source(
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
+
+In Orleans Parish, about half of all Black children live in poverty while 5 percent of White children are poor. In New Orleans, child poverty rates peaked in 1989 for Black children and have fallen slightly such that they are now virtually the same as in 1979 with one in two Black children living in poverty in 2021. Hispanic children experienced a similar peak in poverty in 1989 and a subsequent downtrend.  The White poverty rate  has generally declined from one in ten children in poverty in 1979 to about one in 50 in 2021.
+
+```{r child pov hist, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
+childPov.hist_chart
+```
+
+Orleans  Parish’s very low rate of 5 percent child poverty for White children stands in stark contrast to the 51 percent rate for Black children. While in Orleans, poverty rates for Black children are 10 times higher than for White children, in Jefferson parish Black children experience poverty at a little over 3 times higher rates than White children – which is a disparity on par with the national average. In metro New Orleans, 26 percent of Hispanic children live in poverty – statistically no different from the national rate.
+
+```{r child pov race/eth, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
+childpov.raceGeos_chart
+```
+
 
 Post-Katrina, the share of New Orleans households without access to a vehicle dropped from `r round((getvalue.veh.no.2000)*100)` percent in 2000 to `r round((getvalue.veh.no.2018)*100)` percent in `r year`. Nonetheless, at `r round((getvalue.veh.no.2018)*100)` percent, New Orleans’ share is more than twice as high as in neighboring parishes, indicating the importance of a robust public transportation system and comprehensive evacuation plan.
 
@@ -428,9 +474,19 @@ makeCSS_source(
 )
 ```
 
-Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures. The proportion of metro area homeowners without a mortgage has increased from `r  round((getvalue.honomo.metro.2000)*100)` to `r  round((getvalue.honomo.metro.2018)*100)` percent between 2000 and `r year`, driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from `r round((getvalue.honomo.no.2000)*100)` to `r round((getvalue.honomo.no.2018)*100)` percent in Orleans and from `r round((getvalue.honomo.jeff.2000)*100)` to `r round((getvalue.honomo.jeff.2018)*100)` percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisiana parishes.[^10]
+Homeownership rates among African Americans in New Orleans made consistent progress between 1970 and 2010, increasing from 27 percent to 45 percent, but fell to 43 percent in 2021. Still, the difference in homeownership rates between Black and White people in 2021 was significant, with only 43 percent of African Americans in New Orleans owning homes compared to 59 percent of whites.
 
+```{r honomo hist, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
+homeownership.hist_chart
+```
 
+Metro  homeownership rates mirror national rates, with just over 60  percent of all householders owning their homes and White homeownership rates about 25 percentage points higher than rates for Black homeownership. This disparity is smaller in Orleans Parish, where only 59 percent of White householders own their homes. Homeownership in St. Tammany outstrips Orleans, Jefferson, and the metro overall, with 79 percent of all householders owning their home: a rate of 66 percent for Black householders, 81 percent for White, and 73 percent for Hispanic.
+
+```{r honomo race/eth, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
+ho.raceGeos_chart
+```
+
+Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures. The proportion of metro area homeowners without a mortgage has increased from 35 to 43 percent between 2000 and 2021, driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from 33 to 43 percent in Orleans and from 35 to 45 percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisiana parishes. 
 
 ```{r honomo, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 honomoGraphic
@@ -440,7 +496,6 @@ makeCSS_source(
 "**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
 )
 ```
-
 
 ## Housing costs and affordability, housing stock, and commuting
 
