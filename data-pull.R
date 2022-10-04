@@ -176,7 +176,7 @@ medhh_unadjusted <- read_xlsx("indicator expansion drafts/ProspInd_tables_WhoLiv
             `2010MOE` = `2010 (2010$)...6`,
             `2016MOE` = `2016 (2016$)...8`) %>% na.omit()
 medhh_unadjusted <- medhh_unadjusted %>% pivot_longer(cols = `1979`:`2016`, names_to = "Year") %>% select(-c(`2010MOE`, `2016MOE`))
-
+save(medhh_unadjusted, file = "inputs/medhh_unadjusted.RData")
 #Bachelor's degree or higher, adults 25 and older
 
 bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M',

@@ -530,7 +530,7 @@ chart.mob.allparishes <- mobforGraphic %>%
   geom_bar(stat="identity", 
            position="stack",
            color="gray50") +
-  facet_wrap(~PlaceName.fac, ncol = 5) + 
+  facet_wrap(~PlaceNames, ncol = 5) + 
   scale_fill_manual(values = c(DCcolor.p1lightskyblue,
                                DCcolor.p1skyblue,
                                DCcolor.p2teal,

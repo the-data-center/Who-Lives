@@ -221,6 +221,13 @@ commutenames <- c("Total","TotalMOE","DroveAlone","DroveAloneMOE","Carpool","Car
 commuteRaw <- wholivesdatapull(commutevars, commutenames)
 save(commuteRaw, file = "inputs/commuteRaw.RData")
 
+# 2000 - means of transportation to work, 16+
+P030
+
+commutevars2000 <- c('P030001', 'P030003','P030004','P030005','P030011','P030012','P030013','P030014','P030015','P030016')
+commutenames2000 <- c("Total2000","DroveAlone2000","Carpool2000","PublicTransit2000","Taxi2000","Motorcycle2000","Bike2000","Walk2000","Other2000","Workhome2000")
+commuteRaw2000 <- wholivesdatapull(commutevars2000, commutenames2000, year = 2000, censusname = "dec/sf3")
+
 
 
 ############################################

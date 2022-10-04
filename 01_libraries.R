@@ -8,6 +8,7 @@ library(grid)
 library(here)
 library(knitr)
 library(readxl)
+library(xfun)
 #library(xlsx)
 
 #load("inputs/allparishesRawx.RData")

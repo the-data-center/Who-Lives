@@ -460,8 +460,8 @@ select(place, (contains("pct"))) %>%
 
 #Means of transportation to work, 
 load("inputs/commuteRaw.RData")
-commute <- commuteRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
+commute <- commuteRaw %>% left_join(commuteRaw2000, by = "place", - placename) %>%
+  filter(placename.x %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000drive=c(0.6028,0.7855,0.7301,0.7570),
          census2000carpool=c(0.1614,0.1372,0.1465,0.1219),
          census2000publictransit=c(0.1322,0.0023,0.0530,0.0457),
@@ -477,6 +477,14 @@ commute <- commuteRaw %>%
          Walkpct = Walk / Total,
          Workhomepct = Workhome / Total,
          Otherpct = Other / Total,
+         
+         Drivepct2000 = DroveAlone2000 / Total2000,
+         Carpoolpct2000= Carpool2000 / Total2000,
+         PublicTransitpct2000 = PublicTransit2000 / Total2000,
+         bikepct2000 = Bike2000 / Total2000,
+         Walkpct2000 = Walk2000 / Total2000,
+         Workhomepct2000 = Workhome2000 / Total2000,
+         Otherpct2000 = Other2000 / Total2000,
          
          Drivemoeprop = moeprop(y=Total, moex=DroveAloneMOE, moey=TotalMOE, p=Drivepct),
          carpoolmoeprop = moeprop(y=Total, moex=CarpoolMOE, moey=TotalMOE, p=Carpoolpct),
