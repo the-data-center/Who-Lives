@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-=======
-base
-methods
-datasets
-utils
-grDevices
-graphics
-stats
->>>>>>> 2c27c2c1d3a132792bcadcf52e315c36fd13d7e1
 tidyverse
 ggplot2
 tibble
@@ -22,9 +12,5 @@ extrafont
 here
 censusapi
 directlabels
-<<<<<<< HEAD
-=======
-grid
->>>>>>> 2c27c2c1d3a132792bcadcf52e315c36fd13d7e1
 knitr
 readxl
