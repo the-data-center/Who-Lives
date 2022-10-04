@@ -519,7 +519,33 @@ homeownershipProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_Wh
 educationalAttainmentProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment.csv")
 medHHincProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/medHHinc.csv")
 
+#### getting SEs for 2004 data:
 
+housing_04 <- read_csv("ACS_2004_050.csv") 
+housing <-  housing_04 %>% 
+  filter(grepl("22071", geoid) |
+           grepl("22051", geoid) |
+           grepl("22103", geoid)) %>% #wSt. Tammany isn't in 2004 ACS for these.
+  filter((tblid == "B25064" & order == 1) |
+           (tblid == "B25070" & (order == 1 | order == 10) |
+              (tblid == "B25091" & (order == 1 | order == 11)))) %>%
+  mutate(MOE = as.numeric(cest) - as.numeric(clb),
+         placename = case_when(grepl("22071", geoid) ~ "Orleans",
+                                 grepl("22051", geoid) ~ "Jefferson"),
+         var = case_when(tblid == "B25064" & order == 1 ~ "medgrossrent",
+                         tblid == "B25070" & order == 1 ~  "totrenters",
+                         tblid == "B25070" & order == 10 ~ "rentcostburden",
+                         tblid == "B25091" & order == 1 ~ "tothomeowners",
+                         tblid == "B25091" & order == 11 ~ "hocostburden"),
+         cest = as.numeric(cest),
+         clb = as.numeric(clb)) #%>%
+  select(placename, var, MOE, cest) %>%
+   pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
+  mutate(rentburpct = cest_rentcostburden / cest_totrenters,
+         rentburpctMOE = moeprop(y = cest_totrenters, moex = MOE_rentcostburden, moey = MOE_totrenters, p = rentburpct),
+         hoburpct = cest_hocostburden / cest_tothomeowners,
+         hoburpctMOE = moeprop(y = cest_tothomeowners, moex = MOE_hocostburden, moey = MOE_tothomeowners, p = hoburpct))
+  
 
 
 

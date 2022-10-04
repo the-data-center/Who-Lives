@@ -369,6 +369,7 @@ select(place, census2000, (contains("pct"))) %>%
 load("inputs/rentburRaw.RData")
 rentbur <- rentburRaw %>%
   mutate(sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value
+         sf2004MOE = c()
          sf2004lab =c(0.2432,0.2167," ",0.2161,0.2384),
          rentburpct = `50orMore`/ (Total - NotComputed),
          moeagg = moeagg(cbind(TotalMOE, NotComputedMOE)),
