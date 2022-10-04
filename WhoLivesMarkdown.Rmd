@@ -222,7 +222,7 @@ chart.agepopCurrent.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2021."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates `r yearPEP`."
 )
 ```
 
@@ -234,7 +234,7 @@ hwcGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round((getvalue.sing.2000)*100)` percent in 2000 to `r round((getvalue.sing.2018)*100)` percent in `r year` — similar to the trend for Jefferson Parish where the share of households living alone grew from `r round(( getvalue.singJeff.2000)*100)` percent to `r round(( getvalue.singJeff.2018)*100)` percent. The increase was larger in Orleans Parish, which jumped from `r round((getvalue.singNO.2000)*100)` to `r round((getvalue.singNO.2018)*100)` percent.
@@ -245,7 +245,7 @@ singGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
@@ -257,7 +257,7 @@ popunder18Graphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2021."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates `r yearPEP`."
 )
 ```
 
@@ -271,7 +271,7 @@ Although race/ethnicity and age data is available for all eight parishes in metr
 
 ## Educational attainment, income, and internet access
 
-Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^5] The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from `r round((getvalue.hs.metro.2000)*100)` percent in 2000 to `r round((getvalue.hs.metro.2018)*100)` percent in `r year`. In the city of New Orleans, the share of adults with less than a high school degree fell from `r round((getvalue.hs.no.2000)*100)` percent to `r round((getvalue.hs.no.2018)*100)` percent but is still higher than the U.S. average of `r round((getvalue.hs.us.2018)*100)` percent.
+Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^5] In New Orleans, `r round(getvalue.bachdeg.nopct*100)` percent of adults 25 and older had a bachelor's degree is `r year` - higher than the U.S. average of `r round(getvalue.bachdeg.USpct*100)` percent, and up from 26 percent in 2000.  The overall metro area share of adults with a bachelor's degree grew from 23 to `r round(getvalue.bachdeg.metropct*100)` percent - lower than the national average.
 
 
 ```{r bach, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -279,11 +279,11 @@ bachGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
-The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while more than 69 percent of white adults in New Orleans have a bachelor’s, only 21 percent of Black adults have a bachelor’s as of 2021.    The share of White adults in Orleans Parish who have a bachelor’s degree is substantially higher than the US or metro area overall: 69 percent of White adults in New Orleans have a bachelor’s degree while that number is 44 percent or lower in neighboring parishes and the nation. Like in Orleans, only 20 and 19 percent of Black adults have a bachelor’s degree or higher in Jefferson and St. Tammany, respectively.
+The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while `r round(getvalue.bachdeg.white.nopct*100)` percent of white adults in New Orleans have a bachelor’s, only `r round(getvalue.bachdeg.black.nopct*100)` percent of Black adults have a bachelor’s as of `r yearPEP`.  The share of White adults in Orleans Parish who have a bachelor’s degree is substantially higher than the US or metro area overall: `r round(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s degree while that number is `r round(getvalue.bachdeg.white.maxotherpct*100)` percent or lower in neighboring parishes and the nation. Like in Orleans, only `r round(getvalue.bachdeg.black.jeffpct*100)` and `r round(getvalue.bachdeg.black.stTampct*100)` percent of Black adults have a bachelor’s degree or higher in Jefferson and St. Tammany, respectively.
 
 ```{r bach by loc, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 bach.raceGeos_chart
@@ -293,14 +293,14 @@ bach.raceGeos_chart
 EduAtt.hist_chart
 ```
 
-The  metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from 15 percent in 2000 to 12 percent in 2021. In the city of New Orleans, the share of adults with less than a high school degree fell from 25 percent to 10 percent.
+The  metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from 15 percent in 2000 to `r round(getvalue.noHSdeg.metropct*100)` percent in `r yearPEP`. In the city of New Orleans, the share of adults with less than a high school degree fell from 25 percent to `r round(getvalue.noHSdeg.nopct*100)` percent.
 
 ```{r hs, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hsGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
@@ -313,26 +313,26 @@ medhhGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
-In 1979, households with higher incomes were disproportionately in the parishes surrounding New Orleans, while lower income white, Hispanic, and Black households were more likely to live in the city. By 2021, these patterns had changed with higher income white households more often living in the city such that income disparity within the city has escalated. In 2021, Black households in New Orleans had a median income of only \$30,292, while Hispanic households were at $60,358 and White households had a median income of \$83,727.
+In 1979, households with higher incomes were disproportionately in the parishes surrounding New Orleans, while lower income white, Hispanic, and Black households were more likely to live in the city. By `r yearPEP`, these patterns had changed with higher income white households more often living in the city such that income disparity within the city has escalated. In `r yearPEP`, Black households in New Orleans had a median income of only `r dollar(getvalue.medhh.black.no)`, while Hispanic households were at `r dollar(getvalue.medhh.hisp.no)` and White households had a median income of `r dollar(getvalue.medhh.white.no)`.
 
 ```{r med hh over time, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 medhh.hist_chart
 ```
 
-In New Orleans, Black households earn XX percent less than White households. In St. Tammany, Black households have a median income of \$52,849 such that Black households earn 27 percent less than White households. In Jefferson, Black households have a median income of \$40,168 which is 37 percent less than White households in that parish. Hispanic households have a median of \$58,930 across the metro which is relatively consistent across the 3 large parishes.
+In New Orleans, Black households earn XX percent less than White households. In St. Tammany, Black households have a median income of `r dollar(round(getvalue.medhh.black.stTam))` such that Black households earn XX percent less than White households. In Jefferson, Black households have a median income of `r dollar(round(getvalue.medhh.black.jeff))` which is XX percent less than White households. Hispanic households have a median of `r dollar(round(getvalue.medhh.hisp.metro))` across the metro which is relatively consistent across the 3 large parishes.
 
 ```{r med hh by race/eth, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 medhh.raceGeos_chart
 ```
 
 
-Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and encompassing technology training services, workers and students are at a disadvantage in the job market and education system.[^6] Only `r round((getvalue.inta.no.2018)*100)` percent of households in Orleans Parish and only `r round((getvalue.inta.jeff.2018)*100)` percent of households in Jefferson Parish are connected to the Internet through a home-based internet service, such as broadband (cable, DSL, or fiber), satellite, or dial-up service, compared to `r round((getvalue.inta.us.2018)*100)` percent nationwide. St. Tammany is above the national average at `r round((getvalue.inta.tam.2018)*100)` percent of households connected to the Internet by a home-based service internet connection. Internet access without a subscription refers to households who only have access through group access locations such as school, work, a library, or coffee shop.
+Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and encompassing technology training services, workers and students are at a disadvantage in the job market and education system.[^6] Only `r round((getvalue.inta.no.2018)*100)` percent of households in Orleans Parish and only `r round((getvalue.inta.jeff.2018)*100)` percent of households in Jefferson Parish are connected to the Internet through a home-based internet service, such as broadband (cable, DSL, or fiber), satellite, or dial-up service, compared to `r round((getvalue.inta.us.2018)*100)` percent nationwide. St. Tammany is above the national average at `r round((getvalue.inta.tam.2018)*100)` percent of households connected to the Internet by a home-based service internet connection. Internet access without a subscription refers to households that only have access through group access locations such as school, work, a library, or coffee shop.
 
 An increasingly common way to access the Internet is through a smartphone or some other cellular device. While, in general, smartphone access contributes positively to lessening the Digital Divide, having access only through a smartphone restricts ability to fully leverage the Internet to complete common tasks such as writing and researching a resume, registering your kids for school, analyzing data about your neighborhood, or creating content for an internet business. `r round((getvalue.intacell.no.2018)*100)` percent of households in Orleans Parish only have access through a smartphone. This is compared to `r round((getvalue.intacell.us.2018)*100)` percent nationwide.
 
@@ -354,13 +354,13 @@ makeCSS_source(
 
 **Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey `r yearPEP`."
 )
 ```
 
 ## Poverty and access to vehicles
 
-Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round((getvalue.pov.no.1999 )*100)` to `r round((getvalue.pov.no.2018 )*100)` percent between 1999 and `r year` while the Jefferson Parish poverty rate remained statistically unchanged. Across the U.S., the poverty rate has stayed the same between 1999 and `r year`.
+Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round((getvalue.pov.no.1999 )*100)` to `r round((getvalue.pov.no.2018 )*100)` percent between 1999 and `r year` while the Jefferson Parish poverty rate increased from `r round((getvalue.pov.jeff.1999)*100)` to `r round((getvalue.pov.jeff.2018)*100)`. Across the U.S., the poverty rate has increased by one percentage point between 1999 and `r year`.
 
 
 ```{r pov, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -368,9 +368,9 @@ povGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
@@ -393,19 +393,19 @@ childpovGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
-In Orleans Parish, about half of all Black children live in poverty while 5 percent of White children are poor. In New Orleans, child poverty rates peaked in 1989 for Black children and have fallen slightly such that they are now virtually the same as in 1979 with one in two Black children living in poverty in 2021. Hispanic children experienced a similar peak in poverty in 1989 and a subsequent downtrend.  The White poverty rate  has generally declined from one in ten children in poverty in 1979 to about one in 50 in 2021.
+In Orleans Parish, about half of all Black children live in poverty while `r round(getvalue.childpov.white.nopct*100)` percent of White children are poor. In New Orleans, child poverty rates peaked in 1989 for Black children and have fallen slightly such that they are now virtually the same as in 1979 with one in two Black children living in poverty in `r yearPEP`. Hispanic children experienced a similar peak in poverty in 1989 and a subsequent downtrend.  The White poverty rate  has declined from one in ten children in poverty in 1979 to about one in 50 in `r yearPEP`.
 
 ```{r child pov hist, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
 childPov.hist_chart
 ```
 
-Orleans  Parish’s very low rate of 5 percent child poverty for White children stands in stark contrast to the 51 percent rate for Black children. While in Orleans, poverty rates for Black children are 10 times higher than for White children, in Jefferson parish Black children experience poverty at a little over 3 times higher rates than White children – which is a disparity on par with the national average. In metro New Orleans, 26 percent of Hispanic children live in poverty – statistically no different from the national rate.
+Orleans  Parish’s very low rate of `r round(getvalue.childpov.white.nopct*100)` percent child poverty for White children stands in stark contrast to the 51 percent rate for Black children. While in Orleans, poverty rates for Black children are 10 times higher than for White children, in Jefferson parish Black children experience poverty at a little over 3 times higher rates than White children – which is a disparity on par with the national average. In metro New Orleans, `r round(getvalue.childpov.hisp.metropct*100)` percent of Hispanic children live in poverty – statistically no different from the national rate.
 
 ```{r child pov race/eth, fig.align='center', fig.width=7.4, fig.height=5, echo=FALSE}
 childpov.raceGeos_chart
@@ -420,23 +420,23 @@ vehGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
 ## Foreign-born population and geographic mobility
 
 
-A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[^7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2018 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r year`, fully `r round(((getvalue.forbor.jeff.2018)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, similar to the U.S. share. In Orleans and in St. Tammany parishes the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2018 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r year`.
+A rising foreign-born share of the population may reflect expanding economic opportunities for both high-skilled and low-skilled workers.[^7] That share of the population has grown in all three of the most populous metro parishes since 2000, led by a `r round(((getvalue.forbor.jeff.2018 - getvalue.forbor.jeff.2000)*100), digits = 1)` percentage point gain in Jefferson Parish. By `r year`, fully `r round(((getvalue.forbor.jeff.2018)*100), digits = 1)` percent of Jefferson Parish population was foreign-born, similar to the U.S. share. In Orleans and St. Tammany parishes the foreign-born share of the population increased by `r round(((getvalue.forbor.no.2018 - getvalue.forbor.no.2000)*100), digits = 1)` percentage points between 2000 and `r year`.
 
 ```{r forbor, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 forborGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
@@ -448,13 +448,13 @@ chart.mob.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2021 is not significant at the 95% confidence interval for Orleans Parish. It is significant for all other geographies
+"**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and `r yearPEP` is not significant at the 95% confidence interval for Orleans Parish. It is significant for all other geographies
 
 **Notes**: Also, 2004 data is not available for St. Tammany Parish.
 
-&ast; = Difference between 2004 and 2021 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and `r yearPEP`."
 )
 ```
 
@@ -468,32 +468,32 @@ hoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and 2021 is not significant at 95% confidence interval.
+"&ast; = Difference between 1999 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
-Homeownership rates among African Americans in New Orleans made consistent progress between 1970 and 2010, increasing from 27 percent to 45 percent, but fell to 43 percent in 2021. Still, the difference in homeownership rates between Black and White people in 2021 was significant, with only 43 percent of African Americans in New Orleans owning homes compared to 59 percent of whites.
+Homeownership rates among African Americans in New Orleans made consistent progress between 1970 and 2021, increasing from 27 percent to 46 percent in `r yearPEP`. Still, the difference in homeownership rates between Black and White people in `r yearPEP` was significant, with only 46 percent of African Americans in New Orleans owning homes compared to 59 percent of whites.
 
 ```{r honomo hist, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 homeownership.hist_chart
 ```
 
-Metro  homeownership rates mirror national rates, with just over 60  percent of all householders owning their homes and White homeownership rates about 25 percentage points higher than rates for Black homeownership. This disparity is smaller in Orleans Parish, where only 59 percent of White householders own their homes. Homeownership in St. Tammany outstrips Orleans, Jefferson, and the metro overall, with 79 percent of all householders owning their home: a rate of 66 percent for Black householders, 81 percent for White, and 73 percent for Hispanic.
+Metro homeownership rates mirror national rates, with just over `r round(getvalue.homeowner.metropct*100)`  percent of all householders owning their homes and White homeownership rates about `r (round(getvalue.homeowner.white.metropct*100) - round(getvalue.homeowner.black.metropct*100))` percentage points higher than rates for Black homeownership. This disparity is smaller in Orleans Parish, where only `r round(getvalue.homeowner.white.nopct*100)` percent of White householders own their homes. Homeownership in St. Tammany outstrips Orleans, Jefferson, and the metro overall, with `r round(getvalue.ho.tam.2018*100)` percent of all householders owning their home: a rate of `r round(getvalue.homeowner.black.stTam*100)` percent for Black householders, `r round(getvalue.homeowner.white.stTam*100)` percent for White, and `r round(getvalue.homeowner.hisp.stTam*100)` percent for Hispanic.
 
 ```{r honomo race/eth, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 ho.raceGeos_chart
 ```
 
-Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures. The proportion of metro area homeowners without a mortgage has increased from 35 to 43 percent between 2000 and 2021, driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from 33 to 43 percent in Orleans and from 35 to 45 percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisiana parishes. 
+Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures. The proportion of metro area homeowners without a mortgage has increased from 35 to `r round(getvalue.honomo.metro.2018*100)` percent between 2000 and `r yearPEP`, driven by changes in Orleans and Jefferson. The share of homeowners without a mortgage jumped from 33 to `r round(getvalue.honomo.no.2018*100)` percent in Orleans and from 35 to `r round(getvalue.honomo.jeff.2018*100)` percent in Jefferson. One reason for the surge may be that homeowners who returned after Katrina used insurance or Road Home proceeds to pay off their mortgage principal. In fact, Orleans and Jefferson received the first and second largest number of Road Home Option 1 grants among all Louisiana parishes. 
 
 ```{r honomo, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 honomoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
@@ -510,9 +510,9 @@ rentburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2021 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and `r yearPEP`."
 )
 ```
 
@@ -525,9 +525,9 @@ hoburGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-&ast; = Difference between 2004 and 2021 is not significant at 95% confidence interval.
+&ast; = Difference between 2004 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and `r yearPEP`."
 )
 ```
 
@@ -542,7 +542,7 @@ medrentGraphic
 makeCSS_source(
 "**Notes**: 2004 data is not available for St. Tammany Parish
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and `r yearPEP`."
 )
 ```
 
@@ -559,7 +559,7 @@ chart.yrbuilt.allparishes
 makeCSS_source(
 "&ast; = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey `r yearPEP`."
 )
 ```
 
@@ -575,16 +575,16 @@ chart.commute.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 2000 and 2021 is not significant at 95% confidence interval.
+"&ast; = Difference between 2000 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2021."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
 ```
 
 ## Data Sources / Methodology
 
 
-Data on race/ethnicity and age is from the Census Bureau vintage 2021 population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
+Data on race/ethnicity and age is from the Census Bureau vintage `r yearPEP` population estimates and Census 2000 Summary File 1 (SF1). Other demographic data is from the Census 2000 Summary File 3 (SF3) and American Community Survey 2004, and `r year` (single-year files).
 
 Statistical tests of significance were computed at the 95% confidence level for all data from the American Community Survey and Census 2000 SF3. An “*” indicates that differences between two time periods or geographies are not significant, and therefore are the result of sampling variability rather than real change in characteristics of the population.
 

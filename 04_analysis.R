@@ -459,7 +459,7 @@ commute <- commuteRaw %>%
   filter(place != "103") %>%
   mutate(census2000drive=c(0.6028,0.7855,0.7301,0.7570),
          census2000carpool=c(0.1614,0.1372,0.1465,0.1219),
-         census2000publictransit=c(0.1322,0.0023,0.0530,0.0457),
+         census2000publictransit=c(0.1322,0.0255,0.0530,0.0457),
          census2000bike=c(0.0116,0.0032,0.0059,0.0038),
          census2000walk=c(0.0521,0.0174,0.0272,0.0293),
          census2000workhome=c(0.0266,0.0368,0.0241,0.0326),
@@ -749,6 +749,11 @@ write.csv("outputs/spreadsheets/under18.csv")
 # Jenna's analysis expanded
 ###########################
 
+childPovProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/childPov.csv")
+homeownershipProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/homeownership.csv")
+educationalAttainmentProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment.csv")
+medHHincProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/medHHinc.csv")
+
 ### Median household income ###
 ###
 load("inputs/medhhRaw_exp.RData")
@@ -787,7 +792,7 @@ medhh.race <- medhh_exp %>%
 #1999 to 2021 = 1.59
 #2010 to 2021 = 1.21
 #2016 to 2021 = 1.10
-
+load("inputs/medhh_unadjusted.RData")
 medhhinc_adjusted21 <- medhh_unadjusted %>% mutate(value = as.numeric(value),
                                                    inc_adj21 = case_when(Year == 1979 ~ value * 3.83,
                                                                          Year == 1989 ~ value * 2.16,
@@ -893,6 +898,7 @@ bach.race <- bach_exp %>%
 
 EduAtt <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment_byrace.csv")
 EduAtt.hist <- EduAtt %>% 
+  mutate(var = ifelse(var == "White,\r\nnon-Hispanic", "White,\nnon-Hispanic", ifelse(var == "Hispanic,\r\nany race", "Hispanic,\nany race", var))) %>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race"))) %>%
   bind_rows(bach.race %>%
               filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2021))
@@ -1007,7 +1013,7 @@ pov_stattest <- povRaw_exp %>%
 
 ### Child poverty ###
 ###
-# load("inputs/childpovRaw_exp.RData")
+load("inputs/childpovRaw_exp.RData")
 childpov_exp <- childpovRaw_exp %>%
   mutate(
     TotChildPov = BelowPovFemaleChild + BelowPovMaleChild + AbovePovFemaleChild + AbovePovMaleChild,
@@ -1164,7 +1170,7 @@ ho.race <- ho_exp %>%
          var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
   mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
 
-### Historical child homeownership line chart ###
+### Historical homeownership line chart ###
 homeownership.hist <- homeownershipProspInd %>% 
   filter(Geography == "New Orleans") %>%
   rename(val = pctHomeownership) %>%
@@ -1173,8 +1179,8 @@ homeownership.hist <- homeownershipProspInd %>%
          var = ifelse(grepl("Lat",var), "Hispanic,\nany race", var),
          var = ifelse(grepl("Whi",var), "White,\nnon-Hispanic", var)) %>%
   select (-Geography, -Race) %>% ## some of the tables include US in the geography, so you'll have to filter those
-  bind_rows(ho %>%
-              filter(place.fac == "Orleans",
+  bind_rows(ho_exp %>%
+              filter(place.fac == "Orleans",   
                      !grepl("asian",var)) %>% ## remove asian numbers 
               select(-place.fac) %>%
               mutate(Year = 2021, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
