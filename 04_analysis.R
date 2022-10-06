@@ -368,16 +368,18 @@ select(place, census2000, (contains("pct"))) %>%
 #Renters with severe housing cost burdens
 load("inputs/rentburRaw.RData")
 rentbur <- rentburRaw %>%
-  mutate(sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value
-         sf2004MOE = c()
-         sf2004lab =c(0.2432,0.2167," ",0.2161,0.2384),
+  mutate(#sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value ### ****HT commenting out old values, adding ones I pulled from 2004 ACS
+         #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
+         sf2004 = c(0.2304765, 0.2019471, 0, 0.1989611, 0.2196190),
+         sf2004MOE = c(0.044544178, 0.052252324,0, 0.030693698, 0.003006082),
+         sf2004lab =c(0.2304765, 0.2019471," ",0.1989611,0.2196190),
          rentburpct = `50orMore`/ (Total - NotComputed),
          moeagg = moeagg(cbind(TotalMOE, NotComputedMOE)),
          moeprop = moeprop(y=(Total - NotComputed),moex=`50orMoreMOE`,moey = moeagg, p = rentburpct),
-         significant = stattest(x=sf2004, y=rentburpct, moey=moeprop))
+         significant = stattest(x=sf2004, moex = sf2004MOE, y=rentburpct, moey=moeprop))
 
 rentburCSV <- rentbur %>% 
-select(place, sf2004, (contains("pct"))) %>% 
+select(place, (contains("2004")), (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "rentbur", values_to = "Value") %>% 
   mutate(name = paste( place, rentbur, sep = "-"),
          year = 2021) %>% 
@@ -388,15 +390,18 @@ select(place, sf2004, (contains("pct"))) %>%
 #Homeowners with severe housing cost burdens
 load("inputs/hoburRaw.RData")
 hobur <- hoburRaw %>%
-  mutate(sf2004=c(0.1620,0.0891,0,0.1134,0.0988), #0 for St. tammany missing value,
+  mutate(#sf2004=c(0.1620,0.0891,0,0.1134,0.0988), #0 for St. tammany missing value, ### ****HT commenting out old values, adding ones I pulled from 2004 ACS
+         #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
+         sf2004 = c(0.13226868, 0.06815970, 0, 0.09326323, 0.07895178),
+         sf2004MOE = c(0.030880769, 0.025995416, 0, 0.016581419, 0.000911579), #getting these numbers from line 154 of data-pull.R
          hoburpct = (`50orMoreMortgage`+`50orMoreNoMortgage`)/(Total - NotComputedMortgage - NotComputedNoMortgage),
          moexagg = moeagg(cbind(`50orMoreMortgageMOE`,`50orMoreNoMortgageMOE`)),
          moeyagg = moeagg(cbind(TotalMOE, NotComputedMortgageMOE, NotComputedNoMortgageMOE)),
          moeprop = moeprop(y=Total,moex=moexagg,moey=moeyagg,p=hoburpct),
-         significant = stattest(x=sf2004,y=hoburpct, moey=moeprop))
+         significant = stattest(x=sf2004,moex = sf2004MOE, y=hoburpct, moey=moeprop))
 
 hoburCSV <- hobur %>% 
-select(place, sf2004, (contains("pct"))) %>% 
+select(place, (contains("2004")), (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "hobur", values_to = "Value") %>% 
   mutate(name = paste( place, hobur, sep = "-"),
          year = 2021) %>% 
@@ -407,10 +412,13 @@ select(place, sf2004, (contains("pct"))) %>%
 
 #Median gross rent, 201* inflation-adjusted dollars
 load("inputs/medrentRaw.RData")
-sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))
+#sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))### ****HT commenting out old values, adding ones I pulled from 2004 ACS
+#order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
+sf2004 <- data.frame(sf2004 = 1.41 * c(566, 654, 0, 616, 694), # note that these are the exact same as what we already had, just adjusting to 2021 dollars and noting that I have the same estimates for med rent, but not the rent/hoburden percentages.) 
+                     sf2004MOE = 1.41 * c(29, 48, 0, 22, 2)) #also noting that I am inflation adjusting the MOES the same way
 medrent <- medrentRaw %>% 
   bind_cols(.,sf2004) %>%
-  mutate(significant = stattest(x=sf2004,y=Rent,moey=RentMOE)) 
+  mutate(significant = stattest(x=sf2004, moex = sf2004MOE, y=Rent,moey=RentMOE)) 
 
 medrentCSV <- medrent %>%
   select(place, sf2004, Rent) %>% 
@@ -456,11 +464,11 @@ select(place, (contains("pct"))) %>%
 
 #Means of transportation to work, 
 load("inputs/commuteRaw.RData")
-commute <- commuteRaw %>%
-  filter(place != "103") %>%
+commute <- commuteRaw %>% left_join(commuteRaw2000, by = "placename") %>%
+  filter(placename %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000drive=c(0.6028,0.7855,0.7301,0.7570),
          census2000carpool=c(0.1614,0.1372,0.1465,0.1219),
-         census2000publictransit=c(0.1322,0.0255,0.0530,0.0457),
+         census2000publictransit=c(0.1322,0.0023,0.0530,0.0457),
          census2000bike=c(0.0116,0.0032,0.0059,0.0038),
          census2000walk=c(0.0521,0.0174,0.0272,0.0293),
          census2000workhome=c(0.0266,0.0368,0.0241,0.0326),
@@ -474,6 +482,14 @@ commute <- commuteRaw %>%
          Workhomepct = Workhome / Total,
          Otherpct = Other / Total,
          
+         Drivepct2000 = DroveAlone2000 / Total2000,
+         Carpoolpct2000= Carpool2000 / Total2000,
+         PublicTransitpct2000 = PublicTransit2000 / Total2000,
+         bikepct2000 = Bike2000 / Total2000,
+         Walkpct2000 = Walk2000 / Total2000,
+         Workhomepct2000 = Workhome2000 / Total2000,
+         Otherpct2000 = Other2000 / Total2000,
+         
          Drivemoeprop = moeprop(y=Total, moex=DroveAloneMOE, moey=TotalMOE, p=Drivepct),
          carpoolmoeprop = moeprop(y=Total, moex=CarpoolMOE, moey=TotalMOE, p=Carpoolpct),
          PublicTransitmoeprop = moeprop(y=Total, moex=PublicTransitMOE, moey=TotalMOE, p=PublicTransitpct),
@@ -481,20 +497,28 @@ commute <- commuteRaw %>%
          Walkmoeprop = moeprop(y=Total, moex=WalkMOE, moey=TotalMOE, p=Walkpct),
          workhomemoeprop = moeprop(y=Total, moex=WorkhomeMOE, moey=TotalMOE, p=Workhomepct),
          othermoeprop = moeprop(y=Total, moex=OtherMOE, moey=TotalMOE, p=Otherpct),
-                  
-         DriveSIG = stattest(x=census2000drive,y=Drivepct,moey = Drivemoeprop),
-         carpoolSIG = stattest (x=census2000carpool, y=Carpoolpct, moey = carpoolmoeprop),
-         PublicTransitSIG = stattest (x=census2000publictransit, y=PublicTransitpct, moey = PublicTransitmoeprop),
-         bikeSIG = stattest(x=census2000bike, y = bikepct, moey = bikemoeprop),
-         walkSIG = stattest (x=census2000walk, y = Walkpct, moey = Walkmoeprop),
-         workhomeSIG = stattest ( x=census2000workhome, y=Workhomepct, moey = workhomemoeprop),
-         otherSIG = stattest (x=census2000other, y= Otherpct, moey = othermoeprop))
+         
+         Drivemoeprop2000 = moeprop(y=Total2000, moex=DroveAloneMOE2000, moey=TotalMOE2000, p=Drivepct2000),
+         carpoolmoeprop2000 = moeprop(y=Total2000, moex=CarpoolMOE2000, moey=TotalMOE2000, p=Carpoolpct2000),
+         PublicTransitmoeprop2000 = moeprop(y=Total2000, moex=PublicTransitMOE2000, moey=TotalMOE2000, p=PublicTransitpct2000),
+         bikemoeprop2000 = moeprop(y=Total2000, moex=BikeMOE2000, moey=TotalMOE2000, p=bikepct2000),
+         Walkmoeprop2000 = moeprop(y=Total2000, moex=WalkMOE2000, moey=TotalMOE2000, p=Walkpct2000),
+         workhomemoeprop2000 = moeprop(y=Total2000, moex=WorkhomeMOE2000, moey=TotalMOE2000, p=Workhomepct2000),
+         othermoeprop2000 = moeprop(y=Total2000, moex=OtherMOE2000, moey=TotalMOE2000, p=Otherpct2000),
+         
+         DriveSIG = stattest(x=census2000drive, moex = Drivemoeprop2000,y=Drivepct,moey = Drivemoeprop),
+         carpoolSIG = stattest (x=census2000carpool, moex = carpoolmoeprop2000, y=Carpoolpct, moey = carpoolmoeprop),
+         PublicTransitSIG = stattest (x=census2000publictransit, moex = , y=PublicTransitpct, moey = PublicTransitmoeprop),
+         bikeSIG = stattest(x=census2000bike, moex = PublicTransitmoeprop2000, y = bikepct, moey = bikemoeprop),
+         walkSIG = stattest (x=census2000walk, moex = Walkmoeprop2000, y = Walkpct, moey = Walkmoeprop),
+         workhomeSIG = stattest ( x=census2000workhome, moex = workhomemoeprop2000, y=Workhomepct, moey = workhomemoeprop),
+         otherSIG = stattest (x=census2000other, moex = othermoeprop2000, y= Otherpct, moey = othermoeprop))
 
 commuteCSV <- commute %>% 
-select(place, (contains("pct")), (contains("census2000"))) %>% 
-  pivot_longer(-c("place"), names_to = "commute", values_to = "Value") %>% 
+  select(placename, (contains("pct"))) %>% 
+  pivot_longer(-c("placename"), names_to = "commute", values_to = "Value") %>% 
   mutate(year = ifelse(grepl("2000", commute), 2000, 2021),
-         header = paste(place, year, sep = "-"),
+         header = paste(placename, year, sep = "-"),
          commutefinal = ifelse(grepl("ive", commute), "DroveAlone", commute),
          commutefinal = ifelse(grepl("arpool", commute), "Carpool", commutefinal),
          commutefinal = ifelse(grepl("ublic", commute), "PublicTransit", commutefinal),

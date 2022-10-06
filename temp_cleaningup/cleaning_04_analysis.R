@@ -106,10 +106,11 @@ select(place, census2000, (contains("pct"))) %>%
 
 #Less than a high school degree, adults 25 and older
 load("inputs/hsRaw.RData")
-hs <- hsRaw %>%
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
+hs <- hsRaw %>% left_join(hsRaw2000, by = "placename") %>%
   mutate(census2000=c(0.2531,0.2073,0.1613,0.1536,0.196),
+         totless_2000 = sum(c_across(Male0_2000:Female12_2000), na.rm = T),
          totless = Male9 + Male9to12 + Female9 + Female9to12,
+         pctless_2000 = totless_2000 / Total_2000,
          pctless = totless/Total,
          moeagg = moeagg(cbind(Male9MOE, Male9to12MOE, Female9MOE, Female9to12MOE)),
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctless),
@@ -126,11 +127,13 @@ select(place, census2000, (contains("pct"))) %>%
 
 #Bachelor's degree or higher, adults 25 and older
 load("inputs/bachRaw.RData")
-bach <- bachRaw %>% 
-  filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
+bach <- bachRaw %>% left_join(bachRaw2000, by = "placename") %>%
+  filter(placename %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000=c(0.2575,0.2149,0.2832,0.2256,0.244),
+         totbach2000 = MaleBach2000 + MaleMaster2000 + MaleProf2000 + MaleDoc2000 + FemaleBach2000 + FemaleMaster2000 + FemaleProf2000 + FemaleDoc2000,
          totbach = MaleBach + MaleGradProf + FemaleBach + FemaleGradProf,
          pctbach = totbach / Total,
+         pctbach2000 = totbach2000 / Total2000,
          moeagg = moeagg(cbind(MaleBachMOE, MaleGradProfMOE, FemaleBachMOE, FemaleGradProfMOE)),
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctbach),
          significant = stattest(x=census2000,y=pctbach,moey = moeprop))
@@ -460,8 +463,8 @@ select(place, (contains("pct"))) %>%
 
 #Means of transportation to work, 
 load("inputs/commuteRaw.RData")
-commute <- commuteRaw %>% left_join(commuteRaw2000, by = "place", - placename) %>%
-  filter(placename.x %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
+commute <- commuteRaw %>% left_join(commuteRaw2000, by = "placename") %>%
+  filter(placename %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000drive=c(0.6028,0.7855,0.7301,0.7570),
          census2000carpool=c(0.1614,0.1372,0.1465,0.1219),
          census2000publictransit=c(0.1322,0.0023,0.0530,0.0457),
@@ -493,20 +496,28 @@ commute <- commuteRaw %>% left_join(commuteRaw2000, by = "place", - placename) %
          Walkmoeprop = moeprop(y=Total, moex=WalkMOE, moey=TotalMOE, p=Walkpct),
          workhomemoeprop = moeprop(y=Total, moex=WorkhomeMOE, moey=TotalMOE, p=Workhomepct),
          othermoeprop = moeprop(y=Total, moex=OtherMOE, moey=TotalMOE, p=Otherpct),
+         
+         Drivemoeprop2000 = moeprop(y=Total2000, moex=DroveAloneMOE2000, moey=TotalMOE2000, p=Drivepct2000),
+         carpoolmoeprop2000 = moeprop(y=Total2000, moex=CarpoolMOE2000, moey=TotalMOE2000, p=Carpoolpct2000),
+         PublicTransitmoeprop2000 = moeprop(y=Total2000, moex=PublicTransitMOE2000, moey=TotalMOE2000, p=PublicTransitpct2000),
+         bikemoeprop2000 = moeprop(y=Total2000, moex=BikeMOE2000, moey=TotalMOE2000, p=bikepct2000),
+         Walkmoeprop2000 = moeprop(y=Total2000, moex=WalkMOE2000, moey=TotalMOE2000, p=Walkpct2000),
+         workhomemoeprop2000 = moeprop(y=Total2000, moex=WorkhomeMOE2000, moey=TotalMOE2000, p=Workhomepct2000),
+         othermoeprop2000 = moeprop(y=Total2000, moex=OtherMOE2000, moey=TotalMOE2000, p=Otherpct2000),
                   
-         DriveSIG = stattest(x=census2000drive,y=Drivepct,moey = Drivemoeprop),
-         carpoolSIG = stattest (x=census2000carpool, y=Carpoolpct, moey = carpoolmoeprop),
-         PublicTransitSIG = stattest (x=census2000publictransit, y=PublicTransitpct, moey = PublicTransitmoeprop),
-         bikeSIG = stattest(x=census2000bike, y = bikepct, moey = bikemoeprop),
-         walkSIG = stattest (x=census2000walk, y = Walkpct, moey = Walkmoeprop),
-         workhomeSIG = stattest ( x=census2000workhome, y=Workhomepct, moey = workhomemoeprop),
-         otherSIG = stattest (x=census2000other, y= Otherpct, moey = othermoeprop))
+         DriveSIG = stattest(x=census2000drive, moex = Drivemoeprop2000,y=Drivepct,moey = Drivemoeprop),
+         carpoolSIG = stattest (x=census2000carpool, moex = carpoolmoeprop2000, y=Carpoolpct, moey = carpoolmoeprop),
+         PublicTransitSIG = stattest (x=census2000publictransit, moex = , y=PublicTransitpct, moey = PublicTransitmoeprop),
+         bikeSIG = stattest(x=census2000bike, moex = PublicTransitmoeprop2000, y = bikepct, moey = bikemoeprop),
+         walkSIG = stattest (x=census2000walk, moex = Walkmoeprop2000, y = Walkpct, moey = Walkmoeprop),
+         workhomeSIG = stattest ( x=census2000workhome, moex = workhomemoeprop2000, y=Workhomepct, moey = workhomemoeprop),
+         otherSIG = stattest (x=census2000other, moex = othermoeprop2000, y= Otherpct, moey = othermoeprop))
 
 commuteCSV <- commute %>% 
-select(place, (contains("pct")), (contains("census2000"))) %>% 
-  pivot_longer(-c("place"), names_to = "commute", values_to = "Value") %>% 
-  mutate(year = ifelse(grepl("2000", commute), 2000, 2019),
-         header = paste(place, year, sep = "-"),
+select(placename, (contains("pct"))) %>% 
+  pivot_longer(-c("placename"), names_to = "commute", values_to = "Value") %>% 
+  mutate(year = ifelse(grepl("2000", commute), 2000, 2021),
+         header = paste(placename, year, sep = "-"),
          commutefinal = ifelse(grepl("ive", commute), "DroveAlone", commute),
          commutefinal = ifelse(grepl("arpool", commute), "Carpool", commutefinal),
          commutefinal = ifelse(grepl("ublic", commute), "PublicTransit", commutefinal),

@@ -60,8 +60,8 @@ save(hsRaw, file = "inputs/hsRaw.RData")
 # 2000 - Less than a high school degree , adults 25 and older
 hsvars2000 <- c('P037001', 'P037003', 'P037004', 'P037005', 'P037006', 'P037007', 'P037008', 'P037009', 'P037010',
             'P037020', 'P037021', 'P037022', 'P037023', 'P037024', 'P037025', 'P037026', 'P037027')
-hsnames2000 <- c("Total", "Male0", "Male0to4", "Male5to6", "Male7to8", "Male9", "Male10", "Male11", "Male12",
-             "Female0", "Female0to4", "Female5to6", "Female7to8", "Female9", "Female10", "Female11", "Female12")
+hsnames2000 <- c("Total_2000", "Male0_2000", "Male0to4_2000", "Male5to6_2000", "Male7to8_2000", "Male9_2000", "Male10_2000", "Male11_2000", "Male12_2000",
+             "Female0_2000", "Female0to4_2000", "Female5to6_2000", "Female7to8_2000", "Female9_2000", "Female10_2000", "Female11_2000", "Female12_2000")
 hsRaw2000 <- wholivesdatapull(hsvars2000, hsnames2000, censusname = "dec/sf3", year = 2000)
 
 #Bachelor's degree or higher, adults 25 and older
@@ -72,7 +72,7 @@ bachRaw <- wholivesdatapull(bachvars, bachnames)
 save(bachRaw, file = "inputs/bachRaw.RData")
 
 bachvars2000 <- c('P037001', 'P037015', 'P037016', 'P037017', 'P037018', 'P037032', 'P037033', 'P037034', 'P037035')
-bachnames2000 <- c("Total", "MaleBach", "MaleMaster",  "MaleProf", "MaleDoc", "FemaleBach", "FemaleMaster",  "FemaleProf", "FemaleDoc")
+bachnames2000 <- c("Total2000", "MaleBach2000", "MaleMaster2000",  "MaleProf2000", "MaleDoc2000", "FemaleBach2000", "FemaleMaster2000",  "FemaleProf2000", "FemaleDoc2000")
 bachRaw2000 <- wholivesdatapull(bachvars2000, bachnames2000, censusname = "dec/sf3", year = 2000)
 
 #Median household income, inflation-adjusted dollars
@@ -103,9 +103,16 @@ save(povRaw, file = "inputs/povRaw.RData")
 
 #2000 - Poverty rate, population for whom poverty has been determined
 
-povvars2000 <- c('P087001','P087002')
-povnames2000 <- c("Total","BelowPov")
+povvars2000 <- c('P003001','P087001','P087002')
+povnames2000 <- c('Totalpop',"Total","BelowPov")
 povRaw2000 <- wholivesdatapull(povvars2000, povnames2000, censusname = "dec/sf3", year = 2000)
+
+povtest <- povRaw2000 %>% filter(placename == "Orleans")
+
+test <- moe2000(est = povtest$BelowPov, n = povtest$Totalpop, designfac = 1.5)
+#for adjusted SE, I got 1036.764.  We had 1030.1014
+#% below poverty
+#for aSE % below pov, I got .00216 and we had .00219
 
 #Children in poverty, population for whom poverty has been determined	
 
@@ -180,7 +187,8 @@ save(honomoRaw, file = "inputs/honomoRaw.RData")
 honomovars2000 <- c('H080001','H080002','H080008')
 honomonames2000 <- c("Total","Mortgage","NoMortgage")
 honomoRaw2000 <- wholivesdatapull(honomovars2000, honomonames2000, censusname = "dec/sf3", year = 2000)
-
+ho_orleans <- honomoRaw2000 %>% filter(placename == "Orleans")
+ho_uSE <- sqrt((5/ho_orleans$Total) * (ho_orleans$NoMortgage / ho_orleans$Total) * (1 - (ho_orleans$NoMortgage / ho_orleans$Total)))
 
 #Renters with severe housing cost burdens
 
@@ -222,13 +230,29 @@ commuteRaw <- wholivesdatapull(commutevars, commutenames)
 save(commuteRaw, file = "inputs/commuteRaw.RData")
 
 # 2000 - means of transportation to work, 16+
-P030
+#P030
 
-commutevars2000 <- c('P030001', 'P030003','P030004','P030005','P030011','P030012','P030013','P030014','P030015','P030016')
-commutenames2000 <- c("Total2000","DroveAlone2000","Carpool2000","PublicTransit2000","Taxi2000","Motorcycle2000","Bike2000","Walk2000","Other2000","Workhome2000")
+commutevars2000 <- c('P003001','P030001', 'P030003','P030004','P030005','P030011','P030012','P030013','P030014','P030015','P030016')
+commutenames2000 <- c("Totalpop2000","Total2000","DroveAlone2000","Carpool2000","PublicTransit2000","Taxi2000","Motorcycle2000","Bike2000","Walk2000","Other2000","Workhome2000")
 commuteRaw2000 <- wholivesdatapull(commutevars2000, commutenames2000, year = 2000, censusname = "dec/sf3")
 
+#Design factor for this variable is 1.3 for parishes and metro, 1.1 for US
+commuteRaw2000 <- commuteRaw2000 %>%
+  mutate(TotalMOE2000 = moe2000(est = Total2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         DroveAloneMOE2000 = moe2000(est = DroveAlone2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         CarpoolMOE2000 = moe2000(est = Carpool2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         PublicTransitMOE2000 = moe2000(est = PublicTransit2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         TaxiMOE2000 = moe2000(est = Taxi2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         MotorcycleMOE2000 = moe2000(est = Motorcycle2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         BikeMOE2000 = moe2000(est = Bike2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)), 
+         WalkMOE2000 = moe2000(est = Walk2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         OtherMOE2000 = moe2000(est = Other2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         WorkhomeMOE2000 = moe2000(est = Workhome2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)))
 
+# se_unadj <- sqrt(5*est*(1 - (est/n)))
+# se <- se_unadj * designfac #we don't have this yet...
+# MOE <- se*1.645
+# return(MOE)
 
 ############################################
 # # PEP # #

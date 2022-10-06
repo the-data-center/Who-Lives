@@ -581,7 +581,7 @@ honomoGraphic <- dodgedBar(honomo,
 
 rentburGraphic <- dodgedBar(rentbur, 
                             quo(rentburpct), 
-                            "Renters with severe housing cost burdens",
+                            "Renters with severe housing cost burdens HT edit",
                             colors = c(DCcolor.p2limegreen60, DCcolor.p1mediumblue),
                             comparisonyear = "2004")
 
@@ -589,7 +589,7 @@ rentburGraphic <- dodgedBar(rentbur,
 
 hoburGraphic <- dodgedBar(hobur, 
                           quo(hoburpct), 
-                          "Homeowners with severe housing cost burdens", 
+                          "Homeowners with severe housing cost burdens HT edit", 
                           yscale = c(0,.2), 
                           colors = c(DCcolor.p2limegreen60, DCcolor.p1mediumblue),
                           comparisonyear = "2004")
@@ -598,7 +598,7 @@ hoburGraphic <- dodgedBar(hobur,
 
 medrentGraphic <- dodgedBar(medrent, 
                             quo(Rent), 
-                            "Median gross rent, inflation-adjusted dollars",
+                            "Median gross rent, inflation-adjusted dollars HT edit",
                             yscale = c(0,1.2*max(medrent$Rent)), 
                             pct = FALSE, 
                             colors = c(DCcolor.p2limegreen60, DCcolor.p1mediumblue),

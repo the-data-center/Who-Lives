@@ -123,6 +123,44 @@ hoburnames <- c("Total","TotalMOE","50orMoreMortgage","50orMoreMortgageMOE","Not
 hoburRaw <- wholivesdatapull(hoburvars, hoburnames)
 save(hoburRaw, file = "inputs/hoburRaw.RData")
 
+#### getting SEs for 2004 data:
+
+housing_04 <- read_csv("ACS_2004_050.csv") 
+housingUS_04 <- read_csv("ACS_2004_010.csv")
+housingmetro_04 <- read_csv("ACS_2004_380.csv")
+housing <-  housing_04 %>% rbind(housingUS_04, housingmetro_04) %>%
+  filter(grepl("22071", geoid) |
+           grepl("22051", geoid) |
+           grepl("22103", geoid) | #St. Tammany isn't in 2004 ACS for these.
+           grepl("01000US", geoid) |
+           grepl("38000US5560", geoid)) %>% 
+  filter((tblid == "B25064" & order == 1) |
+           (tblid == "B25070" & (order == 1 | order == 10) |
+              (tblid == "B25091" & (order == 1 | order == 11)))) %>%
+  mutate(MOE = as.numeric(cest) - as.numeric(clb),
+         placename = case_when(grepl("22071", geoid) ~ "Orleans",
+                               grepl("22051", geoid) ~ "Jefferson",
+                               grepl("01000US", geoid) ~ "United States",
+                               grepl("38000US5560", geoid) ~ "New Orleans Metro Area"),
+         var = case_when(tblid == "B25064" & order == 1 ~ "medgrossrent",
+                         tblid == "B25070" & order == 1 ~  "totrenters",
+                         tblid == "B25070" & order == 10 ~ "rentcostburden",
+                         tblid == "B25091" & order == 1 ~ "tothomeowners",
+                         tblid == "B25091" & order == 11 ~ "hocostburden"),
+         cest = as.numeric(cest),
+         clb = as.numeric(clb)) %>%
+  select(placename, var, MOE, cest) %>%
+  pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
+  mutate(rentburpct = cest_rentcostburden / cest_totrenters,
+         rentburpctMOE = moeprop(y = cest_totrenters, moex = MOE_rentcostburden, moey = MOE_totrenters, p = rentburpct),
+         medgrossrent = cest_medgrossrent,
+         medgrossrentMOE = MOE_medgrossrent,
+         hoburpct = cest_hocostburden / cest_tothomeowners,
+         hoburpctMOE = moeprop(y = cest_tothomeowners, moex = MOE_hocostburden, moey = MOE_tothomeowners, p = hoburpct)) %>%
+  select(placename, medgrossrent, medgrossrentMOE, rentburpct, rentburpctMOE, hoburpct, hoburpctMOE)
+
+
+
 
 #Median gross rent, 201* inflation-adjusted dollars
 
@@ -146,6 +184,28 @@ commutevars <- c('B08301_001E','B08301_001M','B08301_003E','B08301_003M','B08301
 commutenames <- c("Total","TotalMOE","DroveAlone","DroveAloneMOE","Carpool","CarpoolMOE","PublicTransit","PublicTransitMOE","Taxi","TaxiMOE","Motorcycle","MotorcycleMOE","Bike","BikeMOE","Walk","WalkMOE","Other","OtherMOE","Workhome","WorkhomeMOE")
 commuteRaw <- wholivesdatapull(commutevars, commutenames)
 save(commuteRaw, file = "inputs/commuteRaw.RData")
+
+# 2000 - means of transportation to work, 16+
+#P030
+
+commutevars2000 <- c('P003001','P030001', 'P030003','P030004','P030005','P030011','P030012','P030013','P030014','P030015','P030016')
+commutenames2000 <- c("Totalpop2000","Total2000","DroveAlone2000","Carpool2000","PublicTransit2000","Taxi2000","Motorcycle2000","Bike2000","Walk2000","Other2000","Workhome2000")
+commuteRaw2000 <- wholivesdatapull(commutevars2000, commutenames2000, year = 2000, censusname = "dec/sf3")
+
+#Design factor for this variable is 1.3 for parishes and metro, 1.1 for US
+commuteRaw2000 <- commuteRaw2000 %>%
+  mutate(TotalMOE2000 = moe2000(est = Total2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         DroveAloneMOE2000 = moe2000(est = DroveAlone2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         CarpoolMOE2000 = moe2000(est = Carpool2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         PublicTransitMOE2000 = moe2000(est = PublicTransit2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         TaxiMOE2000 = moe2000(est = Taxi2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         MotorcycleMOE2000 = moe2000(est = Motorcycle2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         BikeMOE2000 = moe2000(est = Bike2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)), 
+         WalkMOE2000 = moe2000(est = Walk2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         OtherMOE2000 = moe2000(est = Other2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
+         WorkhomeMOE2000 = moe2000(est = Workhome2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)))
+
+
 
 #################################################
 # # Jenna's expanded data pull
@@ -519,33 +579,6 @@ homeownershipProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_Wh
 educationalAttainmentProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment.csv")
 medHHincProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/medHHinc.csv")
 
-#### getting SEs for 2004 data:
-
-housing_04 <- read_csv("ACS_2004_050.csv") 
-housing <-  housing_04 %>% 
-  filter(grepl("22071", geoid) |
-           grepl("22051", geoid) |
-           grepl("22103", geoid)) %>% #wSt. Tammany isn't in 2004 ACS for these.
-  filter((tblid == "B25064" & order == 1) |
-           (tblid == "B25070" & (order == 1 | order == 10) |
-              (tblid == "B25091" & (order == 1 | order == 11)))) %>%
-  mutate(MOE = as.numeric(cest) - as.numeric(clb),
-         placename = case_when(grepl("22071", geoid) ~ "Orleans",
-                                 grepl("22051", geoid) ~ "Jefferson"),
-         var = case_when(tblid == "B25064" & order == 1 ~ "medgrossrent",
-                         tblid == "B25070" & order == 1 ~  "totrenters",
-                         tblid == "B25070" & order == 10 ~ "rentcostburden",
-                         tblid == "B25091" & order == 1 ~ "tothomeowners",
-                         tblid == "B25091" & order == 11 ~ "hocostburden"),
-         cest = as.numeric(cest),
-         clb = as.numeric(clb)) #%>%
-  select(placename, var, MOE, cest) %>%
-   pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
-  mutate(rentburpct = cest_rentcostburden / cest_totrenters,
-         rentburpctMOE = moeprop(y = cest_totrenters, moex = MOE_rentcostburden, moey = MOE_totrenters, p = rentburpct),
-         hoburpct = cest_hocostburden / cest_tothomeowners,
-         hoburpctMOE = moeprop(y = cest_tothomeowners, moex = MOE_hocostburden, moey = MOE_tothomeowners, p = hoburpct))
-  
 
 
 
