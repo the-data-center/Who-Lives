@@ -401,7 +401,7 @@ bachGraphic <- dodgedBar(bach,
 
 medhhGraphic <- dodgedBar(medhh, 
                           quo(MedianHHIncome), 
-                          "Median household income, 2021 inflation adjusted", 
+                          "Median household income in 2021 dollars", 
                           yscale = c(0,1.3*max(medhh$MedianHHIncome)), 
                           colors = c(DCcolor.p2teal50, DCcolor.p1mediumblue), 
                           pct = FALSE,  
@@ -581,7 +581,7 @@ honomoGraphic <- dodgedBar(honomo,
 
 rentburGraphic <- dodgedBar(rentbur, 
                             quo(rentburpct), 
-                            "Renters with severe housing cost burdens HT edit",
+                            "Renters with severe housing cost burdens",
                             colors = c(DCcolor.p2limegreen60, DCcolor.p1mediumblue),
                             comparisonyear = "2004")
 
@@ -589,7 +589,7 @@ rentburGraphic <- dodgedBar(rentbur,
 
 hoburGraphic <- dodgedBar(hobur, 
                           quo(hoburpct), 
-                          "Homeowners with severe housing cost burdens HT edit", 
+                          "Homeowners with severe housing cost burdens", 
                           yscale = c(0,.2), 
                           colors = c(DCcolor.p2limegreen60, DCcolor.p1mediumblue),
                           comparisonyear = "2004")
@@ -598,7 +598,7 @@ hoburGraphic <- dodgedBar(hobur,
 
 medrentGraphic <- dodgedBar(medrent, 
                             quo(Rent), 
-                            "Median gross rent, inflation-adjusted dollars HT edit",
+                            "Median gross rent in 2021 dollars",
                             yscale = c(0,1.2*max(medrent$Rent)), 
                             pct = FALSE, 
                             colors = c(DCcolor.p2limegreen60, DCcolor.p1mediumblue),
