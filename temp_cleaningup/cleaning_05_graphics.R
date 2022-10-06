@@ -732,21 +732,20 @@ chart.yrbuilt.allparishes <- yrbuiltforGraphic %>%
 ####27 Means of transportation to work, workers 16 years and older
 
 commuteforGraphic <- commute %>% 
-  select(place,
+  select(placename,
          contains('pct'),
-         contains('2000'),
          contains('SIG')) %>%
   mutate(PlaceNames = c("Orleans", "Jefferson", "Metro", "U.S."))  %>% 
   mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "Metro", "U.S."))) %>%
-  gather(key = variable, value = value, contains("pct"), contains("2000")) %>% 
+  gather(key = variable, value = value, contains("pct")) %>% 
   mutate(description = NA,
-         description = ifelse(variable == "Drivepct"|variable == "census2000drive", "Drive Alone", description),
-         description = ifelse(variable == "Carpoolpct"|variable == "census2000carpool", "Carpool", description),
-         description = ifelse(variable == "PublicTransitpct"|variable == "census2000publictransit", "Public Transit", description),
-         description = ifelse(variable == "bikepct"|variable == "census2000bike", "Bike", description),
-         description = ifelse(variable == "Walkpct"|variable == "census2000walk", "Walk", description),
-         description = ifelse(variable == "Workhomepct"|variable == "census2000workhome", "Work at home", description),
-         description = ifelse(variable == "Otherpct"|variable == "census2000other", "Other", description)) %>%
+         description = ifelse(variable == "Drivepct"|variable == "Drivepct2000", "Drive Alone", description),
+         description = ifelse(variable == "Carpoolpct"|variable == "Carpoolpct2000", "Carpool", description),
+         description = ifelse(variable == "PublicTransitpct"|variable == "PublicTransitpct2000", "Public Transit", description),
+         description = ifelse(variable == "bikepct"|variable == "bikepct2000", "Bike", description),
+         description = ifelse(variable == "Walkpct"|variable == "Walkpct2000", "Walk", description),
+         description = ifelse(variable == "Workhomepct"|variable == "Workhomepct2000", "Work at home", description),
+         description = ifelse(variable == "Otherpct"|variable == "Otherpct2000", "Other", description)) %>%
   mutate(year = NA,
          year = ifelse(grepl("pct",variable), 2021, year),
          year = ifelse(grepl("2000", variable), 2000,year)) %>%

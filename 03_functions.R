@@ -35,25 +35,26 @@ wholivesdatapull <- function(variables, names = variables, year = 2021, censusna
 }
 
 #warehouse who lives datapull - make sure WhoLives.csv in datalake is updated, and run the datalake-connection.R first
-# 
-wholivesdatapull <- function(variables, names = variables, dataframe = df, year = 2021){
-  df <- df %>% select(-c(row_num, variable_name)) %>% filter(vintage == year, key %in% variables)
-  df <- df %>% pivot_wider(names_from = key, values_from = value, values_fn = as.numeric)
-  df <-  df %>% select(geo_name, county_fips, variables)
-  df$county_fips[df$geo_name == "United States"] <- 1
-  df$county_fips[df$geo_name == "New Orleans-Metairie, LA Metro Area"] <- 35380 #doing this with case_when was giving me trouble
-  colnames(df) <- c("geo_name", "place", names)
-  df[df == -555555555] <- 0
-  df <- df %>% select(-geo_name)
-  df <- df %>% mutate(placename = (case_when(place == "051" ~ "Jefferson",
-                                        place == "071" ~ "Orleans",
-                                        place == "103" ~ "St. Tammany",
-                                        place == "35380" ~ "New Orleans Metro Area",
-                                        place == "1" ~ "United States"))) %>%
-    filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
-    mutate(place = factor(place, levels = c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"))) %>% arrange(place)
-  return(df)
-}
+
+# wholivesdatapull <- function(variables, names = variables, dataframe = df, year = 2021){
+#   df <- df %>% select(-c(row_num, variable_name)) %>% filter(vintage == year, key %in% variables)
+#   df <- df %>% pivot_wider(names_from = key, values_from = value, values_fn = as.numeric)
+#   df <-  df %>% select(geo_name, county_fips, variables)
+#   df$county_fips[df$geo_name == "United States"] <- 1
+#   df$county_fips[df$geo_name == "New Orleans-Metairie, LA Metro Area"] <- 35380 #doing this with case_when was giving me trouble
+#   colnames(df) <- c("geo_name", "place", names)
+#   df[df == -555555555] <- 0
+#   df <- df %>% select(-geo_name)
+#   df <- df %>% mutate(placename = (case_when(place == "051" ~ "Jefferson",
+#                                         place == "071" ~ "Orleans",
+#                                         place == "103" ~ "St. Tammany",
+#                                         place == "35380" ~ "New Orleans Metro Area",
+#                                         place == "1" ~ "United States"))) %>%
+#     filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
+#     mutate(place = factor(place, levels = c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"))) %>% arrange(place)
+#   return(df)
+# }
+
 
 
 

@@ -149,17 +149,6 @@ makeCSS_source(
 )
 ```
 
-The number of African Americans living in New Orleans grew every year post-Katrina (from 2006 to 2017) but decreased for the first time post-Katrina from `r comma(AA2017)` in 2017 to `r comma(AA2018)` in 2018 and continued to decrease in 2019.   
-
-```{r AAhistorical, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
-AAhistGraphic 
-```
-```{r, echo=FALSE}
-makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2019."
-)
-```
-
 Between 2000 and `r yearPEP`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.current-getvalue.hispan.jeff.2000)` reaching over `r round((getvalue.Hispanpct.jeff.current)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.current - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population was `r round((getvalue.Hispanpct.no.current)*100)` percent in Orleans and `r round((getvalue.Hispanpct.tam.current)*100)` percent in St. Tammany in `r yearPEP`.
 
 As of July `r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)` Hispanics in the metro area, representing `r round((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2000)`, representing `r round((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is far below the average for the United States, which has grown from `r round((getvalue.Hispanpct.us.2000)*100)` percent to `r round((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r year-2000` years.
@@ -285,12 +274,12 @@ makeCSS_source(
 
 The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while `r round(getvalue.bachdeg.white.nopct*100)` percent of white adults in New Orleans have a bachelor’s, only `r round(getvalue.bachdeg.black.nopct*100)` percent of Black adults have a bachelor’s as of `r yearPEP`.  The share of White adults in Orleans Parish who have a bachelor’s degree is substantially higher than the US or metro area overall: `r round(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s degree while that number is `r round(getvalue.bachdeg.white.maxotherpct*100)` percent or lower in neighboring parishes and the nation. Like in Orleans, only `r round(getvalue.bachdeg.black.jeffpct*100)` and `r round(getvalue.bachdeg.black.stTampct*100)` percent of Black adults have a bachelor’s degree or higher in Jefferson and St. Tammany, respectively.
 
-```{r bach by loc, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
-bach.raceGeos_chart
+```{r bach by loc, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
+include_graphics("indicator expansion drafts/graphics/bach.raceGeos.png")
 ```
 
 ```{r bach over time, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
-EduAtt.hist_chart
+include_graphics("indicator expansion drafts/graphics/bach.hist.png")
 ```
 
 The  metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metrowide decrease from 15 percent in 2000 to `r round(getvalue.noHSdeg.metropct*100)` percent in `r yearPEP`. In the city of New Orleans, the share of adults with less than a high school degree fell from 25 percent to `r round(getvalue.noHSdeg.nopct*100)` percent.
@@ -328,7 +317,7 @@ medhh.hist_chart
 In New Orleans, Black households earn XX percent less than White households. In St. Tammany, Black households have a median income of `r dollar(round(getvalue.medhh.black.stTam))` such that Black households earn XX percent less than White households. In Jefferson, Black households have a median income of `r dollar(round(getvalue.medhh.black.jeff))` which is XX percent less than White households. Hispanic households have a median of `r dollar(round(getvalue.medhh.hisp.metro))` across the metro which is relatively consistent across the 3 large parishes.
 
 ```{r med hh by race/eth, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
-medhh.raceGeos_chart
+include_graphics("indicator expansion drafts/graphics/medhh.raceGeos.png")
 ```
 
 
@@ -377,12 +366,11 @@ makeCSS_source(
 As we  look at these statistics broken down by race and ethnicity, we see large disparities in the poverty rate at all geographic levels. For example, in metro New Orleans 29 percent of Black people and 19 percent of Hispanic   people live in poverty compared to 9 percent of White people and 10 percent of Asian people.
 
 ```{r pov hist, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
-totalPov.hist_chart
+include_graphics("indicator expansion drafts/graphics/pov.hist.png")
 ```
 
-
 ```{r pov by race/eth, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
-pov.raceGeos_chart
+include_graphics("indicator expansion drafts/graphics/pov.raceGeos.png")
 ```
 
 
