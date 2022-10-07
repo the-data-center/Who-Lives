@@ -179,8 +179,8 @@ housing <-  ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
            grepl("01000US", geoid) |
            grepl("38000US5560", geoid)) %>% 
   filter((tblid == "B25064" & order == 1) |
-           (tblid == "B25070" & (order == 1 | order == 10) |
-              (tblid == "B25091" & (order == 1 | order == 11)))) %>%
+           (tblid == "B25070" & (order == 1 | order == 10 | order == 11 ) |
+              (tblid == "B25091" & (order == 1 | order == 11| order == 12| order == 22| order == 23)))) %>%
   mutate(MOE = as.numeric(cest) - as.numeric(clb),
          placename = case_when(grepl("22071", geoid) ~ "Orleans",
                                grepl("22051", geoid) ~ "Jefferson",
@@ -189,18 +189,25 @@ housing <-  ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
          var = case_when(tblid == "B25064" & order == 1 ~ "medgrossrent",
                          tblid == "B25070" & order == 1 ~  "totrenters",
                          tblid == "B25070" & order == 10 ~ "rentcostburden",
+                         tblid == "B25070" & order == 11 ~ "renters_notcomp",
                          tblid == "B25091" & order == 1 ~ "tothomeowners",
-                         tblid == "B25091" & order == 11 ~ "hocostburden"),
+                         tblid == "B25091" & order == 11 ~ "hocostburden",
+                         tblid == "B25091" & order == 12 ~ "ho_notcomp",
+                         tblid == "B25091" & order == 22 ~ "hocostburden_nomort",
+                         tblid == "B25091" & order == 23 ~ "ho_notcomp_nomort"),
          cest = as.numeric(cest),
          clb = as.numeric(clb)) %>%
   select(placename, var, MOE, cest) %>%
   pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
-  mutate(rentburpct = cest_rentcostburden / cest_totrenters,
-         rentburpctMOE = moeprop(y = cest_totrenters, moex = MOE_rentcostburden, moey = MOE_totrenters, p = rentburpct),
+  mutate(rentburpct = (cest_rentcostburden) / (cest_totrenters - cest_renters_notcomp),
+         MOE_rentersagg = moeagg(cbind(MOE_totrenters,MOE_renters_notcomp)),
+         rentburpctMOE = moeprop(y = cest_totrenters- cest_renters_notcomp, moex = MOE_rentcostburden, moey = MOE_rentersagg, p = rentburpct),
          medgrossrent = cest_medgrossrent,
          medgrossrentMOE = MOE_medgrossrent,
-         hoburpct = cest_hocostburden / cest_tothomeowners,
-         hoburpctMOE = moeprop(y = cest_tothomeowners, moex = MOE_hocostburden, moey = MOE_tothomeowners, p = hoburpct)) %>%
+         hoburpct = (cest_hocostburden+cest_hocostburden_nomort) / (cest_tothomeowners - (cest_ho_notcomp+cest_ho_notcomp_nomort)),
+         MOE_hoburagg = moeagg(cbind(MOE_hocostburden,MOE_hocostburden_nomort)),
+         MOE_hoagg = moeagg(cbind(MOE_tothomeowners,MOE_ho_notcomp,MOE_ho_notcomp_nomort)),
+         hoburpctMOE = moeprop(y = (cest_tothomeowners- (cest_ho_notcomp+cest_ho_notcomp_nomort)), moex = MOE_hoburagg, moey = MOE_hoagg, p = hoburpct)) %>%
   select(placename, medgrossrent, medgrossrentMOE, rentburpct, rentburpctMOE, hoburpct, hoburpctMOE)
 
 
