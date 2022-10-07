@@ -278,11 +278,16 @@ select(place, census2000, (contains("pct"))) %>%
 #Population who moved in the past year
 load("inputs/mobRaw.RData")
 mob <- mobRaw %>%
-  mutate(sf2004mobabroad =c(0.0013,0.0044,0.00,0.00,0.006), #zero filled in for metro and St. Tammany 2004 because of missing data,
+  mutate(sf2004mobabroad =c(0.0013,0.0044,0.00,0.00,0.006), #zeroes previously filled in for both metro and St. Tammany 2004 because of missing data, HT is filling in 2004 Metro.
+         sf2004mobabroadMOE = c(0.0013025893, 0.0033903959, 0, 0, 0.0002322461),
          sf2004states=c(0.0206,0.02,0.00,0.00,0.0235),
+         sf2004statesMOE = c(0.0085199087, 0.0115190278, 0, 0, 0.0006242538),
          sf2004difparish=c(0.0085,0.03,0.00,0.00,0.0302),
+         sf2004difparishMOE = c(0.0037592895, 0.0119890315, 0, 0, 0.0005295007),
          sf2004withinparish=c(0.1131,0.0958,0.00,0.00,0.0973),
+         sf2004withinparishMOE = c(0.023344033, 0.022923510, 0, 0, 0.001341028),
          sf2004samehouse=c(0.8565,0.8498,0.00,0.00,0.8430),
+         sf2004samehouseMOE = c(0.026188401, 0.028107571, 0, 0, 0.001767759),
          
          mobabroadpct = TotMovedfromAbroad / Total,
          mobStatespct = TotMovedbtwnStates / Total,
@@ -296,14 +301,14 @@ mob <- mobRaw %>%
          withinparishmoeprop = moeprop(y=Total,moex = TotMovedinCtyMOE,moey = TotalMOE,p=withinparishpct),
          samehousemoeprop = moeprop(y=Total, moex = TotSameHouseMOE,moey = TotalMOE,p=samehousepct),
          
-         abroadSIG = stattest (x=sf2004mobabroad, y=mobabroadpct, moey = mobabroadmoeprop),
-         statesSIG = stattest (x=sf2004states, y=mobStatespct,moey = mobStatesmoeprop),
-         difparishSIG = stattest (x=sf2004difparish, y =difparishpct, moey = difparishmoeprop),
-         withinparishSIG = stattest (x=sf2004withinparish, y=withinparishpct, moey = withinparishmoeprop),
-         samhouseSIG = stattest (x=sf2004samehouse, y=samehousepct, moey = samehousemoeprop))
+         abroadSIG = stattest (x=sf2004mobabroad, moex = sf2004mobabroadMOE, y=mobabroadpct, moey = mobabroadmoeprop),
+         statesSIG = stattest (x=sf2004states, moex = sf2004statesMOE, y=mobStatespct,moey = mobStatesmoeprop),
+         difparishSIG = stattest (x=sf2004difparish, moex = sf2004difparishMOE, y =difparishpct, moey = difparishmoeprop),
+         withinparishSIG = stattest (x=sf2004withinparish, moex = sf2004withinparishMOE, y=withinparishpct, moey = withinparishmoeprop),
+         samhouseSIG = stattest (x=sf2004samehouse, moex = sf2004samehouseMOE, y=samehousepct, moey = samehousemoeprop))
 
 mobCSV <- mob %>% 
-select(place, (contains("pct")), (contains("sf2004"))) %>% 
+select(place, (contains("pct")), (contains("sf2004") & !contains("MOE"))) %>% 
   pivot_longer(-c("place"), names_to = "mob", values_to = "Value") %>% 
   mutate(year = ifelse(grepl("2004", mob), "2004", "2019"),
          header = paste(place, year, sep = "-"),
@@ -372,7 +377,6 @@ rentbur <- rentburRaw %>%
          #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
          sf2004 = c(0.2304765, 0.2019471, 0, 0.1989611, 0.2196190),
          sf2004MOE = c(0.044544178, 0.052252324,0, 0.030693698, 0.003006082),
-         sf2004lab =c(0.2304765, 0.2019471," ",0.1989611,0.2196190),
          rentburpct = `50orMore`/ (Total - NotComputed),
          moeagg = moeagg(cbind(TotalMOE, NotComputedMOE)),
          moeprop = moeprop(y=(Total - NotComputed),moex=`50orMoreMOE`,moey = moeagg, p = rentburpct),
@@ -464,6 +468,7 @@ select(place, (contains("pct"))) %>%
 
 #Means of transportation to work, 
 load("inputs/commuteRaw.RData")
+load("inputs/commuteRaw2000.RData")
 commute <- commuteRaw %>% left_join(commuteRaw2000, by = "placename") %>%
   filter(placename %in% c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")) %>% 
   mutate(census2000drive=c(0.6028,0.7855,0.7301,0.7570),
