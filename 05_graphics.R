@@ -494,14 +494,14 @@ forborGraphic <- dodgedBar(forbor, quo(forborpct),"Population not U.S. citizens 
 ####20 - Population who moved in the past year
 
 mobforGraphic <- mob %>% 
-  select(place, 
+  select(placename, 
          contains('SIG'),
          contains('pct'),
          contains('2004')) %>%
   mutate(PlaceNames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
-  mutate(PlaceName.fac = factor(.$place,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
   select(-samehousepct, -sf2004samehouse) %>% 
-  gather(key = variable, value = value, contains("pct"), contains("2004")) %>% 
+  gather(key = variable, value = value, contains("pct"), (contains("2004") & !contains("MOE"))) %>% 
   mutate(description = NA,
          description = ifelse(variable == "mobabroadpct"|variable == "sf2004mobabroad", "Moved from abroad", description),
          description = ifelse(variable == "mobStatespct"|variable == "sf2004states", "Moved from out of state", description),
@@ -530,7 +530,7 @@ chart.mob.allparishes <- mobforGraphic %>%
   geom_bar(stat="identity", 
            position="stack",
            color="gray50") +
-  facet_wrap(~PlaceNames, ncol = 5) + 
+  facet_wrap(~PlaceName.fac, ncol = 5) + 
   scale_fill_manual(values = c(DCcolor.p1lightskyblue,
                                DCcolor.p1skyblue,
                                DCcolor.p2teal,
@@ -652,56 +652,55 @@ chart.yrbuilt.allparishes <- yrbuiltforGraphic %>%
 ####27 Means of transportation to work, workers 16 years and older
 
 commuteforGraphic <- commute %>% 
-  select(place,
+  select(placename,
          contains('pct'),
-         contains('2000'),
          contains('SIG')) %>%
   mutate(PlaceNames = c("Orleans", "Jefferson", "Metro", "U.S."))  %>% 
   mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "Metro", "U.S."))) %>%
-  gather(key = variable, value = value, contains("pct"), contains("2000")) %>% 
+  gather(key = variable, value = value, contains("pct")) %>% 
   mutate(description = NA,
-         description = ifelse(variable == "Drivepct"|variable == "census2000drive", "Drive Alone", description),
-         description = ifelse(variable == "Carpoolpct"|variable == "census2000carpool", "Carpool", description),
-         description = ifelse(variable == "PublicTransitpct"|variable == "census2000publictransit", "Public Transit", description),
-         description = ifelse(variable == "bikepct"|variable == "census2000bike", "Bike", description),
-         description = ifelse(variable == "Walkpct"|variable == "census2000walk", "Walk", description),
-         description = ifelse(variable == "Workhomepct"|variable == "census2000workhome", "Work at home", description),
-         description = ifelse(variable == "Otherpct"|variable == "census2000other", "Other", description)) %>%
+         description = ifelse(variable == "Drivepct"|variable == "Drivepct2000", "Drive Alone", description),
+         description = ifelse(variable == "Carpoolpct"|variable == "Carpoolpct2000", "Carpool", description),
+         description = ifelse(variable == "PublicTransitpct"|variable == "PublicTransitpct2000", "Public Transit", description),
+         description = ifelse(variable == "bikepct"|variable == "bikepct2000", "Bike", description),
+         description = ifelse(variable == "Walkpct"|variable == "Walkpct2000", "Walk", description),
+         description = ifelse(variable == "Workhomepct"|variable == "Workhomepct2000", "Work at home", description),
+         description = ifelse(variable == "Otherpct"|variable == "Otherpct2000", "Other", description)) %>%
   mutate(year = NA,
          year = ifelse(grepl("pct",variable), 2021, year),
          year = ifelse(grepl("2000", variable), 2000,year)) %>%
-  mutate(description.fac = factor(.$description, levels = c("Drive Alone",
-                                                            "Carpool",
-                                                            "Public Transit", 
-                                                            "Bike", 
-                                                            "Walk", 
+  mutate(description.fac = factor(.$description, levels = c("Other",
                                                             "Work at home",
-                                                            "Other")))%>% 
+                                                            "Walk",
+                                                            "Bike",
+                                                            "Public Transit",
+                                                            "Carpool",
+                                                            "Drive Alone")))%>% 
   mutate(year.fac = factor(.$year, levels = c("2000",
                                               "2021"))) %>%
   mutate(val = ifelse(value<.02, "",
-                    paste0(round(value*100),"%",ifelse((DriveSIG == "no" & variable == "Drivepct")
-                                                       |(carpoolSIG ==  "no" & variable == "Carpoolpct")
-                                                       |(PublicTransitSIG ==  "no" & variable == "PublicTransitpct")
-                                                       |(bikeSIG ==  "no" & variable == "bikepct")
-                                                       |(walkSIG ==  "no" & variable == "walkpct")
-                                                       |(workhomeSIG ==  "no" & variable == "Workhomepct")
-                                                       |(otherSIG ==  "no" & variable == "Otherpct"), "*", ""))))
+                      paste0(round(value*100),"%",ifelse((DriveSIG == "no" & variable == "Drivepct")
+                                                         |(carpoolSIG ==  "no" & variable == "Carpoolpct")
+                                                         |(PublicTransitSIG ==  "no" & variable == "PublicTransitpct")
+                                                         |(bikeSIG ==  "no" & variable == "bikepct")
+                                                         |(walkSIG ==  "no" & variable == "walkpct")
+                                                         |(workhomeSIG ==  "no" & variable == "Workhomepct")
+                                                         |(otherSIG ==  "no" & variable == "Otherpct"), "*", ""))))
 
-chart.commute.allparishes <- commuteforGraphic %>% 
+chart.commute.allparishes <- commuteforGraphic %>%
   ggplot(aes(year.fac, as.numeric(value), fill=description.fac, label = val)) +
   geom_bar(stat="identity", 
            position="fill",
            size = .7,
            color="gray50") +
   facet_wrap(~PlaceName.fac, ncol = 5) + 
-  scale_fill_manual(values = c(DCcolor.p1lightskyblue,
-                               DCcolor.p1skyblue,
-                               DCcolor.p2blue,
-                               DCcolor.p2teal,
-                               DCcolor.p2green,
+  scale_fill_manual(values = c(DCcolor.p2yellow,
                                DCcolor.p2limegreen,
-                               DCcolor.p2yellow)) +
+                               DCcolor.p2green,
+                               DCcolor.p2teal,
+                               DCcolor.p2blue,
+                               DCcolor.p1skyblue,
+                               DCcolor.p1lightskyblue)) +
   geom_text(size = 4, position = position_stack(vjust = 0.6), family="Asap") + 
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,1)) +
   scale_x_discrete(labels = c("2000",
@@ -716,7 +715,6 @@ chart.commute.allparishes <- commuteforGraphic %>%
   labs(title = "Means of transportation to work, workers 16 years and older",
        x="",
        y="") 
-
 
 ##############################
 # Jenna's expanded graphs
