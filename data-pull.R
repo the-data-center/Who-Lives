@@ -91,6 +91,53 @@ mobnames <- c("Total","TotalMOE","TotSameHouse","TotSameHouseMOE","TotMovedinCty
 mobRaw <- wholivesdatapull(mobvars, mobnames)
 save(mobRaw, file = "inputs/mobRaw.RData")
 
+ACScounty_04 <- read_csv("ACS_2004_050.csv") 
+ACSUS_04 <- read_csv("ACS_2004_010.csv")
+ACSmetro_04 <- read_csv("ACS_2004_380.csv")
+mob_04 <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
+  filter(grepl("22071", geoid) |
+           grepl("22051", geoid) |
+           grepl("22103", geoid) | #St. Tammany isn't in 2004 ACS for these.
+           grepl("01000US", geoid) |
+           grepl("38000US5560", geoid)) %>% 
+  filter((tblid == "B07003" & (order == 1 | 
+                                 order == 4 |
+                                 order == 7 | 
+                                 order == 10 | 
+                                 order == 13 | 
+                                 order == 16) )) %>%
+  mutate(MOE = as.numeric(cest) - as.numeric(clb),
+         placename = case_when(grepl("22071", geoid) ~ "Orleans",
+                               grepl("22051", geoid) ~ "Jefferson",
+                               grepl("01000US", geoid) ~ "United States",
+                               grepl("38000US5560", geoid) ~ "New Orleans Metro Area"),
+         var = case_when(tblid == "B07003" & (order == 1) ~ "Total",
+                         tblid == "B07003" & (order == 4) ~ "TotSameHouse",
+                         tblid == "B07003" & (order == 7) ~ "TotMovedinCty",
+                         tblid == "B07003" & (order == 10) ~ "TotMovedinState",
+                         tblid == "B07003" & (order == 13) ~ "TotMovedbtwnStates",
+                         tblid == "B07003" & (order == 16) ~ "TotMovedfromAbroad"),
+         cest = as.numeric(cest),
+         clb = as.numeric(clb))  %>%
+  select(placename, var, MOE, cest) %>%
+  pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
+  mutate(mobabroadpct = cest_TotMovedfromAbroad / cest_Total,
+         mobabroadpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedfromAbroad,moey = MOE_Total,p=mobabroadpct),
+         mobStatespct = cest_TotMovedbtwnStates / cest_Total,
+         mobStatespctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedbtwnStates,moey = MOE_Total,p=mobStatespct),
+         difparishpct = cest_TotMovedinState / cest_Total,
+         difparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinState,moey = MOE_Total,p=difparishpct),
+         withinparishpct = cest_TotMovedinCty / cest_Total,
+         withinparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinCty,moey = MOE_Total,p=withinparishpct),
+         samehousepct = cest_TotSameHouse / cest_Total,
+         samehousepctMOE = moeprop(y=cest_Total, moex = MOE_TotSameHouse,moey = MOE_Total,p=samehousepct)) %>%
+  select(placename, 
+         mobabroadpct, mobabroadpctMOE, 
+         mobStatespct, mobStatespctMOE, 
+         difparishpct, difparishpctMOE,
+         withinparishpct, withinparishpctMOE,
+         samehousepct, samehousepctMOE)
+
 
 #Homeownership rates
 
@@ -125,10 +172,7 @@ save(hoburRaw, file = "inputs/hoburRaw.RData")
 
 #### getting SEs for 2004 data:
 
-housing_04 <- read_csv("ACS_2004_050.csv") 
-housingUS_04 <- read_csv("ACS_2004_010.csv")
-housingmetro_04 <- read_csv("ACS_2004_380.csv")
-housing <-  housing_04 %>% rbind(housingUS_04, housingmetro_04) %>%
+housing <-  ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
   filter(grepl("22071", geoid) |
            grepl("22051", geoid) |
            grepl("22103", geoid) | #St. Tammany isn't in 2004 ACS for these.
@@ -204,7 +248,7 @@ commuteRaw2000 <- commuteRaw2000 %>%
          WalkMOE2000 = moe2000(est = Walk2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
          OtherMOE2000 = moe2000(est = Other2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
          WorkhomeMOE2000 = moe2000(est = Workhome2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)))
-
+save(commuteRaw2000, file = "inputs/commuteRaw2000.RData")
 
 
 #################################################
