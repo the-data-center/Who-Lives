@@ -399,13 +399,55 @@ bachGraphic <- dodgedBar(bach,
 
 ####14 - Median household income, 2016 inflation-adjusted dollars
 
-medhhGraphic <- dodgedBar(medhh, 
-                          quo(MedianHHIncome), 
-                          "Median household income in 2021 dollars", 
-                          yscale = c(0,1.3*max(medhh$MedianHHIncome)), 
-                          colors = c(DCcolor.p2teal50, DCcolor.p1mediumblue), 
-                          pct = FALSE,  
+medhhGraphic <- dodgedBar(medhh,
+                          quo(MedianHHIncome),
+                          "Median household income in 2021 dollars",
+                          yscale = c(0,1.3*max(medhh$MedianHHIncome)),
+                          colors = c(DCcolor.p2teal50, DCcolor.p1mediumblue),
+                          pct = FALSE,
                           comparisonyear = "1999")
+
+
+dataGraphic <-  medhh %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it  mutate(placenames = NA,
+  mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
+         placenames = ifelse(place == "051", "Jefferson", placenames),
+         placenames = ifelse(place == "071", "Orleans", placenames),
+         placenames = ifelse(place == "35380","Metro",placenames),
+         placenames = ifelse(place == "1", "U.S.", placenames)) %>%
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%     #vars of type "factor" allow you to control order
+  select(one_of("census2000", "sf2004", "sf1999"), !!quo(MedianHHIncome), placenames, place.fac, significant) %>%     #one_of() chooses correct comparison vals/!! is the second part or the quo() tool
+  gather(-placenames,-place.fac, -significant, key=variable, value=value) %>% 
+  mutate(description = as.factor(ifelse(variable == "census2000"|variable =="sf2004"|variable =="sf1999", 1999, year))) %>%     #creates legend info
+  mutate(valp = ifelse(value<.01,ifelse(significant == "no" & description == year, "<1%*", "<1%"),     #creates pct labels
+                       paste0(round(value*100, digits = 0),"%",ifelse((significant == "no" & description == year), "*", "")))) %>%
+  mutate(vald = ifelse((significant == "no" & description == year),      #creates dollar labels
+                       paste0(dollar(value, largest_with_cents = 1),"*"), 
+                       dollar(value, largest_with_cents = 1)))
+
+medhhGraphic <- dataGraphic %>% 
+  ggplot(aes(place.fac, value, fill=description)) + 
+  geom_bar(stat="identity",
+           position = position_dodge(),
+           width = .7,
+           color='gray50') +    #bar outline
+  geom_text(data = subset(dataGraphic, as.numeric(value) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = vald), 
+            #position = position_dodge(width=ifelse(data$vald== "56,438",1.1,.7)),
+            position=position_dodge(width = .7),  #change width accordingly
+            vjust = -.7, 
+            size=2.75, 
+            family="Asap") +
+  scale_y_continuous( expand = c(0,0), limits = c(0,1.3*max(medhh$MedianHHIncome))) + 
+  scale_fill_manual(values = c(DCcolor.p2teal50, DCcolor.p1mediumblue)) + 
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(hjust = .5, size=16)) + 
+  labs(title = "Median household income in 2021 dollars",
+       x="",
+       y="")
+
 
 ####15 - Internet Access
 
@@ -584,6 +626,8 @@ rentburGraphic <- dodgedBar(rentbur,
                             "Renters with severe housing cost burdens",
                             colors = c(DCcolor.p2limegreen60, DCcolor.p1mediumblue),
                             comparisonyear = "2004")
+
+
 
 ####24 - Homeowners with severe housing cost burdens
 
