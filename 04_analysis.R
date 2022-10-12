@@ -375,8 +375,8 @@ load("inputs/rentburRaw.RData")
 rentbur <- rentburRaw %>%
   mutate(#sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value ### ****HT commenting out old values, adding ones I pulled from 2004 ACS
          #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
-         sf2004 = c(0.2304765, 0.2019471, 0, 0.1989611, 0.2196190),
-         sf2004MOE = c(0.044544178, 0.052252324,0, 0.030693698, 0.003006082),
+         sf2004 = c(0.2304765, 0.2019471, 0, 0, 0.2196190),
+         sf2004MOE = c(0.044544178, 0.052252324,0, 0, 0.003006082),
          rentburpct = `50orMore`/ (Total - NotComputed),
          moeagg = moeagg(cbind(TotalMOE, NotComputedMOE)),
          moeprop = moeprop(y=(Total - NotComputed),moex=`50orMoreMOE`,moey = moeagg, p = rentburpct),
@@ -396,8 +396,8 @@ load("inputs/hoburRaw.RData")
 hobur <- hoburRaw %>%
   mutate(#sf2004=c(0.1620,0.0891,0,0.1134,0.0988), #0 for St. tammany missing value, ### ****HT commenting out old values, adding ones I pulled from 2004 ACS
          #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
-         sf2004 = c(0.13226868, 0.06815970, 0, 0.09326323, 0.07895178),
-         sf2004MOE = c(0.030880769, 0.025995416, 0, 0.016581419, 0.000911579), #getting these numbers from line 154 of data-pull.R
+         sf2004 = c(0.13226868, 0.06815970, 0, 0, 0.07895178),
+         sf2004MOE = c(0.030880769, 0.025995416, 0, 0, 0.000911579), #getting these numbers from line 154 of data-pull.R
          hoburpct = (`50orMoreMortgage`+`50orMoreNoMortgage`)/(Total - NotComputedMortgage - NotComputedNoMortgage),
          moexagg = moeagg(cbind(`50orMoreMortgageMOE`,`50orMoreNoMortgageMOE`)),
          moeyagg = moeagg(cbind(TotalMOE, NotComputedMortgageMOE, NotComputedNoMortgageMOE)),
@@ -418,8 +418,8 @@ select(place, (contains("2004")), (contains("pct"))) %>%
 load("inputs/medrentRaw.RData")
 #sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))### ****HT commenting out old values, adding ones I pulled from 2004 ACS
 #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
-sf2004 <- data.frame(sf2004 = 1.41 * c(566, 654, 0, 616, 694), # note that these are the exact same as what we already had, just adjusting to 2021 dollars and noting that I have the same estimates for med rent, but not the rent/hoburden percentages.) 
-                     sf2004MOE = 1.41 * c(29, 48, 0, 22, 2)) #also noting that I am inflation adjusting the MOES the same way
+sf2004 <- data.frame(sf2004 = cpi04 * c(566, 654, 0, 0, 694), # note that these are the exact same as what we already had, just adjusting to 2021 dollars and noting that I have the same estimates for med rent, but not the rent/hoburden percentages.) 
+                     sf2004MOE = cpi04 * c(29, 48, 0, 0, 2)) #also noting that I am inflation adjusting the MOES the same way
 medrent <- medrentRaw %>% 
   bind_cols(.,sf2004) %>%
   mutate(significant = stattest(x=sf2004, moex = sf2004MOE, y=Rent,moey=RentMOE)) 

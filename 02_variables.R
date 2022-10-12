@@ -1,8 +1,8 @@
 mycensuskey = "b6844db29933c9dce9e13fa37f1d015281001b95"
 
 #CPI numbers, calculated in the nbhd profiles google sheet 'Neighborhood Analysis," documentation in Box
-cpi04 <- 1.338591848
-cpi00 <- 1.468408827
+cpi04 <- 1.41
+cpi00 <- 1.55
 
 # the current/most recent year - the year the data you're updating represents
 year <- 2021
