@@ -234,7 +234,8 @@ dodgedBar <- function(data,
                       pct = TRUE,      #used when formatting pct vals vs dollar vals
                       comparisonyear = "2000",
                       year = "2021",
-                      digits = 0){     #for rounding, specifically for forbor
+                      digits = 0,
+                      lab_pos = position_dodge(width = .7)){     #for rounding, specifically for forbor
   dataGraphic <-  data %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it  mutate(placenames = NA,
     mutate(placenames = NA,
            placenames = ifelse(place == "103", "St. Tammany", placenames),
@@ -245,12 +246,16 @@ dodgedBar <- function(data,
     mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%     #vars of type "factor" allow you to control order
     select(one_of("census2000", "sf2004", "sf1999"), !!stattograph, placenames, place.fac, significant) %>%     #one_of() chooses correct comparison vals/!! is the second part or the quo() tool
     gather(-placenames,-place.fac, -significant, key=variable, value=value) %>% 
-    mutate(description = ifelse(variable == "census2000"|variable =="sf2004"|variable =="sf1999", comparisonyear, year)) %>%     #creates legend info
-    mutate(valp = ifelse(value<.01,ifelse(significant == "no" & description == year, "<1%*", "<1%"),     #creates pct labels
-                         paste0(round(value*100, digits = digits),"%",ifelse((significant == "no" & description == year), "*", "")))) %>%
-    mutate(vald = ifelse((significant == "no" & description == year),      #creates dollar labels
-                         paste0(dollar(value, largest_with_cents = 1),"*"), 
-                         dollar(value, largest_with_cents = 1)))
+    mutate(description = as.factor(ifelse(variable == "census2000"|variable =="sf2004"|variable =="sf1999", comparisonyear, year))) %>%     #creates legend info
+    mutate(valp = case_when(value == 0 ~ "  ",
+                                    value < .01 & significant == "no"  ~ "<1%*",
+                                    value < .01 & significant == "yes"  ~ "<1%",
+                                    value > .01 & significant == "yes" ~ paste0(round(value*100, digits = 0), "%"),
+                                    value > .01 & significant == "no"  ~ paste0(round(value*100, digits = 0), "%*"))) %>%
+    
+    mutate(vald = case_when(value == 0 ~ "   ",
+                            significant == "no" ~  paste0(dollar(value, largest_with_cents = 1),"*"),
+                            significant == "yes" ~ dollar(value, largest_with_cents = 1)))
   
   chart <- dataGraphic %>% 
     ggplot(aes(place.fac, value, fill=description)) + 
@@ -258,11 +263,12 @@ dodgedBar <- function(data,
              position = position_dodge(),
              width = .7,
              color='gray50') +    #bar outline
-    geom_text(data = subset(dataGraphic, as.numeric(value) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
-              aes(label = ifelse(rep(pct,sum(dataGraphic$value>0)), 
+    geom_text(#data = subset(dataGraphic, as.numeric(value) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+      data = dataGraphic,        
+      aes(label = ifelse(rep(pct,sum(dataGraphic$value>=0)), 
                                  valp,
                                  vald)), 
-              position=position_dodge(width = .7), 
+              position=lab_pos, 
               vjust = -.7, 
               size=2.75, 
               family="Asap") +

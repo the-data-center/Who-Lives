@@ -418,8 +418,10 @@ select(place, (contains("2004")), (contains("pct"))) %>%
 load("inputs/medrentRaw.RData")
 #sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))### ****HT commenting out old values, adding ones I pulled from 2004 ACS
 #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
-sf2004 <- data.frame(sf2004 = 1.41 * c(566, 654, 0, 0, 694), # note that these are the exact same as what we already had, just adjusting to 2021 dollars and noting that I have the same estimates for med rent, but not the rent/hoburden percentages.) 
-                     sf2004MOE = 1.41 * c(29, 48, 0, 0, 2)) #also noting that I am inflation adjusting the MOES the same way
+
+sf2004 <- data.frame(sf2004 = cpi04 * c(566, 654, 0, 0, 694), # note that these are the exact same as what we already had, just adjusting to 2021 dollars and noting that I have the same estimates for med rent, but not the rent/hoburden percentages.) 
+                     sf2004MOE = cpi04 * c(29, 48, 0, 0, 2)) #also noting that I am inflation adjusting the MOES the same way
+
 medrent <- medrentRaw %>% 
   bind_cols(.,sf2004) %>%
   mutate(significant = stattest(x=sf2004, moex = sf2004MOE, y=Rent,moey=RentMOE)) 
