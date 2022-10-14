@@ -148,11 +148,13 @@ select(place, census2000, (contains("pct"))) %>%
 
 #Median household income, 201* inflation-adjusted dollars
 #***************NEED MOE FOR 2000 DATA**********************
-census2000 <- data.frame(census2000 = cpi00*c(27133,38435,47883,35317,41994))
+census2000 <- data.frame(#census2000 = cpi99*c(27133,38435,47883,35317,41994)) #old numbers
+  census2000 = cpi99 * c(27129, 38239, 47453, 35183, 41851),
+  census2000MOE = cpi99 * c(679.63, 770.33, 585.37, 801.32, 902.83))
 load("inputs/medhhRaw.RData")
 medhh <- medhhRaw %>%
   bind_cols(.,census2000) %>%
-  mutate(significant = stattest(x=census2000,y=MedianHHIncome,moey=MedianHHIncomeMOE))
+  mutate(significant = stattest(x=census2000,moex = census2000MOE, y=MedianHHIncome,moey=MedianHHIncomeMOE))
 
  medhhCSV <- medhh %>%
 select(place, census2000, MedianHHIncome) %>% 
@@ -418,8 +420,10 @@ select(place, (contains("2004")), (contains("pct"))) %>%
 load("inputs/medrentRaw.RData")
 #sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))### ****HT commenting out old values, adding ones I pulled from 2004 ACS
 #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
+
 sf2004 <- data.frame(sf2004 = cpi04 * c(566, 654, 0, 0, 694), # note that these are the exact same as what we already had, just adjusting to 2021 dollars and noting that I have the same estimates for med rent, but not the rent/hoburden percentages.) 
                      sf2004MOE = cpi04 * c(29, 48, 0, 0, 2)) #also noting that I am inflation adjusting the MOES the same way
+
 medrent <- medrentRaw %>% 
   bind_cols(.,sf2004) %>%
   mutate(significant = stattest(x=sf2004, moex = sf2004MOE, y=Rent,moey=RentMOE)) 
@@ -1015,6 +1019,9 @@ pov.race <- pov_exp %>%
 totalPov <- read_csv("inputs/hist_pov.csv")
 totalPov.hist <- totalPov %>% 
   mutate(year = ifelse(year != 2010, year - 1, year)) %>%
+  mutate(var = case_when(var == "White,\r\nnon-Hispanic" ~ "White,\nnon-Hispanic",
+                         var == "Hispanic,\r\nany race" ~ "Hispanic,\nany race",
+                         T ~  var)) %>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))%>%
   bind_rows(pov.race %>%
               filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2021))
