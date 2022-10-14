@@ -429,7 +429,7 @@ medhhGraphic <- dataGraphic %>%
   ggplot(aes(place.fac, value, fill=description)) + 
   geom_bar(stat="identity",
            position = position_dodge(),
-           width = .7,
+           width = .8,
            color='gray50') +    #bar outline
   geom_text(data = subset(dataGraphic, as.numeric(value) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
             aes(label = vald), 
@@ -493,7 +493,7 @@ chart.inta.allparishes <- intaforGraphic %>%
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10), 
         plot.title = element_text(hjust = .5)) +
-  labs(title = "Internet access, 2021 households",
+  labs(title = "Household Internet Access, 2021",
        x="",
        y="") 
 ############################################
@@ -531,7 +531,7 @@ vehGraphic <- dodgedBar(veh,
 
 ####19 - Population not U.S. citizens at birth
 
-forborGraphic <- dodgedBar(forbor, quo(forborpct),"Population not U.S. citizens at birth", yscale = c(0,.18), digits = 1)
+forborGraphic <- dodgedBar(forbor, quo(forborpct),"Population not U.S. citizens at birth", yscale = c(0,.18), digits = 0)
 
 ####20 - Population who moved in the past year
 
@@ -825,7 +825,7 @@ medhh.hist_chart <- medhh.hist %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16)) + 
-  labs(title = "Median household income by race/ethnicity in 2021 dollars, Orleans Parish",
+  labs(title = "Median household income by race/ethnicity in 2021 dollars since 1979, Orleans Parish",
        x="",
        y="") 
 medhh.hist_chart
@@ -847,7 +847,7 @@ bach.raceGeos_chart <- bach.race %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2violet,DCcolor.p3yellowochre),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
                     limits = levels(bach.race$var.fac)) +
   geom_segment(data= bach.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= bach.totals %>% filter(place.fac=="Orleans"),
@@ -886,6 +886,7 @@ EduAtt.hist_chart <- EduAtt.hist %>%
   ggplot()+
   geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2021"))+
   scale_color_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   geom_text(data = subset(EduAtt.hist, year %in% c("1980", "2021") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
   themeDC_horizontal() +
@@ -894,7 +895,7 @@ EduAtt.hist_chart <- EduAtt.hist %>%
         plot.title = element_text(size=16)) + 
   labs(title = "Bachelor's degree or higher, adults 25 years or older by race/ethnicity,\nOrleans Parish",
        x="",
-       y="") + xlim(1980,2021)
+       y="") 
 
 ggsave(EduAtt.hist_chart,filename = "indicator expansion drafts/graphics/bach.hist.png",
        width = 8, height = 6, units = "in")
@@ -914,7 +915,7 @@ pov.raceGeos_chart <- pov.race %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2violet,DCcolor.p3yellowochre),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
                     limits = levels(pov.race$var.fac)) +
   geom_segment(data= pov.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= pov.totals %>% filter(place.fac=="Orleans"),
@@ -960,7 +961,7 @@ totalPov.hist_chart <- totalPov.hist %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16)) + 
-  labs(title = "Poverty rate by race/ethnicity, Orleans Parish",
+  labs(title = "Poverty rate by race/ethnicity since 1979, Orleans Parish",
        x="",
        y="") 
 
@@ -984,7 +985,7 @@ childpov.raceGeos_chart <- childpov.race %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2violet,DCcolor.p3yellowochre), #yellowochre wasn't found for me
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90), #yellowochre wasn't found for me
                     limits = levels(childpov.race$var.fac)) +
   geom_segment(data= childpov.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= childpov.totals %>% filter(place.fac=="Orleans"),
@@ -1030,12 +1031,12 @@ childPov.hist_chart <- childPov.hist %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16)) + 
-  labs(title = "Child poverty rate by race/ethnicity since 1980, Orleans Parish",
+  labs(title = "Child poverty rate by race/ethnicity since 1979, Orleans Parish",
        x="",
        y="")
 
 ggsave(childPov.hist_chart,filename = "indicator expansion drafts/graphics/childpov.hist.png",
-       width = 10, height = 6, units = "in")
+       width = 8, height = 6, units = "in")
 
 # Homeownership
 
@@ -1053,7 +1054,7 @@ ho.raceGeos_chart <- ho.race %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p2violet,DCcolor.p3yellowochre),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
                     limits = levels(ho.race$var.fac)) +
   geom_segment(data= ho.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= ho.totals %>% filter(place.fac=="Orleans"),
@@ -1102,7 +1103,7 @@ homeownership.hist_chart <- homeownership.hist %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16)) + 
-  labs(title = "Homeownership rate by race/ethnicity, Orleans Parish",
+  labs(title = "Homeownership rate by race/ethnicity since 1970, Orleans Parish",
        x="",
        y="") 
 homeownership.hist_chart

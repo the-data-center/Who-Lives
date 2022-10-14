@@ -148,11 +148,13 @@ select(place, census2000, (contains("pct"))) %>%
 
 #Median household income, 201* inflation-adjusted dollars
 #***************NEED MOE FOR 2000 DATA**********************
-census2000 <- data.frame(census2000 = cpi00*c(27133,38435,47883,35317,41994))
+census2000 <- data.frame(#census2000 = cpi99*c(27133,38435,47883,35317,41994)) #old numbers
+  census2000 = cpi99 * c(27129, 38239, 47453, 35183, 41851),
+  census2000MOE = cpi99 * c(679.63, 770.33, 585.37, 801.32, 902.83))
 load("inputs/medhhRaw.RData")
 medhh <- medhhRaw %>%
   bind_cols(.,census2000) %>%
-  mutate(significant = stattest(x=census2000,y=MedianHHIncome,moey=MedianHHIncomeMOE))
+  mutate(significant = stattest(x=census2000,moex = census2000MOE, y=MedianHHIncome,moey=MedianHHIncomeMOE))
 
  medhhCSV <- medhh %>%
 select(place, census2000, MedianHHIncome) %>% 
@@ -1017,6 +1019,9 @@ pov.race <- pov_exp %>%
 totalPov <- read_csv("inputs/hist_pov.csv")
 totalPov.hist <- totalPov %>% 
   mutate(year = ifelse(year != 2010, year - 1, year)) %>%
+  mutate(var = case_when(var == "White,\r\nnon-Hispanic" ~ "White,\nnon-Hispanic",
+                         var == "Hispanic,\r\nany race" ~ "Hispanic,\nany race",
+                         T ~  var)) %>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))%>%
   bind_rows(pov.race %>%
               filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2021))
