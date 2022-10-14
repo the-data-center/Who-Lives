@@ -339,7 +339,7 @@ jeffsig <- stattest(x = (mob$sf2004mobabroad[2]+mob$sf2004states[2]+mob$sf2004di
 load("inputs/hoRaw.RData")
 ho <- hoRaw %>%
   mutate(census2000=c(0.465,0.6385,0.8048,0.6183,0.6619),
-         census2000SE = c(0.00282756, 0.002814847, 0.0037049, 0.001695053, 1.03E-04),
+        # census2000SE = c(0.00282756, 0.002814847, 0.0037049, 0.001695053, 1.03E-04), #using SF1 to be consistent and no MOEs
          Ownerpct = Owner / Total,
          Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
          significant = stattest(x=census2000, moex = census2000SE*1.645,y=Ownerpct,moey = Ownermoeprop))
@@ -1003,10 +1003,66 @@ pov_exp <- povRaw_exp %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
+pov_stattest <- povRaw_exp %>%
+  replace(is.na(.),0) %>%
+  transmute(place = place, 
+            placename = placename,
+            pctpov = BelowPov / Total,
+            pctpov_blk = BelowPov_blk / Total_blk,
+            pctpov_wht = BelowPov_wht / Total_wht,
+            pctpov_hisp = BelowPov_hisp / Total_hisp,
+            pctpov_asian = ifelse(!is.nan(BelowPov_asian / Total_asian),BelowPov_asian / Total_asian,0),
+            moeprop = moeprop(y = Total, moex = BelowPovMOE, moey = TotalMOE, p = pctpov),
+            moeprop_blk = moeprop(y = Total_blk, moex = BelowPovMOE_blk, moey = TotalMOE_blk, p = pctpov_blk),
+            moeprop_wht = moeprop(y = Total_wht, moex = BelowPovMOE_wht, moey = TotalMOE_wht, p = pctpov_wht),
+            moeprop_hisp = moeprop(y = Total_hisp, moex = BelowPovMOE_hisp, moey = TotalMOE_hisp, p = pctpov_hisp),
+            moeprop_asian = moeprop(y = Total_asian, moex = BelowPovMOE_asian, moey = TotalMOE_asian, p = pctpov_asian)
+  ) %>%
+  mutate(sig_wht_blk = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_blk, moey = moeprop_blk),
+         sig_wht_hisp = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_hisp, moey = moeprop_hisp),
+         sig_wht_asian = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_asian, moey = moeprop_asian),
+         sigall_wht = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov, moey = moeprop),
+         sig_blk_hisp = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov_hisp, moey = moeprop_hisp),
+         sig_blk_asian = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov_asian, moey = moeprop_asian),
+         sigall_blk = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov, moey = moeprop),
+         sig_hisp_asian = stattest(x=pctpov_hisp, moex = moeprop_hisp, y=pctpov_asian, moey = moeprop_asian),
+         sigall_hisp = stattest(x=pctpov_hisp, moex = moeprop_hisp, y=pctpov, moey = moeprop),
+         sigall_asian = stattest(x=pctpov_asian, moex = moeprop_asian, y=pctpov, moey = moeprop)
+  )
+
+pov_stat_all <- pov_stattest %>% select(place, placename, (contains("sig") & contains("all")), contains("pct")) %>%
+  pivot_longer(cols = contains("pct"), names_to = "race", values_to = "val") %>%
+  pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_all") %>% group_by(place, placename) %>%
+  mutate(race = case_when(race == "pctpov" ~ "All",
+                          grepl("asian",race) & grepl("asian",var) ~ "Asian",
+                          grepl("blk",race) & grepl("blk",var) ~ "Black",
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+         placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
+                               T ~ placename)) %>% na.omit()
+pov_stat_all$stat_all[pov_stat_all$race == "All"] <- "yes"
+pov_stat_all <- pov_stat_all %>%  group_by(place, placename, race) %>%
+  mutate(val_lab = case_when(stat_all == "no" ~ paste0(round(val*100), "%*"),
+                         T ~ paste0(round(val*100), "%"))) %>% select(-var, -placename) %>% unique()
+  
+
+pov_stat_race <- pov_stattest %>% select(place, placename, (contains("sig") & !contains("all"))) %>%
+  pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
+  group_by(place, placename) %>%
+  mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
+                               T ~ placename),
+         placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
+                               T ~ placename)) %>% select(-stat_race) %>% unique()
+pov_with_stats <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
+         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+
+
 ### Across geos pov bar chart ###
-pov.totals <- pov_exp %>% 
-  filter(var == "pctpov") %>%
-  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+pov.totals <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% unique() %>% 
+  filter(race == "All") %>%
+  mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
+         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")))
 
 pov.race <- pov_exp %>%
   filter(var != "pctpov") %>%
