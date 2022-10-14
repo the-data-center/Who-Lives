@@ -398,6 +398,28 @@ pov10 <- pov10 %>%
   pivot_longer(cols = pctTotalpov:pctHisppov, values_to = "val") %>% 
   select(year, val, name)
 
+pov10MOE <- pov10 %>%
+  filter(place == "071") %>% 
+  transmute(year = 2010,
+            pctTotalpov = BelowPov / Total,
+            pctWhitepov = BelowPov_wht / Total_wht,
+            pctBlackpov = BelowPov_blk / Total_blk,
+            pctHisppov = BelowPov_hisp / Total_hisp,
+            
+            moeprop = moeprop(Total, BelowPovMOE, TotalMOE, pctTotalpov),
+            Blackmoeprop = moeprop(Total_blk, BelowPovMOE_blk, TotalMOE_blk, pctBlackpov),
+            Whitemoeprop = moeprop(Total_wht, BelowPovMOE_wht, TotalMOE_wht, pctWhitepov),
+            Hispmoeprop = moeprop(Total_hisp, BelowPovMOE_hisp, TotalMOE_hisp, pctHisppov)
+            ) %>%
+  select(contains("moeprop")) %>%
+  pivot_longer(everything(), names_to = "var", values_to = "moe2010") %>%
+  mutate(race = case_when(var =="moeprop" ~ "All",
+                          var =="Blackmoeprop" ~ "Black",
+                          var =="Whitemoeprop" ~ "White,\nnon-Hispanic",
+                          var =="Hispmoeprop" ~ "Hispanic,\nany race"
+  )) %>%
+  select(-var)
+
 povvars16 <- c('C17001_001E','C17001_001M','C17001_002E','C17001_002M',
                'C17001B_001E','C17001B_001M','C17001B_002E','C17001B_002M',
                'C17001D_001E','C17001D_001M','C17001D_002E','C17001D_002M',
@@ -462,6 +484,13 @@ childpovnames <- c("BelowPovMaleChild", "BelowPovMaleChildMOE", "BelowPovFemaleC
 childpovRaw <- wholivesdatapull(childpovvars, childpovnames, year = 2021)
 save(childpovRaw, file = "indicator expansion drafts/childpovRaw.RData")
 
+childPovProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/childPov.csv")
+childPov.histMOE = data.frame(race = c("Black","White,\nnon-Hispanic","Hispanic,\nany race","All"),
+                             se2010 = c(0.023372212, 0.016043476, 0.104259483, 0.021288336),
+                             se2000 = c(0.005216453, 0.006067795, 0.026554044, 0.004610543)) %>%
+  mutate(moe2010 = se2010*1.645,
+         moe2000 = se2000*1.645)
+
 #Homeownership rates
 
 hovars <- c('B25003_001E','B25003_001M','B25003_002E','B25003_002M',
@@ -477,7 +506,6 @@ honames <- c("Total","TotalMOE","Owner","OwnerMOE",
 hoRaw <- wholivesdatapull(hovars, honames)
 save(hoRaw, file = "indicator expansion drafts/hoRaw.RData")
 
-childPovProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/childPov.csv")
 homeownershipProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/homeownership.csv")
 educationalAttainmentProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/educationalAttainment.csv")
 medHHincProspInd <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/medHHinc.csv")

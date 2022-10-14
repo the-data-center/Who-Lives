@@ -279,3 +279,25 @@ dodgedBar <- function(data,
   return(chart)
 }
 
+
+### for stat testing notes under new charts ###
+
+### for he by race/by geography bar charts
+raceList <- function(data){
+  data %>%
+    mutate(insigList = "",
+           insigList = ifelse(sig_wht_blk == "no", "White and Black", insigList),
+           insigList = ifelse(sig_wht_asian == "no", paste0(insigList,"White and Asian", sep = ", "), insigList),
+           insigList = ifelse(sig_wht_hisp == "no", paste0(insigList,"White and Hispanic",sep = ", "), insigList),
+           insigList = ifelse(sig_blk_hisp == "no", paste0(insigList,"Black and Hispanic",sep = ", "), insigList),
+           insigList = ifelse(sig_blk_asian  == "no", paste0(insigList, "Black and Asian", sep = ", "), insigList),
+           insigList = ifelse(sig_hisp_asian == "no", paste0(insigList, "Hispanic and Asian", sep = ", "), insigList),
+           insigList = str_sub(insigList,1,-3)) %>%
+    mutate(placename = ifelse(placename %in% c("Orleans", "Jefferson", "St. Tammany"), paste0(placename, " Parish"), placename)) %>%
+    filter(insigList != "") %>%
+    mutate(note = paste0("&#8224; = In ", placename, ", the difference between ", insigList, " is not statistically significant.")) %>%
+    select(placename,note) %>%
+    pivot_wider(names_from = "placename", values_from = "note") %>%
+    unite("note", 1:dim(.)[2]) %>%
+    as.data.frame()
+}
