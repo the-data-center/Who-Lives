@@ -785,11 +785,21 @@ getvalue.sing.2000 <- sing %>%
   getvalue.medhh.white.no <- medhh.race %>% filter(place.fac == "Orleans" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% as.numeric()
   getvalue.medhh.hisp.no <- medhh.race %>% filter(place.fac == "Orleans" & var.fac == "Hispanic,\nany race") %>% select(val) %>% as.numeric()
   
-  
+  getvalue.medhh.blkwht.no.pctdiff <- (getvalue.medhh.white.no - getvalue.medhh.black.no) / getvalue.medhh.white.no
   
   getvalue.medhh.black.stTam <- medhh.race %>% filter(place.fac == "St. Tammany" & var.fac == "Black") %>% select(val) %>% as.numeric()
+  getvalue.medhh.white.stTam <- medhh.race %>% filter(place.fac == "St. Tammany" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% as.numeric()
+  
+  getvalue.medhh.blkwht.stTam.pctdiff <- (getvalue.medhh.white.stTam - getvalue.medhh.black.stTam) / getvalue.medhh.white.stTam
+  
+  
   getvalue.medhh.hisp.metro <- medhh.race %>% filter(place.fac == "Metro" & var.fac == "Hispanic,\nany race") %>% select(val) %>% as.numeric()
+  
   getvalue.medhh.black.jeff <- medhh.race %>% filter(place.fac == "Jefferson" & var.fac == "Black") %>% select(val) %>% as.numeric()
+  getvalue.medhh.white.jeff <- medhh.race %>% filter(place.fac == "Jefferson" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% as.numeric()
+  
+  getvalue.medhh.blkwht.jeff.pctdiff <- (getvalue.medhh.white.jeff - getvalue.medhh.black.jeff) / getvalue.medhh.white.jeff
+  
   
   #Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and
   # encompassing technology training services, workers and students are at a disadvantage in the job market and education system.
@@ -913,6 +923,12 @@ getvalue.sing.2000 <- sing %>%
     filter(placename == "United States") %>%
     select(pctpov) %>%
     pull()
+  
+  getvalue.pov.black.metropct <- pov.race %>% filter(place.fac == "Metro" & var.fac == "Black") %>% select(val) %>% as.numeric()
+  getvalue.pov.hisp.metropct <- pov.race %>% filter(place.fac == "Metro" & var.fac == "Hispanic,\nany race") %>% select(val) %>% as.numeric()
+  getvalue.pov.white.metropct <- pov.race %>% filter(place.fac == "Metro" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% as.numeric()
+  getvalue.pov.asian.metropct <- pov.race %>% filter(place.fac == "Metro" & var.fac == "Asian") %>% select(val) %>% as.numeric()
+  
 
 
   #Like the overall poverty rate, the child poverty rate in New Orleans has fallen, while child poverty has increased in Jefferson and across the U.S.
@@ -957,6 +973,11 @@ getvalue.sing.2000 <- sing %>%
     select(pctBelowChildPov) %>%
     pull()
   
+  getvalue.childpov.metro.2018 <- childpov %>%
+    select(-significant, -contains("moeprop")) %>%
+    filter(placename == "Metro") %>%
+    select(pctBelowChildPov) %>%
+    pull()
   
   getvalue.childpov.white.nopct <- childpov.race %>% filter(place.fac == "Orleans" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% as.numeric()
   getvalue.childpov.hisp.nopct <- childpov.race %>% filter(place.fac == "Orleans" & var.fac == "Hispanic,\nany race") %>% select(val) %>% as.numeric()
@@ -1233,7 +1254,8 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   getvalue.homeowner.hisp.stTam <- ho.race %>% filter(place.fac == "St. Tammany" & var.fac == "Hispanic,\nany race") %>% select(val) %>% as.numeric()
   
   getvalue.homeowner.white.nopct <- ho.race %>% filter(place.fac == "Orleans" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% as.numeric()
-
+  getvalue.homeowner.black.nopct <- ho.race %>% filter(place.fac == "Orleans" & var.fac == "Black") %>% select(val) %>% as.numeric()
+  
 
   #Homeowners without a mortgage own their homes free and clear of any type of loan. A high share of such homeowners usually indicates residents living in the same house for long periods of time, and helps shield neighborhoods from foreclosures.
   #The proportion of metro area homeowners without a mortgage has increased from 35 to 42 percent between 2000 and 2016,
@@ -1519,6 +1541,29 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
     #This goes against the national trend, where the share in driving alone remained steady between 2000 and 2016
     #and where public transit use has also remained steady.
 
+    getvalue.wfh.no.2000 <- commute %>%
+      select(-contains("SIG"), -contains("moeprop")) %>%
+      filter(placename == "Orleans") %>%
+      select(Workhomepct2000) %>%
+      pull()
+    
+    getvalue.wfh.no.current <- commute %>%
+      select(-contains("SIG"), -contains("moeprop")) %>%
+      filter(placename == "Orleans") %>%
+      select(Workhomepct) %>%
+      pull()
+    
+    getvalue.wfh.jeff.current <- commute %>%
+      select(-contains("SIG"), -contains("moeprop")) %>%
+      filter(placename == "Jefferson") %>%
+      select(Workhomepct) %>%
+      pull()
+    
+    getvalue.wfh.stTam.current <- commute %>%
+      select(-contains("SIG"), -contains("moeprop")) %>%
+      filter(placename == "St. Tammany") %>%
+      select(Workhomepct) %>%
+      pull()
 
 
 

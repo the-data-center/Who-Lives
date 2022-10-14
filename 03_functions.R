@@ -14,11 +14,6 @@ wholivesdatapull <- function(variables, names = variables, year = 2021, censusna
   colnames(parishes) <- c("place",names)  #so names match between the three pulls for rbind
   metro <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = ifelse(year == 2000, "consolidated metropolitan statistical area:5560","metropolitan statistical area/micropolitan statistical area:35380"))
   colnames(metro) <- c("place",names)
-  if (year == 2000) { #note here that for MOEs we may have to aggregate them later on
-    metro <- rbind(parishes[parishes$place == "093",], metro)
-    metro <- metro[2,2:ncol(metro)] - parishes[parishes$place == "093",2:ncol(parishes)]
-    metro$place <- "5560"
-  }
   us <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "us:1")
   colnames(us) <- c("place",names)
   df <- switch(rbind(parishes, metro, us))
@@ -250,8 +245,8 @@ dodgedBar <- function(data,
     mutate(valp = case_when(value == 0 ~ "  ",
                                     value < .01 & significant == "no"  ~ "<1%*",
                                     value < .01 & significant == "yes"  ~ "<1%",
-                                    value > .01 & significant == "yes" ~ paste0(round(value*100, digits = 0), "%"),
-                                    value > .01 & significant == "no"  ~ paste0(round(value*100, digits = 0), "%*"))) %>%
+                                    value > .01 & significant == "yes" ~ paste0(round(value*100, digits = digits), "%"),
+                                    value > .01 & significant == "no"  ~ paste0(round(value*100, digits = digits), "%*"))) %>%
     
     mutate(vald = case_when(value == 0 ~ "   ",
                             significant == "no" ~  paste0(dollar(value, largest_with_cents = 1),"*"),
