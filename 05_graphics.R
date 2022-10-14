@@ -902,39 +902,41 @@ ggsave(EduAtt.hist_chart,filename = "indicator expansion drafts/graphics/bach.hi
 
 # across geos pov bar chart
 
-pov.raceGeos_chart <- pov.race %>%
-  ggplot(aes(x=place.fac, y=val, fill=var.fac)) + 
+
+
+pov.raceGeos_chart <- pov_with_stats %>%
+  ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
   geom_bar(stat="identity",
            position = position_dodge(),
            width = .6,
            color='gray70') +    #bar outlineas.factor
-  geom_text(data = subset(pov.race, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
-            aes(label = scales::percent(val,accuracy = 1)),
+  geom_text(data = subset(pov_with_stats, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = val_lab),
             position=position_dodge(width = .7),
             vjust = -.7,
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
   scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
-                    limits = levels(pov.race$var.fac)) +
-  geom_segment(data= pov.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= pov.totals %>% filter(place.fac=="Orleans"),
+                    limits = levels(pov_with_stats$var.fac)) +
+  geom_segment(data= pov.totals %>% filter(grepl("Orleans", placename.fac)), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= pov.totals %>% filter(grepl("Orleans", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= pov.totals %>% filter(place.fac=="Jefferson"),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= pov.totals %>% filter(place.fac=="Jefferson"),
+  geom_segment(data= pov.totals %>% filter(grepl("Jefferson", placename.fac)),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= pov.totals %>% filter(grepl("Jefferson", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= pov.totals %>% filter(place.fac=="St. Tammany"),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= pov.totals %>% filter(place.fac=="St. Tammany"),
+  geom_segment(data= pov.totals %>% filter(grepl("St. Tammany", placename.fac)),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= pov.totals %>% filter(grepl("St. Tammany", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= pov.totals %>% filter(place.fac=="Metro"),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= pov.totals %>% filter(place.fac=="Metro"),
+  geom_segment(data= pov.totals %>% filter(grepl("Metro", placename.fac)),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= pov.totals %>% filter(grepl("Metro", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= pov.totals %>% filter(place.fac=="U.S."),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= pov.totals %>% filter(place.fac=="U.S."),
+  geom_segment(data= pov.totals %>% filter(grepl("United States", placename.fac)),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= pov.totals %>% filter(grepl("United States", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   themeDC_horizontal() +

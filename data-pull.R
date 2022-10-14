@@ -52,6 +52,7 @@ medhhnames2000 <- c("SampHousingUnits2000","TotHousingUnits2000", "MedianHHIncom
 medhhRaw2000 <- wholivesdatapull(medhhvars2000, medhhnames2000, censusname = "dec/sf3", year = 2000)
 medhhRaw2000 <- medhhRaw2000 %>% mutate(PctinSamp = SampHousingUnits2000 / TotHousingUnits2000,
                                         MedhianHHIncomeMOE = moe2000(MedianHHIncome, TotHousingUnits2000, designfac = 1.2))
+
 #Internet access
 
 intavars <- c('B28002_001E','B28002_001M','B28002_006E','B28002_006M','B28002_012E','B28002_012M','B28002_013E','B28002_013M')
