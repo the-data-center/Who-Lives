@@ -10,7 +10,7 @@ medhh <- medhhRaw  %>%
          placenames = ifelse(place == "35380","Metro",placenames),
          placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
   mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
-  select(-place, -placenames, -contains("MOE")) %>%
+  select(-place, -placename, -placenames, -contains("MOE")) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val")
 
 
@@ -133,28 +133,53 @@ ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hi
 ### stat testing ###
 
 medhh.race_stattest <- medhhRaw %>%
-  mutate(sig_wht_blk = stattest(x = MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y = MedianHHIncome_blk, moey = MedianHHIncomeMOE_blk),
-         sig_hisp_wht = stattest(x = MedianHHIncome_hisp, moex = MedianHHIncomeMOE_hisp, y = MedianHHIncome_wht, moey = MedianHHIncomeMOE_wht),
-         sig_hisp_blk = stattest(x = MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y = MedianHHIncome_hisp, moey = MedianHHIncomeMOE_hisp)
-  )
+  mutate(sig_wht_blk = stattest(x=MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y=MedianHHIncome_blk, moey = MedianHHIncomeMOE_blk),
+         sig_wht_hisp = stattest(x=MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y=MedianHHIncome_hisp, moey = MedianHHIncomeMOE_hisp),
+         sig_wht_asian = stattest(x=MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y=MedianHHIncome_asian, moey = MedianHHIncomeMOE_asian),
+         sig_wht_all = stattest(x=MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y=MedianHHIncome, moey = MedianHHIncomeMOE),
+         sig_blk_hisp = stattest(x=MedianHHIncome_blk, moex = MedianHHIncomeMOE_blk, y=MedianHHIncome_hisp, moey = MedianHHIncomeMOE_hisp),
+         sig_blk_asian = stattest(x=MedianHHIncome_blk, moex = MedianHHIncomeMOE_blk, y=MedianHHIncome_asian, moey = MedianHHIncomeMOE_asian),
+         sig_blk_all = stattest(x=MedianHHIncome_blk, moex = MedianHHIncomeMOE_blk, y=MedianHHIncome, moey = MedianHHIncomeMOE),
+         sig_hisp_asian = stattest(x=MedianHHIncome_hisp, moex = MedianHHIncomeMOE_hisp, y=MedianHHIncome_asian, moey = MedianHHIncomeMOE_asian),
+         sig_hisp_all = stattest(x=MedianHHIncome_hisp, moex = MedianHHIncomeMOE_hisp, y=MedianHHIncome, moey = MedianHHIncomeMOE),
+         sig_asian_all = stattest(x=MedianHHIncome_asian, moex = MedianHHIncomeMOE_asian, y=MedianHHIncome, moey = MedianHHIncomeMOE)
+  ) %>%
+  select(placename, contains("sig"))
 
 medhh.hist_stattest.EST <- medhhRaw %>% 
   filter(place == "071") %>%
-  select(-place,-contains("MOE")) %>%
-  pivot_longer(everything(),names_to = "var",values_to = "val")%>%
-  filter(grepl("wht", var) | grepl("blk", var) | grepl("hisp", var)) 
+  select(-place,-placename,-contains("MOE")) %>%
+  pivot_longer(everything(),names_to = "var",values_to = "val2021") %>%
+  filter(var != "MedianHHIncome_asian") %>%
+  mutate(race = case_when(var =="MedianHHIncome" ~ "Overall",
+                          var =="MedianHHIncome_blk" ~ "Black",
+                          var =="MedianHHIncome_wht" ~ "White, Alone",
+                          var =="MedianHHIncome_hisp" ~ "Hispanic, Any Race"
+                          )) %>%
+  select(race, val2021)
 
 medhh.hist_stattest.MOE <- medhhRaw %>% 
   filter(place == "071")%>%
   select(contains("MOE")) %>%
-  pivot_longer(everything(),names_to = "var",values_to = "moe")%>%
-  filter(grepl("wht", var) | grepl("blk", var) | grepl("hisp", var)) 
+  pivot_longer(everything(),names_to = "var",values_to = "moe2021")%>%
+  filter(var != "MedianHHIncomeMOE_asian") %>%
+  mutate(race = case_when(var =="MedianHHIncomeMOE" ~ "Overall",
+                          var =="MedianHHIncomeMOE_blk" ~ "Black",
+                          var =="MedianHHIncomeMOE_wht" ~ "White, Alone",
+                          var =="MedianHHIncomeMOE_hisp" ~ "Hispanic, Any Race"
+  )) %>%
+  select(race, moe2021)
 
-medhh.hist_stattest <- medhh.hist_stattest.EST %>%
-  bind_cols(medhh.hist_stattest.MOE) %>%
-  bind_cols(medhh.hist %>% filter(Year == "1979", var != "All") %>%
-              mutate(order = c(1,3,2)) %>% arrange(order)) %>%
-  mutate(sig_79_21= stattest(x=val...7,y=val...2,moey = moe, zscore=1.96))
+meddhh.hist_withmoe <- medhh_unadjusted %>% 
+  select(var,`1999`,`2010`,`2010MOE`) %>%
+  mutate(adj1999 = as.numeric(`1999`) * 1.59,adj2010 = as.numeric(`2010`) * 1.21, adj2010moe = as.numeric(`2010MOE`) * 1.21)
+
+medhh.hist_stattest <- left_join(medhh.hist_stattest.EST,medhh.hist_stattest.MOE) %>%
+  left_join(meddhh.hist_withmoe, by = c("race" = "var")) %>%
+  mutate(sig_99_10= stattest(x=adj1999,y=adj2010,moey = adj2010moe),
+         sig_99_21= stattest(x=adj1999,y=val2021,moey = moe2021),
+         sig_10_21= stattest(x=adj2010,moex = adj2010moe, y=val2021,moey = moe2021)) %>%
+  select(race, contains("sig"))
 
 ###
 ### Educational attainment ###
@@ -179,7 +204,7 @@ bach <- bachRaw %>%
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctbach),
          moeprop_blk = moeprop(y = Total_blk, moex = moeagg_blk, moey = TotalMOE_blk, p = pctbach_blk),
          moeprop_wht = moeprop(y = Total_wht, moex = moeagg_wht, moey = TotalMOE_wht, p = pctbach_wht),
-         # moeprop_asian = moeprop(y = Total_asian, moex = moeagg_asian, moey = TotalMOE_asian, p = pctbach_asian),
+         moeprop_asian = moeprop(y = Total_asian, moex = moeagg_asian, moey = TotalMOE_asian, p = pctbach_asian),
          moeprop_hisp = moeprop(y = Total_hisp, moex = moeagg_hisp, moey = TotalMOE_hisp, p = pctbach_hisp))%>%
   select(place,contains("pct")) %>%
   mutate(placenames = NA,
@@ -300,10 +325,23 @@ bach.race_stattest.data <-  bachRaw %>%
          moeprop = moeprop(y = Total, moex = moeagg, moey = TotalMOE, p = pctbach),
          moeprop_blk = moeprop(y = Total_blk, moex = moeagg_blk, moey = TotalMOE_blk, p = pctbach_blk),
          moeprop_wht = moeprop(y = Total_wht, moex = moeagg_wht, moey = TotalMOE_wht, p = pctbach_wht),
-         # moeprop_asian = moeprop(y = Total_asian, moex = moeagg_asian, moey = TotalMOE_asian, p = pctbach_asian),
+         moeprop_asian = moeprop(y = Total_asian, moex = moeagg_asian, moey = TotalMOE_asian, p = pctbach_asian),
          moeprop_hisp = moeprop(y = Total_hisp, moex = moeagg_hisp, moey = TotalMOE_hisp, p = pctbach_hisp))
 bach.race_stattest.race <- bach.race_stattest.data%>%
-  mutate(sig_wht_blk = stattest(x = pctbach_wht, moex = moeprop_wht, y = pctbach_blk, moey = moeprop_blk))
+  mutate(sig_wht_blk = stattest(x=pctbach_wht, moex = moeprop_wht, y=pctbach_blk, moey = moeprop_blk),
+         sig_wht_hisp = stattest(x=pctbach_wht, moex = moeprop_wht, y=pctbach_hisp, moey = moeprop_hisp),
+         sig_wht_asian = stattest(x=pctbach_wht, moex = moeprop_wht, y=pctbach_asian, moey = moeprop_asian),
+         sig_wht_all = stattest(x=pctbach_wht, moex = moeprop_wht, y=pctbach, moey = moeprop),
+         sig_blk_hisp = stattest(x=pctbach_blk, moex = moeprop_blk, y=pctbach_hisp, moey = moeprop_hisp),
+         sig_blk_asian = stattest(x=pctbach_blk, moex = moeprop_blk, y=pctbach_asian, moey = moeprop_asian),
+         sig_blk_all = stattest(x=pctbach_blk, moex = moeprop_blk, y=pctbach, moey = moeprop),
+         sig_hisp_asian = stattest(x=pctbach_hisp, moex = moeprop_hisp, y=pctbach_asian, moey = moeprop_asian),
+         sig_hisp_all = stattest(x=pctbach_hisp, moex = moeprop_hisp, y=pctbach, moey = moeprop),
+         sig_asian_all = stattest(x=pctbach_asian, moex = moeprop_asian, y=pctbach, moey = moeprop)
+  ) %>%
+  select(placename, contains("sig"))
+
+
 bach.race_stattest.geoEST <- bach.race_stattest.data %>%
   select(place,pctbach_blk, pctbach_wht) %>%
   pivot_longer(-place, names_to = "var", values_to = "val")
@@ -317,6 +355,36 @@ bach.race_stattest.geo <- left_join(bach.race_stattest.geoEST,bach.race_stattest
          sig_no_stt = stattest(x=val_071, moex = moe_071, y = val_103, moey = moe_103),
          sig_no_jeff = stattest(x=val_071, moex = moe_071, y = val_051, moey = moe_051))
 
+
+bach.hist_stattest <- left_join(Bach10MOE, Bach00MOE) %>%
+  left_join(EduAtt.hist %>% filter(year == 2000) %>% transmute(est2000 = val, race = var)) %>%
+  left_join(EduAtt.hist %>% filter(year == 2010) %>% transmute(est2010 = val, race = var)) %>%
+  left_join(bach.race_stattest.data %>% filter(place == "071") %>% select(moeprop,moeprop_blk ,moeprop_wht ,moeprop_hisp) %>%
+              pivot_longer(everything(), names_to = "var", values_to = "moe2021") %>%
+              mutate(race = case_when(var =="moeprop" ~ "All",
+                                      var =="moeprop_blk" ~ "Black",
+                                      var =="moeprop_wht" ~ "White,\nnon-Hispanic",
+                                      var =="moeprop_hisp" ~ "Hispanic,\nany race"
+              )) %>%
+              select(-var)) %>%
+  left_join(bach.race_stattest.data %>% filter(place == "071") %>% select(pctbach,pctbach_blk ,pctbach_wht ,pctbach_hisp) %>%
+              pivot_longer(everything(), names_to = "var", values_to = "est2021") %>%
+              mutate(race = case_when(var =="pctbach" ~ "All",
+                                      var =="pctbach_blk" ~ "Black",
+                                      var =="pctbach_wht" ~ "White,\nnon-Hispanic",
+                                      var =="pctbach_hisp" ~ "Hispanic,\nany race"
+              )) %>%
+              select(-var)) %>%
+  mutate(sig_00_10 = stattest(est2000, moe2000, est2010, moe2010),
+         sig_00_21 = stattest(est2000, moe2000, est2021, moe2021),
+         sig_10_21 = stattest(est2010, moe2010, est2021, moe2021)
+         ) %>%
+    select(race, contains("sig"))
+
+
+
+
+  
 ###
 ### Poverty ###
 ###
@@ -434,24 +502,32 @@ ggsave(totalPov.hist_chart,filename = "indicator expansion drafts/graphics/pov.h
 
 ### stat test ###
 pov_stattest <- povRaw %>%
-  filter(place != "103") %>%
-  mutate(
+  replace(is.na(.),0) %>%
+  transmute(placename = placename,
     pctpov = BelowPov / Total,
     pctpov_blk = BelowPov_blk / Total_blk,
     pctpov_wht = BelowPov_wht / Total_wht,
     pctpov_hisp = BelowPov_hisp / Total_hisp,
-    pctpov_asian = BelowPov_asian / Total_asian,
+    pctpov_asian = ifelse(!is.nan(BelowPov_asian / Total_asian),BelowPov_asian / Total_asian,0),
     moeprop = moeprop(y = Total, moex = BelowPovMOE, moey = TotalMOE, p = pctpov),
     moeprop_blk = moeprop(y = Total_blk, moex = BelowPovMOE_blk, moey = TotalMOE_blk, p = pctpov_blk),
     moeprop_wht = moeprop(y = Total_wht, moex = BelowPovMOE_wht, moey = TotalMOE_wht, p = pctpov_wht),
     moeprop_hisp = moeprop(y = Total_hisp, moex = BelowPovMOE_hisp, moey = TotalMOE_hisp, p = pctpov_hisp),
     moeprop_asian = moeprop(y = Total_asian, moex = BelowPovMOE_asian, moey = TotalMOE_asian, p = pctpov_asian)
   ) %>%
-  mutate(sig_blk_wht = stattest(x=pctpov_blk,moex = moeprop_blk, y = pctpov_wht, moey = moeprop_wht),
-         sig_blk_hisp = stattest(x=pctpov_blk,moex = moeprop_blk, y = pctpov_hisp, moey = moeprop_hisp),
-         sig_hisp_wht = stattest(x=pctpov_hisp,moex = moeprop_hisp, y = pctpov_wht, moey = moeprop_wht),
-         sig_hisp_asian = stattest(x=pctpov_hisp,moex = moeprop_hisp, y = pctpov_asian, moey = moeprop_asian),
-         sig_blk_asian = stattest(x=pctpov_blk,moex = moeprop_blk, y = pctpov_asian, moey = moeprop_asian))
+  mutate(sig_wht_blk = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_blk, moey = moeprop_blk),
+         sig_wht_hisp = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_hisp, moey = moeprop_hisp),
+         sig_wht_asian = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_asian, moey = moeprop_asian),
+         sig_wht_all = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov, moey = moeprop),
+         sig_blk_hisp = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov_hisp, moey = moeprop_hisp),
+         sig_blk_asian = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov_asian, moey = moeprop_asian),
+         sig_blk_all = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov, moey = moeprop),
+         sig_hisp_asian = stattest(x=pctpov_hisp, moex = moeprop_hisp, y=pctpov_asian, moey = moeprop_asian),
+         sig_hisp_all = stattest(x=pctpov_hisp, moex = moeprop_hisp, y=pctpov, moey = moeprop),
+         sig_asian_all = stattest(x=pctpov_asian, moex = moeprop_asian, y=pctpov, moey = moeprop)
+  ) %>%
+  select(placename, contains("sig"))
+
 
 ###
 ### Child poverty ###
@@ -601,7 +677,9 @@ ggsave(childPov.hist_chart,filename = "indicator expansion drafts/graphics/child
 ### stat test ###
 
 childpov_stattest <- childpovRaw %>%
-  mutate(
+  replace(is.na(.),0) %>%
+  transmute(
+    placename = placename,
     TotChildPov = BelowPovFemaleChild + BelowPovMaleChild + AbovePovFemaleChild + AbovePovMaleChild,
     moeaggtot = moeagg(cbind(BelowPovFemaleChildMOE, BelowPovMaleChildMOE, AbovePovFemaleChildMOE, AbovePovMaleChildMOE)),
     TotBelowChildPov = BelowPovFemaleChild + BelowPovMaleChild,
@@ -630,10 +708,21 @@ childpov_stattest <- childpovRaw %>%
     moeaggtot_asian = moeagg(cbind(BelowPovFemaleChildMOE_asian, BelowPovMaleChildMOE_asian, AbovePovFemaleChildMOE_asian, AbovePovMaleChildMOE_asian)),
     TotBelowChildPov_asian = BelowPovFemaleChild_asian + BelowPovMaleChild_asian,
     moeaggbelow_asian = moeagg(cbind(BelowPovFemaleChildMOE_asian, BelowPovMaleChildMOE_asian)),
-    pctBelowChildPov_asian = TotBelowChildPov_asian / TotChildPov_asian,
-    # moeprop_asian = moeprop(y=TotChildPov_asian, moex = moeaggbelow_asian, moey = moeaggtot_asian, p=pctBelowChildPov_asian)
-  )%>%
-  mutate(sig_wht_blk = stattest(x=pctBelowChildPov_wht, moex = moeprop_wht,y=pctBelowChildPov_blk, moey = moeprop_blk))
+    pctBelowChildPov_asian = ifelse(!is.nan(TotBelowChildPov_asian / TotChildPov_asian),TotBelowChildPov_asian / TotChildPov_asian,0),
+    moeprop_asian = moeprop(y=TotChildPov_asian, moex = moeaggbelow_asian, moey = moeaggtot_asian, p=pctBelowChildPov_asian) 
+    )%>%
+  mutate(sig_wht_blk = stattest(x=pctBelowChildPov_wht, moex = moeprop_wht, y=pctBelowChildPov_blk, moey = moeprop_blk),
+         sig_wht_hisp = stattest(x=pctBelowChildPov_wht, moex = moeprop_wht, y=pctBelowChildPov_hisp, moey = moeprop_hisp),
+         sig_wht_asian = stattest(x=pctBelowChildPov_wht, moex = moeprop_wht, y=pctBelowChildPov_asian, moey = moeprop_asian),
+         sig_wht_all = stattest(x=pctBelowChildPov_wht, moex = moeprop_wht, y=pctBelowChildPov, moey = moeprop),
+         sig_blk_hisp = stattest(x=pctBelowChildPov_blk, moex = moeprop_blk, y=pctBelowChildPov_hisp, moey = moeprop_hisp),
+         sig_blk_asian = stattest(x=pctBelowChildPov_blk, moex = moeprop_blk, y=pctBelowChildPov_asian, moey = moeprop_asian),
+         sig_blk_all = stattest(x=pctBelowChildPov_blk, moex = moeprop_blk, y=pctBelowChildPov, moey = moeprop),
+         sig_hisp_asian = stattest(x=pctBelowChildPov_hisp, moex = moeprop_hisp, y=pctBelowChildPov_asian, moey = moeprop_asian),
+         sig_hisp_all = stattest(x=pctBelowChildPov_hisp, moex = moeprop_hisp, y=pctBelowChildPov, moey = moeprop),
+         sig_asian_all = stattest(x=pctBelowChildPov_asian, moex = moeprop_asian, y=pctBelowChildPov, moey = moeprop)
+         ) %>%
+  select(placename, contains("sig"))
 
 ###
 ### Homeownership ###
@@ -765,7 +854,9 @@ ggsave(homeownership.hist_chart,filename = "indicator expansion drafts/graphics/
 ### stat test
 
 ho_stattest <- hoRaw %>%
-  mutate(Ownerpct = Owner / Total,
+  replace(is.na(.),0) %>%
+  transmute(placename = placename,
+            Ownerpct = Owner / Total,
          Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
          Ownerpct_blk = Owner_blk / Total_blk,
          Ownermoeprop_blk = moeprop(y=Total_blk,moex = OwnerMOE_blk,moey = TotalMOE_blk,p=Ownerpct_blk),
@@ -774,7 +865,18 @@ ho_stattest <- hoRaw %>%
          Ownerpct_hisp = Owner_hisp / Total_hisp,
          Ownermoeprop_hisp = moeprop(y=Total_hisp,moex = OwnerMOE_hisp,moey = TotalMOE_hisp,p=Ownerpct_hisp),
          Ownerpct_asian = Owner_asian / Total_asian,
-         #Ownermoeprop_asian = moeprop(y=Total_asian,moex = OwnerMOE_asian,moey = TotalMOE_asian,p=Ownerpct_asian)
+         Ownermoeprop_asian = moeprop(y=Total_asian,moex = OwnerMOE_asian,moey = TotalMOE_asian,p=Ownerpct_asian)
   )%>%
-  mutate(sig_blk_wht = stattest(x = Ownerpct_blk, moex = Ownermoeprop_blk, y = Ownerpct_wht, moey = Ownermoeprop_wht))
+  mutate(sig_wht_blk = stattest(x=Ownerpct_wht, moex = Ownermoeprop_wht, y=Ownerpct_blk, moey = Ownermoeprop_blk),
+         sig_wht_hisp = stattest(x=Ownerpct_wht, moex = Ownermoeprop_wht, y=Ownerpct_hisp, moey = Ownermoeprop_hisp),
+         sig_wht_asian = stattest(x=Ownerpct_wht, moex = Ownermoeprop_wht, y=Ownerpct_asian, moey = Ownermoeprop_asian),
+         sig_wht_all = stattest(x=Ownerpct_wht, moex = Ownermoeprop_wht, y=Ownerpct, moey = Ownermoeprop),
+         sig_blk_hisp = stattest(x=Ownerpct_blk, moex = Ownermoeprop_blk, y=Ownerpct_hisp, moey = Ownermoeprop_hisp),
+         sig_blk_asian = stattest(x=Ownerpct_blk, moex = Ownermoeprop_blk, y=Ownerpct_asian, moey = Ownermoeprop_asian),
+         sig_blk_all = stattest(x=Ownerpct_blk, moex = Ownermoeprop_blk, y=Ownerpct, moey = Ownermoeprop),
+         sig_hisp_asian = stattest(x=Ownerpct_hisp, moex = Ownermoeprop_hisp, y=Ownerpct_asian, moey = Ownermoeprop_asian),
+         sig_hisp_all = stattest(x=Ownerpct_hisp, moex = Ownermoeprop_hisp, y=Ownerpct, moey = Ownermoeprop),
+         sig_asian_all = stattest(x=Ownerpct_asian, moex = Ownermoeprop_asian, y=Ownerpct, moey = Ownermoeprop)
+  ) %>%
+  select(placename, contains("sig"))
 
