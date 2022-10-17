@@ -281,7 +281,7 @@ include_graphics("indicator expansion drafts/graphics/bach.hist.png")
 ```{r, echo=FALSE}
 makeCSS_source(
 "**Notes**: The number of Asians in New Orleans during the timespan of this chart is too small to produce reliable statistics.
-&#8224; : Change in time is not significant for Hispanic for 2000-2010. 
+&#9826; : Change in time is not significant for Hispanic for 2000-2010. 
 
 **Source**: The Data Center analysis of IPUMS NHGIS data from 1980, 1990, 2000, and 2010 Decennial Census and US Census Bureau data from the American Community Survey `r yearPEP`."
 )
@@ -292,9 +292,9 @@ include_graphics("indicator expansion drafts/graphics/bach.raceGeos.png")
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&#8224; : In Orleans Parish, the difference between Hispanic and Asian is not statistically significant.
-&#8224; : In Jefferson Parish, the difference between White and Asian and Black and Hispanic is not statistically significant.
-&#8224; : In St. Tammany Parish, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.  
+"&#9826; : In Orleans Parish, the difference between Hispanic and Asian is not statistically significant.
+&#9826; : In Jefferson Parish, the difference between White and Asian and Black and Hispanic is not statistically significant.
+&#9826; : In St. Tammany Parish, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.  
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey `r yearPEP`."
 )
@@ -334,8 +334,8 @@ medhh.hist_chart
 ```{r, echo=FALSE}
 makeCSS_source(
 "**Notes**: The number of Asians in New Orleans during the timespan of this chart is too small to produce reliable statistics.
-&#8224; : Change in time is not significant for Black for 2010-2021.
-&#8224; : Change in time is not significant for any race for 1999-2010.
+&#9826; : Change in time is not significant for Black for 2010-2021.
+&#9826; : Change in time is not significant for any race for 1999-2010.
 
 **Source**: The Data Center analysis of IPUMS NHGIS data from 1980, 1990, 2000, and 2010 Decennial Census and US Census Bureau data from the American Community Survey `r yearPEP`."
 )
@@ -348,10 +348,10 @@ include_graphics("indicator expansion drafts/graphics/medhh.raceGeos.png")
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&#8224; = In Orleans Parish, the difference between White and Asian is not statistically significant.
-&#8224; = In Jefferson Parish, the difference between White and Asian, White and Hispanic, and Hispanic and Asian is not statistically significant.
-&#8224; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
-&#8224; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+"&#9826; = In Orleans Parish, the difference between White and Asian is not statistically significant.
+&#9826; = In Jefferson Parish, the difference between White and Asian, White and Hispanic, and Hispanic and Asian is not statistically significant.
+&#9826; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#9826; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey `r yearPEP`."
 )
@@ -415,8 +415,8 @@ include_graphics("indicator expansion drafts/graphics/pov.hist.png")
 ```{r, echo=FALSE}
 makeCSS_source(
 "**Notes**: The number of Asians in New Orleans during the timespan of this chart is too small to produce reliable statistics.  
-&#8224; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
-&#8224; = Change in time is not significant for Black and Hispanic for 2000-2010.
+&#9826; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
+&#9826; = Change in time is not significant for Black and Hispanic for 2000-2010.
 
 **Source**: The Data Center analysis of IPUMS NHGIS data from 1980, 1990, 2000, and 2010 Decennial Census and US Census Bureau data from the American Community Survey `r yearPEP`."
 )
@@ -427,9 +427,9 @@ include_graphics("indicator expansion drafts/graphics/pov.raceGeos.png")
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&#8224; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
-&#8224; = In Jefferson Parish, the difference between White and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
-&#8224; = In New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.
+"&#9826; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#9826; = In Jefferson Parish, the difference between White and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#9826; = In New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey `r yearPEP`."
 )
@@ -456,8 +456,8 @@ include_graphics("indicator expansion drafts/graphics/childpov.hist.png")
 ```{r, echo=FALSE}
 makeCSS_source(
 "**Notes**: The number of Asians in New Orleans during the timespan of this chart is too small to produce reliable statistics.   
-&#8224; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
-&#8224; = Change in time is not significant for White or Hispanic for 2000-2010.
+&#9826; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
+&#9826; = Change in time is not significant for White or Hispanic for 2000-2010.
 
 **Source**: The Data Center analysis of IPUMS NHGIS data from 1980, 1990, 2000, and 2010 Decennial Census and US Census Bureau data from the American Community Survey `r yearPEP`."
 )
@@ -470,10 +470,10 @@ include_graphics("indicator expansion drafts/graphics/childpov.raceGeos.png")
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&#8224; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
-&#8224; = In Jefferson Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.
-&#8224; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
-&#8224; = In United States, the difference between White and Asian is not statistically significant.
+"&#9826; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#9826; = In Jefferson Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#9826; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#9826; = In United States, the difference between White and Asian is not statistically significant.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
 )
@@ -549,8 +549,8 @@ include_graphics("indicator expansion drafts/graphics/homeownership.hist.png")
 ```{r, echo=FALSE}
 makeCSS_source(
 "**Notes**: The number of Asians in New Orleans during the timespan of this chart is too small to produce reliable statistics.   
-&#8224; = Change in time is not significant for Black for 2010-2021.
-&#8224; = Change in time is not significant for Hispanic,any race for 2000-2021.
+&#9826; = Change in time is not significant for Black for 2010-2021.
+&#9826; = Change in time is not significant for Hispanic,any race for 2000-2021.
 
 **Source**: The Data Center analysis of IPUMS NHGIS data from 1980, 1990, 2000, and 2010 Decennial Census and US Census Bureau data from the American Community Survey `r yearPEP`."
 )
@@ -563,9 +563,9 @@ include_graphics("indicator expansion drafts/graphics/homeownership.raceGeos.png
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&#8224; = In Orleans Parish, the difference between White and Asian, Black and Hispanic, and Black and Asian is not statistically significant.
-&#8224; = In Jefferson Parish, the difference between White and Asian is not statistically significant.
-&#8224; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
+"&#9826; = In Orleans Parish, the difference between White and Asian, Black and Hispanic, and Black and Asian is not statistically significant.
+&#9826; = In Jefferson Parish, the difference between White and Asian is not statistically significant.
+&#9826; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey `r yearPEP`."
 )
