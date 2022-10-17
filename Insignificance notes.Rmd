@@ -18,7 +18,7 @@ raceList <- function(data){
            insigList = str_sub(insigList,1,-3)) %>%
   mutate(placename = ifelse(placename %in% c("Orleans", "Jefferson", "St. Tammany"), paste0(placename, " Parish"), placename)) %>%
   filter(insigList != "") %>%
-  mutate(note = paste0("&#8224; : In ", placename, ", the difference between ", insigList, " is not statistically significant.")) %>%
+  mutate(note = paste0("&#9826; : In ", placename, ", the difference between ", insigList, " is not statistically significant.")) %>%
   select(placename,note) %>%
   pivot_wider(names_from = "placename", values_from = "note") %>%
   unite("note", 1:dim(.)[2]) %>%
@@ -35,7 +35,7 @@ timeList <- function(data, compYear = 2000){
            insigList = ifelse(sig_10_21 == "no", paste0(insigList, " for 2010-2021", sep = ", "), insigList),
            insigList = str_sub(insigList,1,-3)) %>%
   filter(insigList != "") %>%
-  mutate(note = paste0("&#8224; = Change in time is not significant for ", race, insigList, ".")) %>%
+  mutate(note = paste0("&#9826; = Change in time is not significant for ", race, insigList, ".")) %>%
   select(race,note) %>%
   pivot_wider(names_from = "race", values_from = "note") %>%
   unite("note", 1:dim(.)[2]) %>%
@@ -48,7 +48,7 @@ timeList <- function(data, compYear = 2000){
            insigList = ifelse(sig_10_21 == "no", paste0(insigList, " for 2010-2021", sep = ", "), insigList),
            insigList = str_sub(insigList,1,-3)) %>%
   filter(insigList != "") %>%
-  mutate(note = paste0("&#8224; = Change in time is not significant for ", race, insigList, ".")) %>%
+  mutate(note = paste0("&#9826; = Change in time is not significant for ", race, insigList, ".")) %>%
   select(race,note) %>%
   pivot_wider(names_from = "race", values_from = "note") %>%
   unite("note", 1:dim(.)[2]) %>%
@@ -63,9 +63,9 @@ bachracelist <- raceList(bach.race_stattest)
 print(bachracelist$note)
 ```
 
-&#8224; : In Orleans Parish, the difference between Hispanic and Asian is not statistically significant.
-&#8224; : In Jefferson Parish, the difference between White and Asian and Black and Hispanic is not statistically significant.
-&#8224; : In St. Tammany Parish, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#9826; : In Orleans Parish, the difference between Hispanic and Asian is not statistically significant.
+&#9826; : In Jefferson Parish, the difference between White and Asian and Black and Hispanic is not statistically significant.
+&#9826; : In St. Tammany Parish, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
 
 ```{r}
 
@@ -73,7 +73,7 @@ bachtimelist <- timeList(bach.hist_stattest)
 print(bachtimelist$note)
 
 ```
-&#8224; : Change in time is not significant for Hispanic for 2000-2010.
+&#9826; : Change in time is not significant for Hispanic for 2000-2010.
 
 
 ### Median household income ###
@@ -82,10 +82,10 @@ medhhracelist <- raceList(medhh.race_stattest)
 print(medhhracelist$note)
 ```
 
-&#8224; = In Orleans Parish, the difference between White and Asian is not statistically significant.
-&#8224; = In Jefferson Parish, the difference between White and Asian, White and Hispanic, and Hispanic and Asian is not statistically significant.
-&#8224; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
-&#8224; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#9826; = In Orleans Parish, the difference between White and Asian is not statistically significant.
+&#9826; = In Jefferson Parish, the difference between White and Asian, White and Hispanic, and Hispanic and Asian is not statistically significant.
+&#9826; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#9826; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
 
 ```{r}
 
@@ -93,25 +93,25 @@ medhhtimelist <- timeList(medhh.hist_stattest, compYear = 1999)
 print(medhhtimelist$note)
 
 ```
-&#8224; : Change in time is not significant for Black for 2010-2021.
-&#8224; : Change in time is not significant for any race for 1999-2010.
+&#9826; : Change in time is not significant for Black for 2010-2021.
+&#9826; : Change in time is not significant for any race for 1999-2010.
 
 ### Poverty ###
 ```{r}
 povracelist <- raceList(pov.race_stattest)
 print(povracelist$note)
 ```
-&#8224; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
-&#8224; = In Jefferson Parish, the difference between White and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
-&#8224; = In New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.
+&#9826; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#9826; = In Jefferson Parish, the difference between White and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#9826; = In New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.
 
 ```{r}
 povtimelist <- timeList(pov.hist_stattest)
 print(povtimelist$note)
 
 ```
-&#8224; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
-&#8224; = Change in time is not significant for Black and Hispanic, any race for 2000-2010.
+&#9826; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
+&#9826; = Change in time is not significant for Black and Hispanic, any race for 2000-2010.
 
 
 ### Child poverty ###
@@ -119,10 +119,10 @@ print(povtimelist$note)
 childpovracelist <- raceList(childpov.race_stattest)
 print(childpovracelist$note)
 ```
-&#8224; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
-&#8224; = In Jefferson Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.
-&#8224; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
-&#8224; = In United States, the difference between White and Asian is not statistically significant.
+&#9826; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#9826; = In Jefferson Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#9826; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#9826; = In United States, the difference between White and Asian is not statistically significant.
 
 ```{r}
 
@@ -130,25 +130,25 @@ childpovtimelist <- timeList(childpov.hist_stattest)
 print(childpovtimelist$note)
 
 ```
-&#8224; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
-&#8224; = Change in time is not significant for White or Hispanic for 2000-2010.
+&#9826; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
+&#9826; = Change in time is not significant for White or Hispanic for 2000-2010.
 
 ### Homeownership ###
 ```{r}
 horacelist <- raceList(ho.race_stattest)
 print(horacelist$note)
 ```
-&#8224; = In Orleans Parish, the difference between White and Asian, Black and Hispanic, and Black and Asian is not statistically significant.
-&#8224; = In Jefferson Parish, the difference between White and Asian is not statistically significant.
-&#8224; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#9826; = In Orleans Parish, the difference between White and Asian, Black and Hispanic, and Black and Asian is not statistically significant.
+&#9826; = In Jefferson Parish, the difference between White and Asian is not statistically significant.
+&#9826; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
 ```{r}
 
 hotimelist <- timeList(ho.hist_stattest %>% mutate(sig_00_10 = ""))
 print(hotimelist$note)
 
 ```
-&#8224; = Change in time is not significant for Black for 2010-2021.
-&#8224; = Change in time is not significant for Hispanic for 2000-2021.
+&#9826; = Change in time is not significant for Black for 2010-2021.
+&#9826; = Change in time is not significant for Hispanic for 2000-2021.
 
 
 
