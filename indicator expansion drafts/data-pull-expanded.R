@@ -179,9 +179,11 @@ bachnames10 <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",
                  "FemaleBachMOE_wht", 
                  "Total_hisp", "TotalMOE_hisp", "MaleBach_hisp", "MaleBachMOE_hisp", "FemaleBach_hisp", 
                  "FemaleBachMOE_hisp")
-Bach10_raw <- wholivesdatapull(bachvars10, bachnames10, year = 2010)
 
-Bach10 <- Bach10_raw %>%
+Bach10Raw <- wholivesdatapull(bachvars10, bachnames10, year = 2010)
+
+Bach10 <- Bach10Raw %>%
+
   filter(place == "071") %>% 
   transmute(year = 2010,
             pctTotalBach = (MaleBach + FemaleBach + MaleGradProf + FemaleGradProf) / Total,
@@ -191,7 +193,9 @@ Bach10 <- Bach10_raw %>%
   pivot_longer(cols = pctTotalBach:pctHispBach, values_to = "val") %>% 
   select(year, val, name)
 
-Bach10MOE <- Bach10_raw %>%
+
+Bach10MOE <- Bach10Raw %>%
+
   filter(place == "071") %>% 
   mutate(year = 2010,
             pctTotalBach = (MaleBach + FemaleBach + MaleGradProf + FemaleGradProf) / Total,
@@ -386,9 +390,11 @@ povnames10 <- c("Total", "TotalMOE", "BelowPov", "BelowPovMOE",
                 "Total_asian", "TotalMOE_asian", "BelowPov_asian", "BelowPovMOE_asian",
                 "Total_wht", "TotalMOE_wht", "BelowPov_wht", "BelowPovMOE_wht",
                 "Total_hisp", "TotalMOE_hisp", "BelowPov_hisp", "BelowPovMOE_hisp")
-pov10_raw <- wholivesdatapull(povvars10, povnames10, year = 2010)
 
-pov10 <- pov10_raw %>%
+pov10Raw <- wholivesdatapull(povvars10, povnames10, year = 2010)
+
+pov10 <- pov10Raw %>%
+
   filter(place == "071") %>% 
   transmute(place = place,
             year = 2010,
@@ -399,7 +405,9 @@ pov10 <- pov10_raw %>%
   pivot_longer(cols = pctTotalpov:pctHisppov, values_to = "val") %>% 
   select(place, year, val, name)
 
-pov10MOE <- pov10_raw %>%
+
+pov10MOE <- pov10Raw %>%
+
   filter(place == "071") %>% 
   transmute(year = 2010,
             place = place,
