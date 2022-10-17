@@ -1,0 +1,152 @@
+---
+title: "Indignificant notes"
+output: html_document
+date: "2022-10-14"
+---
+
+### Fynctions to list out insignificance between variables:
+```{r}
+raceList <- function(data){
+  data %>%
+    mutate(insigList = "",
+           insigList = ifelse(sig_wht_blk == "no", "White and Black", insigList),
+           insigList = ifelse(sig_wht_asian == "no", paste0(insigList,"White and Asian", sep = ", "), insigList),
+           insigList = ifelse(sig_wht_hisp == "no", paste0(insigList,"White and Hispanic",sep = ", "), insigList),
+           insigList = ifelse(sig_blk_hisp == "no", paste0(insigList,"Black and Hispanic",sep = ", "), insigList),
+           insigList = ifelse(sig_blk_asian  == "no", paste0(insigList, "Black and Asian", sep = ", "), insigList),
+           insigList = ifelse(sig_hisp_asian == "no", paste0(insigList, "Hispanic and Asian", sep = ", "), insigList),
+           insigList = str_sub(insigList,1,-3)) %>%
+  mutate(placename = ifelse(placename %in% c("Orleans", "Jefferson", "St. Tammany"), paste0(placename, " Parish"), placename)) %>%
+  filter(insigList != "") %>%
+  mutate(note = paste0("&#8224; : In ", placename, ", the difference between ", insigList, " is not statistically significant.")) %>%
+  select(placename,note) %>%
+  pivot_wider(names_from = "placename", values_from = "note") %>%
+  unite("note", 1:dim(.)[2]) %>%
+    as.data.frame()
+}
+```
+```{r}
+timeList <- function(data, compYear = 2000){
+  if(compYear == 2000){
+  data %>%
+    mutate(insigList = "",
+           insigList = ifelse(sig_00_10 == "no", paste0(insigList, " for 2000-2010", sep = ", "), insigList),
+           insigList = ifelse(sig_00_21 == "no", paste0(insigList, " for 2000-2021", sep = ", "), insigList),
+           insigList = ifelse(sig_10_21 == "no", paste0(insigList, " for 2010-2021", sep = ", "), insigList),
+           insigList = str_sub(insigList,1,-3)) %>%
+  filter(insigList != "") %>%
+  mutate(note = paste0("&#8224; = Change in time is not significant for ", race, insigList, ".")) %>%
+  select(race,note) %>%
+  pivot_wider(names_from = "race", values_from = "note") %>%
+  unite("note", 1:dim(.)[2]) %>%
+    as.data.frame()
+  } else{
+    data %>%
+    mutate(insigList = "",
+           insigList = ifelse(sig_99_10 == "no", paste0(insigList, " for 1999-2010", sep = ", "), insigList),
+           insigList = ifelse(sig_99_21 == "no", paste0(insigList, " for 1999-2021", sep = ", "), insigList),
+           insigList = ifelse(sig_10_21 == "no", paste0(insigList, " for 2010-2021", sep = ", "), insigList),
+           insigList = str_sub(insigList,1,-3)) %>%
+  filter(insigList != "") %>%
+  mutate(note = paste0("&#8224; = Change in time is not significant for ", race, insigList, ".")) %>%
+  select(race,note) %>%
+  pivot_wider(names_from = "race", values_from = "note") %>%
+  unite("note", 1:dim(.)[2]) %>%
+    as.data.frame()
+  }
+}
+```
+
+### Bachelor/educational attainment ###
+```{r}
+bachracelist <- raceList(bach.race_stattest)
+print(bachracelist$note)
+```
+
+&#8224; : In Orleans Parish, the difference between Hispanic and Asian is not statistically significant.
+&#8224; : In Jefferson Parish, the difference between White and Asian and Black and Hispanic is not statistically significant.
+&#8224; : In St. Tammany Parish, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+
+```{r}
+
+bachtimelist <- timeList(bach.hist_stattest)
+print(bachtimelist$note)
+
+```
+&#8224; : Change in time is not significant for Hispanic for 2000-2010.
+
+
+### Median household income ###
+```{r}
+medhhracelist <- raceList(medhh.race_stattest)
+print(medhhracelist$note)
+```
+
+&#8224; = In Orleans Parish, the difference between White and Asian is not statistically significant.
+&#8224; = In Jefferson Parish, the difference between White and Asian, White and Hispanic, and Hispanic and Asian is not statistically significant.
+&#8224; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#8224; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+
+```{r}
+
+medhhtimelist <- timeList(medhh.hist_stattest, compYear = 1999)
+print(medhhtimelist$note)
+
+```
+&#8224; : Change in time is not significant for Black for 2010-2021.
+&#8224; : Change in time is not significant for any race for 1999-2010.
+
+### Poverty ###
+```{r}
+povracelist <- raceList(pov.race_stattest)
+print(povracelist$note)
+```
+&#8224; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#8224; = In Jefferson Parish, the difference between White and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#8224; = In New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.
+```{r}
+povtimelist <- timeList(pov.hist_stattest)
+print(povtimelist$note)
+
+```
+&#8224; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
+&#8224; = Change in time is not significant for Black and Hispanic, any race for 2000-2010.
+
+
+### Child poverty ###
+```{r}
+childpovracelist <- raceList(childpov.race_stattest)
+print(childpovracelist$note)
+```
+&#8224; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#8224; = In Jefferson Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.
+&#8224; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
+&#8224; = In United States, the difference between White and Asian is not statistically significant.
+```{r}
+
+childpovtimelist <- timeList(childpov.hist_stattest)
+print(childpovtimelist$note)
+
+```
+&#8224; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
+&#8224; = Change in time is not significant for White, non-Hispanic for 2000-2010.
+
+### Homeownership ###
+```{r}
+horacelist <- raceList(ho.race_stattest)
+print(horacelist$note)
+```
+&#8224; = In Orleans Parish, the difference between White and Asian, Black and Hispanic, and Black and Asian is not statistically significant.
+&#8224; = In Jefferson Parish, the difference between White and Asian is not statistically significant.
+&#8224; = In St. Tammany Parish, the difference between White and Asian, White and Hispanic, Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
+```{r}
+
+hotimelist <- timeList(ho.hist_stattest %>% mutate(sig_00_10 = ""))
+print(hotimelist$note)
+
+```
+&#8224; = Change in time is not significant for Black for 2010-2021.
+&#8224; = Change in time is not significant for Hispanic,any race for 2000-2021.
+
+
+
