@@ -104,6 +104,7 @@ print(povracelist$note)
 &#8224; = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.
 &#8224; = In Jefferson Parish, the difference between White and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.
 &#8224; = In New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.
+
 ```{r}
 povtimelist <- timeList(pov.hist_stattest)
 print(povtimelist$note)
@@ -122,6 +123,7 @@ print(childpovracelist$note)
 &#8224; = In Jefferson Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.
 &#8224; = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.
 &#8224; = In United States, the difference between White and Asian is not statistically significant.
+
 ```{r}
 
 childpovtimelist <- timeList(childpov.hist_stattest)
@@ -129,7 +131,7 @@ print(childpovtimelist$note)
 
 ```
 &#8224; = Change in time is not significant for any race for 2000-2021 or 2010-2021.
-&#8224; = Change in time is not significant for White, non-Hispanic for 2000-2010.
+&#8224; = Change in time is not significant for White or Hispanic for 2000-2010.
 
 ### Homeownership ###
 ```{r}
@@ -146,7 +148,7 @@ print(hotimelist$note)
 
 ```
 &#8224; = Change in time is not significant for Black for 2010-2021.
-&#8224; = Change in time is not significant for Hispanic,any race for 2000-2021.
+&#8224; = Change in time is not significant for Hispanic for 2000-2021.
 
 
 
