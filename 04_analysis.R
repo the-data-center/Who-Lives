@@ -1321,7 +1321,7 @@ pov_stat_race <- pov_stattest %>% select(place, placename, (contains("sig") & !c
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename),
-         placename = case_when("no" %in% stat_race ~ paste0(placename, "◊"),
+         placename = case_when("no" %in% stat_race ~ paste0(placename, " ◊"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 pov_with_stats <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans ◊", "Jefferson ◊", "St. Tammany ◊", "Metro ◊", "United States")),
@@ -1651,7 +1651,7 @@ childpov.hist_stattest <- left_join(childPov.histMOE, (childPov.hist %>%
   ) %>%
   select(race, contains("sig"))
 
-childPov.hist <- childPov.hist %>% left_join(childpov.hist_stattest, by = c("var" = "race")) %>%
+childPov.hist <- childPov.hist %>% left_join(childpov.hist_stattest, by = c("var" = "race")) %>% filter(var != "All") %>%
   mutate(val_lab = case_when((sig_00_10 == "no" | sig_00_21 == "no" | sig_10_21 == "no") ~ "◊",
                              T ~ " "))
 
@@ -1660,7 +1660,7 @@ childPov.hist <- childPov.hist %>% left_join(childpov.hist_stattest, by = c("var
 
 # Homeownership
 
-hoRaw_exp <- load("indicator expansion drafts/hoRaw.RData")
+load("inputs/hoRaw_exp.RData")
 ho_exp <- hoRaw_exp %>%
   mutate(Ownerpct = Owner / Total,
          Ownermoeprop = moeprop(y=Total,moex = OwnerMOE,moey = TotalMOE,p=Ownerpct),
@@ -1685,9 +1685,6 @@ ho_exp <- hoRaw_exp %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
 ### Across geos homeownership bar chart ###
-ho.totals <- ho_exp %>% 
-  filter(var == "Ownerpct") %>%
-  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
 
 ho.race <- ho_exp %>%
   filter(var != "Ownerpct") %>%

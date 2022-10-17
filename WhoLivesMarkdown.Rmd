@@ -329,7 +329,7 @@ makeCSS_source(
 In 1979, households with higher incomes were disproportionately in the parishes surrounding New Orleans, while lower income White, Hispanic, and Black households were more likely to live in the city. [^6] By `r yearPEP`, these patterns had changed with higher income White households more often living in the city such that income disparity within the city has escalated. In `r yearPEP`, Black households in New Orleans had a median income of only `r dollar(getvalue.medhh.black.no)`, while Hispanic households were at `r dollar(getvalue.medhh.hisp.no)` and White households at `r dollar(getvalue.medhh.white.no)`.
 
 ```{r med hh over time, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
-medhh.hist_chart
+include_graphics("indicator expansion drafts/graphics/medhh.hist.png")
 ```
 ```{r, echo=FALSE}
 makeCSS_source(

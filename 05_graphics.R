@@ -783,23 +783,23 @@ medhh.raceGeos_chart <- medhh_with_stats %>%
                     limits = levels(medhh_with_stats$var.fac)) +
   geom_segment(data= medhh.totals %>% filter(grepl("Orleans", placename.fac)), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= medhh.totals %>% filter(grepl("Orleans", placename.fac)),
-             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             aes(label = paste0("All:$",scales::comma(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   geom_segment(data= medhh.totals %>% filter(grepl("Jefferson", placename.fac)),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= medhh.totals %>% filter(grepl("Jefferson", placename.fac)),
-             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             aes(label = paste0("All:$",scales::comma(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   geom_segment(data= medhh.totals %>% filter(grepl("St. Tammany", placename.fac)),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= medhh.totals %>% filter(grepl("St. Tammany", placename.fac)),
-             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             aes(label = paste0("All:$",scales::comma(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   geom_segment(data= medhh.totals %>% filter(grepl("Metro", placename.fac)),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= medhh.totals %>% filter(grepl("Metro", placename.fac)),
-             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             aes(label = paste0("All:$",scales::comma(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   geom_segment(data= medhh.totals %>% filter(grepl("United States", placename.fac)),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
   geom_label(data= medhh.totals %>% filter(grepl("United States", placename.fac)),
-             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             aes(label = paste0("All:$",scales::comma(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
@@ -831,7 +831,7 @@ medhh.hist_chart <- medhh.hist %>%
        y="") 
 medhh.hist_chart
 ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hist.png",
-       width = 8, height = 6, units = "in")
+       width = 10, height = 6, units = "in")
 
 # Across geos educational attainment bar chart
 
@@ -1032,7 +1032,7 @@ childPov.hist_chart <- childPov.hist %>%
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2021")) + 
   geom_text(data = subset(childPov.hist, Year %in% c("1980", "2021") & var != "All"), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(childPov.hist, year == "2021"), aes(x = year, y = val, label = val_lab, hjust = -1))+
+  geom_text(data = subset(childPov.hist, Year == "2021"), aes(x = Year, y = val, label = val_lab, hjust = -1))+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
