@@ -1190,7 +1190,7 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   getvalue.ho.us.2000 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "United States") %>%
-    select(census2000) %>%
+    select(Ownerpct2000) %>%
     pull()
 
   getvalue.ho.us.2018 <- ho %>%
@@ -1204,7 +1204,7 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   getvalue.ho.tam.2000 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "St. Tammany") %>%
-    select(census2000) %>%
+    select(Ownerpct2000) %>%
     pull()
 
   getvalue.ho.tam.2018 <- ho %>%
@@ -1217,7 +1217,7 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   getvalue.ho.jeff.2000 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "Jefferson") %>%
-    select(census2000) %>%
+    select(Ownerpct2000) %>%
     pull()
 
   getvalue.ho.jeff.2018 <- ho %>%
@@ -1231,7 +1231,7 @@ getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.stat
   getvalue.ho.no.2000 <- ho %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
-    select(census2000) %>%
+    select(Ownerpct2000) %>%
     pull()
 
   getvalue.ho.no.2018 <- ho %>%
