@@ -153,6 +153,10 @@ honames <- c("Total","TotalMOE","Owner","OwnerMOE")
 hoRaw <- wholivesdatapull(hovars, honames)
 save(hoRaw, file = "inputs/hoRaw.RData")
 
+hovars2000 <- c('H004001', 'H004002')
+honames2000 <- c("Total2000", "Owner2000")
+hoRaw2000 <- wholivesdatapull(hovars2000, honames2000, censusname = "dec/sf1", year = 2000) %>% select(-place)
+save(hoRaw2000, file = "inputs/hoRaw2000.RData")
 
 #Homeowners without a mortgage
 

@@ -535,9 +535,9 @@ hoGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"&ast; = Difference between 1999 and `r yearPEP` is not significant at 95% confidence interval.
+"&ast; = Difference between 2000 and `r yearPEP` is not significant at 95% confidence interval.
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey `r yearPEP`."
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF1 and American Community Survey `r yearPEP`."
 )
 ```
 
