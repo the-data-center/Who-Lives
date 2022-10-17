@@ -766,45 +766,45 @@ chart.commute.allparishes <- commuteforGraphic %>%
 
 #across geos median hh income bar chart
 
-medhh.raceGeos_chart <- medhh.race %>%
-  ggplot(aes(place.fac, val, fill=var.fac)) + 
+medhh.raceGeos_chart <- medhh_with_stats %>%
+  ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
   geom_bar(stat="identity",
            position = position_dodge(),
-           width = .7,
-           color='gray70') +    #bar outline
-  geom_text(data = subset(medhh.race, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
-            aes(label = paste0("$",scales::comma(val))),
+           width = .6,
+           color='gray70') +    #bar outlineas.factor
+  geom_text(data = subset(medhh_with_stats, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = val_lab),
             position=position_dodge(width = .7),
             vjust = -.7,
-            size=3,
+            size=2.75,
             family="Asap") +
   scale_y_continuous(labels = comma_format(accuracy = 1)) + 
   scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
-                    limits = levels(medhh.race$var.fac)) +
-  geom_segment(data= medhh.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= medhh.totals %>% filter(place.fac=="Orleans"),
-             aes(label = paste0("All:$",scales::comma(val))),
-             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3.5,family="Asap", color = "gray70") +
-  geom_segment(data= medhh.totals %>% filter(place.fac=="Jefferson"),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= medhh.totals %>% filter(place.fac=="Jefferson"),
-             aes(label = paste0("All:$",scales::comma(val))),
-             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3.5,family="Asap", color = "gray70") +
-  geom_segment(data= medhh.totals %>% filter(place.fac=="St. Tammany"),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= medhh.totals %>% filter(place.fac=="St. Tammany"),
-             aes(label = paste0("All:$",scales::comma(val))),
-             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3.5,family="Asap", color = "gray70") +
-  geom_segment(data= medhh.totals %>% filter(place.fac=="Metro"),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= medhh.totals %>% filter(place.fac=="Metro"),
-             aes(label = paste0("All:$",scales::comma(val))),
-             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3.5,family="Asap", color = "gray70") +
-  geom_segment(data= medhh.totals %>% filter(place.fac=="U.S."),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= medhh.totals %>% filter(place.fac=="U.S."),
-             aes(label = paste0("All:$",scales::comma(val))),
-             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3.5,family="Asap", color = "gray70") +
+                    limits = levels(medhh_with_stats$var.fac)) +
+  geom_segment(data= medhh.totals %>% filter(grepl("Orleans", placename.fac)), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= medhh.totals %>% filter(grepl("Orleans", placename.fac)),
+             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
+  geom_segment(data= medhh.totals %>% filter(grepl("Jefferson", placename.fac)),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= medhh.totals %>% filter(grepl("Jefferson", placename.fac)),
+             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
+  geom_segment(data= medhh.totals %>% filter(grepl("St. Tammany", placename.fac)),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= medhh.totals %>% filter(grepl("St. Tammany", placename.fac)),
+             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
+  geom_segment(data= medhh.totals %>% filter(grepl("Metro", placename.fac)),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= medhh.totals %>% filter(grepl("Metro", placename.fac)),
+             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
+  geom_segment(data= medhh.totals %>% filter(grepl("United States", placename.fac)),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= medhh.totals %>% filter(grepl("United States", placename.fac)),
+             aes(label = paste0("All:",scales::comma(val,accuracy = 1))),
+             hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
-        plot.title = element_text(hjust = .5, size=16)) + 
+        plot.title = element_text(size=16)) + 
   labs(title = "Median household income by race/ethnicity, 2021",
        x="",
        y="")
@@ -821,6 +821,7 @@ medhh.hist_chart <- medhh.hist %>%
   scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2021")) +
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   geom_text(data = subset(medhh.hist, Year %in% c("1979", "2021") & var != "All"), aes(x=Year,y=val, label = label_dollar(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(medhh.hist, Year == "2021"), aes(x = Year, y = val, label = val_lab, hjust = -1))+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -834,39 +835,39 @@ ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hi
 
 # Across geos educational attainment bar chart
 
-bach.raceGeos_chart <- bach.race %>%
-  ggplot(aes(x=place.fac, y=val, fill=var.fac)) + 
+bach.raceGeos_chart <- bach_with_stats %>%
+  ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
   geom_bar(stat="identity",
            position = position_dodge(),
            width = .6,
            color='gray70') +    #bar outlineas.factor
-  geom_text(data = subset(bach.race, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
-            aes(label = scales::percent(val,accuracy = 1)),
+  geom_text(data = subset(bach_with_stats, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = val_lab),
             position=position_dodge(width = .7),
             vjust = -.7,
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
   scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
-                    limits = levels(bach.race$var.fac)) +
-  geom_segment(data= bach.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= bach.totals %>% filter(place.fac=="Orleans"),
+                    limits = levels(bach_with_stats$var.fac)) +
+  geom_segment(data= bach.totals %>% filter(grepl("Orleans", placename.fac)), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= bach.totals %>% filter(grepl("Orleans", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= bach.totals %>% filter(place.fac=="Jefferson"),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= bach.totals %>% filter(place.fac=="Jefferson"),
+  geom_segment(data= bach.totals %>% filter(grepl("Jefferson", placename.fac)),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= bach.totals %>% filter(grepl("Jefferson", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= bach.totals %>% filter(place.fac=="St. Tammany"),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= bach.totals %>% filter(place.fac=="St. Tammany"),
+  geom_segment(data= bach.totals %>% filter(grepl("St. Tammany", placename.fac)),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= bach.totals %>% filter(grepl("St. Tammany", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= bach.totals %>% filter(place.fac=="Metro"),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= bach.totals %>% filter(place.fac=="Metro"),
+  geom_segment(data= bach.totals %>% filter(grepl("Metro", placename.fac)),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= bach.totals %>% filter(grepl("Metro", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= bach.totals %>% filter(place.fac=="U.S."),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= bach.totals %>% filter(place.fac=="U.S."),
+  geom_segment(data= bach.totals %>% filter(grepl("United States", placename.fac)),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= bach.totals %>% filter(grepl("United States", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   themeDC_horizontal() +
@@ -889,6 +890,7 @@ EduAtt.hist_chart <- EduAtt.hist %>%
   scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2021"))+
   scale_color_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   geom_text(data = subset(EduAtt.hist, year %in% c("1980", "2021") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(EduAtt.hist, year == "2021"), aes(x = year, y = val, label = val_lab, hjust = -1))+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -959,6 +961,7 @@ totalPov.hist_chart <- totalPov.hist %>%
   scale_color_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2021")) + 
   geom_text(data = subset(totalPov.hist, year %in% c("1979", "2021") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(totalPov.hist, year == "2021"), aes(x = year, y = val, label = val_lab, hjust = -1))+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -974,39 +977,39 @@ ggsave(totalPov.hist_chart,filename = "indicator expansion drafts/graphics/pov.h
 
 #child poverty
 
-childpov.raceGeos_chart <- childpov.race %>%
-  ggplot(aes(x=place.fac, y=val, fill=var.fac)) + 
+childpov.raceGeos_chart <- childpov_with_stats %>%
+  ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
   geom_bar(stat="identity",
            position = position_dodge(),
            width = .6,
            color='gray70') +    #bar outlineas.factor
-  geom_text(data = subset(childpov.race, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
-            aes(label = scales::percent(val,accuracy = 1)),
+  geom_text(data = subset(childpov_with_stats, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = val_lab),
             position=position_dodge(width = .7),
             vjust = -.7,
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90), #yellowochre wasn't found for me
-                    limits = levels(childpov.race$var.fac)) +
-  geom_segment(data= childpov.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= childpov.totals %>% filter(place.fac=="Orleans"),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
+                    limits = levels(childpov_with_stats$var.fac)) +
+  geom_segment(data= childpov.totals %>% filter(grepl("Orleans", placename.fac)), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= childpov.totals %>% filter(grepl("Orleans", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= childpov.totals %>% filter(place.fac=="Jefferson"),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= childpov.totals %>% filter(place.fac=="Jefferson"),
+  geom_segment(data= childpov.totals %>% filter(grepl("Jefferson", placename.fac)),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= childpov.totals %>% filter(grepl("Jefferson", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= childpov.totals %>% filter(place.fac=="St. Tammany"),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= childpov.totals %>% filter(place.fac=="St. Tammany"),
+  geom_segment(data= childpov.totals %>% filter(grepl("St. Tammany", placename.fac)),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= childpov.totals %>% filter(grepl("St. Tammany", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= childpov.totals %>% filter(place.fac=="Metro"),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= childpov.totals %>% filter(place.fac=="Metro"),
+  geom_segment(data= childpov.totals %>% filter(grepl("Metro", placename.fac)),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= childpov.totals %>% filter(grepl("Metro", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= childpov.totals %>% filter(place.fac=="U.S."),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= childpov.totals %>% filter(place.fac=="U.S."),
+  geom_segment(data= childpov.totals %>% filter(grepl("United States", placename.fac)),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= childpov.totals %>% filter(grepl("United States", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   themeDC_horizontal() +
@@ -1029,6 +1032,7 @@ childPov.hist_chart <- childPov.hist %>%
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2021")) + 
   geom_text(data = subset(childPov.hist, Year %in% c("1980", "2021") & var != "All"), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(childPov.hist, year == "2021"), aes(x = year, y = val, label = val_lab, hjust = -1))+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -1043,39 +1047,39 @@ ggsave(childPov.hist_chart,filename = "indicator expansion drafts/graphics/child
 # Homeownership
 
 
-ho.raceGeos_chart <- ho.race %>%
-  ggplot(aes(x=place.fac, y=val, fill=var.fac)) + 
+ho.raceGeos_chart <- ho_with_stats %>%
+  ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
   geom_bar(stat="identity",
            position = position_dodge(),
            width = .6,
            color='gray70') +    #bar outlineas.factor
-  geom_text(data = subset(ho.race, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
-            aes(label = scales::percent(val,accuracy = 1)),
+  geom_text(data = subset(ho_with_stats, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = val_lab),
             position=position_dodge(width = .7),
             vjust = -.7,
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
   scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
-                    limits = levels(ho.race$var.fac)) +
-  geom_segment(data= ho.totals %>% filter(place.fac=="Orleans"), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= ho.totals %>% filter(place.fac=="Orleans"),
+                    limits = levels(ho_with_stats$var.fac)) +
+  geom_segment(data= ho.totals %>% filter(grepl("Orleans", placename.fac)), aes(x = .5 , y = val, xend = 1.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= ho.totals %>% filter(grepl("Orleans", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= ho.totals %>% filter(place.fac=="Jefferson"),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= ho.totals %>% filter(place.fac=="Jefferson"),
+  geom_segment(data= ho.totals %>% filter(grepl("Jefferson", placename.fac)),aes(x = 1.5 , y = val, xend = 2.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= ho.totals %>% filter(grepl("Jefferson", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= ho.totals %>% filter(place.fac=="St. Tammany"),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= ho.totals %>% filter(place.fac=="St. Tammany"),
+  geom_segment(data= ho.totals %>% filter(grepl("St. Tammany", placename.fac)),aes(x = 2.5 , y = val, xend = 3.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= ho.totals %>% filter(grepl("St. Tammany", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= ho.totals %>% filter(place.fac=="Metro"),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= ho.totals %>% filter(place.fac=="Metro"),
+  geom_segment(data= ho.totals %>% filter(grepl("Metro", placename.fac)),aes(x = 3.5 , y = val, xend = 4.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= ho.totals %>% filter(grepl("Metro", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
-  geom_segment(data= ho.totals %>% filter(place.fac=="U.S."),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
-  geom_label(data= ho.totals %>% filter(place.fac=="U.S."),
+  geom_segment(data= ho.totals %>% filter(grepl("United States", placename.fac)),aes(x = 4.5 , y = val, xend = 5.5, yend = val), linetype = 2, color = "gray70") +
+  geom_label(data= ho.totals %>% filter(grepl("United States", placename.fac)),
              aes(label = paste0("All:",scales::percent(val,accuracy = 1))),
              hjust = 1, vjust =1, label.size = NA, fill = NA,size=3,family="Asap", color = "gray70") +
   themeDC_horizontal() +
@@ -1101,6 +1105,7 @@ homeownership.hist_chart <- homeownership.hist %>%
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   geom_text(data = subset(homeownership.hist, Year %in% c("1970", "2021") & var != "All"), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
   geom_text(data = subset(homeownership.hist,  Year == "1980"& var == "Hispanic,\nany race" ), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(homeownership.hist, Year == "2021"), aes(x = year, y = val, label = val_lab, hjust = -1.5))+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),

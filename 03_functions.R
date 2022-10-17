@@ -239,9 +239,9 @@ dodgedBar <- function(data,
            placenames = ifelse(place == "35380","Metro",placenames),
            placenames = ifelse(place == "1", "U.S.", placenames)) %>%
     mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%     #vars of type "factor" allow you to control order
-    select(one_of("census2000", "sf2004", "sf1999"), !!stattograph, placenames, place.fac, significant) %>%     #one_of() chooses correct comparison vals/!! is the second part or the quo() tool
+    select(one_of("census2000", "sf2004", "sf1999", "Ownerpct2000"), !!stattograph, placenames, place.fac, significant) %>%     #one_of() chooses correct comparison vals/!! is the second part or the quo() tool
     gather(-placenames,-place.fac, -significant, key=variable, value=value) %>% 
-    mutate(description = as.factor(ifelse(variable == "census2000"|variable =="sf2004"|variable =="sf1999", comparisonyear, year))) %>%     #creates legend info
+    mutate(description = as.factor(ifelse(variable == "census2000"|variable =="sf2004"|variable =="sf1999" | variable == "Ownerpct2000", comparisonyear, year))) %>%     #creates legend info
     mutate(valp = case_when(value == 0 ~ "  ",
                                     value < .01 & significant == "no"  ~ "<1%*",
                                     value < .01 & significant == "yes"  ~ "<1%",

@@ -391,8 +391,7 @@ bach.hist_stattest <- left_join(Bach10MOE, Bach00MOE) %>%
   
 ###
 ### Poverty ###
-###
-# load("indicator expansion drafts/povRaw.RData")
+ load("indicator expansion drafts/povRaw.RData")
 pov <- povRaw %>%
   mutate(
     pctpov = BelowPov / Total,
@@ -480,7 +479,10 @@ ggsave(pov.raceGeos_chart,filename = "indicator expansion drafts/graphics/pov.ra
 
 totalPov <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/totalPov.csv")
 totalPov.hist <- totalPov %>% 
-  mutate(year = ifelse(year != 2010, year - 1, year)) %>%
+  mutate(year = ifelse(year != 2010, year - 1, year),
+         var = case_when(var == "White,\r\nnon-Hispanic" ~ "White,\nnon-Hispanic",
+                         var == "Hispanic,\r\nany race" ~ "Hispanic,\nany race",
+                         T ~ var)) %>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))%>%
   bind_rows(pov.race %>%
               filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2021))
@@ -507,7 +509,8 @@ ggsave(totalPov.hist_chart,filename = "indicator expansion drafts/graphics/pov.h
 ### stat test ###
 pov_stattest.data <- povRaw %>%
   replace(is.na(.),0) %>%
-  transmute(placename = placename,
+  transmute(place = place,
+            placename = placename,
     pctpov = BelowPov / Total,
     pctpov_blk = BelowPov_blk / Total_blk,
     pctpov_wht = BelowPov_wht / Total_wht,
@@ -940,6 +943,6 @@ ho.hist_stattest <-
   select(-var)) %>%
   mutate(sig_00_21 = stattest(x=est2000,y= est2021, moey=moe2021),
          sig_10_21 = stattest(x=est2010, y= est2021, moey=moe2021)
-  ) %>%
+  ) #%>%
   select(race, contains("sig"))
 
