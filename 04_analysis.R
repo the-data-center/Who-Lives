@@ -1585,7 +1585,7 @@ childpov_stat_race <- childpov_stattest %>% select(place, placename, (contains("
          placename = case_when("no" %in% stat_race ~ paste0(placename, " ◊"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 childpov_with_stats <- childpov_stat_all %>% left_join(childpov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans ◊*", "Jefferson ◊", "St. Tammany ◊", "Metro ◊", "United States ◊")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans ◊", "Jefferson ◊", "St. Tammany ◊", "Metro ◊", "United States ◊")),
          var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
 
 ###

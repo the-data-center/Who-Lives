@@ -1,6 +1,7 @@
 ---
-output: 
-  word_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r, include=FALSE}
