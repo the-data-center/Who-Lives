@@ -1124,16 +1124,26 @@ Bach10MOE <- Bach10_raw %>%
   select(-var)
 
 Bach00Raw <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/nhgis0095_csv/nhgis0095_ds151_2000_county.csv")
+Bach00Wht <- wholivesdatapull(variables = c('P001001', "P148I001", 'P148I008', 'P148I009', 'P148I016', 'P148I017'),
+                              names = c("Totalpop2000", "TotalWhite2000", "MaleBach", "MaleGradProf", "FemaleBach", "FemaleGradProf"),
+                              censusname = "dec/sf3",
+                              year = 2000) %>%
+  mutate(WhiteBach = MaleBach + MaleGradProf + FemaleBach + FemaleGradProf,
+         WhiteBachMOE = moe2000(WhiteBach, Totalpop2000, designfac = 1.2),
+         TotalWhiteMOE = moe2000(TotalWhite2000, Totalpop2000, designfac = 1.2), #is this the correct way to do this for whites 25+? Do I use race/eth designfac? But it's for educational attainment pop.
+         pctWhiteBach = WhiteBach / TotalWhite2000,
+         WhiteBachmoeprop = moeprop(y = TotalWhite2000, moex = WhiteBachMOE, moey = TotalWhiteMOE, p = pctWhiteBach)) %>% filter(place == "071") %>% select(pctWhiteBach, WhiteBachmoeprop)
+
 Bach00MOE <- Bach00Raw %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is by sex
   transmute(year = 2000,
             totBach = GRW006 + GRW007 + GRW013 + GRW014 + GRW020 + GRW021 + GRW027 + GRW028 + GRW034 + GRW035 + GRW041 + GRW042 + GRW048 + GRW049 + GRW055 + GRW056 + GRW062 + GRW063 + GRW069 + GRW070 + GRW076 + GRW077 + GRW083 + GRW084 + GRW090 + GRW091 + GRW097 + GRW098,
             totpop = sum(c_across(GRW001:GRW098), na.rm = T),
             totBachMOE = moe2000(est = totBach, n = 484674, designfac = 1.2),
             totpopMOE = moe2000(est = totpop, n = 484674, designfac = 1.2),
-            WhiteBach = GRW006 + GRW007 + GRW013 + GRW014, 
-            WhiteBachMOE = moe2000(est = WhiteBach, n = 484674, designfac = 1.2),
-            totWhite = sum(c_across(GRW001:GRW014), na.rm = T), #adding all White adults 25+
-            totWhiteMOE = moe2000(est = totWhite, n = 484674, designfac = 1.2),
+            #WhiteBach = GRW006 + GRW007 + GRW013 + GRW014, 
+            #WhiteBachMOE = moe2000(est = WhiteBach, n = 484674, designfac = 1.2),
+            #totWhite = sum(c_across(GRW001:GRW014), na.rm = T), #adding all White adults 25+
+            #totWhiteMOE = moe2000(est = totWhite, n = 484674, designfac = 1.2),
             BlackBach = GRW020 + GRW021 + GRW027 + GRW028,
             BlackBachMOE = moe2000(est = BlackBach, n = 484674, designfac = 1.2),
             totBlack = sum(c_across(GRW015:GRW028), na.rm = T),
@@ -1144,15 +1154,15 @@ Bach00MOE <- Bach00Raw %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this o
             totHispMOE = moe2000(est = totHisp, n = 484674, designfac = 1.2),
             
             pctTotalBach = totBach / totpop,
-            pctWhiteBach = WhiteBach / totWhite,
+            #pctWhiteBach = WhiteBach / totWhite,
             pctBlackBach = BlackBach / totBlack,
             pctHispBach = HispBach / totHisp,
             
             Totalmoeprop = moeprop(totpop, totBachMOE, totpopMOE, pctTotalBach),
-            WhiteBachmoeprop = moeprop(totWhite,WhiteBachMOE,totWhiteMOE,pctWhiteBach),
+            #WhiteBachmoeprop = moeprop(totWhite,WhiteBachMOE,totWhiteMOE,pctWhiteBach),
             BlackBachmoeprop = moeprop(totBlack,BlackBachMOE,totBlackMOE,pctBlackBach),
             HispBachmoeprop = moeprop(totHisp,HispBachMOE,totHispMOE,pctHispBach)
-  ) %>%
+  ) %>% cbind(Bach00Wht) %>%
   select(contains("moeprop")) %>%
   pivot_longer(everything(), names_to = "var", values_to = "moe2000") %>%
   mutate(race = case_when(var =="Totalmoeprop" ~ "All",
@@ -1351,6 +1361,15 @@ totalPov.hist <- totalPov %>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))%>%
   bind_rows(pov.race %>%
               filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2021))
+pov00Wht <- wholivesdatapull(variables = c('P001001', 'P148I001', 'P159I002'),
+                             names = c('TotalPop2000', "TotalWhitepop", "Whitepov"),
+                             censusname = "dec/sf3",
+                             year = 2000) %>%
+  filter(place == "071") %>%
+  mutate(pctWhitepov = Whitepov / TotalWhitepop,
+         WhitepovMOE = moe2000(Whitepov, TotalPop2000, designfac = 1.5),
+         TotalWhiteMOE = moe2000(TotalWhitepop, TotalPop2000, designfac = 2),
+         Whitemoeprop = moeprop(y = TotalWhitepop, moex = WhitepovMOE, moey = TotalWhiteMOE, p = pctWhitepov)) %>% select(pctWhitepov, Whitemoeprop)
 
 
 pov00Raw <- read_csv("indicator expansion drafts/ProspInd_tables_WhoLives2022/nhgis0092_csv/nhgis0092_ds151_2000_county.csv")
@@ -1359,10 +1378,10 @@ pov00MOE <- pov00Raw %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute
                                                                                  totpop = sum(c_across(GTV001:GTV014),na.rm = T),
                                                                                  totpovMOE = moe2000(est = totpov, n = totpop, designfac = 1.3),
                                                                                  totpopMOE = moe2000(est = totpop, n = totpop, designfac = 1.3),
-                                                                                 Whitepov = GTV001,
-                                                                                 totWhitepop = GTV001 + GTV002,
-                                                                                 WhitepovMOE = moe2000(est = Whitepov, n = totpop, designfac = 1.3),
-                                                                                 totWhitepopMOE = moe2000(est = totWhitepop, n = totpop, designfac = 1.3),
+                                                                                 #Whitepov = GTV001,
+                                                                                 #totWhitepop = GTV001 + GTV002,
+                                                                                 #WhitepovMOE = moe2000(est = Whitepov, n = totpop, designfac = 1.3),
+                                                                                 #totWhitepopMOE = moe2000(est = totWhitepop, n = totpop, designfac = 1.3),
                                                                                  Blackpov = GTV003,
                                                                                  totBlackpop = GTV003 + GTV004,
                                                                                  BlackpovMOE = moe2000(est = Blackpov, n = totpop, designfac = 1.3),
@@ -1372,15 +1391,15 @@ pov00MOE <- pov00Raw %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute
                                                                                  HisppovMOE = moe2000(est = Hisppov, n = totpop, designfac = 1.3),
                                                                                  totHisppopMOE = moe2000(est = totHisppop, n = totpop, designfac = 1.3),
                                                                                  pctTotalpov = totpov / totpop,
-                                                                                 pctWhitepov = Whitepov / totWhitepop,
+                                                                                 #pctWhitepov = Whitepov / totWhitepop,
                                                                                  pctBlackpov = Blackpov / totBlackpop,
                                                                                  pctHisppov = Hisppov / totHisppop,
                                                                                  
                                                                                  Totalmoeprop = moeprop(y = totpop, moex = totpovMOE, moey = totpopMOE, p = pctTotalpov),
-                                                                                 Whitemoeprop = moeprop(y = totWhitepop, moex = WhitepovMOE, moey = totWhitepopMOE, p = pctWhitepov),
+                                                                                 #Whitemoeprop = moeprop(y = totWhitepop, moex = WhitepovMOE, moey = totWhitepopMOE, p = pctWhitepov),
                                                                                  Blackmoeprop = moeprop(y = totBlackpop, moex = BlackpovMOE, moey = totBlackpopMOE, p = pctBlackpov),
                                                                                  Hispmoeprop = moeprop(y = totHisppop, moex = HisppovMOE, moey = totHisppopMOE, p = pctHisppov)
-) %>% 
+) %>% cbind(pov00Wht) %>%
   select(contains("moeprop")) %>%
   pivot_longer(everything(), names_to = "var", values_to = "moe2000") %>%
   mutate(race = case_when(var =="Totalmoeprop" ~ "All",
