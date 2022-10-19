@@ -1,0 +1,36 @@
+"","Year","race","val"
+"1",1970,"Black",0.2672
+"2",1970,"Hispanic,
+any race",0
+"3",1970,"White,
+non-Hispanic",0.4595
+"4",1980,"Black",0.3086
+"5",1980,"Hispanic,
+any race",0.3258
+"6",1980,"White,
+non-Hispanic",0.4862
+"7",1990,"Black",0.3605
+"8",1990,"Hispanic,
+any race",0.376
+"9",1990,"White,
+non-Hispanic",0.5474
+"10",2000,"Black",0.4159
+"11",2000,"Hispanic,
+any race",0.384
+"12",2000,"White,
+non-Hispanic",0.5596
+"13",2010,"Black",0.454
+"14",2010,"Hispanic,
+any race",0.3441
+"15",2010,"White,
+non-Hispanic",0.5282
+"16",2016,"Black",0.4093
+"17",2016,"Hispanic,
+any race",0.4195
+"18",2016,"White,
+non-Hispanic",0.5385
+"19",2021,"Black",0.460621403912543
+"20",2021,"White,
+non-Hispanic",0.629613848202397
+"21",2021,"Hispanic,
+any race",0.429839156960621
