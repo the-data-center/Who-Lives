@@ -1,4 +1,5 @@
-"","raceSimple","population","est2000"
-"1","Hispanic",21487,14826
-"2","Black",224366,323392
-"3","White",133297,128871
+"","raceSimple","race.fac","population","est2000"
+"1","Black","Black",220344,323392
+"2","White","White",117738,128871
+"3","Hispanic","Hispanic",21487,14826
+"4","Asian","Asian",10977,10919
