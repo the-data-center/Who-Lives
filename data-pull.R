@@ -787,11 +787,7 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2019, ty
 allparishesRaw <- read_csv("PEP2021charagegroups.csv")
 allparishesRaw <-  allparishesRaw %>% 
   filter(COUNTY %in% c("071","051","075","087","089","093","095","103")) %>% #making a total column for each sex.  revise unneeded ones later
-  mutate(WA_Total = WA_MALE + WA_FEMALE,
-         BA_Total = BA_MALE + BA_FEMALE,
-         AA_Total = AA_MALE + AA_FEMALE,
-         NH_Total = NH_MALE + NH_FEMALE,
-         NHWA_Total = NHWA_MALE + NHWA_FEMALE,
+  mutate(NHWA_Total = NHWA_MALE + NHWA_FEMALE,
          NHBA_Total = NHBA_MALE + NHBA_FEMALE,
          NHAA_Total = NHAA_MALE + NHAA_FEMALE,
          
@@ -827,6 +823,7 @@ allparishesRaw <-  allparishesRaw %>%
                          sex == "MALE" ~ "Male",
                          sex == "FEMALE" ~ "Female"),
          population = value) %>%
+  filter(sex == "Total") %>%
   select(place, date, sex,race, age, population)
 
 allparishesRaw <- allparishesRaw %>% #for some reason this is working only when I keep it separate
@@ -834,17 +831,17 @@ allparishesRaw <- allparishesRaw %>% #for some reason this is working only when 
                           allparishesRaw$race == "TOT" ~ "Total",
                           substr(allparishesRaw$race,1,1) != "H" ~ "Not Hispanic"))
 
-allparishesRaw <- allparishesRaw %>% filter(race %in% c("TOT", "WA", "BA", "AA", "H")) %>% 
+allparishesRaw <- allparishesRaw %>% filter(race %in% c("TOT", "NHWA", "NHBA", "NHAA", "H")) %>% 
   mutate(race = case_when(race == "TOT" ~ "Total",
-                          race == "WA" ~ "White alone",
-                          race == "BA" ~ "Black or African American alone",
-                          race == "AA" ~ "Asian alone",
+                          race == "NHWA" ~ "White alone",
+                          race == "NHBA" ~ "Black or African American alone",
+                          race == "NHAA" ~ "Asian alone",
                           race == "H" ~ "Hispanic"),
-         raceSimple = case_when(race == "Total" ~ "Total",
-                                race == "White alone" ~ "White",
-                                race == "Black or African American alone" ~ "Black",
-                                race == "Asian alone" ~ "Asian",
-                                hisp == "Hispanic" ~ "Hispanic")) %>%
+         raceSimple = case_when(race == "Total" & hisp == "Total" & sex == "Total" ~ "Total",
+                                race == "White alone" & hisp == "Not Hispanic"  & sex == "Total" ~ "White",
+                                race == "Black or African American alone" & hisp == "Not Hispanic" & sex == "Total"  ~ "Black",
+                                race == "Asian alone" & hisp == "Not Hispanic" & sex == "Total" ~ "Asian",
+                                hisp == "Hispanic" & sex == "Total"~ "Hispanic")) %>%
   select(place, date, hisp, sex, race, age, population, raceSimple)
 
 popunder18co <- read_csv("county_pep_age2021.csv") #for popunder18 measure
@@ -866,11 +863,7 @@ allparishesRaw <- allparishesRaw %>% full_join(popunder18co, by = c("place", "da
 allstates_pep <- read_csv("PEP2021charagegroups_allstates.csv")
 
 allstates_pep <- allstates_pep %>% 
-  mutate(WA_Total = WA_MALE + WA_FEMALE,
-         BA_Total = BA_MALE + BA_FEMALE,
-         AA_Total = AA_MALE + AA_FEMALE,
-         NH_Total = NH_MALE + NH_FEMALE,
-         NHWA_Total = NHWA_MALE + NHWA_FEMALE,
+  mutate(NHWA_Total = NHWA_MALE + NHWA_FEMALE,
          NHBA_Total = NHBA_MALE + NHBA_FEMALE,
          NHAA_Total = NHAA_MALE + NHAA_FEMALE,
          
@@ -906,6 +899,7 @@ allstates_pep <- allstates_pep %>%
                          sex == "MALE" ~ "Male",
                          sex == "FEMALE" ~ "Female"),
          population = value) %>%
+  filter(sex == "Total") %>%
   select(place, date, sex,race, age, population)
 
 allstates_pep  <- allstates_pep  %>% #for some reason this is working only when I keep it separate
@@ -913,17 +907,17 @@ allstates_pep  <- allstates_pep  %>% #for some reason this is working only when 
                           allstates_pep$race == "TOT" ~ "Total",
                           substr(allstates_pep$race,1,1) != "H" ~ "Not Hispanic"))
 
-allstates_pep  <- allstates_pep  %>% filter(race %in% c("TOT", "WA", "BA", "AA", "H")) %>% 
+allstates_pep  <- allstates_pep  %>% filter(race %in% c("TOT", "NHWA", "NHBA", "NHAA", "H")) %>% 
   mutate(race = case_when(race == "TOT" ~ "Total",
-                          race == "WA" ~ "White alone",
-                          race == "BA" ~ "Black or African American alone",
-                          race == "AA" ~ "Asian alone",
+                          race == "NHWA" ~ "White alone",
+                          race == "NHBA" ~ "Black or African American alone",
+                          race == "NHAA" ~ "Asian alone",
                           race == "H" ~ "Hispanic"),
          raceSimple = case_when(race == "Total" ~ "Total",
-                                race == "White alone" ~ "White",
-                                race == "Black or African American alone" ~ "Black",
-                                race == "Asian alone" ~ "Asian",
-                                hisp == "Hispanic" ~ "Hispanic")) %>%
+                                race == "White alone" & hisp == "Not Hispanic" & sex == "Total"  ~ "White",
+                                race == "Black or African American alone" & hisp == "Not Hispanic" & sex == "Total"  ~ "Black",
+                                race == "Asian alone"& hisp == "Not Hispanic" & sex == "Total"   ~ "Asian",
+                                hisp == "Hispanic"  & sex == "Total" ~ "Hispanic")) %>%
   select(place, date, hisp, sex, race, age, population, raceSimple)
 
 popunder18US <- read_csv("US_pep_age2021.csv") #for popunder18 measure
@@ -959,7 +953,7 @@ allparishesRaw2020 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7
          PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
                                                   "St. Bernard","St. Charles", "St. James",
                                                   "St. John the Baptist", "St. Tammany", "Metro", "United States")))
-save(allparishesRaw2020, file = "inputs/allparishesRaw.RData")
+save(allparishesRaw2020, file = "inputs/allparishesRaw2020.RData")
 
 allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimate") %>%
   mutate(PlaceName = case_when(place == "Orleans Parish" ~ "Orleans",

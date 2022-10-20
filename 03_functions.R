@@ -137,7 +137,7 @@ switch <- function(dataframe){
 ## critical value for ACS is z = 1.645 (they use 90% CI)
 moe2000 <- function(est, n, designfac = 1){
   se_unadj <- sqrt(5*est*(1 - (est/n)))
-  se <- se_unadj * designfac #we don't have this yet...
+  se <- se_unadj * designfac #when designfac = 1 it produces the unadjusted standard errors 
   MOE <- se*1.645
   return(MOE)
 }
@@ -300,4 +300,12 @@ raceList <- function(data){
     pivot_wider(names_from = "placename", values_from = "note") %>%
     unite("note", 1:dim(.)[2]) %>%
     as.data.frame()
+}
+
+round.off <- function (x, digits=0) 
+{
+  posneg = sign(x)
+  z = trunc(abs(x) * 10 ^ (digits + 1)) / 10
+  z = floor(z * posneg + 0.5) / 10 ^ digits
+  return(z)
 }
