@@ -278,7 +278,7 @@ makeCSS_source(
 The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while `r round.off(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s, only `r round.off(getvalue.bachdeg.black.nopct*100)` percent of Black adults have a bachelor’s as of 2021. The share of White adults in Orleans Parish who have a bachelor’s degree is substantially higher than the U.S. or metro area overall: `r round.off(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s degree while that number is `r round.off(getvalue.bachdeg.white.maxotherpct*100)` percent or lower in neighboring parishes and the nation. Only `r round.off(getvalue.bachdeg.black.jeffpct*100)` and `r round.off(getvalue.bachdeg.black.stTampct*100)` percent of Black adults have a bachelor’s degree or higher in Jefferson and St. Tammany, respectively.
 
 
-```{r bachovertime, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
+```{r bachovertime, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 EduAtt.hist_chart
 ```
 ```{r, echo=FALSE}
@@ -409,7 +409,7 @@ makeCSS_highlight(
 The Census still uses the federal definition for poverty that was first created in 1964. The original calculations were based on studies from the early 1960s that indicated that family food costs were about one-third of a family’s budget. But housing costs have risen much faster than food costs since 1964. Also, the current calculations don’t count non-cash government aid, like Child Tax Credits or housing subsidies, as income. And they aren’t adjusted for differences in costs of living in different parts of the country. Given these limitations, the Census began publishing a Supplemental Poverty Measure that incorporates up-to-date data on regional housing costs as well as several kinds of government aid.  According to the Census, the 2020 Supplemental Poverty Rate for the U.S. was 9.1 percent. The Official Poverty Rate that same year was 11.4 percent.[^8]  The Census Bureau does not calculate Supplemental Poverty Rates for geographies smaller than the nation as a whole.[^9]"
 )
 ```
-[^8] [^9]
+
 The poverty rate for Black New Orleanians spiked when the 1980s “oil bust” hit, jumping from 37% in 1979 to 42% in 1989. White New Orleanians were not similarly affected. The poverty rate for White New Orleanians remained at roughly 12% in 1979 and in 1989. Large disparities in the poverty rate continue to be evident at all geographic levels. For example, in metro New Orleans `r round.off((getvalue.pov.black.metropct*100))` percent of Black people and `r round.off((getvalue.pov.hisp.metropct*100))` percent of Hispanic people live in poverty compared to `r round.off((getvalue.pov.white.metropct*100))` percent of White people and `r round.off((getvalue.pov.asian.metropct*100))` percent of Asian people.[^10]
 
 ```{r povhist, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
@@ -468,7 +468,7 @@ makeCSS_source(
 
 Orleans  Parish’s very low rate of `r round.off(getvalue.childpov.white.nopct*100)` percent child poverty for White children stands in stark contrast to the 51 percent rate for Black children. While in Orleans, poverty rates for Black children are 10 times higher than for White children, in Jefferson Parish Black children experience poverty at a little over 3 times higher rates than White children – which is a disparity on par with the national average. In metro New Orleans, `r round.off(getvalue.childpov.hisp.metropct*100)` percent of Hispanic children live in poverty – statistically no different from the national rate.
 
-```{r childpovrace, fig.align='center', fig.width=11, fig.height=6, echo=FALSE}
+```{r childpovrace, fig.align='center', fig.width=7.5, fig.height=5, echo=FALSE}
 childpov.raceGeos_chart
 ```
 ```{r, echo=FALSE}
@@ -693,7 +693,7 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 [^7]: Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home Computer Technology and Student Achievement. Retrieved February 8, 2021 from http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.6663&rep=rep1&type=pdf.
 
-[^8]: The latest Supplemental Poverty Measure report can be found at https://www.census.gov/content/dam/Census/library/publications/2021/demo/p60-275.pdf.  
+[^8]: The latest Supplemental Poverty Measure report can be found at https://www.census.gov/content/dam/Census/library/publications/2021/demo/p60-275.pdf.
 
 [^9]: Guidance for how to approximate the Supplemental Poverty Measure using ACS geographies can be found at https://www.census.gov/content/dam/Census/library/working-papers/2020/demo/SEHSD-WP2020-09.pdf. 
 

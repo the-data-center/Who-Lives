@@ -4,7 +4,7 @@ output: html_document
 date: "2022-10-14"
 ---
 
-### Fynctions to list out insignificance between variables:
+### Functions to list out insignificance between variables:
 ```{r}
 raceList <- function(data){
   data %>%

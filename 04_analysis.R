@@ -381,7 +381,7 @@ select(place, (contains("pct"))) %>% select(place, Ownerpct2000, Ownerpct) %>%
 load("inputs/honomoRaw.RData")
 honomo <- honomoRaw %>%
   mutate(census2000 = c(0.3298,0.3458,0.2967,0.3476,0.3259),
-         census2000SE = c(0.004263821, 0.003804423, 0.005191947, 0.002300568, 1.25E-04),
+         census2000SE = c(0.004263821, 0.003804423, 0.005191947, 0.00230056781162641, 1.25E-04),
          honomopct = NoMortgage / Total,
          moeprop = moeprop(y=Total,moex =NoMortgageMOE,moey = TotalMOE,p=honomopct),
          significant = stattest(x=census2000, moex = census2000SE*1.645, y=honomopct,moey=moeprop))
@@ -928,8 +928,8 @@ medhh_stat_all <- medhh.race_stattest %>% select(place, placename, (contains("si
   mutate(race = case_when(race == "MedianHHIncome" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 medhh_stat_all$stat_all[medhh_stat_all$race == "All"] <- "yes"
@@ -946,13 +946,13 @@ medhh_stat_race <- medhh.race_stattest %>% select(place, placename, (contains("s
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 medhh_with_stats <- medhh_stat_all %>% left_join(medhh_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
 ### Across geos pov bar chart ###
 medhh.totals <- medhh_stat_all %>% left_join(medhh_stat_race, by = "place") %>% unique() %>%
   filter(race == "All") %>%
-  mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
+  mutate(var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")),
          placename.fac = factor(placename.y, levels = c("Orleans ◊", "Jefferson ◊", "St. Tammany ◊", "Metro ◊", "United States")))
 
 medhh.totals_CSV <- medhh.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
@@ -1093,8 +1093,8 @@ bach_stat_all <- bach.race_stattest %>% select(place, placename, (contains("sig"
   mutate(race = case_when(race == "pctbach" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 bach_stat_all$stat_all[bach_stat_all$race == "All"] <- "yes"
@@ -1110,7 +1110,7 @@ bach_stat_race <- bach.race_stattest %>% select(place, placename, (contains("sig
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 bach_with_stats <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
 bach.totals <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>%
@@ -1383,8 +1383,8 @@ pov_stat_all <- pov_stattest %>% select(place, placename, (contains("sig") & con
   mutate(race = case_when(race == "pctpov" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 pov_stat_all$stat_all[pov_stat_all$race == "All"] <- "yes"
@@ -1401,7 +1401,7 @@ pov_stat_race <- pov_stattest %>% select(place, placename, (contains("sig") & !c
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 pov_with_stats <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
 ### Across geos pov bar chart ###
@@ -1664,8 +1664,8 @@ childpov_stat_all <- childpov_stattest %>% select(place, placename, (contains("s
   mutate(race = case_when(race == "pctBelowChildPov" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 childpov_stat_all$stat_all[childpov_stat_all$race == "All"] <- "yes"
@@ -1682,7 +1682,7 @@ childpov_stat_race <- childpov_stattest %>% select(place, placename, (contains("
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 childpov_with_stats <- childpov_stat_all %>% left_join(childpov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States*")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 ###
 
@@ -1800,19 +1800,6 @@ ho.race <- ho_exp %>%
          var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
   mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
 
-ho.totals <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% 
-  filter(race == "All") %>%
-  mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
-         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")))
-
-ho.totals_CSV <- ho.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
-  mutate(placename.x = ifelse(placename.x == "United States", "U.S.", placename.x)) %>%
-  pivot_wider(names_from = placename.x, values_from = val) 
-
-ho.race_CSV <- ho.race %>% select(race = var, place.fac, val) %>% unique() %>%
-  pivot_wider(names_from = place.fac, values_from = val) %>% rbind(ho.totals_CSV)
-write.csv(ho.race_CSV, "outputs/spreadsheets/horace.csv")
-
 
 ### Historical homeownership line chart ###
 homeownership.hist <- homeownershipProspInd %>% 
@@ -1876,8 +1863,8 @@ ho_stat_all <- ho_stattest %>% select(place, placename, (contains("sig") & conta
   mutate(race = case_when(race == "Ownerpct" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 ho_stat_all$stat_all[ho_stat_all$race == "All"] <- "yes"
@@ -1894,7 +1881,20 @@ ho_stat_race <- ho_stattest %>% select(place, placename, (contains("sig") & !con
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 ho_with_stats <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
+
+ho.totals <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% 
+  filter(race == "All") %>%
+  mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
+         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")))
+
+ho.totals_CSV <- ho.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
+  mutate(placename.x = ifelse(placename.x == "United States", "U.S.", placename.x)) %>%
+  pivot_wider(names_from = placename.x, values_from = val) 
+
+ho.race_CSV <- ho.race %>% select(race = var, place.fac, val) %>% unique() %>%
+  pivot_wider(names_from = place.fac, values_from = val) %>% rbind(ho.totals_CSV)
+write.csv(ho.race_CSV, "outputs/spreadsheets/horace.csv")
 
 ###
 
