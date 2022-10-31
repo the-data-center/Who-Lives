@@ -294,10 +294,8 @@ medhh_unadjusted <- read_xlsx("indicator expansion drafts/ProspInd_tables_WhoLiv
             `1989`= as.character(`1989 (1989$)`),
             `1999` = as.character(`1999 (1999$)`),
             `2010` = `2010 (2010$)...5`,
-            `2016` = `2016 (2016$)...7`,
-            `2010MOE` = `2010 (2010$)...6`,
-            `2016MOE` = `2016 (2016$)...8`) %>% na.omit()
-medhh_unadjusted <- medhh_unadjusted %>% pivot_longer(cols = `1979`:`2016`, names_to = "Year") %>% select(-c(`2010MOE`, `2016MOE`))
+            `2010MOE` = `2010 (2010$)...6`) %>% na.omit()
+medhh_unadjusted <- medhh_unadjusted %>% pivot_longer(cols = `1979`:`2010MOE`, names_to = "Year") %>% select(-c(`2010MOE`))
 save(medhh_unadjusted, file = "inputs/medhh_unadjusted.RData")
 #Bachelor's degree or higher, adults 25 and older
 

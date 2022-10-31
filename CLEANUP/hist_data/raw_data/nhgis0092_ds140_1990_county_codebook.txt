@@ -1,0 +1,127 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0092_ds140_1990_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1990
+Geographic level: County (by State)
+Dataset:          1990 Census: SSTF 17 - Poverty
+   NHGIS code:    1990_SSTF17
+   NHGIS ID:      ds140
+Breakdown(s):     Poverty:
+                     All census tracts or block numbering areas (000)
+                  Geographic Subarea:
+                     Total area (00)
+ 
+Tables:
+ 
+1. Poverty Status in 1989 by Hispanic Origin by Race
+   Universe:    Persons for Whom Poverty Status is Determined
+   Source code: NPB006
+   NHGIS code:  EKT
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        COUNTY:      County Name
+        COUNTYA:     County Code
+        DIVISIONA:   Division Code
+        MSA_CMSAA:   Metropolitan Statistical Area/Consolidated Metropolitan Statistical Area Code
+        PLACEA:      Place Code
+        PMSAA:       Primary Metropolitan Statistical Area Code
+        REGIONA:     Region Code
+        STATE:       State Name
+        STATEA:      State Code
+        ANPSADPI:    Area Name/PSAD Term/Part Indicator
+ 
+Breakdown:
+    Geographic Subarea: Total area (00)
+    Poverty: All census tracts or block numbering areas (000)
+ 
+    Table 1:     Poverty Status in 1989 by Hispanic Origin by Race
+    Universe:    Persons for Whom Poverty Status is Determined
+    Source code: NPB006
+    NHGIS code:  EKT
+        EKT001:      Income in 1989 above poverty level >> Not of Hispanic origin >> White
+        EKT002:      Income in 1989 above poverty level >> Not of Hispanic origin >> Black
+        EKT003:      Income in 1989 above poverty level >> Not of Hispanic origin >> American Indian, Eskimo, or Aleut
+        EKT004:      Income in 1989 above poverty level >> Not of Hispanic origin >> Asian or Pacific Islander
+        EKT005:      Income in 1989 above poverty level >> Not of Hispanic origin >> Other race
+        EKT006:      Income in 1989 above poverty level >> Hispanic origin >> White
+        EKT007:      Income in 1989 above poverty level >> Hispanic origin >> Black
+        EKT008:      Income in 1989 above poverty level >> Hispanic origin >> American Indian, Eskimo, or Aleut
+        EKT009:      Income in 1989 above poverty level >> Hispanic origin >> Asian or Pacific Islander
+        EKT010:      Income in 1989 above poverty level >> Hispanic origin >> Other race
+        EKT011:      Income in 1989 below poverty level >> Not of Hispanic origin >> White
+        EKT012:      Income in 1989 below poverty level >> Not of Hispanic origin >> Black
+        EKT013:      Income in 1989 below poverty level >> Not of Hispanic origin >> American Indian, Eskimo, or Aleut
+        EKT014:      Income in 1989 below poverty level >> Not of Hispanic origin >> Asian or Pacific Islander
+        EKT015:      Income in 1989 below poverty level >> Not of Hispanic origin >> Other race
+        EKT016:      Income in 1989 below poverty level >> Hispanic origin >> White
+        EKT017:      Income in 1989 below poverty level >> Hispanic origin >> Black
+        EKT018:      Income in 1989 below poverty level >> Hispanic origin >> American Indian, Eskimo, or Aleut
+        EKT019:      Income in 1989 below poverty level >> Hispanic origin >> Asian or Pacific Islander
+        EKT020:      Income in 1989 below poverty level >> Hispanic origin >> Other race
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Steven Manson, Jonathan Schroeder, David Van Riper, Tracy Kugler, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 17.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2022. 
+        http://doi.org/10.18128/D050.V17.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455

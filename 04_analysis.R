@@ -1101,7 +1101,8 @@ bach_stat_all$stat_all[bach_stat_all$race == "All"] <- "yes"
 bach_stat_all <- bach_stat_all %>%  group_by(place, placename, race) %>%
   mutate(val_lab = paste0(round.off(val*100), "%")) %>% select(-var, -placename) %>% unique()
 
-bach_stat_race <- bach.race_stattest %>% select(place, placename, (contains("sig") & !contains("all"))) %>%
+bach_stat_race <- bach.race_stattest %>%
+  select(place, placename, (contains("sig") & !contains("all"))) %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
