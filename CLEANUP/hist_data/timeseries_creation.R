@@ -58,7 +58,10 @@ Bach00Wht <- wholivesdatapull(variables = c('P001001', "P148I001", 'P148I008', '
          WhiteBachMOE = moe2000(WhiteBach, Totalpop2000, designfac = 1.2),
          TotalWhiteMOE = moe2000(TotalWhite2000, Totalpop2000, designfac = 1.2), #is this the correct way to do this for whites 25+? Do I use race/eth designfac? But it's for educational attainment pop.
          pctWhiteBach = WhiteBach / TotalWhite2000,
-         WhiteBachmoeprop = moeprop(y = TotalWhite2000, moex = WhiteBachMOE, moey = TotalWhiteMOE, p = pctWhiteBach)) %>% filter(place == "071") %>% select(pctWhiteBach, WhiteBachmoeprop)
+         Whitemoeprop = moeprop(y = TotalWhite2000, moex = WhiteBachMOE, moey = TotalWhiteMOE, p = pctWhiteBach)) %>%
+  filter(place == "071") %>%
+  select(pctWhiteBach, Whitemoeprop)
+
 
 
 Bach00 <- Bach00Raw %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is by sex
@@ -82,10 +85,10 @@ Bach00 <- Bach00Raw %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one 
             pctHispBach = HispBach / totHisp,
             
             Totalmoeprop = moeprop(totpop, totBachMOE, totpopMOE, pctTotalBach),
-            BlackBachmoeprop = moeprop(totBlack,BlackBachMOE,totBlackMOE,pctBlackBach),
-            HispBachmoeprop = moeprop(totHisp,HispBachMOE,totHispMOE,pctHispBach)
+            Blackmoeprop = moeprop(totBlack,BlackBachMOE,totBlackMOE,pctBlackBach),
+            Hispmoeprop = moeprop(totHisp,HispBachMOE,totHispMOE,pctHispBach)
   )%>% cbind(Bach00Wht) %>%
-  pivot_longer(cols = c(pctTotalBach:pctHispBach, HispBachmoeprop), values_to = "val") %>% 
+  pivot_longer(cols = c(pctTotalBach:Hispmoeprop, pctWhiteBach, Whitemoeprop), values_to = "val") %>% 
   select(year, val, name)
 
 #pulling ACS1 for 2010 data
@@ -141,14 +144,21 @@ save(bachhist, file = "bachhist.RData")
 #### Med HH Inc over time by race ####
 
 medhh_unadjusted <- read_xlsx("raw_data/Copy_MedianInc.xlsx", range = "A1:H7") %>%
-  transmute("var" = `...1`,
-            `1979` = as.character(`1979 (1979$)`),
-            `1989`= as.character(`1989 (1989$)`),
-            `1999` = as.character(`1999 (1999$)`),
-            `2010` = `2010 (2010$)...5`,
-            `2010MOE` = `2010 (2010$)...6`) %>% filter(`2010` != "Estimate")
-medhh_unadjusted <- medhh_unadjusted %>% pivot_longer(cols = `1979`:`2010MOE`, names_to = "Year") 
-
+  transmute(race = `...1`,
+            race = case_when(race == "Overall" ~ "All",
+                             race == "White, Not Hispanic" ~ "White, non-Hispanic",
+                             race == "Hispanic, Any Race" ~ "Hispanic, any race",
+                             T ~ race),
+            `1979_dollars` = as.character(`1979 (1979$)`),
+            `1989_dollars`= as.character(`1989 (1989$)`),
+            `1999_dollars` = as.character(`1999 (1999$)`),
+            `1999_MOE` = as.character(moe2000(as.numeric(`1999_dollars`), 215091, designfac = 1.2)), 
+            `2010_dollars` = as.character(`2010 (2010$)...5`),
+            `2010_MOE` = as.character(`2010 (2010$)...6`)) %>% filter(`2010_dollars` != "Estimate") %>%
+  pivot_longer(-race, names_to = c("year", "var"), names_sep = "_", values_to = "val") %>%
+  select(year, val, race, var) %>%
+  mutate(val = ifelse(is.na(val) == T, 15605,val)) %>%  #this line is to use White Alone ( including hispanics in 1979)
+  filter(race != "White, Alone")
 #save, then we can join the current year in the data-pull.R file.
 save(medhh_unadjusted, file = "medHHhist.RData")
 

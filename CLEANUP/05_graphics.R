@@ -765,13 +765,13 @@ chart.commute.allparishes <- commuteforGraphic %>%
 
 #across geos median hh income bar chart
 
-medhh.raceGeos_chart <- medhh_with_stats %>%
-  ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
+medhh.raceGeos_chart <- medhhrace_forgraphic %>%
+  ggplot(aes(x=placename.fac, y=value, fill=var.fac)) + 
   geom_bar(stat="identity",
            position = position_dodge(),
            width = .6,
            color='gray70') +    #bar outlineas.factor
-  geom_text(data = subset(medhh_with_stats, as.numeric(val) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+  geom_text(data = subset(medhhrace_forgraphic, as.numeric(value) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
             aes(label = val_lab),
             position=position_dodge(width = .7),
             vjust = -.7,
@@ -779,7 +779,7 @@ medhh.raceGeos_chart <- medhh_with_stats %>%
             family="Asap") +
   scale_y_continuous(labels = comma_format(accuracy = 1)) + 
   scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
-                    limits = levels(medhh_with_stats$var.fac)) +
+                    limits = levels(medhhrace_forgraphic$var.fac)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -792,15 +792,14 @@ ggsave(medhh.raceGeos_chart,filename = "indicator expansion drafts/graphics/medh
 
 #Historical median hh income line chart 
 
-medhh.hist_chart <- medhh.hist %>%
-  filter(var != "All", Year != 2016) %>%
+medhh.hist_chart <- medHHhist %>%
   ggplot()+
-  geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
+  geom_line(aes(x=year,y=value, color = race.fac), size = 1) +
   scale_y_continuous(labels = dollar_format(accuracy = 1), limits = c(0,90000), breaks = c(0,30000,60000,90000)) + 
   scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2021")) +
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  geom_text(data = subset(medhh.hist, Year %in% c("1979", "2021") & var != "All"), aes(x=Year,y=val, label = label_dollar(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(medhh.hist, Year == "2021"), aes(x = Year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  geom_text(data = subset(medHHhist, year %in% c("1979", "2021")), aes(x=year,y=value, label = label_dollar(accuracy = 1)(value)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(medHHhist, year == "2021"), aes(x = year, y = value, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -814,13 +813,13 @@ ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hi
 
 # Across geos educational attainment bar chart
 
-bach.raceGeos_chart <- bachrace %>%
+bach.raceGeos_chart <- bachrace_forgraphic %>%
   ggplot(aes(x=placename.fac, y=value, fill=var.fac)) + 
   geom_bar(stat="identity",
            position = position_dodge(),
            width = .6,
            color='gray70') +    #bar outlineas.factor
-  geom_text(data = subset(bachrace, as.numeric(value) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
+  geom_text(data = subset(bachrace_forgraphic, as.numeric(value) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
             aes(label = val_lab),
             position=position_dodge(width = .7),
             vjust = -.7,
@@ -828,7 +827,7 @@ bach.raceGeos_chart <- bachrace %>%
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
   scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
-                    limits = levels(bachrace$var.fac)) +
+                    limits = levels(bachrace_forgraphic$var.fac)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -841,15 +840,15 @@ ggsave(bach.raceGeos_chart,filename = "indicator expansion drafts/graphics/bach.
 
 #Historical educational attainment line chart
 
-EduAtt.hist_chart <- EduAtt.hist %>%
-  filter(var != "All", year != 2016) %>%
+bach.hist_chart <- bachhist %>%
+  filter(race != "All") %>%
   ggplot()+
-  geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
+  geom_line(aes(x=year,y=percent, color = race.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
   scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2021"))+
   scale_color_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  geom_text(data = subset(EduAtt.hist, year %in% c("1980", "2021") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(EduAtt.hist, year == "2021"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  geom_text(data = subset(bachhist, year %in% c("1980", "2021") & race != "All"), aes(x=year,y=percent, label = percent_format(accuracy = 1)(percent)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(bachhist, year == "2021"), aes(x = year, y = percent, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -858,7 +857,7 @@ EduAtt.hist_chart <- EduAtt.hist %>%
        x="",
        y="") 
 
-ggsave(EduAtt.hist_chart,filename = "indicator expansion drafts/graphics/bach.hist.png",
+ggsave(bach.hist_chart,filename = "indicator expansion drafts/graphics/bach.hist.png",
        width = 8, height = 6, units = "in")
 
 # across geos pov bar chart

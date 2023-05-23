@@ -263,7 +263,7 @@ Although race/ethnicity and age data is available for all eight parishes in metr
 
 ## Educational attainment, income, and internet access
 
-Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^5] In New Orleans, `r round.off(getvalue.bachdeg.nopct*100)` percent of adults 25 and older had at least a bachelor's degree in `r year` - higher than the U.S. average of `r round.off(getvalue.bachdeg.USpct*100)` percent, and up from 26 percent in 2000.  The overall metro area share of adults with a bachelor's degree grew from 23 to `r round.off(getvalue.bachdeg.metropct*100)` percent - lower than the national average of `r round.off(getvalue.bachdeg.USpct*100)` percent.
+Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^5] In New Orleans, `r round.off(getvalue.bachdeg.nopct*100)` percent of adults 25 and older had at least a bachelor's degree in `r year` &mdash; higher than the U.S. average of `r round.off(getvalue.bachdeg.USpct*100)` percent, and up from 26 percent in 2000.  The overall metro area share of adults with a bachelor's degree grew from 23 to `r round.off(getvalue.bachdeg.metropct*100)` percent &mdash; lower than the national average of `r round.off(getvalue.bachdeg.USpct*100)` percent.
 
 
 ```{r bach, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -432,6 +432,7 @@ pov.raceGeos_chart
 makeCSS_source(
 "∗ = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.   
 ∗ = In Jefferson Parish, the difference between White and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
+∗ = In St. Tammany Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.   
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2021."
@@ -475,6 +476,7 @@ childpov.raceGeos_chart
 makeCSS_source(
 "∗ = In Orleans Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.   
 ∗ = In Jefferson Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.   
+∗ = In St. Tammany Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In the New Orleans Metro Area, the difference between White and Asian and Hispanic and Asian is not statistically significant.   
 ∗ = In United States, the difference between White and Asian is not statistically significant.   
 

@@ -363,22 +363,23 @@ bachrace <- bachraceRaw %>%
          moeprop_wht = moeprop(y = Total_wht, moex = moeagg_wht, moey = TotalMOE_wht, p = pctbach_wht),
          moeprop_asian = moeprop(y = Total_asian, moex = moeagg_asian, moey = TotalMOE_asian, p = pctbach_asian),
          moeprop_hisp = moeprop(y = Total_hisp, moex = moeagg_hisp, moey = TotalMOE_hisp, p = pctbach_hisp),
-         
-         #stat test each race against each other within parishes.  Check archived if we want to compare each race to the overall parish value.
+#stat test each race against each other within parishes.  Check archived if we want to compare each race to the overall parish value.
          sig_wht_blk = stattest(x=pctbach_wht, moex = moeprop_wht, y=pctbach_blk, moey = moeprop_blk),
          sig_wht_hisp = stattest(x=pctbach_wht, moex = moeprop_wht, y=pctbach_hisp, moey = moeprop_hisp),
          sig_wht_asian = stattest(x=pctbach_wht, moex = moeprop_wht, y=pctbach_asian, moey = moeprop_asian),
          sig_blk_hisp = stattest(x=pctbach_blk, moex = moeprop_blk, y=pctbach_hisp, moey = moeprop_hisp),
          sig_blk_asian = stattest(x=pctbach_blk, moex = moeprop_blk, y=pctbach_asian, moey = moeprop_asian),
          sig_hisp_asian = stattest(x=pctbach_hisp, moex = moeprop_hisp, y=pctbach_asian, moey = moeprop_asian)) %>%
-  pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
+  pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>%
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename),
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
-                               T ~ placename)) %>% 
-  ungroup() %>% 
-  unique() %>%
+                               T ~ placename)) %>%
+  ungroup() %>%
+  unique() 
+
+bachrace_forgraphic <- bachrace %>%
   select(place, placename, pctbach_blk, pctbach_wht, pctbach_hisp, pctbach_asian) %>% #not includjng "pctbach"
   pivot_longer(-c(placename,place), names_to = c("val", "race"), names_sep = "_") %>%
   select(-val) %>%
@@ -389,20 +390,54 @@ bachrace <- bachraceRaw %>%
                           grepl("wht", race) ~ "White, non-Hispanic"),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")),
          val_lab = case_when(value == 0 ~ " ",
-                             value != 0 ~ paste0(round.off(value*100), "%"))) %>% 
+                             value != 0 ~ paste0(round.off(value*100), "%"))) %>%
   unique()
 
 bachraceCSV <- bachrace %>% 
   select(race, placename.fac, value) %>%
   pivot_wider(names_from = placename.fac, values_from = value) %>%
   write.csv("outputs/spreadsheets/bachrace.csv")
-  
-bachhist <- rbind(bachhist,
-                  (bachrace %>% 
-                     filter(place == "071") %>%
-                     transmute(year = 2021,
-                            val = value,
-                            var = race))) #current year
+
+bachhist <- bachhist %>%
+  select(year, val, race, var) %>%
+  pivot_wider(id_cols = race, names_from = c(year, var), values_from = val) %>%
+  #this looks crazy, but it is pivoting what we already created for bachrace so that we can stat test the historical data without creating so many new dataframes.
+           left_join(bachrace %>%
+            filter(place == "071") %>%
+            filter(!duplicated(place)) %>%
+                transmute(`all_2021_percent` = pctbach,
+                          `wht_2021_percent` = pctbach_wht,
+                          `blk_2021_percent` = pctbach_blk,
+                          `hisp_2021_percent` = pctbach_hisp,
+                          `all_2021_MOE` = moeprop,
+                          `blk_2021_MOE` = moeprop_blk,
+                          `hisp_2021_MOE` = moeprop_hisp,
+                          `wht_2021_MOE` = moeprop_wht) %>%
+       pivot_longer(everything(), names_to = c("race", "var","type"), names_sep = "_", values_to = "val") %>%
+       pivot_wider(names_from = c(var, type), names_sep = "_", values_from = "val") %>%
+       mutate(race = case_when(grepl("all",race) ~ "All",
+                               grepl("blk",race) ~ "Black",
+                               grepl("hisp",race) ~ "Hispanic, any race",
+                               grepl("wht", race) ~ "White, non-Hispanic"),
+              race.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race"))),
+       # end of left join
+       by = "race") %>%
+  #now we have all the data to stat test.
+  mutate(sig_00_10 = stattest(`2000_percent`, `2000_MOE`, `2010_percent`, `2010_MOE`),
+         sig_00_21 = stattest(`2000_percent`, `2000_MOE`, `2021_percent`, `2021_MOE`),
+         sig_10_21 = stattest(`2010_percent`, `2010_MOE`, `2021_percent`, `2021_MOE`),
+        
+         #this gives us the significance star indicating that within a race, the change over time is not signficant 
+         val_lab = case_when((sig_00_10 == "no" | sig_00_21 == "no" | sig_10_21 == "no") ~ "*",
+                             T ~ " ")) %>%
+  pivot_longer(cols = `1980_percent`:`2021_MOE`, names_to = c("year", "var"), names_sep = "_", values_to = "val") %>%
+  pivot_wider(names_from = var, values_from = val) %>%
+  mutate(year = as.numeric(year))
+
+#not working yet to write to csv.
+bachhist_CSV <- bachhist %>% filter(race.fac != "All") %>% select(year, race.fac, percent, MOE, val_lab, sig_00_10,sig_10_21, sig_00_21) %>%
+  arrange(year, race.fac)
+#write_csv(bachhist_CSV, file = "outputs/spreadsheets/bachhist.csv")
 
 #Less than a high school degree, adults 25 and older
 load("inputs/hsRaw.RData")
@@ -425,7 +460,6 @@ hsCSV <- hs %>%
   write.csv("outputs/spreadsheets/hs.csv")
 
 #Median household income, 201* inflation-adjusted dollars
-#***************NEED MOE FOR 2000 DATA**********************
 census2000 <- data.frame(census2000 = cpi99 * c(27129, 38239, 47453, 35183, 41851),
                          census2000MOE = cpi99 * c(679.63, 770.33, 585.37, 801.32, 902.83))
 load("inputs/medhhRaw.RData")
@@ -443,21 +477,92 @@ select(placename, census2000, MedianHHIncome) %>%
   write.csv("outputs/spreadsheets/medhh.csv")
  
 load("inputs/medhhraceRaw.RData")
-load("hist_data/medhhhist.RData")
+load("hist_data/medHHhist.RData")
 medhhrace <- medhhraceRaw %>%
-  select(-place, -placename) %>%
-  pivot_longer(-placename.fac,names_to = c("var", "race"), names_sep = "_",values_to = "val") %>%
-  mutate(race = ifelse(grepl("asian",race), "Asian",race),
-         race = ifelse(grepl("blk",race), "Black", race),
-         race = ifelse(grepl("hisp",race), "Hispanic, any race", race),
-         race = ifelse(grepl("wht",race), "White, non-Hispanic", race)) %>%
-  mutate(race.fac = factor(.$race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race"))) %>%
-  na.omit()
+  mutate(#doing the significance tests:
+         sig_wht_blk = stattest(x=MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y=MedianHHIncome_blk, moey = MedianHHIncomeMOE_blk),
+         sig_wht_hisp = stattest(x=MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y=MedianHHIncome_hisp, moey = MedianHHIncomeMOE_hisp),
+         sig_wht_asian = stattest(x=MedianHHIncome_wht, moex = MedianHHIncomeMOE_wht, y=MedianHHIncome_asian, moey = MedianHHIncomeMOE_asian),
+         sig_blk_hisp = stattest(x=MedianHHIncome_blk, moex = MedianHHIncomeMOE_blk, y=MedianHHIncome_hisp, moey = MedianHHIncomeMOE_hisp),
+         sig_blk_asian = stattest(x=MedianHHIncome_blk, moex = MedianHHIncomeMOE_blk, y=MedianHHIncome_asian, moey = MedianHHIncomeMOE_asian),
+         sig_hisp_asian = stattest(x=MedianHHIncome_hisp, moex = MedianHHIncomeMOE_hisp, y=MedianHHIncome_asian, moey = MedianHHIncomeMOE_asian),
+         ) %>%
+  na.omit() %>%
+  pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>%
+  select(-var) %>%
+  group_by(place, placename) %>%
+  mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
+                               T ~ placename),
+         placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
+                               T ~ placename)) %>% select(-stat_race) %>% 
+  ungroup() %>%
+  unique() 
 
-select(placename, (contains("pct"))) %>% 
-  pivot_longer(-placename, names_to = "inta", values_to = "Value") %>% 
-  pivot_wider(id_cols = c("inta"), names_from = "placename", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/inta.csv")
+medhhrace_forgraphic <- medhhrace %>%
+  select(place, placename, MedianHHIncome_blk, MedianHHIncome_wht, MedianHHIncome_hisp, MedianHHIncome_asian) %>% #not including overall
+  pivot_longer(-c(placename,place), names_to = c("val", "race"), names_sep = "_") %>%
+  select(-val) %>%
+  mutate(placename.fac = factor(placename, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "U.S.")), #need to figure out a better way to do this one...
+         race = case_when(grepl("asian",race) ~ "Asian",
+                          grepl("blk",race) ~ "Black",
+                          grepl("hisp",race) ~ "Hispanic, any race",
+                          grepl("wht", race) ~ "White, non-Hispanic"),
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")),
+         val_lab = paste0("$", comma(value))) %>%
+  unique()
+
+medhhraceCSV <- medhhrace %>%
+  select(race, placename.fac, MedianHHIncome) %>%
+  pivot_wider(names_from = placename.fac, values_from = MedianHHIncome) %>%
+  write.csv("outputs/spreadsheets/medhhrace.csv")
+
+medHHhist <- medhh_unadjusted %>% 
+  select(year, val, race, var) %>%
+  pivot_wider(id_cols = race, names_from = c(year, var), values_from = val) %>%
+  #this looks crazy, but it is pivoting what we already created for medhhrace so that we can stat test the historical data without creating so many new dataframes.
+  left_join(medhhrace %>%
+              filter(place == "071") %>%
+              filter(!duplicated(place)) %>%
+              transmute(`all_2021_dollars` = MedianHHIncome,
+                        `wht_2021_dollars` = MedianHHIncome_wht,
+                        `blk_2021_dollars` = MedianHHIncome_blk,
+                        `hisp_2021_dollars` = MedianHHIncome_hisp,
+                        `all_2021_MOE` = MedianHHIncomeMOE,
+                        `blk_2021_MOE` = MedianHHIncomeMOE_blk,
+                        `hisp_2021_MOE` = MedianHHIncomeMOE_hisp,
+                        `wht_2021_MOE` = MedianHHIncomeMOE_wht) %>%
+              pivot_longer(everything(), names_to = c("race", "var","type"), names_sep = "_", values_to = "val") %>%
+              pivot_wider(names_from = c(var, type), names_sep = "_", values_from = "val") %>%
+              mutate(race = case_when(grepl("all",race) ~ "All",
+                                      grepl("blk",race) ~ "Black",
+                                      grepl("hisp",race) ~ "Hispanic, any race",
+                                      grepl("wht", race) ~ "White, non-Hispanic"),
+                     race.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race"))),
+            # end of left join
+            by = "race") %>%
+  mutate(#adjust to 2021 dollars.
+    `1979_adj` = as.numeric(`1979_dollars`)*cpi79,
+    `1989_adj` = as.numeric(`1989_dollars`)*cpi89,
+    `1999_adj` = as.numeric(`1999_dollars`)*cpi99,
+    `1999_adjMOE` = as.numeric(`1999_MOE`)*cpi99,
+    `2010_adj` = as.numeric(`2010_dollars`)*cpi10,
+    `2010_adjMOE` = as.numeric(`2010_MOE`)*cpi10,
+    
+    
+    sig_99_10 = stattest(`1999_adj`, `1999_adjMOE`, `2010_adj`, `2010_adjMOE`),
+         sig_99_21 = stattest(`1999_adj`, `1999_adjMOE`, `2021_dollars`, `2021_MOE`),
+         sig_10_21 = stattest(`2010_adj`, `2010_adjMOE`, `2021_dollars`, `2021_MOE`),
+         
+         #this gives us the significance star indicating that within a race, the change over time is not signficant 
+         val_lab = case_when((sig_99_10 == "no" | sig_99_21 == "no" | sig_10_21 == "no") ~ "*",
+                             T ~ " "))
+  
+
+#Household internet access ... where did the rest of it go @HT?
+# select(placename, (contains("pct"))) %>% 
+#   pivot_longer(-placename, names_to = "inta", values_to = "Value") %>% 
+#   pivot_wider(id_cols = c("inta"), names_from = "placename", values_from = "Value") %>%
+#   write.csv("outputs/spreadsheets/inta.csv")
 
 #Poverty rate, population for whom poverty has been determined
 load("inputs/povRaw.RData")
@@ -477,41 +582,100 @@ select(placename, sf1999, (contains("pct"))) %>%
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
   write.csv("outputs/spreadsheets/pov.csv")
 
+#Poverty by race
 load("inputs/povraceRaw.RData")
-povraceRaw <- povraceRaw %>% 
-  mutate(pctpov = BelowPov / Total,
+load("hist_data/povhist.RData")
+
+#for bar charts + stat testing.
+povrace <-  povraceRaw %>% 
+  mutate(#adding zeros for asian in st. tammany (suppression):
+    # BelowPov_asian = case_when(is.na(BelowPov_asian) == T & place == 103 ~ 0,
+    #                            T ~ BelowPov_asian),
+    # Total_asian = case_when(is.na(Total_asian) == T & place == 103 ~ 0,
+    #                         T ~ Total_asian),
+    # BelowPovMOE_asian= case_when(is.na(BelowPovMOE_asian) == T & place == 103 ~ 0,
+    #                              T ~ BelowPovMOE_asian),
+    # TotalMOE_asian= case_when(is.na(TotalMOE_asian) == T & place == 103 ~ 0,
+    #                           T ~ TotalMOE_asian),
+    
+    pctpov = BelowPov / Total,
          pctpov_blk = BelowPov_blk / Total_blk,
          pctpov_wht = BelowPov_wht / Total_wht,
          pctpov_hisp = BelowPov_hisp / Total_hisp,
          pctpov_asian = BelowPov_asian / Total_asian,
+         
          moeprop = moeprop(y = Total, moex = BelowPovMOE, moey = TotalMOE, p = pctpov),
          moeprop_blk = moeprop(y = Total_blk, moex = BelowPovMOE_blk, moey = TotalMOE_blk, p = pctpov_blk),
          moeprop_wht = moeprop(y = Total_wht, moex = BelowPovMOE_wht, moey = TotalMOE_wht, p = pctpov_wht),
          moeprop_hisp = moeprop(y = Total_hisp, moex = BelowPovMOE_hisp, moey = TotalMOE_hisp, p = pctpov_hisp),
+         moeprop_asian = case_when(place != 103 ~ moeprop(y = Total_asian, moex = BelowPovMOE_asian, moey = TotalMOE_asian, p = pctpov_asian),
+                                                          place == 103 ~ 0),
          
          sig_wht_blk = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_blk, moey = moeprop_blk),
          sig_wht_hisp = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_hisp, moey = moeprop_hisp),
          sig_wht_asian = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov_asian, moey = moeprop_asian),
-         sigall_wht = stattest(x=pctpov_wht, moex = moeprop_wht, y=pctpov, moey = moeprop),
          sig_blk_hisp = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov_hisp, moey = moeprop_hisp),
          sig_blk_asian = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov_asian, moey = moeprop_asian),
-         sigall_blk = stattest(x=pctpov_blk, moex = moeprop_blk, y=pctpov, moey = moeprop),
-         sig_hisp_asian = stattest(x=pctpov_hisp, moex = moeprop_hisp, y=pctpov_asian, moey = moeprop_asian),
-         sigall_hisp = stattest(x=pctpov_hisp, moex = moeprop_hisp, y=pctpov, moey = moeprop),
-         sigall_asian = stattest(x=pctpov_asian, moex = moeprop_asian, y=pctpov, moey = moeprop)) %>%
-  select(place, placename, (contains("sig") & !contains("all"))) %>%
+         sig_hisp_asian = stattest(x=pctpov_hisp, moex = moeprop_hisp, y=pctpov_asian, moey = moeprop_asian)) %>%
+  
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename),
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
-                               T ~ placename)) %>% select(-stat_race) %>% unique() %>%
-  filter(race != "All") %>%
-  mutate(placename.fac = factor(placename, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
-         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
+                               T ~ placename)) %>% 
+  unique() %>%
+  unique()
 
+povrace_forgraphic <- povrace %>%
+  select(place, placename, pctpov_blk, pctpov_wht, pctpov_hisp, pctpov_asian) %>% #not including overall/"pctpov"
+  pivot_longer(-c(placename, place), names_to = c("val", "race"), names_sep = "_") %>%
+  select(-val) %>%
+  mutate(placename.fac = factor(placename, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "U.S.")), #need to figure out a better way to do this one...
+         race = case_when(grepl("asian",race) ~ "Asian",
+                          grepl("blk",race) ~ "Black",
+                          grepl("hisp",race) ~ "Hispanic, any race",
+                          grepl("wht", race) ~ "White, non-Hispanic"),
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")),
+         val_lab = case_when(value == 0 ~ " ",
+                             value != 0 ~ paste0(round.off(value*100), "%"))) %>%
+  unique()
 
-load("hist_data/povhist.RData") #join to only the data columns from above. then pivot wider to stat test.
+povhist <- povhist %>%
+  select(year, val, race, var) %>%
+  pivot_wider(id_cols = race, names_from = c(year, var), values_from = val) %>%
+  #this looks crazy, but it is pivoting what we already created for povrace so that we can stat test the historical data without creating so many new dataframes.
+  left_join(povrace %>%
+              filter(place == "071") %>%
+              filter(!duplicated(place)) %>%
+              transmute(`all_2021_percent` = pctpov,
+                        `wht_2021_percent` = pctpov_wht,
+                        `blk_2021_percent` = pctpov_blk,
+                        `hisp_2021_percent` = pctpov_hisp,
+                        `all_2021_MOE` = moeprop,
+                        `blk_2021_MOE` = moeprop_blk,
+                        `hisp_2021_MOE` = moeprop_hisp,
+                        `wht_2021_MOE` = moeprop_wht) %>%
+              pivot_longer(everything(), names_to = c("race", "var","type"), names_sep = "_", values_to = "val") %>%
+              pivot_wider(names_from = c(var, type), names_sep = "_", values_from = "val") %>%
+              mutate(race = case_when(grepl("all",race) ~ "All",
+                                      grepl("blk",race) ~ "Black",
+                                      grepl("hisp",race) ~ "Hispanic, any race",
+                                      grepl("wht", race) ~ "White, non-Hispanic"),
+                     race.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race"))),
+            # end of left join
+            by = "race") %>%
+  #now we have all the data to stat test.
+  mutate(sig_00_10 = stattest(`2000_percent`, `2000_MOE`, `2010_percent`, `2010_MOE`),
+         sig_00_21 = stattest(`2000_percent`, `2000_MOE`, `2021_percent`, `2021_MOE`),
+         sig_10_21 = stattest(`2010_percent`, `2010_MOE`, `2021_percent`, `2021_MOE`),
+         
+         #this gives us the significance star indicating that within a race, the change over time is not signficant 
+         val_lab = case_when((sig_00_10 == "no" | sig_00_21 == "no" | sig_10_21 == "no") ~ "*",
+                             T ~ " ")) %>%
+  pivot_longer(cols = `1980_percent`:`2021_MOE`, names_to = c("year", "var"), names_sep = "_", values_to = "val") %>%
+  pivot_wider(names_from = var, values_from = val) %>%
+  mutate(year = as.numeric(year))
 
 #Children in poverty, population for whom poverty has been determined			
 load("inputs/childpovRaw.RData")

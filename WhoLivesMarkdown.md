@@ -197,11 +197,11 @@ Although race/ethnicity and age data is available for all eight parishes in metr
 
 Educational attainment is an important determinant of household incomes,
 workforce skills, and regional resiliency.[^5] In New Orleans, 42
-percent of adults 25 and older had at least a bachelor’s degree in
-2021 - higher than the U.S. average of 35 percent, and up from 26
-percent in 2000. The overall metro area share of adults with a
-bachelor’s degree grew from 23 to 34 percent - lower than the national
-average of 35 percent.
+percent of adults 25 and older had at least a bachelor’s degree in 2021
+— higher than the U.S. average of 35 percent, and up from 26 percent in
+2000. The overall metro area share of adults with a bachelor’s degree
+grew from 23 to 34 percent — lower than the national average of 35
+percent.
 
 <img src="https://next.datacenterresearch.org/a/wp-content/uploads/2022/10/bach-1.png" style="display: block; margin: auto;" />
 

@@ -11,7 +11,6 @@ hispanRaw <- wholivesdatapull(hispanvars,hispannames)[-3,]
 save(hispanRaw, file = "inputs/hispanRaw.RData") # -3 removes St. Tammany because it is not included in this analysis
 
 #Households with own children under 18
-### *** something went wrong here pulling from the warehouse!!!!!! ***
 hwcvars <- c('B11001_001E','B11001_001M','B11003_003E','B11003_003M','B11003_010E','B11003_010M','B11003_016E','B11003_016M')
 hwcnames <- c("TotalHH", "TotalHHMOE","Married", "MarriedMOE", "MaleHH", "MaleHHMOE", "FemaleHH" ,"FemaleHHMOE")
 hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
