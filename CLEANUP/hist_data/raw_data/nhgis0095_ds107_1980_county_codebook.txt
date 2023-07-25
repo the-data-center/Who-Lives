@@ -1,0 +1,153 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0095_ds107_1980_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             1980
+Geographic level: County (by State)
+Dataset:          1980 Census: STF 3 - Sample-Based Data
+   NHGIS code:    1980_STF3
+   NHGIS ID:      ds107
+Breakdown(s):     Geographic Subarea:
+                     Total area (0000)
+ 
+Tables:
+ 
+1. Years of School Completed
+   Universe:    Persons 25 Years and Over
+   Source code: NT48B
+   NHGIS code:  DHN
+ 
+2. Years of School Completed
+   Universe:    Persons of Spanish Origin 25 Years and Over
+   Source code: NT49
+   NHGIS code:  DHO
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATE:       State Name
+        STATEA:      State Code
+        SMSAA:       Standard Metropolitan Statistical Area Code
+        COUNTY:      County Name
+        COUNTYA:     County Code
+        CTY_SUBA:    County Subdivision Code
+        PLACEA:      Place Code
+        TRACTA:      Census Tract Code
+        BLCK_GRPA:   Block Group Code
+        ENUMDISTA:   Enumeration District Code
+        SCSAA:       Standard Consolidated Statistical Area Code
+        URB_AREAA:   Urban Area Code
+        CDA:         Congressional District Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        MCDSEQNOA:   MCD Sequence Number Code
+        ZIPA:        5-Digit Zip Code Code
+        AREANAME:    Area Name
+ 
+Breakdown:
+    Geographic Subarea: Total area (0000)
+ 
+    Table 1:     Years of School Completed
+    Universe:    Persons 25 Years and Over
+    Source code: NT48B
+    NHGIS code:  DHN
+        DHN001:      White >> Elementary (0-8 years)
+        DHN002:      White >> High school: 1-3 years
+        DHN003:      White >> High school: 4 years
+        DHN004:      White >> College: 1-3 years
+        DHN005:      White >> College: 4 or more years
+        DHN006:      Black >> Elementary (0-8 years)
+        DHN007:      Black >> High school: 1-3 years
+        DHN008:      Black >> High school: 4 years
+        DHN009:      Black >> College: 1-3 years
+        DHN010:      Black >> College: 4 or more years
+        DHN011:      American Indian, Eskimo, and Aleut >> Elementary (0-8 years)
+        DHN012:      American Indian, Eskimo, and Aleut >> High school: 1-3 years
+        DHN013:      American Indian, Eskimo, and Aleut >> High school: 4 years
+        DHN014:      American Indian, Eskimo, and Aleut >> College: 1-3 years
+        DHN015:      American Indian, Eskimo, and Aleut >> College: 4 or more years
+        DHN016:      Asian and Pacific Islander >> Elementary (0-8 years)
+        DHN017:      Asian and Pacific Islander >> High school: 1-3 years
+        DHN018:      Asian and Pacific Islander >> High school: 4 years
+        DHN019:      Asian and Pacific Islander >> College: 1-3 years
+        DHN020:      Asian and Pacific Islander >> College: 4 or more years
+        DHN021:      Other >> Elementary (0-8 years)
+        DHN022:      Other >> High school: 1-3 years
+        DHN023:      Other >> High school: 4 years
+        DHN024:      Other >> College: 1-3 years
+        DHN025:      Other >> College: 4 or more years
+ 
+    Table 2:     Years of School Completed
+    Universe:    Persons of Spanish Origin 25 Years and Over
+    Source code: NT49
+    NHGIS code:  DHO
+        DHO001:      Elementary (0-8 years)
+        DHO002:      High school: 1-3 years
+        DHO003:      High school: 4 years
+        DHO004:      College: 1-3 years
+        DHO005:      College: 4 or more years
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Steven Manson, Jonathan Schroeder, David Van Riper, Tracy Kugler, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 17.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2022. 
+        http://doi.org/10.18128/D050.V17.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455

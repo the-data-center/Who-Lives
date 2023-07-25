@@ -7,6 +7,7 @@
 ##pull parish, metro, and US numbers with census api
 ##input: census api variable names, human-readable names, and vintage
 ##output: dataframe in same format as Who Lives data tables excel sheet
+
 wholivesdatapull <- function(variables, names = variables, year = 2021, censusname = "acs/acs1"){
   censuskey="530ce361defc2c476e5b5d5626d224d8354b9b9a"
   parishes <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "county:071,051,103,093", regionin = "state:22") ##pull parish data

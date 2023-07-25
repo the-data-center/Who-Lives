@@ -167,7 +167,7 @@ chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
                                DCcolor.p2limegreen,
                                DCcolor.p1darkblue90)) +
   scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,130000)) +
-  scale_x_continuous(breaks = 2000:2021)+
+  scale_x_continuous(breaks = 2000:2022)+
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
@@ -335,7 +335,7 @@ chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5, size = 16))+
-  labs(title = "Population by age group, 2021",
+  labs(title = "Population by age group, 2022",
        x="",
        y="")
 
@@ -394,7 +394,7 @@ hsGraphic <- dodgedBar(hs,
 
 bachGraphic <- dodgedBar(bach, 
                          quo(pctbach), 
-                         "Rate of Bachelor's degree or higher, adults 25 and older")
+                         "Rate of bachelor's degree or higher, adults 25 and older")
 
 ####14 - Median household income, 2016 inflation-adjusted dollars
 
@@ -833,7 +833,7 @@ bach.raceGeos_chart <- bach_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16)) + 
-  labs(title = "Rate of Bachelor's degree or higher, adults 25 years or older by race/ethnicity, 2021",
+  labs(title = "Rate of bachelor's degree or higher, adults 25 years or older by race/ethnicity, 2021",
        x="",
        y="")
 ggsave(bach.raceGeos_chart,filename = "indicator expansion drafts/graphics/bach.raceGeos.png",
@@ -854,7 +854,7 @@ EduAtt.hist_chart <- EduAtt.hist %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16)) + 
-  labs(title = "Rate of Bachelor's degree or higher, adults 25 years or older by race/ethnicity,\nOrleans Parish",
+  labs(title = "Rate of bachelor's degree or higher, adults 25 years or older by race/ethnicity,\nOrleans Parish",
        x="",
        y="") 
 

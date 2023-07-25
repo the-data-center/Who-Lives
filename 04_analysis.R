@@ -77,8 +77,10 @@ hispan <- hispanRaw %>%
 hispanCSV <- hispan %>% 
   select(place, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "Hispanic origin", values_to = "Value") %>% 
-  pivot_wider(id_cols = c("Hispanic origin"), names_from = "place", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/hispan.csv")
+  pivot_wider(id_cols = c("Hispanic origin"), names_from = "place", values_from = "Value")
+
+write.csv(hispanCSV, "outputs/spreadsheets/hispan.csv")
+storage_write_csv(hispanCSV, cont_proj, "who_lives/2022/outputs/hispan.csv")
 
 #Households with own children under 18
 load("inputs/hwcRaw.RData")
@@ -99,8 +101,10 @@ hwcCSV <- hwc %>%
   mutate(name = paste( place, hwc, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/hwc.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+
+write.csv(hwcCSV, "outputs/spreadsheets/hwc.csv")
+storage_write_csv(hwcCSV, cont_proj, "who_lives/2022/outputs/hwc.csv")
 
 #One-person households
 load("inputs/singRaw.RData")
@@ -117,8 +121,9 @@ select(place, census2000, (contains("pct"))) %>%
   mutate(name = paste( place, sing, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/sing.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(singCSV, "outputs/spreadsheets/sing.csv")
+storage_write_csv(singCSV, cont_proj, "who_lives/2022/outputs/sing.csv")
 
 #Less than a high school degree, adults 25 and older
 load("inputs/hsRaw.RData")
@@ -137,8 +142,9 @@ select(place, census2000, (contains("pct"))) %>%
   mutate(name = paste( place, hs, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/hs.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(hsCSV, "outputs/spreadsheets/hs.csv")
+storage_write_csv(hsCSV, cont_proj, "who_lives/2022/outputs/hs.csv")
 
 #Bachelor's degree or higher, adults 25 and older
 load("inputs/bachRaw.RData")
@@ -157,8 +163,9 @@ select(place, census2000, (contains("pct"))) %>%
   mutate(name = paste( place, bach, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/bach.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(bachCSV, "outputs/spreadsheets/bach.csv")
+storage_write_csv(bachCSV, cont_proj, "who_lives/2022/outputs/bach.csv")
 
 #Median household income, 201* inflation-adjusted dollars
 #***************NEED MOE FOR 2000 DATA**********************
@@ -176,8 +183,9 @@ select(place, census2000, MedianHHIncome) %>%
   mutate(name = paste( place, medhh, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/medhh.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(medhhCSV, "outputs/spreadsheets/medhh.csv")
+storage_write_csv(medhhCSV, cont_proj, "who_lives/2022/outputs/medhh.csv")
 
 #Internet access
 load("inputs/intaRaw.RData")
@@ -213,8 +221,9 @@ inta <- intaRaw %>%
 intaCSV <- inta %>% 
 select(place, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "inta", values_to = "Value") %>% 
-  pivot_wider(id_cols = c("inta"), names_from = "place", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/inta.csv")
+  pivot_wider(id_cols = c("inta"), names_from = "place", values_from = "Value") 
+write.csv(intaCSV, "outputs/spreadsheets/inta.csv") 
+storage_write_csv(intaCSV, cont_proj, "who_lives/2022/outputs/inta.csv")
 
 #Poverty rate, population for whom poverty has been determined
 load("inputs/povRaw.RData")
@@ -232,8 +241,9 @@ select(place, sf1999, (contains("pct"))) %>%
   mutate(name = paste( place, pov, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/pov.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") 
+write.csv(povCSV, "outputs/spreadsheets/pov.csv") 
+storage_write_csv(povCSV, cont_proj, "who_lives/2022/outputs/pov.csv")
 
 #Children in poverty, population for whom poverty has been determined			
 load("inputs/childpovRaw.RData")
@@ -255,8 +265,9 @@ select(place, sf1999, (contains("pct"))) %>%
   mutate(name = paste( place, childpov, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/childpov.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(childpovCSV, "outputs/spreadsheets/childpov.csv")
+storage_write_csv(childpovCSV, cont_proj, "who_lives/2022/outputs/childpov.csv")
 
 #Households without access to a vehicle
 load("inputs/vehRaw.RData")
@@ -273,8 +284,9 @@ select(place, census2000, (contains("pct"))) %>%
   mutate(name = paste( place, veh, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/veh.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(vehCSV, "outputs/spreadsheets/veh.csv")
+storage_write_csv(vehCSV, cont_proj, "who_lives/2022/outputs/veh.csv")
 
 #Population not U.S. citizens at birth
 load("inputs/forborRaw.RData")
@@ -293,8 +305,9 @@ select(place, census2000, (contains("pct"))) %>%
   mutate(name = paste( place, forbor, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/forbor.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") 
+write.csv(forborCSV, "outputs/spreadsheets/forbor.csv") 
+storage_write_csv(forborCSV, cont_proj, "who_lives/2022/outputs/forbor.csv")
 
 #Population who moved in the past year
 load("inputs/mobRaw.RData")
@@ -340,8 +353,9 @@ select(place,  (contains("sf2004") & !contains("MOE")), (contains("pct"))) %>%
          mobfinal = ifelse(grepl("samehouse", mob), "samehouse", mobfinal),
          mobfinal = factor(mobfinal, levels = c("samehouse", "withinparish", "difparish", "tates", "abroad"))) %>% 
   arrange(mobfinal) %>%
-  pivot_wider(id_cols = c("mobfinal"), names_from = "header", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/mob.csv")
+  pivot_wider(id_cols = c("mobfinal"), names_from = "header", values_from = "Value") 
+write.csv(mobCSV, "outputs/spreadsheets/mob.csv") 
+storage_write_csv(mobCSV, cont_proj, "who_lives/2022/outputs/mob.csv")
 
 ## mobility sig testing for written analysis
 
@@ -373,15 +387,16 @@ select(place, (contains("pct"))) %>% select(place, Ownerpct2000, Ownerpct) %>%
   mutate(name = paste( place, ho, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/ho.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") 
+write.csv(hoCSV, "outputs/spreadsheets/ho.csv") 
+storage_write_csv(hoCSV, cont_proj, "who_lives/2022/outputs/ho.csv")
 
 
 #Homeowners without a mortgage
 load("inputs/honomoRaw.RData")
 honomo <- honomoRaw %>%
   mutate(census2000 = c(0.3298,0.3458,0.2967,0.3476,0.3259),
-         census2000SE = c(0.004263821, 0.003804423, 0.005191947, 0.002300568, 1.25E-04),
+         census2000SE = c(0.004263821, 0.003804423, 0.005191947, 0.00230056781162641, 1.25E-04),
          honomopct = NoMortgage / Total,
          moeprop = moeprop(y=Total,moex =NoMortgageMOE,moey = TotalMOE,p=honomopct),
          significant = stattest(x=census2000, moex = census2000SE*1.645, y=honomopct,moey=moeprop))
@@ -392,8 +407,9 @@ select(place, census2000, (contains("pct"))) %>%
   mutate(name = paste( place, honomo, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/honomo.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(honomoCSV, "outputs/spreadsheets/honomo.csv")
+storage_write_csv(honomoCSV, cont_proj, "who_lives/2022/outputs/honomo.csv")
 
 #Renters with severe housing cost burdens
 load("inputs/rentburRaw.RData")
@@ -413,8 +429,9 @@ select(place, (contains("2004")) & (!contains("MOE")), (contains("pct"))) %>%
   mutate(name = paste( place, rentbur, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/rentbur.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(rentburCSV, "outputs/spreadsheets/rentbur.csv")
+storage_write_csv(rentburCSV, cont_proj, "who_lives/2022/outputs/rentbur.csv")
 
 #Homeowners with severe housing cost burdens
 load("inputs/hoburRaw.RData")
@@ -435,8 +452,9 @@ select(place, (contains("2004")) & (!contains("MOE")), (contains("pct"))) %>%
   mutate(name = paste( place, hobur, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/hobur.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(hoburCSV, "outputs/spreadsheets/hobur.csv")
+storage_write_csv(hoburCSV, cont_proj, "who_lives/2022/outputs/hobur.csv")
 
 
 #Median gross rent, 201* inflation-adjusted dollars
@@ -457,8 +475,9 @@ medrentCSV <- medrent %>%
   mutate(name = paste( place, medrent, sep = "-"),
          year = 2021) %>% 
   select(-place) %>% 
-  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/medrent.csv")
+  pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
+write.csv(medrentCSV, "outputs/spreadsheets/medrent.csv")
+storage_write_csv(medrentCSV, cont_proj, "who_lives/2022/outputs/medrent.csv")
 
 
 #Year structure built, 201* housing units
@@ -488,8 +507,9 @@ yrbuilt <- yrbuiltRaw %>%
 yrbuiltCSV <- yrbuilt %>% 
 select(place, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "yrbuilt", values_to = "Value") %>% 
-  pivot_wider(id_cols = c("yrbuilt"), names_from = "place", values_from = "Value") %>%
-  write.csv("outputs/spreadsheets/yrbuilt.csv")
+  pivot_wider(id_cols = c("yrbuilt"), names_from = "place", values_from = "Value")
+write.csv(yrbuiltCSV, "outputs/spreadsheets/yrbuilt.csv")
+storage_write_csv(yrbuiltCSV, cont_proj, "who_lives/2022/outputs/yrbuilt.csv")
 
 
 
@@ -560,8 +580,9 @@ commuteCSV <- commute %>%
          commutefinal = ifelse(grepl("home", commute), "Workhome", commutefinal),
          commutefinal = ifelse(grepl("ther", commute), "Other", commutefinal)) %>% 
   pivot_wider(id_cols = c("commutefinal"), names_from = "header", values_from = "Value") %>%
-  select(commutefinal, `Orleans-2000`, `Orleans-2021`, `Jefferson-2000`, `Jefferson-2021`, `New Orleans Metro Area-2000`, `New Orleans Metro Area-2021`, `United States-2000`, `United States-2021`  ) %>% 
-  write.csv("outputs/spreadsheets/commute.csv")
+  select(commutefinal, `Orleans-2000`, `Orleans-2021`, `Jefferson-2000`, `Jefferson-2021`, `New Orleans Metro Area-2000`, `New Orleans Metro Area-2021`, `United States-2000`, `United States-2021`  )
+write.csv(commuteCSV, "outputs/spreadsheets/commute.csv")
+storage_write_csv(commuteCSV, cont_proj, "who_lives/2022/outputs/commute.csv")
 
 
 
@@ -581,17 +602,18 @@ orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. 
 #allparishesRaw <- load("inputs/allparishesRaw.RData")
 
 #Table 1
-load("inputs/allparishesRaw.RData")
-AAWhiteHispan <- allparishesRaw %>%
+load("inputs/allparishesRaw2022.RData")
+AAWhiteHispan <- allparishesRaw2022 %>%
   filter(place == "Orleans Parish") %>%
-  filter(date == "7/1/2021 population estimate") %>%
+  filter(date == "7/1/2022 population estimate") %>%
   filter(age == "Total" & sex == "Total" & (raceSimple == "Black"|raceSimple == "White" |hisp == "Hispanic" | raceSimple == "Asian" )) %>%
   mutate(race.fac = factor(.$raceSimple,levels = c("Black", "White","Hispanic", "Asian")))%>% arrange(race.fac) %>%
   mutate(est2000=c(323392, 128871,  14826, 10919)) %>% #check order of races in data frame. Order is bottom up
   select(raceSimple, race.fac, population, est2000) 
 
-AAWhiteHispan %>%
-  write.csv("outputs/spreadsheets/AAWhiteHispan.csv")
+
+write.csv(AAWhiteHispan, "outputs/spreadsheets/AAWhiteHispan.csv")
+storage_write_csv(AAWhiteHispan, cont_proj, "who_lives/2023/outputs/AAWhiteHispan.csv")
 
 
 
@@ -602,23 +624,23 @@ AAWhiteHispan %>%
 
 #HT : I just switched these around so it would make Metro last... The dataframe is not ordered by the levels of placename factor 
 #that's the order that the 2000 numbers are going in.
-ParishDemo2<- allparishesRaw %>%
+ParishDemo2<- allparishesRaw2022 %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>%
-  filter(date == "7/1/2021 population estimate") %>%
+  filter(date == "7/1/2022 population estimate") %>%
   filter(age == "Total" & sex == "Total") %>%
   group_by(raceSimple)%>% unique() %>%
   summarise(population=sum(population)) %>% mutate(PlaceName = "Metro") %>% select(PlaceName, population, raceSimple)
 
-ParishDemo3 <- allparishesRaw %>% filter(PlaceName == "United States") %>%
-  filter(date == "7/1/2021 population estimate") %>%
+ParishDemo3 <- allparishesRaw2022 %>% filter(PlaceName == "United States") %>%
+  filter(date == "7/1/2022 population estimate") %>%
   filter(age == "Total" & sex == "Total")  %>%
   select(PlaceName, population, raceSimple)
 
-ParishDemo1<- allparishesRaw %>%
+ParishDemo1<- allparishesRaw2022 %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>% arrange((PlaceName)) %>%
-  filter(date == "7/1/2021 population estimate") %>%
+  filter(date == "7/1/2022 population estimate") %>%
   filter(age == "Total" & sex == "Total")  %>%
   select(PlaceName, population, raceSimple)  %>%
   bind_rows(.,ParishDemo2, ParishDemo3) 
@@ -641,13 +663,14 @@ ParishDemo <- pivot_wider(ParishDemo1, names_from = raceSimple, values_from = po
   #.[-2,]
 
 orleansdemo_csv <- ParishDemo %>% filter(PlaceName == "Orleans") %>% select(PlaceName, Total:Hispanic) %>% 
-  pivot_longer(cols = -PlaceName, names_to = "race", values_to = "est2021") 
+  pivot_longer(cols = -PlaceName, names_to = "race", values_to = "est2022") 
 write.csv(orleansdemo_csv, "outputs/spreadsheets/orleansdemo.csv")
+storage_write_csv(orleansdemo_csv, cont_proj, "who_lives/2023/outputs/orleansdemo.csv")
 
 parishdemo_csv <- ParishDemo %>% select(-c(Total:Hispanic)) %>%
   pivot_longer(cols = -PlaceName, names_to = c("race", "year"), names_sep = "2", values_to = "val") %>% 
   mutate(year = case_when(year == "000" ~ "2000",
-                          is.na(year) ~ "2021",
+                          is.na(year) ~ "2022",
                           T ~ year),
          race = factor(case_when(grepl("white", race) ~ "White, non-Hispanic",
                           grepl("black", race) ~ "Black",
@@ -657,6 +680,7 @@ parishdemo_csv <- ParishDemo %>% select(-c(Total:Hispanic)) %>%
   pivot_wider(names_from = c(PlaceName, year), values_from = val) %>% 
   arrange(race) 
 write.csv(parishdemo_csv, "outputs/spreadsheets/ParishDemo.csv")
+storage_write_csv(parishdemo_csv, cont_proj, "who_lives/2023/outputs/ParishDemo.csv")
 
 
 
@@ -670,27 +694,28 @@ AAhistorical <- blackpopestRaw %>%
   #.[-(2:3),] %>% #Remove 2010 estimates we don't need. We use Census Population for 2010 so we can delete 2010 Population estimate
   bind_rows(data.frame(POP = c(323392,0,0,0,0,0,133015,159887,181882,197337), row.names = (NULL)), .) %>%
   select(POP) %>%
-  bind_cols(data.frame(year = as.factor(c(2000:2021))), .)
+  bind_cols(data.frame(year = as.factor(c(2000:2022))), .)
 
 write.csv(AAhistorical, "outputs/spreadsheets/AAHistorical.csv")
+storage_write_csv(AAhistorical, cont_proj, "who_lives/2023/outputs/AAHistorical.csv")
 
 #######AA historical part 2
-BlackPopyears <- allparishesRaw %>%
+BlackPopyears <- allparishesRaw2022 %>%
   filter(age == "Total" & sex == "Total")  %>%
   filter(raceSimple=="Black") %>%
   filter(place %in% c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
                           "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish"))
 
 BlackpopM <- blackpopestRaw %>%
-  add_row(year = "2000", place= "Orleans", POP=323392) 
+  add_row(year = "2000", place= "Orleans", POP=323392)  %>%
+  select(year, POP)
 
-BlackpopM %>%
-  select(year, POP) %>%
-  write.csv("outputs/spreadsheets/BlackpopM.csv")
+write.csv(BlackpopM, "outputs/spreadsheets/BlackpopM.csv")
+storage_write_csv(BlackpopM, cont_proj, "who_lives/2023/outputs/BlackpopM.csv")
 
 #Table 4 Hispanic population change by population
 
-HispanicPop <- allparishesRaw %>%
+HispanicPop <- allparishesRaw2022 %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>%
   filter(age == "Total" & sex == "Total")  %>%
@@ -708,16 +733,17 @@ HispanicPop <- allparishesRaw %>%
 
 #Table 5 Hispanic population for parishes in metro by year
 
-HispanicPopyears <- allparishesRaw %>%
+HispanicPopyears <- allparishesRaw2022 %>%
   filter(age == "Total" & sex == "Total") %>%
   filter(raceSimple=="Hispanic") %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany"))
 
-HispanicPopyears %>%
+HispanicPopyears <- HispanicPopyears %>%
   select(PlaceName, date, population) %>%
-  pivot_wider(id_cols = date, names_from = PlaceName, values_from = population ) %>%
-  write.csv("outputs/spreadsheets/HispanicPopyears.csv")
+  pivot_wider(id_cols = date, names_from = PlaceName, values_from = population )
+write.csv(HispanicPopyears, "outputs/spreadsheets/HispanicPopyears.csv")
+storage_write_csv(HispanicPopyears, cont_proj, "who_lives/2023/outputs/HispanicPopyears.csv")
 
 load("inputs/hisppopestRaw.RData")
 HISPpopM <- hisppopestRaw %>%
@@ -737,6 +763,8 @@ HISPpopM_CSV <- HISPpopM %>% pivot_wider(names_from = "place", values_from = POP
   select(year, Orleans, Jefferson, Plaquemines, `St. Bernard`, `St. Charles`, `St. James`, `St. John the Baptist`, `St. Tammany`) %>%
   arrange(year)
 write.csv(HISPpopM_CSV, "outputs/spreadsheets/HISPpopM.csv")
+storage_write_csv(HISPpopM_CSV, cont_proj, "who_lives/2023/outputs/HISPpopM_CSV.csv")
+
 #For excel
 # HISPpopSheet1 <- HISPpopM %>%
 #   select(year, place, POP) %>%
@@ -750,19 +778,18 @@ write.csv(HISPpopM_CSV, "outputs/spreadsheets/HISPpopM.csv")
 
 
 #Table 5 Population by age group
-# HT: Why are we doing this? repeating and adding the numbers manually with mutate?
 
 orderAge <- c(rep("Jefferson",18),rep("Orleans", 18),rep("Plaquemines",18),
               rep("St. Bernard", 18),rep("St. Charles", 18),rep("St. James", 18),
               rep("St. John The Baptist", 18),rep("St. Tammany",18))
-Agepop <- allparishesRaw %>%
+Agepop <- allparishesRaw2022 %>%
   filter(age== "Under 5 years" | age== "5 to 9"| age== "10 to 14" | age== "15 to 19"|
            age=="20 to 24"| age== "25 to 29"| age== "30 to 34"| age== "35 to 39"| age== "40 to 44"
          | age== "45 to 49" | age=="50 to 54"| age== "55 to 59"| age== "60 to 64"| age== "65 to 69"|
            age== "70 to 74"| age== "75 to 79"| age== "80 to 84"| age== "85 plus")%>%
   filter(raceSimple=="Total")%>%
   filter(sex=="Total")%>%
-  filter(date == "7/1/2021 population estimate") %>%
+  filter(date == "7/1/2022 population estimate") %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>%
   arrange(factor(PlaceName, levels = c("Jefferson","Orleans","Plaquemines",
@@ -777,31 +804,29 @@ Agepop <- allparishesRaw %>%
  3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,
  17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
  Agepop_csv <-  Agepop %>%
-   mutate(est21 = population,
+   mutate(est22 = population,
           est00 = est2000) %>%
-   pivot_wider(id_cols = age, names_from = PlaceName, values_from = c(est00, est21)) %>% select(est00_Orleans, est21_Orleans,
-                                                                                                est00_Jefferson, est21_Jefferson,
-                                                                                                est00_Plaquemines, est21_Plaquemines,
-                                                                                                `est00_St. Bernard`, `est21_St. Bernard`,
-                                                                                                `est00_St. Charles`, `est21_St. Charles`,
-                                                                                                `est00_St. James`, `est21_St. James`,
-                                                                                                `est00_St. John the Baptist`, `est21_St. John the Baptist`,
-                                                                                                `est00_St. Tammany`, `est21_St. Tammany`)
+   pivot_wider(id_cols = age, names_from = PlaceName, values_from = c(est00, est22)) %>% select(est00_Orleans, est22_Orleans,
+                                                                                                est00_Jefferson, est22_Jefferson,
+                                                                                                est00_Plaquemines, est22_Plaquemines,
+                                                                                                `est00_St. Bernard`, `est22_St. Bernard`,
+                                                                                                `est00_St. Charles`, `est22_St. Charles`,
+                                                                                                `est00_St. James`, `est22_St. James`,
+                                                                                                `est00_St. John the Baptist`, `est22_St. John the Baptist`,
+                                                                                                `est00_St. Tammany`, `est22_St. Tammany`)
 write.csv(Agepop_csv, "outputs/spreadsheets/Agepop.csv")
+storage_write_csv(Agepop_csv, cont_proj, "who_lives/2023/outputs/Agepop.csv")
 
 
 #Table 6 Under 18 population
 #Different than estimates from google sheets but aligns with American fact finder
 
 
-
-
-### waiting to hear back from US census bureau for 2021 PEP
-under18pars<-allparishesRaw %>%
+under18pars<-allparishesRaw2022 %>%
   filter(age=="18 years and over" | age=="Total")%>%
   filter(raceSimple=="Total")%>%
   filter(sex=="Total")%>%
-  filter(date == "7/1/2021 population estimate") %>%
+  filter(date == "7/1/2022 population estimate") %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany")) %>%
   select(age, PlaceName, population)
@@ -824,11 +849,12 @@ popunder18CSV <- popunder18 %>%
   select(PlaceName, est2000, under18) %>%
   pivot_longer(-c("PlaceName"), names_to = "under18", values_to = "Value") %>%
   mutate(name = paste(PlaceName, under18, sep = "-"),
-         year = 2021) %>%
+         year = 2022) %>%
   select(-PlaceName) %>%
 pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  select(`Orleans-est2000`, `Orleans-under18`, `Jefferson-est2000`, `Jefferson-under18`, `St. Tammany-est2000`, `St. Tammany-under18`, `Metro-est2000`, `Metro-under18`) %>%
-write.csv("outputs/spreadsheets/under18.csv")
+  select(`Orleans-est2000`, `Orleans-under18`, `Jefferson-est2000`, `Jefferson-under18`, `St. Tammany-est2000`, `St. Tammany-under18`, `Metro-est2000`, `Metro-under18`) 
+write.csv(popunder18CSV, "outputs/spreadsheets/under18.csv")
+storage_write_csv(popunder18CSV, cont_proj, "who_lives/2023/outputs/under18.csv")
 
 
 ###########################
@@ -928,8 +954,8 @@ medhh_stat_all <- medhh.race_stattest %>% select(place, placename, (contains("si
   mutate(race = case_when(race == "MedianHHIncome" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 medhh_stat_all$stat_all[medhh_stat_all$race == "All"] <- "yes"
@@ -946,13 +972,13 @@ medhh_stat_race <- medhh.race_stattest %>% select(place, placename, (contains("s
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 medhh_with_stats <- medhh_stat_all %>% left_join(medhh_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
 ### Across geos pov bar chart ###
 medhh.totals <- medhh_stat_all %>% left_join(medhh_stat_race, by = "place") %>% unique() %>%
   filter(race == "All") %>%
-  mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
+  mutate(var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")),
          placename.fac = factor(placename.y, levels = c("Orleans ◊", "Jefferson ◊", "St. Tammany ◊", "Metro ◊", "United States")))
 
 medhh.totals_CSV <- medhh.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
@@ -962,6 +988,7 @@ medhh.totals_CSV <- medhh.totals %>% ungroup() %>% select(placename.x, race, val
 medhh.race_CSV <- medhh.race %>% select(race = var, place.fac, val) %>%
   pivot_wider(names_from = place.fac, values_from = val) %>% rbind(medhh.totals_CSV)
 write.csv(medhh.race_CSV, "outputs/spreadsheets/medhhrace.csv")
+storage_write_csv(medhh.race_CSV, cont_proj, "who_lives/2022/outputs/medhhrace.csv")
 
 medhh.hist_stattest.EST <- medhhRaw_exp %>% 
   filter(place == "071") %>%
@@ -1017,6 +1044,7 @@ medhh.hist <- medhh.hist %>% left_join(medhh.hist_stattest, by = c("var" = "race
                              T ~ " "))
 medhh.hist_csv <- medhh.hist %>% select(Year, race = var, val) %>% filter(Year != 2016) %>% pivot_wider(names_from = Year, values_from = val) 
 write.csv(medhh.hist_csv, "outputs/spreadsheets/medhhhist.csv")
+storage_write_csv(medhh.hist_csv, cont_proj, "who_lives/2022/outputs/medhhhist.csv")
 
 ### Educational attainment ###
 ###
@@ -1093,15 +1121,16 @@ bach_stat_all <- bach.race_stattest %>% select(place, placename, (contains("sig"
   mutate(race = case_when(race == "pctbach" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 bach_stat_all$stat_all[bach_stat_all$race == "All"] <- "yes"
 bach_stat_all <- bach_stat_all %>%  group_by(place, placename, race) %>%
   mutate(val_lab = paste0(round.off(val*100), "%")) %>% select(-var, -placename) %>% unique()
 
-bach_stat_race <- bach.race_stattest %>% select(place, placename, (contains("sig") & !contains("all"))) %>%
+bach_stat_race <- bach.race_stattest %>%
+  select(place, placename, (contains("sig") & !contains("all"))) %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
@@ -1110,7 +1139,7 @@ bach_stat_race <- bach.race_stattest %>% select(place, placename, (contains("sig
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 bach_with_stats <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
 bach.totals <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>%
@@ -1133,6 +1162,7 @@ bach.totals_CSV <- bach.totals %>% ungroup() %>% select(placename.x, race, val) 
 bach.race_CSV <- bach.race %>% select(race = var, place.fac, val) %>%
   pivot_wider(names_from = place.fac, values_from = val) %>% rbind(bach.totals_CSV)
 write.csv(bach.race_CSV, "outputs/spreadsheets/bachrace.csv")
+storage_write_csv(bach.race_CSV, cont_proj, "who_lives/2022/outputs/bachrace.csv")
 
 
 # Historical Educational Attainment Line Chart
@@ -1267,6 +1297,7 @@ EduAtt.hist <- EduAtt.hist %>% left_join(bach.hist_stattest, by = c("var" = "rac
                              T ~ " "))
 EduAtt.hist_csv <- EduAtt.hist %>% select(year, race = var, val) %>% filter(year != 2016) %>% pivot_wider(names_from = year, values_from = val) 
 write.csv(EduAtt.hist_csv, "outputs/spreadsheets/EduAtthist.csv")
+storage_write_csv(EduAtt.hist_csv, cont_proj, "who_lives/2022/outputs/EduAtthist.csv")
 
 ### stat test ### 
 
@@ -1383,8 +1414,8 @@ pov_stat_all <- pov_stattest %>% select(place, placename, (contains("sig") & con
   mutate(race = case_when(race == "pctpov" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 pov_stat_all$stat_all[pov_stat_all$race == "All"] <- "yes"
@@ -1401,7 +1432,7 @@ pov_stat_race <- pov_stattest %>% select(place, placename, (contains("sig") & !c
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 pov_with_stats <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
 ### Across geos pov bar chart ###
@@ -1425,6 +1456,7 @@ pov.totals_CSV <- pov.totals %>% ungroup() %>% select(placename.x, race, val) %>
 pov.race_CSV <- pov.race %>% select(race = var, place.fac, val) %>%
   pivot_wider(names_from = place.fac, values_from = val) %>% rbind(pov.totals_CSV)
 write.csv(pov.race_CSV, "outputs/spreadsheets/povrace.csv")
+storage_write_csv(pov.race_CSV, cont_proj, "who_lives/2022/outputs/povrace.csv")
 
 
 totalPov <- read_csv("inputs/hist_pov.csv")
@@ -1556,6 +1588,7 @@ totalPov.hist <- totalPov.hist %>% left_join(pov.hist_stattest, by = c("var" = "
                                   T ~ " "))
 totalpov.hist_csv <- totalPov.hist %>% select(year, race = var, val) %>% filter(year != 2016) %>% pivot_wider(names_from = year, values_from = val) 
 write.csv(totalpov.hist_csv, "outputs/spreadsheets/totalpovhist.csv")
+storage_write_csv(totalpov.hist_csv, cont_proj, "who_lives/2022/outputs/totalpovhist.csv")
 
 
 ### Child poverty ###
@@ -1664,8 +1697,8 @@ childpov_stat_all <- childpov_stattest %>% select(place, placename, (contains("s
   mutate(race = case_when(race == "pctBelowChildPov" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 childpov_stat_all$stat_all[childpov_stat_all$race == "All"] <- "yes"
@@ -1682,7 +1715,7 @@ childpov_stat_race <- childpov_stattest %>% select(place, placename, (contains("
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 childpov_with_stats <- childpov_stat_all %>% left_join(childpov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States*")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 ###
 
@@ -1707,6 +1740,7 @@ childpov.totals_CSV <- childpov.totals %>% ungroup() %>% select(placename.x, rac
 childpov.race_CSV <- childpov.race %>% select(race = var, place.fac, val) %>%
   pivot_wider(names_from = place.fac, values_from = val) %>% rbind(childpov.totals_CSV)
 write.csv(childpov.race_CSV, "outputs/spreadsheets/childpovrace.csv")
+storage_write_csv(childpov.race_CSV, cont_proj, "who_lives/2022/outputs/childpovrace")
 
 
 ### Historical child pov line chart ###
@@ -1762,6 +1796,7 @@ childPov.hist <- childPov.hist %>% left_join(childpov.hist_stattest, by = c("var
 
 childpov.hist_csv <- childPov.hist %>% select(Year, race = var, val) %>% filter(Year != 2016) %>% pivot_wider(names_from = Year, values_from = val) 
 write.csv(childpov.hist_csv, "outputs/spreadsheets/childpovhist.csv")
+storage_write_csv(childpov.hist_csv, cont_proj, "who_lives/2022/outputs/childpovhist.csv")
 
 
 # Homeownership
@@ -1800,19 +1835,6 @@ ho.race <- ho_exp %>%
          var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
   mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
 
-ho.totals <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% 
-  filter(race == "All") %>%
-  mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
-         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")))
-
-ho.totals_CSV <- ho.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
-  mutate(placename.x = ifelse(placename.x == "United States", "U.S.", placename.x)) %>%
-  pivot_wider(names_from = placename.x, values_from = val) 
-
-ho.race_CSV <- ho.race %>% select(race = var, place.fac, val) %>% unique() %>%
-  pivot_wider(names_from = place.fac, values_from = val) %>% rbind(ho.totals_CSV)
-write.csv(ho.race_CSV, "outputs/spreadsheets/horace.csv")
-
 
 ### Historical homeownership line chart ###
 homeownership.hist <- homeownershipProspInd %>% 
@@ -1836,6 +1858,7 @@ homeownership.hist <- homeownershipProspInd %>%
 
 ho.hist_csv <- homeownership.hist %>% select(Year, race = var, val) %>% filter(Year != 2016) %>% pivot_wider(names_from = Year, values_from = val) 
 write.csv(ho.hist_csv, "outputs/spreadsheets/hohist.csv")
+storage_write_csv(ho.hist_csv, cont_proj, "who_lives/2022/outputs/hohist.csv")
 
 
 
@@ -1876,8 +1899,8 @@ ho_stat_all <- ho_stattest %>% select(place, placename, (contains("sig") & conta
   mutate(race = case_when(race == "Ownerpct" ~ "All",
                           grepl("asian",race) & grepl("asian",var) ~ "Asian",
                           grepl("blk",race) & grepl("blk",var) ~ "Black",
-                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic,\nany race",
-                          grepl("wht", race) & grepl("wht",var) ~ "White,\nnon-Hispanic"),
+                          grepl("hisp",race) & grepl("hisp",var) ~ "Hispanic, any race",
+                          grepl("wht", race) & grepl("wht",var) ~ "White, non-Hispanic"),
          placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename)) %>% na.omit()
 ho_stat_all$stat_all[ho_stat_all$race == "All"] <- "yes"
@@ -1894,7 +1917,21 @@ ho_stat_race <- ho_stattest %>% select(place, placename, (contains("sig") & !con
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 ho_with_stats <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")),
-         var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
+
+ho.totals <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% 
+  filter(race == "All") %>%
+  mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
+         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")))
+
+ho.totals_CSV <- ho.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
+  mutate(placename.x = ifelse(placename.x == "United States", "U.S.", placename.x)) %>%
+  pivot_wider(names_from = placename.x, values_from = val) 
+
+ho.race_CSV <- ho.race %>% select(race = var, place.fac, val) %>% unique() %>%
+  pivot_wider(names_from = place.fac, values_from = val) %>% rbind(ho.totals_CSV)
+write.csv(ho.race_CSV, "outputs/spreadsheets/horace.csv")
+storage_write_csv(ho.race_CSV, cont_proj, "who_lives/2022/outputs/horace.csv")
 
 ###
 

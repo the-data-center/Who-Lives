@@ -9,6 +9,26 @@ library(here)
 library(knitr)
 library(readxl)
 library(xfun)
+
 #library(xlsx)
 
 #load("inputs/allparishesRawx.RData")
+
+library(AzureAuth) ## to connect with credentials
+library(AzureStor) ## to access the stored data
+
+## install azure cli: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli
+## sign in to Azure using your AAD un/pw in the terminal/commandline: az login 
+## get token in terminal/commandline: az account get-access-token --resource https://datacenterdc2datalake.blob.core.windows.net/
+
+### define your token 
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2RhdGFjZW50ZXJkYzJkYXRhbGFrZS5ibG9iLmNvcmUud2luZG93cy5uZXQvIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNzQ5YzFmYmEtMmMyOS00YTBmLTg3ZGEtODc3NjQ3YmJiZDg2LyIsImlhdCI6MTY5MDMxNjM2NywibmJmIjoxNjkwMzE2MzY3LCJleHAiOjE2OTAzMjE3MjIsImFjciI6IjEiLCJhaW8iOiJBVFFBeS84VUFBQUFreVNRY0xtYWEreUJkR0Q0N3ZkTWdSdGFFSm9jRU03K3lyY1daUkdhQ1A5MmJTQlZLUURPS2NpNUdaQWpiTHg2IiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6IjA0YjA3Nzk1LThkZGItNDYxYS1iYmVlLTAyZjllMWJmN2I0NiIsImFwcGlkYWNyIjoiMCIsImZhbWlseV9uYW1lIjoiVG9tbGluIiwiZ2l2ZW5fbmFtZSI6IkhhbGVpZ2giLCJncm91cHMiOlsiNzcyYzQ3MWMtZTVkMy00ZWI0LWE2YTEtZGY5ZGVmOTYxZmVjIiwiYWQwOTQ4YWMtYWY2OC00NDk1LThjY2QtNDE0YzNjY2ZmMzczIl0sImlwYWRkciI6IjIwOC4xMTcuMjA3LjEyMiIsIm5hbWUiOiJIYWxlaWdoIFRvbWxpbiIsIm9pZCI6IjE4OTgxMjUzLTQxNjQtNDkyMC1hMWI5LTE5YjA2NzE4MDVmMSIsInB1aWQiOiIxMDAzMjAwMjFFRTAzNjQ3IiwicmgiOiIwLkFTa0F1aC1jZENrc0QwcUgyb2QyUjd1OWhvR21CdVRVODZoQ2tMYkNzQ2xKZXZFcEFIOC4iLCJzY3AiOiJ1c2VyX2ltcGVyc29uYXRpb24iLCJzdWIiOiJ6OU1xcER5Z1Exb3JhRWdHdHRZUTd6eXY0czFVOWpjcHRQdzUtQkoxZk9nIiwidGlkIjoiNzQ5YzFmYmEtMmMyOS00YTBmLTg3ZGEtODc3NjQ3YmJiZDg2IiwidW5pcXVlX25hbWUiOiJIYWxlaWdodEBkYXRhY2VudGVycmVzZWFyY2gub3JnIiwidXBuIjoiSGFsZWlnaHRAZGF0YWNlbnRlcnJlc2VhcmNoLm9yZyIsInV0aSI6IlZ0S1ZMNFN4N0VHbG9ZQUlyWVJ1QUEiLCJ2ZXIiOiIxLjAifQ.b_ImTzMJUIXR9RjNVWQCOVwnxtzhGfe7zY7VsnMFapV2xjdaTT4BTyk6aOZvLZ29I62tYdDffN_RvC8oArUMzKJAezD53CQwI5xXBCLWBrW_F5oMx8NFJRPy7bzvAEfgN-dauQQGMlbNOnnrfxnPjXH5tdFUMVdgZUwjifFmphrXyxLYk8TepRXy90Z01LGwpE6L3v-QmwlchwETtW5_YypENnRXbH3aupHX8ZywoP4BJQP8LhPerr-IOBvJhAlMsmgDyxPxcEKbQV5k-fCyFZkzU2JyTmqQIVIXfeQjFhAEfvRIBOS86rAUs6ryhu66pYEE-R89NgVFdGmReQbilQ"
+# delete token before pushing to github
+
+ad_endp_tok2 <- storage_endpoint("https://datacenterdc2datalake.blob.core.windows.net/", token=token) ## again, the rsource/URL
+
+## Connections to some most-used containers.
+cont_proj <- storage_container(ad_endp_tok2, "project") 
+#df <- storage_read_csv(cont_proj, "who_lives/2022/inputs/WhoLives_longer.csv") %>% select(-1) #make sure this is updated within datalake - querying_WhoLives_factconsolidated
+
+#to write back to azure, use storage_write_csv(df, cont_proj, "who_lives/2022/outputs/file_name")

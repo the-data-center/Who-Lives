@@ -11,7 +11,6 @@ hispanRaw <- wholivesdatapull(hispanvars,hispannames)[-3,]
 save(hispanRaw, file = "inputs/hispanRaw.RData") # -3 removes St. Tammany because it is not included in this analysis
 
 #Households with own children under 18
-### *** something went wrong here pulling from the warehouse!!!!!! ***
 hwcvars <- c('B11001_001E','B11001_001M','B11003_003E','B11003_003M','B11003_010E','B11003_010M','B11003_016E','B11003_016M')
 hwcnames <- c("TotalHH", "TotalHHMOE","Married", "MarriedMOE", "MaleHH", "MaleHHMOE", "FemaleHH" ,"FemaleHHMOE")
 hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
@@ -294,10 +293,8 @@ medhh_unadjusted <- read_xlsx("indicator expansion drafts/ProspInd_tables_WhoLiv
             `1989`= as.character(`1989 (1989$)`),
             `1999` = as.character(`1999 (1999$)`),
             `2010` = `2010 (2010$)...5`,
-            `2016` = `2016 (2016$)...7`,
-            `2010MOE` = `2010 (2010$)...6`,
-            `2016MOE` = `2016 (2016$)...8`) %>% na.omit()
-medhh_unadjusted <- medhh_unadjusted %>% pivot_longer(cols = `1979`:`2016`, names_to = "Year") %>% select(-c(`2010MOE`, `2016MOE`))
+            `2010MOE` = `2010 (2010$)...6`) %>% na.omit()
+medhh_unadjusted <- medhh_unadjusted %>% pivot_longer(cols = `1979`:`2010MOE`, names_to = "Year") %>% select(-c(`2010MOE`))
 save(medhh_unadjusted, file = "inputs/medhh_unadjusted.RData")
 #Bachelor's degree or higher, adults 25 and older
 
@@ -782,9 +779,9 @@ charagegroupsVars <- censusapi::listCensusMetadata("pep/charagegroups", 2019, ty
 #                            counties = mycounties)
 # save(allparishesRaw, file = "inputs/allparishesRaw.Rdata")
 
-### 2021 PEP data not available by API yet, pulling it in directly.
+### 2022 PEP data not available by API. pulling it in directly. 7/24/23 HT updated with 2022 data
 
-allparishesRaw <- read_csv("PEP2021charagegroups.csv")
+allparishesRaw <- read_csv("PEP2022charagegroups.csv")
 allparishesRaw <-  allparishesRaw %>% 
   filter(COUNTY %in% c("071","051","075","087","089","093","095","103")) %>% #making a total column for each sex.  revise unneeded ones later
   mutate(NHWA_Total = NHWA_MALE + NHWA_FEMALE,
@@ -818,7 +815,8 @@ allparishesRaw <-  allparishesRaw %>%
                          AGEGRP == 18 ~ "85 plus"),
          date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
                           YEAR == 2 ~ "7/1/2020 population estimate",
-                          YEAR == 3 ~ "7/1/2021 population estimate"),
+                          YEAR == 3 ~ "7/1/2021 population estimate",
+                          YEAR == 4 ~ "7/1/2022 population estimate"),
          sex = case_when(sex == "POP" | sex == "Total" ~ "Total",
                          sex == "MALE" ~ "Male",
                          sex == "FEMALE" ~ "Female"),
@@ -844,12 +842,13 @@ allparishesRaw <- allparishesRaw %>% filter(race %in% c("TOT", "NHWA", "NHBA", "
                                 hisp == "Hispanic" & sex == "Total"~ "Hispanic")) %>%
   select(place, date, hisp, sex, race, age, population, raceSimple)
 
-popunder18co <- read_csv("county_pep_age2021.csv") #for popunder18 measure
+popunder18co <- read_csv("county_pep_age2022.csv") #for popunder18 measure
 popunder18co <- popunder18co %>% 
-  filter(COUNTY %in% c("071","051","075","087","089","093","095","103"))  %>% select(CTYNAME, YEAR, AGE18PLUS_TOT) %>% mutate(place = CTYNAME,
+  filter(COUNTY %in% c("071","051","075","087","089","093","095","103")) %>% select(CTYNAME, YEAR, AGE18PLUS_TOT) %>% mutate(place = CTYNAME,
                                                                                  date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
                                                                                                   YEAR == 2 ~ "7/1/2020 population estimate",
-                                                                                                  YEAR == 3 ~ "7/1/2021 population estimate"),
+                                                                                                  YEAR == 3 ~ "7/1/2021 population estimate",
+                                                                                                  YEAR == 4 ~ "7/1/2022 population estimate"),
                                                                                  age = "18 years and over",
                                                                                  race = "Total",
                                                                                  raceSimple = "Total",
@@ -860,7 +859,7 @@ allparishesRaw <- allparishesRaw %>% full_join(popunder18co, by = c("place", "da
   select(place, date, hisp, sex, race, age, population, raceSimple)
 #pulling in entire US PEP data, then binding to allparishesRaw.  Doing this with the exact same code as from above.
 
-allstates_pep <- read_csv("PEP2021charagegroups_allstates.csv")
+allstates_pep <- read_csv("PEP2022charagegroups_allstates.csv")
 
 allstates_pep <- allstates_pep %>% 
   mutate(NHWA_Total = NHWA_MALE + NHWA_FEMALE,
@@ -894,7 +893,8 @@ allstates_pep <- allstates_pep %>%
                          AGEGRP == 18 ~ "85 plus"),
          date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
                           YEAR == 2 ~ "7/1/2020 population estimate",
-                          YEAR == 3 ~ "7/1/2021 population estimate"),
+                          YEAR == 3 ~ "7/1/2021 population estimate",
+                          YEAR == 4 ~ "7/1/2022 population estimate"),
          sex = case_when(sex == "POP" | sex == "Total" ~ "Total",
                          sex == "MALE" ~ "Male",
                          sex == "FEMALE" ~ "Female"),
@@ -920,11 +920,12 @@ allstates_pep  <- allstates_pep  %>% filter(race %in% c("TOT", "NHWA", "NHBA", "
                                 hisp == "Hispanic"  & sex == "Total" ~ "Hispanic")) %>%
   select(place, date, hisp, sex, race, age, population, raceSimple)
 
-popunder18US <- read_csv("US_pep_age2021.csv") #for popunder18 measure
+popunder18US <- read_csv("US_pep_age2022.csv") #for popunder18 measure
 popunder18US <- popunder18US %>% select(CTYNAME, YEAR, AGE18PLUS_TOT) %>% mutate(place = CTYNAME,
                                                                                  date = case_when(YEAR == 1 ~ "4/1/2020 population estimates base",
                                                                                                   YEAR == 2 ~ "7/1/2020 population estimate",
-                                                                                                  YEAR == 3 ~ "7/1/2021 population estimate"),
+                                                                                                  YEAR == 3 ~ "7/1/2021 population estimate",
+                                                                                                  YEAR == 4 ~ "7/1/2022 population estimate"),
                                                                                  age = "18 years and over",
                                                                                  race = "Total",
                                                                                  raceSimple = "Total",
@@ -955,7 +956,7 @@ allparishesRaw2020 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7
                                                   "St. John the Baptist", "St. Tammany", "Metro", "United States")))
 save(allparishesRaw2020, file = "inputs/allparishesRaw2020.RData")
 
-allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimate") %>%
+allparishesRaw2021 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2021 population estimate") %>%
   mutate(PlaceName = case_when(place == "Orleans Parish" ~ "Orleans",
                                place =="Jefferson Parish" ~ "Jefferson",
                                place =="Plaquemines Parish" ~ "Plaquemines", 
@@ -968,7 +969,22 @@ allparishesRaw <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2
          PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
                                                   "St. Bernard","St. Charles", "St. James",
                                                   "St. John the Baptist", "St. Tammany", "Metro", "United States")))
-save(allparishesRaw, file = "inputs/allparishesRaw.RData")
+save(allparishesRaw2021, file = "inputs/allparishesRaw2021.RData")
+
+allparishesRaw2022 <- rbind(allstates_pep, allparishesRaw) %>% filter(date == "7/1/2022 population estimate") %>%
+  mutate(PlaceName = case_when(place == "Orleans Parish" ~ "Orleans",
+                               place =="Jefferson Parish" ~ "Jefferson",
+                               place =="Plaquemines Parish" ~ "Plaquemines", 
+                               place == "St. Bernard Parish" ~ "St. Bernard",
+                               place == "St. Charles Parish" ~ "St. Charles",
+                               place == "St. James Parish" ~ "St. James",
+                               place == "St. John the Baptist Parish" ~ "St. John the Baptist",
+                               place == "St. Tammany Parish" ~ "St. Tammany",
+                               place == "United States" ~ "United States"),
+         PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
+                                                  "St. Bernard","St. Charles", "St. James",
+                                                  "St. John the Baptist", "St. Tammany", "Metro", "United States")))
+save(allparishesRaw2022, file = "inputs/allparishesRaw2022.RData")
 
 
 #### Pulling PEP
@@ -1044,8 +1060,9 @@ hisppopestRaw <- getCensus(name = "pep/charagegroups", # most recent
   filter(DATE_DESC == "4/1/2010 Census population" | year == 2006 | year == 2007 | year == 2008 | year == 2009 | year == 2011 | year == 2012 | year ==2013 | year == 2014 | year == 2015 | year == 2016 | year ==2017 | year ==2018 | year == 2019)
 
 hisppopest20 <- allparishesRaw2020 %>% filter(race == "Hispanic"  & age == "Total" & sex == "Total") %>% mutate(place = PlaceName) %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% mutate(state = "", county = "", year = 2020) %>% select(state, county, POP, DATE_DESC, HISP, place, year)
-hisppopest21 <- allparishesRaw %>% filter(race == "Hispanic"  & age == "Total" & sex == "Total") %>% mutate(place = PlaceName) %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place)  %>% mutate(state = "", county = "", year = 2021) %>% select(state, county, POP, DATE_DESC, HISP, place, year)
-hisppopestRaw <- rbind(hisppopestRaw, hisppopest20, hisppopest21)
+hisppopest21 <- allparishesRaw2021 %>% filter(race == "Hispanic"  & age == "Total" & sex == "Total") %>% mutate(place = PlaceName) %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place)  %>% mutate(state = "", county = "", year = 2021) %>% select(state, county, POP, DATE_DESC, HISP, place, year)
+hisppopest22 <- allparishesRaw2022 %>% filter(race == "Hispanic"  & age == "Total" & sex == "Total") %>% mutate(place = PlaceName) %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place)  %>% mutate(state = "", county = "", year = 2022) %>% select(state, county, POP, DATE_DESC, HISP, place, year)
+hisppopestRaw <- rbind(hisppopestRaw, hisppopest20, hisppopest21, hisppopest22)
 
 save(hisppopestRaw, file = "inputs/hisppopestRaw.RData")
 
@@ -1075,8 +1092,9 @@ blackpopestRaw <- getCensus(name = "pep/charagegroups", # most recent
   select(-GEO_ID, -DATE_)
 
 blackpopest20 <- allparishesRaw2020 %>% filter(race == "Black or African American alone" & place == "Orleans Parish" & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% mutate(state = 22, county = 071, year = 2020) %>% select(state, county, POP, DATE_DESC, HISP, RACE, place, year)
-blackpopest21 <- allparishesRaw %>% filter(race == "Black or African American alone" & place == "Orleans Parish" & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% filter(RACE == "Black or African American alone" & place == "Orleans Parish") %>% mutate(state = 22, county = 071, year = 2021) %>% select(state, county, POP, DATE_DESC, HISP, RACE, place, year)
-blackpopestRaw <- rbind(blackpopestRaw, blackpopest20, blackpopest21)
+blackpopest21 <- allparishesRaw2021 %>% filter(race == "Black or African American alone" & place == "Orleans Parish" & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% filter(RACE == "Black or African American alone" & place == "Orleans Parish") %>% mutate(state = 22, county = 071, year = 2021) %>% select(state, county, POP, DATE_DESC, HISP, RACE, place, year)
+blackpopest22 <- allparishesRaw2022 %>% filter(race == "Black or African American alone" & place == "Orleans Parish" & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% filter(RACE == "Black or African American alone" & place == "Orleans Parish") %>% mutate(state = 22, county = 071, year = 2022) %>% select(state, county, POP, DATE_DESC, HISP, RACE, place, year)
+blackpopestRaw <- rbind(blackpopestRaw, blackpopest20, blackpopest21, blackpopest22)
 
 save(blackpopestRaw, file = "inputs/blackpopestRaw.RData")
 
