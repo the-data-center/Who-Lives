@@ -1,9 +1,2 @@
-"","place","date","hisp","sex","race","age","population","raceSimple","PlaceName"
-"1","Jefferson Parish","7/1/2021 population estimate","Hispanic","Total","Hispanic","Total",66207,"Hispanic","Jefferson"
-"2","Orleans Parish","7/1/2021 population estimate","Hispanic","Total","Hispanic","Total",21487,"Hispanic","Orleans"
-"3","Plaquemines Parish","7/1/2021 population estimate","Hispanic","Total","Hispanic","Total",1953,"Hispanic","Plaquemines"
-"4","St. Bernard Parish","7/1/2021 population estimate","Hispanic","Total","Hispanic","Total",4778,"Hispanic","St. Bernard"
-"5","St. Charles Parish","7/1/2021 population estimate","Hispanic","Total","Hispanic","Total",3511,"Hispanic","St. Charles"
-"6","St. James Parish","7/1/2021 population estimate","Hispanic","Total","Hispanic","Total",363,"Hispanic","St. James"
-"7","St. John the Baptist Parish","7/1/2021 population estimate","Hispanic","Total","Hispanic","Total",3213,"Hispanic","St. John the Baptist"
-"8","St. Tammany Parish","7/1/2021 population estimate","Hispanic","Total","Hispanic","Total",16783,"Hispanic","St. Tammany"
+"","date","Jefferson","Orleans","Plaquemines","St. Bernard","St. Charles","St. James","St. John the Baptist","St. Tammany"
+"1","7/1/2022 population estimate",66944,21909,1888,4911,3521,373,3265,17609

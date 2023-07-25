@@ -2,23 +2,23 @@
 #library(dplyr)
 
 #Year to be changed manually in 02_variables_SQL
-year <- data_frame("year" = yearPEP)
-year <- year %>%
+yearPEP <- data_frame("year" = yearPEP)
+yearPEP <- yearPEP %>%
    select(year) %>%
   pull()
 #for 2nd update later in year -- aligns with ACS year
-yearu2 <- data_frame("yearu2" = year)
-yearu2 <- yearu2 %>%
+year <- data_frame("yearu2" = year)
+year <- year %>%
   select(yearu2) %>%
   pull()
 
-allparishes <- allparishesRaw %>% 
+allparishes <- allparishesRaw2022 %>% 
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany", "United States")) 
 
 
 Overallpop <- allparishes %>%
-  filter(date =="7/1/2021 population estimate") %>% ## PEP update
+  filter(date =="7/1/2022 population estimate") %>% ## PEP update
   filter(sex =="Total") %>%
   filter(hisp =="Total") %>%
   filter(raceSimple =="Total") %>%

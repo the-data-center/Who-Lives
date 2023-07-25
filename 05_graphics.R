@@ -167,7 +167,7 @@ chart.HispanpopYears.allparishes <- HispanpopYearsforGraphic %>%
                                DCcolor.p2limegreen,
                                DCcolor.p1darkblue90)) +
   scale_y_continuous(labels = comma_format(accuracy = 1), expand = c(0,0), limits = c(0,130000)) +
-  scale_x_continuous(breaks = 2000:2021)+
+  scale_x_continuous(breaks = 2000:2022)+
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
@@ -335,7 +335,7 @@ chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
         axis.text.x = element_text(size = 12, angle = -45, vjust = -1, family="Asap"),
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = .5, size = 16))+
-  labs(title = "Population by age group, 2021",
+  labs(title = "Population by age group, 2022",
        x="",
        y="")
 

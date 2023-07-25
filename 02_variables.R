@@ -6,10 +6,10 @@ cpi99 <- 1.59
 
 # the current/most recent year - the year the data you're updating represents
 year <- 2021
-yearPEP <- 2021
+yearPEP <- 2022
 
 year.char <- c("2021")
-yearPEP.char <- c("2021")
+yearPEP.char <- c("2022")
 
 
 windowsFonts("Asap" = windowsFont("Asap"))
