@@ -775,6 +775,7 @@ storage_write_csv(HISPpopM_CSV, cont_proj, "who_lives/2023/outputs/HISPpopM_CSV.
 # I thought about calculating age in this way, but in the end, ACS metro-level estimate makes more sense to use -- this is kinda weird to do the weighted mean/median. Leaving this here to remember that I tried it! -- Jenna, 7/13/2020
 # medAge <- as.data.frame(matrix(data = c(POPESTIMATE	= c(432493, 390144, 23197	, 47244	, 53100	, 21096	, 42837	, 260419), MEDIAN_AGE_TOT = c(39.6, 37.7, 37.1, 35.1, 38.4, 39.5, 37.8, 40.5)), ncol = 2)) %>%
 #   summarise(med = mean(x = V2, wt = V1))
+load("inputs/medageRaw.RData")
 
 
 #Table 5 Population by age group

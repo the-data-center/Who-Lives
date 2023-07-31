@@ -500,7 +500,7 @@ getvalue.MexUS.2018 <- hispan %>%
 #and indeed the whole country — with many more changes yet to come.[4] Looking at the total population in the metro by five-year age groups for 2000 and 2018,
 #the baby boomers are like a ParishDemographic tidal wave. Consequently, the median age of the metro has risen to 37.7 in 2016 from 34.8 in 2000.
 
-
+getvalue.medage.current <- medageRaw$medage
 
 
 
