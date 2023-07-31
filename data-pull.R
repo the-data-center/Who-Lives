@@ -16,6 +16,18 @@ hwcnames <- c("TotalHH", "TotalHHMOE","Married", "MarriedMOE", "MaleHH", "MaleHH
 hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
 save(hwcRaw, file = "inputs/hwcRaw.RData")
 
+## Median age calculation
+
+medagevars <- c("B01002_001E")
+medagenames <- c("medianage")
+medageRaw <- getCensus("acs/acs1",
+                       2021,
+                       key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+                       vars = medagevars,
+                       region = "metropolitan statistical area/micropolitan statistical area:35380")
+names(medageRaw) <- c("metro", "medage")
+save(medageRaw, file = "inputs/medageRaw.RData")
+
 #One-person households
 
 singvars <- c('B11001_001E','B11001_001M','B11001_008E','B11001_008M')
