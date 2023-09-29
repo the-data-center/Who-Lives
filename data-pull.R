@@ -21,7 +21,7 @@ save(hwcRaw, file = "inputs/hwcRaw.RData")
 medagevars <- c("B01002_001E")
 medagenames <- c("medianage")
 medageRaw <- getCensus("acs/acs1",
-                       2021,
+                       2022,
                        key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
                        vars = medagevars,
                        region = "metropolitan statistical area/micropolitan statistical area:35380")
@@ -109,6 +109,7 @@ mobnames <- c("Total","TotalMOE","TotSameHouse","TotSameHouseMOE","TotMovedinCty
 mobRaw <- wholivesdatapull(mobvars, mobnames)
 save(mobRaw, file = "inputs/mobRaw.RData")
 
+# https://www2.census.gov/acs2004/Core_Tables/
 ACScounty_04 <- read_csv("ACS_2004_050.csv") 
 ACSUS_04 <- read_csv("ACS_2004_010.csv")
 ACSmetro_04 <- read_csv("ACS_2004_380.csv")
@@ -296,7 +297,7 @@ medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE",
                 "MedianHHIncome_asian", "MedianHHIncomeMOE_asian",
                 "MedianHHIncome_wht", "MedianHHIncomeMOE_wht",
                 "MedianHHIncome_hisp", "MedianHHIncomeMOE_hisp")
-medhhRaw_exp <- wholivesdatapull(medhhvars, medhhnames, year = 2021)
+medhhRaw_exp <- wholivesdatapull(medhhvars, medhhnames, year = 2022)
 save(medhhRaw_exp, file = "inputs/medhhRaw_exp.RData")
 
 medhh_unadjusted <- read_xlsx("indicator expansion drafts/ProspInd_tables_WhoLives2022/Copy_MedianInc.xlsx", range = "A1:H7") %>%
@@ -306,7 +307,7 @@ medhh_unadjusted <- read_xlsx("indicator expansion drafts/ProspInd_tables_WhoLiv
             `1999` = as.character(`1999 (1999$)`),
             `2010` = `2010 (2010$)...5`,
             `2010MOE` = `2010 (2010$)...6`) %>% na.omit()
-medhh_unadjusted <- medhh_unadjusted %>% pivot_longer(cols = `1979`:`2010MOE`, names_to = "Year") %>% select(-c(`2010MOE`))
+medhh_unadjusted <- medhh_unadjusted %>% select(-c(`2010MOE`)) %>% pivot_longer(cols = `1979`:`2010`, names_to = "Year")
 save(medhh_unadjusted, file = "inputs/medhh_unadjusted.RData")
 #Bachelor's degree or higher, adults 25 and older
 
@@ -326,7 +327,7 @@ bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  
                "FemaleBachMOE_wht", 
                "Total_hisp", "TotalMOE_hisp", "MaleBach_hisp", "MaleBachMOE_hisp", "FemaleBach_hisp", 
                "FemaleBachMOE_hisp")
-bachRaw_exp <- wholivesdatapull(bachvars, bachnames, year = 2021)
+bachRaw_exp <- wholivesdatapull(bachvars, bachnames, year = 2022)
 save(bachRaw_exp, file = "inputs/bachRaw_exp.RData")
 
 #Historial Educational Attainment. 1980-2000 from NHGIS
@@ -493,7 +494,7 @@ Bach16 <- Bach16 %>%
 
 bachRaw_exp <- bachRaw_exp %>% ## something's going on here where this is names the same as bachRaw above and so can't be used in the analysis piece as it was before
   filter(place == "071") %>% 
-  transmute(year = 2021,
+  transmute(year = 2022,
             pctTotalBach = (MaleBach + FemaleBach + MaleGradProf + FemaleGradProf) / Total,
             pctWhiteBach = (MaleBach_wht + FemaleBach_wht) / Total_wht,
             pctBlackBach = (MaleBach_blk + FemaleBach_blk) / Total_blk,
@@ -522,7 +523,7 @@ povnames <- c("Total", "TotalMOE", "BelowPov", "BelowPovMOE",
               "Total_asian", "TotalMOE_asian", "BelowPov_asian", "BelowPovMOE_asian",
               "Total_wht", "TotalMOE_wht", "BelowPov_wht", "BelowPovMOE_wht",
               "Total_hisp", "TotalMOE_hisp", "BelowPov_hisp", "BelowPovMOE_hisp")
-povRaw_exp <- wholivesdatapull(povvars, povnames, year = 2021)
+povRaw_exp <- wholivesdatapull(povvars, povnames, year = 2022)
 save(povRaw_exp, file = "inputs/povRaw_exp.RData")
 
 # Creating a time series for total poverty - had to get 1980-2000 from IPUMS NHGIS
@@ -638,7 +639,7 @@ pov16 <- pov16 %>%
 #current year
 povraw_exp <- povRaw_exp %>%
   filter(place == "071") %>% 
-  transmute(year = 2021, 
+  transmute(year = 2022, 
             pctTotalpov = BelowPov / Total,
             pctWhitepov = BelowPov_wht / Total_wht,
             pctBlackpov = BelowPov_blk / Total_blk,
@@ -673,7 +674,7 @@ childpovnames <- c("BelowPovMaleChild", "BelowPovMaleChildMOE", "BelowPovFemaleC
                    "AbovePovMaleChildMOE_wht", "AbovePovFemaleChild_wht", "AbovePovFemaleChildMOE_wht",
                    "BelowPovMaleChild_hisp", "BelowPovMaleChildMOE_hisp", "BelowPovFemaleChild_hisp", "BelowPovFemaleChildMOE_hisp", "AbovePovMaleChild_hisp", 
                    "AbovePovMaleChildMOE_hisp", "AbovePovFemaleChild_hisp", "AbovePovFemaleChildMOE_hisp")
-childpovRaw_exp <- wholivesdatapull(childpovvars, childpovnames, year = 2021)
+childpovRaw_exp <- wholivesdatapull(childpovvars, childpovnames, year = 2022)
 save(childpovRaw_exp, file = "inputs/childpovRaw_exp.RData")
 
 #Homeownership rates
@@ -1104,7 +1105,7 @@ blackpopestRaw <- getCensus(name = "pep/charagegroups", # most recent
   select(-GEO_ID, -DATE_)
 
 blackpopest20 <- allparishesRaw2020 %>% filter(race == "Black or African American alone" & place == "Orleans Parish" & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% mutate(state = 22, county = 071, year = 2020) %>% select(state, county, POP, DATE_DESC, HISP, RACE, place, year)
-blackpopest21 <- allparishesRaw2021 %>% filter(race == "Black or African American alone" & place == "Orleans Parish" & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% filter(RACE == "Black or African American alone" & place == "Orleans Parish") %>% mutate(state = 22, county = 071, year = 2021) %>% select(state, county, POP, DATE_DESC, HISP, RACE, place, year)
+blackpopest21 <- allparishesRaw2022 %>% filter(race == "Black or African American alone" & place == "Orleans Parish" & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% filter(RACE == "Black or African American alone" & place == "Orleans Parish") %>% mutate(state = 22, county = 071, year = 2022) %>% select(state, county, POP, DATE_DESC, HISP, RACE, place, year)
 blackpopest22 <- allparishesRaw2022 %>% filter(race == "Black or African American alone" & place == "Orleans Parish" & age == "Total" & sex == "Total") %>% select(POP = population, DATE_DESC = date, HISP = hisp, RACE = race, place) %>% filter(RACE == "Black or African American alone" & place == "Orleans Parish") %>% mutate(state = 22, county = 071, year = 2022) %>% select(state, county, POP, DATE_DESC, HISP, RACE, place, year)
 blackpopestRaw <- rbind(blackpopestRaw, blackpopest20, blackpopest21, blackpopest22)
 

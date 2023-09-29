@@ -140,6 +140,11 @@ AA2021 <- AAhistorical %>%
   select(POP) %>%
   pull()
 
+AA2022 <- AAhistorical %>%
+  filter(year == 2022) %>%
+  select(POP) %>%
+  pull()
+
 
 
 getvalue.AA.no.current <- AAWhiteHispan %>%  ### PEP update
