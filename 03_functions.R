@@ -8,7 +8,7 @@
 ##input: census api variable names, human-readable names, and vintage
 ##output: dataframe in same format as Who Lives data tables excel sheet
 
-wholivesdatapull <- function(variables, names = variables, year = 2021, censusname = "acs/acs1"){
+wholivesdatapull <- function(variables, names = variables, year = 2022, censusname = "acs/acs1"){
   censuskey="530ce361defc2c476e5b5d5626d224d8354b9b9a"
   parishes <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "county:071,051,103,093", regionin = "state:22") ##pull parish data
   parishes$state = NULL  #state column pulled automatically & needs to be deleted
@@ -229,7 +229,7 @@ dodgedBar <- function(data,
                       yscale = c(0,.45),      
                       pct = TRUE,      #used when formatting pct vals vs dollar vals
                       comparisonyear = "2000",
-                      year = "2021",
+                      year = "2022",
                       digits = 0,
                       lab_pos = position_dodge(width = .7)){     #for rounding, specifically for forbor
   dataGraphic <-  data %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it  mutate(placenames = NA,
