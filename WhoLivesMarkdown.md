@@ -6,11 +6,11 @@ output: md_document: variant: markdown_phpextra+backtick_code_blocks
 
 <div class="highlight" markdown="1"> 
 
-This brief examines the 2022 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age. For results of the official 2020 Census headcount see our analyses under ['Population and Demographics'](https://www.datacenterresearch.org/topic/population-demographics/).  This brief also covers 2022 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.
+This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age. For results of the official 2020 Census headcount see our analyses under ['Population and Demographics'](https://www.datacenterresearch.org/topic/population-demographics/).  This brief also covers 2022 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.
 </div>
 
-The U.S. Census Bureau estimates that 1,246,176 residents were living in
-metro New Orleans as of July 2022, a 5 percent increase from April
+The U.S. Census Bureau estimates that 1,237,748 residents were living in
+metro New Orleans as of July 2023, a 4 percent increase from April
 2010.[^1] The metro area now has 93 percent of its 2000 population of
 1,337,726. In this brief, we examine demographic data released by the
 U.S. Census Bureau and identify important changes in metro area parishes
@@ -18,16 +18,16 @@ since 2000 (or the best benchmark available).
 
 ## Race/Ethnicity {#raceethnicity}
 
-According to the U.S. Census Bureau’s 2022 population estimates, there
-are now 110,608 fewer Black residents living in New Orleans (Orleans
-Parish) compared to 2000, and there are 11,418 fewer White residents as
-well as 7,083 more Hispanic residents.[^2]
+According to the U.S. Census Bureau’s 2023 population estimates, there
+are now 119,052 fewer Black residents living in New Orleans (Orleans
+Parish) compared to 2000, and there are 16,133 fewer White residents as
+well as 14,737 more Hispanic residents.[^2]
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2022.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2023.</p>
 </div>
 
 <div class="highlight" markdown="1"> 
@@ -37,58 +37,58 @@ well as 7,083 more Hispanic residents.[^2]
 Orleans Parish is the city of New Orleans. New Orleans and Orleans Parish are interchangeable. Their boundaries are the same, and they contain the same population. 
 </div>
 
-In Orleans Parish, the share of the 2022 population that is Black —
+In Orleans Parish, the share of the 2023 population that is Black —
 while lower than in 2000 when it was 67 percent — continues to represent
-the majority of city residents at 58 percent. The share of Hispanic
-residents in the city increased from 3 percent in 2000 to 6 percent in
-2022; the share of Asian residents increased from 2 percent to 3
+the majority of city residents at 56 percent. The share of Hispanic
+residents in the city increased from 3 percent in 2000 to 8 percent in
+2023; the share of Asian residents increased from 2 percent to 3
 percent; and the share of White residents increased from 27 percent to
-32 percent. Meanwhile, Hispanic, Asian, and Black populations increased
+31 percent. Meanwhile, Hispanic, Asian, and Black populations increased
 as a share of the total population in Jefferson, St. Bernard,
 St. Charles, St. John the Baptist, and St. Tammany parishes. In fact,
 the number and share of Hispanics have increased in all eight parishes
 in the metro area since 2000.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/demoallparish-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/demoallparish-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2022.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2023.</p>
 </div>
 
-Between 2000 and 2022, the number of Hispanics in Jefferson Parish
-increased by 34,526 reaching over 16 percent of the total parish
-population. Orleans Parish and St. Tammany Parish gained 7,083 and
-12,872 Hispanics, respectively, such that the Hispanic share of the
-population grew to 6 percent in Orleans and 6 percent in St. Tammany by
-2022.
+Between 2000 and 2023, the number of Hispanics in Jefferson Parish
+increased by 47,387 reaching over 19 percent of the total parish
+population. Orleans Parish and St. Tammany Parish gained 14,737 and
+17,920 Hispanics, respectively, such that the Hispanic share of the
+population grew to 8 percent in Orleans and 8 percent in St. Tammany by
+2023.
 
-As of July 2022, there were 120,420 Hispanics in the metro area,
-representing 10 percent of the metro population. This is up from 2000
+As of July 2023, there were 148,895 Hispanics in the metro area,
+representing 12 percent of the metro population. This is up from 2000
 when there were 58,545, representing 4 percent of the metro population.
 Despite these recent gains, the Hispanic share of the population in
 metro area parishes is below the average for the United States, which
 has grown from 13 percent to 19 percent of the total U.S. population
 over these 22 years.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/hispanpop-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/hispanpop-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2022.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2023.</p>
 </div>
 
 The number of Hispanics in the New Orleans metro has grown every year
-since 2006. Indeed, while the overall metro population has grown 5
-percent since 2010, the Hispanic population has grown 31 percent such
-that Hispanics account for 50 percent of the metro’s population growth
+since 2006. Indeed, while the overall metro population has grown 4
+percent since 2010, the Hispanic population has grown 62 percent such
+that Hispanics account for 118 percent of the metro’s population growth
 since 2010.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/hispanpopyear-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/hispanpopyear-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2011-2022.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2011-2023.</p>
 </div>
 
 Hispanic is an umbrella term comprising multiple nationalities and
@@ -107,7 +107,7 @@ Hispanic population in metro New Orleans. Nevertheless, the Mexican
 population is much less prominent in the metro than nationally, where it
 represents 59 percent of the Hispanic population.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/hispan2018-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/hispan2018-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -122,22 +122,22 @@ The progression of the baby boomers through the age groups, along with
 falling birth rates, has brought massive changes to the metro — and
 indeed the whole country — with many more changes yet to come.[^4]
 Looking at the total population in the metro by five-year age groups for
-2000 and 2022, the baby boomers are like a demographic tidal wave.
+2000 and 2023, the baby boomers are like a demographic tidal wave.
 According to the American Community Survey, the median age of the metro
 has risen to 39.5 in 2022 from 34.8 in 2000.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/age2000-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/age2000-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000.</p>
 </div>
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/agecurrent-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/agecurrent-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2022.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Population Estimates 2023.</p>
 </div>
 
 Meanwhile, the share of households with children is shrinking while the
@@ -149,7 +149,7 @@ percent to 29 percent; the percent of Jefferson households with children
 declined from 33 percent to 23 percent; and the percent of Orleans
 households with children declined from 30 percent to 20 percent.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/hwc-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/hwc-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -164,7 +164,7 @@ householders living alone grew from 27 percent to 35 percent. The
 increase was larger in Orleans Parish, which jumped from 33 to 41
 percent.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/sing-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/sing-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -173,17 +173,17 @@ percent.
 
 While the metro has regained much of the post-Katrina population losses,
 youth population is substantially lower than pre-Katrina levels. The
-metro had 358,092 children under 18 years in 2000 and only 271,203 in
-2022. Much of this loss was driven by Orleans Parish, where the
-population under 18 has declined to 71,513 from 129,408. The under 18
+metro had 358,092 children under 18 years in 2000 and only 271,464 in
+2023. Much of this loss was driven by Orleans Parish, where the
+population under 18 has declined to 70,990 from 129,408. The under 18
 population is now 22 percent of the metro population, down from 27
 percent in 2000.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/popunder18-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/popunder18-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2022.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2023.</p>
 </div>
 
 <div class="highlight" markdown="1"> 
@@ -203,7 +203,7 @@ percent of adults 25 and older had at least a bachelor’s degree in 2022
 grew from 23 to 35 percent — lower than the national average of 36
 percent.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/bach-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/bach-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -221,7 +221,7 @@ lower in neighboring parishes and the nation. Only 23 and 29 percent of
 Black adults have a bachelor’s degree or higher in Jefferson and
 St. Tammany, respectively.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/bachovertime-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/bachovertime-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -231,7 +231,7 @@ St. Tammany, respectively.
 **Source**: The Data Center analysis of U.S. Census Bureau data from 1980, 1990, 2000 SF3, and 2010 and American Community Survey 2022.</p>
 </div>
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/bachbyloc-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/bachbyloc-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -251,7 +251,7 @@ percent in 2000 to 11 percent in 2022. In the city of New Orleans, the
 share of adults with less than a high school degree fell from 25 percent
 to 11 percent.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/hs-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/hs-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -262,7 +262,7 @@ The 2022 median household income of $61,602 for the metro, $61,397 for
 Jefferson Parish, and $52,322 for the city of New Orleans are
 significantly lower than the U.S. median of $74,755.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/medhh-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/medhh-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -280,7 +280,7 @@ escalated. In 2022, Black households in New Orleans had a median income
 of only $34,552, while Hispanic households were at $63,114 and White
 households at $91,148.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/medhhtime-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/medhhtime-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -299,7 +299,7 @@ which is 37 percent less than White households in that parish. Hispanic
 households have a median of $57,316 across the metro which is relatively
 consistent across the three largest metro parishes.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/medhhbyrace-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/medhhbyrace-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -342,7 +342,7 @@ compared to 11 percent nationwide.
 Inequalities between individuals, households, businesses, or geographic areas with regard to access, use of, or impact of information and communication technologies.
 </div>
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/inta-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/inta-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -363,7 +363,7 @@ and 2022 while the Jefferson Parish poverty rate increased from 14 to 14
 percent. Across the U.S., the poverty rate increased by one percentage
 point between 1999 and 2022.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/pov-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/pov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -388,7 +388,7 @@ example, in metro New Orleans 24 percent of Black people and 19 percent
 of Hispanic people live in poverty compared to 10 percent of White
 people and 13 percent of Asian people.[^8]
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/povhist-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/povhist-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -401,7 +401,7 @@ people and 13 percent of Asian people.[^8]
 **Source**: The Data Center analysis of U.S. Census Bureau data from 1980, 1990, 2000 SF3, and 2010 and American Community Survey 2022.</p>
 </div>
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/povbyrace-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/povbyrace-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -417,7 +417,7 @@ Like the overall poverty rate, the child poverty rate in New Orleans
 decreased between 1999 and 2022. The child poverty rate of across the
 Metro area in 2022 is higher than the U.S. child poverty rate.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/childpov-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/childpov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -434,7 +434,7 @@ Black children living in poverty in 2022. The poverty rate for White
 children has declined from one in 10 children in poverty in 1979 to
 about one in 50 in 2022.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/childpovhist-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/childpovhist-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -454,7 +454,7 @@ children – which is a disparity on par with the national average. In
 metro New Orleans, 26 percent of Hispanic children live in poverty –
 statistically no different from the national rate.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/childpovrace-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/childpovrace-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -473,7 +473,7 @@ Nonetheless, at 17 percent, New Orleans’ share is more than twice as
 high as in neighboring parishes, indicating the importance of a robust
 public transportation system and comprehensive evacuation plan.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/veh-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/veh-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -494,7 +494,7 @@ Orleans Parish the foreign-born share of the population increased by 1.7
 percentage points between 2000 and 2022 while St. Tammany saw an
 increase of 1.2 percentage points.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/forbor-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/forbor-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -513,7 +513,7 @@ Orleans Parish came from outside the state of Louisiana. In Jefferson
 Parish, the share of the population who were new movers into the parish
 was 5 percent in 2004 and has not significantly changed.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/mob-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/mob-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -534,7 +534,7 @@ around 80 percent since 2000. In contrast, homeownership rates in New
 Orleans have increased slightly, but remain lower than neighboring
 parishes at 55 percent.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/ho-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/ho-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -550,7 +550,7 @@ and White people in 2022 was significant, with only 49 percent of Black
 householders in New Orleans owning their homes compared to 64 percent of
 White householders.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/honomohist-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/honomohist-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -571,7 +571,7 @@ percent of all householders owning their home: a rate of 60 percent for
 Black householders, 83 percent for White householders, and 77 percent
 for Hispanic householders.
 
-![](https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/honomoraceeth-1.png)
+![](https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/honomoraceeth-1.png)
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -595,7 +595,7 @@ proceeds to pay off their mortgage principal. In fact, Orleans and
 Jefferson received the first and second largest number of Road Home
 Option 1 Grants among all Louisiana parishes.[^12]
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/honomo-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/honomo-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -614,7 +614,7 @@ in Orleans while growing to only 27 percent nationally. In Jefferson
 Parish, the share of renters paying more than 50 percent of household
 income on housing and utilities is 31 percent in 2022.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/rentbur-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/rentbur-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -628,7 +628,7 @@ on their mortgage, taxes, utilities, and insurance is only 11 percent
 across the metro area. There is a clear gap between the rate of housing
 cost burden for renters vs. homeowners, and that gap has widened.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/hoburGraphic-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/hoburGraphic-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -646,7 +646,7 @@ rose from $860 to $1,151 in New Orleans, a 34 percent increase after
 adjusting for inflation. Meanwhile, median gross rents increased 23
 percent nationwide.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/medrent-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/medrent-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -670,7 +670,7 @@ percent of housing stock has been built since 1990. In contrast, in
 St. Tammany, the majority of housing units are in structures that have
 been built since 1990.
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/yrbuilt-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/yrbuilt-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -691,7 +691,7 @@ sharply from 13 percent in 2000 to 4 percent in 2022. Working from home
 is somewhat less common in Jefferson (10 percent) than in New Orleans or
 across the nation (18 percent).
 
-<img src="https://s3.amazonaws.com/files.datacenterresearch/who-livesuploads/2023/10/commute-1.png" style="display: block; margin: auto;" />
+<img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/commute-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
@@ -702,7 +702,7 @@ across the nation (18 percent).
 
 ## Data Sources / Methodology {#data-sources-methodology}
 
-Data on race/ethnicity and age is from the Census Bureau vintage 2022
+Data on race/ethnicity and age is from the Census Bureau vintage 2023
 population estimates and Census 2000 Summary File 1 (SF1). Other
 demographic data is from the Census 2000 Summary File 3 (SF3) and
 American Community Survey 2004, and 2022 (single-year files).

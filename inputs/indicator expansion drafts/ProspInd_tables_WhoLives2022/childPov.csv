@@ -1,0 +1,21 @@
+﻿Geography ,Year,Race,childPov
+New Orleans,1980,"White, not Hispanic",0.119
+New Orleans,1990,"White, not Hispanic",0.0894
+New Orleans,2000,"White, not Hispanic",0.0598
+New Orleans,2010,"White, not Hispanic",0.0435
+New Orleans,2015,"White, not Hispanic",0.0939
+New Orleans,1980,All,0.3883
+New Orleans,1990,All,0.4634
+New Orleans,2000,All,0.4053
+New Orleans,2010,All,0.4205
+New Orleans,2015,All,0.3691
+New Orleans,1980,Black or African American,0.483
+New Orleans,1990,Black or African American,0.5534
+New Orleans,2000,Black or African American,0.473
+New Orleans,2010,Black or African American,0.5214
+New Orleans,2015,Black or African American,0.4741
+New Orleans,1980,Hispanic or Latino,0.3357
+New Orleans,1990,Hispanic or Latino,0.3672
+New Orleans,2000,Hispanic or Latino,0.2715
+New Orleans,2010,Hispanic or Latino,0.372
+New Orleans,2015,Hispanic or Latino,0.2089

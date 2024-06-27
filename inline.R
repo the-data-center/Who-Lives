@@ -12,13 +12,13 @@ year <- year %>%
   select(yearu2) %>%
   pull()
 
-allparishes <- allparishesRaw2022 %>% 
+allparishes <- allparishesRaw2023 %>% 
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist", "St. Tammany", "United States")) 
 
 
 Overallpop <- allparishes %>%
-  filter(date =="7/1/2022 population estimate") %>% ## PEP update
+  filter(date =="7/1/2023 population estimate") %>% ## PEP update
   filter(sex =="Total") %>%
   filter(hisp =="Total") %>%
   filter(raceSimple =="Total") %>%
@@ -145,6 +145,10 @@ AA2022 <- AAhistorical %>%
   select(POP) %>%
   pull()
 
+AA2023 <- AAhistorical %>%
+  filter(year == 2023) %>%
+  select(POP) %>%
+  pull()
 
 
 getvalue.AA.no.current <- AAWhiteHispan %>%  ### PEP update
