@@ -8,17 +8,25 @@ updated July 2024 by Haleigh Tomlin
 There is the following series of files and some brief descriptions that are important to updating the page.
 
 01_libraries.R
+
 02_variables.R
+
 03_functions.R - creates a data pull function for either getting the Who Lives 2 data from the warehouse or from the census api, and creates a data visualization function for the bar charts
+
 04_analysis.R - depends on the data from data-pull.R
+
 05_graphics.R
 
 There is also:
 
 datalake-connection.R - connects to the data warehouse 
+
 data-pull.R - either pulls data from the census API or the warehouse and writes RData that are used in 04_analysis.R
+
 inline.R - updates the data points referenced in the Who Lives text in WhoLivesMarkdown.Rmd
+
 css_helper.R - has html hacks to make Who Lives pretty on the website
+
 WhoLivesMarkdown.Rmd - this generates the html document that gets pasted into wordpress directly to update the website
 
 outputs/spreadsheets - this folder has the data for each chart, and is used to update the downloadable excel sheet with the data.
@@ -36,6 +44,7 @@ The first happens in July, when the County population estimates by characteristi
 The PEP data is used in 5 charts in Who Lives. The data you need is downloaded in 4 files. 
 
 County population by characteristics -> Annual County Population Estimates by Selected Age Groups and Sex -> Download US and Louisiana data
+
 County population by characteristics -> Annual County Resident Population Estimates by Age, Race, and Hispanic Origin -> Download US and Louisiana data.
 
 I usually rename them and put them in inputs/PEP_data. 
