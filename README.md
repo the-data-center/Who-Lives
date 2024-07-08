@@ -53,6 +53,7 @@ The second installment happens in the fall, when the new ACS 1-year estimates ar
 
 #### Update process
 
+Check updates.txt document before updating anything!
 
 Run 01_libraries.R
 
@@ -75,7 +76,7 @@ The first time you do this, comment out the manual "fig.path" so that it generat
 
 The second time you knit, you want fig.path to be wp-graphics/uploads/[year]/[month number] so that it generates all the graphics to a folder that you can upload the contents of into aws to the url specified - "https://s3.amazonaws.com/files.datacenterresearch/who-lives"
 
-Before the project wraps up, be sure to make notes in the "updates.txt" document for future reference, so we don't re-do old work. 
+Before the project wraps up, be sure to make notes in the "updates.txt" document for future reference, so we don't re-do old work. Also, edit this Readme to be up to date.
 
 ------
 
