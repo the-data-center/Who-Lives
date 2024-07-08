@@ -6,12 +6,12 @@ output: md_document: variant: markdown_phpextra+backtick_code_blocks
 
 <div class="highlight" markdown="1"> 
 
-This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age. For results of the official 2020 Census headcount see our analyses under ['Population and Demographics'](https://www.datacenterresearch.org/topic/population-demographics/).  This brief also covers 2022 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.
+This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age.  This brief also covers 2022 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.   In 2023, the official definition of the New Orleans metro area changed to exclude St. Tammany. Later this year, when the Census Bureau releases 2023 ACS data, we'll publish data according to the new 7-parish metro area definition.
 </div>
 
 The U.S. Census Bureau estimates that 1,237,748 residents were living in
-metro New Orleans as of July 2023, a 4 percent increase from April
-2010.[^1] The metro area now has 93 percent of its 2000 population of
+metro New Orleans as of July 2023, a 3 percent decrease from April
+2020.[^1] The metro area now has 93 percent of its 2000 population of
 1,337,726. In this brief, we examine demographic data released by the
 U.S. Census Bureau and identify important changes in metro area parishes
 since 2000 (or the best benchmark available).
@@ -60,8 +60,7 @@ Between 2000 and 2023, the number of Hispanics in Jefferson Parish
 increased by 47,387 reaching over 19 percent of the total parish
 population. Orleans Parish and St. Tammany Parish gained 14,737 and
 17,920 Hispanics, respectively, such that the Hispanic share of the
-population grew to 8 percent in Orleans and 8 percent in St. Tammany by
-2023.
+population grew to 8 percent in both of these parishes.
 
 As of July 2023, there were 148,895 Hispanics in the metro area,
 representing 12 percent of the metro population. This is up from 2000
@@ -69,7 +68,7 @@ when there were 58,545, representing 4 percent of the metro population.
 Despite these recent gains, the Hispanic share of the population in
 metro area parishes is below the average for the United States, which
 has grown from 13 percent to 19 percent of the total U.S. population
-over these 22 years.
+over these 23 years.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/hispanpop-1.png" style="display: block; margin: auto;" />
 
@@ -79,16 +78,18 @@ over these 22 years.
 </div>
 
 The number of Hispanics in the New Orleans metro has grown every year
-since 2006. Indeed, while the overall metro population has grown 4
-percent since 2010, the Hispanic population has grown 62 percent such
-that Hispanics account for 118 percent of the metro’s population growth
-since 2010.
+since Hurricane Katrina. From 2010 to 2020, the Hispanic population
+accounted for the majority of the metro area’s growth, increasing by
+53,874, while the total population increased by 81,979. Since 2020, the
+overall population declined but the Hispanic population continued to
+grow. From 2020 to 2023, the metro area gained another 2,843 Hispanic
+residents while losing a total of 34,097 residents.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/hispanpopyear-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2011-2023.</p>
+**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, and Population Estimates 2020 and 2023.</p>
 </div>
 
 Hispanic is an umbrella term comprising multiple nationalities and
@@ -731,10 +732,11 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 [^1]: The eight-parish New Orleans metro includes Jefferson, Orleans,
     Plaquemines, St. Bernard, St. Charles, St. James, St. John the
     Baptist, and St. Tammany. From 2003-2012, the New Orleans metro was
-    comprised of seven parishes, excluding St. James. This brief has
-    updated all 2000 metro data to reflect an 8-parish definition,
-    however previous versions of this report will have used the 7-parish
-    metro definition and accompanying numbers.
+    comprised of seven parishes, excluding St. James. In 2023, the
+    official definition of the New Orleans metro area changed to exclude
+    St. Tammany. Later this year, when the Census Bureau releases 2023
+    ACS data, we’ll publish data according to the new 7-parish metro
+    area definition which excludes St. Tammany.
 
 [^2]: Throughout this brief, when referring to Population Estimates and
     Projections data, “Black,” “Asian,” and “White” refer to individuals

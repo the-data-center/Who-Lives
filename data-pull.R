@@ -3,6 +3,20 @@
 ############################################
 
 
+# Total population change
+## test: using the total pop numbers from our site
+
+totalpop_metro <- read_xlsx("inputs/TheDataCenter_PopulationbyParish.xlsx")
+totalpop_metro <- totalpop_metro %>%
+  rename(year = `...1`) %>%
+  mutate(year = str_replace(year, "Census ", ""),
+         year = str_replace(year, "Estimate ", ""),
+         year = as.numeric(year),
+         
+         metro_pop = `Metro Area total`)
+
+save(totalpop_metro, file = "inputs/totalpop_metro.RData")
+
 #Hispanic Origin
 
 hispanvars <-c("B03001_001E","B03001_001M","B03001_002E","B03001_002M","B03001_003E","B03001_003M","B03001_004E","B03001_004M","B03001_005E","B03001_005M","B03001_006E","B03001_006M","B03001_007E","B03001_007M","B03001_008E","B03001_008M","B03001_009E","B03001_009M","B03001_010E","B03001_010M","B03001_011E","B03001_011M","B03001_012E","B03001_012M","B03001_013E","B03001_013M","B03001_014E","B03001_014M","B03001_015E","B03001_015M","B03001_016E","B03001_016M","B03001_027E","B03001_027M")
@@ -1064,9 +1078,9 @@ save(allparishes_retro, file = "inputs/allparishes_retro.RData")
 
 
 
-popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP") #added because between 2017 and 2018 they changes DATE to DATE_CODE
+popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP", "RACE") #added because between 2017 and 2018 they changes DATE to DATE_CODE
 popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP")
-#listCensusMetadata("pep/int_charagegroups", vintage = 2000, type = "variables")
+#listCensusMetadata("pep/int_charagegroups", vintage = 2019, type = "variables")
 hisppopestRaw <- getCensus(name = "pep/charagegroups", # most recent
                                vintage = 2019,
                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
@@ -1100,6 +1114,7 @@ hisppopest23 <- allparishesRaw2023 %>% filter(race == "Hispanic"  & age == "Tota
 hisppopestRaw <- rbind(hisppopestRaw, hisppopest20, hisppopest21, hisppopest22, hisppopest23)
 
 save(hisppopestRaw, file = "inputs/hisppopestRaw.RData")
+write_csv(hisppopestRaw %>% arrange(place, year), file = "temp/pep23_hispanic.csv")
 
 
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP", "RACE")
@@ -1134,6 +1149,81 @@ blackpopestRaw <- rbind(blackpopestRaw, blackpopest20, blackpopest21, blackpopes
 
 save(blackpopestRaw, file = "inputs/blackpopestRaw.RData")
 
+
+###### HT adding new code to get all races retrospectively July 2024
+
+popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP", "RACE")
+popestVars2000 <- c("POP","DATE_DESC","DATE_", "GEONAME", "HISP", "RACE")
+#listCensusMetadata("pep/int_charagegroups", vintage = 2019, type = "variables")
+Historic_popestRaw <- getCensus(name = "pep/charagegroups", # most recent
+                            vintage = 2019,
+                            key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+                            vars = popestVars,
+                            region = "county:071,051,075,087,089,093,095,103",
+                            regionin = "state:22") %>%
+  rename(DATE = DATE_CODE) %>%
+  bind_rows(getCensus(name = "pep/int_charagegroups", # Intercensal estimates
+                      vintage = 2000,
+                      key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
+                      vars = popestVars2000,
+                      region = "county:071,051,075,087,089,093,095,103",
+                      regionin = "state:22"))  %>%
+  mutate(place = case_when(county == "071" ~ "Orleans",
+                           county == "051" ~ "Jefferson",
+                           county == "075" ~ "Plaquemines",
+                           county == "087" ~ "St. Bernard",
+                           county == "089" ~ "St. Charles",
+                           county == "093" ~ "St. James",
+                           county == "095" ~ "St. John the Baptist",
+                           county == "103" ~ "St. Tammany")) %>%
+  mutate(year = str_sub(DATE_DESC, 5, 8)) %>% # Clean July 1 from every year
+  select(-GEONAME, -DATE) %>%
+  mutate(race = factor(case_when(RACE == 0 & HISP == 0 ~ "Total",
+                          RACE == 1  & HISP == 1 ~ "White",
+                          RACE == 2 & HISP == 1 ~ "Black",
+                          RACE == 4 & HISP == 1 ~ "Asian",
+                          HISP == 2 & RACE == 0 ~ "Hispanic"), levels = c("White", "Black", "Hispanic", "Asian"))) %>%
+  filter((DATE_DESC == "4/1/2010 Census population" | DATE_DESC == "4/1/2000 population estimates base") &
+           race %in% c("White", "Black", "Hispanic", "Asian")) %>%
+  select(-GEO_ID, -DATE_) %>%
+  mutate(state = "",
+         county = "") %>%
+  select(state, county, POP, DATE_DESC, race, place, year)
+
+Racepopest20 <- allparishesRaw2020 %>%
+  filter(age == "Total" & sex == "Total" & raceSimple != "Total") %>%
+  mutate(place = PlaceName) %>% 
+  select(POP = population, DATE_DESC = date, race = raceSimple, place) %>%
+  mutate(state = "",
+         county = "",
+         year = 2020) %>%
+  select(state, county, POP, DATE_DESC, race, place, year)
+
+Racepopest23 <- allparishesRaw2023 %>%
+  filter(age == "Total" & sex == "Total" & raceSimple != "Total") %>%
+  mutate(place = PlaceName) %>%
+  select(POP = population, DATE_DESC = date, race = raceSimple, place)  %>%
+  mutate(state = "", county = "", year = 2023) %>%
+  select(state, county, POP, DATE_DESC, race, place, year)
+
+
+RacepopestRaw <- rbind(Historic_popestRaw, Racepopest20, Racepopest23) %>%
+  filter(place != "United States") %>%
+  group_by(year, race, DATE_DESC) %>%
+  summarize(POP = sum(POP)) %>%
+  mutate(place = "Metro")
+
+save(RacepopestRaw, file = "inputs/RacepopestRaw.RData")
+
+
+
+
+
+
+
+
+
+################
 
 # ###2019 update - saving in case we get access to the API again
 # 

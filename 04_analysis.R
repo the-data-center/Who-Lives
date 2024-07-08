@@ -4,7 +4,9 @@
 order <- c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")
 orderHisp <- c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")
 
+load("inputs/totalpop_metro.RData")
 load("inputs/hispanRaw.RData")
+load("inputs/RacepopestRaw.RData")
 
 hispanRaw[hispanRaw == -555555555] <- 0 
 #Hispanic Origin
@@ -1917,7 +1919,7 @@ ho_stat_race <- ho_stattest %>% select(place, placename, (contains("sig") & !con
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 ho_with_stats <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 ho.totals <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% 

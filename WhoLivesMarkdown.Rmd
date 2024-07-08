@@ -24,7 +24,7 @@ base.dir <- "wp-graphics"
 base.url <- "https://s3.amazonaws.com/files.datacenterresearch/who-lives"
 
 #Set date path manually
-#fig.path <- "uploads/2024/06/"
+# fig.path <- "uploads/2024/07/"
 
 #Set date path with auto generated month and year
 fig.path <- paste0("/",
@@ -107,13 +107,13 @@ source(here("inline.R"))
 
 ```{r, echo=FALSE}
 makeCSS_highlight(
-"This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age. For results of the official 2020 Census headcount see our analyses under ['Population and Demographics'](https://www.datacenterresearch.org/topic/population-demographics/).  This brief also covers 2022 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.") 
+"This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age.  This brief also covers 2022 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.   In 2023, the official definition of the New Orleans metro area changed to exclude St. Tammany. Later this year, when the Census Bureau releases 2023 ACS data, we'll publish data according to the new 7-parish metro area definition.") 
 ```
 
 
 
 
-The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in metro New Orleans as of July `r yearPEP`, a `r round.off((pctincrease.metro.current.2010)*100)` percent increase from April 2010.[^1] The metro area now has `r round.off((metropop.current / 1337726)*100)` percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available).
+The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in metro New Orleans as of July `r yearPEP`, a `r round.off((-1*pctincrease.metro.current.2020)*100)` percent decrease from April 2020.[^1] The metro area now has `r round.off((metropop.current / 1337726)*100)` percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available).
 
 
 ## Race/Ethnicity
@@ -151,9 +151,9 @@ makeCSS_source(
 )
 ```
 
-Between 2000 and `r yearPEP`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.current-getvalue.hispan.jeff.2000)` reaching over `r round.off((getvalue.Hispanpct.jeff.current)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.current - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population grew to `r round.off((getvalue.Hispanpct.no.current)*100)` percent in Orleans and `r round.off((getvalue.Hispanpct.tam.current)*100)` percent in St. Tammany by `r yearPEP`.
+Between 2000 and `r yearPEP`, the number of Hispanics in Jefferson Parish increased by `r comma(getvalue.hispan.jeff.current-getvalue.hispan.jeff.2000)` reaching over `r round.off((getvalue.Hispanpct.jeff.current)*100)` percent of the total parish population. Orleans Parish and St. Tammany Parish gained `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` and `r comma(getvalue.hispan.tam.current - getvalue.hispan.tam.2000)` Hispanics, respectively, such that the Hispanic share of the population grew to `r round.off((getvalue.Hispanpct.no.current)*100)` percent in both of these parishes.
 
-As of July `r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)` Hispanics in the metro area, representing `r round.off((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2000)`, representing `r round.off((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is below the average for the United States, which has grown from `r round.off((getvalue.Hispanpct.us.2000)*100)` percent to `r round.off((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r year-2000` years.
+As of July `r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)` Hispanics in the metro area, representing `r round.off((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2000)`, representing `r round.off((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is below the average for the United States, which has grown from `r round.off((getvalue.Hispanpct.us.2000)*100)` percent to `r round.off((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r yearPEP-2000` years.
 
 ```{r hispanpop, fig.align='center', fig.width=7, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 HispanicPopGraphic
@@ -164,14 +164,14 @@ makeCSS_source(
 )
 ```
 
-The number of Hispanics in the New Orleans metro has grown every year since 2006. Indeed, while the overall metro population has grown `r round.off((pctincrease.metro.current.2010)*100)` percent since 2010, the Hispanic population has grown `r round.off((getvalue.Hispgrowth.metro.2010.current)*100)` percent such that Hispanics account for `r comma(round.off((getvalue.growthpcthispanic.metro.2010.current)*100))` percent of the metro's population growth since 2010.
+The number of Hispanics in the New Orleans metro has grown every year since Hurricane Katrina. From 2010 to 2020, the Hispanic population accounted for the majority of the metro area’s growth, increasing by `r comma(getvalue.hispangrowthCOUNT.metro.2010.2020)`, while the total population increased by `r comma(getvalue.growthCOUNT.metro.2010.2020)`.  Since 2020, the overall population declined but the Hispanic population continued to grow.  From 2020 to `r yearPEP`, the metro area gained  another `r comma(getvalue.hispangrowthCOUNT.metro.2020.current)` Hispanic residents while losing a total of `r comma(-1*(getvalue.growthCOUNT.metro.2020.current))` residents.
 
 ```{r hispanpopyear, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 chart.HispanpopYears.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, Intercensal Estimates 2006-2009, and Population Estimates 2011-2023."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000, 2010, and Population Estimates 2020 and 2023."
 )
 ```
 
@@ -682,7 +682,7 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 ## Endnotes
 
-[^1]: The eight-parish New Orleans metro includes Jefferson, Orleans, Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist, and St. Tammany. From 2003-2012, the New Orleans metro was comprised of seven parishes, excluding St. James. This brief has updated all 2000 metro data to reflect an 8-parish definition, however previous versions of this report will have used the 7-parish metro definition and accompanying numbers.
+[^1]: The eight-parish New Orleans metro includes Jefferson, Orleans, Plaquemines, St. Bernard, St. Charles, St. James, St. John the Baptist, and St. Tammany. From 2003-2012, the New Orleans metro was comprised of seven parishes, excluding St. James. In 2023, the official definition of the New Orleans metro area changed to exclude St. Tammany. Later this year, when the Census Bureau releases 2023 ACS data, we'll publish data according to the new 7-parish metro area definition which excludes St. Tammany. 
 
 [^2]: Throughout this brief, when referring to Population Estimates and Projections data, “Black,” “Asian,” and “White” refer to individuals who report to be only one race and not Hispanic. However, “Hispanics” can be of any race(s).  When using American Community Survey data, "Black" and "Asian" are inclusive of "Hispanics".
 

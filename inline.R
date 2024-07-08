@@ -112,6 +112,12 @@ metro2010pop <- (getvalue.pop.no.2010 + getvalue.pop.jeff.2010  + getvalue.pop.p
 pctincrease.metro.current.2010 <- ((metropop.current - metro2010pop)/metro2010pop)
 
 
+## Percent increase in the metro since 2020.
+metro2020pop <- totalpop_metro$`Metro Area total`[totalpop_metro$year == 2020]
+
+pctincrease.metro.current.2020 <- ((metropop.current - metro2020pop)/metro2020pop)
+
+
 #The number of African Americans living In New Orleans grew every year post-Katrina (from 2006 to 2018)
 #but decreased for the first time post-Katrina from 232,118 in 2018 to 231,147 In 2018.
 
@@ -424,19 +430,40 @@ getvalue.Hispgrowth.metro.2010 <-HISPpopM %>%
   pull()
 # sum(getvalue.Hispgrowth.metro.2010)
 
+getvalue.Hispgrowth.metro.2020 <-HISPpopM %>%  ### PEP update
+  filter(year == 2020) %>%
+  mutate(POP = as.numeric(POP)) %>%
+  select(POP)%>%
+  pull()
+
 getvalue.Hispgrowth.metro.current <-HISPpopM %>%  ### PEP update
   filter(year ==yearPEP) %>%
   mutate(POP = as.numeric(POP)) %>%
   select(POP)%>%
   pull()
 #sum(getvalue.Hispgrowth.metro.2018)
+
+
 getvalue.Hispgrowth.metro.2010.current <- ((sum(getvalue.Hispgrowth.metro.current) - sum(getvalue.Hispgrowth.metro.2010)) / sum(getvalue.Hispgrowth.metro.2010))
+
+getvalue.Hispgrowth.metro.2020.current <- ((sum(getvalue.Hispgrowth.metro.current) - sum(getvalue.Hispgrowth.metro.2020)) / sum(getvalue.Hispgrowth.metro.2020))
+
 
 #such that Hispanics account for more than one-quarter of the metro's population growth since 2010.
 getvalue.hispangrowthCOUNT.metro.2010.current <- (sum(getvalue.Hispgrowth.metro.current) - sum(getvalue.Hispgrowth.metro.2010))
 getvalue.growthCOUNT.metro.2010.current <-(metropop.current - metro2010pop)
 
+getvalue.hispangrowthCOUNT.metro.2010.2020 <- (sum(getvalue.Hispgrowth.metro.2020) - sum(getvalue.Hispgrowth.metro.2010))
+getvalue.growthCOUNT.metro.2010.2020 <-(metro2020pop - metro2010pop)
+
+
+getvalue.hispangrowthCOUNT.metro.2020.current <- (sum(getvalue.Hispgrowth.metro.current) - sum(getvalue.Hispgrowth.metro.2020))
+getvalue.growthCOUNT.metro.2020.current <-(metropop.current - metro2020pop)
+
+
 getvalue.growthpcthispanic.metro.2010.current <- (getvalue.hispangrowthCOUNT.metro.2010.current)/ getvalue.growthCOUNT.metro.2010.current
+
+getvalue.growthpcthispanic.metro.2020.current <- (getvalue.hispangrowthCOUNT.metro.2020.current)/ getvalue.growthCOUNT.metro.2020.current
 
 
 

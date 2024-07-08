@@ -1,6 +1,6 @@
 ## New Who Lives Readme! 
 
-updated June 2024 by Haleigh Tomlin
+updated July 2024 by Haleigh Tomlin
 
 
 ### Files
@@ -44,6 +44,8 @@ In data-pull.R, the PEP data is updated toward the bottom of the file. Update th
 
 Also, since the PEP data updates the year-over-year changes in population, rather than changing the data year to reflect the new year, you must add the new year analysis. For example, last time I updated this data it was the 2022 pep, and I will just add the 2023 code onto this, which includes the updated numbers since 2020.
 
+In 04_analysis.R, you'll have to change the PEP year date.
+
 
 ##### Who Lives 2
 
@@ -57,4 +59,32 @@ Run 01_libraries.R
 Update the variable year in 02_variables.R. If it's the PEP update, only update the yearPEP and yearPEP.char variable to the data release year. 
 For the ACS update (Who Lives 2) update the cpi variable from BLS from 2004 and 1999 to the update year so that any dollar amounts will be inflation adjusted to the current year.
 
+Run 03_functions.R. For now, this pulls from the census API, but when the warehouse is ready, edit to pull from the warehouse api.
 
+Run data-pull.R. 
+
+Run 04_analysis.R - there are a few places in this file where the date might need to be updated to the new year.
+
+Run 05_graphics.R - there are a few places where you need to add on the new year label. Also, check chart title labels to ensure they say the new year.
+
+update inline.R - there are a few places here where it pulls from allparishesRaw[YEAR] - change that to the new year, or make a new variable that is immune to year changes like "current."
+
+In WhoLivesMarkdown.Rmd, change the year in the description text in the blue box at the top. You will also need to edit the css-style captions to reflect the new year of the respective data update. When you are ready, knit the WhoLivesMarkdown to "md document." You will have to do this two times.
+   
+The first time you do this, comment out the manual "fig.path" so that it generates images to a url that will point to aws. This is the one you will copy into wordpress.
+
+The second time you knit, you want fig.path to be wp-graphics/uploads/[year]/[month number] so that it generates all the graphics to a folder that you can upload the contents of into aws to the url specified - "https://s3.amazonaws.com/files.datacenterresearch/who-lives"
+
+Before the project wraps up, be sure to make notes in the "updates.txt" document for future reference, so we don't re-do old work. 
+
+------
+
+Improvement ideas:
+
+- anywhere that needs to be edited in the series laid out above, make that immune to changes so you only need to update the "year" variable.
+
+- have the WhoLivesMarkdown.Rmd write images to both aws and generate the link in the same go.
+
+- further automate the process: in a separate script, have the year variable, have it source the data-pull.R file, and have it knit the WhoLivesMarkdown.Rmd (which calls the other files). 
+
+- automatically update the excel sheet so it isn't manual - have the R script write into the excel sheet at the appropriate locations

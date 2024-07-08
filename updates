@@ -1,0 +1,11 @@
+[insert more recent updates at the top of the file]
+
+-----------------------------------------------------
+
+July 2024 PEP update: Haleigh 
+
+The vintage 2023 PEP numbers showed dramatically increased Hispanic population numbers from 2020-2023, correcting for undercounts of the Hispanic population in Census 2020. This made our metro numbers jump drastically. Due to this, we changed our Hispanic population by year graph to only show 2000, 2010, 2020, and 2023. 
+
+Now that we have Census 2020 data, we updated the inline text to compare recent numbers to the 2020 census rather than 2010. Accordingly, we included text about our recent population loss. 
+
+In 2023, the OMB changed the metro area definition to exclude St. Tammany from the New Orleans metro. since we only have 2023 PEP data and not 2023 ACS data, we updated it like usual. However, when the 2023 ACS data comes out, we are going to need to redo all the charts to reflect the 7-parish metro and to match all other charts. Who Lives 2 in 2024 will be a heavy lift, and will likely need some additional text drawing on the MSA change paper (forthcoming at this point). Edits will need to be made to the analysis text, inline numbers, and to the function which pulls data for the metro area (check this though? the msa code might be accurate with 2023 ACS), as well as the PEP counties.
