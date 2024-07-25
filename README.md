@@ -91,10 +91,21 @@ Before the project wraps up, be sure to make notes in the "updates.txt" document
 
 Improvement ideas:
 
-- anywhere that needs to be edited in the series laid out above, make that immune to changes so you only need to update the "year" variable.
+- automatically download the link to the PEP data using the url 
+
+- anywhere that needs to be edited in the series laid out above, make that immune to changes so you only need to update the "year" variable - including name of graphs
 
 - have the WhoLivesMarkdown.Rmd write images to both aws and generate the link in the same go.
 
 - further automate the process: in a separate script, have the year variable, have it source the data-pull.R file, and have it knit the WhoLivesMarkdown.Rmd (which calls the other files). 
 
 - automatically update the excel sheet so it isn't manual - have the R script write into the excel sheet at the appropriate locations
+
+- archive things that are commented out 
+
+- cpi adjustment: can we do that via API or get automatically from BLS?
+
+- PEP data doesn't add the previous year anymore, make that automatically add new year
+
+- can we connect to aws remotely?
+

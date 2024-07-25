@@ -29,7 +29,6 @@ well as 14,737 more Hispanic residents.[^2]
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2023.</p>
 </div>
-
 <div class="highlight" markdown="1"> 
 
 ### What is Orleans Parish? 
@@ -186,7 +185,6 @@ percent in 2000.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 and Population Estimates 2023.</p>
 </div>
-
 <div class="highlight" markdown="1"> 
 
 ### Where is data for Plaquemines, St. Bernard, St. James, St. Charles, and St. John the Baptist?
@@ -372,7 +370,6 @@ point between 1999 and 2022.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2022.</p>
 </div>
-
 <div class="highlight" markdown="1"> 
 
 ### How is poverty measured? 
