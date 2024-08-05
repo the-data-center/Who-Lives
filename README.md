@@ -108,4 +108,6 @@ Improvement ideas:
 - PEP data doesn't add the previous year anymore, make that automatically add new year
 
 - can we connect to aws remotely?
+  
+- move analysis out of graphics.R
 
