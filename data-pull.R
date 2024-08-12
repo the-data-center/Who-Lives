@@ -4,7 +4,7 @@
 
 
 # Total population change
-## test: using the total pop numbers from our site
+## test: using the total pop numbers from our site to update the comparison year to 2020 instead of 2010 in the text
 
 totalpop_metro <- read_xlsx("inputs/TheDataCenter_PopulationbyParish.xlsx")
 totalpop_metro <- totalpop_metro %>%
