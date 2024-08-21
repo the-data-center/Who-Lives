@@ -38,6 +38,7 @@ wholivesdatapull <- function(variables, names = variables, dataframe = df, year 
 }
 
 
+
 ########## Define function to pull variables
 
 # Pull data. Note that this includes 2010-2017.

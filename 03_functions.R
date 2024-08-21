@@ -10,46 +10,49 @@
 
 wholivesdatapull <- function(variables, names = variables, year = 2022, censusname = "acs/acs1"){
   censuskey="530ce361defc2c476e5b5d5626d224d8354b9b9a"
-  parishes <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "county:071,051,103,093", regionin = "state:22") ##pull parish data
+  parishes <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "county:071,051", regionin = "state:22") ##pull parish data
   parishes$state = NULL  #state column pulled automatically & needs to be deleted
   colnames(parishes) <- c("place",names)  #so names match between the three pulls for rbind
-  metro <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = ifelse(year == 2000, "consolidated metropolitan statistical area:5560","metropolitan statistical area/micropolitan statistical area:35380"))
+  metro <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "metropolitan statistical area/micropolitan statistical area:35380")
   colnames(metro) <- c("place",names)
   us <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "us:1")
   colnames(us) <- c("place",names)
-  df <- switch(rbind(parishes, metro, us))
+  #df <- switch(rbind(parishes, metro, us))
+  df <- rbind(parishes, metro, us)
   df[df == -555555555] <- 0
 
   df <- df %>% mutate(placename = case_when(place == "051" ~ "Jefferson",
                                             place == "071" ~ "Orleans",
-                                            place == "103" ~ "St. Tammany",
                                             place == "35380" ~ "New Orleans Metro Area",
-                                            place == "5560" ~ "New Orleans Metro Area",
                                             place == "1" ~ "United States")) %>%
     filter(place != "093")
   return(df)  #combine the three pulls, rows 1 & 2 (Jeff & Orl) switched
 }
 
-#warehouse who lives datapull - make sure WhoLives.csv in datalake is updated, and run the datalake-connection.R first
+#creating a separate data pull for 2000 so that we can manually match the metro parish estimates and include stat testing
 
-# wholivesdatapull <- function(variables, names = variables, dataframe = df, year = 2021){
-#   df <- df %>% select(-c(row_num, variable_name)) %>% filter(vintage == year, key %in% variables)
-#   df <- df %>% pivot_wider(names_from = key, values_from = value, values_fn = as.numeric)
-#   df <-  df %>% select(geo_name, county_fips, variables)
-#   df$county_fips[df$geo_name == "United States"] <- 1
-#   df$county_fips[df$geo_name == "New Orleans-Metairie, LA Metro Area"] <- 35380 #doing this with case_when was giving me trouble
-#   colnames(df) <- c("geo_name", "place", names)
-#   df[df == -555555555] <- 0
-#   df <- df %>% select(-geo_name)
-#   df <- df %>% mutate(placename = (case_when(place == "051" ~ "Jefferson",
-#                                         place == "071" ~ "Orleans",
-#                                         place == "103" ~ "St. Tammany",
-#                                         place == "35380" ~ "New Orleans Metro Area",
-#                                         place == "1" ~ "United States"))) %>%
-#     filter(place %in% c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")) %>%
-#     mutate(place = factor(place, levels = c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"))) %>% arrange(place)
-#   return(df)
-# }
+#What to do if a variable doesn't have error?
+wholivesdatapull2000 <- function(variables, names = variables, design_fac = 1){
+  censuskey = "530ce361defc2c476e5b5d5626d224d8354b9b9a"
+  names <- paste(names, "_2000", sep = "")
+  parishes <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = "county:071,051", regionin = "state:22") 
+  parishes$state = NULL  #state column pulled automatically & needs to be deleted
+  colnames(parishes) <- c("place",names)  #so names match between the three pulls for rbind
+  
+  metro <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = "county:071,051,075,087,089,093,095", regionin = "state:22")
+  metro <- metro %>% select(-state,-county) %>% summarize(across(everything(), sum)) %>% mutate(place = "New Orleans Metro Area") %>% relocate("place")
+  colnames(metro) <- c("place", names) 
+  
+  us <-  getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = "us:1")
+  colnames(us) <- c("place",names)
+  df <- rbind(parishes, metro, us)
+  df <- df %>% mutate(placename = case_when(place == "051" ~ "Jefferson",
+                                            place == "071" ~ "Orleans",
+                                            place == "New Orleans Metro Area" ~ "New Orleans Metro Area",
+                                            place == "1" ~ "United States"))
+  return(df)
+}
+
 
 
 
@@ -132,7 +135,7 @@ switch <- function(dataframe){
 
 ## calculates MOE for 2000 STF3 files.
 ## Formula on pg954 of documentation, table A "Unadjusted Standard Error for Estimated Totals"
-## This is only for estimate totals.  Median and pcts will have to be done differently!!!***
+## This is only for estimate totals and percentages.  Medians and sums will have to be done differently!!!***
 ## N = population
 ## Design factor table not found, so until we multiply by design factor, it's unadjusted std error.
 ## critical value for ACS is z = 1.645 (they use 90% CI)
@@ -144,7 +147,8 @@ moe2000 <- function(est, n, designfac = 1){
 }
 
 
-##calculates MOE for aggregated estimates
+
+##calculates MOE for aggregated estimates (this works the same for 2000 or current years)
 ##moe = sqrt(sum(estimateMOE^2))
 ##input: dataframe of estimates' MOEs (i.e. use cbind)
 ##output: column of MOEs
