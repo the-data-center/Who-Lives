@@ -1,7 +1,7 @@
 ############################################
 # # ACS # #
 ############################################
-order <- c("Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States")
+order <- c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")
 orderHisp <- c("Orleans", "Jefferson", "New Orleans Metro Area", "United States")
 
 load("inputs/totalpop_metro.RData")
@@ -86,13 +86,16 @@ storage_write_csv(hispanCSV, cont_proj, "who_lives/2024/outputs/hispan.csv")
 
 #Households with own children under 18
 load("inputs/hwcRaw.RData")
+load("inputs/hwc2000Raw.RData")
+
 hwc <- hwcRaw %>%
+  left_join(hwc2000Raw, by = "place") %>%
   mutate(census2000 = c(0.3007,0.3251,0.397,0.3353,0.3339),
          census2000SE = c(0.00259888,0.002743002, 0.004572234,0.001643334,9.24E-05),
          tothwc = Married + MaleHH + FemaleHH,
          pcthwc = tothwc/TotalHH,
          moeagg = moeagg(cbind(MarriedMOE, MaleHHMOE, FemaleHHMOE)),
-        # moeagg2000 = moeagg(cbind(MarriedMOE, MaleHHMOE, FemaleHHMOE)),
+        # moeagg2000 = moeagg(cbind(Married2000MOE, MaleHH2000MOE, FemaleHH2000MOE)),
          moeprop = moeprop(y = TotalHH, moex = moeagg, moey = TotalHHMOE, p = pcthwc),
          #moeprop2000 = moeprop(y = TotalHH2000, moex = moeagg2000, moey = TotalHHMOE2000, p = pcthwc2000),
          significant = stattest(x=census2000,moex = census2000SE*1.645, y=pcthwc,moey = moeprop)) 

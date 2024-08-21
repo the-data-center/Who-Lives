@@ -30,6 +30,12 @@ hwcnames <- c("TotalHH", "TotalHHMOE","Married", "MarriedMOE", "MaleHH", "MaleHH
 hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
 save(hwcRaw, file = "inputs/hwcRaw.RData")
 
+hwc2000vars <- c("P012001","P012005", "P012009", "P012012", "P012020", "P012024", "P012027")
+hwc2000names <- c("TotalHH_2000", "Married15to64_2000", "MaleHH15to64", "FemaleHH15to64", "Married65plus", "MaleHH65plus", "FemaleHH65plus")
+#hwc2000 <- wholivesdatapull2000(hwc2000vars, hwc2000names, DF = )
+save(hwc2000Raw, file = "inputs/hwc2000Raw.RData")
+
+
 ## Median age calculation
 
 medagevars <- c("B01002_001E")
