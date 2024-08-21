@@ -31,8 +31,8 @@ hwcRaw <- wholivesdatapull(hwcvars, hwcnames)
 save(hwcRaw, file = "inputs/hwcRaw.RData")
 
 hwc2000vars <- c("P012001","P012005", "P012009", "P012012", "P012020", "P012024", "P012027")
-hwc2000names <- c("TotalHH_2000", "Married15to64_2000", "MaleHH15to64", "FemaleHH15to64", "Married65plus", "MaleHH65plus", "FemaleHH65plus")
-#hwc2000 <- wholivesdatapull2000(hwc2000vars, hwc2000names, DF = )
+hwc2000names <- c("TotalHH", "Married15to64", "MaleHH15to64", "FemaleHH15to64", "Married65plus", "MaleHH65plus", "FemaleHH65plus")
+hwc2000 <- wholivesdatapull2000(hwc2000vars, hwc2000names)
 save(hwc2000Raw, file = "inputs/hwc2000Raw.RData")
 
 
@@ -48,12 +48,14 @@ medageRaw <- getCensus("acs/acs1",
 names(medageRaw) <- c("metro", "medage")
 save(medageRaw, file = "inputs/medageRaw.RData")
 
-#One-person households
+#Single-person households
 
 singvars <- c('B11001_001E','B11001_001M','B11001_008E','B11001_008M')
 singnames <- c("TotalHH","TotalMOE","SingleHH","SingleHHMOE")
 singRaw <- wholivesdatapull(singvars, singnames)
 save(singRaw, file = "inputs/singRaw.RData")
+
+sing2000vars <- 
 
 
 #Less than a high school degree, adults 25 and older
@@ -77,12 +79,6 @@ medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE")
 medhhRaw <- wholivesdatapull(medhhvars, medhhnames)
 save(medhhRaw, file = "inputs/medhhRaw.RData")
 
-#have to make MOEs slightly differently because it is a household universe.
-medhhvars2000 <- c('H002001', 'H003001','HCT012001')
-medhhnames2000 <- c("SampHousingUnits2000","TotHousingUnits2000", "MedianHHIncome")
-medhhRaw2000 <- wholivesdatapull(medhhvars2000, medhhnames2000, censusname = "dec/sf3", year = 2000)
-medhhRaw2000 <- medhhRaw2000 %>% mutate(PctinSamp = SampHousingUnits2000 / TotHousingUnits2000,
-                                        MedhianHHIncomeMOE = moe2000(MedianHHIncome, TotHousingUnits2000, designfac = 1.2))
 
 #Internet access
 
