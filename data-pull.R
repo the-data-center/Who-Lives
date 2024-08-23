@@ -48,6 +48,8 @@ medageRaw <- getCensus("acs/acs1",
 names(medageRaw) <- c("metro", "medage")
 save(medageRaw, file = "inputs/medageRaw.RData")
 
+medagevars2000 <- c("")
+
 #Single-person households
 
 singvars <- c('B11001_001E','B11001_001M','B11001_008E','B11001_008M')
@@ -55,7 +57,10 @@ singnames <- c("TotalHH","TotalMOE","SingleHH","SingleHHMOE")
 singRaw <- wholivesdatapull(singvars, singnames)
 save(singRaw, file = "inputs/singRaw.RData")
 
-sing2000vars <- 
+singvars2000 <- c('P012001','P010002')
+singnames2000 <- c("TotalHH","SingleHH")
+singRaw2000 <- wholivesdatapull2000(singvars2000,singnames2000)
+save(singRaw2000,file = "inputs/singRaw2000.RData")
 
 
 #Less than a high school degree, adults 25 and older
@@ -65,12 +70,23 @@ hsnames <- c("Total", "TotalMOE", "Male9", "Male9MOE", "Male9to12", "Male9to12MO
 hsRaw <- wholivesdatapull(hsvars, hsnames)
 save(hsRaw, file = "inputs/hsRaw.RData")
 
+hsvars2000 <- c('P037001','P037003','P037004','P037005',"P037006",'P037007','P037008','P037009','P037010','P037020','P037021','P037022','P037023','P037024','P037025','P037026','P037027')
+hsnames2000 <- c("Total","MaleNS","Male4","Male5to6","Male7to8","Male9","Male10","Male11","Male12ND","FemaleNS","Female4","Female5to6","Female7to8","Female9","Female10","Female11", "Female12ND")
+hsRaw2000 <- wholivesdatapull2000(hsvars2000,hsnames2000)
+save(hsRaw2000,file = "inputs/hsRaw2000.RData")
+
+
 #Bachelor's degree or higher, adults 25 and older
 
 bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M','C15002_017E','C15002_017M')
 bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  "MaleGradProfMOE", "FemaleBach", "FemaleBachMOE", "FemaleGradProf", "FemaleGradProfMOE")
 bachRaw <- wholivesdatapull(bachvars, bachnames)
 save(bachRaw, file = "inputs/bachRaw.RData")
+
+bachvars2000 <- c('P037001','P037015','P037016','P037017','P037018','P037032','P037033','P037034','P037035')
+bachnames2000 <- c("Total","MaleBach","MaleMasters","MaleProf","MaleDoc","FemaleBach","FemaleMasters","FemaleProf","FemaleDoc")
+bachRaw2000 <- wholivesdatapull2000(bachvars2000,bachnames2000)
+save(bachRaw2000,file = "inputs/bachraw2000.RData")
 
 #Median household income, inflation-adjusted dollars
 
