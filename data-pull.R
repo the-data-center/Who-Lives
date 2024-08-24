@@ -95,6 +95,11 @@ medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE")
 medhhRaw <- wholivesdatapull(medhhvars, medhhnames)
 save(medhhRaw, file = "inputs/medhhRaw.RData")
 
+medhhvars2000 <- c('HCT012001')
+medhhames2000 <- c("MedianHHIncome")
+medhhRaw2000 <- wholivesdatapull2000(medhhvars2000,medhhames2000)
+save(medhhRaw2000, file = "inputs/medhhRaw2000.RData")
+
 
 #Internet access
 
@@ -110,6 +115,11 @@ povvars <- c('C17001_001E','C17001_001M','C17001_002E','C17001_002M')
 povnames <- c("Total", "TotalMOE", "BelowPov", "BelowPovMOE")
 povRaw <- wholivesdatapull(povvars, povnames)
 save(povRaw, file = "inputs/povRaw.RData")
+
+povvars2000 <-c('P087001','P087003','P087004','P087005','P087006','P087007','P087008','P087009')
+povnames2000 <-c("Total", "BelowPovUnder5Years","BelowPov5Years","BelowPov6to11Years","BelowPov12to17Years","BelowPov18to64","BelowPov65to74","BelowPovOver75")
+povRaw2000 <- wholivesdatapull2000(povvars2000,povnames2000)
+save(povRaw2000,file = "input/povRaw2000.RData")
 
 #Children in poverty, population for whom poverty has been determined	
 
