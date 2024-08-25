@@ -136,6 +136,11 @@ vehnames <- c("Total","TotalMOE","NoVehAvail","NoVehAvailMOE")
 vehRaw <- wholivesdatapull(vehvars, vehnames)
 save(vehRaw, file = "inputs/vehRaw.RData")
 
+vehvars2000<- c('H044001','H044002','H044010')
+vehnames2000<- c("Total","OwnNoVehAvail","RentNoVehAvail")
+vehRaw2000 <- wholivesdatapull2000(vehvars2000,vehnames2000)
+save(vehRaw2000,file = "inputs/vehRAw2000.RData")
+
 #Population not U.S. citizens at birth
 
 forborvars <- c('C05005_004E','C05005_004M','C05005_007E','C05005_007M','C05005_010E','C05005_010M','C05005_013E','C05005_013M','B01003_001E','B01003_001M')
@@ -143,6 +148,10 @@ forbornames <- c("TotForeign10on","TotForeign10onMOE","TotForeign00to09","TotFor
 forborRaw <- wholivesdatapull(forborvars, forbornames)
 save(forborRaw, file = "inputs/forborRaw.RData")
 
+forborvars2000<- c('P022001','P022002','P022003','P022004','P022005','P022006','P022007','P022008','P022009')
+forbornames2000<- c("Total","TotForeign95to00","TotForegin90to94","TotForegin85to89","TotForeign80to84","TotForegin75to79","TotForeign70to74","TotForegin65to69","TotForeginPre65")
+forborRaw2000<-wholivesdatapull2000(forborvars2000,forbornames2000)
+save
 
 #Population who moved in the past year
 
@@ -219,6 +228,11 @@ honomonames <- c("Total","TotalMOE","Mortgage","MortgageMOE","NoMortgage","NoMor
 honomoRaw <- wholivesdatapull(honomovars, honomonames)
 save(honomoRaw, file = "inputs/honomoRaw.RData")
 
+
+honomovars2000 <- c('H098001','H098018')
+honomonames2000 <-c("Total","NoMortgage")
+honomoRaw2000<- wholivesdatapull2000(honomovars2000,honomonames2000)
+save(honomoRaw2000, file = "inputs/honomoRaw2000.RData")
 
 #Renters with severe housing cost burdens
 
