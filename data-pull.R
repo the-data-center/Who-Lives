@@ -160,6 +160,20 @@ mobnames <- c("Total","TotalMOE","TotSameHouse","TotSameHouseMOE","TotMovedinCty
 mobRaw <- wholivesdatapull(mobvars, mobnames)
 save(mobRaw, file = "inputs/mobRaw.RData")
 
+# Total Population by race
+
+totpopracevars<- c('P001001','P006003','P006002','P007010','P007010')
+totpopracenames<-c("Total","TotBlackAlone","TotWhiteAlone","TotHispanicAny","TotAsianAlone")
+totpopraceRaw<-wholivesdatapull2000(totpopracevars,totpopracenames)
+save(totpopraceRaw, file = "inputs/totpoprace2000.Rdata")
+
+# Total Population by Age,*inhales*
+
+totpopagevars <-c('P008003','P008004','P008005','P008006','P008007','P008008','P008009','P008010','P008011','P008012','P008013','P008014','P008015','P008016','P008017','P008018','P008019','P008020','P008021','P008022','P008023','P008024','P008025','P008026','P008027','P008028','P008029','P008030','P008031','P008032','P008033','P008034','P008035')
+totpopagenames <-c("MaleUnder1yr","Male1yr","Male2yr","Male3yr","Male4yr","Male5yr","Male6yr","Male7yr","Male8yr","Male9yr","Male10yr","Male11yr","Male12yr","Male13yr","Male14yr","Male15yr","Male16yr","Male17yr","Male18yr","Male19yr","Male20yr","Male21yr","Male22to24","Male25to29","Male30to34","Male35to39","Male40to44","Male45to49","Male50to54","Male55to59","Male60to61","Male62to64")
+
+
+
 # https://www2.census.gov/acs2004/Core_Tables/
 ACScounty_04 <- read_csv("inputs/ACS_data/ACS_2004_050.csv") 
 ACSUS_04 <- read_csv("inputs/ACS_data/ACS_2004_010.csv")
