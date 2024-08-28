@@ -89,16 +89,19 @@ load("inputs/hwcRaw.RData")
 load("inputs/hwc2000Raw.RData")
 
 hwc <- hwcRaw %>%
-  left_join(hwc2000Raw, by = "place") %>%
-  mutate(census2000 = c(0.3007,0.3251,0.397,0.3353,0.3339),
-         census2000SE = c(0.00259888,0.002743002, 0.004572234,0.001643334,9.24E-05),
+  left_join(hwc2000Raw, by = c("placename")) %>% #do something about the mismatch place codes
+  mutate(tothwc2000 = Married15to64_2000 + MaleHH15to64_2000 + FemaleHH15to64_2000 + Married65plus_2000 + MaleHH65plus_2000 + FemaleHH65plus_2000,
+         tothwc2000MOE = moeagg(cbind(Married15to64_2000MOE, MaleHH15to64_2000MOE, FemaleHH15to64_2000MOE, Married65plus_2000MOE, MaleHH65plus_2000MOE, FemaleHH65plus_2000MOE)),
+         
+         pcthwc2000 = tothwc2000 / TotalHH_2000,
+         
          tothwc = Married + MaleHH + FemaleHH,
          pcthwc = tothwc/TotalHH,
          moeagg = moeagg(cbind(MarriedMOE, MaleHHMOE, FemaleHHMOE)),
-        # moeagg2000 = moeagg(cbind(Married2000MOE, MaleHH2000MOE, FemaleHH2000MOE)),
+         
          moeprop = moeprop(y = TotalHH, moex = moeagg, moey = TotalHHMOE, p = pcthwc),
-         #moeprop2000 = moeprop(y = TotalHH2000, moex = moeagg2000, moey = TotalHHMOE2000, p = pcthwc2000),
-         significant = stattest(x=census2000,moex = census2000SE*1.645, y=pcthwc,moey = moeprop)) 
+         moeprop2000 = moeprop(y = TotalHH_2000, moex = tothwc2000MOE, moey = TotalHH_2000MOE, p = pcthwc2000),
+         significant = stattest(x=pcthwc2000,moex = moeprop2000, y=pcthwc,moey = moeprop)) 
 
 hwcCSV <- hwc %>% 
   select(place, census2000, (contains("pct"))) %>% 
