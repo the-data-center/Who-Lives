@@ -10,7 +10,8 @@ library(knitr)
 library(readxl)
 library(xfun)
 
-#library(xlsx)
+#HT created this in the 2024 who lives to be a crosswalk to the Louisiana and US design factors to calculate error for the 2000's data in the wholivesdatapull2000 in the functions.R file.
+Census2000_designfac <- read_xlsx("inputs/2000_census/Census2000SF3_designfac.xlsx")
 
 #load("inputs/allparishesRawx.RData")
 
