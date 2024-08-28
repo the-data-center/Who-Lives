@@ -32,7 +32,7 @@ save(hwcRaw, file = "inputs/hwcRaw.RData")
 
 hwc2000vars <- c("P012001","P012005", "P012009", "P012012", "P012020", "P012024", "P012027")
 hwc2000names <- c("TotalHH", "Married15to64", "MaleHH15to64", "FemaleHH15to64", "Married65plus", "MaleHH65plus", "FemaleHH65plus")
-hwc2000 <- wholivesdatapull2000(hwc2000vars, hwc2000names)
+hwc2000Raw <- wholivesdatapull2000(hwc2000vars, hwc2000names)
 save(hwc2000Raw, file = "inputs/hwc2000Raw.RData")
 
 
@@ -119,7 +119,7 @@ save(povRaw, file = "inputs/povRaw.RData")
 povvars2000 <-c('P087001','P087002')
 povnames2000 <-c("Total", "BelowPov")
 povRaw2000 <- wholivesdatapull2000(povvars2000,povnames2000)
-save(povRaw2000,file = "input/povRaw2000.RData")
+save(povRaw2000,file = "inputs/povRaw2000.RData")
 
 
 #Children in poverty, population for whom poverty has been determined	
@@ -132,7 +132,7 @@ save(childpovRaw, file = "inputs/childpovRaw.RData")
 childpovvars2000 <-c('P087003','P087004','P087005','P087006','P087011','P087012','P087013',	'P087014') 
 childpovnames2000 <-c( "BelowPovUnder5Years","BelowPov5Years","BelowPov6to11Years","BelowPov12to17Years","AbovePovUnder5Years","AbovePov5Years","AbovePov6to11Years","AbovePov12to17")
 childpovRaw2000 <- wholivesdatapull2000(povvars2000,povnames2000)
-save(childpovRaw2000,file = "input/childpovRaw2000.RData")
+save(childpovRaw2000,file = "inputs/childpovRaw2000.RData")
 
 #Households without access to a vehicle
 
@@ -173,11 +173,11 @@ totpopraceRaw<-wholivesdatapull2000(totpopracevars,totpopracenames)
 save(totpopraceRaw, file = "inputs/totpoprace2000.Rdata")
 
 # Total Population by Age,*inhales*
-
-totpopagevars <-c('P008003','P008004','P008005','P008006','P008007','P008008','P008009','P008010','P008011','P008012','P008013','P008014','P008015','P008016','P008017','P008018','P008019','P008020','P008021','P008022','P008023','P008024','P008025','P008026','P008027','P008028','P008029','P008030','P008031','P008032','P008033','P008034','P008035','P008036','P008037','P008038','P008039','P008040','P008042','P008043','P008044','P008045','P008046','P008047','P008048','P008049','P008050','P008051','P008052','P008053','P008054','P008055','P008056','P008057','P008058','P008059','P008060','P008061','P008062','P008063','P008064','P008065','P008066','P008067','P008068','P008069','P008070','P008071','P008072','P008073','P008074','P008075','P008076','P008077','P008078','P008079')
-totpopagenames <-c("MaleUnder1yr","Male1yr","Male2yr","Male3yr","Male4yr","Male5yr","Male6yr","Male7yr","Male8yr","Male9yr","Male10yr","Male11yr","Male12yr","Male13yr","Male14yr","Male15yr","Male16yr","Male17yr","Male18yr","Male19yr","Male20yr","Male21yr","Male22to24","Male25to29","Male30to34","Male35to39","Male40to44","Male45to49","Male50to54","Male55to59","Male60to61","Male62to64","Male65to66","Male67to69","Male70to74","Male75to79","Male80to84","MaleOver85","FemaleUnder1","Female1yr", "Female2yr","Female3yr","Female4yr","Female5yr","Female6yr","Female7yr","Female8yr","Female9yr","Female10yr","Female11yr","Female12yr","Female13yr","Female14yr","Female15yr","Female16yr","Female17","Female18","Female19","Female20yr","Female21yr","Female22to24","Female25to29","Female30to34","Female35to39","Female40to44","Female45to49","Female50to54","Female55to59","Female60to61","Female62to64","Female65to66","Female67to69","Female70to74","Female75to79","Female80to84","FemaleOver85")
-totpopageRaw <-wholivesdatapull2000(totpopagevars,totpopagenames)
-save(totpopageRaw, file = "inputs/totpopage2000.RData")
+# Need total population 
+totpopage2000vars <-c('P008001','P008003','P008004','P008005','P008006','P008007','P008008','P008009','P008010','P008011','P008012','P008013','P008014','P008015','P008016','P008017','P008018','P008019','P008020','P008021','P008022','P008023','P008024','P008025','P008026','P008027','P008028','P008029','P008030','P008031','P008032','P008033','P008034','P008035','P008036','P008037','P008038','P008039','P008040','P008042','P008043','P008044','P008045','P008046','P008047','P008048','P008049','P008050','P008051','P008052','P008053','P008054','P008055','P008056','P008057','P008058','P008059','P008060','P008061','P008062','P008063','P008064','P008065','P008066','P008067','P008068','P008069','P008070','P008071','P008072','P008073','P008074','P008075','P008076','P008077','P008078','P008079')
+totpopage2000names <-c("totalsexbyage","MaleUnder1yr","Male1yr","Male2yr","Male3yr","Male4yr","Male5yr","Male6yr","Male7yr","Male8yr","Male9yr","Male10yr","Male11yr","Male12yr","Male13yr","Male14yr","Male15yr","Male16yr","Male17yr","Male18yr","Male19yr","Male20yr","Male21yr","Male22to24","Male25to29","Male30to34","Male35to39","Male40to44","Male45to49","Male50to54","Male55to59","Male60to61","Male62to64","Male65to66","Male67to69","Male70to74","Male75to79","Male80to84","MaleOver85","FemaleUnder1","Female1yr", "Female2yr","Female3yr","Female4yr","Female5yr","Female6yr","Female7yr","Female8yr","Female9yr","Female10yr","Female11yr","Female12yr","Female13yr","Female14yr","Female15yr","Female16yr","Female17yr","Female18yr","Female19yr","Female20yr","Female21yr","Female22to24","Female25to29","Female30to34","Female35to39","Female40to44","Female45to49","Female50to54","Female55to59","Female60to61","Female62to64","Female65to66","Female67to69","Female70to74","Female75to79","Female80to84","FemaleOver85")
+totpopage2000Raw <-wholivesdatapull2000(totpopage2000vars,totpopage2000names)
+save(totpopage2000Raw, file = "inputs/totpopage2000.RData")
 
 
 # https://www2.census.gov/acs2004/Core_Tables/
@@ -1261,189 +1261,3 @@ RacepopestRaw <- rbind(Historic_popestRaw, Racepopest20, Racepopest23) %>%
   mutate(place = "Metro")
 
 save(RacepopestRaw, file = "inputs/RacepopestRaw.RData")
-
-
-
-
-
-
-
-
-
-################
-
-# ###2019 update - saving in case we get access to the API again
-# 
-# popestVarsAGE <- c("POP", "GEO_ID", "AGEGROUP", "DATE_DESC")
-# 
-# popestVarsRACE <- c("POP", "GEO_ID", "RACE", "HISP", "DATE_DESC")
-# 
-# 
-# # Age codes for joining later
-# ageGroupCodeName <-
-#   c("Total",
-#     "Under 5 years",
-#     "5 to 9",
-#     "10 to 14",
-#     "15 to 19",
-#     "20 to 24",
-#     "25 to 29",
-#     "30 to 34",
-#     "35 to 39",
-#     "40 to 44",
-#     "45 to 49",
-#     "50 to 54",
-#     "55 to 59",
-#     "60 to 64",
-#     "65 to 69",
-#     "70 to 74",
-#     "75 to 79",
-#     "80 to 84",
-#     "85 plus",
-#     "Under 18 years",
-#     "5 to 13 years",
-#     "14 to 17 years",
-#     "18 to 64 years",
-#     "18 to 24 years",
-#     "25 to 44 years",
-#     "45 to 64 years",
-#     "65 years and over",
-#     "85 years and over",
-#     "16 years and over",
-#     "18 years and over",
-#     "15 to 44 years",
-#     "Median age (years)")
-# ageGroupCode <- data.frame(AGEGROUP=as.character(0:31),ageGroupCodeName)
-# 
-# # Race codes for joining later
-# # See PEPSR6H and PEPSR5H on Am FactFinder, verified match for Orleans Parish
-# raceCodeName <-
-#   c("Total",
-#     "White alone",
-#     "Black or African American alone",
-#     "American Indian and Alaska Native alone",
-#     "Asian alone",
-#     "Native Hawaiian and Other Pacific Islander alone",
-#     "Two or more races",
-#     "White combo",
-#     "Black or African American combo",
-#     "American Indian and Alaska Native combo",
-#     "Asian combo",
-#     "Native Hawaiian and Other Pacific Islander combo")
-# raceCode <- data.frame(RACE=as.character(0:11),raceCodeName)
-# 
-# 
-# 
-# hispCodeName <- c("Total","Not Hispanic","Hispanic")
-# hispCode <- data.frame(HISP=as.character(0:2),hispCodeName)
-# 
-
-# 
-# 
-# 
-# 
-# # Pull data age
-# 
-# parish_ageEstimates <- getCensus(name = "pep/charagegroups",
-#                                  vintage = 2019,
-#                                  key = mycensuskey,
-#                                  vars = popestVarsAGE,
-#                                  region = mycounties,
-#                                  regionin = "state:22")
-# 
-# state_ageEstimates <- getCensus(name = "pep/charagegroups",
-#                                 vintage = 2019,
-#                                 key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
-#                                 vars = popestVarsAGE ,
-#                                 region = "state:22")
-# 
-# usa_ageEstimates  <- getCensus(name = "pep/charagegroups",
-#                                vintage = 2019,
-#                                key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
-#                                vars = popestVarsAGE ,
-#                                region = "us:1")
-# 
-# dfage <- parish_ageEstimates %>% bind_rows(state_ageEstimates) %>% bind_rows(usa_ageEstimates) # Bind rows for counties, metro, state, usa
-# 
-# rm(parish_ageEstimates, state_ageEstimates, usa_ageEstimates)  # remove large objects from environment
-# 
-# dfage <- dfage %>%
-#   left_join(ageGroupCode) %>%
-#   mutate(place = GEO_ID) %>%
-#   mutate(POP = as.numeric(POP))
-# 
-# dfage <- dfage %>%
-#   select(place, DATE_DESC, ageGroupCodeName, POP) %>%
-#   rename(age = ageGroupCodeName,
-#          population = POP,
-#          date = DATE_DESC) %>%
-#   mutate(raceSimple = "Total",
-#           race = "Total",
-#           hisp= "Total")
-
-
-
-
-
-
-# # Pull data race
-# 
-# parish_raceEstimates <- getCensus(name = "pep/charagegroups",
-#                                   vintage = 2019,
-#                                   key = mycensuskey,
-#                                   vars = popestVarsRACE,
-#                                   region = mycounties,
-#                                   regionin = "state:22")
-# 
-# state_raceEstimates <- getCensus(name = "pep/charagegroups",
-#                                  vintage = 2019,
-#                                  key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
-#                                  vars = popestVarsRACE,
-#                                  region = "state:22")
-# 
-# usa_raceEstimates  <- getCensus(name = "pep/charagegroups",
-#                                 vintage = 2019,
-#                                 key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
-#                                 vars = popestVarsRACE,
-#                                 region = "us:1")
-# 
-# dfrace <- parish_raceEstimates %>% bind_rows(state_raceEstimates) %>% bind_rows(usa_raceEstimates) # Bind rows for counties, metro, state, usa
-# 
-# rm(parish_raceEstimates, state_raceEstimates, usa_raceEstimates)  # remove large objects from environment
-# 
-# dfrace <- dfrace %>%
-#   left_join(raceCode) %>%
-#   left_join(hispCode) %>%
-#   mutate(place = GEO_ID) %>%
-#   mutate(POP = as.numeric(POP))
-# 
-# dfrace <- dfrace %>%
-#   select(place, DATE_DESC, hispCodeName,  raceCodeName, POP) %>%
-#   rename(hisp = hispCodeName,
-#          race = raceCodeName,
-#          population = POP,
-#          date = DATE_DESC) %>%
-#   filter(race %in% c("Total",
-#                      "White alone",
-#                      "Black or African American alone",
-#                      "Asian alone")) %>%
-#   mutate(raceSimple = NA, # make variable base on race alone that matches Who Lives races.
-#          raceSimple = ifelse(race == "Total" & hisp == "Total", "Total", raceSimple),
-#          raceSimple = ifelse(race == "White alone" & hisp == "Not Hispanic", "White", raceSimple),
-#          raceSimple = ifelse(race == "Black or African American alone" & hisp == "Not Hispanic", "Black", raceSimple),
-#          raceSimple = ifelse(race == "Asian alone" & hisp == "Not Hispanic", "Asian", raceSimple),
-#          raceSimple = ifelse(race == "Total" & hisp == "Hispanic", "Hispanic", raceSimple))  %>%
-#   filter(!is.na(raceSimple)) %>% # Filter out other races
-#   mutate(age = "Total")
-# 
-# 
-# 
-# 
-# 
-# allparishesRawx <- bind_rows(dfrace, dfage) %>%
-#   distinct()
-# 
-# save(allparishesRawx, file = "inputs/allparishesRawx.Rdata")
-
-
-
