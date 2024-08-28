@@ -48,6 +48,8 @@ medageRaw <- getCensus("acs/acs1",
 names(medageRaw) <- c("metro", "medage")
 save(medageRaw, file = "inputs/medageRaw.RData")
 
+medagevars2000 <- c("")
+
 #Single-person households
 
 singvars <- c('B11001_001E','B11001_001M','B11001_008E','B11001_008M')
@@ -55,7 +57,10 @@ singnames <- c("TotalHH","TotalMOE","SingleHH","SingleHHMOE")
 singRaw <- wholivesdatapull(singvars, singnames)
 save(singRaw, file = "inputs/singRaw.RData")
 
-sing2000vars <- 
+singvars2000 <- c('P012001','P010002')
+singnames2000 <- c("TotalHH","SingleHH")
+singRaw2000 <- wholivesdatapull2000(singvars2000,singnames2000)
+save(singRaw2000,file = "inputs/singRaw2000.RData")
 
 
 #Less than a high school degree, adults 25 and older
@@ -65,6 +70,12 @@ hsnames <- c("Total", "TotalMOE", "Male9", "Male9MOE", "Male9to12", "Male9to12MO
 hsRaw <- wholivesdatapull(hsvars, hsnames)
 save(hsRaw, file = "inputs/hsRaw.RData")
 
+hsvars2000 <- c('P037001','P037003','P037004','P037005',"P037006",'P037007','P037008','P037009','P037010','P037020','P037021','P037022','P037023','P037024','P037025','P037026','P037027')
+hsnames2000 <- c("Total","MaleNS","Male4","Male5to6","Male7to8","Male9","Male10","Male11","Male12ND","FemaleNS","Female4","Female5to6","Female7to8","Female9","Female10","Female11", "Female12ND")
+hsRaw2000 <- wholivesdatapull2000(hsvars2000,hsnames2000)
+save(hsRaw2000,file = "inputs/hsRaw2000.RData")
+
+
 #Bachelor's degree or higher, adults 25 and older
 
 bachvars <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M','C15002_017E','C15002_017M')
@@ -72,12 +83,22 @@ bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  
 bachRaw <- wholivesdatapull(bachvars, bachnames)
 save(bachRaw, file = "inputs/bachRaw.RData")
 
+bachvars2000 <- c('P037001','P037015','P037016','P037017','P037018','P037032','P037033','P037034','P037035')
+bachnames2000 <- c("Total","MaleBach","MaleMasters","MaleProf","MaleDoc","FemaleBach","FemaleMasters","FemaleProf","FemaleDoc")
+bachRaw2000 <- wholivesdatapull2000(bachvars2000,bachnames2000)
+save(bachRaw2000,file = "inputs/bachraw2000.RData")
+
 #Median household income, inflation-adjusted dollars
 
 medhhvars <- c('B19013_001E','B19013_001M')
 medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE")
 medhhRaw <- wholivesdatapull(medhhvars, medhhnames)
 save(medhhRaw, file = "inputs/medhhRaw.RData")
+
+medhhvars2000 <- c('HCT012001')
+medhhames2000 <- c("MedianHHIncome")
+medhhRaw2000 <- wholivesdatapull2000(medhhvars2000,medhhames2000)
+save(medhhRaw2000, file = "inputs/medhhRaw2000.RData")
 
 
 #Internet access
@@ -95,6 +116,12 @@ povnames <- c("Total", "TotalMOE", "BelowPov", "BelowPovMOE")
 povRaw <- wholivesdatapull(povvars, povnames)
 save(povRaw, file = "inputs/povRaw.RData")
 
+povvars2000 <-c('P087001','P087002')
+povnames2000 <-c("Total", "BelowPov")
+povRaw2000 <- wholivesdatapull2000(povvars2000,povnames2000)
+save(povRaw2000,file = "input/povRaw2000.RData")
+
+
 #Children in poverty, population for whom poverty has been determined	
 
 childpovvars <- c('C17001_004E','C17001_004M','C17001_008E','C17001_008M','C17001_013E','C17001_013M','C17001_017E','C17001_017M')
@@ -102,6 +129,10 @@ childpovnames <- c( "BelowPovMaleChild", "BelowPovMaleChildMOE", "BelowPovFemale
 childpovRaw <- wholivesdatapull(childpovvars, childpovnames)
 save(childpovRaw, file = "inputs/childpovRaw.RData")
 
+childpovvars2000 <-c('P087003','P087004','P087005','P087006','P087011','P087012','P087013',	'P087014') 
+childpovnames2000 <-c( "BelowPovUnder5Years","BelowPov5Years","BelowPov6to11Years","BelowPov12to17Years","AbovePovUnder5Years","AbovePov5Years","AbovePov6to11Years","AbovePov12to17")
+childpovRaw2000 <- wholivesdatapull2000(povvars2000,povnames2000)
+save(childpovRaw2000,file = "input/childpovRaw2000.RData")
 
 #Households without access to a vehicle
 
@@ -110,6 +141,11 @@ vehnames <- c("Total","TotalMOE","NoVehAvail","NoVehAvailMOE")
 vehRaw <- wholivesdatapull(vehvars, vehnames)
 save(vehRaw, file = "inputs/vehRaw.RData")
 
+vehvars2000<- c('H044001','H044002','H044010')
+vehnames2000<- c("Total","OwnNoVehAvail","RentNoVehAvail")
+vehRaw2000 <- wholivesdatapull2000(vehvars2000,vehnames2000)
+save(vehRaw2000,file = "inputs/vehRAw2000.RData")
+
 #Population not U.S. citizens at birth
 
 forborvars <- c('C05005_004E','C05005_004M','C05005_007E','C05005_007M','C05005_010E','C05005_010M','C05005_013E','C05005_013M','B01003_001E','B01003_001M')
@@ -117,6 +153,10 @@ forbornames <- c("TotForeign10on","TotForeign10onMOE","TotForeign00to09","TotFor
 forborRaw <- wholivesdatapull(forborvars, forbornames)
 save(forborRaw, file = "inputs/forborRaw.RData")
 
+forborvars2000<- c('P022001','P022002','P022003','P022004','P022005','P022006','P022007','P022008','P022009')
+forbornames2000<- c("Total","TotForeign95to00","TotForegin90to94","TotForegin85to89","TotForeign80to84","TotForegin75to79","TotForeign70to74","TotForegin65to69","TotForeginPre65")
+forborRaw2000<-wholivesdatapull2000(forborvars2000,forbornames2000)
+save
 
 #Population who moved in the past year
 
@@ -124,6 +164,21 @@ mobvars <- c('B07003_001E','B07003_001M','B07003_004E','B07003_004M','B07003_007
 mobnames <- c("Total","TotalMOE","TotSameHouse","TotSameHouseMOE","TotMovedinCty","TotMovedinCtyMOE","TotMovedinState","TotMovedinStateMOE","TotMovedbtwnStates","TotMovedbtwnStatesMOE","TotMovedfromAbroad","TotMovedfromAbroadMOE")
 mobRaw <- wholivesdatapull(mobvars, mobnames)
 save(mobRaw, file = "inputs/mobRaw.RData")
+
+# Total Population by race
+
+totpopracevars<- c('P001001','P006003','P006002','P007010','P007010')
+totpopracenames<-c("Total","TotBlackAlone","TotWhiteAlone","TotHispanicAny","TotAsianAlone")
+totpopraceRaw<-wholivesdatapull2000(totpopracevars,totpopracenames)
+save(totpopraceRaw, file = "inputs/totpoprace2000.Rdata")
+
+# Total Population by Age,*inhales*
+
+totpopagevars <-c('P008003','P008004','P008005','P008006','P008007','P008008','P008009','P008010','P008011','P008012','P008013','P008014','P008015','P008016','P008017','P008018','P008019','P008020','P008021','P008022','P008023','P008024','P008025','P008026','P008027','P008028','P008029','P008030','P008031','P008032','P008033','P008034','P008035','P008036','P008037','P008038','P008039','P008040','P008042','P008043','P008044','P008045','P008046','P008047','P008048','P008049','P008050','P008051','P008052','P008053','P008054','P008055','P008056','P008057','P008058','P008059','P008060','P008061','P008062','P008063','P008064','P008065','P008066','P008067','P008068','P008069','P008070','P008071','P008072','P008073','P008074','P008075','P008076','P008077','P008078','P008079')
+totpopagenames <-c("MaleUnder1yr","Male1yr","Male2yr","Male3yr","Male4yr","Male5yr","Male6yr","Male7yr","Male8yr","Male9yr","Male10yr","Male11yr","Male12yr","Male13yr","Male14yr","Male15yr","Male16yr","Male17yr","Male18yr","Male19yr","Male20yr","Male21yr","Male22to24","Male25to29","Male30to34","Male35to39","Male40to44","Male45to49","Male50to54","Male55to59","Male60to61","Male62to64","Male65to66","Male67to69","Male70to74","Male75to79","Male80to84","MaleOver85","FemaleUnder1","Female1yr", "Female2yr","Female3yr","Female4yr","Female5yr","Female6yr","Female7yr","Female8yr","Female9yr","Female10yr","Female11yr","Female12yr","Female13yr","Female14yr","Female15yr","Female16yr","Female17","Female18","Female19","Female20yr","Female21yr","Female22to24","Female25to29","Female30to34","Female35to39","Female40to44","Female45to49","Female50to54","Female55to59","Female60to61","Female62to64","Female65to66","Female67to69","Female70to74","Female75to79","Female80to84","FemaleOver85")
+totpopageRaw <-wholivesdatapull2000(totpopagevars,totpopagenames)
+save(totpopageRaw, file = "inputs/totpopage2000.RData")
+
 
 # https://www2.census.gov/acs2004/Core_Tables/
 ACScounty_04 <- read_csv("inputs/ACS_data/ACS_2004_050.csv") 
@@ -182,8 +237,8 @@ hoRaw <- wholivesdatapull(hovars, honames)
 save(hoRaw, file = "inputs/hoRaw.RData")
 
 hovars2000 <- c('H004001', 'H004002')
-honames2000 <- c("Total2000", "Owner2000")
-hoRaw2000 <- wholivesdatapull(hovars2000, honames2000, censusname = "dec/sf1", year = 2000) %>% select(-place)
+honames2000 <- c("Total", "Owner")
+hoRaw2000 <- wholivesdatapull2000(hovars2000, honames2000)
 save(hoRaw2000, file = "inputs/hoRaw2000.RData")
 
 #Homeowners without a mortgage
@@ -193,6 +248,11 @@ honomonames <- c("Total","TotalMOE","Mortgage","MortgageMOE","NoMortgage","NoMor
 honomoRaw <- wholivesdatapull(honomovars, honomonames)
 save(honomoRaw, file = "inputs/honomoRaw.RData")
 
+
+honomovars2000 <- c('H098001','H098018')
+honomonames2000 <-c("Total","NoMortgage")
+honomoRaw2000<- wholivesdatapull2000(honomovars2000,honomonames2000)
+save(honomoRaw2000, file = "inputs/honomoRaw2000.RData")
 
 #Renters with severe housing cost burdens
 
@@ -275,26 +335,11 @@ commutenames <- c("Total","TotalMOE","DroveAlone","DroveAloneMOE","Carpool","Car
 commuteRaw <- wholivesdatapull(commutevars, commutenames)
 save(commuteRaw, file = "inputs/commuteRaw.RData")
 
-# 2000 - means of transportation to work, 16+
-#P030
 
-commutevars2000 <- c('P003001','P030001', 'P030003','P030004','P030005','P030011','P030012','P030013','P030014','P030015','P030016')
-commutenames2000 <- c("Totalpop2000","Total2000","DroveAlone2000","Carpool2000","PublicTransit2000","Taxi2000","Motorcycle2000","Bike2000","Walk2000","Other2000","Workhome2000")
-commuteRaw2000 <- wholivesdatapull(commutevars2000, commutenames2000, year = 2000, censusname = "dec/sf3")
-
-#Design factor for this variable is 1.3 for parishes and metro, 1.1 for US
-commuteRaw2000 <- commuteRaw2000 %>%
-  mutate(TotalMOE2000 = moe2000(est = Total2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
-         DroveAloneMOE2000 = moe2000(est = DroveAlone2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
-         CarpoolMOE2000 = moe2000(est = Carpool2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
-         PublicTransitMOE2000 = moe2000(est = PublicTransit2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
-         TaxiMOE2000 = moe2000(est = Taxi2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
-         MotorcycleMOE2000 = moe2000(est = Motorcycle2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
-         BikeMOE2000 = moe2000(est = Bike2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)), 
-         WalkMOE2000 = moe2000(est = Walk2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
-         OtherMOE2000 = moe2000(est = Other2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)),
-         WorkhomeMOE2000 = moe2000(est = Workhome2000, Totalpop2000, designfac = ifelse(placename == "United States", 1.1, 1.3)))
-save(commuteRaw2000, file = "inputs/commuteRaw2000.RData")
+commutevars2000 <- c('P030001', 'P030003','P030004','P030005','P030011','P030012','P030013','P030014','P030015','P030016')
+commutenames2000 <- c("Total","DroveAlone","Carpool","PublicTransit","Taxi","Motorcycle","Bike","Walk","Other","Workhome")
+commuteRaw2000 <- wholivesdatapull2000(commutevars2000, commutenames2000)
+save(commuteRaw2000,file = "inputs/commuteRaw2000.RData")
 
 
 #################################################
