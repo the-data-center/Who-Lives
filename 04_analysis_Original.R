@@ -420,7 +420,7 @@ storage_write_csv(honomoCSV, cont_proj, "who_lives/2024/outputs/honomo.csv")
 load("inputs/rentburRaw.RData")
 rentbur <- rentburRaw %>%
   mutate(#sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value ### ****HT commenting out old values, adding ones I pulled from 2004 ACS
-         #order is "Orleans", "Jefferson", "New Orleans Metro Area", "United States"
+         #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
          sf2004 = c(0.2304765, 0.2019471, 0, 0, 0.2196190),
          sf2004MOE = c(0.044544178, 0.052252324,0, 0, 0.003006082),
          rentburpct = `50orMore`/ (Total - NotComputed),
@@ -442,7 +442,7 @@ storage_write_csv(rentburCSV, cont_proj, "who_lives/2024/outputs/rentbur.csv")
 load("inputs/hoburRaw.RData")
 hobur <- hoburRaw %>%
   mutate(#sf2004=c(0.1620,0.0891,0,0.1134,0.0988), #0 for St. tammany missing value, ### ****HT commenting out old values, adding ones I pulled from 2004 ACS
-         #order is "Orleans", "Jefferson", "New Orleans Metro Area", "United States"
+         #order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
          sf2004 = c(0.13226868, 0.06815970, 0, 0, 0.07895178),
          sf2004MOE = c(0.030880769, 0.025995416, 0, 0, 0.000911579), #getting these numbers from line 154 of data-pull.R
          hoburpct = (`50orMoreMortgage`+`50orMoreNoMortgage`)/(Total - NotComputedMortgage - NotComputedNoMortgage),
@@ -465,7 +465,7 @@ storage_write_csv(hoburCSV, cont_proj, "who_lives/2024/outputs/hobur.csv")
 #Median gross rent, 201* inflation-adjusted dollars
 load("inputs/medrentRaw.RData")
 #sf2004 <- data.frame(sf2004 = cpi04*c(566,654,0,616,694))### ****HT commenting out old values, adding ones I pulled from 2004 ACS
-#order is "Orleans", "Jefferson", "New Orleans Metro Area", "United States"
+#order is "Orleans", "Jefferson", "St. Tammany", "New Orleans Metro Area", "United States"
 
 sf2004 <- data.frame(sf2004 = cpi04 * c(566, 654, 0, 0, 694), # note that these are the exact same as what we already had, just adjusting to 2022 dollars and noting that I have the same estimates for med rent, but not the rent/hoburden percentages.) 
                      sf2004MOE = cpi04 * c(29, 48, 0, 0, 2)) #also noting that I am inflation adjusting the MOES the same way
@@ -603,7 +603,7 @@ storage_write_csv(commuteCSV, cont_proj, "who_lives/2024/outputs/commute.csv")
 # whatever year of estimate that you need: date
 
 orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
-               "St. James Parish", "St. John the Baptist Parish", "Metro", "United States")
+               "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish", "Metro", "United States")
 #allparishesRaw <- load("inputs/allparishesRaw.RData")
 
 #Table 1
@@ -631,7 +631,7 @@ storage_write_csv(AAWhiteHispan, cont_proj, "who_lives/2024/outputs/AAWhiteHispa
 #that's the order that the 2000 numbers are going in.
 ParishDemo2<- allparishesRaw2023 %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist")) %>%
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
   filter(date == "7/1/2023 population estimate") %>%
   filter(age == "Total" & sex == "Total") %>%
   group_by(raceSimple)%>% unique() %>%
@@ -644,7 +644,7 @@ ParishDemo3 <- allparishesRaw2023 %>% filter(PlaceName == "United States") %>%
 
 ParishDemo1<- allparishesRaw2023 %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist",)) %>% arrange((PlaceName)) %>%
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>% arrange((PlaceName)) %>%
   filter(date == "7/1/2023 population estimate") %>%
   filter(age == "Total" & sex == "Total")  %>%
   select(PlaceName, population, raceSimple)  %>%
@@ -656,7 +656,7 @@ ParishDemo1<- allparishesRaw2023 %>%
 ParishDemo <- pivot_wider(ParishDemo1, names_from = raceSimple, values_from = population) %>%
   mutate(PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
                                                   "St. Bernard","St. Charles", "St. James",
-                                                  "St. John the Baptist", "Metro", "United States"))) %>%
+                                                  "St. John the Baptist", "St. Tammany", "Metro", "United States"))) %>%
          mutate(pctwhite = as.numeric(White)/ as.numeric(Total),
          pctblack = as.numeric(Black) / as.numeric(Total),
          pctasian = as.numeric(Asian) / as.numeric(Total),
@@ -709,7 +709,7 @@ BlackPopyears <- allparishesRaw2023 %>%
   filter(age == "Total" & sex == "Total")  %>%
   filter(raceSimple=="Black") %>%
   filter(place %in% c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. Bernard Parish", "St. Charles Parish",
-                          "St. James Parish", "St. John the Baptist Parish"))
+                          "St. James Parish", "St. John the Baptist Parish", "St. Tammany Parish"))
 
 BlackpopM <- blackpopestRaw %>%
   add_row(year = "2000", place= "Orleans", POP=323392)  %>%
@@ -722,11 +722,12 @@ storage_write_csv(BlackpopM, cont_proj, "who_lives/2024/outputs/BlackpopM.csv")
 
 HispanicPop <- allparishesRaw2023 %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist")) %>%
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
   filter(age == "Total" & sex == "Total")  %>%
   filter(raceSimple=="Hispanic")%>%
   select(PlaceName, population) %>%
   mutate(est2000 = 0,
+         est2000 = ifelse(PlaceName == "St. Tammany", 4737, est2000),
          est2000 = ifelse(PlaceName == "St. John the Baptist", 1230, est2000),
          est2000 = ifelse(PlaceName == "St. James", 130, est2000),
          est2000 = ifelse(PlaceName == "St. Charles", 1346, est2000),
@@ -741,7 +742,7 @@ HispanicPopyears <- allparishesRaw2023 %>%
   filter(age == "Total" & sex == "Total") %>%
   filter(raceSimple=="Hispanic") %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist")
+                          "St. James", "St. John the Baptist", "St. Tammany"))
 
 HispanicPopyears <- HispanicPopyears %>%
   select(PlaceName, date, population) %>%
@@ -753,9 +754,10 @@ load("inputs/hisppopestRaw.RData")
 HISPpopM <- hisppopestRaw %>%
   mutate(year = as.numeric(year)) %>%
   filter(place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist")) %>%
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
   add_row(year = 2000, place= "Orleans", POP=14826) %>%
   add_row(year = 2000, place= "Jefferson", POP=32418) %>%
+  add_row(year = 2000, place= "St. Tammany", POP=4737) %>%
   add_row(year = 2000, place= "Plaquemines", POP=433) %>%
   add_row(year = 2000, place= "St. Bernard", POP=3425) %>%
   add_row(year = 2000, place= "St. Charles", POP=1346) %>%
@@ -785,7 +787,7 @@ load("inputs/medageRaw.RData")
 
 orderAge <- c(rep("Jefferson",18),rep("Orleans", 18),rep("Plaquemines",18),
               rep("St. Bernard", 18),rep("St. Charles", 18),rep("St. James", 18),
-              rep("St. John The Baptist", 18))
+              rep("St. John The Baptist", 18),rep("St. Tammany",18))
 Agepop <- allparishesRaw2023 %>%
   filter(age== "Under 5 years" | age== "5 to 9"| age== "10 to 14" | age== "15 to 19"|
            age=="20 to 24"| age== "25 to 29"| age== "30 to 34"| age== "35 to 39"| age== "40 to 44"
@@ -795,10 +797,10 @@ Agepop <- allparishesRaw2023 %>%
   filter(sex=="Total")%>%
   filter(date == "7/1/2023 population estimate") %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist") %>%
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
   arrange(factor(PlaceName, levels = c("Jefferson","Orleans","Plaquemines",
                  "St. Bernard","St. Charles","St. James",
-                 "St. John the Baptist"))) %>%
+                 "St. John the Baptist","St. Tammany"))) %>%
   select(age, PlaceName, population) %>%
  mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,
  37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,
@@ -832,7 +834,7 @@ under18pars<-allparishesRaw2023 %>%
   filter(sex=="Total")%>%
   filter(date == "7/1/2023 population estimate") %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist")) %>%
+                          "St. James", "St. John the Baptist", "St. Tammany")) %>%
   select(age, PlaceName, population)
 
 #Creating metro
@@ -845,7 +847,7 @@ under18metro$PlaceName <- "Metro"
 popunder18 <-bind_rows(under18pars,under18metro) %>%
   spread(., age, population) %>%
   mutate(under18 = Total-`18 years and over`) %>%
-  filter(PlaceName == "Orleans" | PlaceName =="Jefferson" | PlaceName == "Metro")%>%
+  filter(PlaceName == "Orleans" | PlaceName =="Jefferson" | PlaceName == "St. Tammany" | PlaceName == "Metro")%>%
   select(PlaceName, under18) %>%
   mutate(est2000=c(115255,358092,129408,54399))
 
@@ -875,11 +877,12 @@ medHHincProspInd <- read_csv("inputs/indicator expansion drafts/ProspInd_tables_
 load("inputs/medhhRaw_exp.RData")
 medhh_exp <- medhhRaw_exp  %>%
   mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
          placenames = ifelse(place == "051", "Jefferson", placenames),
          placenames = ifelse(place == "071", "Orleans", placenames),
          placenames = ifelse(place == "35380","Metro",placenames),
          placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
-  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
   select(-place, -placenames, -placename, -contains("MOE")) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val")
 
@@ -974,7 +977,7 @@ medhh_stat_race <- medhh.race_stattest %>% select(place, placename, (contains("s
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 medhh_with_stats <- medhh_stat_all %>% left_join(medhh_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
@@ -982,7 +985,7 @@ medhh_with_stats <- medhh_stat_all %>% left_join(medhh_stat_race, by = "place") 
 medhh.totals <- medhh_stat_all %>% left_join(medhh_stat_race, by = "place") %>% unique() %>%
   filter(race == "All") %>%
   mutate(var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")),
-         placename.fac = factor(placename.y, levels = c("Orleans ◊", "Jefferson ◊", "Metro ◊", "United States")))
+         placename.fac = factor(placename.y, levels = c("Orleans ◊", "Jefferson ◊", "St. Tammany ◊", "Metro ◊", "United States")))
 
 medhh.totals_CSV <- medhh.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
   mutate(placename.x = ifelse(placename.x == "United States", "U.S.", placename.x)) %>%
@@ -1075,11 +1078,12 @@ bach_exp <- bachRaw_exp %>%
          moeprop_hisp = moeprop(y = Total_hisp, moex = moeagg_hisp, moey = TotalMOE_hisp, p = pctbach_hisp))%>%
   select(place,contains("pct")) %>%
   mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
          placenames = ifelse(place == "051", "Jefferson", placenames),
          placenames = ifelse(place == "071", "Orleans", placenames),
          placenames = ifelse(place == "35380","Metro",placenames),
          placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
-  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
@@ -1140,14 +1144,14 @@ bach_stat_race <- bach.race_stattest %>%
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 bach_with_stats <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans", "Jefferson*", "Metro*", "United States")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
 bach.totals <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>%
   filter(race == "All") %>%
   mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
-         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro", "United States")))
+         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")))
 
 bach.race <- bach_exp %>%
   filter(var!="pctbach") %>%
@@ -1358,11 +1362,12 @@ pov_exp <- povRaw_exp %>%
   )%>%
   select(place,contains("pct")) %>%
   mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
          placenames = ifelse(place == "051", "Jefferson", placenames),
          placenames = ifelse(place == "071", "Orleans", placenames),
          placenames = ifelse(place == "35380","Metro",placenames),
          placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
-  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
@@ -1432,7 +1437,7 @@ pov_stat_race <- pov_stattest %>% select(place, placename, (contains("sig") & !c
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 pov_with_stats <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
@@ -1440,7 +1445,7 @@ pov_with_stats <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% un
 pov.totals <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% unique() %>% 
   filter(race == "All") %>%
   mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
-         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")))
+         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")))
 
 pov.race <- pov_exp %>%
   filter(var != "pctpov") %>%
@@ -1630,11 +1635,12 @@ childpov_exp <- childpovRaw_exp %>%
   )%>%
   select(place,contains("pct")) %>%
   mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
          placenames = ifelse(place == "051", "Jefferson", placenames),
          placenames = ifelse(place == "071", "Orleans", placenames),
          placenames = ifelse(place == "35380","Metro",placenames),
          placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
-  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
@@ -1714,7 +1720,7 @@ childpov_stat_race <- childpov_stattest %>% select(place, placename, (contains("
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 childpov_with_stats <- childpov_stat_all %>% left_join(childpov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States*")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States*")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 ###
@@ -1723,7 +1729,7 @@ childpov_with_stats <- childpov_stat_all %>% left_join(childpov_stat_race, by = 
 childpov.totals <- childpov_stat_all %>% left_join(childpov_stat_race, by = "place") %>% unique() %>% 
   filter(race == "All") %>%
   mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
-         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States*")))
+         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States*")))
 
 childpov.race <- childpov_exp %>%
   filter(var != "pctBelowChildPov") %>%
@@ -1816,11 +1822,12 @@ ho_exp <- hoRaw_exp %>%
   )%>%
   select(place,contains("pct")) %>%
   mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
          placenames = ifelse(place == "051", "Jefferson", placenames),
          placenames = ifelse(place == "071", "Orleans", placenames),
          placenames = ifelse(place == "35380","Metro",placenames),
          placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
-  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson",'Metro", "U.S."))) %>%
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
@@ -1915,13 +1922,13 @@ ho_stat_race <- ho_stattest %>% select(place, placename, (contains("sig") & !con
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 ho_with_stats <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 ho.totals <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% 
   filter(race == "All") %>%
   mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
-         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro", "United States")))
+         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")))
 
 ho.totals_CSV <- ho.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
   mutate(placename.x = ifelse(placename.x == "United States", "U.S.", placename.x)) %>%
@@ -1938,7 +1945,7 @@ storage_write_csv(ho.race_CSV, cont_proj, "who_lives/2024/outputs/horace.csv")
 ho.totals <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% 
   filter(race == "All") %>%
   mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
-         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro", "United States")))
+         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "St. Tammany*", "Metro", "United States")))
 
 ho.hist_stattest <- 
   left_join((homeownership.hist %>% filter(Year == 2000) %>% transmute(est2000 = val, race = var)), (homeownership.hist %>% filter(Year == 2010) %>% transmute(est2010 = val, race = var))) %>%
