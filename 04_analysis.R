@@ -763,7 +763,7 @@ HISPpopM <- hisppopestRaw %>%
   add_row(year = 2000, place= "St. John the Baptist", POP=1230) %>%
   select(place, year, POP) %>% unique()
 HISPpopM_CSV <- HISPpopM %>% pivot_wider(names_from = "place", values_from = POP) %>%
-  select(year, Orleans, Jefferson, Plaquemines, `St. Bernard`, `St. Charles`, `St. James`, `St. John the Baptist`, `St. Tammany`) %>%
+  select(year, Orleans, Jefferson, Plaquemines, `St. Bernard`, `St. Charles`, `St. James`, `St. John the Baptist`) %>%
   arrange(year)
 write.csv(HISPpopM_CSV, "outputs/spreadsheets/HISPpopM.csv")
 storage_write_csv(HISPpopM_CSV, cont_proj, "who_lives/2024/outputs/HISPpopM_CSV.csv")
@@ -816,8 +816,7 @@ Agepop <- allparishesRaw2023 %>%
                                                                                                 `est00_St. Bernard`, `est22_St. Bernard`,
                                                                                                 `est00_St. Charles`, `est22_St. Charles`,
                                                                                                 `est00_St. James`, `est22_St. James`,
-                                                                                                `est00_St. John the Baptist`, `est22_St. John the Baptist`,
-                                                                                                `est00_St. Tammany`, `est22_St. Tammany`)
+                                                                                                `est00_St. John the Baptist`, `est22_St. John the Baptist`)
 write.csv(Agepop_csv, "outputs/spreadsheets/Agepop.csv")
 storage_write_csv(Agepop_csv, cont_proj, "who_lives/2024/outputs/Agepop.csv")
 
@@ -856,7 +855,7 @@ popunder18CSV <- popunder18 %>%
          year = 2023) %>%
   select(-PlaceName) %>%
 pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value") %>%
-  select(`Orleans-est2000`, `Orleans-under18`, `Jefferson-est2000`, `Jefferson-under18`, `St. Tammany-est2000`, `St. Tammany-under18`, `Metro-est2000`, `Metro-under18`) 
+  select(`Orleans-est2000`, `Orleans-under18`, `Jefferson-est2000`, `Jefferson-under18`, `Metro-est2000`, `Metro-under18`) 
 write.csv(popunder18CSV, "outputs/spreadsheets/under18.csv")
 storage_write_csv(popunder18CSV, cont_proj, "who_lives/2024/outputs/under18.csv")
 
