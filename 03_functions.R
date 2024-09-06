@@ -31,7 +31,7 @@ wholivesdatapull <- function(variables, names = variables, year = 2022, censusna
 #creating a separate data pull for 2000 so that we can manually match the metro parish estimates and include stat testing
 #WL datapull with error
 
-wholivesdatapull2000 <- function(variables, names = variables){
+wholivesdatapull2000 <- function(variables, names = variables, universe = "persons", error = TRUE){
   censuskey = "530ce361defc2c476e5b5d5626d224d8354b9b9a"
   parishes <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = "county:071,051", regionin = "state:22") 
   parishes$state = NULL  #state column pulled automatically & needs to be deleted
@@ -39,13 +39,40 @@ wholivesdatapull2000 <- function(variables, names = variables){
   metro <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = "county:071,051,075,087,089,093,095", regionin = "state:22")
   metro <- metro %>% select(-state,-county) %>% summarize(across(everything(), sum)) %>% mutate(county = "MSA_2023") %>% relocate("county")
   
+  if (universe == "persons") {
+    parish_totpop <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = "P001001", region = "county:071,051", regionin = "state:22") %>% select(-state) %>% rename(POP = P001001)
+    metro_totpop <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = "P001001", region = "county:071,051,075,087,089,093,095", regionin = "state:22") %>% select(-state,-county) %>% summarize(across(everything(), sum)) %>% mutate(county = "MSA_2023") %>% rename(POP = P001001) %>% relocate("county")
+    us_totpop <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = "P001001", region = "us:1") %>% rename(county = us) %>% rename(POP = P001001)
+    
+  }
+  
+  if (universe == "households") {
+    parish_totpop <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = "H001001", region = "county:071,051", regionin = "state:22") %>% select(-state) %>% rename(POP = H001001)
+    metro_totpop <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = "H001001", region = "county:071,051,075,087,089,093,095", regionin = "state:22") %>% select(-state,-county) %>% summarize(across(everything(), sum)) %>% mutate(county = "MSA_2023") %>% rename(POP = H001001) %>% relocate("county")
+    us_totpop <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = "H001001", region = "us:1") %>% rename(county = us) %>% rename(POP = H001001)
+  }
+  
+  parishes <- parishes %>% left_join(parish_totpop)
+  metro <- metro %>% left_join(metro_totpop)
   
   LA_data <- rbind(parishes, metro)
-  LA_data <- error2000(LA_data, names, "LA")
+  if(error == TRUE) {
+    LA_data <- error2000(LA_data, names, "LA")
+  } else {
+    names(LA_data) <- c("place", names)
+  }
+  
   
   us <-  getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = "us:1") %>% rename(county = us)
+  us <- us %>% left_join(us_totpop)
   
-  US_data <- error2000(us, names, "US")
+  if (error == TRUE) {
+    US_data <- error2000(us, names, "US")
+  } else {
+    names(us) <- c("place",names)
+    US_data <-us
+  }
+  
   
   df <- switch(rbind(LA_data, US_data))
   df <- df %>% mutate(placename = case_when(place == "051" ~ "Jefferson",
@@ -59,26 +86,24 @@ wholivesdatapull2000 <- function(variables, names = variables){
 error2000 <- function(data2000, names, geo_df){
   
   names_2000 <- paste(names, "2000", sep = "_")
-  names_2000 <- c("place", names_2000)
+  names_2000 <- c("place", names_2000, "POP")
   names(names_2000) <- colnames(data2000) 
   
   if(geo_df == "LA"){
     
     df <- data2000 %>%
       pivot_longer(cols = -county, names_to = "var", values_to = "val") %>% 
-      mutate(var_sum = case_when(str_sub(var, -3, -1) == "001" ~ "total",
+      mutate(var_sum = case_when(var == "POP" ~ "pop",
                                  T ~ str_sub(var, 1, -4))) %>%
       left_join(Census2000_designfac, by = c("var_sum" = "table_name"))
     
-    df_totals <- df %>% filter(var_sum == "total") %>% select(county, total = val)
+    df_totals <- df %>% filter(var_sum == "pop") %>% pivot_wider(names_from = var, values_from = val) %>% select(-c(var_sum, LA_df, US_df))
     
-    data_witherror <- df %>% filter(var_sum != "total") %>% left_join(df_totals, by = "county") %>% 
-      mutate(MOE = moe2000(val, total, LA_df)) %>% 
+    data_witherror <- df %>% filter(var_sum != "pop") %>% left_join(df_totals, by = "county") %>% 
+      mutate(MOE = moe2000(val, POP, LA_df)) %>% 
       pivot_longer(cols = c(val, MOE), names_to = "var_type", values_to = "val") %>%
       pivot_wider(names_from = c(var, var_type), names_sep = "", values_from = val) %>%
-      select(-c(var_sum, LA_df, US_df)) %>%
-      mutate(totalMOE = 0) %>%
-      relocate(totalMOE, .after = total)
+      select(-c(var_sum, LA_df, US_df)) 
     
   }
   
@@ -86,26 +111,24 @@ error2000 <- function(data2000, names, geo_df){
     
     df <- data2000 %>%
       pivot_longer(cols = -county, names_to = "var", values_to = "val") %>% 
-      mutate(var_sum = case_when(str_sub(var, -3, -1) == "001" ~ "total",
+      mutate(var_sum = case_when(var == "POP" ~ "pop",
                                  T ~ str_sub(var, 1, -4))) %>%
       left_join(Census2000_designfac, by = c("var_sum" = "table_name"))
     
-    df_totals <- df %>% filter(var_sum == "total") %>% select(county, total = val)
+    df_totals <- df %>% filter(var_sum == "pop") %>% pivot_wider(names_from = var, values_from = val) %>% select(-c(var_sum, LA_df, US_df))
     
-    data_witherror <- df %>% filter(var_sum != "total") %>% left_join(df_totals, by = "county") %>% 
-      mutate(MOE = moe2000(val, total, US_df)) %>% 
+    data_witherror <- df %>% filter(!(var_sum %in% c("total", "pop"))) %>% left_join(df_totals, by = "county") %>% 
+      mutate(MOE = moe2000(val, POP, US_df)) %>% 
       pivot_longer(cols = c(val, MOE), names_to = "var_type", values_to = "val") %>%
       pivot_wider(names_from = c(var, var_type), names_sep = "", values_from = val) %>%
-      select(-c(var_sum, LA_df, US_df)) %>%
-      mutate(totalMOE = 0) %>%
-      relocate(totalMOE, .after = total)
+      select(-c(var_sum, LA_df, US_df)) 
     
   }
   
   colnames_vec <- colnames(data_witherror) %>%
     str_c(collapse = " ") %>%
     str_replace_all(c(names_2000)) %>%
-    str_replace_all(c("total" = as.character(names_2000[2]))) %>% 
+    #str_replace_all(c("total" = as.character(names_2000[2]))) %>% 
     str_replace_all(c("val" = "")) %>%
     str_split(" ")
   
@@ -193,7 +216,7 @@ switch <- function(dataframe){
 ## calculates MOE for 2000 STF3 files.
 ## Formula on pg954 of documentation, table A "Unadjusted Standard Error for Estimated Totals"
 ## This is only for estimate totals and percentages.  Medians and sums will have to be done differently!!!***
-## N = population
+## N = population of the geography
 ## Design factor table not found, so until we multiply by design factor, it's unadjusted std error.
 ## critical value for ACS is z = 1.645 (they use 90% CI)
 moe2000 <- function(est, n, designfac = 1){
