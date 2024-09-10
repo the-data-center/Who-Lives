@@ -63,7 +63,7 @@ ParishDemoforGraphic <- ParishDemo %>%
   filter(PlaceName != "Louisiana") %>%
   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "Plaquemines",
                                                        "St. Bernard","St. Charles", "St. James",
-                                                       "St. John the Baptist", "Metro", "United States"))) %>%
+                                                       "St. John the Baptist", "St. Tammany", "Metro", "United States"))) %>%
   gather(key = variable, value = value, contains("pct"), contains("2000")) %>%
   mutate(description  = NA,
          description = ifelse(grepl("pct",variable), yearPEP, description),     #if variable contains 'pct'
@@ -128,7 +128,7 @@ AAhistGraphic <- AAhistorical %>%
 
 ### PEP ###
 HispanicPopforGraphic  <- HispanicPop %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "Plaquemines",
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "St. Tammany", "Plaquemines",
                                                        "St. Bernard","St. Charles", "St. James", "St. John the Baptist"))) %>%
   gather(-PlaceName,-PlaceName.fac,key = variable, value = value) %>%
   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char)) %>%
@@ -165,9 +165,9 @@ HispanicPopGraphic <- HispanicPopforGraphic %>%
 ## old graph code:
 # HispanpopYearsforGraphic <- HISPpopM  %>%
 #   filter(place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-#                           "St. James", "St. John the Baptist")) %>%
+#                           "St. James", "St. John the Baptist", "St. Tammany")) %>%
 #   mutate(PlaceName.fac = factor(.$place,levels = c("St. James", "Plaquemines", "St. John the Baptist",
-#                                                        "St. Charles", "St. Bernard", "Orleans", "Jefferson"))) %>%
+#                                                        "St. Charles", "St. Bernard", "St. Tammany", "Orleans", "Jefferson"))) %>%
 # add_row(year = 2001, PlaceName.fac = "Jefferson", POP = 0) %>%
 #   add_row(year = 2002, PlaceName.fac = "Jefferson", POP = 0) %>%
 #   add_row(year = 2003, PlaceName.fac = "Jefferson", POP = 0) %>%
@@ -206,9 +206,9 @@ HispanicPopGraphic <- HispanicPopforGraphic %>%
 HispanpopYearsforGraphic <- HISPpopM %>%
   filter(year %in% c(2000, 2010, 2020, 2023) &
            place %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                        "St. James", "St. John the Baptist")) %>%
+                        "St. James", "St. John the Baptist", "St. Tammany")) %>%
     mutate(PlaceName.fac = factor(.$place,levels = c("St. James", "Plaquemines", "St. John the Baptist",
-                                                     "St. Charles", "St. Bernard","Orleans", "Jefferson")))
+                                                     "St. Charles", "St. Bernard", "St. Tammany", "Orleans", "Jefferson")))
     
 chart.HispanpopYears.allparishes <- ggplot(HispanpopYearsforGraphic, aes(factor(year), as.numeric(POP), fill=place)) +
   geom_bar(stat="identity",
@@ -355,7 +355,7 @@ chart.hispan2018.allparishes <- hispan2018 %>%
 ###7 - Population by age group, 2000
 agepop2000forGraphic <- Agepop %>%
   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
-                                                       "St. Bernard", "Plaquemines","Jefferson","Orleans"))) %>%
+                                                       "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
   mutate(age.fac = factor(.$age, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
 
 chart.agepop2000.allparishes <- agepop2000forGraphic %>%
@@ -392,7 +392,7 @@ chart.agepop2000.allparishes <- agepop2000forGraphic %>%
 ### PEP ###
 agepopCurrentforGraphic <- Agepop %>%
   mutate(PlaceName.fac = factor(.$PlaceName,levels = c("St. John the Baptist","St. James", "St. Charles",
-                                                       "St. Bernard", "Plaquemines","Jefferson","Orleans"))) %>%
+                                                       "St. Bernard", "Plaquemines", "St. Tammany","Jefferson","Orleans"))) %>%
   mutate(age.fac = factor(.$age, levels = c("Under 5 years", "5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 plus")))
 
 chart.agepopCurrent.allparishes <- agepopCurrentforGraphic %>%
@@ -438,7 +438,7 @@ singGraphic <- dodgedBar(sing,
 
 ### PEP ###
 popunder18forGraphic <- popunder18 %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","Metro"))) %>%
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","St. Tammany","Metro"))) %>%
   pivot_longer(cols = c(under18, est2000), names_to = "variable", values_to = "val") %>%
   #gather(PlaceName,-PlaceName.fac, key=variable, value =val) %>%
   mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char))
@@ -490,11 +490,12 @@ medhhGraphic <- dodgedBar(medhh,
 
 dataGraphic <-  medhh %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it  mutate(placenames = NA,
   mutate(placenames = NA,
+         placenames = ifelse(place == "103", "St. Tammany", placenames),
          placenames = ifelse(place == "051", "Jefferson", placenames),
          placenames = ifelse(place == "071", "Orleans", placenames),
          placenames = ifelse(place == "35380","Metro",placenames),
          placenames = ifelse(place == "1", "U.S.", placenames)) %>%
-  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%     #vars of type "factor" allow you to control order
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%     #vars of type "factor" allow you to control order
   select(one_of("census2000", "sf2004", "sf1999"), !!quo(MedianHHIncome), placenames, place.fac, significant) %>%     #one_of() chooses correct comparison vals/!! is the second part or the quo() tool
   gather(-placenames,-place.fac, -significant, key=variable, value=value) %>% 
   mutate(description = as.factor(ifelse(variable == "census2000"|variable =="sf2004"|variable =="sf1999", 1999, year))) %>%     #creates legend info
@@ -534,8 +535,8 @@ intaforGraphic <- inta %>%
   select(place,
          contains('pct'),
          contains('SIG')) %>%
-  mutate(PlaceNames = c("Orleans", "Jefferson", "Metro", "U.S."))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
+  mutate(PlaceNames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
+  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
   gather(key = variable, value = value, contains("pct")) %>% 
   mutate(description = NA,
          description = ifelse(variable == "broadbandpct", "Broadband and all other", description),
@@ -619,8 +620,8 @@ mobforGraphic <- mob %>%
          contains('SIG'),
          contains('pct'),
          contains('2004')) %>%
-  mutate(PlaceNames = c("Orleans", "Jefferson","Metro", "U.S."))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
+  mutate(PlaceNames = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
+  mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
   select(-samehousepct, -sf2004samehouse) %>% 
   gather(key = variable, value = value, contains("pct"), (contains("2004") & !contains("MOE"))) %>% 
   mutate(description = NA,
@@ -732,8 +733,8 @@ medrentGraphic <- dodgedBar(medrent,
 yrbuiltforGraphic <- yrbuilt %>% 
   select(contains('pct'),
          contains('SIG')) %>%
-  mutate(PlaceName = c("Orleans", "Jefferson","Metro", "U.S."))  %>% 
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
+  mutate(PlaceName = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))  %>% 
+  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "St. Tammany", "Metro", "U.S."))) %>%
   gather(-PlaceName, -PlaceName.fac, -contains('SIG'), key=variable, value = value) %>% 
   mutate(description = NA,
          description = ifelse(variable == "orLater1990pct", "1990 or later", description),
