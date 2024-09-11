@@ -342,6 +342,20 @@ commuteRaw2000 <- wholivesdatapull2000(commutevars2000, commutenames2000)
 save(commuteRaw2000,file = "inputs/commuteRaw2000.RData")
 
 
+# Creating a time series for total employment - had to get 1980-2000 from IPUMS NHGIS
+
+employ80 <-  read_csv("inputs/indicator expansion drafts/employment/nhgis0014_csv/nhgis0014_ds107_1980_county.csv")
+hispemploy80  <- read_csv("inputs/indicator expansion drafts/employment/nhgis0015_csv/nhgis0015_ds107_1980_county.csv")
+employ90 <- read_csv("inputs/indicator expansion drafts/employment/nhgis0014_csv/nhgis0014_ds123_1990_county.csv")
+employ00 <- read_csv("inputs/indicator expansion drafts/employment/nhgis0014_csv/nhgis0014_ds151_2000_county.csv")
+employ10  <- read_csv("inputs/indicator expansion drafts/employment/nhgis0013_csv/nhgis0013_ds175_2010_county.csv")
+
+# Employment Rates by race by sex by parish,2022
+
+employmentvars<- c('B23002A_001','B23002A_002','B23002A_041','B23002B_001','B23002B_002','B23002B_041','B23002I_001','B23002I_002','B23002I_041')
+employmentnames<-c("TotalWhite","WhiteMale","WhiteFemale","TotalBlack","BlackMale","BlackFemale","TotalHispanic","HispanicMale","HispanicFemale")
+employmentRaw<-wholivesdatapull(employmentvars,employmentnames)
+
 #################################################
 # # Jenna's expanded data pull
 #################################################
