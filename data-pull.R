@@ -350,23 +350,65 @@ employ90 <- read_csv("inputs/indicator expansion drafts/employment/nhgis0014_csv
 employ00 <- read_csv("inputs/indicator expansion drafts/employment/nhgis0014_csv/nhgis0014_ds151_2000_county.csv")
 employ10  <- read_csv("inputs/indicator expansion drafts/employment/nhgis0013_csv/nhgis0013_ds175_2010_county.csv")
 
-# Employment Rates by race by sex,2022
+# Employment Rates by race by sex, 2022
 
-employmentvars<- c('B23002A_001E', 'B23002A_001M', 'B23002A_002E','B23002A_002M','B23002A_041E','B23002A_041M','B23002B_001E','B23002B_001M','B23002B_002E','B23002B_002M','B23002B_041E','B23002B_041M','B23002I_001E','B23002I_001M','B23002I_002E','B23002I_002M','B23002I_041E','B23002I_041M')
-employmentnames<-c("TotalWhite", "TotalWhiteMOE", "WhiteMale", "WhiteMaleMOE","WhiteFemale","WhiteFemaleMOE","TotalBlack","TotalBlackMOE","BlackMale","BlackMaleMOE","BlackFemale", "BlackFemaleMOE", "TotalHispanic","TotalHispanicMOE", "HispanicMale", "HispanicMaleMOE", "HispanicFemale", "HispanicFemaleMOE")
+employmentvars <- c('B23002A_002E','B23002A_002M', # Total White Males
+                   'B23002A_007E', 'B23002A_007M', 'B23002A_014E', 'B23002A_014M', 'B23002A_021E', 'B23002A_021M', 'B23002A_028E', 'B23002A_028M', 'B23002A_033E', 'B23002A_033M', 'B23002A_038E', 'B23002A_038M', #White Male by age
+                   
+                   'B23002A_041E','B23002A_041M', #Total White females
+                   'B23002A_046E', 'B23002A_046M', 'B23002A_053E', 'B23002A_053M', 'B23002A_060E', 'B23002A_060M', 'B23002A_067E', 'B23002A_067M', 'B23002A_072E', 'B23002A_072M', 'B23002A_077E', 'B23002A_077M', #White Female by age
+                   
+                   
+                   'B23002B_002E','B23002B_002M', #Total Black Males
+                   'B23002B_007E', 'B23002B_007M', 'B23002B_014E', 'B23002B_014M', 'B23002B_021E', 'B23002B_021M', 'B23002B_028E', 'B23002B_028M', 'B23002B_033E', 'B23002B_033M', 'B23002B_038E', 'B23002B_038M',#Black Male by age
+                   
+                   'B23002B_041E','B23002B_041M', #Total Black Females
+                   'B23002B_046E', 'B23002B_046M', 'B23002B_053E', 'B23002B_053M', 'B23002B_060E', 'B23002B_060M', 'B23002B_067E', 'B23002B_067M', 'B23002B_072E', 'B23002B_072M', 'B23002B_077E', 'B23002B_077M', #Black female by age
+                   
+                   'B23002I_002E','B23002I_002M', #Total Hispanic Males
+                   'B23002I_007E', 'B23002I_007M', 'B23002I_014E', 'B23002I_014M', 'B23002I_021E', 'B23002I_021M', 'B23002I_028E', 'B23002I_028M', 'B23002I_033E', 'B23002I_033M', 'B23002I_038E', 'B23002I_038M', #Hispanic male by age
+                   
+                   'B23002I_041E','B23002I_041M', #Total Hispanic females
+                   'B23002I_046E', 'B23002I_046M', 'B23002I_053E', 'B23002I_053M', 'B23002I_060E', 'B23002I_060M', 'B23002I_067E', 'B23002I_067M', 'B23002I_072E', 'B23002I_072M', 'B23002I_077E', 'B23002I_077M' #Hispanic female by age
+                   )
+
+
+employmentnames <- c("WhiteMale", "WhiteMaleMOE",
+                   "WhiteMale16to19", "WhiteMale16to19MOE", "WhiteMale20to24", "WhiteMale20to24MOE", "WhiteMale25to54", "WhiteMale25to54MOE", "WhiteMale55to64", "WhiteMale55to64MOE", "WhiteMale65to69", "WhiteMale65to69MOE", "WhiteMale70plus", "WhiteMale70plusMOE",
+                   
+                   "WhiteFemale","WhiteFemaleMOE",
+                   "WhiteFemale16to19", "WhiteFemale16to19MOE", "WhiteFemale20to24", "WhiteFemale20to24MOE", "WhiteFemale25to54", "WhiteFemale25to54MOE", "WhiteFemale55to64", "WhiteFemale55to64MOE", "WhiteFemale65to69", "WhiteFemale65to69MOE", "WhiteFemale70plus", "WhiteFemale70plusMOE",
+                   
+                   "BlackMale","BlackMaleMOE",
+                   "BlackMale16to19", "BlackMale16to19MOE", "BlackMale20to24", "BlackMale20to24MOE", "BlackMale25to54", "BlackMale25to54MOE", "BlackMale55to64", "BlackMale55to64MOE", "BlackMale65to69", "BlackMale65to69MOE", "BlackMale70plus", "BlackMale70plusMOE",
+                   
+                   "BlackFemale", "BlackFemaleMOE",
+                   "BlackFemale16to19", "BlackFemale16to19MOE", "BlackFemale20to24", "BlackFemale20to24MOE", "BlackFemale25to54", "BlackFemale25to54MOE", "BlackFemale55to64", "BlackFemale55to64MOE", "BlackFemale65to69", "BlackFemale65to69MOE", "BlackFemale70plus", "BlackFemale70plusMOE",
+                   
+                   "HispanicMale", "HispanicMaleMOE",
+                   "HispMale16to19", "HispMale16to19MOE", "HispMale20to24", "HispMale20to24MOE", "HispMale25to54", "HispMale25to54MOE", "HispMale55to64", "HispMale55to64MOE", "HispMale65to69", "HispMale65to69MOE", "HispMale70plus", "HispMale70plusMOE",
+                   
+                   "HispanicFemale", "HispanicFemaleMOE",
+                   "HispFemale16to19", "HispFemale16to19MOE", "HispFemale20to24", "HispFemale20to24MOE", "HispFemale25to54", "HispFemale25to54MOE", "HispFemale55to64", "HispFemale55to64MOE", "HispFemale65to69", "HispFemale65to69MOE", "HispFemale70plus", "HispFemale70plusMOE"
+)
+
+
 employmentRaw<-wholivesdatapull(employmentvars,employmentnames)
+
+save(employmentRaw, file = "inputs/employmentRaw.RData")
+
 
 
 #filter to Orleans Parish and create the columns we need 
 # These feel like analysis.R type steps but I am copying the poverty over time steps #
 
-employ80 <- employpov80 %>% filter(STATEA == "2 2" & COUNTYA == "071") %>% transmute(year = 1980,
+employ80 <- employ80 %>% filter(STATEA == "2 2" & COUNTYA == "071") %>% transmute(year = 1980,
                                                                            totWhitemalepop =  sum(c_across(DHY001:DHY004), na.rm = T),
                                                                            totwhitefemalepop = sum(c_across(DHY001:DHY004), na.rm = T),
                                                                            whiteMaleemploy =  DHY002,
                                                                            whitefemaleemploy = DHY006,
                                                                           totblackmalepop = sum(c_across(DHY009:DHY012), na.rm = T),
-                                                                          totblackfemalepop = sum(c_across(DHY013: DHY016), na.rm = T)                     
+                                                                          totblackfemalepop = sum(c_across(DHY013: DHY016), na.rm = T),                     
                                                                             blackFemaleemploy = DHY014,
                                                                            blackMaleemply = DHY010,
                                                                            pctTotalemploy = totemploy / totpop,
@@ -375,8 +417,8 @@ employ80 <- employpov80 %>% filter(STATEA == "2 2" & COUNTYA == "071") %>% trans
                                                                            pctBfemale = DHY014 / totpop,
                                                                            pctBMale = DHY010 / totpop) %>% pivot_longer(cols = pctTotalpov:pctBlackpov, values_to = "val") %>% select(year, val, name)
 
-hispemploy80 <- hisppov80 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1980,
-                                                                                   totpop = sum(c_across(DHZ001:DHZ008)   
+hispemploy80 <- hispemploy80 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1980,
+                                                                                   totpop = sum(c_across(DHZ001:DHZ008)),   
                                                                                    totHispemploy = DHZ006 + DHZ002,
                                                                                    femaleHispemploy = DHZ006,
                                                                                    maleHispemploy = DHZ002,
