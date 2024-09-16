@@ -350,11 +350,53 @@ employ90 <- read_csv("inputs/indicator expansion drafts/employment/nhgis0014_csv
 employ00 <- read_csv("inputs/indicator expansion drafts/employment/nhgis0014_csv/nhgis0014_ds151_2000_county.csv")
 employ10  <- read_csv("inputs/indicator expansion drafts/employment/nhgis0013_csv/nhgis0013_ds175_2010_county.csv")
 
-# Employment Rates by race by sex by parish,2022
+# Employment Rates by race by sex,2022
 
-employmentvars<- c('B23002A_001','B23002A_002','B23002A_041','B23002B_001','B23002B_002','B23002B_041','B23002I_001','B23002I_002','B23002I_041')
-employmentnames<-c("TotalWhite","WhiteMale","WhiteFemale","TotalBlack","BlackMale","BlackFemale","TotalHispanic","HispanicMale","HispanicFemale")
+employmentvars<- c('B23002A_001E', 'B23002A_001M', 'B23002A_002','B23002A_041','B23002B_001','B23002B_002','B23002B_041','B23002I_001','B23002I_002','B23002I_041')
+employmentnames<-c("TotalWhite", "TotslWhiteMOE", "WhiteMale","WhiteFemale","TotalBlack","BlackMale","BlackFemale","TotalHispanic","HispanicMale","HispanicFemale")
 employmentRaw<-wholivesdatapull(employmentvars,employmentnames)
+
+
+#filter to Orleans Parish and create the columns we need 
+# These feel like analysis.R type steps but I am copying the poverty over time steps #
+
+employ80 <- employpov80 %>% filter(STATEA == "2 2" & COUNTYA == "071") %>% transmute(year = 1980,
+                                                                           totWhitemalepop =  sum(c_across(DHY001:DHY004), na.rm = T),
+                                                                           totwhitefemalepop = sum(c_across(DHY001:DHY004), na.rm = T),
+                                                                           whiteMaleemploy =  DHY002,
+                                                                           whitefemaleemploy = DHY006,
+                                                                          totblackmalepop = sum(c_across(DHY009:DHY012), na.rm = T),
+                                                                          totblackfemalepop = sum(c_across(DHY013: DHY016), na.rm = T)                     
+                                                                            blackFemaleemploy = DHY014,
+                                                                           blackMaleemply = DHY010,
+                                                                           pctTotalemploy = totemploy / totpop,
+                                                                           pctWmaleemploy = DHY002 / totpop,
+                                                                           pctWfemaleempoy = DHY006 / totpop,
+                                                                           pctBfemale = DHY014 / totpop,
+                                                                           pctBMale = DHY010 / totpop) %>% pivot_longer(cols = pctTotalpov:pctBlackpov, values_to = "val") %>% select(year, val, name)
+
+hispemploy80 <- hisppov80 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1980,
+                                                                                   totpop = sum(c_across(DHZ001:DHZ008)   
+                                                                                   totHispemploy = DHZ006 + DHZ002,
+                                                                                   femaleHispemploy = DHZ006,
+                                                                                   maleHispemploy = DHZ002,
+                                                                                   pctHispemploy = totHispemploy / totppop,
+                                                                                   pctHMaleemploy = DHZ002 /totppop,
+                                                                                   pctHFemaleemploy = 
+                                                                                   name = "pctHisppov") %>% select(year, val = pctHisppov, name)
+employ90 <- employ90 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1990,
+                                                                           totpop = sum(c_across(E4J001:E4J016), na.rm = T),
+                                                                           totemploy = EKT011,
+                                                                           blackMaleemploy = E4J010,
+                                                                           blackFemaleemploy = E4J014,
+                                                                           totBlackepop = E4J010 + E4J014,
+                                                                           whiteMalemploy = E4J002 ,
+                                                                           whiteFemaleemploy = E4J006,
+                                                                           pctTotalpov = totemploy / totpop,
+                                                                           pctWhitepov = Whitepov / totWhitepop,
+                                                                           pctBlackpov = Blackpov / totBlackpop,
+                                                                           pctHisppov = Hisppov / totHisppop) %>% pivot_longer(cols = pctTotalpov:pctHisppov, values_to = "val") %>% select(year, val, name)
+
 
 #################################################
 # # Jenna's expanded data pull
