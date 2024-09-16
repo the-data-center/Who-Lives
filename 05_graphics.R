@@ -1097,6 +1097,8 @@ homeownership.hist_chart
 ggsave(homeownership.hist_chart,filename = "indicator expansion drafts/graphics/homeownership.hist.png",
        width = 8, height = 6, units = "in")
 
+# Employment by Age and Sex over time in Orleans Parish
+
 
 
 # #For checking graphics

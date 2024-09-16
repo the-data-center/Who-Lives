@@ -1,0 +1,325 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0013_ds175_2010_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             2010
+Geographic level: County (by State)
+Dataset:          2010 American Community Survey: 1-Year Data
+   NHGIS code:    2010_ACS1
+   NHGIS ID:      ds175
+Breakdown(s):     Geographic Component:
+                     Total area (00)
+Data type(s):     (E) Estimates
+                  (M) Margins of error
+ 
+Tables:
+ 
+1. Sex by Age by Employment Status for the Population 16 Years and Over (Black or African American Alone)
+   Universe:    Black or African American alone population 16 years and over
+   Source code: C23002B
+   NHGIS code:  I9H
+ 
+2. Sex by Age by Employment Status for the Population 16 Years and Over (White Alone, Not Hispanic or Latino)
+   Universe:    White alone, not Hispanic or Latino population 16 years and over
+   Source code: C23002H
+   NHGIS code:  I9T
+ 
+3. Sex by Age by Employment Status for the Population 16 Years and Over (Hispanic or Latino)
+   Universe:    Hispanic or Latino population 16 years and over
+   Source code: C23002I
+   NHGIS code:  I9V
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State Postal Abbreviation
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATE:       State Name
+        STATEA:      State Code
+        COUNTY:      County Name
+        COUNTYA:     County Code
+        COUSUBA:     County Subdivision Code
+        PLACEA:      Place Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        ANRCA:       Alaska Native Regional Corporation Code
+        CBSAA:       Metropolitan Statistical Area/Micropolitan Statistical Area Code
+        CSAA:        Combined Statistical Area Code
+        METDIVA:     Metropolitan Division Code
+        NECTAA:      New England City and Town Area Code
+        CNECTAA:     Combined New England City and Town Area Code
+        NECTADIVA:   New England City and Town Area Division Code
+        UAA:         Urban Area Code
+        CDCURRA:     Congressional District (111th Congress) Code
+        SDELMA:      School District (Elementary)/Remainder Code
+        SDSECA:      School District (Secondary)/Remainder Code
+        SDUNIA:      School District (Unified)/Remainder Code
+        PCI:         Principal City Indicator
+        PUMAA:       Public Use Microdata Area Code
+        GEOID:       Geographic Identifier
+ 
+Data Type (E):
+    Estimates
+ 
+        NAME_E:      Area Name
+ 
+    Table 1:     Sex by Age by Employment Status for the Population 16 Years and Over (Black or African American Alone)
+    Universe:    Black or African American alone population 16 years and over
+    Source code: C23002B
+    NHGIS code:  I9H
+        I9HE001:     Total
+        I9HE002:     Male
+        I9HE003:     Male: 16 to 64 years
+        I9HE004:     Male: 16 to 64 years: In labor force
+        I9HE005:     Male: 16 to 64 years: In labor force: In Armed Forces
+        I9HE006:     Male: 16 to 64 years: In labor force: Civilian
+        I9HE007:     Male: 16 to 64 years: In labor force: Civilian: Employed
+        I9HE008:     Male: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9HE009:     Male: 16 to 64 years: Not in labor force
+        I9HE010:     Male: 65 years and over
+        I9HE011:     Male: 65 years and over: In labor force
+        I9HE012:     Male: 65 years and over: In labor force: Employed
+        I9HE013:     Male: 65 years and over: In labor force: Unemployed
+        I9HE014:     Male: 65 years and over: Not in labor force
+        I9HE015:     Female
+        I9HE016:     Female: 16 to 64 years
+        I9HE017:     Female: 16 to 64 years: In labor force
+        I9HE018:     Female: 16 to 64 years: In labor force: In Armed Forces
+        I9HE019:     Female: 16 to 64 years: In labor force: Civilian
+        I9HE020:     Female: 16 to 64 years: In labor force: Civilian: Employed
+        I9HE021:     Female: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9HE022:     Female: 16 to 64 years: Not in labor force
+        I9HE023:     Female: 65 years and over
+        I9HE024:     Female: 65 years and over: In labor force
+        I9HE025:     Female: 65 years and over: In labor force: Employed
+        I9HE026:     Female: 65 years and over: In labor force: Unemployed
+        I9HE027:     Female: 65 years and over: Not in labor force
+ 
+    Table 2:     Sex by Age by Employment Status for the Population 16 Years and Over (White Alone, Not Hispanic or Latino)
+    Universe:    White alone, not Hispanic or Latino population 16 years and over
+    Source code: C23002H
+    NHGIS code:  I9T
+        I9TE001:     Total
+        I9TE002:     Male
+        I9TE003:     Male: 16 to 64 years
+        I9TE004:     Male: 16 to 64 years: In labor force
+        I9TE005:     Male: 16 to 64 years: In labor force: In Armed Forces
+        I9TE006:     Male: 16 to 64 years: In labor force: Civilian
+        I9TE007:     Male: 16 to 64 years: In labor force: Civilian: Employed
+        I9TE008:     Male: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9TE009:     Male: 16 to 64 years: Not in labor force
+        I9TE010:     Male: 65 years and over
+        I9TE011:     Male: 65 years and over: In labor force
+        I9TE012:     Male: 65 years and over: In labor force: Employed
+        I9TE013:     Male: 65 years and over: In labor force: Unemployed
+        I9TE014:     Male: 65 years and over: Not in labor force
+        I9TE015:     Female
+        I9TE016:     Female: 16 to 64 years
+        I9TE017:     Female: 16 to 64 years: In labor force
+        I9TE018:     Female: 16 to 64 years: In labor force: In Armed Forces
+        I9TE019:     Female: 16 to 64 years: In labor force: Civilian
+        I9TE020:     Female: 16 to 64 years: In labor force: Civilian: Employed
+        I9TE021:     Female: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9TE022:     Female: 16 to 64 years: Not in labor force
+        I9TE023:     Female: 65 years and over
+        I9TE024:     Female: 65 years and over: In labor force
+        I9TE025:     Female: 65 years and over: In labor force: Employed
+        I9TE026:     Female: 65 years and over: In labor force: Unemployed
+        I9TE027:     Female: 65 years and over: Not in labor force
+ 
+    Table 3:     Sex by Age by Employment Status for the Population 16 Years and Over (Hispanic or Latino)
+    Universe:    Hispanic or Latino population 16 years and over
+    Source code: C23002I
+    NHGIS code:  I9V
+        I9VE001:     Total
+        I9VE002:     Male
+        I9VE003:     Male: 16 to 64 years
+        I9VE004:     Male: 16 to 64 years: In labor force
+        I9VE005:     Male: 16 to 64 years: In labor force: In Armed Forces
+        I9VE006:     Male: 16 to 64 years: In labor force: Civilian
+        I9VE007:     Male: 16 to 64 years: In labor force: Civilian: Employed
+        I9VE008:     Male: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9VE009:     Male: 16 to 64 years: Not in labor force
+        I9VE010:     Male: 65 years and over
+        I9VE011:     Male: 65 years and over: In labor force
+        I9VE012:     Male: 65 years and over: In labor force: Employed
+        I9VE013:     Male: 65 years and over: In labor force: Unemployed
+        I9VE014:     Male: 65 years and over: Not in labor force
+        I9VE015:     Female
+        I9VE016:     Female: 16 to 64 years
+        I9VE017:     Female: 16 to 64 years: In labor force
+        I9VE018:     Female: 16 to 64 years: In labor force: In Armed Forces
+        I9VE019:     Female: 16 to 64 years: In labor force: Civilian
+        I9VE020:     Female: 16 to 64 years: In labor force: Civilian: Employed
+        I9VE021:     Female: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9VE022:     Female: 16 to 64 years: Not in labor force
+        I9VE023:     Female: 65 years and over
+        I9VE024:     Female: 65 years and over: In labor force
+        I9VE025:     Female: 65 years and over: In labor force: Employed
+        I9VE026:     Female: 65 years and over: In labor force: Unemployed
+        I9VE027:     Female: 65 years and over: Not in labor force
+ 
+Data Type (M):
+    Margins of error
+ 
+        NAME_M:      Area Name
+ 
+    Table 1:     Sex by Age by Employment Status for the Population 16 Years and Over (Black or African American Alone)
+    Universe:    Black or African American alone population 16 years and over
+    Source code: C23002B
+    NHGIS code:  I9H
+        I9HM001:     Total
+        I9HM002:     Male
+        I9HM003:     Male: 16 to 64 years
+        I9HM004:     Male: 16 to 64 years: In labor force
+        I9HM005:     Male: 16 to 64 years: In labor force: In Armed Forces
+        I9HM006:     Male: 16 to 64 years: In labor force: Civilian
+        I9HM007:     Male: 16 to 64 years: In labor force: Civilian: Employed
+        I9HM008:     Male: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9HM009:     Male: 16 to 64 years: Not in labor force
+        I9HM010:     Male: 65 years and over
+        I9HM011:     Male: 65 years and over: In labor force
+        I9HM012:     Male: 65 years and over: In labor force: Employed
+        I9HM013:     Male: 65 years and over: In labor force: Unemployed
+        I9HM014:     Male: 65 years and over: Not in labor force
+        I9HM015:     Female
+        I9HM016:     Female: 16 to 64 years
+        I9HM017:     Female: 16 to 64 years: In labor force
+        I9HM018:     Female: 16 to 64 years: In labor force: In Armed Forces
+        I9HM019:     Female: 16 to 64 years: In labor force: Civilian
+        I9HM020:     Female: 16 to 64 years: In labor force: Civilian: Employed
+        I9HM021:     Female: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9HM022:     Female: 16 to 64 years: Not in labor force
+        I9HM023:     Female: 65 years and over
+        I9HM024:     Female: 65 years and over: In labor force
+        I9HM025:     Female: 65 years and over: In labor force: Employed
+        I9HM026:     Female: 65 years and over: In labor force: Unemployed
+        I9HM027:     Female: 65 years and over: Not in labor force
+ 
+    Table 2:     Sex by Age by Employment Status for the Population 16 Years and Over (White Alone, Not Hispanic or Latino)
+    Universe:    White alone, not Hispanic or Latino population 16 years and over
+    Source code: C23002H
+    NHGIS code:  I9T
+        I9TM001:     Total
+        I9TM002:     Male
+        I9TM003:     Male: 16 to 64 years
+        I9TM004:     Male: 16 to 64 years: In labor force
+        I9TM005:     Male: 16 to 64 years: In labor force: In Armed Forces
+        I9TM006:     Male: 16 to 64 years: In labor force: Civilian
+        I9TM007:     Male: 16 to 64 years: In labor force: Civilian: Employed
+        I9TM008:     Male: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9TM009:     Male: 16 to 64 years: Not in labor force
+        I9TM010:     Male: 65 years and over
+        I9TM011:     Male: 65 years and over: In labor force
+        I9TM012:     Male: 65 years and over: In labor force: Employed
+        I9TM013:     Male: 65 years and over: In labor force: Unemployed
+        I9TM014:     Male: 65 years and over: Not in labor force
+        I9TM015:     Female
+        I9TM016:     Female: 16 to 64 years
+        I9TM017:     Female: 16 to 64 years: In labor force
+        I9TM018:     Female: 16 to 64 years: In labor force: In Armed Forces
+        I9TM019:     Female: 16 to 64 years: In labor force: Civilian
+        I9TM020:     Female: 16 to 64 years: In labor force: Civilian: Employed
+        I9TM021:     Female: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9TM022:     Female: 16 to 64 years: Not in labor force
+        I9TM023:     Female: 65 years and over
+        I9TM024:     Female: 65 years and over: In labor force
+        I9TM025:     Female: 65 years and over: In labor force: Employed
+        I9TM026:     Female: 65 years and over: In labor force: Unemployed
+        I9TM027:     Female: 65 years and over: Not in labor force
+ 
+    Table 3:     Sex by Age by Employment Status for the Population 16 Years and Over (Hispanic or Latino)
+    Universe:    Hispanic or Latino population 16 years and over
+    Source code: C23002I
+    NHGIS code:  I9V
+        I9VM001:     Total
+        I9VM002:     Male
+        I9VM003:     Male: 16 to 64 years
+        I9VM004:     Male: 16 to 64 years: In labor force
+        I9VM005:     Male: 16 to 64 years: In labor force: In Armed Forces
+        I9VM006:     Male: 16 to 64 years: In labor force: Civilian
+        I9VM007:     Male: 16 to 64 years: In labor force: Civilian: Employed
+        I9VM008:     Male: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9VM009:     Male: 16 to 64 years: Not in labor force
+        I9VM010:     Male: 65 years and over
+        I9VM011:     Male: 65 years and over: In labor force
+        I9VM012:     Male: 65 years and over: In labor force: Employed
+        I9VM013:     Male: 65 years and over: In labor force: Unemployed
+        I9VM014:     Male: 65 years and over: Not in labor force
+        I9VM015:     Female
+        I9VM016:     Female: 16 to 64 years
+        I9VM017:     Female: 16 to 64 years: In labor force
+        I9VM018:     Female: 16 to 64 years: In labor force: In Armed Forces
+        I9VM019:     Female: 16 to 64 years: In labor force: Civilian
+        I9VM020:     Female: 16 to 64 years: In labor force: Civilian: Employed
+        I9VM021:     Female: 16 to 64 years: In labor force: Civilian: Unemployed
+        I9VM022:     Female: 16 to 64 years: Not in labor force
+        I9VM023:     Female: 65 years and over
+        I9VM024:     Female: 65 years and over: In labor force
+        I9VM025:     Female: 65 years and over: In labor force: Employed
+        I9VM026:     Female: 65 years and over: In labor force: Unemployed
+        I9VM027:     Female: 65 years and over: Not in labor force
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Steven Manson, Jonathan Schroeder, David Van Riper, Katherine Knowles, Tracy Kugler, Finn Roberts, and Steven Ruggles.
+        IPUMS National Historical Geographic Information System: Version 18.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2023.
+        http://doi.org/10.18128/D050.V18.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
