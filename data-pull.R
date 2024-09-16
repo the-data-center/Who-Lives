@@ -352,8 +352,8 @@ employ10  <- read_csv("inputs/indicator expansion drafts/employment/nhgis0013_cs
 
 # Employment Rates by race by sex,2022
 
-employmentvars<- c('B23002A_001E', 'B23002A_001M', 'B23002A_002','B23002A_041','B23002B_001','B23002B_002','B23002B_041','B23002I_001','B23002I_002','B23002I_041')
-employmentnames<-c("TotalWhite", "TotslWhiteMOE", "WhiteMale","WhiteFemale","TotalBlack","BlackMale","BlackFemale","TotalHispanic","HispanicMale","HispanicFemale")
+employmentvars<- c('B23002A_001E', 'B23002A_001M', 'B23002A_002E','B23002A_002M','B23002A_041E','B23002A_041M','B23002B_001E','B23002B_001M','B23002B_002E','B23002B_002M','B23002B_041E','B23002B_041M','B23002I_001E','B23002I_001M','B23002I_002E','B23002I_002M','B23002I_041E','B23002I_041M')
+employmentnames<-c("TotalWhite", "TotalWhiteMOE", "WhiteMale", "WhiteMaleMOE","WhiteFemale","WhiteFemaleMOE","TotalBlack","TotalBlackMOE","BlackMale","BlackMaleMOE","BlackFemale", "BlackFemaleMOE", "TotalHispanic","TotalHispanicMOE", "HispanicMale", "HispanicMaleMOE", "HispanicFemale", "HispanicFemaleMOE")
 employmentRaw<-wholivesdatapull(employmentvars,employmentnames)
 
 
