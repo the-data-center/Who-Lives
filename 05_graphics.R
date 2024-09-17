@@ -14,19 +14,19 @@ source(here("inputs/datacenter_colors.R"))
 
 ##### mockup 1 - population over time
 
-totalpop_metro %>%
-  ggplot(aes(year, metro_pop)) +
-  geom_line(size = 1, color = DCcolor.p2limegreen) +
-  scale_y_continuous(labels = comma_format(), limits = c(1150000, 1400000)) + 
-  scale_x_continuous(breaks = c(1980, 1990, 2000, 2010,2023),  labels = c("1980", "1990", "2000", "2010", "2023")) + 
-  scale_color_manual(values = c(DCcolor.p2limegreen)) +
-themeDC_horizontal() +
-  theme(legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
-        plot.title = element_text(size=16, hjust = .5)) + 
-  labs(title = "Total population since 1980, Metro",
-       x="",
-       y="") 
+# totalpop_metro %>%
+#   ggplot(aes(year, metro_pop)) +
+#   geom_line(size = 1, color = DCcolor.p2limegreen) +
+#   scale_y_continuous(labels = comma_format(), limits = c(1150000, 1400000)) + 
+#   scale_x_continuous(breaks = c(1980, 1990, 2000, 2010,2023),  labels = c("1980", "1990", "2000", "2010", "2023")) + 
+#   scale_color_manual(values = c(DCcolor.p2limegreen)) +
+# themeDC_horizontal() +
+#   theme(legend.title = element_blank(),
+#         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+#         plot.title = element_text(size=16, hjust = .5)) + 
+#   labs(title = "Total population since 1980, Metro",
+#        x="",
+#        y="") 
 
 #### 1 - African American, white, and Hispanic population ####
 
@@ -104,25 +104,6 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
   labs(title = "White, Black, Hispanic, and Asian, Metro New Orleans parishes and U.S.",
        x="",
        y="")
-
-#### 3 - African American population, New Orleans
-
-### PEP ###
-AAhistGraphic <- AAhistorical %>%
-  ggplot(aes(year, POP, label = comma(POP, accuracy = 1))) +
-  geom_bar(stat="identity", fill = DCcolor.p2blue, width = .7) +
-  geom_text(data = subset(AAhistorical,  year %in% c("2000", "2006", "2017", "")),      #remove labels for years without data
-            size = 3.75,
-            position = position_stack(vjust = 1.05),
-            family="Asap") +
-  scale_y_continuous(labels = comma_format(), expand = c(0,0), limits = c(0,350000)) +
-  themeDC_horizontal() +
-  theme(legend.position = "none",
-        plot.title = element_text(hjust = .5, size = 24)) +
-  labs(title = "Black population, New Orleans",
-       x="",
-       y="")
-
 
 ####4 - -Hispanic population change by parish
 
@@ -344,7 +325,7 @@ chart.hispan2018.allparishes <- hispan2018 %>%
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12), 
         plot.title = element_text(hjust = .5, size = 14)) +
-  labs(title = "Hispanic origin, 2022",
+  labs(title = "Hispanic origin, 2023",
        x="",
        y="")
 ############################################
@@ -386,7 +367,7 @@ chart.agepop2000.allparishes <- agepop2000forGraphic %>%
 
 
 #   
-####8 - Population by age group, 2022
+####8 - Population by age group, 2023
 
 
 ### PEP ###
@@ -481,7 +462,7 @@ bachGraphic <- dodgedBar(bach,
 
 medhhGraphic <- dodgedBar(medhh,
                           quo(MedianHHIncome),
-                          "Median household income in 2022 dollars",
+                          "Median household income in 2023 dollars",
                           yscale = c(0,1.3*max(medhh$MedianHHIncome)),
                           colors = c(DCcolor.p2teal50, DCcolor.p1mediumblue),
                           pct = FALSE,
@@ -523,7 +504,7 @@ medhhGraphic <- dataGraphic %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(hjust = .5, size=16)) + 
-  labs(title = "Median household income in 2022 dollars",
+  labs(title = "Median household income in 2023 dollars",
        x="",
        y="")
 
@@ -572,7 +553,7 @@ chart.inta.allparishes <- intaforGraphic %>%
         legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 10), 
         plot.title = element_text(hjust = .5)) +
-  labs(title = "Household internet access, 2022",
+  labs(title = "Household internet access, 2023",
        x="",
        y="") 
 ############################################
@@ -662,7 +643,7 @@ chart.mob.allparishes <- mobforGraphic %>%
             position = position_stack(vjust = 0.6), 
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,.18)) +
-  scale_x_discrete(labels = c("2004","2022"))+
+  scale_x_discrete(labels = c("2004","2023"))+
   themeDC_horizontal() +
   theme(plot.title = element_text(hjust = .5, size = 18),
         strip.text = element_text(size=12),
@@ -721,7 +702,7 @@ hoburGraphic <- dodgedBar(hobur,
 
 medrentGraphic <- dodgedBar(medrent, 
                             quo(Rent), 
-                            "Median gross rent in 2022 dollars",
+                            "Median gross rent in 2023 dollars",
                             yscale = c(0,1.2*max(medrent$Rent)), 
                             pct = FALSE, 
                             colors = c(DCcolor.p2limegreen60, DCcolor.p1mediumblue),
@@ -768,7 +749,7 @@ chart.yrbuilt.allparishes <- yrbuiltforGraphic %>%
         axis.text.x = element_text(size = 10, vjust = 1),
         axis.text.y = element_text(size = 10),
         plot.title = element_text(hjust = .5)) +
-  labs(title = "Year structure built, 2022 housing units",
+  labs(title = "Year structure built, 2023 housing units",
        x="",
        y="") 
 
@@ -790,7 +771,7 @@ commuteforGraphic <- commute %>%
          description = ifelse(variable == "Workhomepct"|variable == "Workhomepct2000", "Work at home", description),
          description = ifelse(variable == "Otherpct"|variable == "Otherpct2000", "Other", description)) %>%
   mutate(year = NA,
-         year = ifelse(grepl("pct",variable), 2022, year),
+         year = ifelse(grepl("pct",variable), 2023, year),
          year = ifelse(grepl("2000", variable), 2000,year)) %>%
   mutate(description.fac = factor(.$description, levels = c("Other",
                                                             "Work at home",
@@ -800,7 +781,7 @@ commuteforGraphic <- commute %>%
                                                             "Carpool",
                                                             "Drive Alone")))%>% 
   mutate(year.fac = factor(.$year, levels = c("2000",
-                                              "2022"))) %>%
+                                              "2023"))) %>%
   mutate(val = ifelse(value<.02, "",
                       paste0(round.off(value*100),"%",ifelse((DriveSIG == "no" & variable == "Drivepct")
                                                          |(carpoolSIG ==  "no" & variable == "Carpoolpct")
@@ -827,7 +808,7 @@ chart.commute.allparishes <- commuteforGraphic %>%
   geom_text(size = 4, position = position_stack(vjust = 0.6), family="Asap") + 
   scale_y_continuous(labels = percent_format(accuracy = 1), expand = c(0,0), limits = c(0,1)) +
   scale_x_discrete(labels = c("2000",
-                              "2022"))+
+                              "2023"))+
   themeDC_horizontal() +
   theme(legend.position = "right",
         legend.title = element_blank(),
@@ -864,7 +845,7 @@ medhh.raceGeos_chart <- medhh_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) + 
-  labs(title = "Median household income by race/ethnicity, 2022",
+  labs(title = "Median household income by race/ethnicity, 2023",
        x="",
        y="")
 medhh.raceGeos_chart
@@ -878,20 +859,77 @@ medhh.hist_chart <- medhh.hist %>%
   ggplot()+
   geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = dollar_format(accuracy = 1), limits = c(0,99000), breaks = c(0,30000,60000,90000)) + 
-  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2022")) +
+  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023")) +
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  geom_text(data = subset(medhh.hist, Year %in% c("1979", "2022") & var != "All"), aes(x=Year,y=val, label = label_dollar(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(medhh.hist, Year == "2022"), aes(x = Year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  geom_text(data = subset(medhh.hist, Year %in% c("1979", "2023") & var != "All"), aes(x=Year,y=val, label = label_dollar(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(medhh.hist, Year == "2023"), aes(x = Year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) + 
-  labs(title = "Median household income by race/ethnicity in 2022 dollars since 1979, Orleans Parish",
+  labs(title = "Median household income by race/ethnicity in 2023 dollars since 1979, Orleans Parish",
        x="",
        y="") 
 medhh.hist_chart
 ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hist.png",
        width = 10, height = 6, units = "in")
+
+
+# Across geos employment bar chart
+
+employ.raceGeos_chart <- employ_with_stats %>%
+  ggplot(aes(x = grp.fac, y = val, fill = placename.fac)) +
+  geom_bar(stat = "identity",
+           position = position_dodge(),
+           width = .6,
+           color='gray70') +    #bar outlineas.factor
+
+  coord_flip() + 
+  geom_text(data = employ_with_stats,     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = val_lab),
+            position=position_dodge(width = .7),
+            vjust = .5,
+            hjust = -.5,
+            size=2.75,
+            family="Asap") +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_fill_manual(values = c(DCcolor.p2yellow90, DCcolor.p2purple90, DCcolor.p2blue90, DCcolor.p2green90), guide=guide_legend(reverse=T)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16, hjust = .5))  + 
+  labs(title = "Employment rate, for population 16+ by race/ethnicity, 2023",
+       x="",
+       y="",
+       fill = "") +
+  themeDC_vertical()
+
+ggsave(employ.raceGeos_chart,filename = "indicator expansion drafts/graphics/employ.raceGeos.png",
+       width = 10, height = 6, units = "in")
+
+## employment over time 
+
+
+employment.hist_chart <- ggplot(employ_stattest.hist) +  
+  geom_line(aes(x = year, y = val, color = race, group = racesex_lab), size = 1) +
+  geom_point(aes(x =year, y = val, color = race, shape = sex), size = 2) +
+  scale_y_continuous(labels = percent_format(accuracy = 1), limits = c(0.35,0.80) ) + 
+  #scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2022")) +
+  scale_color_manual(name = "", labels = c("Black", "Hispanic, any race","White, non-Hispanic"),
+                     values = c( DCcolor.p1darkblue90, DCcolor.p3yellowochre90, DCcolor.p2green90)) +
+  
+  geom_text(data = subset(employ_stattest.hist, year %in% c(1980, 2022)), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(employ_stattest.hist, year == "2022"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16, hjust = .5)) +
+  labs(title = "Employment rate, population 16+ by race/ethnicity and gender,\n Orleans Parish",
+       x = "",
+       y = "")
+ggsave(employment.hist_chart,filename = "indicator expansion drafts/graphics/employment.hist.png",
+       width = 8, height = 6, units = "in")
 
 # Across geos educational attainment bar chart
 
@@ -914,7 +952,7 @@ bach.raceGeos_chart <- bach_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) + 
-  labs(title = "Rate of bachelor's degree or higher, adults 25 years or older by race/ethnicity, 2022",
+  labs(title = "Rate of bachelor's degree or higher, adults 25 years or older by race/ethnicity, 2023",
        x="",
        y="")
 ggsave(bach.raceGeos_chart,filename = "indicator expansion drafts/graphics/bach.raceGeos.png",
@@ -927,10 +965,10 @@ EduAtt.hist_chart <- EduAtt.hist %>%
   ggplot()+
   geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2022"))+
+  scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2023"))+
   scale_color_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  geom_text(data = subset(EduAtt.hist, year %in% c("1980", "2022") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(EduAtt.hist, year == "2022"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  geom_text(data = subset(EduAtt.hist, year %in% c("1980", "2023") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(EduAtt.hist, year == "2023"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -965,7 +1003,7 @@ pov.raceGeos_chart <- pov_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) + 
-  labs(title = "Poverty rate by race/ethnicity, 2022",
+  labs(title = "Poverty rate by race/ethnicity, 2023",
        x="",
        y="")
 ggsave(pov.raceGeos_chart,filename = "indicator expansion drafts/graphics/pov.raceGeos.png",
@@ -979,9 +1017,9 @@ totalPov.hist_chart <- totalPov.hist %>%
   geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) +
   scale_color_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2022")) + 
-  geom_text(data = subset(totalPov.hist, year %in% c("1979", "2022") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(totalPov.hist, year == "2022"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023")) + 
+  geom_text(data = subset(totalPov.hist, year %in% c("1979", "2023") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(totalPov.hist, year == "2023"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -1016,7 +1054,7 @@ childpov.raceGeos_chart <- childpov_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) + 
-  labs(title = "Child poverty rate by race/ethnicity, 2022",
+  labs(title = "Child poverty rate by race/ethnicity, 2023",
        x="",
        y="")
 ggsave(childpov.raceGeos_chart,filename = "indicator expansion drafts/graphics/childpov.raceGeos.png",
@@ -1030,9 +1068,9 @@ childPov.hist_chart <- childPov.hist %>%
   geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2022")) + 
-  geom_text(data = subset(childPov.hist, Year %in% c("1980", "2022") & var != "All"), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(childPov.hist, Year == "2022"), aes(x = Year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023")) + 
+  geom_text(data = subset(childPov.hist, Year %in% c("1980", "2023") & var != "All"), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(childPov.hist, Year == "2023"), aes(x = Year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
@@ -1066,7 +1104,7 @@ ho.raceGeos_chart <- ho_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) + 
-  labs(title = "Homeownership rate by race/ethnicity, 2022",
+  labs(title = "Homeownership rate by race/ethnicity, 2023",
        x="",
        y="")
 ggsave(ho.raceGeos_chart,filename = "indicator expansion drafts/graphics/homeownership.raceGeos.png",
@@ -1081,11 +1119,11 @@ homeownership.hist_chart <- homeownership.hist %>%
   ggplot()+
   geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1), limits = c(.2,.7)) + 
-  scale_x_continuous( labels = c("1970", "1980", "1990", "2000", "2010","2022")) + 
+  scale_x_continuous( labels = c("1970", "1980", "1990", "2000", "2010","2023")) + 
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  geom_text(data = subset(homeownership.hist, Year %in% c("1970", "2022") & var != "All"), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(homeownership.hist, Year %in% c("1970", "2023") & var != "All"), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
   geom_text(data = subset(homeownership.hist,  Year == "1980"& var == "Hispanic,\nany race" ), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(homeownership.hist, Year == "2022"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  geom_text(data = subset(homeownership.hist, Year == "2023"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
