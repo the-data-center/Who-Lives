@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-Codebook for NHGIS data file 'nhgis0014_ds151_2000_county'
+Codebook for NHGIS data file 'nhgis0019_ds151_2000_county'
 --------------------------------------------------------------------------------
  
 Contents
@@ -24,7 +24,12 @@ Breakdown(s):     Geographic Subarea:
  
 Tables:
  
-1. Civilian Population 16 Years and Over in Labor Force by Sex by Employment Status
+1. Population 16 Years and Over by Race by Sex by Labor Force Status
+   Universe:    Persons 16 Years and Over
+   Source code: NP150C
+   NHGIS code:  GSQ
+ 
+2. Civilian Population 16 Years and Over in Labor Force by Sex by Employment Status
    Universe:    Civilian Persons 16 Years and Over in Labor Force
    Source code: NP150E
    NHGIS code:  GSS
@@ -87,7 +92,40 @@ Context Fields
 Breakdown:
     Geographic Subarea: Total area (00)
  
-    Table 1:     Civilian Population 16 Years and Over in Labor Force by Sex by Employment Status
+    Table 1:     Population 16 Years and Over by Race by Sex by Labor Force Status
+    Universe:    Persons 16 Years and Over
+    Source code: NP150C
+    NHGIS code:  GSQ
+        GSQ001:      White alone >> Male >> In labor force
+        GSQ002:      White alone >> Male >> Not in labor force
+        GSQ003:      White alone >> Female >> In labor force
+        GSQ004:      White alone >> Female >> Not in labor force
+        GSQ005:      Black or African American alone >> Male >> In labor force
+        GSQ006:      Black or African American alone >> Male >> Not in labor force
+        GSQ007:      Black or African American alone >> Female >> In labor force
+        GSQ008:      Black or African American alone >> Female >> Not in labor force
+        GSQ009:      American Indian and Alaska Native alone >> Male >> In labor force
+        GSQ010:      American Indian and Alaska Native alone >> Male >> Not in labor force
+        GSQ011:      American Indian and Alaska Native alone >> Female >> In labor force
+        GSQ012:      American Indian and Alaska Native alone >> Female >> Not in labor force
+        GSQ013:      Asian alone >> Male >> In labor force
+        GSQ014:      Asian alone >> Male >> Not in labor force
+        GSQ015:      Asian alone >> Female >> In labor force
+        GSQ016:      Asian alone >> Female >> Not in labor force
+        GSQ017:      Native Hawaiian and Other Pacific Islander alone >> Male >> In labor force
+        GSQ018:      Native Hawaiian and Other Pacific Islander alone >> Male >> Not in labor force
+        GSQ019:      Native Hawaiian and Other Pacific Islander alone >> Female >> In labor force
+        GSQ020:      Native Hawaiian and Other Pacific Islander alone >> Female >> Not in labor force
+        GSQ021:      Some other race alone >> Male >> In labor force
+        GSQ022:      Some other race alone >> Male >> Not in labor force
+        GSQ023:      Some other race alone >> Female >> In labor force
+        GSQ024:      Some other race alone >> Female >> Not in labor force
+        GSQ025:      Two or more races >> Male >> In labor force
+        GSQ026:      Two or more races >> Male >> Not in labor force
+        GSQ027:      Two or more races >> Female >> In labor force
+        GSQ028:      Two or more races >> Female >> Not in labor force
+ 
+    Table 2:     Civilian Population 16 Years and Over in Labor Force by Sex by Employment Status
     Universe:    Civilian Persons 16 Years and Over in Labor Force
     Source code: NP150E
     NHGIS code:  GSS

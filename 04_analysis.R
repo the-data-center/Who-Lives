@@ -744,7 +744,7 @@ HispanicPopyears <- allparishesRaw2023 %>%
   filter(age == "Total" & sex == "Total") %>%
   filter(raceSimple=="Hispanic") %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist")
+                          "St. James", "St. John the Baptist"))
 
 HispanicPopyears <- HispanicPopyears %>%
   select(PlaceName, date, population) %>%
@@ -798,7 +798,7 @@ Agepop <- allparishesRaw2023 %>%
   filter(sex=="Total")%>%
   filter(date == "7/1/2023 population estimate") %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
-                          "St. James", "St. John the Baptist") %>%
+                          "St. James", "St. John the Baptist")) %>%
   arrange(factor(PlaceName, levels = c("Jefferson","Orleans","Plaquemines",
                  "St. Bernard","St. Charles","St. James",
                  "St. John the Baptist"))) %>%
@@ -1110,6 +1110,56 @@ employ_stattest.data <- employ %>%
          sig_blkM_F = stattest(x = BlackMale_pct, moex = BlackMale_pctMOE, y = BlackFemale_pct, moey = BlackFemale_pctMOE),
          sig_hispM_F = stattest(x = HispMale_pct, moex = HispMale_pctMOE, y = HispFemale_pct, moey = HispFemale_pctMOE))
 
+## employment timeseries
+
+employ_22 <- employ %>% filter(place == "071") %>% 
+  rename(pctWhiteMaleEmploy = WhtMale_pct,
+         pctWhiteMaleEmployMOE = WhtMale_pctMOE,
+         pctWhiteFemaleEmploy = WhtFemale_pct,
+         pctWhiteFemaleEmployMOE = WhtFemale_pctMOE,
+         pctBlackMaleEmploy = BlackMale_pct,
+         pctBlackMaleEmployMOE = BlackMale_pctMOE,
+         pctBlackFemaleEmploy = BlackFemale_pct,
+         pctBlackFemaleEmployMOE = BlackFemale_pctMOE,
+         pctHispMaleEmploy = HispMale_pct,
+         pctHispMaleEmployMOE  = HispMale_pctMOE,
+         pctHispFemaleEmploy = HispFemale_pct,
+         pctHispFemaleEmployMOE = HispFemale_pctMOE) %>% pivot_longer(cols = pctWhiteMaleEmploy:pctHispFemaleEmployMOE, values_to = "val") %>% 
+        select(val,name) %>% mutate(year = year) %>% relocate(year, .before = val)
+
+
+employment_TS <-rbind(employment, employ_22)
+
+#Employment Stat test set up
+employment_statTest<-employment_TS %>%
+ mutate(name = str_replace(name,"MOE","_MOE")) %>%  
+ separate(name,c("name","type"), sep = "_") %>%
+ mutate(type = case_when(is.na(type) ~ "est", 
+                         type == "MOE" ~ "MOE")) %>%
+  pivot_wider(names_from = c("type","year"), values_from = "val")
+
+# Stat Test
+employ_stattest.hist <- employment_statTest %>%
+  mutate(sig_00_10 = stattest(x = est_2000, moex = MOE_2000, y = est_2010, moey = MOE_2010),
+         sig_00_current = stattest(x = est_2000, moex = MOE_2000, y = est_2022, moey = MOE_2022),
+         sig_10_current = stattest(x = est_2010, moex = MOE_2010, y = est_2022, moey = MOE_2022)) %>% 
+  mutate(name = factor(case_when(
+                          grepl("BlackMale",name) ~ "Black_Male",
+                          grepl("BlackFemale",name) ~ "Black_Female",
+                          grepl("HispMale",name)  ~ "Hispanic, any race_Male",
+                          grepl("HispFemale",name)  ~ "Hispanic, any race_Female",
+                          grepl("WhiteMale", name) ~ "White, non-Hispanic_Male",
+                          grepl("WhiteFemale", name) ~ "White, non-Hispanic_Female"
+                          ))) %>%
+  pivot_longer(cols = -c(name, sig_00_10, sig_00_current, sig_10_current), names_to = c("type", "year"), names_sep = "_", values_to = "val") %>% 
+  filter(type != "MOE") %>%
+  select(year, val, name, sig_00_10, sig_00_current, sig_10_current)  %>%
+  mutate(val_lab = case_when((sig_00_10 == "no" | sig_00_current == "no" | sig_10_current == "no") ~ "*",
+                             T ~ " ")) %>%
+  separate(name, c("race", "sex"), sep = "_") %>%
+  filter(val != 0) %>%
+  mutate( race= factor(race,levels = c("White, non-Hispanic","Hispanic, any race","Black")))
+  
 
 
 ### Educational attainment ###

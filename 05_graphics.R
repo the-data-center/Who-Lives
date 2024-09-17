@@ -893,6 +893,40 @@ medhh.hist_chart
 ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hist.png",
        width = 10, height = 6, units = "in")
 
+## employment over time 
+#EduAtt.hist_chart <- EduAtt.hist %>%
+#  filter(var != "All", year != 2016) %>%
+
+
+ggplot() +
+  geom_line(data = subset(employ_stattest.hist, sex == "Male"), aes(x = as.numeric(year), y = val, color = race), size = 1)+
+  geom_line(data = subset(employ_stattest.hist, sex == "Female"), aes(x = as.numeric(year), y = val, color = race), size = 1)+
+  
+  geom_point(data = subset(employ_stattest.hist, sex == "Male"), aes(x = as.numeric(year), y = val, color = race, shape = sex, size = 3))+
+  geom_point(data = subset(employ_stattest.hist, sex == "Female"), aes(x = as.numeric(year), y = val, color = race, shape = sex, size = 3)) +
+  scale_y_continuous(labels = percent_format(accuracy = 1), limits = c(0.35,0.80) ) + 
+  scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2022")) +
+  scale_color_manual(values = c(DCcolor.p2green,DCcolor.p3yellowochre,DCcolor.p1darkblue)) 
+  
+
+
+employ_stattest.hist %>%  
+ggplot()+
+  geom_line(aes(x=year,y=val, color = race), size = 1) +
+  geom_point(aes(x =year, y = val,shape = sex))#+
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2022"))+
+  scale_color_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
+  geom_text(data = subset(EduAtt.hist, year %in% c("1980", "2022") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(EduAtt.hist, year == "2022"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16, hjust = .5)) + 
+  labs(title = "Rate of bachelor's degree or higher, adults 25 years or older by race/ethnicity,\nOrleans Parish",
+       x="",
+       y="") 
+
 # Across geos educational attainment bar chart
 
 bach.raceGeos_chart <- bach_with_stats %>%

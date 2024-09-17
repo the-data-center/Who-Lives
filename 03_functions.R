@@ -342,10 +342,10 @@ dodgedBar <- function(data,
     gather(-placenames,-place.fac, -significant, key=variable, value=value) %>% 
     mutate(description = as.factor(ifelse(variable == "census2000"|variable =="sf2004"|variable =="sf1999" | variable == "Ownerpct2000", comparisonyear, year))) %>%     #creates legend info
     mutate(valp = case_when(value == 0 ~ "  ",
-                                    value < .01 & significant == "no"  ~ "<1%*",
-                                    value < .01 & significant == "yes"  ~ "<1%",
-                                    value > .01 & significant == "yes" ~ paste0(round(value*100, digits = digits), "%"),
-                                    value > .01 & significant == "no"  ~ paste0(round(value*100, digits = digits), "%*"))) %>%
+                            value < .01 & significant == "no"  ~ "<1%*",
+                            value < .01 & significant == "yes"  ~ "<1%",
+                            value > .01 & significant == "yes" ~ paste0(round(value*100, digits = digits), "%"),
+                            value > .01 & significant == "no"  ~ paste0(round(value*100, digits = digits), "%*"))) %>%
     
     mutate(vald = case_when(value == 0 ~ "   ",
                             significant == "no" ~  paste0(dollar(value, largest_with_cents = 1),"*"),
@@ -360,12 +360,12 @@ dodgedBar <- function(data,
     geom_text(#data = subset(dataGraphic, as.numeric(value) != 0),     #leave out labels where data point doesn't exist (is placeheld with 0)
       data = dataGraphic,        
       aes(label = ifelse(rep(pct,sum(dataGraphic$value>=0)), 
-                                 valp,
-                                 vald)), 
-              position=lab_pos, 
-              vjust = -.7, 
-              size=2.75, 
-              family="Asap") +
+                         valp,
+                         vald)), 
+      position=lab_pos, 
+      vjust = -.7, 
+      size=2.75, 
+      family="Asap") +
     scale_y_continuous(labels = ifelse(pct == TRUE, percent_format(accuracy = 1), comma_format(accuracy = 1)), expand = c(0,0), limits = yscale) + 
     scale_fill_manual(values = colors) + 
     themeDC_horizontal() +
