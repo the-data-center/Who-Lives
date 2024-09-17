@@ -893,6 +893,39 @@ medhh.hist_chart
 ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hist.png",
        width = 10, height = 6, units = "in")
 
+
+# Across geos employment bar chart
+
+employ.raceGeos_chart <- employ_with_stats %>%
+  ggplot(aes(x = grp.fac, y = val, fill = placename.fac)) +
+  geom_bar(stat = "identity",
+           position = position_dodge(),
+           width = .6,
+           color='gray70') +    #bar outlineas.factor
+
+  coord_flip() + 
+  geom_text(data = employ_with_stats,     #leave out labels where data point doesn't exist (is placeheld with 0)
+            aes(label = val_lab),
+            position=position_dodge(width = .7),
+            vjust = .5,
+            hjust = -.5,
+            size=2.75,
+            family="Asap") +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
+  scale_fill_manual(values = c(DCcolor.p2yellow90, DCcolor.p2purple90, DCcolor.p2blue90, DCcolor.p2green90), guide=guide_legend(reverse=T)) +
+  themeDC_horizontal() +
+  theme(legend.title = element_blank(),
+        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
+        plot.title = element_text(size=16, hjust = .5))  + 
+  labs(title = "Employment rate, for population 16+ by race/ethnicity, 2022",
+       x="",
+       y="",
+       fill = "") +
+  themeDC_vertical()
+
+ggsave(employ.raceGeos_chart,filename = "indicator expansion drafts/graphics/employ.raceGeos.png",
+       width = 10, height = 6, units = "in")
+
 # Across geos educational attainment bar chart
 
 bach.raceGeos_chart <- bach_with_stats %>%

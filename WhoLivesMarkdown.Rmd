@@ -256,7 +256,7 @@ Although race/ethnicity and age data is available for all eight parishes in metr
 )
 ```
 
-## Educational attainment, income, and internet access
+## Educational attainment, income, and employment
 
 Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^5] In New Orleans, `r round.off(getvalue.bachdeg.nopct*100)` percent of adults 25 and older had at least a bachelor's degree in `r year` &mdash; higher than the U.S. average of `r round.off(getvalue.bachdeg.USpct*100)` percent, and up from 26 percent in 2000.  The overall metro area share of adults with a bachelor's degree grew from 23 to `r round.off(getvalue.bachdeg.metropct*100)` percent &mdash; lower than the national average of `r round.off(getvalue.bachdeg.USpct*100)` percent.
 
@@ -355,33 +355,20 @@ makeCSS_source(
 )
 ```
 
-Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and encompassing technology training services, workers and students are at a disadvantage in the job market and education system.[^7] Only `r round.off((getvalue.inta.no.2018)*100)` percent of households in Orleans Parish and only `r round.off((getvalue.inta.jeff.2018)*100)` percent of households in Jefferson Parish are connected to the internet through a home-based internet service, such as broadband (cable, DSL, or fiber), satellite, or dial-up service, compared to `r round.off((getvalue.inta.us.2018)*100)` percent nationwide. St. Tammany is above the national average at `r round.off((getvalue.inta.tam.2018)*100)` percent of households connected to the internet by a home-based service internet connection. Internet access without a subscription refers to households that only have access through group access locations such as school, work, a library, or coffee shop.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. In massa lacus, vehicula sed nibh ac, sollicitudin accumsan urna. Aenean sit amet hendrerit purus. In ut augue tincidunt tellus tempus volutpat sed at nulla. Sed tempus ex felis, a convallis sapien ultricies sed. Donec tortor urna, sodales a laoreet sed, mollis ac erat. In vestibulum et dolor at rutrum. Duis quis ex ante. Suspendisse potenti. In tempus ipsum purus, sed maximus diam pharetra eget. Quisque justo arcu, ornare eu vulputate quis, semper sit amet felis. Curabitur sit amet metus nibh. Nam ultrices nunc nec erat rhoncus tincidunt. In imperdiet venenatis lobortis.
 
-An increasingly common way to access the internet is through a smartphone or some other cellular device. While, in general, smartphone access contributes positively to lessening the Digital Divide, having access only through a smartphone restricts ability to fully leverage the internet to complete common tasks such as writing and researching a resume, registering your kids for school, analyzing data about your neighborhood, or creating content for an internet business. In Orleans Parish, `r round.off((getvalue.intacell.no.2018)*100)` percent of households only have access through a smartphone, compared to `r round.off((getvalue.intacell.us.2018)*100)` percent nationwide.
+```{r employtime, fig.align='center', fig.width=10, fig.height=6, echo = FALSE}
 
-```{r, echo=FALSE}
-makeCSS_highlight(
-"### What is the Digital Divide?
+```
 
-Inequalities between individuals, households, businesses, or geographic areas with regard to access, use of, or impact of information and communication technologies."
-)
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. In massa lacus, vehicula sed nibh ac, sollicitudin accumsan urna. Aenean sit amet hendrerit purus. In ut augue tincidunt tellus tempus volutpat sed at nulla. Sed tempus ex felis, a convallis sapien ultricies sed. Donec tortor urna, sodales a laoreet sed, mollis ac erat. In vestibulum et dolor at rutrum. Duis quis ex ante. Suspendisse potenti. In tempus ipsum purus, sed maximus diam pharetra eget. Quisque justo arcu, ornare eu vulputate quis, semper sit amet felis. Curabitur sit amet metus nibh. Nam ultrices nunc nec erat rhoncus tincidunt. In imperdiet venenatis lobortis.
+
+```{r employbyrace, fig.align='center', fig.width = 10, fig.height = 6, echo = FALSE}
+employ.raceGeos_chart
 ```
 
 
-```{r inta, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
-chart.inta.allparishes
-```
-```{r, echo=FALSE}
-makeCSS_source(
-"∗ = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
-
-**Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
-
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2022."
-)
-```
-
-## Poverty and access to vehicles
+## Poverty and access to vehicles and internet
 
 A high share of residents living below the poverty level indicates the economy is not providing many residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round.off((getvalue.pov.no.1999 )*100)` to `r round.off((getvalue.pov.no.2018 )*100)` percent between 1999 and `r year` while the Jefferson Parish poverty rate increased from `r round.off((getvalue.pov.jeff.1999)*100)` to `r round.off((getvalue.pov.jeff.2018)*100)` percent. Across the U.S., the poverty rate increased by one percentage point between 1999 and `r year`.
 
@@ -495,6 +482,31 @@ makeCSS_source(
 )
 ```
 
+Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and encompassing technology training services, workers and students are at a disadvantage in the job market and education system.[^7] Only `r round.off((getvalue.inta.no.2018)*100)` percent of households in Orleans Parish and only `r round.off((getvalue.inta.jeff.2018)*100)` percent of households in Jefferson Parish are connected to the internet through a home-based internet service, such as broadband (cable, DSL, or fiber), satellite, or dial-up service, compared to `r round.off((getvalue.inta.us.2018)*100)` percent nationwide. St. Tammany is above the national average at `r round.off((getvalue.inta.tam.2018)*100)` percent of households connected to the internet by a home-based service internet connection. Internet access without a subscription refers to households that only have access through group access locations such as school, work, a library, or coffee shop.
+
+An increasingly common way to access the internet is through a smartphone or some other cellular device. While, in general, smartphone access contributes positively to lessening the Digital Divide, having access only through a smartphone restricts ability to fully leverage the internet to complete common tasks such as writing and researching a resume, registering your kids for school, analyzing data about your neighborhood, or creating content for an internet business. In Orleans Parish, `r round.off((getvalue.intacell.no.2018)*100)` percent of households only have access through a smartphone, compared to `r round.off((getvalue.intacell.us.2018)*100)` percent nationwide.
+
+```{r, echo=FALSE}
+makeCSS_highlight(
+"### What is the Digital Divide?
+
+Inequalities between individuals, households, businesses, or geographic areas with regard to access, use of, or impact of information and communication technologies."
+)
+```
+
+
+```{r inta, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
+chart.inta.allparishes
+```
+```{r, echo=FALSE}
+makeCSS_source(
+"∗ = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
+
+**Notes**: Access with no subscription refers to those who receive free internet from their housing environment (e.g. college dorms).
+
+**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2022."
+)
+```
 ## Foreign-born population and geographic mobility
 
 
