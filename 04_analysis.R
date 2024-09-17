@@ -133,7 +133,7 @@ singCSV <- sing %>%
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "sing", values_to = "Value") %>% 
   mutate(name = paste( place, sing, sep = "-"),
-         year = 2022) %>% 
+         year = 2023) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
 write.csv(singCSV, "outputs/spreadsheets/sing.csv")
@@ -158,7 +158,7 @@ hsCSV <- hs %>%
 select(place, census2000, (contains("pct"))) %>% 
   pivot_longer(-c("place"), names_to = "hs", values_to = "Value") %>% 
   mutate(name = paste( place, hs, sep = "-"),
-         year = 2022) %>% 
+         year = 2023) %>% 
   select(-place) %>% 
   pivot_wider(id_cols = c("year"), names_from = "name", values_from = "Value")
 write.csv(hsCSV, "outputs/spreadsheets/hs.csv")
@@ -630,13 +630,33 @@ orderDemo <- c("Orleans Parish", "Jefferson Parish", "Plaquemines Parish", "St. 
 #allparishesRaw <- load("inputs/allparishesRaw.RData")
 
 #Table 1
+load("inputs/totpoprace2000.Rdata")
+
+totpopraceRaw_tot <- totpopraceRaw %>% select(placename, Total_2000) %>% na.omit()
+totpopraceRaw_blkwt <- totpopraceRaw %>% select(placename, TotBlackAlone_2000, TotWhiteAlone_2000, TotAsianAlone_2000) %>% na.omit()
+totpopraceRaw_hisp <- totpopraceRaw %>% select(placename, TotHispanicAny_2000) %>% na.omit()
+
+totpoprace_2000 <- totpopraceRaw_tot %>%
+  left_join(totpopraceRaw_blkwt) %>%
+  left_join(totpopraceRaw_hisp) %>%
+  select(placename, Total_2000, TotBlackAlone_2000, TotWhiteAlone_2000, TotHispanicAny_2000, TotAsianAlone_2000) %>%
+  pivot_longer(cols = -placename, names_to = c("var2000", "year"), names_sep = "_", values_to = "val2000") %>%
+  mutate(raceSimple = case_when(grepl("Total", var2000) ~ "Total",
+                                grepl("Black", var2000) ~ "Black",
+                                grepl("White", var2000) ~ "White",
+                                grepl("Hisp", var2000) ~ "Hispanic",
+                                grepl("Asian", var2000) ~ "Asian")) %>%
+  select(-c(year, var2000))
+
+AAWhiteHispan2000 <- totpoprace_2000 %>% filter(placename == "Orleans" & raceSimple != "Total") %>% rename(est2000 = val2000)
+
 load("inputs/allparishesRaw2023.RData")
 AAWhiteHispan <- allparishesRaw2023 %>%
   filter(place == "Orleans Parish") %>%
   filter(date == "7/1/2023 population estimate") %>%
   filter(age == "Total" & sex == "Total" & (raceSimple == "Black"|raceSimple == "White" |hisp == "Hispanic" | raceSimple == "Asian" )) %>%
   mutate(race.fac = factor(.$raceSimple,levels = c("Black", "White","Hispanic", "Asian")))%>% arrange(race.fac) %>%
-  mutate(est2000=c(323392, 128871,  14826, 10919)) %>% #check order of races in data frame. Order is bottom up
+  left_join(AAWhiteHispan2000, by = "raceSimple") %>%
   select(raceSimple, race.fac, population, est2000) 
 
 
@@ -793,6 +813,40 @@ load("inputs/medageRaw.RData")
 
 #Table 5 Population by age group
 
+load("inputs/totpopage2000.RData")
+age2000 <- totpopage2000Raw %>%
+  rename_with(~str_replace(., "_2000", "")) %>%
+  select(-contains("MOE")) %>%
+  mutate("Under 5 years" = MaleUnder1yr + Male1yr + Male2yr + Male3yr + Male4yr + FemaleUnder1 + Female1yr + Female2yr + Female3yr + Female4yr,
+         "5 to 9" =  Male5yr + Male6yr + Male7yr + Male8yr +Male9yr +  Female5yr + Female6yr + Female7yr + Female8yr + Female9yr ,
+         "10 to 14" =  Male10yr + Male11yr + Male12yr + Male13yr + Male14yr  +  Female10yr + Female11yr + Female12yr + Female13yr + Female14yr ,
+         "15 to 19" =  Male15yr + Male16yr + Male17yr + Male18yr + Male19yr  +  Female15yr + Female16yr + Female17yr + Female18yr + Female19yr ,
+         "20 to 24" =  Male20yr + Male21yr + Male22to24  +  Female20yr + Female21yr + Female22to24 ,
+         "25 to 29" = Male25to29 + Female25to29,
+         "30 to 34" = Male30to34 + Female30to34, 
+         "35 to 39" = Male35to39 + Female35to39,
+         "40 to 44" = Male40to44 + Female40to44,
+         "45 to 49" = Male45to49 + Female45to49,
+         "50 to 54" = Male50to54 + Female50to54,
+         "55 to 59" = Male55to59 + Female55to59,
+         "60 to 64" = Male60to61 + Male62to64 + Female60to61 + Female62to64,
+         "65 to 69" = Male65to66 + Male67to69 + Female65to66 + Female67to69,
+         "70 to 74" = Male70to74 + Female70to74,
+         "75 to 79" = Male75to79 + Female75to79,
+         "80 to 84" = Male80to84 + Female80to84,
+         "85 plus" = MaleOver85 + FemaleOver85,
+         
+         PlaceName = case_when(place == "051" ~ "Jefferson",
+                                          place == "071" ~ "Orleans",
+                                          place == "075" ~ "Plaquemines",
+                                          place == "087" ~ "St. Bernard",
+                                          place == "089" ~ "St. Charles",
+                                          place == "093" ~ "St. James",
+                                          place == "095" ~ "St. John the Baptist",
+                                          place == "MSA_2023" ~ "New Orleans Metro Area",
+                                          place == "1" ~ "United States")) %>%
+  select(PlaceName, `Under 5 years`:`85 plus`) %>% pivot_longer(cols = -PlaceName, names_to = "age", values_to = "est2000")
+
 orderAge <- c(rep("Jefferson",18),rep("Orleans", 18),rep("Plaquemines",18),
               rep("St. Bernard", 18),rep("St. Charles", 18),rep("St. James", 18),
               rep("St. John The Baptist", 18))
@@ -810,13 +864,8 @@ Agepop <- allparishesRaw2023 %>%
                  "St. Bernard","St. Charles","St. James",
                  "St. John the Baptist"))) %>%
   select(age, PlaceName, population) %>%
- mutate(est2000 = c(30226,31811,32657,32436,29793,31838,32713,36367,36834,34166,30658,23741,17911,15034,14991,11973,6942,5375,33496,
- 37133,36769,38312,38932,36416,34050,35053,36444,34562,29128,21068,16658,14648,14301,12458,7838,7408,1977,2183,2241,
- 2197,1668,1621,2024,2271,2247,1855,1554,1272,1034,854,769,524,259,207,4242,4639,4996,5021,4257,4196,4584,5327,5530,
- 4939,4398,3241,2597,2569,2714,2148,1051,780,3511,3994,4352,4063,2649,2662,3440,4407,4569,3732,2872,2025,1488,1345,
- 1244,859,462,398,1483,1711,1863,1936,1346,1142,1439,1671,1713,1496,1220,918,916,736,616,448,275,287,3463,3692,3874,
- 3837,2721,2699,3118,3612,3588,3240,2503,1907,1434,1006,925,663,416,346,13556,15029,16147,14672,9045,10257,12729,16457,
- 17655,16062,13641,9733,7125,5825,5168,4033,2296,1838))
+  left_join(age2000, by = c("age", "PlaceName"))
+  
  Agepop_csv <-  Agepop %>%
    mutate(est22 = population,
           est00 = est2000) %>%
@@ -833,7 +882,24 @@ storage_write_csv(Agepop_csv, cont_proj, "who_lives/2024/outputs/Agepop.csv")
 
 #Table 6 Under 18 population
 #Different than estimates from google sheets but aligns with American fact finder
-
+popunder18_2000 <- totpopage2000Raw %>%
+  rename_with(~str_replace(., "_2000", "")) %>%
+  select(-contains("MOE")) %>%
+  mutate(est2000 = MaleUnder1yr + Male1yr + Male2yr + Male3yr + Male4yr + FemaleUnder1 + Female1yr + Female2yr + Female3yr + Female4yr +
+           Male5yr + Male6yr + Male7yr + Male8yr +Male9yr +  Female5yr + Female6yr + Female7yr + Female8yr + Female9yr  +
+           Male10yr + Male11yr + Male12yr + Male13yr + Male14yr  +  Female10yr + Female11yr + Female12yr + Female13yr + Female14yr +
+           Male15yr + Male16yr + Male17yr + Female15yr + Female16yr + Female17yr,
+         
+         PlaceName = case_when(place == "051" ~ "Jefferson",
+                               place == "071" ~ "Orleans",
+                               place == "075" ~ "Plaquemines",
+                               place == "087" ~ "St. Bernard",
+                               place == "089" ~ "St. Charles",
+                               place == "093" ~ "St. James",
+                               place == "095" ~ "St. John the Baptist",
+                               place == "MSA_2023" ~ "Metro",
+                               place == "1" ~ "United States")) %>%
+  select(PlaceName, est2000)
 
 under18pars<-allparishesRaw2023 %>%
   filter(age=="18 years and over" | age=="Total")%>%
@@ -843,6 +909,7 @@ under18pars<-allparishesRaw2023 %>%
   filter(PlaceName %in% c("Orleans", "Jefferson", "Plaquemines", "St. Bernard", "St. Charles",
                           "St. James", "St. John the Baptist")) %>%
   select(age, PlaceName, population)
+
 
 #Creating metro
 under18metro<- under18pars %>%
@@ -856,7 +923,7 @@ popunder18 <-bind_rows(under18pars,under18metro) %>%
   mutate(under18 = Total-`18 years and over`) %>%
   filter(PlaceName == "Orleans" | PlaceName =="Jefferson" | PlaceName == "Metro")%>%
   select(PlaceName, under18) %>%
-  mutate(est2000=c(115255,358092,129408,54399))
+  left_join(popunder18_2000, by = c("PlaceName"))
 
 popunder18CSV <- popunder18 %>%
   select(PlaceName, est2000, under18) %>%
@@ -919,11 +986,11 @@ medhh.race <- medhh_exp %>%
 #2016 to 2022 = 1.10
 load("inputs/medhh_unadjusted.RData")
 medhhinc_adjusted21 <- medhh_unadjusted %>% mutate(value = as.numeric(value),
-                                                   inc_adj21 = case_when(Year == 1979 ~ value * 3.83,
-                                                                         Year == 1989 ~ value * 2.16,
-                                                                         Year == 1999 ~ value * 1.59,
-                                                                         Year == 2010 ~ value * 1.21,
-                                                                         Year == 2016 ~ value * 1.10))
+                                                   inc_adj23 = case_when(Year == 1979 ~ value * cpi79,
+                                                                         Year == 1989 ~ value * cpi89,
+                                                                         Year == 1999 ~ value * cpi99,
+                                                                         Year == 2010 ~ value * cpi10,
+                                                                         Year == 2016 ~ value * cpi16))
 # write_csv(medhhinc_adjusted21, "inputs/medHHinc_exp.csv")
 
 medhh.hist <- medhhinc_adjusted21 %>% 
@@ -938,7 +1005,7 @@ medhh.hist <- medhhinc_adjusted21 %>%
               filter(place.fac == "Orleans",
                      !grepl("asian",var)) %>% ## remove asian numbers 
               select(-place.fac) %>%
-              mutate(Year = 2022, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+              mutate(Year = 2023, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
                      var = ifelse(var == "MedianHHIncome", "All", var),
                      var = ifelse(grepl("blk",var), "Black", var),
                      var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
@@ -1005,26 +1072,26 @@ storage_write_csv(medhh.race_CSV, cont_proj, "who_lives/2024/outputs/medhhrace.c
 medhh.hist_stattest.EST <- medhhRaw_exp %>% 
   filter(place == "071") %>%
   select(-place,-placename,-contains("MOE")) %>%
-  pivot_longer(everything(),names_to = "var",values_to = "val2022") %>%
+  pivot_longer(everything(),names_to = "var",values_to = "val2023") %>%
   filter(var != "MedianHHIncome_asian") %>%
   mutate(race = case_when(var =="MedianHHIncome" ~ "Overall",
                           var =="MedianHHIncome_blk" ~ "Black",
                           var =="MedianHHIncome_wht" ~ "White,\nnon-Hispanic",
                           var =="MedianHHIncome_hisp" ~ "Hispanic,\nany race"
   )) %>%
-  select(race, val2022)
+  select(race, val2023)
 
 medhh.hist_stattest.MOE <- medhhRaw_exp %>% 
   filter(place == "071")%>%
   select(contains("MOE")) %>%
-  pivot_longer(everything(),names_to = "var",values_to = "moe2022")%>%
+  pivot_longer(everything(),names_to = "var",values_to = "moe2023")%>%
   filter(var != "MedianHHIncomeMOE_asian") %>%
   mutate(race = case_when(var =="MedianHHIncomeMOE" ~ "Overall",
                           var =="MedianHHIncomeMOE_blk" ~ "Black",
                           var =="MedianHHIncomeMOE_wht" ~ "White,\nnon-Hispanic",
                           var =="MedianHHIncomeMOE_hisp" ~ "Hispanic,\nany race"
   )) %>%
-  select(race, moe2022)
+  select(race, moe2023)
 
 medhh_unadjusted <- read_xlsx("inputs/indicator expansion drafts/ProspInd_tables_WhoLives2022/Copy_MedianInc.xlsx", range = "A1:H7") %>%
   transmute("var" = `...1`,
@@ -1041,14 +1108,14 @@ medhh_unadjusted <- read_xlsx("inputs/indicator expansion drafts/ProspInd_tables
 
 meddhh.hist_withmoe <- medhh_unadjusted %>% 
   select(var,`1999`,`2010`,`2010MOE`) %>%
-  mutate(adj1999 = as.numeric(`1999`) * 1.59,adj2010 = as.numeric(`2010`) * 1.21, adj2010moe = as.numeric(`2010MOE`) * 1.21) %>%
+  mutate(adj1999 = as.numeric(`1999`) * cpi99,adj2010 = as.numeric(`2010`) * cpi10, adj2010moe = as.numeric(`2010MOE`) * cpi10) %>%
   mutate(adj1999moe = moe2000(adj1999, 215091, designfac = 1.2))
 
 medhh.hist_stattest <- left_join(medhh.hist_stattest.EST,medhh.hist_stattest.MOE) %>%
   left_join(meddhh.hist_withmoe, by = c("race" = "var")) %>%
   mutate(sig_99_10= stattest(x=adj1999,moex = adj1999moe, y=adj2010,moey = adj2010moe),
-         sig_99_21= stattest(x=adj1999,moex = adj1999moe, y=val2022,moey = moe2022),
-         sig_10_21= stattest(x=adj2010,moex = adj2010moe, y=val2022,moey = moe2022)) %>%
+         sig_99_21= stattest(x=adj1999,moex = adj1999moe, y=val2023,moey = moe2023),
+         sig_10_21= stattest(x=adj2010,moex = adj2010moe, y=val2023,moey = moe2023)) %>%
   select(race, contains("sig"))
 
 medhh.hist <- medhh.hist %>% left_join(medhh.hist_stattest, by = c("var" = "race")) %>% filter(var != "All") %>%
@@ -1269,7 +1336,7 @@ EduAtt.hist <- EduAtt %>%
   mutate(var = ifelse(var == "White,\r\nnon-Hispanic", "White,\nnon-Hispanic", ifelse(var == "Hispanic,\r\nany race", "Hispanic,\nany race", var))) %>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race"))) %>%
   bind_rows(bach.race %>%
-              filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2022))
+              filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2023))
 
 bachvars10 <- c('C15002_001E','C15002_001M','C15002_008E','C15002_008M','C15002_009E','C15002_009M','C15002_016E','C15002_016M',
                 'C15002_017E','C15002_017M',
@@ -1353,7 +1420,7 @@ bach.hist_stattest <- left_join(Bach10MOE, Bach00MOE) %>%
   left_join(EduAtt.hist %>% filter(year == 2000) %>% transmute(est2000 = val, race = var)) %>%
   left_join(EduAtt.hist %>% filter(year == 2010) %>% transmute(est2010 = val, race = var)) %>%
   left_join(bach.race_stattest.data %>% filter(place == "071") %>% select(moeprop,moeprop_blk ,moeprop_wht ,moeprop_hisp) %>%
-              pivot_longer(everything(), names_to = "var", values_to = "moe2022") %>%
+              pivot_longer(everything(), names_to = "var", values_to = "moe2023") %>%
               mutate(race = case_when(var =="moeprop" ~ "All",
                                       var =="moeprop_blk" ~ "Black",
                                       var =="moeprop_wht" ~ "White,\nnon-Hispanic",
@@ -1361,7 +1428,7 @@ bach.hist_stattest <- left_join(Bach10MOE, Bach00MOE) %>%
               )) %>%
               select(-var)) %>%
   left_join(bach.race_stattest.data %>% filter(place == "071") %>% select(pctbach,pctbach_blk ,pctbach_wht ,pctbach_hisp) %>%
-              pivot_longer(everything(), names_to = "var", values_to = "est2022") %>%
+              pivot_longer(everything(), names_to = "var", values_to = "est2023") %>%
               mutate(race = case_when(var =="pctbach" ~ "All",
                                       var =="pctbach_blk" ~ "Black",
                                       var =="pctbach_wht" ~ "White,\nnon-Hispanic",
@@ -1369,8 +1436,8 @@ bach.hist_stattest <- left_join(Bach10MOE, Bach00MOE) %>%
               )) %>%
               select(-var)) %>%
   mutate(sig_00_10 = stattest(est2000, moe2000, est2010, moe2010),
-         sig_00_21 = stattest(est2000, moe2000, est2022, moe2022),
-         sig_10_21 = stattest(est2010, moe2010, est2022, moe2022)
+         sig_00_21 = stattest(est2000, moe2000, est2023, moe2023),
+         sig_10_21 = stattest(est2010, moe2010, est2023, moe2023)
   ) %>%
   select(race, contains("sig"))
 EduAtt.hist <- EduAtt.hist %>% left_join(bach.hist_stattest, by = c("var" = "race")) %>%
@@ -1547,7 +1614,7 @@ totalPov.hist <- totalPov %>%
                          T ~  var)) %>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))%>%
   bind_rows(pov.race %>%
-              filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2022))
+              filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2023))
 pov00Wht <- wholivesdatapull(variables = c('P001001', 'P148I001', 'P159I002'),
                              names = c('TotalPop2000', "TotalWhitepop", "Whitepov"),
                              censusname = "dec/sf3",
@@ -1648,9 +1715,9 @@ pov10MOE <- pov10_raw %>%
 pov.hist_stattest <- left_join(pov10MOE, pov00MOE) %>%
   left_join(totalPov.hist %>% filter(year == 1999) %>% transmute(est2000 = val, race = var)) %>%
   left_join(totalPov.hist %>% filter(year == 2010) %>% transmute(est2010 = val, race = var)) %>%
-  left_join(totalPov.hist %>% filter(year == 2022) %>% transmute(est2022 = val, race = var)) %>%
+  left_join(totalPov.hist %>% filter(year == 2023) %>% transmute(est2023 = val, race = var)) %>%
   left_join(pov_stattest.data %>% filter(placename == "Orleans") %>% select(moeprop,moeprop_blk ,moeprop_wht ,moeprop_hisp) %>%
-              pivot_longer(everything(), names_to = "var", values_to = "moe2022") %>%
+              pivot_longer(everything(), names_to = "var", values_to = "moe2023") %>%
               mutate(race = case_when(var =="moeprop" ~ "All",
                                       var =="moeprop_blk" ~ "Black",
                                       var =="moeprop_wht" ~ "White,\nnon-Hispanic",
@@ -1658,8 +1725,8 @@ pov.hist_stattest <- left_join(pov10MOE, pov00MOE) %>%
               )) %>%
               select(-var)) %>%
   mutate(sig_00_10 = stattest(est2000, moe2000, est2010, moe2010),
-         sig_00_21 = stattest(est2000, moe2000, est2022, moe2022),
-         sig_10_21 = stattest(est2010, moe2010, est2022, moe2022)
+         sig_00_21 = stattest(est2000, moe2000, est2023, moe2023),
+         sig_10_21 = stattest(est2010, moe2010, est2023, moe2023)
   ) %>%
   select(race, contains("sig")) %>% filter(race != "All")
 
@@ -1835,7 +1902,7 @@ childPov.hist <- childPovProspInd %>%
               filter(place.fac == "Orleans",
                      !grepl("asian",var)) %>% ## remove asian numbers 
               select(-place.fac) %>%
-              mutate(Year = 2022, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+              mutate(Year = 2023, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
                      var = ifelse(var == "pctBelowChildPov", "All", var),
                      var = ifelse(grepl("blk",var), "Black", var),
                      var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
@@ -1852,11 +1919,11 @@ childpov.hist_stattest <- left_join(childPov.histMOE, (childPov.hist %>%
                                                          filter(Year == 2000) %>% 
                                                          transmute(est2000 = val, race = var)), by = "race") %>%
   left_join(childPov.hist %>% filter(Year == 2010) %>% transmute(est2010 = val, race = var)) %>%
-  left_join(childPov.hist %>% filter(Year == 2022) %>% transmute(est2022 = val, race = var)) %>%
+  left_join(childPov.hist %>% filter(Year == 2023) %>% transmute(est2023 = val, race = var)) %>%
   left_join((childpov_stattest.data %>% 
                filter(placename == "Orleans") %>% 
                select(moeprop,moeprop_blk ,moeprop_wht ,moeprop_hisp) %>%
-               pivot_longer(everything(), names_to = "var", values_to = "moe2022") %>%
+               pivot_longer(everything(), names_to = "var", values_to = "moe2023") %>%
                mutate(race = case_when(var =="moeprop" ~ "All",
                                        var =="moeprop_blk" ~ "Black",
                                        var =="moeprop_wht" ~ "White,\nnon-Hispanic",
@@ -1864,8 +1931,8 @@ childpov.hist_stattest <- left_join(childPov.histMOE, (childPov.hist %>%
                )))) %>%
   select(-var) %>%
   mutate(sig_00_10 = stattest(est2000, moe2000, est2010, moe2010),
-         sig_00_21 = stattest(est2000, moe2000, est2022, moe2022),
-         sig_10_21 = stattest(est2010, moe2010, est2022, moe2022)
+         sig_00_21 = stattest(est2000, moe2000, est2023, moe2023),
+         sig_10_21 = stattest(est2010, moe2010, est2023, moe2023)
   ) %>%
   select(race, contains("sig"))
 
@@ -1899,7 +1966,7 @@ ho_exp <- hoRaw_exp %>%
          placenames = ifelse(place == "071", "Orleans", placenames),
          placenames = ifelse(place == "35380","Metro",placenames),
          placenames = ifelse(place == "1", "U.S.", placenames))  %>% 
-  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson",'Metro", "U.S."))) %>%
+  mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
   select(-place,-placenames) %>%
   pivot_longer(-place.fac,names_to = "var",values_to = "val") 
 
@@ -1927,7 +1994,7 @@ homeownership.hist <- homeownershipProspInd %>%
               filter(place.fac == "Orleans",   
                      !grepl("asian",var)) %>% ## remove asian numbers 
               select(-place.fac) %>%
-              mutate(Year = 2022, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
+              mutate(Year = 2023, ## for the drafts, this is the wrong year, but will make the x axis the correct length for when we update the numbers
                      var = ifelse(var == "Ownerpct", "All", var),
                      var = ifelse(grepl("blk",var), "Black", var),
                      var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
@@ -2021,19 +2088,19 @@ ho.totals <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() 
 
 ho.hist_stattest <- 
   left_join((homeownership.hist %>% filter(Year == 2000) %>% transmute(est2000 = val, race = var)), (homeownership.hist %>% filter(Year == 2010) %>% transmute(est2010 = val, race = var))) %>%
-  left_join((homeownership.hist %>% filter(Year == 2022) %>% transmute(est2022 = val, race = var)))%>%
+  left_join((homeownership.hist %>% filter(Year == 2023) %>% transmute(est2023 = val, race = var)))%>%
   left_join((ho_stattest.data %>% 
                filter(placename == "Orleans") %>% 
                select(Ownermoeprop,Ownermoeprop_blk ,Ownermoeprop_wht ,Ownermoeprop_hisp) %>%
-               pivot_longer(everything(), names_to = "var", values_to = "moe2022") %>%
+               pivot_longer(everything(), names_to = "var", values_to = "moe2023") %>%
                mutate(race = case_when(var =="Ownermoeprop" ~ "All",
                                        var =="Ownermoeprop_blk" ~ "Black",
                                        var =="Ownermoeprop_wht" ~ "White,\nnon-Hispanic",
                                        var =="Ownermoeprop_hisp" ~ "Hispanic,\nany race"
                ))) %>%
               select(-var)) %>%
-  mutate(sig_00_21 = stattest(x=est2000,y= est2022, moey=moe2022),
-         sig_10_21 = stattest(x=est2010, y= est2022, moey=moe2022)
+  mutate(sig_00_21 = stattest(x=est2000,y= est2023, moey=moe2023),
+         sig_10_21 = stattest(x=est2010, y= est2023, moey=moe2023)
   )  %>% filter(race != "All")
 
 homeownership.hist <- homeownership.hist %>% filter(var != "All") %>% left_join(ho.hist_stattest, by = c("var" = "race")) %>%
