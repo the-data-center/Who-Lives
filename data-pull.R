@@ -41,7 +41,7 @@ save(hwc2000Raw, file = "inputs/hwc2000Raw.RData")
 medagevars <- c("B01002_001E")
 medagenames <- c("medianage")
 medageRaw <- getCensus("acs/acs1",
-                       2022,
+                       year,
                        key = "530ce361defc2c476e5b5d5626d224d8354b9b9a",
                        vars = medagevars,
                        region = "metropolitan statistical area/micropolitan statistical area:35380")
@@ -167,16 +167,16 @@ save(mobRaw, file = "inputs/mobRaw.RData")
 
 # Total Population by race
 
-totpopracevars<- c('P001001','P006003','P006002','P007010','P007010')
+totpopracevars<- c('P001001','P006003','P006002','P007010','P006005')
 totpopracenames<-c("Total","TotBlackAlone","TotWhiteAlone","TotHispanicAny","TotAsianAlone")
-totpopraceRaw<-wholivesdatapull2000(totpopracevars,totpopracenames)
+totpopraceRaw<-wholivesdatapull2000(totpopracevars,totpopracenames, parishregions = "county:071,051,075,087,089,093,095")
 save(totpopraceRaw, file = "inputs/totpoprace2000.Rdata")
 
 # Total Population by Age,*inhales*
 # Need total population 
 totpopage2000vars <-c('P008001','P008003','P008004','P008005','P008006','P008007','P008008','P008009','P008010','P008011','P008012','P008013','P008014','P008015','P008016','P008017','P008018','P008019','P008020','P008021','P008022','P008023','P008024','P008025','P008026','P008027','P008028','P008029','P008030','P008031','P008032','P008033','P008034','P008035','P008036','P008037','P008038','P008039','P008040','P008042','P008043','P008044','P008045','P008046','P008047','P008048','P008049','P008050','P008051','P008052','P008053','P008054','P008055','P008056','P008057','P008058','P008059','P008060','P008061','P008062','P008063','P008064','P008065','P008066','P008067','P008068','P008069','P008070','P008071','P008072','P008073','P008074','P008075','P008076','P008077','P008078','P008079')
 totpopage2000names <-c("totalsexbyage","MaleUnder1yr","Male1yr","Male2yr","Male3yr","Male4yr","Male5yr","Male6yr","Male7yr","Male8yr","Male9yr","Male10yr","Male11yr","Male12yr","Male13yr","Male14yr","Male15yr","Male16yr","Male17yr","Male18yr","Male19yr","Male20yr","Male21yr","Male22to24","Male25to29","Male30to34","Male35to39","Male40to44","Male45to49","Male50to54","Male55to59","Male60to61","Male62to64","Male65to66","Male67to69","Male70to74","Male75to79","Male80to84","MaleOver85","FemaleUnder1","Female1yr", "Female2yr","Female3yr","Female4yr","Female5yr","Female6yr","Female7yr","Female8yr","Female9yr","Female10yr","Female11yr","Female12yr","Female13yr","Female14yr","Female15yr","Female16yr","Female17yr","Female18yr","Female19yr","Female20yr","Female21yr","Female22to24","Female25to29","Female30to34","Female35to39","Female40to44","Female45to49","Female50to54","Female55to59","Female60to61","Female62to64","Female65to66","Female67to69","Female70to74","Female75to79","Female80to84","FemaleOver85")
-totpopage2000Raw <-wholivesdatapull2000(totpopage2000vars,totpopage2000names)
+totpopage2000Raw <-wholivesdatapull2000(totpopage2000vars,totpopage2000names, parishregions = "county:071,051,075,087,089,093,095")
 save(totpopage2000Raw, file = "inputs/totpopage2000.RData")
 
 
@@ -184,7 +184,7 @@ save(totpopage2000Raw, file = "inputs/totpopage2000.RData")
 ACScounty_04 <- read_csv("inputs/ACS_data/ACS_2004_050.csv") 
 ACSUS_04 <- read_csv("inputs/ACS_data/ACS_2004_010.csv")
 ACSmetro_04 <- read_csv("inputs/ACS_data/ACS_2004_380.csv")
-mob_04 <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
+mob04Raw <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
   filter(grepl("22071", geoid) |
            grepl("22051", geoid) |
            grepl("22103", geoid) | #St. Tammany isn't in 2004 ACS for these.
@@ -211,23 +211,23 @@ mob_04 <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
          clb = as.numeric(clb))  %>%
   select(placename, var, MOE, cest) %>%
   pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
-  mutate(mobabroadpct = cest_TotMovedfromAbroad / cest_Total,
-         mobabroadpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedfromAbroad,moey = MOE_Total,p=mobabroadpct),
-         mobStatespct = cest_TotMovedbtwnStates / cest_Total,
-         mobStatespctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedbtwnStates,moey = MOE_Total,p=mobStatespct),
-         difparishpct = cest_TotMovedinState / cest_Total,
-         difparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinState,moey = MOE_Total,p=difparishpct),
-         withinparishpct = cest_TotMovedinCty / cest_Total,
-         withinparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinCty,moey = MOE_Total,p=withinparishpct),
-         samehousepct = cest_TotSameHouse / cest_Total,
-         samehousepctMOE = moeprop(y=cest_Total, moex = MOE_TotSameHouse,moey = MOE_Total,p=samehousepct)) %>%
+  mutate(sf2004mobabroadpct = cest_TotMovedfromAbroad / cest_Total,
+         sf2004mobabroadpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedfromAbroad,moey = MOE_Total,p=sf2004mobabroadpct),
+         sf2004mobStatespct = cest_TotMovedbtwnStates / cest_Total,
+         sf2004mobStatespctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedbtwnStates,moey = MOE_Total,p=sf2004mobStatespct),
+         sf2004difparishpct = cest_TotMovedinState / cest_Total,
+         sf2004difparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinState,moey = MOE_Total,p=sf2004difparishpct),
+         sf2004withinparishpct = cest_TotMovedinCty / cest_Total,
+         sf2004withinparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinCty,moey = MOE_Total,p=sf2004withinparishpct),
+         sf2004samehousepct = cest_TotSameHouse / cest_Total,
+         sf2004samehousepctMOE = moeprop(y=cest_Total, moex = MOE_TotSameHouse,moey = MOE_Total,p=sf2004samehousepct)) %>%
   select(placename, 
-         mobabroadpct, mobabroadpctMOE, 
-         mobStatespct, mobStatespctMOE, 
-         difparishpct, difparishpctMOE,
-         withinparishpct, withinparishpctMOE,
-         samehousepct, samehousepctMOE)
-
+         sf2004mobabroadpct, sf2004mobabroadpctMOE, 
+         sf2004mobStatespct, sf2004mobStatespctMOE, 
+         sf2004difparishpct, sf2004difparishpctMOE,
+         sf2004withinparishpct, sf2004withinparishpctMOE,
+         sf2004samehousepct, sf2004samehousepctMOE)
+save(mob04Raw, file = "inputs/mob04Raw.RData")
 
 #Homeownership rates
 
@@ -238,7 +238,7 @@ save(hoRaw, file = "inputs/hoRaw.RData")
 
 hovars2000 <- c('H004001', 'H004002')
 honames2000 <- c("Total", "Owner")
-hoRaw2000 <- wholivesdatapull2000(hovars2000, honames2000)
+hoRaw2000 <- wholivesdatapull2000(hovars2000, honames2000, universe = "households")
 save(hoRaw2000, file = "inputs/hoRaw2000.RData")
 
 #Homeowners without a mortgage
@@ -251,7 +251,7 @@ save(honomoRaw, file = "inputs/honomoRaw.RData")
 
 honomovars2000 <- c('H098001','H098018')
 honomonames2000 <-c("Total","NoMortgage")
-honomoRaw2000<- wholivesdatapull2000(honomovars2000,honomonames2000)
+honomoRaw2000<- wholivesdatapull2000(honomovars2000,honomonames2000, universe = "households")
 save(honomoRaw2000, file = "inputs/honomoRaw2000.RData")
 
 #Renters with severe housing cost burdens
@@ -298,17 +298,18 @@ housing <-  ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
          clb = as.numeric(clb)) %>%
   select(placename, var, MOE, cest) %>%
   pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
-  mutate(rentburpct = (cest_rentcostburden) / (cest_totrenters - cest_renters_notcomp),
+  mutate(rentburpct2004 = (cest_rentcostburden) / (cest_totrenters - cest_renters_notcomp),
          MOE_rentersagg = moeagg(cbind(MOE_totrenters,MOE_renters_notcomp)),
-         rentburpctMOE = moeprop(y = cest_totrenters- cest_renters_notcomp, moex = MOE_rentcostburden, moey = MOE_rentersagg, p = rentburpct),
-         medgrossrent = cest_medgrossrent,
-         medgrossrentMOE = MOE_medgrossrent,
-         hoburpct = (cest_hocostburden+cest_hocostburden_nomort) / (cest_tothomeowners - (cest_ho_notcomp+cest_ho_notcomp_nomort)),
+         rentburpct2004MOE = moeprop(y = cest_totrenters- cest_renters_notcomp, moex = MOE_rentcostburden, moey = MOE_rentersagg, p = rentburpct2004),
+         medgrossrent2004 = cest_medgrossrent,
+         medgrossrent2004MOE = MOE_medgrossrent,
+         hoburpct2004 = (cest_hocostburden+cest_hocostburden_nomort) / (cest_tothomeowners - (cest_ho_notcomp+cest_ho_notcomp_nomort)),
          MOE_hoburagg = moeagg(cbind(MOE_hocostburden,MOE_hocostburden_nomort)),
          MOE_hoagg = moeagg(cbind(MOE_tothomeowners,MOE_ho_notcomp,MOE_ho_notcomp_nomort)),
-         hoburpctMOE = moeprop(y = (cest_tothomeowners- (cest_ho_notcomp+cest_ho_notcomp_nomort)), moex = MOE_hoburagg, moey = MOE_hoagg, p = hoburpct)) %>%
-  select(placename, medgrossrent, medgrossrentMOE, rentburpct, rentburpctMOE, hoburpct, hoburpctMOE)
-
+         hoburpct2004MOE = moeprop(y = (cest_tothomeowners- (cest_ho_notcomp+cest_ho_notcomp_nomort)), moex = MOE_hoburagg, moey = MOE_hoagg, p = hoburpct2004)) %>%
+  select(placename, medgrossrent2004, medgrossrent2004MOE, rentburpct2004, rentburpct2004MOE, hoburpct2004, hoburpct2004MOE)
+rentburRaw2004 <- housing
+save(rentburRaw2004, file = "inputs/rentburRaw2004.RData")
 
 
 
@@ -547,7 +548,7 @@ medhhnames <- c("MedianHHIncome", "MedianHHIncomeMOE",
                 "MedianHHIncome_asian", "MedianHHIncomeMOE_asian",
                 "MedianHHIncome_wht", "MedianHHIncomeMOE_wht",
                 "MedianHHIncome_hisp", "MedianHHIncomeMOE_hisp")
-medhhRaw_exp <- wholivesdatapull(medhhvars, medhhnames, year = 2022)
+medhhRaw_exp <- wholivesdatapull(medhhvars, medhhnames, year = year)
 save(medhhRaw_exp, file = "inputs/medhhRaw_exp.RData")
 
 medhh_unadjusted <- read_xlsx("inputs/indicator expansion drafts/ProspInd_tables_WhoLives2022/Copy_MedianInc.xlsx", range = "A1:H7") %>%
@@ -577,7 +578,7 @@ bachnames <- c("Total", "TotalMOE", "MaleBach", "MaleBachMOE", "MaleGradProf",  
                "FemaleBachMOE_wht", 
                "Total_hisp", "TotalMOE_hisp", "MaleBach_hisp", "MaleBachMOE_hisp", "FemaleBach_hisp", 
                "FemaleBachMOE_hisp")
-bachRaw_exp <- wholivesdatapull(bachvars, bachnames, year = 2022)
+bachRaw_exp <- wholivesdatapull(bachvars, bachnames, year = year)
 save(bachRaw_exp, file = "inputs/bachRaw_exp.RData")
 
 #Historial Educational Attainment. 1980-2000 from NHGIS
@@ -750,7 +751,7 @@ Bach16 <- Bach16 %>%
 
 bachRaw_exp <- bachRaw_exp %>% ## something's going on here where this is names the same as bachRaw above and so can't be used in the analysis piece as it was before
   filter(place == "071") %>% 
-  transmute(year = 2022,
+  transmute(year = year,
             pctTotalBach = (MaleBach + FemaleBach + MaleGradProf + FemaleGradProf) / Total,
             pctWhiteBach = (MaleBach_wht + FemaleBach_wht) / Total_wht,
             pctBlackBach = (MaleBach_blk + FemaleBach_blk) / Total_blk,
@@ -779,7 +780,7 @@ povnames <- c("Total", "TotalMOE", "BelowPov", "BelowPovMOE",
               "Total_asian", "TotalMOE_asian", "BelowPov_asian", "BelowPovMOE_asian",
               "Total_wht", "TotalMOE_wht", "BelowPov_wht", "BelowPovMOE_wht",
               "Total_hisp", "TotalMOE_hisp", "BelowPov_hisp", "BelowPovMOE_hisp")
-povRaw_exp <- wholivesdatapull(povvars, povnames, year = 2022)
+povRaw_exp <- wholivesdatapull(povvars, povnames, year = year)
 save(povRaw_exp, file = "inputs/povRaw_exp.RData")
 
 # Creating a time series for total poverty - had to get 1980-2000 from IPUMS NHGIS
@@ -897,7 +898,7 @@ pov16 <- pov16 %>%
 #current year
 povraw_exp <- povRaw_exp %>%
   filter(place == "071") %>% 
-  transmute(year = 2022, 
+  transmute(year = year, 
             pctTotalpov = BelowPov / Total,
             pctWhitepov = BelowPov_wht / Total_wht,
             pctBlackpov = BelowPov_blk / Total_blk,
@@ -932,7 +933,7 @@ childpovnames <- c("BelowPovMaleChild", "BelowPovMaleChildMOE", "BelowPovFemaleC
                    "AbovePovMaleChildMOE_wht", "AbovePovFemaleChild_wht", "AbovePovFemaleChildMOE_wht",
                    "BelowPovMaleChild_hisp", "BelowPovMaleChildMOE_hisp", "BelowPovFemaleChild_hisp", "BelowPovFemaleChildMOE_hisp", "AbovePovMaleChild_hisp", 
                    "AbovePovMaleChildMOE_hisp", "AbovePovFemaleChild_hisp", "AbovePovFemaleChildMOE_hisp")
-childpovRaw_exp <- wholivesdatapull(childpovvars, childpovnames, year = 2022)
+childpovRaw_exp <- wholivesdatapull(childpovvars, childpovnames, year = year)
 save(childpovRaw_exp, file = "inputs/childpovRaw_exp.RData")
 
 #Homeownership rates
@@ -1349,7 +1350,7 @@ Racepopest23 <- allparishesRaw2023 %>%
   filter(age == "Total" & sex == "Total" & raceSimple != "Total") %>%
   mutate(place = PlaceName) %>%
   select(POP = population, DATE_DESC = date, race = raceSimple, place)  %>%
-  mutate(state = "", county = "", year = 2023) %>%
+  mutate(state = "", county = "", year = year) %>%
   select(state, county, POP, DATE_DESC, race, place, year)
 
 

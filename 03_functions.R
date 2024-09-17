@@ -8,7 +8,7 @@
 ##input: census api variable names, human-readable names, and vintage
 ##output: dataframe in same format as Who Lives data tables excel sheet
 
-wholivesdatapull <- function(variables, names = variables, year = 2022, censusname = "acs/acs1"){
+wholivesdatapull <- function(variables, names = variables, year = 2023, censusname = "acs/acs1"){
   censuskey="530ce361defc2c476e5b5d5626d224d8354b9b9a"
   parishes <- getCensus(name = censusname, vintage = year, key = censuskey, vars = variables, region = "county:071,051", regionin = "state:22") ##pull parish data
   parishes$state = NULL  #state column pulled automatically & needs to be deleted
@@ -31,9 +31,9 @@ wholivesdatapull <- function(variables, names = variables, year = 2022, censusna
 #creating a separate data pull for 2000 so that we can manually match the metro parish estimates and include stat testing
 #WL datapull with error
 
-wholivesdatapull2000 <- function(variables, names = variables, universe = "persons", error = TRUE){
+wholivesdatapull2000 <- function(variables, names = variables, universe = "persons", error = TRUE, parishregions = "county:071,051"){
   censuskey = "530ce361defc2c476e5b5d5626d224d8354b9b9a"
-  parishes <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = "county:071,051", regionin = "state:22") 
+  parishes <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = parishregions, regionin = "state:22") 
   parishes$state = NULL  #state column pulled automatically & needs to be deleted
   
   metro <- getCensus(name = "dec/sf3", vintage = 2000, key = censuskey, vars = variables, region = "county:071,051,075,087,089,093,095", regionin = "state:22")
@@ -59,7 +59,8 @@ wholivesdatapull2000 <- function(variables, names = variables, universe = "perso
   if(error == TRUE) {
     LA_data <- error2000(LA_data, names, "LA")
   } else {
-    names(LA_data) <- c("place", names)
+    names(LA_data) <- c("place", names) 
+    LA_data <- LA_data %>% select(-last_col())
   }
   
   
@@ -71,12 +72,18 @@ wholivesdatapull2000 <- function(variables, names = variables, universe = "perso
   } else {
     names(us) <- c("place",names)
     US_data <-us
+    US_data <- US_data %>% select(-last_col())
   }
   
   
   df <- switch(rbind(LA_data, US_data))
   df <- df %>% mutate(placename = case_when(place == "051" ~ "Jefferson",
                                             place == "071" ~ "Orleans",
+                                            place == "075" ~ "Plaquemines",
+                                            place == "087" ~ "St. Bernard",
+                                            place == "089" ~ "St. Charles",
+                                            place == "093" ~ "St. James",
+                                            place == "095" ~ "St. John the Baptist",
                                             place == "MSA_2023" ~ "New Orleans Metro Area",
                                             place == "1" ~ "United States"))
   return(df)
@@ -327,7 +334,7 @@ dodgedBar <- function(data,
                       yscale = c(0,.45),      
                       pct = TRUE,      #used when formatting pct vals vs dollar vals
                       comparisonyear = "2000",
-                      year = "2022",
+                      year = "2023",
                       digits = 0,
                       lab_pos = position_dodge(width = .7)){     #for rounding, specifically for forbor
   dataGraphic <-  data %>% select(-contains("moeprop")) %>%      #dplyr rejects the format of moeprop, so we drop it  mutate(placenames = NA,
@@ -337,7 +344,7 @@ dodgedBar <- function(data,
            placenames = ifelse(place == "071", "Orleans", placenames),
            placenames = ifelse(place == "35380","Metro",placenames),
            placenames = ifelse(place == "1", "U.S.", placenames)) %>%
-    mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","St. Tammany","Metro", "U.S."))) %>%     #vars of type "factor" allow you to control order
+    mutate(place.fac = factor(.$placenames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%     #vars of type "factor" allow you to control order
     select(one_of("census2000", "sf2004", "sf1999", "Ownerpct2000"), !!stattograph, placenames, place.fac, significant) %>%     #one_of() chooses correct comparison vals/!! is the second part or the quo() tool
     gather(-placenames,-place.fac, -significant, key=variable, value=value) %>% 
     mutate(description = as.factor(ifelse(variable == "census2000"|variable =="sf2004"|variable =="sf1999" | variable == "Ownerpct2000", comparisonyear, year))) %>%     #creates legend info
