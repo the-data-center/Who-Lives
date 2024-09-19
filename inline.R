@@ -59,7 +59,7 @@ getvalue.pop.tam.current <- Overallpop %>%
   select(population) %>%
   pull()
 
-metropop.current <-(getvalue.pop.no.current + getvalue.pop.jeff.current  + getvalue.pop.plaq.current  + getvalue.pop.bernard.current + getvalue.pop.charles.current + getvalue.pop.james.current + getvalue.pop.john.current + getvalue.pop.tam.current)
+metropop.current <-(getvalue.pop.no.current + getvalue.pop.jeff.current  + getvalue.pop.plaq.current  + getvalue.pop.bernard.current + getvalue.pop.charles.current + getvalue.pop.james.current + getvalue.pop.john.current)
 
 
 #According to the U.S. Census Bureau’s 2018 population estimates, there are now 91,274 fewer African Americans living in New Orleans (Orleans)
@@ -101,13 +101,10 @@ getvalue.pop.john.2010 <- Overallpop2010 %>%
   filter(PlaceName == "St. John the Baptist") %>%
   select(population) %>%
   pull()
-getvalue.pop.tam.2010 <- Overallpop2010 %>%
-  filter(PlaceName == "St. Tammany") %>%
-  select(population) %>%
-  pull()
 
 
-metro2010pop <- (getvalue.pop.no.2010 + getvalue.pop.jeff.2010  + getvalue.pop.plaq.2010  + getvalue.pop.bernard.2010 + getvalue.pop.charles.2010 + getvalue.pop.james.2010 + getvalue.pop.john.2010 + getvalue.pop.tam.2010)
+
+metro2010pop <- (getvalue.pop.no.2010 + getvalue.pop.jeff.2010  + getvalue.pop.plaq.2010  + getvalue.pop.bernard.2010 + getvalue.pop.charles.2010 + getvalue.pop.james.2010 + getvalue.pop.john.2010)
 
 pctincrease.metro.current.2010 <- ((metropop.current - metro2010pop)/metro2010pop)
 

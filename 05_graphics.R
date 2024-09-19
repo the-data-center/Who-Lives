@@ -901,7 +901,7 @@ employ.raceGeos_chart <- employ_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5))  + 
-  labs(title = "Employment rate, for population 16+ by race/ethnicity, 2023",
+  labs(title = "Employment rate, for population 16-64 by race/ethnicity, 2023",
        x="",
        y="",
        fill = "") +
@@ -928,7 +928,7 @@ employment.hist_chart <- ggplot(employ_stattest.hist) +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) +
-  labs(title = "Employment rate, population 16+ by race/ethnicity and gender,\n Orleans Parish",
+  labs(title = "Employment rate, population 16-64 by race/ethnicity and gender,\n Orleans Parish",
        x = "",
        y = "")
 ggsave(employment.hist_chart,filename = "indicator expansion drafts/graphics/employment.hist.png",

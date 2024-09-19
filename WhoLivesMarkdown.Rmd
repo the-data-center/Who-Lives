@@ -111,6 +111,10 @@ makeCSS_highlight(
 The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in metro New Orleans as of July `r yearPEP`, a `r round.off((-1*pctincrease.metro.current.2020)*100)` percent decrease from April 2020.[^1] The metro area now has `r round.off((metropop.current / 1337726)*100)` percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available).
 
 
+## updated text ##
+The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in the 7-parish New Orleans metro as of July `r yearPEP`, a 4.5 percent decrease from April 2020.1 The metro area now has percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available). 
+
+
 ## Race/Ethnicity
 
 According to the U.S. Census Bureau’s `r yearPEP` population estimates, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.current)` fewer Black residents living in New Orleans (Orleans Parish) compared to 2000, and there are `r comma(getvalue.white.no.2000 - getvalue.white.no.current)` fewer White residents as well as `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` more Hispanic residents.[^2]
