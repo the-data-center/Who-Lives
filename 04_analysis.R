@@ -1139,41 +1139,23 @@ medhh.hist_csv <- medhh.hist %>% select(Year, race = var, val) %>% filter(Year !
 load("inputs/employmentRaw.RData")
 
 employ <- employmentRaw %>%
-  mutate(WhtMale_emp = WhiteMale16to19 + WhiteMale20to24 + WhiteMale25to54 + WhiteMale55to64 + WhiteMale65to69 + WhiteMale70plus,
-         WhtMale_empMOE = moeagg(cbind(WhiteMale16to19MOE, WhiteMale20to24MOE, WhiteMale25to54MOE, WhiteMale55to64MOE, WhiteMale65to69MOE, WhiteMale70plusMOE)),
+  mutate(WhtMale_pct = WhtMaleEmp / WhtMaleTot,
+         WhtMale_pctMOE = moeprop(WhtMaleTot, WhtMaleEmpMOE, WhtMaleTotMOE, WhtMale_pct),
          
-         WhtFemale_emp = WhiteFemale16to19 + WhiteFemale20to24 + WhiteFemale25to54 + WhiteFemale55to64 + WhiteFemale65to69 + WhiteFemale70plus,
-         WhtFemale_empMOE = moeagg(cbind(WhiteFemale16to19MOE, WhiteFemale20to24MOE, WhiteFemale25to54MOE, WhiteFemale55to64MOE, WhiteFemale65to69MOE, WhiteFemale70plusMOE)),
+         WhtFemale_pct = WhtFemaleEmp / WhtFemaleTot,
+         WhtFemale_pctMOE = moeprop(WhtFemaleTot, WhtFemaleEmpMOE, WhtFemaleTotMOE, WhtFemale_pct),
          
-         BlackMale_emp = BlackMale16to19 + BlackMale20to24 + BlackMale25to54 + BlackMale55to64 + BlackMale65to69 + BlackMale70plus,
-         BlackMale_empMOE = moeagg(cbind(BlackMale16to19MOE, BlackMale20to24MOE, BlackMale25to54MOE, BlackMale55to64MOE, BlackMale65to69MOE, BlackMale70plusMOE)),
+         BlackMale_pct = BlkMaleEmp / BlkMaleTot,
+         BlackMale_pctMOE = moeprop(BlkMaleTot, BlkMaleEmpMOE, BlkMaleTotMOE, BlackMale_pct),
          
-         BlackFemale_emp = BlackFemale16to19 + BlackFemale20to24 + BlackFemale25to54 + BlackFemale55to64 + BlackFemale65to69 + BlackFemale70plus,
-         BlackFemale_empMOE = moeagg(cbind(BlackFemale16to19MOE, BlackFemale20to24MOE, BlackFemale25to54MOE, BlackFemale55to64MOE, BlackFemale65to69MOE, BlackFemale70plusMOE)),
+         BlackFemale_pct = BlkFemaleEmp / BlkFemaleTot,
+         BlackFemale_pctMOE = moeprop(BlkFemaleTot, BlkFemaleEmpMOE, BlkFemaleTotMOE, BlackFemale_pct),
          
-         HispMale_emp = HispMale16to19 + HispMale20to24 + HispMale25to54 + HispMale55to64 + HispMale65to69 + HispMale70plus,
-         HispMale_empMOE = moeagg(cbind(HispMale16to19MOE, HispMale20to24MOE, HispMale25to54MOE, HispMale55to64MOE, HispMale65to69MOE, HispMale70plusMOE)),
+         HispMale_pct = HispMaleEmp / HispMaleTot, 
+         HispMale_pctMOE = moeprop(HispMaleTot, HispMaleEmpMOE, HispMaleTotMOE, HispMale_pct),
          
-         HispFemale_emp = HispFemale16to19 + HispFemale20to24 + HispFemale25to54 + HispFemale55to64 + HispFemale65to69 + HispFemale70plus,
-         HispFemale_empMOE = moeagg(cbind(HispFemale16to19MOE, HispFemale20to24MOE, HispFemale25to54MOE, HispFemale55to64MOE, HispFemale65to69MOE, HispFemale70plusMOE)),
-         
-         WhtMale_pct = WhtMale_emp / WhiteMale,
-         WhtMale_pctMOE = moeprop(WhiteMale, WhtMale_empMOE, WhiteMaleMOE, WhtMale_pct),
-         
-         WhtFemale_pct = WhtFemale_emp / WhiteFemale,
-         WhtFemale_pctMOE = moeprop(WhiteFemale, WhtFemale_empMOE, WhiteFemaleMOE, WhtFemale_pct),
-         
-         BlackMale_pct = BlackMale_emp / BlackMale,
-         BlackMale_pctMOE = moeprop(BlackMale, BlackMale_empMOE, BlackMaleMOE, BlackMale_pct),
-         
-         BlackFemale_pct = BlackFemale_emp / BlackFemale,
-         BlackFemale_pctMOE = moeprop(BlackFemale, BlackFemale_empMOE, BlackFemaleMOE, BlackFemale_pct),
-         
-         HispMale_pct = ifelse(!is.na(HispMale_emp / HispanicMale), HispMale_emp / HispanicMale, 0), 
-         HispMale_pctMOE = moeprop(HispanicMale, ifelse(is.na(HispMale_empMOE), 0, HispMale_empMOE), ifelse(is.na(HispanicMaleMOE), 0, HispanicMaleMOE), HispMale_pct),
-         
-         HispFemale_pct = ifelse(!is.na(HispFemale_emp / HispanicFemale), HispFemale_emp / HispanicFemale, 0),
-         HispFemale_pctMOE = moeprop(HispanicFemale, ifelse(is.na(HispFemale_empMOE), 0, HispFemale_empMOE), ifelse(is.na(HispanicFemaleMOE), 0, HispanicFemaleMOE), HispFemale_pct)
+         HispFemale_pct = HispFemaleEmp / HispFemaleTot,
+         HispFemale_pctMOE = moeprop(HispFemaleTot, HispFemaleEmpMOE, HispFemaleTotMOE, HispFemale_pct)
   ) %>%
   select(c(place, placename, WhtMale_pct:HispFemale_pctMOE))
 
