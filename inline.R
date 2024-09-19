@@ -121,47 +121,47 @@ pctincrease.metro.current.2020 <- ((metropop.current - metro2020pop)/metro2020po
 #The number of African Americans living In New Orleans grew every year post-Katrina (from 2006 to 2018)
 #but decreased for the first time post-Katrina from 232,118 in 2018 to 231,147 In 2018.
 
-AA2017 <- AAhistorical %>%   ### PEP update 
-  filter(year == 2017) %>%
-  select(POP) %>%
-  pull()
-
-AA2018 <- AAhistorical %>%
-  filter(year == 2018) %>%
-  select(POP) %>%
-  pull()
-
-AA2019 <- AAhistorical %>%
-  filter(year == 2019) %>%
-  select(POP) %>%
-  pull()
-
-AA2020 <- AAhistorical %>%
-  filter(year == 2020) %>%
-  select(POP) %>%
-  pull()
-
-AA2021 <- AAhistorical %>%
-  filter(year == 2021) %>%
-  select(POP) %>%
-  pull()
-
-AA2022 <- AAhistorical %>%
-  filter(year == 2022) %>%
-  select(POP) %>%
-  pull()
-
-AA2023 <- AAhistorical %>%
-  filter(year == 2023) %>%
-  select(POP) %>%
-  pull()
-
-
+# AA2017 <- AAhistorical %>%   ### PEP update 
+#   filter(year == 2017) %>%
+#   select(POP) %>%
+#   pull()
+# 
+# AA2018 <- AAhistorical %>%
+#   filter(year == 2018) %>%
+#   select(POP) %>%
+#   pull()
+# 
+# AA2019 <- AAhistorical %>%
+#   filter(year == 2019) %>%
+#   select(POP) %>%
+#   pull()
+# 
+# AA2020 <- AAhistorical %>%
+#   filter(year == 2020) %>%
+#   select(POP) %>%
+#   pull()
+# 
+# AA2021 <- AAhistorical %>%
+#   filter(year == 2021) %>%
+#   select(POP) %>%
+#   pull()
+# 
+# AA2022 <- AAhistorical %>%
+#   filter(year == 2022) %>%
+#   select(POP) %>%
+#   pull()
+# 
+# AA2023 <- AAhistorical %>%
+#   filter(year == 2023) %>%
+#   select(POP) %>%
+#   pull()
+# 
+# 
 getvalue.AA.no.current <- AAWhiteHispan %>%  ### PEP update
   filter(raceSimple == "Black") %>%
   select(population) %>%
   pull()
-
+# 
 getvalue.AA.no.2000 <- AAWhiteHispan %>%
   filter(raceSimple == "Black") %>%
   select(est2000) %>%
@@ -297,7 +297,7 @@ getvalue.Hispanpct.tam.current <-ParishDemo %>%  ### PEP update
 #As of July 2018, there were 115,396 Hispanics in the metro area,
 getvalue.Hispan.metro.current <-ParishDemo %>%  ### PEP update
   filter(grepl("Metro",PlaceName)) %>%
-  select(Hispanic) %>%
+  select(population_Hispanic) %>%
   pull()
 
 
@@ -1112,19 +1112,19 @@ getvalue.sing.2000 <- sing %>%
   getvalue.mobabroadpct.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
-    select(sf2004mobabroad) %>%
+    select(sf2004mobabroadpct) %>%
     pull()
 
   getvalue.mobStatespct.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
-    select(sf2004states) %>%
+    select(sf2004mobStatespct) %>%
     pull()
 
   getvalue.difparishpct.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
-    select(sf2004difparish) %>%
+    select(sf2004difparishpct) %>%
     pull()
 
 
@@ -1148,13 +1148,13 @@ getvalue.sing.2000 <- sing %>%
   getvalue.mobsamehouse.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
-    select(sf2004samehouse) %>%
+    select(sf2004samehousepct) %>%
     pull()
 
   getvalue.mobbtwnparish.no.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
-    select(sf2004withinparish) %>%
+    select(sf2004withinparishpct) %>%
     pull()
 
 
@@ -1200,19 +1200,19 @@ getvalue.outsidestatepct.no.2018 <- (getvalue.mobTotMovedbtwnStates.no.2018 + ge
   getvalue.abroad.jeff.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
     filter(placename == "Jefferson") %>%
-    select(sf2004mobabroad) %>%
+    select(sf2004mobabroadpct) %>%
     pull()
 
   getvalue.states.jeff.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
     filter(placename == "Jefferson") %>%
-    select(sf2004states) %>%
+    select(sf2004mobStatespct) %>%
     pull()
 
   getvalue.difparish.jeff.2004 <- mob %>%
     select(-abroadSIG, -statesSIG, -difparishSIG, -withinparishSIG, -samhouseSIG, -contains("moeprop")) %>%
     filter(placename == "Jefferson") %>%
-    select(sf2004difparish) %>%
+    select(sf2004difparishpct) %>%
     pull()
 
 getvalue.moboutofparish.jeff.2004 <- (getvalue.abroad.jeff.2004  + getvalue.states.jeff.2004 + getvalue.difparish.jeff.2004)
