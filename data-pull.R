@@ -594,6 +594,8 @@ employ10<-employ10 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(y
 employment<-rbind(employ80,employ90,employ00,employ10)
 save(employment, file = "inputs/employ_TS.RData")
 
+
+
 #################################################
 # # Jenna's expanded data pull
 #################################################
