@@ -21,7 +21,7 @@ save(totalpop_metro, file = "inputs/totalpop_metro.RData")
 
 hispanvars <-c("B03001_001E","B03001_001M","B03001_002E","B03001_002M","B03001_003E","B03001_003M","B03001_004E","B03001_004M","B03001_005E","B03001_005M","B03001_006E","B03001_006M","B03001_007E","B03001_007M","B03001_008E","B03001_008M","B03001_009E","B03001_009M","B03001_010E","B03001_010M","B03001_011E","B03001_011M","B03001_012E","B03001_012M","B03001_013E","B03001_013M","B03001_014E","B03001_014M","B03001_015E","B03001_015M","B03001_016E","B03001_016M","B03001_027E","B03001_027M")
 hispannames <-c("Total","TotalMOE","TotalNotHIsporLat","TotalNotHIsporLatMOE","TotalHisporLat","TotalHisporLatMOE","TotMex","TotMexMOE","TotPR","TotPRMOE","TotCuba","TotCubaMOE","TotDomin","TotDominMOE","TotCentrAm","TotCentrAmMOE","TotCostaR","TotCostaRMOE","TotGuat","TotGuatMOE","TotHond","TotHondMOE","TotNicarag","TotNicaragMOE","TotPanama","TotPanamaMOE","TotSalva","TotSalvaMOE","TotOtherCA","TotOtherCAMOE","TotSA","TotSAMOE","TotOtherHisporLat","TotOtherHisporLatMOE")
-hispanRaw <- wholivesdatapull(hispanvars,hispannames)[-3,]
+hispanRaw <- wholivesdatapull(hispanvars,hispannames)
 save(hispanRaw, file = "inputs/hispanRaw.RData") # -3 removes St. Tammany because it is not included in this analysis
 
 #Households with own children under 18
@@ -141,7 +141,7 @@ vehnames <- c("Total","TotalMOE","NoVehAvail","NoVehAvailMOE")
 vehRaw <- wholivesdatapull(vehvars, vehnames)
 save(vehRaw, file = "inputs/vehRaw.RData")
 
-vehvars2000<- c('H044001','H044002','H044010')
+vehvars2000<- c('H044001','H044003','H044010')
 vehnames2000<- c("Total","OwnNoVehAvail","RentNoVehAvail")
 vehRaw2000 <- wholivesdatapull2000(vehvars2000,vehnames2000, universe = "households")
 save(vehRaw2000,file = "inputs/vehRAw2000.RData")
@@ -153,7 +153,7 @@ forbornames <- c("TotForeign10on","TotForeign10onMOE","TotForeign00to09","TotFor
 forborRaw <- wholivesdatapull(forborvars, forbornames)
 save(forborRaw, file = "inputs/forborRaw.RData")
 
-forborvars2000<- c('P022001','P022002','P022003','P022004','P022005','P022006','P022007','P022008','P022009')
+forborvars2000<- c('P001001','P022002','P022003','P022004','P022005','P022006','P022007','P022008','P022009')
 forbornames2000<- c("Total","TotForeign95to00","TotForegin90to94","TotForegin85to89","TotForeign80to84","TotForegin75to79","TotForeign70to74","TotForegin65to69","TotForeginPre65")
 forborRaw2000<-wholivesdatapull2000(forborvars2000,forbornames2000)
 save(forborRaw2000, file = "inputs/forborRaw2000.RData")
@@ -171,6 +171,10 @@ totpopracevars<- c('P001001','P006003','P006002','P007010','P006005')
 totpopracenames<-c("Total","TotBlackAlone","TotWhiteAlone","TotHispanicAny","TotAsianAlone")
 totpopraceRaw<-wholivesdatapull2000(totpopracevars,totpopracenames, parishregions = "county:071,051,075,087,089,093,095")
 save(totpopraceRaw, file = "inputs/totpoprace2000.Rdata")
+
+#Checking sf1
+getCensus(name = "dec/sf1", vintage = 2000, key = mycensuskey, vars = c("P003003", 	
+                                                                    "P003004"), region = "county:071,051", regionin = "state:22")
 
 # Total Population by Age,*inhales*
 # Need total population 
@@ -212,21 +216,22 @@ mob04Raw <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
   select(placename, var, MOE, cest) %>%
   pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
   mutate(sf2004mobabroadpct = cest_TotMovedfromAbroad / cest_Total,
-         sf2004mobabroadpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedfromAbroad,moey = MOE_Total,p=sf2004mobabroadpct),
+         sf2004mobabroadpctMOE = as.numeric(moeprop(y=cest_Total,moex = MOE_TotMovedfromAbroad,moey = MOE_Total,p=sf2004mobabroadpct)),
          sf2004mobStatespct = cest_TotMovedbtwnStates / cest_Total,
-         sf2004mobStatespctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedbtwnStates,moey = MOE_Total,p=sf2004mobStatespct),
+         sf2004mobStatespctMOE = as.numeric(moeprop(y=cest_Total,moex = MOE_TotMovedbtwnStates,moey = MOE_Total,p=sf2004mobStatespct)),
          sf2004difparishpct = cest_TotMovedinState / cest_Total,
-         sf2004difparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinState,moey = MOE_Total,p=sf2004difparishpct),
+         sf2004difparishpctMOE = as.numeric(moeprop(y=cest_Total,moex = MOE_TotMovedinState,moey = MOE_Total,p=sf2004difparishpct)),
          sf2004withinparishpct = cest_TotMovedinCty / cest_Total,
-         sf2004withinparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinCty,moey = MOE_Total,p=sf2004withinparishpct),
+         sf2004withinparishpctMOE = as.numeric(moeprop(y=cest_Total,moex = MOE_TotMovedinCty,moey = MOE_Total,p=sf2004withinparishpct)),
          sf2004samehousepct = cest_TotSameHouse / cest_Total,
-         sf2004samehousepctMOE = moeprop(y=cest_Total, moex = MOE_TotSameHouse,moey = MOE_Total,p=sf2004samehousepct)) %>%
+         sf2004samehousepctMOE = as.numeric(moeprop(y=cest_Total, moex = MOE_TotSameHouse,moey = MOE_Total,p=sf2004samehousepct))) %>%
   select(placename, 
          sf2004mobabroadpct, sf2004mobabroadpctMOE, 
          sf2004mobStatespct, sf2004mobStatespctMOE, 
          sf2004difparishpct, sf2004difparishpctMOE,
          sf2004withinparishpct, sf2004withinparishpctMOE,
-         sf2004samehousepct, sf2004samehousepctMOE)
+         sf2004samehousepct, sf2004samehousepctMOE)%>%
+  filter(placename != "New Orleans Metro Area") # we're not able to manually calculate the metro and it was defined differently in 2004.
 save(mob04Raw, file = "inputs/mob04Raw.RData")
 
 #Homeownership rates
@@ -236,7 +241,7 @@ honames <- c("Total","TotalMOE","Owner","OwnerMOE")
 hoRaw <- wholivesdatapull(hovars, honames)
 save(hoRaw, file = "inputs/hoRaw.RData")
 
-hovars2000 <- c('H004001', 'H004002')
+hovars2000 <- c('H007001', 'H007002')
 honames2000 <- c("Total", "Owner")
 hoRaw2000 <- wholivesdatapull2000(hovars2000, honames2000, universe = "households")
 save(hoRaw2000, file = "inputs/hoRaw2000.RData")
@@ -307,7 +312,8 @@ housing <-  ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
          MOE_hoburagg = moeagg(cbind(MOE_hocostburden,MOE_hocostburden_nomort)),
          MOE_hoagg = moeagg(cbind(MOE_tothomeowners,MOE_ho_notcomp,MOE_ho_notcomp_nomort)),
          hoburpct2004MOE = moeprop(y = (cest_tothomeowners- (cest_ho_notcomp+cest_ho_notcomp_nomort)), moex = MOE_hoburagg, moey = MOE_hoagg, p = hoburpct2004)) %>%
-  select(placename, medgrossrent2004, medgrossrent2004MOE, rentburpct2004, rentburpct2004MOE, hoburpct2004, hoburpct2004MOE)
+  select(placename, medgrossrent2004, medgrossrent2004MOE, rentburpct2004, rentburpct2004MOE, hoburpct2004, hoburpct2004MOE) %>%
+  filter(placename != "New Orleans Metro Area") # we're not able to manually calculate the metro and it was defined differently in 2004.
 rentburRaw2004 <- housing
 save(rentburRaw2004, file = "inputs/rentburRaw2004.RData")
 
@@ -448,7 +454,7 @@ hispemploy90 <- hispemploy90 %>% filter(STATEA == "22" & COUNTYA == "071") %>% t
                                                                                          pctHispMaleEmploy = E4K002/totHispMalepop,
                                                                                          pctHispFemaleEmploy = E4K006/ totHispFemalepop) %>% pivot_longer(cols = pctHispMaleEmploy:pctHispFemaleEmploy, values_to = "val") %>% select(year, val, name)
 employ90<-rbind(employ90,hispemploy90)
-save(employment, file = "inputs/employ_TS.RData")
+#save(employment, file = "inputs/employ_TS.RData")
 
 # We need the 2000 MOE, so we are doing it manually from the NHGIS data.
 #For all of these, we need 2000 total pop from Orleans parish. And the design factor is 2.0 for all of them.
@@ -586,6 +592,7 @@ employ10<-employ10 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(y
 
 
 employment<-rbind(employ80,employ90,employ00,employ10)
+save(employment, file = "inputs/employ_TS.RData")
 
 #################################################
 # # Jenna's expanded data pull
@@ -703,6 +710,8 @@ Bach00Wht <- Bach00Wht %>%
   filter(place == "071") %>%
   select(pctWhiteBach, WhiteBachmoeprop)
 
+save(Bach00Wht, file = "inputs/Bach00Wht.RData")
+save(Bach00, file = "inputs/Bach00Raw.RData")
 
 Bach00 <- Bach00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is by sex
   transmute(year = 2000,
@@ -733,6 +742,8 @@ Bach00 <- Bach00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is 
   )%>% cbind(Bach00Wht) %>%
   pivot_longer(cols = c(pctTotalBach:pctHispBach, pctWhiteBach), values_to = "val") %>% 
   select(year, val, name)
+
+
 
 #pulling ACS1 for 2010 data
 
@@ -887,7 +898,7 @@ pov00Wht <- pov00Wht %>%
          TotalWhiteMOE = moe2000(TotalWhitepop, TotalPop2000, designfac = 2),
          Whitemoeprop = moeprop(y = TotalWhitepop, moex = WhitepovMOE, moey = TotalWhiteMOE, p = pctWhitepov)) %>% select(pctWhitepov, Whitemoeprop)
 
-
+save(pov00Wht, file = "inputs/pov00Wht.RData")
 pov00 <- pov00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2000,
                                                                            totpov = GTV001 + GTV003 + GTV005 + GTV007 + GTV009 + GTV011 + GTV013,
                                                                            totpop = sum(c_across(GTV001:GTV014),na.rm = T),
@@ -1317,7 +1328,7 @@ hisppopest23 <- allparishesRaw2023 %>% filter(race == "Hispanic"  & age == "Tota
 hisppopestRaw <- rbind(hisppopestRaw, hisppopest20, hisppopest23)
 
 save(hisppopestRaw, file = "inputs/hisppopestRaw.RData")
-write_csv(hisppopestRaw %>% arrange(place, year), file = "temp/pep23_hispanic.csv")
+write_csv(hisppopestRaw %>% arrange(place, year), file = "inputs/pep23_hispanic.csv")
 
 
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP", "RACE")
