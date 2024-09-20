@@ -11,7 +11,7 @@ load("inputs/RacepopestRaw.RData")
 hispanRaw[hispanRaw == -555555555] <- 0 
 #Hispanic Origin
 hispan <- hispanRaw %>%
-  filter(placename %in% c("Orleans", "New Orleans Metro Area", "United States")) %>%
+  filter(placename %in% c("Orleans", "Jefferson","New Orleans Metro Area", "United States")) %>%
   #slice(match(orderHisp, place)) %>%
   mutate(Cubanpct = TotCuba / TotalHisporLat,
          Dominicanpct = TotDomin / TotalHisporLat,
@@ -26,17 +26,17 @@ hispan <- hispanRaw %>%
          Otherpct = TotOtherHisporLat / TotalHisporLat,
          
          # for US/other geo sig testing
-         CubanUS = rep(Cubanpct[3], 3),
-         DominicanUS = rep(Dominicanpct[3],3),
-         MexicanUS = rep(Mexicanpct[3],3),
-         PuertoRicanUS = rep(PuertoRicanpct[3],3),
-         HonduranUS = rep(Honduranpct[3],3),
-         GuatemalanUS = rep(Guatemalanpct[3],3),
-         NicaraguanUS = rep(Nicaraguanpct[3],3),
-         SalvadoranUS = rep(Salvadoranpct[3],3),
-         OtherCAUS = rep(OtherCApct[3],3),
-         SouthAmericanUS = rep(SouthAmericanpct[3],3),
-         OtherUS = rep(Otherpct[3],3),
+         CubanUS = rep(Cubanpct[4], 4),
+         DominicanUS = rep(Dominicanpct[4],4),
+         MexicanUS = rep(Mexicanpct[4],4),
+         PuertoRicanUS = rep(PuertoRicanpct[4],4),
+         HonduranUS = rep(Honduranpct[4],4),
+         GuatemalanUS = rep(Guatemalanpct[4],4),
+         NicaraguanUS = rep(Nicaraguanpct[4],4),
+         SalvadoranUS = rep(Salvadoranpct[4],4),
+         OtherCAUS = rep(OtherCApct[4],4),
+         SouthAmericanUS = rep(SouthAmericanpct[4],4),
+         OtherUS = rep(Otherpct[4],4),
          
          CubanMoeProp = moeprop(y = TotalHisporLat, moex = TotCubaMOE, moey = TotalHisporLatMOE, p = Cubanpct),
          DominicanMoeProp = moeprop(y = TotalHisporLat, moex = TotDominMOE, moey = TotalHisporLatMOE, p = Dominicanpct),
@@ -51,17 +51,17 @@ hispan <- hispanRaw %>%
          OtherMoeProp= moeprop(y = TotalHisporLat, moex = TotOtherHisporLatMOE, moey = TotalHisporLatMOE, p = Otherpct),
          
          ###adding US MOEs to the stat test###
-         CubanUSMOE = rep(CubanMoeProp[3], 3),
-         DominicanUSMOE = rep(DominicanMoeProp[3],3),
-         MexicanUSMOE = rep(MexicanMoeProp[3],3),
-         PuertoRicanUSMOE = rep(PuertoRicanMoeProp[3],3),
-         HonduranUSMOE = rep(HonduranMoeProp[3],3),
-         GuatemalanUSMOE = rep(GuatemalanMoeProp[3],3),
-         NicaraguanUSMOE = rep(NicaraguanMoeProp[3],3),
-         SalvadoranUSMOE = rep(SalvadoranMoeProp[3],3),
-         OtherCAUSMOE = rep(OtherCAMoeProp[3],3),
-         SouthAmericanUSMOE = rep(SouthAmericanMoeProp[3],3),
-         OtherUSMOE = rep(OtherMoeProp[3],3),
+         CubanUSMOE = rep(CubanMoeProp[4], 4),
+         DominicanUSMOE = rep(DominicanMoeProp[4],4),
+         MexicanUSMOE = rep(MexicanMoeProp[4],4),
+         PuertoRicanUSMOE = rep(PuertoRicanMoeProp[4],4),
+         HonduranUSMOE = rep(HonduranMoeProp[4],4),
+         GuatemalanUSMOE = rep(GuatemalanMoeProp[4],4),
+         NicaraguanUSMOE = rep(NicaraguanMoeProp[4],4),
+         SalvadoranUSMOE = rep(SalvadoranMoeProp[4],4),
+         OtherCAUSMOE = rep(OtherCAMoeProp[4],4),
+         SouthAmericanUSMOE = rep(SouthAmericanMoeProp[4],4),
+         OtherUSMOE = rep(OtherMoeProp[4],4),
          ######
          
          CubanSIG = stattest(x=CubanUS, moex = CubanUSMOE, y=Cubanpct, moey = CubanMoeProp),
@@ -1196,9 +1196,8 @@ mutate(race = case_when(grepl("Black",race) & grepl("blk",sig) ~ "Black",
   unite("grp", c(race, sex), sep = " ")
   
 employ_with_stats <- employ_stattest.data %>% select(placename, grp, val, val_lab) %>% unique() %>%
-  mutate(placename.fac = fct_rev(factor(placename, levels = c("Orleans", "Jefferson*", "Metro*", "United States"))),
-         grp.fac = fct_rev(factor(grp, levels = c("Black Female", "White, non-Hispanic Female", "Hispanic, any race Female",
-                                          "Black Male", "White, non-Hispanic Male", "Hispanic, any race Male"))))
+  mutate(placename.fac = fct_rev(factor(placename, levels = c("Orleans*", "Jefferson*", "Metro*", "United States"))),
+         grp.fac = fct_rev(factor(grp, levels = c("Black Male", "Black Female", "White, non-Hispanic Male", "White, non-Hispanic Female", "Hispanic, any race Male", "Hispanic, any race Female"))))
 
 
 ## employment timeseries
