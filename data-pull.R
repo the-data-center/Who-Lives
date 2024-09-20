@@ -21,7 +21,7 @@ save(totalpop_metro, file = "inputs/totalpop_metro.RData")
 
 hispanvars <-c("B03001_001E","B03001_001M","B03001_002E","B03001_002M","B03001_003E","B03001_003M","B03001_004E","B03001_004M","B03001_005E","B03001_005M","B03001_006E","B03001_006M","B03001_007E","B03001_007M","B03001_008E","B03001_008M","B03001_009E","B03001_009M","B03001_010E","B03001_010M","B03001_011E","B03001_011M","B03001_012E","B03001_012M","B03001_013E","B03001_013M","B03001_014E","B03001_014M","B03001_015E","B03001_015M","B03001_016E","B03001_016M","B03001_027E","B03001_027M")
 hispannames <-c("Total","TotalMOE","TotalNotHIsporLat","TotalNotHIsporLatMOE","TotalHisporLat","TotalHisporLatMOE","TotMex","TotMexMOE","TotPR","TotPRMOE","TotCuba","TotCubaMOE","TotDomin","TotDominMOE","TotCentrAm","TotCentrAmMOE","TotCostaR","TotCostaRMOE","TotGuat","TotGuatMOE","TotHond","TotHondMOE","TotNicarag","TotNicaragMOE","TotPanama","TotPanamaMOE","TotSalva","TotSalvaMOE","TotOtherCA","TotOtherCAMOE","TotSA","TotSAMOE","TotOtherHisporLat","TotOtherHisporLatMOE")
-hispanRaw <- wholivesdatapull(hispanvars,hispannames)[-3,]
+hispanRaw <- wholivesdatapull(hispanvars,hispannames)
 save(hispanRaw, file = "inputs/hispanRaw.RData") # -3 removes St. Tammany because it is not included in this analysis
 
 #Households with own children under 18
@@ -141,7 +141,7 @@ vehnames <- c("Total","TotalMOE","NoVehAvail","NoVehAvailMOE")
 vehRaw <- wholivesdatapull(vehvars, vehnames)
 save(vehRaw, file = "inputs/vehRaw.RData")
 
-vehvars2000<- c('H044001','H044002','H044010')
+vehvars2000<- c('H044001','H044003','H044010')
 vehnames2000<- c("Total","OwnNoVehAvail","RentNoVehAvail")
 vehRaw2000 <- wholivesdatapull2000(vehvars2000,vehnames2000, universe = "households")
 save(vehRaw2000,file = "inputs/vehRAw2000.RData")
@@ -153,7 +153,7 @@ forbornames <- c("TotForeign10on","TotForeign10onMOE","TotForeign00to09","TotFor
 forborRaw <- wholivesdatapull(forborvars, forbornames)
 save(forborRaw, file = "inputs/forborRaw.RData")
 
-forborvars2000<- c('P022001','P022002','P022003','P022004','P022005','P022006','P022007','P022008','P022009')
+forborvars2000<- c('P001001','P022002','P022003','P022004','P022005','P022006','P022007','P022008','P022009')
 forbornames2000<- c("Total","TotForeign95to00","TotForegin90to94","TotForegin85to89","TotForeign80to84","TotForegin75to79","TotForeign70to74","TotForegin65to69","TotForeginPre65")
 forborRaw2000<-wholivesdatapull2000(forborvars2000,forbornames2000)
 save(forborRaw2000, file = "inputs/forborRaw2000.RData")
@@ -171,6 +171,10 @@ totpopracevars<- c('P001001','P006003','P006002','P007010','P006005')
 totpopracenames<-c("Total","TotBlackAlone","TotWhiteAlone","TotHispanicAny","TotAsianAlone")
 totpopraceRaw<-wholivesdatapull2000(totpopracevars,totpopracenames, parishregions = "county:071,051,075,087,089,093,095")
 save(totpopraceRaw, file = "inputs/totpoprace2000.Rdata")
+
+#Checking sf1
+getCensus(name = "dec/sf1", vintage = 2000, key = mycensuskey, vars = c("P003003", 	
+                                                                    "P003004"), region = "county:071,051", regionin = "state:22")
 
 # Total Population by Age,*inhales*
 # Need total population 
@@ -212,21 +216,22 @@ mob04Raw <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
   select(placename, var, MOE, cest) %>%
   pivot_wider(names_from = var, values_from = c(MOE, cest)) %>%
   mutate(sf2004mobabroadpct = cest_TotMovedfromAbroad / cest_Total,
-         sf2004mobabroadpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedfromAbroad,moey = MOE_Total,p=sf2004mobabroadpct),
+         sf2004mobabroadpctMOE = as.numeric(moeprop(y=cest_Total,moex = MOE_TotMovedfromAbroad,moey = MOE_Total,p=sf2004mobabroadpct)),
          sf2004mobStatespct = cest_TotMovedbtwnStates / cest_Total,
-         sf2004mobStatespctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedbtwnStates,moey = MOE_Total,p=sf2004mobStatespct),
+         sf2004mobStatespctMOE = as.numeric(moeprop(y=cest_Total,moex = MOE_TotMovedbtwnStates,moey = MOE_Total,p=sf2004mobStatespct)),
          sf2004difparishpct = cest_TotMovedinState / cest_Total,
-         sf2004difparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinState,moey = MOE_Total,p=sf2004difparishpct),
+         sf2004difparishpctMOE = as.numeric(moeprop(y=cest_Total,moex = MOE_TotMovedinState,moey = MOE_Total,p=sf2004difparishpct)),
          sf2004withinparishpct = cest_TotMovedinCty / cest_Total,
-         sf2004withinparishpctMOE = moeprop(y=cest_Total,moex = MOE_TotMovedinCty,moey = MOE_Total,p=sf2004withinparishpct),
+         sf2004withinparishpctMOE = as.numeric(moeprop(y=cest_Total,moex = MOE_TotMovedinCty,moey = MOE_Total,p=sf2004withinparishpct)),
          sf2004samehousepct = cest_TotSameHouse / cest_Total,
-         sf2004samehousepctMOE = moeprop(y=cest_Total, moex = MOE_TotSameHouse,moey = MOE_Total,p=sf2004samehousepct)) %>%
+         sf2004samehousepctMOE = as.numeric(moeprop(y=cest_Total, moex = MOE_TotSameHouse,moey = MOE_Total,p=sf2004samehousepct))) %>%
   select(placename, 
          sf2004mobabroadpct, sf2004mobabroadpctMOE, 
          sf2004mobStatespct, sf2004mobStatespctMOE, 
          sf2004difparishpct, sf2004difparishpctMOE,
          sf2004withinparishpct, sf2004withinparishpctMOE,
-         sf2004samehousepct, sf2004samehousepctMOE)
+         sf2004samehousepct, sf2004samehousepctMOE)%>%
+  filter(placename != "New Orleans Metro Area") # we're not able to manually calculate the metro and it was defined differently in 2004.
 save(mob04Raw, file = "inputs/mob04Raw.RData")
 
 #Homeownership rates
@@ -236,7 +241,7 @@ honames <- c("Total","TotalMOE","Owner","OwnerMOE")
 hoRaw <- wholivesdatapull(hovars, honames)
 save(hoRaw, file = "inputs/hoRaw.RData")
 
-hovars2000 <- c('H004001', 'H004002')
+hovars2000 <- c('H007001', 'H007002')
 honames2000 <- c("Total", "Owner")
 hoRaw2000 <- wholivesdatapull2000(hovars2000, honames2000, universe = "households")
 save(hoRaw2000, file = "inputs/hoRaw2000.RData")
@@ -307,7 +312,8 @@ housing <-  ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
          MOE_hoburagg = moeagg(cbind(MOE_hocostburden,MOE_hocostburden_nomort)),
          MOE_hoagg = moeagg(cbind(MOE_tothomeowners,MOE_ho_notcomp,MOE_ho_notcomp_nomort)),
          hoburpct2004MOE = moeprop(y = (cest_tothomeowners- (cest_ho_notcomp+cest_ho_notcomp_nomort)), moex = MOE_hoburagg, moey = MOE_hoagg, p = hoburpct2004)) %>%
-  select(placename, medgrossrent2004, medgrossrent2004MOE, rentburpct2004, rentburpct2004MOE, hoburpct2004, hoburpct2004MOE)
+  select(placename, medgrossrent2004, medgrossrent2004MOE, rentburpct2004, rentburpct2004MOE, hoburpct2004, hoburpct2004MOE) %>%
+  filter(placename != "New Orleans Metro Area") # we're not able to manually calculate the metro and it was defined differently in 2004.
 rentburRaw2004 <- housing
 save(rentburRaw2004, file = "inputs/rentburRaw2004.RData")
 
@@ -356,46 +362,10 @@ employ10  <- read_csv("inputs/indicator expansion drafts/employment/nhgis0013_cs
 
 # Employment Rates by race by sex, 2022
 
-employmentvars<- c('B23002A_002E','B23002A_002M', # Total White Males
-                   'B23002A_007E', 'B23002A_007M', 'B23002A_014E', 'B23002A_014M', 'B23002A_021E', 'B23002A_021M', 'B23002A_028E', 'B23002A_028M', 'B23002A_033E', 'B23002A_033M', 'B23002A_038E', 'B23002A_038M', #White Male by age
-                   
-                   'B23002A_041E','B23002A_041M', #Total White females
-                   'B23002A_046E', 'B23002A_046M', 'B23002A_053E', 'B23002A_053M', 'B23002A_060E', 'B23002A_060M', 'B23002A_067E', 'B23002A_067M', 'B23002A_072E', 'B23002A_072M', 'B23002A_077E', 'B23002A_077M', #White Female by age
-                   
-                   
-                   'B23002B_002E','B23002B_002M', #Total Black Males
-                   'B23002B_007E', 'B23002B_007M', 'B23002B_014E', 'B23002B_014M', 'B23002B_021E', 'B23002B_021M', 'B23002B_028E', 'B23002B_028M', 'B23002B_033E', 'B23002B_033M', 'B23002B_038E', 'B23002B_038M',#Black Male by age
-                   
-                   'B23002B_041E','B23002B_041M', #Total Black Females
-                   'B23002B_046E', 'B23002B_046M', 'B23002B_053E', 'B23002B_053M', 'B23002B_060E', 'B23002B_060M', 'B23002B_067E', 'B23002B_067M', 'B23002B_072E', 'B23002B_072M', 'B23002B_077E', 'B23002B_077M', #Black female by age
-                   
-                   'B23002I_002E','B23002I_002M', #Total Hispanic Males
-                   'B23002I_007E', 'B23002I_007M', 'B23002I_014E', 'B23002I_014M', 'B23002I_021E', 'B23002I_021M', 'B23002I_028E', 'B23002I_028M', 'B23002I_033E', 'B23002I_033M', 'B23002I_038E', 'B23002I_038M', #Hispanic male by age
-                   
-                   'B23002I_041E','B23002I_041M', #Total Hispanic females
-                   'B23002I_046E', 'B23002I_046M', 'B23002I_053E', 'B23002I_053M', 'B23002I_060E', 'B23002I_060M', 'B23002I_067E', 'B23002I_067M', 'B23002I_072E', 'B23002I_072M', 'B23002I_077E', 'B23002I_077M' #Hispanic female by age
-)
 
 
-employmentnames<-c("WhiteMale", "WhiteMaleMOE",
-                   "WhiteMale16to19", "WhiteMale16to19MOE", "WhiteMale20to24", "WhiteMale20to24MOE", "WhiteMale25to54", "WhiteMale25to54MOE", "WhiteMale55to64", "WhiteMale55to64MOE", "WhiteMale65to69", "WhiteMale65to69MOE", "WhiteMale70plus", "WhiteMale70plusMOE",
-                   
-                   "WhiteFemale","WhiteFemaleMOE",
-                   "WhiteFemale16to19", "WhiteFemale16to19MOE", "WhiteFemale20to24", "WhiteFemale20to24MOE", "WhiteFemale25to54", "WhiteFemale25to54MOE", "WhiteFemale55to64", "WhiteFemale55to64MOE", "WhiteFemale65to69", "WhiteFemale65to69MOE", "WhiteFemale70plus", "WhiteFemale70plusMOE",
-                   
-                   "BlackMale","BlackMaleMOE",
-                   "BlackMale16to19", "BlackMale16to19MOE", "BlackMale20to24", "BlackMale20to24MOE", "BlackMale25to54", "BlackMale25to54MOE", "BlackMale55to64", "BlackMale55to64MOE", "BlackMale65to69", "BlackMale65to69MOE", "BlackMale70plus", "BlackMale70plusMOE",
-                   
-                   "BlackFemale", "BlackFemaleMOE",
-                   "BlackFemale16to19", "BlackFemale16to19MOE", "BlackFemale20to24", "BlackFemale20to24MOE", "BlackFemale25to54", "BlackFemale25to54MOE", "BlackFemale55to64", "BlackFemale55to64MOE", "BlackFemale65to69", "BlackFemale65to69MOE", "BlackFemale70plus", "BlackFemale70plusMOE",
-                   
-                   "HispanicMale", "HispanicMaleMOE",
-                   "HispMale16to19", "HispMale16to19MOE", "HispMale20to24", "HispMale20to24MOE", "HispMale25to54", "HispMale25to54MOE", "HispMale55to64", "HispMale55to64MOE", "HispMale65to69", "HispMale65to69MOE", "HispMale70plus", "HispMale70plusMOE",
-                   
-                   "HispanicFemale", "HispanicFemaleMOE",
-                   "HispFemale16to19", "HispFemale16to19MOE", "HispFemale20to24", "HispFemale20to24MOE", "HispFemale25to54", "HispFemale25to54MOE", "HispFemale55to64", "HispFemale55to64MOE", "HispFemale65to69", "HispFemale65to69MOE", "HispFemale70plus", "HispFemale70plusMOE"
-)
-
+employmentvars <- c("C23002H_003E", "C23002H_003M", "C23002H_007E", "C23002H_007M", "C23002H_016E",  "C23002H_016M", "C23002H_020E", "C23002H_020M", "C23002B_003E", "C23002B_003M", "C23002B_007E", "C23002B_007M", "C23002B_016E", "C23002B_016M", "C23002B_020E", "C23002B_020M", "C23002I_003E", "C23002I_003M", "C23002I_007E", "C23002I_007M", "C23002I_016E", "C23002I_016M", "C23002I_020E",  "C23002I_020M")
+employmentnames <- c("WhtMaleTot", "WhtMaleTotMOE", "WhtMaleEmp", "WhtMaleEmpMOE", "WhtFemaleTot", "WhtFemaleTotMOE", "WhtFemaleEmp", "WhtFemaleEmpMOE", "BlkMaleTot", "BlkMaleTotMOE", "BlkMaleEmp", "BlkMaleEmpMOE", "BlkFemaleTot", "BlkFemaleTotMOE", "BlkFemaleEmp", "BlkFemaleEmpMOE", "HispMaleTot", "HispMaleTotMOE", "HispMaleEmp", "HispMaleEmpMOE", "HispFemaleTot", "HispFemaleTotMOE", "HispFemaleEmp", "HispFemaleEmpMOE")
 
 employmentRaw<-wholivesdatapull(employmentvars,employmentnames)
 save(employmentRaw, file = "inputs/employmentRaw.RData")
@@ -522,54 +492,30 @@ hispemploy_test <- hisemploy00 %>% filter(STATEA == "22" & COUNTYA == "071") %>%
 employ00<- rbind(employ_test,hispemploy_test)
 
 employ10<-employ10 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2010,
-                                                                               totWhiteMalepop = I9TE002,
-                                                                               totWhiteMalepopMOE = I9TM002,
-                                                                               totWhiteFemalepop = I9TE015,
-                                                                               totWhiteFemalepopMOE = I9TM015,
-                                                                               WhiteMale16to64 = I9TE007 ,
-                                                                               WhiteMale16to64MOE = I9TM007,
-                                                                               WhiteMale65plus = I9TE012,
-                                                                               WhiteMale65plusMOE = I9TM012,
-                                                                               WhiteMaleEmploy = I9TE007 + I9TE012,
-                                                                               WhiteMaleEmployMOE = moeagg(cbind(WhiteMale16to64MOE, WhiteMale65plusMOE)),
-                                                                               WhiteFemale16to64 = I9TE020,
-                                                                               WhiteFemale16to64MOE = I9TM020,
-                                                                               WhiteFemale164plus = I9TE025,
-                                                                               WhiteFemale164plusMOE = I9TM025,
-                                                                               WhiteFemaleEmploy = I9TE020 + I9TE025,
-                                                                               WhiteFemaleEmployMOE = moeagg(cbind(WhiteFemale16to64MOE, WhiteFemale164plusMOE)),
-                                                                               totBlackMalepop = I9HE002,
-                                                                               totBlackMalepopMOE = I9HM002,
-                                                                               totBlackFemalepop = I9HE015,                     
-                                                                               totBlackFemalepopMOE = I9HM015,
-                                                                               BlackMale16to64 =  I9HE007,
-                                                                               BlackMale16to64MOE = I9HM007, 
-                                                                               BlackMale64plus = I9HE012,
-                                                                               BlackMale64plusMOE = I9HM012,
-                                                                               BlackFemale16to64  =  I9HE020,
-                                                                               BlackFemale16to64MOE = I9HM020,
-                                                                               BlackFemale64Plus = I9HE025,
-                                                                               BlackFemale64PlusMOE = I9HE025,  
-                                                                               BlackMaleEmploy =  I9HE007 + I9HE012,
-                                                                               BlackMaleEmployMOE = moeagg(cbind(BlackMale16to64MOE, BlackMale64plusMOE)),
-                                                                               BlackFemaleEmploy =  I9HE020 + I9HE025 ,
-                                                                               BlackFemaleEmployMOE = moeagg(cbind(BlackFemale16to64MOE, BlackFemale64PlusMOE)),
-                                                                               totHispMalepop = I9VE002,
-                                                                               totHispMalepopMOE = I9VM002,
-                                                                               totHispFemalepop =   I9VE015,
-                                                                               totHispFemalepopMOE = I9VM015,
-                                                                               HispMale16to64 = I9VE007,
-                                                                               HispMale16to64MOE = I9VM007,
-                                                                               HispMale64plus = I9VE012,
-                                                                               HispMale64plusMOE = I9VM012,
-                                                                               HispFemale16to64 = I9VE020,
-                                                                               HispFemale16to64MOE = I9VM020,
-                                                                               HispFemale64plus = I9VE025,
-                                                                               HispFemale64plusMOE = I9VM025,
-                                                                               HispMaleEmploy = I9VE007 +  I9VE012,
-                                                                               HispMaleEmployMOE = moeagg(cbind(HispMale16to64MOE, HispMale64plusMOE)),
-                                                                               HispFemaleEmploy = I9VE020 + I9VE025,
-                                                                               HispFemaleEmployMOE = moeagg(cbind(HispFemale16to64MOE, HispFemale64plusMOE)),
+                                                                               totWhiteMalepop = I9TE003,
+                                                                               totWhiteMalepopMOE = I9TM003,
+                                                                               totWhiteFemalepop = I9TE016,
+                                                                               totWhiteFemalepopMOE = I9TM016,
+                                                                               WhiteMaleEmploy = I9TE007 ,
+                                                                               WhiteMaleEmployMOE = I9TM007,
+                                                                               WhiteFemaleEmploy = I9TE020,
+                                                                               WhiteFemaleEmployMOE = I9TM020,
+                                                                               totBlackMalepop = I9HE003,
+                                                                               totBlackMalepopMOE = I9HM003,
+                                                                               totBlackFemalepop = I9HE016,                     
+                                                                               totBlackFemalepopMOE = I9HM016,
+                                                                               BlackMaleEmploy =  I9HE007,
+                                                                               BlackMaleEmployMOE = I9HM007, 
+                                                                               BlackFemaleEmploy  =  I9HE020,
+                                                                               BlackFemaleEmployMOE = I9HM020,
+                                                                               totHispMalepop = I9VE003,
+                                                                               totHispMalepopMOE = I9VM003,
+                                                                               totHispFemalepop =   I9VE016,
+                                                                               totHispFemalepopMOE = I9VM016,
+                                                                               HispMaleEmploy = I9VE007,
+                                                                               HispMaleEmployMOE = I9VM007,
+                                                                               HispFemaleEmploy = I9VE020,
+                                                                               HispFemaleEmployMOE = I9VM020,
                                                                                pctWhiteMaleEmploy = WhiteMaleEmploy / totWhiteMalepop,
                                                                                pctWhiteMaleEmployMOE = moeprop(y = totWhiteMalepop, moex = WhiteMaleEmployMOE, moey = totWhiteMalepopMOE, p = pctWhiteMaleEmploy),
                                                                                pctWhiteFemaleEmploy = WhiteFemaleEmploy / totWhiteFemalepop,
@@ -703,6 +649,8 @@ Bach00Wht <- Bach00Wht %>%
   filter(place == "071") %>%
   select(pctWhiteBach, WhiteBachmoeprop)
 
+save(Bach00Wht, file = "inputs/Bach00Wht.RData")
+save(Bach00, file = "inputs/Bach00Raw.RData")
 
 Bach00 <- Bach00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is by sex
   transmute(year = 2000,
@@ -733,6 +681,8 @@ Bach00 <- Bach00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is 
   )%>% cbind(Bach00Wht) %>%
   pivot_longer(cols = c(pctTotalBach:pctHispBach, pctWhiteBach), values_to = "val") %>% 
   select(year, val, name)
+
+
 
 #pulling ACS1 for 2010 data
 
@@ -887,7 +837,7 @@ pov00Wht <- pov00Wht %>%
          TotalWhiteMOE = moe2000(TotalWhitepop, TotalPop2000, designfac = 2),
          Whitemoeprop = moeprop(y = TotalWhitepop, moex = WhitepovMOE, moey = TotalWhiteMOE, p = pctWhitepov)) %>% select(pctWhitepov, Whitemoeprop)
 
-
+save(pov00Wht, file = "inputs/pov00Wht.RData")
 pov00 <- pov00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2000,
                                                                            totpov = GTV001 + GTV003 + GTV005 + GTV007 + GTV009 + GTV011 + GTV013,
                                                                            totpop = sum(c_across(GTV001:GTV014),na.rm = T),
@@ -1317,7 +1267,7 @@ hisppopest23 <- allparishesRaw2023 %>% filter(race == "Hispanic"  & age == "Tota
 hisppopestRaw <- rbind(hisppopestRaw, hisppopest20, hisppopest23)
 
 save(hisppopestRaw, file = "inputs/hisppopestRaw.RData")
-write_csv(hisppopestRaw %>% arrange(place, year), file = "temp/pep23_hispanic.csv")
+write_csv(hisppopestRaw %>% arrange(place, year), file = "inputs/pep23_hispanic.csv")
 
 
 popestVars <- c("POP","DATE_DESC","DATE_CODE", "GEO_ID", "HISP", "RACE")
