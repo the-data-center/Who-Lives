@@ -79,7 +79,8 @@ ParishDemoforGraphic <- ParishDemo %>%
                                               "Black",
                                               "Hispanic",
                                               "Asian"))) %>%
-  mutate(val = ifelse(as.numeric(value)<.01,"<1%",paste0(round.off(as.numeric(value)*100),"%")))
+  mutate(val = ifelse(as.numeric(value)<.01,"<1%",paste0(round.off(as.numeric(value)*100),"%"))) %>%
+  filter(is.na(race.fac) == F)
 
 chart.demo.allparishes <- ParishDemoforGraphic %>%
   ggplot(aes(race.fac, value, fill=description.fac, label = val)) +
@@ -456,7 +457,8 @@ hsGraphic <- dodgedBar(hs,
 
 bachGraphic <- dodgedBar(bach, 
                          quo(pctbach), 
-                         "Rate of bachelor's degree or higher, adults 25 and older")
+                         "Rate of bachelor's degree or higher, adults 25 and older",
+                         yscale = c(0,.5))
 
 ####14 - Median household income, 2016 inflation-adjusted dollars
 
@@ -602,16 +604,16 @@ mobforGraphic <- mob %>%
          contains('2004')) %>%
   mutate(PlaceNames = c("Orleans", "Jefferson","Metro", "U.S."))  %>% 
   mutate(PlaceName.fac = factor(.$PlaceNames,levels = c("Orleans", "Jefferson","Metro", "U.S."))) %>%
-  select(-samehousepct, -sf2004samehouse) %>% 
+  select(-samehousepct, -sf2004samehousepct) %>% 
   gather(key = variable, value = value, contains("pct"), (contains("2004") & !contains("MOE"))) %>% 
   mutate(description = NA,
-         description = ifelse(variable == "mobabroadpct"|variable == "sf2004mobabroad", "Moved from abroad", description),
-         description = ifelse(variable == "mobStatespct"|variable == "sf2004states", "Moved from out of state", description),
-         description = ifelse(variable == "difparishpct"|variable == "sf2004difparish", "Moved from different parish in state", description),
-         description = ifelse(variable == "withinparishpct"|variable == "sf2004withinparish", "Moved within same parish", description)) %>%
+         description = ifelse(variable == "mobabroadpct"|variable == "sf2004mobabroadpct", "Moved from abroad", description),
+         description = ifelse(variable == "mobStatespct"|variable == "sf2004mobStatespct", "Moved from out of state", description),
+         description = ifelse(variable == "difparishpct"|variable == "sf2004difparishpct", "Moved from different parish in state", description),
+         description = ifelse(variable == "withinparishpct"|variable == "sf2004withinparishpct", "Moved within same parish", description)) %>%
   mutate(year = NA,
          year = ifelse(variable == "mobabroadpct"|variable == "mobStatespct"|variable == "difparishpct"|variable == "withinparishpct", 2018, year),
-         year = ifelse(variable == "sf2004mobabroad"|variable == "sf2004states"|variable == "sf2004difparish"|variable == "sf2004withinparish", 2004,year)) %>%
+         year = ifelse(variable == "sf2004mobabroadpct"|variable == "sf2004mobStatespct"|variable == "sf2004difparishpct"|variable == "sf2004withinparishpct", 2004,year)) %>%
   mutate(description.fac = factor(.$description, levels = c( "Moved from abroad",
                                                              "Moved from out of state",
                                                              "Moved from different parish in state",
@@ -625,7 +627,8 @@ mobforGraphic <- mob %>%
          paste0(round.off(value*100),"%",ifelse((abroadSIG == "no" & variable == "mobabroadpct")
                                                                          |(statesSIG ==  "no" & variable == "mobStatespct")
                                                                          |(difparishSIG ==  "no" & variable == "difparishpct")
-                                                                         |(withinparishSIG ==  "no" & variable == "withinparishpct"), "*", ""))))
+                                                                         |(withinparishSIG ==  "no" & variable == "withinparishpct"), "*", "")))) %>%
+  filter(grepl("MOE", variable) == F)
 
 chart.mob.allparishes <- mobforGraphic %>% 
   ggplot(aes(year.fac, as.numeric(value), fill=description.fac, label = val)) +
@@ -859,7 +862,7 @@ medhh.hist_chart <- medhh.hist %>%
   ggplot()+
   geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = dollar_format(accuracy = 1), limits = c(0,99000), breaks = c(0,30000,60000,90000)) + 
-  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023")) +
+  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023"), breaks = c(1979, 1989, 1999, 2010, year+1)) +
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
   geom_text(data = subset(medhh.hist, Year %in% c("1979", "2023") & var != "All"), aes(x=Year,y=val, label = label_dollar(accuracy = 1)(val)), vjust = -1, family = "Asap") +
   geom_text(data = subset(medhh.hist, Year == "2023"), aes(x = Year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
@@ -898,7 +901,7 @@ employ.raceGeos_chart <- employ_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5))  + 
-  labs(title = "Employment rate, for population 16+ by race/ethnicity, 2023",
+  labs(title = "Employment rate, for population 16-64 by race/ethnicity, 2023",
        x="",
        y="",
        fill = "") +
@@ -914,18 +917,18 @@ employment.hist_chart <- ggplot(employ_stattest.hist) +
   geom_line(aes(x = year, y = val, color = race, group = racesex_lab), size = 1) +
   geom_point(aes(x =year, y = val, color = race, shape = sex), size = 2) +
   scale_y_continuous(labels = percent_format(accuracy = 1), limits = c(0.35,0.80) ) + 
-  #scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2022")) +
+  #scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2023")) +
   scale_color_manual(name = "", labels = c("Black", "Hispanic, any race","White, non-Hispanic"),
                      values = c( DCcolor.p1darkblue90, DCcolor.p3yellowochre90, DCcolor.p2green90)) +
   
-  geom_text(data = subset(employ_stattest.hist, year %in% c(1980, 2022)), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
-  geom_text(data = subset(employ_stattest.hist, year == "2022"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
+  geom_text(data = subset(employ_stattest.hist, year %in% c(1980, 2023)), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
+  geom_text(data = subset(employ_stattest.hist, year == "2023"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) +
-  labs(title = "Employment rate, population 16+ by race/ethnicity and gender,\n Orleans Parish",
+  labs(title = "Employment rate, population 16-64 by race/ethnicity and gender,\n Orleans Parish",
        x = "",
        y = "")
 ggsave(employment.hist_chart,filename = "indicator expansion drafts/graphics/employment.hist.png",
@@ -1017,7 +1020,7 @@ totalPov.hist_chart <- totalPov.hist %>%
   geom_line(aes(x=year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) +
   scale_color_manual(values = c(DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023")) + 
+  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023"), breaks = c(1979, 1989, 1999, 2010, year+1)) + 
   geom_text(data = subset(totalPov.hist, year %in% c("1979", "2023") & var != "All"), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
   geom_text(data = subset(totalPov.hist, year == "2023"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +
@@ -1068,7 +1071,7 @@ childPov.hist_chart <- childPov.hist %>%
   geom_line(aes(x=Year,y=val, color = var.fac), size = 1) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
   scale_color_manual(values = c( DCcolor.p1darkblue,DCcolor.p2green,DCcolor.p3yellowochre)) +
-  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023")) + 
+  scale_x_continuous( labels = c("1979", "1989", "1999", "2010", "2023"), breaks = c(1979, 1989, 1999, 2010, year+1)) + 
   geom_text(data = subset(childPov.hist, Year %in% c("1980", "2023") & var != "All"), aes(x=Year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
   geom_text(data = subset(childPov.hist, Year == "2023"), aes(x = Year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
   themeDC_horizontal() +

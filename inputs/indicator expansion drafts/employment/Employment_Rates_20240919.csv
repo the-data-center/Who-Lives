@@ -1,0 +1,19 @@
+Geography ,Race,Gender,Year,pct_employed,MOE
+New Orleans,"White, not Hispanic",Male,1980,0.761,0
+New Orleans,"White, not Hispanic",Male,1990,0.7213,0
+New Orleans,"White, not Hispanic",Male,2000,0.7531,0.008866413
+New Orleans,"White, not Hispanic",Female,1980,0.5466,0
+New Orleans,"White, not Hispanic",Female,1990,0.6309,0
+New Orleans,"White, not Hispanic",Female,2000,0.6801,0.009993049
+New Orleans,Black or African American,Male,1980,0.6253,0
+New Orleans,Black or African American,Male,1990,0.5359,0
+New Orleans,Black or African American,Male,2000,0.5192,0.007321543
+New Orleans,Black or African American,Female,1990,0.5,0
+New Orleans,Black or African American,Female,1980,0.4847,0
+New Orleans,Black or African American,Female,2000,0.5447,0.006535161
+New Orleans,Hispanic or Latino,Male,1990,0.651,0
+New Orleans,Hispanic or Latino,Male,1980,0.6892,0
+New Orleans,Hispanic or Latino,Male,2000,0.6808,0.028343628
+New Orleans,Hispanic or Latino,Female,2000,0.5702,0.030478476
+New Orleans,Hispanic or Latino,Female,1980,0.5311,0
+New Orleans,Hispanic or Latino,Female,1990,0.5787,0
