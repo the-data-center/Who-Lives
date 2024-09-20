@@ -131,7 +131,7 @@ save(childpovRaw, file = "inputs/childpovRaw.RData")
 
 childpovvars2000 <-c('P087003','P087004','P087005','P087006','P087011','P087012','P087013',	'P087014') 
 childpovnames2000 <-c( "BelowPovUnder5Years","BelowPov5Years","BelowPov6to11Years","BelowPov12to17Years","AbovePovUnder5Years","AbovePov5Years","AbovePov6to11Years","AbovePov12to17")
-childpovRaw2000 <- wholivesdatapull2000(povvars2000,povnames2000)
+childpovRaw2000 <- wholivesdatapull2000(childpovvars2000,childpovnames2000)
 save(childpovRaw2000,file = "inputs/childpovRaw2000.RData")
 
 #Households without access to a vehicle
@@ -187,14 +187,11 @@ save(totpopage2000Raw, file = "inputs/totpopage2000.RData")
 # https://www2.census.gov/acs2004/Core_Tables/
 ACScounty_04 <- read_csv("inputs/ACS_data/ACS_2004_050.csv") 
 ACSUS_04 <- read_csv("inputs/ACS_data/ACS_2004_010.csv")
-ACSmetro_04 <- read_csv("inputs/ACS_data/ACS_2004_380.csv")
-mob04Raw <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
+mob04Raw <- ACScounty_04 %>% rbind(ACSUS_04) %>%
   filter(grepl("22071", geoid) |
            grepl("22051", geoid) |
-           grepl("22103", geoid) | #St. Tammany isn't in 2004 ACS for these.
-           grepl("01000US", geoid) |
-           grepl("38000US5560", geoid)) %>% 
-  filter((tblid == "B07003" & (order == 1 | 
+          grepl("01000US", geoid)) %>% 
+          filter((tblid == "B07003" & (order == 1 | 
                                  order == 4 |
                                  order == 7 | 
                                  order == 10 | 
@@ -203,8 +200,7 @@ mob04Raw <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
   mutate(MOE = as.numeric(cest) - as.numeric(clb),
          placename = case_when(grepl("22071", geoid) ~ "Orleans",
                                grepl("22051", geoid) ~ "Jefferson",
-                               grepl("01000US", geoid) ~ "United States",
-                               grepl("38000US5560", geoid) ~ "New Orleans Metro Area"),
+                               grepl("01000US", geoid) ~ "United States"),
          var = case_when(tblid == "B07003" & (order == 1) ~ "Total",
                          tblid == "B07003" & (order == 4) ~ "TotSameHouse",
                          tblid == "B07003" & (order == 7) ~ "TotMovedinCty",
@@ -230,8 +226,8 @@ mob04Raw <- ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
          sf2004mobStatespct, sf2004mobStatespctMOE, 
          sf2004difparishpct, sf2004difparishpctMOE,
          sf2004withinparishpct, sf2004withinparishpctMOE,
-         sf2004samehousepct, sf2004samehousepctMOE)%>%
-  filter(placename != "New Orleans Metro Area") # we're not able to manually calculate the metro and it was defined differently in 2004.
+         sf2004samehousepct, sf2004samehousepctMOE)
+ 
 save(mob04Raw, file = "inputs/mob04Raw.RData")
 
 #Homeownership rates
@@ -276,20 +272,18 @@ save(hoburRaw, file = "inputs/hoburRaw.RData")
 
 #### getting SEs for 2004 data:
 
-housing <-  ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
+housing <-  ACScounty_04 %>% rbind(ACSUS_04) %>%
   filter(grepl("22071", geoid) |
            grepl("22051", geoid) |
-           grepl("22103", geoid) | #St. Tammany isn't in 2004 ACS for these.
-           grepl("01000US", geoid) |
-           grepl("38000US5560", geoid)) %>% 
+            grepl("01000US", geoid)
+           ) %>% 
   filter((tblid == "B25064" & order == 1) |
            (tblid == "B25070" & (order == 1 | order == 10 | order == 11 ) |
               (tblid == "B25091" & (order == 1 | order == 11| order == 12| order == 22| order == 23)))) %>%
   mutate(MOE = as.numeric(cest) - as.numeric(clb),
          placename = case_when(grepl("22071", geoid) ~ "Orleans",
                                grepl("22051", geoid) ~ "Jefferson",
-                               grepl("01000US", geoid) ~ "United States",
-                               grepl("38000US5560", geoid) ~ "New Orleans Metro Area"),
+                               grepl("01000US", geoid) ~ "United States"),
          var = case_when(tblid == "B25064" & order == 1 ~ "medgrossrent",
                          tblid == "B25070" & order == 1 ~  "totrenters",
                          tblid == "B25070" & order == 10 ~ "rentcostburden",
@@ -312,8 +306,7 @@ housing <-  ACScounty_04 %>% rbind(ACSUS_04, ACSmetro_04) %>%
          MOE_hoburagg = moeagg(cbind(MOE_hocostburden,MOE_hocostburden_nomort)),
          MOE_hoagg = moeagg(cbind(MOE_tothomeowners,MOE_ho_notcomp,MOE_ho_notcomp_nomort)),
          hoburpct2004MOE = moeprop(y = (cest_tothomeowners- (cest_ho_notcomp+cest_ho_notcomp_nomort)), moex = MOE_hoburagg, moey = MOE_hoagg, p = hoburpct2004)) %>%
-  select(placename, medgrossrent2004, medgrossrent2004MOE, rentburpct2004, rentburpct2004MOE, hoburpct2004, hoburpct2004MOE) %>%
-  filter(placename != "New Orleans Metro Area") # we're not able to manually calculate the metro and it was defined differently in 2004.
+  select(placename, medgrossrent2004, medgrossrent2004MOE, rentburpct2004, rentburpct2004MOE, hoburpct2004, hoburpct2004MOE)
 rentburRaw2004 <- housing
 save(rentburRaw2004, file = "inputs/rentburRaw2004.RData")
 

@@ -274,7 +274,11 @@ load("inputs/childpovRaw.RData")
 load("inputs/childpovRaw2000.RData")
 childpov <- childpovRaw %>%
   left_join(childpovRaw2000 %>% select(-place), by = "placename") %>%
-  mutate(sf1999= BelowPov_2000 / Total_2000,
+  mutate(BelowPov_2000 = BelowPovUnder5Years_2000 + BelowPov5Years_2000 + BelowPov6to11Years_2000 + BelowPov12to17Years_2000,
+         BelowPov_2000MOE = moeagg(cbind(BelowPovUnder5Years_2000MOE,BelowPov5Years_2000MOE,BelowPov6to11Years_2000MOE,BelowPov12to17Years_2000MOE)),
+         Total_2000 = BelowPovUnder5Years_2000 + BelowPov5Years_2000 + BelowPov6to11Years_2000 + BelowPov12to17Years_2000 + AbovePovUnder5Years_2000 + AbovePov5Years_2000 + AbovePov6to11Years_2000 + AbovePov12to17_2000,
+         Total_2000MOE = moeagg(cbind(BelowPovUnder5Years_2000MOE, BelowPov5Years_2000MOE,BelowPov6to11Years_2000MOE,BelowPov12to17Years_2000MOE , AbovePovUnder5Years_2000MOE , AbovePov5Years_2000MOE,AbovePov6to11Years_2000MOE ,AbovePov12to17_2000MOE)),
+         sf1999= BelowPov_2000 / Total_2000,
          sf1999MOE = moeprop(Total_2000, BelowPov_2000MOE, Total_2000MOE, sf1999),
          TotChildPov = BelowPovFemaleChild + BelowPovMaleChild + AbovePovFemaleChild + AbovePovMaleChild,
          moeaggtot = moeagg(cbind(BelowPovFemaleChildMOE, BelowPovMaleChildMOE, AbovePovFemaleChildMOE, AbovePovMaleChildMOE)),
@@ -345,6 +349,7 @@ write.csv(forborCSV, "outputs/spreadsheets/forbor.csv")
 storage_write_csv(forborCSV, cont_proj, "who_lives/2024/outputs/forbor.csv")
 
 #Population who moved in the past year
+
 load("inputs/mobRaw.RData")
 load("inputs/mob04Raw.RData")
 mob <- mobRaw %>%
@@ -366,6 +371,8 @@ mob <- mobRaw %>%
          difparishSIG = stattest (x=sf2004difparishpct, moex = sf2004difparishpctMOE, y =difparishpct, moey = difparishmoeprop),
          withinparishSIG = stattest (x=sf2004withinparishpct, moex = sf2004withinparishpctMOE, y=withinparishpct, moey = withinparishmoeprop),
          samhouseSIG = stattest (x=sf2004samehousepct, moex = sf2004samehousepctMOE, y=samehousepct, moey = samehousemoeprop))
+
+mob[3,2:39]<-0 # using this nifty code to remove any metro related information
 
 mobCSV <- mob %>% 
 select(place,  (contains("sf2004") & !contains("MOE")), (contains("pct"))) %>% 
@@ -445,8 +452,8 @@ rentbur <- rentburRaw %>%
   left_join(rentburRaw2004, by = "placename") %>%
   mutate(#sf2004=c(0.2432,0.2167,0,0.2161,0.2384),#0 for St. tammany missing value ### ****HT commenting out old values, adding ones I pulled from 2004 ACS
          #order is "Orleans", "Jefferson", "New Orleans Metro Area", "United States"
-         sf2004 = rentburpct2004,
-         sf2004MOE = rentburpct2004MOE,
+         sf2004 = ifelse(is.na(rentburpct2004),0,rentburpct2004),
+         sf2004MOE = ifelse(is.na(rentburpct2004MOE),0,rentburpct2004MOE),
          rentburpct = `50orMore`/ (Total - NotComputed),
          moeagg = moeagg(cbind(TotalMOE, NotComputedMOE)),
          moeprop = moeprop(y=(Total - NotComputed),moex=`50orMoreMOE`,moey = moeagg, p = rentburpct),
@@ -467,8 +474,8 @@ load("inputs/hoburRaw.RData")
 load("inputs/rentburRaw2004.RData") #this one has both variables
 hobur <- hoburRaw %>%
   left_join(rentburRaw2004, by = "placename") %>%
-  mutate(sf2004 = hoburpct2004,
-         sf2004MOE = hoburpct2004MOE, #getting these numbers from line 154 of data-pull.R
+  mutate(sf2004 = ifelse(is.na(hoburpct2004), 0,hoburpct2004),
+         sf2004MOE = ifelse(is.na(hoburpct2004MOE),0,hoburpct2004MOE), #getting these numbers from line 154 of data-pull.R
          hoburpct = (`50orMoreMortgage`+`50orMoreNoMortgage`)/(Total - NotComputedMortgage - NotComputedNoMortgage),
          moexagg = moeagg(cbind(`50orMoreMortgageMOE`,`50orMoreNoMortgageMOE`)),
          moeyagg = moeagg(cbind(TotalMOE, NotComputedMortgageMOE, NotComputedNoMortgageMOE)),
@@ -493,9 +500,11 @@ load("inputs/medrentRaw.RData")
 
 medrent <- medrentRaw %>%
   left_join(rentburRaw2004, by = "placename") %>%
-  mutate(sf2004 = medgrossrent2004 *cpi04,
-         sf2004MOE = medgrossrent2004MOE * cpi04,
-         significant = stattest(x=sf2004, moex = sf2004MOE, y=Rent,moey=RentMOE)) 
+  mutate(sf2004 = ifelse(is.na(medgrossrent2004),0,medgrossrent2004) * cpi04,
+         sf2004MOE =  ifelse(is.na(medgrossrent2004),0,medgrossrent2004) * cpi04,
+         significant = stattest(x=sf2004, moex = sf2004MOE, y=Rent,moey=RentMOE))
+ 
+
 
 medrentCSV <- medrent %>%
   select(place, sf2004, Rent) %>% 
