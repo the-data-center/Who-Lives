@@ -360,8 +360,13 @@ employ00 <- read_csv("inputs/indicator expansion drafts/employment/nhgis0019_csv
 hisemploy00<- read_csv("inputs/indicator expansion drafts/employment/nhgis0017_csv/nhgis0017_ds151_2000_county.csv")
 employ10  <- read_csv("inputs/indicator expansion drafts/employment/nhgis0013_csv/nhgis0013_ds175_2010_county.csv")
 
-# Employment Rates by race by sex, 2022
 
+##Or we can use the data from the Prosperity Index for the years 1980,1990, and 2000. We well then join the 2010 on (constructed below) and the 2023 data pull. 
+
+employ80to00<- read_csv("inputs/indicator expansion drafts/employment/Employment_Rates_20240919.csv")
+
+
+# Employment Rates by race by sex, current
 
 
 employmentvars <- c("C23002H_003E", "C23002H_003M", "C23002H_007E", "C23002H_007M", "C23002H_016E",  "C23002H_016M", "C23002H_020E", "C23002H_020M", "C23002B_003E", "C23002B_003M", "C23002B_007E", "C23002B_007M", "C23002B_016E", "C23002B_016M", "C23002B_020E", "C23002B_020M", "C23002I_003E", "C23002I_003M", "C23002I_007E", "C23002I_007M", "C23002I_016E", "C23002I_016M", "C23002I_020E",  "C23002I_020M")
@@ -373,125 +378,125 @@ save(employmentRaw, file = "inputs/employmentRaw.RData")
 #filter to Orleans Parish and create the columns we need 
 
 
-employ80 <- employ80 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1980,
-                                                                                 totWhiteMalepop =  sum(c_across(DHY001:DHY004), na.rm = T),
-                                                                                 totWhiteFemalepop = sum(c_across(DHY001:DHY004), na.rm = T),
-                                                                                 WhiteMaleEmploy =  DHY002,
-                                                                                 WhiteFemaleEmploy = DHY006,
-                                                                                 totBlackMalepop = sum(c_across(DHY009:DHY012), na.rm = T),
-                                                                                 totBlackFemalepop = sum(c_across(DHY013: DHY016), na.rm = T),                     
-                                                                                 BlackFemaleemploy = DHY014,
-                                                                                 BlackMaleEmploy = DHY010,
-                                                                                 pctWhiteMaleEmploy = DHY002 / totWhiteMalepop,
-                                                                                 pctWhiteFemaleEmploy = DHY006 / totWhiteFemalepop,
-                                                                                 pctBlackMaleEmploy = DHY010 / totBlackMalepop,
-                                                                                 pctBlackFemaleEmploy = DHY014 / totBlackFemalepop) %>% pivot_longer(cols = pctWhiteMaleEmploy:pctBlackFemaleEmploy, values_to = "val") %>% select(year, val, name)
+# employ80 <- employ80 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1980,
+#                                                                                  totWhiteMalepop =  sum(c_across(DHY001:DHY004), na.rm = T),
+#                                                                                  totWhiteFemalepop = sum(c_across(DHY001:DHY004), na.rm = T),
+#                                                                                  WhiteMaleEmploy =  DHY002,
+#                                                                                  WhiteFemaleEmploy = DHY006,
+#                                                                                  totBlackMalepop = sum(c_across(DHY009:DHY012), na.rm = T),
+#                                                                                  totBlackFemalepop = sum(c_across(DHY013: DHY016), na.rm = T),                     
+#                                                                                  BlackFemaleemploy = DHY014,
+#                                                                                  BlackMaleEmploy = DHY010,
+#                                                                                  pctWhiteMaleEmploy = DHY002 / totWhiteMalepop,
+#                                                                                  pctWhiteFemaleEmploy = DHY006 / totWhiteFemalepop,
+#                                                                                  pctBlackMaleEmploy = DHY010 / totBlackMalepop,
+#                                                                                  pctBlackFemaleEmploy = DHY014 / totBlackFemalepop) %>% pivot_longer(cols = pctWhiteMaleEmploy:pctBlackFemaleEmploy, values_to = "val") %>% select(year, val, name)
+# 
+# hispemploy80 <- hispemploy80 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1980,
+#                                                                                          totHispMalepop = sum(c_across(DHZ001:DHZ004), na.rm = T),
+#                                                                                          totHispFemalepop = sum(c_across(DHZ004:DHZ008), na.rm = T),
+#                                                                                          HispMaleEmploy = DHZ002,
+#                                                                                          HispFemaleEmploy = DHZ006,
+#                                                                                          pctHispMaleEmploy = DHZ002/totHispMalepop,
+#                                                                                          pctHispFemaleEmploy = DHZ006/ totHispFemalepop) %>% pivot_longer(cols = pctHispMaleEmploy:pctHispFemaleEmploy, values_to = "val") %>% select(year, val, name)
+# employ80<-rbind(employ80,hispemploy80)                                      
+# 
+# employ90 <- employ90 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1990,
+#                                                                                  totWhiteMalepop =  sum(c_across(E4J001:E4J004), na.rm = T),
+#                                                                                  totWhiteFemalepop = sum(c_across(E4J005:E4J008), na.rm = T),
+#                                                                                  WhiteMaleEmploy =  E4J002,
+#                                                                                  WhiteFemaleEmploy = E4J006,
+#                                                                                  totBlackMalepop = sum(c_across(E4J009:E4J012), na.rm = T),
+#                                                                                  totBlackFemalepop = sum(c_across(E4J013: E4J016), na.rm = T),                     
+#                                                                                  BlackFemaleemploy =E4J014,
+#                                                                                  BlackMaleEmploy = E4J010,
+#                                                                                  pctWhiteMaleEmploy = E4J002/ totWhiteMalepop,
+#                                                                                  pctWhiteFemaleEmploy = E4J006 / totWhiteFemalepop,
+#                                                                                  pctBlackMaleEmploy = E4J010 / totBlackMalepop,
+#                                                                                  pctBlackFemaleEmploy = E4J014 / totBlackFemalepop) %>% pivot_longer(cols = pctWhiteMaleEmploy:pctBlackFemaleEmploy, values_to = "val") %>% select(year, val, name)
+# 
+# hispemploy90 <- hispemploy90 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1990,
+#                                                                                          totHispMalepop = sum(c_across(E4K001:E4K004), na.rm = T),
+#                                                                                          totHispFemalepop = sum(c_across(E4K005:E4K008), na.rm = T),
+#                                                                                          HispMaleEmploy = E4K002,
+#                                                                                          HispFemaleEmploy = E4K006,
+#                                                                                          pctHispMaleEmploy = E4K002/totHispMalepop,
+#                                                                                          pctHispFemaleEmploy = E4K006/ totHispFemalepop) %>% pivot_longer(cols = pctHispMaleEmploy:pctHispFemaleEmploy, values_to = "val") %>% select(year, val, name)
+# employ90<-rbind(employ90,hispemploy90)
+# save(employment, file = "inputs/employ_TS.RData")
+# 
+# # We need the 2000 MOE, so we are doing it manually from the NHGIS data.
+# #For all of these, we need 2000 total pop from Orleans parish. And the design factor is 2.0 for all of them.
+# 
+# orleans_totpop<- getCensus(name = "dec/sf3", vintage = 2000, key = mycensuskey, vars = "P001001", region = "county:071", regionin = "state:22") %>% select(-state) %>% rename(POP = P001001)
+# 
+# employ_test<-employ00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2000,
+#                                                                                   WhiteMale_employ = GSS001,
+#                                                                                   WhiteMale_employMOE = moe2000(est = WhiteMale_employ, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totWhiteMalepopInLabor = GSQ001, 
+#                                                                                   totWhiteMalepopInLaborMOE = moe2000(est = totWhiteMalepopInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totWhiteMalepopNotInLabor =  GSQ002,
+#                                                                                   totWhiteMalepopNotInLaborMOE = moe2000(est = totWhiteMalepopNotInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totWhiteMalepop = totWhiteMalepopInLabor + totWhiteMalepopNotInLabor,
+#                                                                                   totWhiteMalepopMOE = moeagg(cbind(totWhiteMalepopInLaborMOE, totWhiteMalepopNotInLaborMOE)),
+#                                                                                   WhiteFemale_employ = GSS003,
+#                                                                                   WhiteFemale_employMOE = moe2000(est = WhiteFemale_employ, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totWhiteFemaleInLabor = GSQ003,
+#                                                                                   totWhiteFemaleInLaborMOE = moe2000(est = totWhiteFemaleInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totWhiteFemaleNotInLabor = GSQ004,
+#                                                                                   totWhiteFemaleNotInLaborMOE = moe2000(est = totWhiteFemaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totWhiteFemalepop = totWhiteFemaleInLabor + totWhiteFemaleNotInLabor,
+#                                                                                   totWhiteFemalepopMOE = moeagg(cbind(totWhiteFemaleInLaborMOE, totWhiteFemaleNotInLaborMOE)),
+#                                                                                   BlackMale_employ = GSS005,
+#                                                                                   BlackMale_employMOE = moe2000(est = BlackMale_employ, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totBlackMaleInLabor =  GSQ005, 
+#                                                                                   totBlackMaleInLaborMOE = moe2000(est = totBlackMaleInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totBlackMaleNotInLabor = GSQ006,
+#                                                                                   totBlackMaleNotInLaborMOE = moe2000(est = totBlackMaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totBlackMalepop = totBlackMaleInLabor + totBlackMaleNotInLabor,
+#                                                                                   totBlackMalepopMOE = moeagg(cbind(totBlackMaleInLaborMOE, totBlackMaleNotInLaborMOE)),
+#                                                                                   BlackFemale_employ = GSS007,
+#                                                                                   BlackFemale_employMOE = moe2000(est = BlackFemale_employ, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totBlackFemaleInLabor =  GSQ007,
+#                                                                                   totBlackFemaleInLaborMOE = moe2000(est = totBlackFemaleInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totBlackFemaleNotInLabor = GSQ006,
+#                                                                                   totBlackFemaleNotInLaborMOE = moe2000(est = totBlackFemaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                   totBlackFemalepop = totBlackFemaleInLabor + totBlackFemaleNotInLabor,
+#                                                                                   totBlackFemalepopMOE = moeagg(cbind( totBlackFemaleInLaborMOE,  totBlackFemaleNotInLaborMOE)),
+#                                                                                   pctWhiteMaleEmploy = WhiteMale_employ / totWhiteMalepop,
+#                                                                                   pctWhiteMaleEmployMOE = moeprop(y = totWhiteMalepop, moex = WhiteMale_employMOE, moey = totWhiteMalepopMOE, p = pctWhiteMaleEmploy),
+#                                                                                   pctWhiteFemaleEmploy = WhiteFemale_employ / totWhiteFemalepop,
+#                                                                                   pctWhiteFemaleEmployMOE = moeprop(y = totWhiteFemalepop, moex = WhiteFemale_employMOE, moey = totWhiteFemalepopMOE, p = pctWhiteFemaleEmploy),
+#                                                                                   pctBlackMaleEmploy = BlackMale_employ / totBlackMalepop,
+#                                                                                   pctBlackMaleEmployMOE = moeprop(y = totBlackMalepop, moex =   BlackMale_employMOE, moey = totBlackMalepopMOE, p = pctBlackMaleEmploy),  
+#                                                                                   pctBlackFemaleEmploy =  BlackFemale_employ/totBlackFemalepop,
+#                                                                                   pctBlackFemaleEmployMOE = moeprop(y = totBlackFemalepop, moex = BlackFemale_employMOE, moey = totBlackFemalepopMOE, p = pctBlackFemaleEmploy)) %>% pivot_longer(cols = pctWhiteMaleEmploy:pctBlackFemaleEmployMOE, values_to = "val") %>% select(year, val, name)
+# 
+# hispemploy_test <- hisemploy00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2000,
+#                                                                                            HispMale_employ = GSX001,
+#                                                                                            HispMale_employMOE = moe2000(est = HispMale_employ, n = orleans_totpop$POP, designfac = 2),
+#                                                                                            totHispMaleInLabor = GSV001,
+#                                                                                            totHispMaleInLaborMOE =  moe2000(est = totHispMaleInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                            totHispMaleNotInLabor = GSV002, 
+#                                                                                            totHispMaleNotInLaborMOE = moe2000(est = totHispMaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                            totHispMalepop = totHispMaleInLabor + totHispMaleNotInLabor,
+#                                                                                            totHispMalepopMOE = moeagg(cbind(totHispMaleInLaborMOE,  totHispMaleNotInLaborMOE)),
+#                                                                                            HispFemale_employ = GSX003,
+#                                                                                            HispFemale_employMOE = moe2000(est = HispFemale_employ, n = orleans_totpop$POP, designfac = 2),
+#                                                                                            totHispFemaleInLabor = GSV003,
+#                                                                                            totHispFemaleInLaborMOE = moe2000(est = totHispFemaleInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                            totHispFemaleNotInLabor = GSV004,
+#                                                                                            totHispFemaleNotInLaborMOE = moe2000(est = totHispFemaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
+#                                                                                            totHispFemalepop = totHispFemaleInLabor + totHispFemaleNotInLabor,
+#                                                                                            totHispFemalepopMOE = moeagg(cbind(totHispFemaleInLaborMOE,  totHispFemaleNotInLaborMOE)),
+#                                                                                            pctHispMaleEmploy = HispMale_employ/ totHispMalepop,
+#                                                                                            pctHispMaleEmployMOE = moeprop(y = totHispMalepop, moex = HispMale_employMOE, moey = totHispMalepopMOE, p = pctHispMaleEmploy),
+#                                                                                            pctHispFemaleEmploy = HispFemale_employ/ totHispFemalepop,
+#                                                                                            pctHispFemaleEmployMOE = moeprop(y = totHispFemalepop, moex = HispFemale_employMOE, moey = totHispFemalepopMOE, p = pctHispFemaleEmploy)) %>% pivot_longer(cols = pctHispMaleEmploy:pctHispFemaleEmployMOE, values_to = "val") %>% select(year, val, name)
+# 
+# employ00<- rbind(employ_test,hispemploy_test)
 
-hispemploy80 <- hispemploy80 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1980,
-                                                                                         totHispMalepop = sum(c_across(DHZ001:DHZ004), na.rm = T),
-                                                                                         totHispFemalepop = sum(c_across(DHZ004:DHZ008), na.rm = T),
-                                                                                         HispMaleEmploy = DHZ002,
-                                                                                         HispFemaleEmploy = DHZ006,
-                                                                                         pctHispMaleEmploy = DHZ002/totHispMalepop,
-                                                                                         pctHispFemaleEmploy = DHZ006/ totHispFemalepop) %>% pivot_longer(cols = pctHispMaleEmploy:pctHispFemaleEmploy, values_to = "val") %>% select(year, val, name)
-employ80<-rbind(employ80,hispemploy80)                                      
-
-employ90 <- employ90 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1990,
-                                                                                 totWhiteMalepop =  sum(c_across(E4J001:E4J004), na.rm = T),
-                                                                                 totWhiteFemalepop = sum(c_across(E4J005:E4J008), na.rm = T),
-                                                                                 WhiteMaleEmploy =  E4J002,
-                                                                                 WhiteFemaleEmploy = E4J006,
-                                                                                 totBlackMalepop = sum(c_across(E4J009:E4J012), na.rm = T),
-                                                                                 totBlackFemalepop = sum(c_across(E4J013: E4J016), na.rm = T),                     
-                                                                                 BlackFemaleemploy =E4J014,
-                                                                                 BlackMaleEmploy = E4J010,
-                                                                                 pctWhiteMaleEmploy = E4J002/ totWhiteMalepop,
-                                                                                 pctWhiteFemaleEmploy = E4J006 / totWhiteFemalepop,
-                                                                                 pctBlackMaleEmploy = E4J010 / totBlackMalepop,
-                                                                                 pctBlackFemaleEmploy = E4J014 / totBlackFemalepop) %>% pivot_longer(cols = pctWhiteMaleEmploy:pctBlackFemaleEmploy, values_to = "val") %>% select(year, val, name)
-
-hispemploy90 <- hispemploy90 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 1990,
-                                                                                         totHispMalepop = sum(c_across(E4K001:E4K004), na.rm = T),
-                                                                                         totHispFemalepop = sum(c_across(E4K005:E4K008), na.rm = T),
-                                                                                         HispMaleEmploy = E4K002,
-                                                                                         HispFemaleEmploy = E4K006,
-                                                                                         pctHispMaleEmploy = E4K002/totHispMalepop,
-                                                                                         pctHispFemaleEmploy = E4K006/ totHispFemalepop) %>% pivot_longer(cols = pctHispMaleEmploy:pctHispFemaleEmploy, values_to = "val") %>% select(year, val, name)
-employ90<-rbind(employ90,hispemploy90)
-save(employment, file = "inputs/employ_TS.RData")
-
-# We need the 2000 MOE, so we are doing it manually from the NHGIS data.
-#For all of these, we need 2000 total pop from Orleans parish. And the design factor is 2.0 for all of them.
-
-orleans_totpop<- getCensus(name = "dec/sf3", vintage = 2000, key = mycensuskey, vars = "P001001", region = "county:071", regionin = "state:22") %>% select(-state) %>% rename(POP = P001001)
-
-employ_test<-employ00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2000,
-                                                                                  WhiteMale_employ = GSS001,
-                                                                                  WhiteMale_employMOE = moe2000(est = WhiteMale_employ, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totWhiteMalepopInLabor = GSQ001, 
-                                                                                  totWhiteMalepopInLaborMOE = moe2000(est = totWhiteMalepopInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totWhiteMalepopNotInLabor =  GSQ002,
-                                                                                  totWhiteMalepopNotInLaborMOE = moe2000(est = totWhiteMalepopNotInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totWhiteMalepop = totWhiteMalepopInLabor + totWhiteMalepopNotInLabor,
-                                                                                  totWhiteMalepopMOE = moeagg(cbind(totWhiteMalepopInLaborMOE, totWhiteMalepopNotInLaborMOE)),
-                                                                                  WhiteFemale_employ = GSS003,
-                                                                                  WhiteFemale_employMOE = moe2000(est = WhiteFemale_employ, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totWhiteFemaleInLabor = GSQ003,
-                                                                                  totWhiteFemaleInLaborMOE = moe2000(est = totWhiteFemaleInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totWhiteFemaleNotInLabor = GSQ004,
-                                                                                  totWhiteFemaleNotInLaborMOE = moe2000(est = totWhiteFemaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totWhiteFemalepop = totWhiteFemaleInLabor + totWhiteFemaleNotInLabor,
-                                                                                  totWhiteFemalepopMOE = moeagg(cbind(totWhiteFemaleInLaborMOE, totWhiteFemaleNotInLaborMOE)),
-                                                                                  BlackMale_employ = GSS005,
-                                                                                  BlackMale_employMOE = moe2000(est = BlackMale_employ, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totBlackMaleInLabor =  GSQ005, 
-                                                                                  totBlackMaleInLaborMOE = moe2000(est = totBlackMaleInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totBlackMaleNotInLabor = GSQ006,
-                                                                                  totBlackMaleNotInLaborMOE = moe2000(est = totBlackMaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totBlackMalepop = totBlackMaleInLabor + totBlackMaleNotInLabor,
-                                                                                  totBlackMalepopMOE = moeagg(cbind(totBlackMaleInLaborMOE, totBlackMaleNotInLaborMOE)),
-                                                                                  BlackFemale_employ = GSS007,
-                                                                                  BlackFemale_employMOE = moe2000(est = BlackFemale_employ, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totBlackFemaleInLabor =  GSQ007,
-                                                                                  totBlackFemaleInLaborMOE = moe2000(est = totBlackFemaleInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totBlackFemaleNotInLabor = GSQ006,
-                                                                                  totBlackFemaleNotInLaborMOE = moe2000(est = totBlackFemaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                  totBlackFemalepop = totBlackFemaleInLabor + totBlackFemaleNotInLabor,
-                                                                                  totBlackFemalepopMOE = moeagg(cbind( totBlackFemaleInLaborMOE,  totBlackFemaleNotInLaborMOE)),
-                                                                                  pctWhiteMaleEmploy = WhiteMale_employ / totWhiteMalepop,
-                                                                                  pctWhiteMaleEmployMOE = moeprop(y = totWhiteMalepop, moex = WhiteMale_employMOE, moey = totWhiteMalepopMOE, p = pctWhiteMaleEmploy),
-                                                                                  pctWhiteFemaleEmploy = WhiteFemale_employ / totWhiteFemalepop,
-                                                                                  pctWhiteFemaleEmployMOE = moeprop(y = totWhiteFemalepop, moex = WhiteFemale_employMOE, moey = totWhiteFemalepopMOE, p = pctWhiteFemaleEmploy),
-                                                                                  pctBlackMaleEmploy = BlackMale_employ / totBlackMalepop,
-                                                                                  pctBlackMaleEmployMOE = moeprop(y = totBlackMalepop, moex =   BlackMale_employMOE, moey = totBlackMalepopMOE, p = pctBlackMaleEmploy),  
-                                                                                  pctBlackFemaleEmploy =  BlackFemale_employ/totBlackFemalepop,
-                                                                                  pctBlackFemaleEmployMOE = moeprop(y = totBlackFemalepop, moex = BlackFemale_employMOE, moey = totBlackFemalepopMOE, p = pctBlackFemaleEmploy)) %>% pivot_longer(cols = pctWhiteMaleEmploy:pctBlackFemaleEmployMOE, values_to = "val") %>% select(year, val, name)
-
-hispemploy_test <- hisemploy00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2000,
-                                                                                           HispMale_employ = GSX001,
-                                                                                           HispMale_employMOE = moe2000(est = HispMale_employ, n = orleans_totpop$POP, designfac = 2),
-                                                                                           totHispMaleInLabor = GSV001,
-                                                                                           totHispMaleInLaborMOE =  moe2000(est = totHispMaleInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                           totHispMaleNotInLabor = GSV002, 
-                                                                                           totHispMaleNotInLaborMOE = moe2000(est = totHispMaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                           totHispMalepop = totHispMaleInLabor + totHispMaleNotInLabor,
-                                                                                           totHispMalepopMOE = moeagg(cbind(totHispMaleInLaborMOE,  totHispMaleNotInLaborMOE)),
-                                                                                           HispFemale_employ = GSX003,
-                                                                                           HispFemale_employMOE = moe2000(est = HispFemale_employ, n = orleans_totpop$POP, designfac = 2),
-                                                                                           totHispFemaleInLabor = GSV003,
-                                                                                           totHispFemaleInLaborMOE = moe2000(est = totHispFemaleInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                           totHispFemaleNotInLabor = GSV004,
-                                                                                           totHispFemaleNotInLaborMOE = moe2000(est = totHispFemaleNotInLabor, n = orleans_totpop$POP, designfac = 2),
-                                                                                           totHispFemalepop = totHispFemaleInLabor + totHispFemaleNotInLabor,
-                                                                                           totHispFemalepopMOE = moeagg(cbind(totHispFemaleInLaborMOE,  totHispFemaleNotInLaborMOE)),
-                                                                                           pctHispMaleEmploy = HispMale_employ/ totHispMalepop,
-                                                                                           pctHispMaleEmployMOE = moeprop(y = totHispMalepop, moex = HispMale_employMOE, moey = totHispMalepopMOE, p = pctHispMaleEmploy),
-                                                                                           pctHispFemaleEmploy = HispFemale_employ/ totHispFemalepop,
-                                                                                           pctHispFemaleEmployMOE = moeprop(y = totHispFemalepop, moex = HispFemale_employMOE, moey = totHispFemalepopMOE, p = pctHispFemaleEmploy)) %>% pivot_longer(cols = pctHispMaleEmploy:pctHispFemaleEmployMOE, values_to = "val") %>% select(year, val, name)
-
-employ00<- rbind(employ_test,hispemploy_test)
-
-employ10<-employ10 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2010,
+employ10 <-employ10 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2010,
                                                                                totWhiteMalepop = I9TE003,
                                                                                totWhiteMalepopMOE = I9TM003,
                                                                                totWhiteFemalepop = I9TE016,
@@ -529,9 +534,8 @@ employ10<-employ10 %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(y
                                                                                pctHispFemaleEmploy = HispFemaleEmploy/ totHispFemalepop,
                                                                                pctHispFemaleEmployMOE = moeprop(y = totHispFemalepop, moex = HispFemaleEmployMOE, moey = totHispFemalepopMOE, p = pctHispFemaleEmploy)) %>% pivot_longer(cols = pctWhiteMaleEmploy:pctHispFemaleEmployMOE, values_to = "val") %>% select(year, val, name)
 
+save(employ10, file = "inputs/employ10Raw.RData")
 
-
-employment<-rbind(employ80,employ90,employ00,employ10)
 
 #################################################
 # # Jenna's expanded data pull

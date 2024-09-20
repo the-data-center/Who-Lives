@@ -365,10 +365,9 @@ employment.hist_chart
 
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: The Hispanic employment rate by gender is unavailable for Orleans Parish in 2023.
-∗ = Change in time is not significant for White and Hispanic males.  
-∗ = Change in time is not significant for Black males for 2000-2010 and 2000-2023.
-∗ = Change in time is not significant for Black females for 2010-2023.     
+"∗ = Change in time is not significant for Hispanic males.  
+∗ = Change in time is not significant for Black males, Black females, White males and White females for 2000-2010.   
+∗ = Change in time is not significant for Hispanic females for 2010-2023.     
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023."
 )
