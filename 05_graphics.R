@@ -260,8 +260,8 @@ hispan2018 <- hispan %>%
          SouthAmericanpct,
          Otherpct,
          contains('SIG')) %>%
-  mutate(place = c( "Orleans", "Metro", "United States"))  %>% 
-  mutate(PlaceName.fac = factor(.$place,levels = c( "Orleans","Metro","United States"))) %>%
+  mutate(place = c( "Orleans", "Jefferson", "Metro", "United States"))  %>% 
+  mutate(PlaceName.fac = factor(.$place,levels = c( "Orleans", "Jefferson", "Metro","United States"))) %>%
   gather(-place, -PlaceName.fac, -contains('SIG'), key=variable, value = value) %>% 
   .[-(45:48),] %>%
   mutate(description = NA,
@@ -881,7 +881,7 @@ ggsave(medhh.hist_chart,filename = "indicator expansion drafts/graphics/medhh.hi
 # Across geos employment bar chart
 
 employ.raceGeos_chart <- employ_with_stats %>%
-  ggplot(aes(x = grp.fac, y = val, fill = placename.fac)) +
+  ggplot(aes(x = placename.fac, y = val, fill = grp.fac)) +
   geom_bar(stat = "identity",
            position = position_dodge(),
            width = .6,
@@ -895,8 +895,11 @@ employ.raceGeos_chart <- employ_with_stats %>%
             hjust = -.5,
             size=2.75,
             family="Asap") +
-  scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p2yellow90, DCcolor.p2purple90, DCcolor.p2blue90, DCcolor.p2green90), guide=guide_legend(reverse=T)) +
+  scale_y_continuous(labels = percent_format(accuracy = 1), limits = c(0, 1)) + 
+  scale_fill_manual(values = c(DCcolor.p3yellowochre50, DCcolor.p3yellowochre90,
+                               DCcolor.p2limegreen50, DCcolor.p2limegreen90,
+                               DCcolor.p1darkblue50, DCcolor.p1darkblue90),
+                    guide = guide_legend(reverse = T)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
