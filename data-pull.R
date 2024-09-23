@@ -646,8 +646,7 @@ Bach00Wht <- Bach00Wht %>%
   filter(place == "071") %>%
   select(pctWhiteBach, WhiteBachmoeprop)
 
-save(Bach00Wht, file = "inputs/Bach00Wht.RData")
-save(Bach00, file = "inputs/Bach00Raw.RData")
+
 
 Bach00 <- Bach00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is by sex
   transmute(year = 2000,
@@ -680,6 +679,8 @@ Bach00 <- Bach00 %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is 
   select(year, val, name)
 
 
+save(Bach00Wht, file = "inputs/Bach00Wht.RData")
+save(Bach00, file = "inputs/Bach00Raw.RData")
 
 #pulling ACS1 for 2010 data
 

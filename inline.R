@@ -280,8 +280,58 @@ getvalue.hispan.tam.current <- HispanicPop %>%  ### PEP update
   select(population) %>%
   pull()
 
+#In Orleans and St. Bernard parishes, the Hispanic population nearly doubled
+getvalue.hispan.orleans.current <- HispanicPop %>%
+  filter(PlaceName == "Orleans") %>%
+  select (population) %>%
+  pull()
+
+getvalue.Hispanpct.orleans.current <- ParishDemo %>%
+  filter(PlaceName == "Orleans") %>%
+  select(pcthisp) %>% 
+  pull()
+
+getvalue.hispan.bernard.current <- HispanicPop %>%
+  filter(PlaceName == "St. Bernard") %>%
+  select (population) %>%
+  pull()
+
+getvalue.Hispanpct.bernard.current <- ParishDemo %>%
+  filter(PlaceName == "St. Bernard") %>%
+  select(pcthisp) %>% 
+  pull()
+
+# The number of Hispanics St. Charles, St. John the Baptist, Plaquemines, and St. James
+
+getvalue.hispan.charles.current <- HispanicPop %>%
+  filter(PlaceName == "St. Charles") %>%
+  select (population) %>%
+  pull()
+
+# St John the baddest B)
+
+getvalue.hispan.john.current <- HispanicPop %>%
+  filter(PlaceName == "St. John the Baptist") %>% # St John the baddest B)
+  select (population) %>%
+  pull()  
+
+getvalue.hispan.plaquemines.current <- HispanicPop %>%
+  filter(PlaceName == "Plaquemines") %>%
+  select (population) %>%
+  pull()  
+
+getvalue.hispan.james.current <- HispanicPop %>%
+  filter(PlaceName == "St. James") %>%
+  select (population) %>%
+  pull()  
+
+
+
+
 #such that the Hispanic share of the population was 5.7 percent in Orleans and 5.8 percent in St. Tammany by 2018.
 
+  
+  
 #getvalue.Hispanpct.no.2018
 
 getvalue.Hispanpct.tam.current <-ParishDemo %>%  ### PEP update
@@ -291,21 +341,23 @@ getvalue.Hispanpct.tam.current <-ParishDemo %>%  ### PEP update
 
 
 
-#As of July 2018, there were 115,396 Hispanics in the metro area,
+#As of July 2018, there were X Hispanics in the metro area,
 getvalue.Hispan.metro.current <-ParishDemo %>%  ### PEP update
-  filter(grepl("Metro",PlaceName)) %>%
+  filter(placename2 == "New Orleans Metro Area") %>%
   select(population_Hispanic) %>%
   pull()
 
 
-#representing 9.0 percent of the metro population.
+#representing X percent of the metro population.
 
 getvalue.Hispanpct.metro.current <-ParishDemo %>%  ### PEP update
-  filter(grepl("Metro",PlaceName)) %>%
+  filter(placename2 == "New Orleans Metro Area")  %>%
   select(pcthisp) %>%
   pull()
 
-#This is up from 2000 when there were 58,545,
+#This is up from 2000 when there were 58,545
+
+
 
 getvalue.Hispanpop.jeff.current <- HispanicPop %>%   ### PEP update
   filter(PlaceName == "Jefferson") %>%
@@ -368,10 +420,7 @@ getvalue.Hispanpop.john.2000 <- HispanicPop %>%
   filter(PlaceName == "St. John the Baptist") %>%
   select(est2000) %>%
   pull()
-getvalue.Hispanpop.tam.2000 <- HispanicPop %>%
-  filter(PlaceName == "St. Tammany") %>%
-  select(est2000) %>%
-  pull()
+
 
 getvalue.hispanpop.metro.current <- (getvalue.Hispanpop.jeff.current + 
                                     getvalue.Hispanpop.no.current + 
@@ -379,8 +428,8 @@ getvalue.hispanpop.metro.current <- (getvalue.Hispanpop.jeff.current +
                                     getvalue.Hispanpop.bern.current + 
                                     getvalue.Hispanpop.char.current + 
                                     getvalue.Hispanpop.jam.current + 
-                                    getvalue.Hispanpop.john.current + 
-                                    getvalue.Hispanpop.tam.current)
+                                    getvalue.Hispanpop.john.current) 
+                                  
 
 
 getvalue.hispanpop.metro.2000 <- (getvalue.Hispanpop.jeff.2000 + 
@@ -389,11 +438,12 @@ getvalue.hispanpop.metro.2000 <- (getvalue.Hispanpop.jeff.2000 +
                                      getvalue.Hispanpop.bern.2000 + 
                                      getvalue.Hispanpop.char.2000 + 
                                      getvalue.Hispanpop.jam.2000 + 
-                                     getvalue.Hispanpop.john.2000 + 
-                                     getvalue.Hispanpop.tam.2000)
-# representing 4.4 percent of the metro population.
+                                     getvalue.Hispanpop.john.2000)
+                             
+
+# representing X percent of the metro population.
 getvalue.Hispanpct.metro.2000 <-ParishDemo %>%
-  filter(grepl("Metro",PlaceName)) %>%
+  filter(placename2 == "New Orleans Metro Area")  %>%
   select(hispanic2000) %>%
   pull()
 
