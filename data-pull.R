@@ -7,13 +7,6 @@
 ## test: using the total pop numbers from our site to update the comparison year to 2020 instead of 2010 in the text
 
 totalpop_metro <- read_xlsx("inputs/TheDataCenter_PopulationbyParish.xlsx")
-totalpop_metro <- totalpop_metro %>%
-  rename(year = `...1`) %>%
-  mutate(year = str_replace(year, "Census ", ""),
-         year = str_replace(year, "Estimate ", ""),
-         year = as.numeric(year),
-         
-         metro_pop = `Metro Area total`)
 
 save(totalpop_metro, file = "inputs/totalpop_metro.RData")
 

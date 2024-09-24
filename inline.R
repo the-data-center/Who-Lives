@@ -59,8 +59,9 @@ getvalue.pop.tam.current <- Overallpop %>%
   select(population) %>%
   pull()
 
-metropop.current <-(getvalue.pop.no.current + getvalue.pop.jeff.current  + getvalue.pop.plaq.current  + getvalue.pop.bernard.current + getvalue.pop.charles.current + getvalue.pop.james.current + getvalue.pop.john.current)
+metropop.current <-totalpop_metro$`Metro Area total`[totalpop_metro$year == 2023]
 
+metropop.2000<- totalpop_metro$`Metro Area total`[totalpop_metro$year==2000]
 
 #According to the U.S. Census Bureau’s 2018 population estimates, there are now 91,274 fewer African Americans living in New Orleans (Orleans)
 load("inputs/allparishes_retro.RData")
@@ -104,13 +105,17 @@ getvalue.pop.john.2010 <- Overallpop2010 %>%
 
 
 
-metro2010pop <- (getvalue.pop.no.2010 + getvalue.pop.jeff.2010  + getvalue.pop.plaq.2010  + getvalue.pop.bernard.2010 + getvalue.pop.charles.2010 + getvalue.pop.james.2010 + getvalue.pop.john.2010)
+#metro2010pop <- (getvalue.pop.no.2010 + getvalue.pop.jeff.2010  + getvalue.pop.plaq.2010  + getvalue.pop.bernard.2010 + getvalue.pop.charles.2010 + getvalue.pop.james.2010 + getvalue.pop.john.2010)
+
+
 
 pctincrease.metro.current.2010 <- ((metropop.current - metro2010pop)/metro2010pop)
 
 
 ## Percent increase in the metro since 2020.
 metro2020pop <- totalpop_metro$`Metro Area total`[totalpop_metro$year == 2020]
+
+metro2010pop <- totalpop_metro$`Metro Area total`[totalpop_metro$year == 2010]
 
 pctincrease.metro.current.2020 <- ((metropop.current - metro2020pop)/metro2020pop)
 
@@ -590,7 +595,7 @@ getvalue.medage.current <- medageRaw$medage
 
 #As of 2016, 26 percent of households in metro New Orleans included children
 
-getvalue.hwc.2018 <- hwc %>%
+getvalue.hwc.current <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
   filter(grepl("Metro",placename)) %>%
   select(pcthwc) %>%
@@ -599,7 +604,7 @@ pull()
 getvalue.hwc.2000 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
   filter(grepl("Metro",placename)) %>%
-  select(census2000) %>%
+  select(pcthwc2000) %>%
 pull()
 
 # . Between 2000 and 2016, the percent of St. Tammany households with children declined from 40 percent to 29 percent;
@@ -622,10 +627,10 @@ pull()
 getvalue.hwc.Jeff.2000 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
   filter(placename == "Jefferson") %>%
-  select(census2000) %>%
+  select(pcthwc2000) %>%
 pull()
 
-getvalue.hwc.Jeff.2018 <- hwc %>%
+getvalue.hwc.Jeff.current <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
   filter(placename == "Jefferson") %>%
   select(pcthwc) %>%
@@ -637,10 +642,10 @@ pull()
 getvalue.hwc.no.2000 <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
   filter(placename == "Orleans") %>%
-  select(census2000) %>%
+  select(pcthwc2000) %>%
 pull()
 
-getvalue.hwc.no.2018 <- hwc %>%
+getvalue.hwc.no.current <- hwc %>%
   select(-significant, -contains("moeprop")) %>%
   filter(placename == "Orleans") %>%
   select(pcthwc) %>%
@@ -657,7 +662,7 @@ getvalue.sing.2000 <- sing %>%
   select(census2000) %>%
   pull()
 
-  getvalue.sing.2018 <- sing %>%
+  getvalue.sing.current <- sing %>%
     select(-significant, -contains("moeprop")) %>%
     filter(grepl("Metro",placename)) %>%
     select(pctsing) %>%
@@ -672,7 +677,7 @@ getvalue.sing.2000 <- sing %>%
     select(census2000) %>%
     pull()
   
-  getvalue.singJeff.2018 <- sing %>%
+  getvalue.singJeff.current <- sing %>%
     select(-significant, -contains("moeprop")) %>%
     filter(grepl("Jefferson",placename)) %>%
     select(pctsing) %>%
@@ -686,7 +691,7 @@ getvalue.sing.2000 <- sing %>%
     select(census2000) %>%
   pull()
 
-  getvalue.singNO.2018 <- sing %>%
+  getvalue.singNO.current <- sing %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
     select(pctsing) %>%
@@ -717,7 +722,18 @@ getvalue.sing.2000 <- sing %>%
     filter(PlaceName == "Orleans") %>%
     select(under18) %>%
     pull()
- # 
+  
+ # Jefferson Parish’s child population also declined
+  getvalue.under18.jeff.2000 <- popunder18 %>%
+    filter(PlaceName == "Jefferson") %>%
+    select(est2000) %>%
+    pull()
+  
+  getvalue.under18.jeff.current <- popunder18 %>%
+    filter(PlaceName == "Jefferson") %>%
+    select(under18) %>%
+    pull()
+  
  #The under 18 population is now 21 percent of the metro population, down from 27 percent in 2000.
   getvalue.over18.metro.current <- under18metro %>%
     filter(age == "18 years and over") %>%
@@ -787,6 +803,13 @@ getvalue.sing.2000 <- sing %>%
     filter(placename == "Orleans") %>%
     select(census2000) %>%
     pull()
+  
+  #Jefferson Parish 2000 bach deg
+  getvalue.bach.jeff.2000 <- bach %>%
+    select(-significant, -contains("moeprop")) %>%
+    filter(placename == "Jefferson") %>%
+    select(census2000) %>%
+    pull()
 
   # The overall metro area share of adults with a bachelor’s degree grew from 23 to 29 percent
   getvalue.bach.metro.2000 <- bach %>%
@@ -795,7 +818,7 @@ getvalue.sing.2000 <- sing %>%
     select(census2000) %>%
     pull()
 
-  getvalue.bach.metro.2018 <- bach %>%
+  getvalue.bach.metro.current <- bach %>%
     select(-significant, -contains("moeprop")) %>%
     filter(grepl("Metro",placename)) %>%
     select(pctbach) %>%
@@ -806,18 +829,28 @@ getvalue.sing.2000 <- sing %>%
   getvalue.bachdeg.nopct <- bach %>% filter(placename == "Orleans") %>% select(pctbach) %>% as.numeric()
   getvalue.bachdeg.USpct <- bach %>% filter(placename == "United States") %>% select(pctbach) %>% as.numeric()
   getvalue.bachdeg.metropct <- bach %>% filter(placename == "New Orleans Metro Area") %>% select(pctbach)
+  getvalue.bachdeg.jeffpct <- bach %>% filter(placename == "Jefferson") %>% select(pctbach) %>% as.numeric()
+  
+  #The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980
   
   getvalue.bachdeg.white.nopct <- bach.race %>% filter(place.fac == "Orleans" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% as.numeric()
   getvalue.bachdeg.black.nopct <- bach.race %>% filter(place.fac == "Orleans" & var.fac == "Black") %>% select(val) %>% as.numeric()
   
+  getvalue.bachdeg.asian.nopct <- bach.race %>% filter(place.fac == "Orleans" & var.fac == "Asian") %>% select(val) %>% as.numeric()
+  getvalue.bachdeg.his.nopct <- bach.race %>% filter(place.fac == "Orleans" & var.fac == "Hispanic, any race") %>% select(val) %>% as.numeric()
+
   getvalue.bachdeg.white.maxotherpct <- bach.race %>% filter(place.fac != "Orleans" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% max() %>% as.numeric()
   
   getvalue.bachdeg.black.jeffpct <- bach.race %>% filter(place.fac == "Jefferson" & var.fac == "Black") %>% select(val)
   getvalue.bachdeg.black.stTampct <- bach.race %>% filter(place.fac == "St. Tammany" & var.fac == "Black") %>% select(val)
 
-  getvalue.noHSdeg.metropct <- hs %>% filter(placename == "New Orleans Metro Area") %>% select(pctless)
-  getvalue.noHSdeg.nopct <- hs %>% filter(placename == "Orleans") %>% select(pctless)
+
   
+  
+  getvalue.noHSdeg.metropct <- hs %>% filter(placename == "New Orleans Metro Area") %>% select(pctless) %>% as.numeric()
+  getvalue.noHSdeg.nopct <- hs %>% filter(placename == "Orleans") %>% select(pctless)  %>% as.numeric()
+ 
+   getvalue.jeffHSdeg.nopct <- hs %>% filter(placename == "Jefferson") %>% select(pctless)  %>% as.numeric()
   
   # pushed household income down 5 percent in the nation between 1999 and 2016
   getvalue.medhh.us.2000 <- medhh %>%

@@ -105,19 +105,12 @@ makeCSS_highlight(
 "This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age.  This brief also covers 2023 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.   In 2023, the official definition of the New Orleans metro area changed to exclude St. Tammany. Later this year, when the Census Bureau releases 2023 ACS data, we'll publish data according to the new 7-parish metro area definition.") 
 ```
 
-
-
-
-The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in metro New Orleans as of July `r yearPEP`, a `r round.off((-1*pctincrease.metro.current.2020)*100)` percent decrease from April 2020.[^1] The metro area now has `r round.off((metropop.current / 1337726)*100)` percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available).
-
-
-## updated text ##
-The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in the 7-parish New Orleans metro as of July `r yearPEP`, a 4.5 percent decrease from April 2020.1 The metro area now has percent of its 2000 population of 1,337,726. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available). 
+The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in the 7-parish New Orleans metro as of July `r yearPEP`, a 4.5 percent decrease from April 2020.1 The metro area now has `r round.off((metropop.current / metropop.2000)*100)` percent of its 2000 population of`r comma(metropop.2000)`. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available). 
 
 
 ## Race/Ethnicity
 
-According to the U.S. Census Bureau’s `r yearPEP` population estimates, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.current)` fewer Black residents living in New Orleans (Orleans Parish) compared to 2000, and there are `r comma(getvalue.white.no.2000 - getvalue.white.no.current)` fewer White residents as well as `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` more Hispanic residents.[^2]
+Compared to 2000, pre-Katrina, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.current)` fewer Black residents living in New Orleans (Orleans Parish), and there are `r comma(getvalue.white.no.2000 - getvalue.white.no.current)` fewer White residents as well as `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` more Hispanic residents.2 
 
 ```{r AAWhiteHispan, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 AAwhthispGraphic
@@ -139,7 +132,8 @@ Orleans Parish is the city of New Orleans. New Orleans and Orleans Parish are in
 )
 ```
 
-In Orleans Parish, the share of the `r yearPEP` population that is Black — while lower than in 2000 when it was `r round.off((getvalue.AApct.no.2000)*100)` percent — continues to represent the majority of city residents at `r round.off((getvalue.AApct.no.current)*100)` percent. The share of Hispanic residents in the city increased from `r round.off((getvalue.Hispanpct.no.2000)*100)` percent in 2000 to `r round.off((getvalue.Hispanpct.no.current)*100)` percent in `r yearPEP`; the share of Asian residents increased from `r round.off((getvalue.Asianpct.no.2000)*100)` percent to `r round.off((getvalue.Asianpct.no.current)*100)` percent; and the share of White residents increased from `r round.off((getvalue.whitepct.no.2000)*100)` percent to `r round.off((getvalue.whitepct.no.current)*100)` percent. Meanwhile, Hispanic, Asian, and Black populations increased as a share of the total population in Jefferson, St. Bernard, St. Charles, and St. John the Baptist parishes. In fact, the number and share of Hispanics have increased in all seven parishes in the metro area since 2000.
+
+In Orleans Parish, the share of the `r yearPEP` population that is Black — while lower than in 2000 when it was `r round.off((getvalue.AApct.no.2000)*100)` percent — continues to represent the majority of city residents at `r round.off((getvalue.AApct.no.current)*100)` percent. The share of Hispanic residents in the city increased from `r round.off((getvalue.Hispanpct.no.2000)*100)` percent in 2000 to`r round.off((getvalue.Hispanpct.no.current)*100)` percent in  `r yearPEP`; the share of Asian residents increased from `r round.off((getvalue.Asianpct.no.2000)*100)` percent to `r round.off((getvalue.Asianpct.no.current)*100)` percent; and the share of White residents increased from `r round.off((getvalue.whitepct.no.2000)*100)` percent to `r round.off((getvalue.whitepct.no.current)*100)` percent. Meanwhile, Hispanic, Asian, and Black populations increased as a share of the total population in Jefferson, St. Bernard, St. Charles, and St. John the Baptist parishes. In fact, the number and share of Hispanics have increased in all seven parishes in the metro area since 2000. 
 
 ```{r demoallparish, fig.align='center', fig.width=10, fig.height=16, echo=FALSE, warning=FALSE, message=FALSE}
 chart.demo.allparishes
@@ -152,7 +146,7 @@ makeCSS_source(
 
 Between 2000 and 2023, the number of Hispanics in Jefferson Parish more than doubled – reaching `r comma(getvalue.hispan.jeff.current)` or more than `r round.off((getvalue.Hispanpct.jeff.current)*100)` percent of the total parish population. In Orleans and St. Bernard parishes, the Hispanic population nearly doubled – growing to `r comma(getvalue.hispan.orleans.current)` (`r round.off((getvalue.Hispanpct.orleans.current)*100)`% of the population) in Orleans and `r comma(getvalue.hispan.bernard.current)` (`r round.off((getvalue.Hispanpct.bernard.current)*100)`% of the population) in St. Bernard.  The number of Hispanics St. Charles, St. John the Baptist, Plaquemines, and St. James more than doubled reaching `r comma(getvalue.hispan.charles.current)`, `r comma(getvalue.hispan.john.current)`, `r comma(getvalue.hispan.plaquemines.current)`, and `r comma(getvalue.hispan.james.current)` respectively.  
 
-As of July`r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)`Hispanics in the metro area, representing `r round.off((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2000)` Hispanics, representing `r round.off((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is below the average for the United States, which has grown from `r round.off((getvalue.Hispanpct.us.2000)*100)` percent to `r round.off((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r yearPEP-2000`years. 
+As of July`r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)`Hispanics in the metro area, representing `r round.off((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2000)` Hispanics, representing `r round.off((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is below the average for the United States, which has grown from `r round.off((getvalue.Hispanpct.us.2000)*100)` percent to `r round.off((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r yearPEP-2000`years. 
 
 ```{r hispanpop, fig.align='center', fig.width=7, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 HispanicPopGraphic
@@ -163,7 +157,9 @@ makeCSS_source(
 )
 ```
 
-The number of Hispanics in the New Orleans metro has grown every year since Hurricane Katrina. From 2010 to 2020, the Hispanic population accounted for the majority of the metro area’s growth, increasing by `r comma(getvalue.hispangrowthCOUNT.metro.2010.2020)`, while the total population increased by `r comma(getvalue.growthCOUNT.metro.2010.2020)`.  Since 2020, the overall population declined but the Hispanic population continued to grow.  From 2020 to `r yearPEP`, the metro area gained  another `r comma(getvalue.hispangrowthCOUNT.metro.2020.current)` Hispanic residents while losing a total of `r comma(-1*(getvalue.growthCOUNT.metro.2020.current))` residents.
+#updated Text
+
+The number of Hispanics in the New Orleans metro has continued to swell in recent years. From 2010 to 2020, the Hispanic population accounted for the vast majority of the metro area’s growth, increasing by `r comma(getvalue.hispangrowthCOUNT.metro.2010.2020)`, while the overall population increased by only `r comma(getvalue.growthCOUNT.metro.2010.2020)`. Since 2020, the overall metro population declined but the Hispanic population continued to grow. From 2020 to 2023, the metro area gained another `r comma(getvalue.hispangrowthCOUNT.metro.2020.current)` Hispanic residents while losing a net total of `r comma(-1*(getvalue.growthCOUNT.metro.2020.current))` residents. 
 
 ```{r hispanpopyear, fig.align='center', fig.width=10, fig.height=6, echo=FALSE, warning=FALSE, message=FALSE}
 chart.HispanpopYears.allparishes
@@ -197,7 +193,6 @@ makeCSS_source(
 ## Population by age and household types
 The progression of the baby boomers through the age groups, along with falling birth rates, has brought massive changes to the metro — and indeed the whole country — with many more changes yet to come.[^4] Looking at the total population in the metro by five-year age groups for 2000 and `r yearPEP`, the baby boomers are like a demographic tidal wave. According to the American Community Survey, the median age of the metro has risen to `r getvalue.medage.current` in `r year` from 34.8 in 2000.
 
-
 ```{r age2000, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
 chart.agepop2000.allparishes
 ```
@@ -216,9 +211,7 @@ makeCSS_source(
 )
 ```
 
-Meanwhile, the share of households with children is shrinking while the share of individuals living alone is growing — both across the metro and nation. As of `r year`, `r round.off((getvalue.hwc.2018)*100)` percent of households in metro New Orleans included children, down from `r round.off((getvalue.hwc.2000)*100)` percent in 2000. Between 2000 and `r year`, the percent of St. Tammany households with children declined from XX percent to XX percent; the percent of Jefferson households with children declined from `r round.off((getvalue.hwc.Jeff.2000)*100)` percent to `r round.off((getvalue.hwc.Jeff.2018)*100)` percent; and the percent of Orleans households with children declined from `r round.off((getvalue.hwc.no.2000)*100)` percent to `r round.off((getvalue.hwc.no.2018)*100)` percent.
-
-
+Meanwhile, the share of households with children is shrinking while the share of individuals living alone is growing — both across the metro and nation. As of `r year` ,`r round.off((getvalue.hwc.current)*100)` percent of households in Metro New Orleans included children, down from `r round.off((getvalue.hwc.2000)*100)` percent in 2000. Between 2000 and `r year`, the percent of Jefferson households with children declined from `r round.off((getvalue.hwc.Jeff.2000)*100)` percent to `r round.off((getvalue.hwc.Jeff.current)*100)` percent; and the percent of Orleans households with children declined from `r round.off((getvalue.hwc.no.2000)*100)` percent to `r round.off((getvalue.hwc.no.current)*100)` percent. 
 ```{r hwc, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hwcGraphic 
 ```
@@ -229,6 +222,7 @@ makeCSS_source(
 ```
 As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round.off((getvalue.sing.2000)*100)` percent in 2000 to `r round.off((getvalue.sing.2018)*100)` percent in `r year` — similar to the trend for Jefferson Parish where the share of householders living alone grew from `r round.off(( getvalue.singJeff.2000)*100)` percent to `r round.off(( getvalue.singJeff.2018)*100)` percent. The increase was larger in Orleans Parish, which jumped from `r round.off((getvalue.singNO.2000)*100)` to `r round.off((getvalue.singNO.2018)*100)` percent.
 
+As households with children have declined, the share of single-person households has grown in the metro and nationwide. The metro area share of individuals living alone grew from `r round.off((getvalue.sing.2000)*100)` percent in 2000 to `r round.off((getvalue.sing.current)*100)` percent in `r year` — similar to the trend for Jefferson Parish where the share of householders living alone grew from `r round.off(( getvalue.singJeff.2000)*100)` percent to `r round.off(( getvalue.singJeff.current)*100)` percent. The increase was larger in Orleans Parish, which jumped from `r round.off((getvalue.singNO.2000)*100)` to `r round.off((getvalue.singNO.2018)*100)` percent. 
 
 ```{r sing, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 singGraphic
@@ -239,7 +233,7 @@ makeCSS_source(
 )
 ```
 
-While the metro has regained much of the post-Katrina population losses, youth population is substantially lower than pre-Katrina levels. The metro had `r comma(getvalue.under18.metro.2000)` children under 18 years in 2000 and only `r comma(getvalue.under18.metro.current)` in `r yearPEP`. Much of this loss was driven by Orleans Parish, where the population under 18 has declined to `r comma(getvalue.under18.no.current)` from `r comma(getvalue.under18.no.2000)`. The under 18 population is now `r round.off((getvalue.pct.under18.metro.current)*100)` percent of the metro population, down from 27 percent in 2000.
+Overall the youth population is substantially lower than pre-Katrina levels. The metro had `r comma(getvalue.under18.metro.2000)` children under 18 years in 2000 and only `r comma(getvalue.under18.metro.current)` in `r yearPEP`. More than half of this loss was driven by Orleans Parish, where the population under 18 has declined to `r comma(getvalue.under18.no.current)` from `r comma(getvalue.under18.no.2000)`. Jefferson Parish’s child population also declined from `r comma(getvalue.under18.jeff.2000)` to  `r comma(getvalue.under18.jeff.current)`. The under 18 population is now `r round.off((getvalue.pct.under18.metro.current)*100)` percent of the metro population, down from 27 percent in 2000. 
 
 
 ```{r popunder18, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
@@ -261,8 +255,7 @@ Although race/ethnicity and age data is available for all eight parishes in metr
 
 ## Educational attainment, income, and employment
 
-Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^5] In New Orleans, `r round.off(getvalue.bachdeg.nopct*100)` percent of adults 25 and older had at least a bachelor's degree in `r year` &mdash; higher than the U.S. average of `r round.off(getvalue.bachdeg.USpct*100)` percent, and up from 26 percent in 2000.  The overall metro area share of adults with a bachelor's degree grew from 23 to `r round.off(getvalue.bachdeg.metropct*100)` percent &mdash; lower than the national average of `r round.off(getvalue.bachdeg.USpct*100)` percent.
-
+Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^4] In New Orleans, `r round.off(getvalue.bachdeg.nopct*100)` percent of adults 25 and older had at least a bachelor’s degree in `r year` — higher than the U.S. average of `r round.off(getvalue.bachdeg.USpct*100)` percent, and up from `r round.off( getvalue.bach.no.2000*100)` percent in 2000. The Jefferson Parish share of adults with a bachelor’s degree is `r round.off(getvalue.bachdeg.jeffpct*100)` percent up from `r round.off( getvalue.bach.jeff.2000*100)` percent in 2000. Overall the share of adults with a bachelor’s degree in Metro New Orleans from  `r round.off(getvalue.bach.metro.2000*100)`to `r round.off(getvalue.bach.metro.current*100)` percent — just short of the national average of `r round.off(getvalue.bachdeg.USpct*100)` percent. 
 
 ```{r bach, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 bachGraphic
@@ -273,7 +266,7 @@ makeCSS_source(
 )
 ```
 
-The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while `r round.off(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s, only `r round.off(getvalue.bachdeg.black.nopct*100)` percent of Black adults have a bachelor’s as of 2023. The share of White adults in Orleans Parish who have a bachelor’s degree is substantially higher than the U.S. or metro area overall: `r round.off(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s degree while that number is `r round.off(getvalue.bachdeg.white.maxotherpct*100)` percent or lower in neighboring parishes and the nation. Only `r round.off(getvalue.bachdeg.black.jeffpct*100)` and XX percent of Black adults have a bachelor’s degree or higher in Jefferson and St. Tammany, respectively.
+The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while `r round.off(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s, only `r round.off(getvalue.bachdeg.asian.nopct*100)` percent of Asian adults, `r round.off(getvalue.bachdeg.his.nopct*100)` percent of Hispanic adults, and `r round.off(getvalue.bachdeg.black.nopct*100)` percent of Black adults in New Orleans have a bachelor’s as of `r year`. 
 
 
 ```{r bachovertime, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
@@ -303,6 +296,8 @@ makeCSS_source(
 
 The  metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metro-wide decrease from 15 percent in 2000 to `r round.off(getvalue.noHSdeg.metropct*100)` percent in 2023. In the city of New Orleans, the share of adults with less than a high school degree fell from 25 percent to `r round.off(getvalue.noHSdeg.nopct*100)` percent.
 
+
+The metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across Orleans, Jefferson, and the metro as a whole. The metro share of adults without a high school degree fell from 23 percent in 2000 to `r round.off(getvalue.noHSdeg.metropct*100)` 'percent in 2023 `r year`. In Jefferson Parish, `r round.off(getvalue.jeffHSdeg.nopct*100)` percent of adults 25 and older have less than a high school degree while in New Orleans only `r round.off(getvalue.noHSdeg.nopct*100)` percent of adults have less than a high school degree – lower than the national average. 
 ```{r hs, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hsGraphic
 ```
