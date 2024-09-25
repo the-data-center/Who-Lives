@@ -1390,7 +1390,7 @@ bach_stat_race <- bach.race_stattest %>%
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 bach_with_stats <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans", "Jefferson*", "Metro*", "United States")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
@@ -1474,6 +1474,8 @@ Bach10MOE <- Bach10_raw %>%
   select(-var)
 
 load("inputs/Bach00Wht.RData")
+load("inputs/Bach00Raw.RData")
+
 Bach00Raw <- read_csv("inputs/indicator expansion drafts/ProspInd_tables_WhoLives2022/nhgis0095_csv/nhgis0095_ds151_2000_county.csv")
 
 Bach00MOE <- Bach00Raw %>% filter(STATEA == "22" & COUNTYA == "071") %>% #this one is by sex
@@ -1608,8 +1610,7 @@ bach.race_stattest.geo <- left_join(bach.race_stattest.geoEST,bach.race_stattest
   pivot_wider(names_from = place,values_from = c(val, moe)) %>%
   mutate(sig_no_us = stattest(x=val_071, moex = moe_071, y = val_1, moey = moe_1),
          sig_no_metro =stattest(x=val_071, moex = moe_071, y = val_35380, moey = moe_35380),
-         sig_no_stt = stattest(x=val_071, moex = moe_071, y = val_103, moey = moe_103),
-         sig_no_jeff = stattest(x=val_071, moex = moe_071, y = val_051, moey = moe_051))
+       sig_no_jeff = stattest(x=val_071, moex = moe_071, y = val_051, moey = moe_051))
 
 
 # Poverty
@@ -1742,18 +1743,7 @@ totalPov.hist <- totalPov %>%
   bind_rows(pov.race %>%
               filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2023))
 
-
-pov00Wht <- wholivesdatapull(variables = c('P001001', 'P148I001', 'P159I002'),
-                             names = c('TotalPop2000', "TotalWhitepop", "Whitepov"),
-                             censusname = "dec/sf3",
-                             year = 2000) %>%
-  filter(place == "071") %>%
-  mutate(pctWhitepov = Whitepov / TotalWhitepop,
-         WhitepovMOE = moe2000(Whitepov, TotalPop2000, designfac = 1.5),
-         TotalWhiteMOE = moe2000(TotalWhitepop, TotalPop2000, designfac = 2),
-         Whitemoeprop = moeprop(y = TotalWhitepop, moex = WhitepovMOE, moey = TotalWhiteMOE, p = pctWhitepov)) %>% select(pctWhitepov, Whitemoeprop)
-
-
+load("inputs/pov00Wht.RData")
 pov00Raw <- read_csv("inputs/indicator expansion drafts/ProspInd_tables_WhoLives2022/nhgis0092_csv/nhgis0092_ds151_2000_county.csv")
 pov00MOE <- pov00Raw %>% filter(STATEA == "22" & COUNTYA == "071") %>% transmute(year = 2000,
                                                                                  totpov = GTV001 + GTV003 + GTV005 + GTV007 + GTV009 + GTV011 + GTV013,
@@ -1987,7 +1977,7 @@ childpov_stat_race <- childpov_stattest %>% select(place, placename, (contains("
                                T ~ placename),
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
-childpov_with_stats <- childpov_stat_all %>% left_join(childpov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
+childpov_with_stats <- childpov_stat_all %>% left_join(childpov_stat_race, by = "place") %>% unique() %>% filter(race != "All" & !(race == "Asian" & place == "071")) %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States*")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
@@ -2188,7 +2178,7 @@ ho_stat_race <- ho_stattest %>% select(place, placename, (contains("sig") & !con
                                T ~ placename),
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
-ho_with_stats <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
+ho_with_stats <- ho_stat_all %>% left_join(ho_stat_race, by = "place") %>% unique() %>% filter(race != "All" & !(race == "Asian" & place == "071")) %>%
   mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
