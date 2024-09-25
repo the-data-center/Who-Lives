@@ -1741,6 +1741,8 @@ totalPov.hist <- totalPov %>%
   mutate(var.fac = factor(.$var, levels = c("All","Black","White,\nnon-Hispanic","Hispanic,\nany race")))%>%
   bind_rows(pov.race %>%
               filter(place.fac == "Orleans", var != "Asian") %>% select(-place.fac) %>% mutate(year = 2023))
+
+
 pov00Wht <- wholivesdatapull(variables = c('P001001', 'P148I001', 'P159I002'),
                              names = c('TotalPop2000', "TotalWhitepop", "Whitepov"),
                              censusname = "dec/sf3",

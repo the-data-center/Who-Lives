@@ -294,9 +294,6 @@ makeCSS_source(
 )
 ```
 
-The  metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metro-wide decrease from 15 percent in 2000 to `r round.off(getvalue.noHSdeg.metropct*100)` percent in 2023. In the city of New Orleans, the share of adults with less than a high school degree fell from 25 percent to `r round.off(getvalue.noHSdeg.nopct*100)` percent.
-
-
 The metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across Orleans, Jefferson, and the metro as a whole. The metro share of adults without a high school degree fell from 23 percent in 2000 to `r round.off(getvalue.noHSdeg.metropct*100)` 'percent in 2023 `r year`. In Jefferson Parish, `r round.off(getvalue.jeffHSdeg.nopct*100)` percent of adults 25 and older have less than a high school degree while in New Orleans only `r round.off(getvalue.noHSdeg.nopct*100)` percent of adults have less than a high school degree – lower than the national average. 
 ```{r hs, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hsGraphic
@@ -307,8 +304,7 @@ makeCSS_source(
 )
 ```
 
-
-The `r year` median household income of `r dollar(getvalue.medhh.metro.2018)` for the metro, `r dollar(getvalue.medhh.jeff.2018)` for Jefferson Parish, and `r dollar(getvalue.medhh.no.2018)` for the city of New Orleans are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.2018)`.
+The `r year` median household income in Orleans Parish is `r dollar(getvalue.medhh.no.current)` – 13 percent higher than in 2000 after controlling for inflation. Meanwhile, the median household income in Jefferson Parish, at`r dollar(getvalue.medhh.jeff.current)` is 12 percent lower than in 2000 after controlling for inflation.  The `r year` Metro New Orleans median household income of `r dollar(getvalue.medhh.metro.current)` ,`r dollar(getvalue.medhh.jeff.current)` for Jefferson Parish, and `r dollar(getvalue.medhh.no.current)` for the city of New Orleans are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.current)`. 
 
 
 ```{r medhh, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
@@ -322,8 +318,7 @@ makeCSS_source(
 )
 ```
 
-In 1979, households with higher incomes were disproportionately in the parishes surrounding New Orleans, while lower income White, Hispanic, and Black households were more likely to live in the city.[^6] By 2023, these patterns had changed with higher income White households more often living in the city such that income disparity within the city has escalated. In 2023, Black households in New Orleans had a median income of only `r dollar(getvalue.medhh.black.no)`, while Hispanic households were at `r dollar(getvalue.medhh.hisp.no)` and White households at `r dollar(getvalue.medhh.white.no)`.
-
+In 1979, households with higher incomes were disproportionately in the parishes surrounding New Orleans, while lower income White, Hispanic, and Black households were more likely to live in the city.5 By `r year`, these patterns had changed with higher income White households more often living in the city such that income disparity within the city has escalated. In `r year`, Black households in New Orleans had a median income of only `r dollar(getvalue.medhh.black.no)`, while Hispanic households were at `r dollar(getvalue.medhh.hisp.no)` and White households at `r dollar(getvalue.medhh.white.no)`. 
 ```{r medhhtime, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
 medhh.hist_chart
 ```
@@ -336,8 +331,7 @@ makeCSS_source(
 **Source**: The Data Center analysis of U.S. Census Bureau data from 1980, 1990, 2000 SF3, and 2010 and American Community Survey 2023."
 )
 ```
-
-In 2023, Black households in New Orleans have incomes `r round.off((getvalue.medhh.blkwht.no.pctdiff*100))` percent less than White households. In St. Tammany, Black households have a median income of XX which is XX percent less than White households in that parish. In Jefferson, Black households have a median income of `r dollar(round.off(getvalue.medhh.black.jeff))` which is `r round.off((getvalue.medhh.blkwht.jeff.pctdiff*100))` percent less than White households in that parish. Hispanic households have a median of `r dollar(round.off(getvalue.medhh.hisp.metro))` across the metro which is relatively consistent across the three largest metro parishes.
+In `r year`, Black households in New Orleans have incomes `r round.off((getvalue.medhh.blkwht.no.pctdiff*100))` percent less than White households. In Jefferson, Black households have a median income of `r dollar(round.off(getvalue.medhh.black.jeff))` which is `r round.off((getvalue.medhh.blkwht.jeff.pctdiff*100))` percent less than White households in that parish who have a median income of `r round.off((getvalue.medhh.white.jeff))`. Notably, Black households across the metro have a median income of `r round.off((getvalue.medhh.black.metro))`, which is well below their national peers (`r round.off((getvalue.medhh.black.us))`). And Asian households in Metro New Orleans have a median income of `r round.off((getvalue.medhh.asian.metro))` which is about 40% lower than their national peers (`r round.off((getvalue.medhh.asian.us))`). 
 
 ```{r medhhbyrace, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
 medhh.raceGeos_chart
@@ -352,7 +346,7 @@ makeCSS_source(
 )
 ```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In massa lacus, vehicula sed nibh ac, sollicitudin accumsan urna. Aenean sit amet hendrerit purus. In ut augue tincidunt tellus tempus volutpat sed at nulla. Sed tempus ex felis, a convallis sapien ultricies sed. Donec tortor urna, sodales a laoreet sed, mollis ac erat. In vestibulum et dolor at rutrum. Duis quis ex ante. Suspendisse potenti. In tempus ipsum purus, sed maximus diam pharetra eget. Quisque justo arcu, ornare eu vulputate quis, semper sit amet felis. Curabitur sit amet metus nibh. Nam ultrices nunc nec erat rhoncus tincidunt. In imperdiet venenatis lobortis.
+Employment rates indicate the percent of the working age population that did any work for pay, including self-employment. Employment rates are a more comprehensive measure of labor market conditions than official “unemployment” rates, because they not only reveal the share of the population that are unemployed but also those who are no longer in the labor force at all—many of whom are “discouraged workers.”6  Employment rates by race and gender suggest the extent to which structural economic changes have benefited different groups. In New Orleans, employment rates have risen for White men and women, Hispanic men and women, and Black women compared with 1980, but for Black men are lower in `r year` at `r round.off(getvalue.blackmaleemploy.no.current*100)` percent than in 1980 when `r round.off(getvalue.blackmaleemploy.no.1980*100)` percent of working age Black men had employment.  
 
 ```{r employtime, fig.align='center', fig.width=10, fig.height=6, echo = FALSE}
 employment.hist_chart
@@ -368,7 +362,8 @@ makeCSS_source(
 )
 ```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In massa lacus, vehicula sed nibh ac, sollicitudin accumsan urna. Aenean sit amet hendrerit purus. In ut augue tincidunt tellus tempus volutpat sed at nulla. Sed tempus ex felis, a convallis sapien ultricies sed. Donec tortor urna, sodales a laoreet sed, mollis ac erat. In vestibulum et dolor at rutrum. Duis quis ex ante. Suspendisse potenti. In tempus ipsum purus, sed maximus diam pharetra eget. Quisque justo arcu, ornare eu vulputate quis, semper sit amet felis. Curabitur sit amet metus nibh. Nam ultrices nunc nec erat rhoncus tincidunt. In imperdiet venenatis lobortis.
+In `r year` New Orleans, White men (at `r round.off(getvalue.whitemaleemploy.no*100)` percent) are more likely to have employment than their national peers, while Black men and women in New Orleans (at `r round.off(getvalue.blackmaleemploy.no.current*100)` and  `r round.off(getvalue.blackfemaleemploy.no*100)`percent respectively) are less likely to have employment than their national peers. The rates of employment for White women, Hispanic men and women are not statistically different than their national peers. 
+
 
 ```{r employbyrace, fig.align='center', fig.width = 10, fig.height = 6, echo = FALSE}
 employ.raceGeos_chart
@@ -386,7 +381,7 @@ makeCSS_source(
 
 ## Poverty and access to vehicles and internet
 
-A high share of residents living below the poverty level indicates the economy is not providing many residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round.off((getvalue.pov.no.1999 )*100)` to `r round.off((getvalue.pov.no.2018 )*100)` percent between 1999 and `r year` while the Jefferson Parish poverty rate increased from `r round.off((getvalue.pov.jeff.1999)*100)` to `r round.off((getvalue.pov.jeff.2018)*100)` percent. Across the U.S., the poverty rate increased by one percentage point between 1999 and `r year`.
+A high share of residents living below the poverty level indicates the economy is not providing many residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round.off((getvalue.pov.no.1999 )*100)` to `r round.off((getvalue.pov.no.current )*100)` percent between 1999 and `r year`while the Jefferson Parish poverty rate increased from `r round.off((getvalue.pov.jeff.1999)*100)` to `r round.off((getvalue.pov.jeff.2018)*100)`percent. Across the U.S., the poverty rate increased by one percentage point between 1999 and `r year`. 
 
 
 ```{r pov, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -408,7 +403,7 @@ The Census still uses the federal definition for poverty that was first created 
 )
 ```
 
-The poverty rate for Black New Orleanians spiked when the 1980s “oil bust” hit, jumping from 37% in 1979 to 42% in 1989. White New Orleanians were not similarly affected. The poverty rate for White New Orleanians remained at roughly 12% in 1979 and in 1989. Large disparities in the poverty rate continue to be evident at all geographic levels. For example, in metro New Orleans `r round.off((getvalue.pov.black.metropct*100))` percent of Black people and `r round.off((getvalue.pov.hisp.metropct*100))` percent of Hispanic people live in poverty compared to `r round.off((getvalue.pov.white.metropct*100))` percent of White people and `r round.off((getvalue.pov.asian.metropct*100))` percent of Asian people.[^10]
+The poverty rate for Black New Orleanians spiked when the 1980s “oil bust” hit, jumping from 37% in 1979 to 42% in 1989. White New Orleanians were not similarly affected. The poverty rate for White New Orleanians remained at roughly 12% in 1979 and in 1989. In `r year`, the poverty rate for White New Orleanians was `r round.off((getvalue.whitepov.no.current*100))` percent, while the poverty rate for Black New Orleanians had fallen to `r round.off((getvalue.blackpov.no.current*100))`% but remained about triple that of White New Orleanians. 
 
 ```{r povhist, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 totalPov.hist_chart
@@ -424,6 +419,8 @@ makeCSS_source(
 **Source**: The Data Center analysis of U.S. Census Bureau data from 1980, 1990, 2000 SF3, and 2010 and American Community Survey 2023."
 )
 ```
+
+Large disparities in the poverty rate continue to be evident at all geographic levels. For example, in Metro New Orleans 26 percent of Black people, 22 percent of Hispanic people, and 20 percent of Asian people live in poverty compared to 10 percent of White people. 
 
 ```{r povbyrace, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
 pov.raceGeos_chart

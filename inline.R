@@ -859,7 +859,7 @@ getvalue.sing.2000 <- sing %>%
     select(census2000) %>%
     pull()
 
-  getvalue.medhh.us.2018 <- medhh %>%
+  getvalue.medhh.us.current <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "United States") %>%
     select(MedianHHIncome) %>%
@@ -872,13 +872,13 @@ getvalue.sing.2000 <- sing %>%
     select(census2000) %>%
     pull()
 
-  getvalue.medhh.metro.2018 <- medhh %>%
+  getvalue.medhh.metro.current <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
     filter(grepl("Metro",placename)) %>%
     select(MedianHHIncome) %>%
     pull()
 
-  getvalue.medhh.no.2018 <- medhh %>%
+  getvalue.medhh.no.current <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
     select(MedianHHIncome) %>%
@@ -891,7 +891,7 @@ getvalue.sing.2000 <- sing %>%
     select(census2000) %>%
     pull()
 
-  getvalue.medhh.jeff.2018 <- medhh %>%
+  getvalue.medhh.jeff.current <- medhh %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "Jefferson") %>%
     select(MedianHHIncome) %>%
@@ -910,11 +910,30 @@ getvalue.sing.2000 <- sing %>%
   
   
   getvalue.medhh.hisp.metro <- medhh.race %>% filter(place.fac == "Metro" & var.fac == "Hispanic,\nany race") %>% select(val) %>% as.numeric()
+  getvalue.medhh.black.metro <- medhh.race %>% filter(place.fac == "Metro" & var.fac == "Black") %>% select(val) %>% as.numeric()
+  getvalue.medhh.black.us <- medhh.race %>% filter(place.fac == "U.S." & var.fac == "Black") %>% select(val) %>% as.numeric()
   
   getvalue.medhh.black.jeff <- medhh.race %>% filter(place.fac == "Jefferson" & var.fac == "Black") %>% select(val) %>% as.numeric()
   getvalue.medhh.white.jeff <- medhh.race %>% filter(place.fac == "Jefferson" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% as.numeric()
   
   getvalue.medhh.blkwht.jeff.pctdiff <- (getvalue.medhh.white.jeff - getvalue.medhh.black.jeff) / getvalue.medhh.white.jeff
+  
+  #And Asian households in Metro New Orleans have a median income of 
+  getvalue.medhh.asian.metro <- medhh.race %>% filter(place.fac == "Metro" & var.fac == "Asian") %>% select(val) %>% as.numeric()
+  getvalue.medhh.asian.us <- medhh.race %>% filter(place.fac == "U.S." & var.fac == "Asian") %>% select(val) %>% as.numeric()
+  
+  # Employment Black Men 2023 vs 1980
+  getvalue.blackmaleemploy.no.current <- employment_TS %>% filter(racesex_lab == "Black Male") %>% select(est_2023) %>% as.numeric()
+  getvalue.blackmaleemploy.no.1980 <- employment_TS %>% filter(racesex_lab == "Black Male") %>% select(est_1980) %>% as.numeric()
+  
+  #White men (at 81 percent) are more likely to have employment their national peers
+  getvalue.whitemaleemploy.no <- employment_TS %>% filter(racesex_lab == "White, non-Hispanic Male") %>% select(est_2023) %>% as.numeric()
+ 
+   # Black women employment
+  
+   getvalue.blackfemaleemploy.no <- employment_TS %>% filter(racesex_lab == "Black Female") %>% select(est_2023) %>% as.numeric()
+  
+
   
   
   #Internet access is an important indicator of access to information. Studies have shown that without broadband, computer access, and
@@ -983,17 +1002,25 @@ getvalue.sing.2000 <- sing %>%
  #Individuals living below the poverty level indicate the economy is not providing all residents with the ability to meet
   #their most basic needs, including food, housing, and transportation.
 
-  #The poverty rate in New Orleans declined from 28 percent in 1999 to 24 percent in 2016.
-  getvalue.pov.no.1999 <- pov %>%
-    select(-significant, -contains("moeprop")) %>%
-    filter(placename == "Orleans") %>%
-    select(sf1999) %>%
+  
+  #White resident poverty
+  getvalue.whitepov.no.current <- totalPov %>%
+    filter(year == "2023" & var == "White,\r\nnon-Hispanic") %>%
+    select(val) %>%
     pull()
 
-  getvalue.pov.no.2018 <- pov %>%
+  
+  #black resident poverty
+  getvalue.blackpov.no.current <- totalPov %>%
+    filter(year == "2023" & var == "Black") %>%
+    select(val) %>%
+    pull()
+  
+  
+  getvalue.pov.no.current <- pov %>%
     select(-significant, -contains("moeprop")) %>%
     filter(placename == "Orleans") %>%
-    select(pctpov) %>%
+    select(val) %>%
     pull()
 
   #Meanwhile, the Jefferson poverty rate increased from 14 to 16 percent between
