@@ -377,15 +377,17 @@ mob <- mobRaw %>%
          mobStatesmoeprop = moeprop(y=Total,moex = TotMovedbtwnStatesMOE,moey = TotalMOE,p=mobStatespct),
          difparishmoeprop = moeprop(y=Total,moex = TotMovedinStateMOE,moey = TotalMOE,p=difparishpct),
          withinparishmoeprop = moeprop(y=Total,moex = TotMovedinCtyMOE,moey = TotalMOE,p=withinparishpct),
-         samehousemoeprop = moeprop(y=Total, moex = TotSameHouseMOE,moey = TotalMOE,p=samehousepct),
-         
-         abroadSIG = stattest (x=sf2004mobabroadpct, moex = sf2004mobabroadpctMOE, y=mobabroadpct, moey = mobabroadmoeprop),
-         statesSIG = stattest (x=sf2004mobStatespct, moex = sf2004mobStatespctMOE, y=mobStatespct,moey = mobStatesmoeprop),
-         difparishSIG = stattest (x=sf2004difparishpct, moex = sf2004difparishpctMOE, y =difparishpct, moey = difparishmoeprop),
-         withinparishSIG = stattest (x=sf2004withinparishpct, moex = sf2004withinparishpctMOE, y=withinparishpct, moey = withinparishmoeprop),
-         samhouseSIG = stattest (x=sf2004samehousepct, moex = sf2004samehousepctMOE, y=samehousepct, moey = samehousemoeprop))
+         samehousemoeprop = moeprop(y=Total, moex = TotSameHouseMOE,moey = TotalMOE,p=samehousepct))
 
-mob[3,2:39]<-0 # using this nifty code to remove any metro related information
+mob <- mob %>% mutate_all(funs(replace_na(.,0))) %>%
+  mutate(
+         
+         abroadSIG = stattest(x=sf2004mobabroadpct, moex = ifelse(is.na(sf2004mobabroadpctMOE), 0, sf2004mobabroadpctMOE), y=mobabroadpct, moey = mobabroadmoeprop),
+         statesSIG = stattest(x=sf2004mobStatespct, moex = ifelse(is.na(sf2004mobStatespctMOE), 0, sf2004mobStatespctMOE), y=mobStatespct,moey = mobStatesmoeprop),
+         difparishSIG = stattest(x=sf2004difparishpct, moex = ifelse(is.na(sf2004difparishpctMOE), 0, sf2004difparishpctMOE), y =difparishpct, moey = difparishmoeprop),
+         withinparishSIG = stattest(x=sf2004withinparishpct, moex = ifelse(is.na(sf2004withinparishpctMOE), 0 , sf2004withinparishpctMOE), y=withinparishpct, moey = withinparishmoeprop),
+         samhouseSIG = stattest (x=sf2004samehousepct, moex = ifelse(is.na(sf2004samehousepctMOE), 0, sf2004samehousepctMOE), y=samehousepct, moey = samehousemoeprop))
+
 
 mobCSV <- mob %>% 
 select(place,  (contains("sf2004") & !contains("MOE")), (contains("pct"))) %>% 

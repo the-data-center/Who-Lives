@@ -926,14 +926,15 @@ employment.hist_chart <- ggplot(employ_stattest.hist) +
   
   geom_text(data = subset(employ_stattest.hist, year %in% c(1980, 2023)), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
   geom_text(data = subset(employ_stattest.hist, year == "2023"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
-  
   themeDC_horizontal() +
+  
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) +
-  labs(title = "Employment rate, population 16-64 by race/ethnicity and gender,\n Orleans Parish",
+  labs(title = "Employment rate, population 16-64 years old by race/ethnicity and gender,\n Orleans Parish",
        x = "",
        y = "")
+
 ggsave(employment.hist_chart,filename = "indicator expansion drafts/graphics/employment.hist.png",
        width = 8, height = 6, units = "in")
 

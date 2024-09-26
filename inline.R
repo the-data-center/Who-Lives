@@ -824,7 +824,7 @@ getvalue.sing.2000 <- sing %>%
   getvalue.bachdeg.black.nopct <- bach.race %>% filter(place.fac == "Orleans" & var.fac == "Black") %>% select(val) %>% as.numeric()
   
   getvalue.bachdeg.asian.nopct <- bach.race %>% filter(place.fac == "Orleans" & var.fac == "Asian") %>% select(val) %>% as.numeric()
-  getvalue.bachdeg.his.nopct <- bach.race %>% filter(place.fac == "Orleans" & var.fac == "Hispanic, any race") %>% select(val) %>% as.numeric()
+  getvalue.bachdeg.his.nopct <- bach.race %>% filter(place.fac == "Orleans" & var.fac == "Hispanic,\nany race") %>% select(val) %>% as.numeric()
 
   getvalue.bachdeg.white.maxotherpct <- bach.race %>% filter(place.fac != "Orleans" & var.fac == "White,\nnon-Hispanic") %>% select(val) %>% max() %>% as.numeric()
   
