@@ -301,7 +301,7 @@ makeCSS_source(
 )
 ```
 
-The  metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metro-wide decrease from 15 percent in 2000 to `r round.off(getvalue.noHSdeg.metropct*100)` percent in 2023. In the city of New Orleans, the share of adults with less than a high school degree fell from 25 percent to `r round.off(getvalue.noHSdeg.nopct*100)` percent.
+The metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across all three of the largest parishes, leading to a metro-wide decrease from 15 percent in 2000 to `r round.off(getvalue.noHSdeg.metropct*100)` percent in 2023. In the city of New Orleans, the share of adults with less than a high school degree fell from 25 percent to `r round.off(getvalue.noHSdeg.nopct*100)` percent.
 
 ```{r hs, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hsGraphic
@@ -335,7 +335,7 @@ medhh.hist_chart
 ```{r, echo=FALSE}
 makeCSS_source(
 "**Notes**: The number of Asians in New Orleans during the timespan of this chart is too small to produce reliable statistics.   
-∗ = Change in time is not significant for Black or Hispanics.   
+∗ = Change in time is not significant for Black or Hispanic.   
 ∗ = Change in time is not significant for any race for 1999-2010.   
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from 1980, 1990, 2000 SF3, and 2010 and American Community Survey 2023."
@@ -365,7 +365,7 @@ employment.hist_chart
 
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: The Hispanic employment rate by gender is unavailable for Orleans Parish in 2023.
+"**Notes**:
 ∗ = Change in time is not significant for White and Hispanic males.  
 ∗ = Change in time is not significant for Black males for 2000-2010 and 2000-2023.
 ∗ = Change in time is not significant for Black females for 2010-2023.     
@@ -480,7 +480,8 @@ childpov.raceGeos_chart
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = In Orleans Parish, the difference between Black and Hispanic and any race and Asian is not statistically significant.   
+"**Notes**: Due to high margins of error, the comparison between any race and Asian is not statistically significant in Orleans Parish.   
+∗ = In Orleans Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In Jefferson Parish, the difference between Black and Asian, Black and Hispanic, and Hispanic and Asian is not statistically significant.   
 ∗ = In the New Orleans Metro Area, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
 ∗ = In United States, the difference between White and Asian is not statistically significant.   
@@ -596,7 +597,8 @@ ho.raceGeos_chart
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = In Orleans Parish, the difference between Black and Hispanic and any race and Asian is not statistically significant.   
+"**Notes**: Due to high margins of error, the comparison between any race and Asian is not statistically significant in Orleans Parish.   
+∗ = In Orleans Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In the New Orleans Metro Area, the difference between Black and Hispanic is not statistically significant.   
 
