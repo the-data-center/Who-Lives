@@ -1030,8 +1030,12 @@ medhh.race_stattest <- medhhRaw_exp %>%
          sigall_blk = stattest(x=MedianHHIncome_blk, moex = MedianHHIncomeMOE_blk, y=MedianHHIncome, moey = MedianHHIncomeMOE),
          sig_hisp_asian = stattest(x=MedianHHIncome_hisp, moex = MedianHHIncomeMOE_hisp, y=MedianHHIncome_asian, moey = MedianHHIncomeMOE_asian),
          sigall_hisp = stattest(x=MedianHHIncome_hisp, moex = MedianHHIncomeMOE_hisp, y=MedianHHIncome, moey = MedianHHIncomeMOE),
-         sigall_asian = stattest(x=MedianHHIncome_asian, moex = MedianHHIncomeMOE_asian, y=MedianHHIncome, moey = MedianHHIncomeMOE)
-  ) 
+         sigall_asian = stattest(x=MedianHHIncome_asian, moex = MedianHHIncomeMOE_asian, y=MedianHHIncome, moey = MedianHHIncomeMOE),
+         cv = (MedianHHIncomeMOE/1.65)/MedianHHIncome,
+         cv_white = (MedianHHIncomeMOE_wht/1.65)/MedianHHIncome_wht,
+         cv_black = (MedianHHIncomeMOE_blk/1.65)/MedianHHIncome_blk,
+         cv_hisp = (MedianHHIncomeMOE_hisp/1.65)/MedianHHIncome_hisp,
+         cv_asian = (MedianHHIncomeMOE_asian/1.65)/MedianHHIncome_asian) 
 
 medhh_stat_all <- medhh.race_stattest %>% select(place, placename, (contains("sigall")), (contains("MedianHHIncome") & !contains("MOE"))) %>%
   pivot_longer(cols = c(-place, -placename, -contains("sig")), names_to = "race", values_to = "val") %>%

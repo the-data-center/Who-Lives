@@ -918,24 +918,28 @@ ggsave(employ.raceGeos_chart,filename = "indicator expansion drafts/graphics/emp
 
 employment.hist_chart <- ggplot(employ_stattest.hist) +  
   geom_line(aes(x = year, y = val, color = race, group = racesex_lab), size = 1) +
-  geom_point(aes(x =year, y = val, color = race, shape = sex), size = 2) +
-  scale_y_continuous(labels = percent_format(accuracy = 1), limits = c(0.35,0.80) ) + 
+  geom_point(aes(x =year, y = val, color = race, shape = sex), size = 3) +
+  scale_y_continuous(labels = percent_format(accuracy = 1), limits = c(0.35,0.90) ) + 
   #scale_x_continuous(labels = c("1980", "1990", "2000", "2010", "2023")) +
   scale_color_manual(name = "", labels = c("Black", "Hispanic, any race","White, non-Hispanic"),
                      values = c( DCcolor.p1darkblue90, DCcolor.p3yellowochre90, DCcolor.p2green90)) +
   
   geom_text(data = subset(employ_stattest.hist, year %in% c(1980, 2023)), aes(x=year,y=val, label = percent_format(accuracy = 1)(val)), vjust = -1, family = "Asap") +
   geom_text(data = subset(employ_stattest.hist, year == "2023"), aes(x = year, y = val, label = val_lab, hjust = -.7, vjust = .7), size = 6)+
-  
   themeDC_horizontal() +
+  
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5)) +
-  labs(title = "Employment rate, population 16-64 by race/ethnicity and gender,\n Orleans Parish",
+  labs(title = "Employment rate, population 16-64 years old by race/ethnicity and gender,\n Orleans Parish",
        x = "",
        y = "")
+
 ggsave(employment.hist_chart,filename = "indicator expansion drafts/graphics/employment.hist.png",
-       width = 8, height = 6, units = "in")
+       width = 10, height = 6, units = "in")
+
+ggsave(employment.hist_chart,filename = "indicator expansion drafts/graphics/employment_hist.svg",
+       width = 10, height = 6, units = "in")
 
 # Across geos educational attainment bar chart
 
