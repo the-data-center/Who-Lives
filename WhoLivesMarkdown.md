@@ -1,6 +1,6 @@
 <div class="highlight" markdown="1"> 
 
-This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age.  This brief also covers 2023 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.   In 2023, the official definition of the New Orleans metro area changed to exclude St. Tammany, because a smaller portion of workers who live in St. Tammany are commuting to work in Orleans, Jefferson, and other parishes on the south shore of Lake Pontchartrain. To learn more about how metro areas are defined and how this change came about read this [Research Note](https://www.datacenterresearch.org/reports_analysis/on-st-tammanys-split-from-the-new-orleans-metro/).
+This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age. This brief also covers 2023 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs. In 2023, the official definition of the New Orleans metro area changed to exclude St. Tammany, because a smaller portion of workers who live in St. Tammany are commuting to work in Orleans, Jefferson, and other parishes on the south shore of Lake Pontchartrain. To learn more about how metro areas are defined and how this change came about read this [Research Note](https://www.datacenterresearch.org/reports_analysis/on-st-tammanys-split-from-the-new-orleans-metro/).
 </div>
 
 The U.S. Census Bureau estimates that 962,165 residents were living in
@@ -14,7 +14,7 @@ metro area parishes since 2000 (or the best benchmark available).
 
 Compared to 2000, pre-Katrina, there are now 120,876 fewer Black
 residents living in New Orleans (Orleans Parish), and there are 23,503
-fewer White residents as well as 14,531 more Hispanic residents.[^2]
+fewer White residents, as well as 14,531 more Hispanic residents.[^2]
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/AAWhiteHispan-1.png" style="display: block; margin: auto;" />
 
@@ -49,13 +49,13 @@ area since 2000.
 </div>
 
 Between 2000 and 2023, the number of Hispanics in Jefferson Parish more
-than doubled – reaching 79,805 or more than 19 percent of the total
+than doubled — reaching 79,805 or more than 19 percent of the total
 parish population. In Orleans and St. Bernard parishes, the Hispanic
-population nearly doubled – growing to 29,563 (8 percent of the
+population nearly doubled — growing to 29,563 (8 percent of the
 population) in Orleans and 6,206 (14 percent of the population) in
-St. Bernard. The number of Hispanics St. Charles, St. John the Baptist,
-Plaquemines, and St. James more than doubled reaching 4,231, 3,788,
-2,250, and 395 respectively.
+St. Bernard. The number of Hispanics in St. Charles, St. John the
+Baptist, Plaquemines, and St. James more than doubled reaching 4,231,
+3,788, 2,250, and 395 respectively.
 
 As of July 2023, there were 126,238 Hispanics in the metro area,
 representing 13 percent of the metro population. This is up from 2000
@@ -91,15 +91,15 @@ Hispanic is an umbrella term comprising multiple nationalities and
 ethnicities. Researchers have shown that most Hispanics prefer to
 identify by nationality rather than by pan-ethnic terms such as
 “Hispanic” and “Latino.”[^3] The nationalities of Hispanics residing in
-metro New Orleans are quite distinct from the national Hispanic profile.
+Metro New Orleans are quite distinct from the national Hispanic profile.
 
-In 2023, the largest Hispanic group in metro New Orleans was Honduran,
+In 2023, the largest Hispanic group in Metro New Orleans was Honduran,
 representing 29 percent of the Hispanic population. In comparison,
 Hondurans represent only 2 percent of the national Hispanic population.
-These figures point to metro New Orleans as a hub of Honduran migration.
+These figures point to Metro New Orleans as a hub of Honduran migration.
 
 Not to be ignored, the Mexican population represents 16 percent of the
-Hispanic population in metro New Orleans. Nevertheless, the Mexican
+Hispanic population in Metro New Orleans. Nevertheless, the Mexican
 population is much less prominent in the metro than nationally, where it
 represents 58 percent of the Hispanic population.
 
@@ -165,7 +165,7 @@ percent.
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023.</p>
 </div>
 
-Overall the youth population is substantially lower than pre-Katrina
+Overall, the youth population is substantially lower than pre-Katrina
 levels. The metro had 303,054 children under 18 years in 2000 and only
 206,918 in 2023. More than half of this loss was driven by Orleans
 Parish, where the population under 18 has declined to 70,990 from
@@ -181,9 +181,9 @@ population, down from 27 percent in 2000.
 </div>
 <div class="highlight" markdown="1"> 
 
-### Where is data for Plaquemines, St. Bernard, St. James, St. Charles, and St. John the Baptist?
+### Where is data for Plaquemines, St. Bernard, St. James, St. Charles, and St. John the Baptist?
 
-Although race/ethnicity and age data is available for all seven parishes in metro New Orleans, most other demographic data (such as educational attainment, poverty, and homeownership) is available for only the two most populous parishes of Jefferson and Orleans, as well as the metro.
+Although race/ethnicity and age data is available for all seven parishes in Metro New Orleans, most other demographic data (such as educational attainment, poverty, and homeownership) is available for only the two most populous parishes of Jefferson and Orleans, as well as the metro.
 </div>
 
 ## Educational attainment, income, and employment {#educational-attainment-income-and-employment}
@@ -193,7 +193,7 @@ workforce skills, and regional resiliency.[^5] In New Orleans, 45
 percent of adults 25 and older had at least a bachelor’s degree in 2023
 — higher than the U.S. average of 36 percent, and up from 26 percent in
 2000. The Jefferson Parish share of adults with a bachelor’s degree is
-30 percent up from 21 percent in 2000. Overall the share of adults with
+30 percent up from 21 percent in 2000. Overall, the share of adults with
 a bachelor’s degree in Metro New Orleans from 22 to 35 percent — just
 short of the national average of 36 percent.
 
@@ -206,9 +206,9 @@ short of the national average of 36 percent.
 
 The share of New Orleans adults who have a bachelor’s degree has grown
 across racial and ethnic groups since 1980. But while 72 percent of
-White adults in New Orleans have a bachelor’s, only 47 percent of Asian
-adults, 43 percent of Hispanic adults, and 27 percent of Black adults in
-New Orleans have a bachelor’s as of 2023.
+White adults in New Orleans have a bachelor’s, only 43 percent of
+Hispanic adults, and 27 percent of Black adults in New Orleans have a
+bachelor’s as of 2023.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/bachovertime-1.png" style="display: block; margin: auto;" />
 
@@ -224,9 +224,9 @@ New Orleans have a bachelor’s as of 2023.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-∗ = In Orleans Parish, the difference between Hispanic and Asian is not statistically significant.   
+**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
 ∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
-∗ = In the New Orleans Metro area, the difference between White and Asian and Black and Hispanic is not statistically significant.   
+∗ = In Metro New Orleans, the difference between Black and Hispanic is not statistically significant.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023.</p>
 </div>
 
@@ -238,7 +238,7 @@ Jefferson, and the metro as a whole. The metro share of adults without a
 high school degree fell from 23 percent in 2000 to 12 percent in 2023.
 In Jefferson Parish, 14 percent of adults 25 and older have less than a
 high school degree while in New Orleans only 9 percent of adults have
-less than a high school degree – lower than the national average.
+less than a high school degree — lower than the national average.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/hs-1.png" style="display: block; margin: auto;" />
 
@@ -247,7 +247,7 @@ less than a high school degree – lower than the national average.
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023.</p>
 </div>
 
-The 2023 median household income in Orleans Parish is $55,580 – 13
+The 2023 median household income in Orleans Parish is $55,580 — 13
 percent higher than in 2000 after controlling for inflation. Meanwhile,
 the median household income in Jefferson Parish, at $61,085 is 12
 percent lower than in 2000 after controlling for inflation. The 2023
@@ -259,7 +259,7 @@ significantly lower than the U.S. median of $77,719.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-∗ = Difference between 1999 and 2023 is not significant at 95% confidence interval.   
+**Notes**: 1999 data is not available for Metro New Orleans.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023.</p>
 </div>
 
@@ -267,9 +267,9 @@ In 1979, households with higher incomes were disproportionately in the
 parishes surrounding New Orleans, while lower income White, Hispanic,
 and Black households were more likely to live in the city.[^6] By 2023,
 these patterns had changed with higher income White households more
-often living in the city such that income disparity within the city has
+often living in the city, such that income disparity within the city has
 escalated. In 2023, Black households in New Orleans had a median income
-of only $38,092, while Hispanic households were at $56,992 and White
+of only $38,092, while Hispanic households were at $56,992, and White
 households at $97,494.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/medhhtime-1.png" style="display: block; margin: auto;" />
@@ -286,19 +286,16 @@ households at $97,494.
 In 2023, Black households in New Orleans have incomes 61 percent less
 than White households. In Jefferson, Black households have a median
 income of $40,198 which is 45 percent less than White households in that
-parish who have a median income of 73678. Notably, Black households
-across the metro have a median income of 40841, which is well below
-their national peers (53927). And Asian households in Metro New Orleans
-have a median income of 68079 which is about 40 percent lower than their
-national peers (111817).
+parish who have a median income of $73,678. Notably, Black households
+across the metro have a median income of $40,841, which is well below
+their national peers ($53,927).
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/medhhbyrace-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-∗ = In Orleans Parish, the difference between Black and Hispanic and Hispanic and Asian is not statistically significant.  
-∗ = In Jefferson Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.   
-∗ = In the New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.   
+**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
+∗ = In Orleans Parish, the difference between Black and Hispanic is not statistically significant.  
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023.</p>
 </div>
@@ -320,9 +317,9 @@ Black men had employment.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-∗ = Change in time is not significant for White and Hispanic males.  
-∗ = Change in time is not significant for Black males for 2000-2010 and 2000-2023.
-∗ = Change in time is not significant for Black females for 2010-2023.   
+∗ = Change in time is not significant for Hispanic Males.   
+∗ = Change in time is not significant for White and Black males and females for 2000-2010.     
+∗ = Change in time is not significant for Hispanic females for 2010-2023.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023.</p>
 </div>
 
@@ -337,9 +334,10 @@ national peers.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Notes**: The Hispanic employment rate by gender is unavailable for Orleans Parish in 2023.   
+**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
+∗ = In Orleans Parish, the difference between White and Hispanic males is not significant.   
 ∗ = In Jefferson Parish, the difference between White and Black males, White and Black females, White and Hispanic females, and Black and Hispanic females is not significant.   
-∗ = In the New Orleans Metro area, the difference between White and Hispanic females is not significant.   
+∗ = In Metro New Orleans, the difference between White and Hispanic females is not significant.   
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023.</p>
 </div>
@@ -350,22 +348,21 @@ A high share of residents living below the poverty level indicates the
 economy is not providing many residents with the ability to meet their
 most basic needs, including food, housing, and transportation. The
 poverty rate in New Orleans decreased from 28 to 23 percent between 1999
-and 2023while the Jefferson Parish poverty rate increased from 14 to 17
-percent. Across the U.S., the poverty rate increased by one percentage
-point between 1999 and 2023.
+and 2023, while the Jefferson Parish poverty rate increased from 14 to
+17 percent. Across the U.S., the poverty rate increased by one
+percentage point between 1999 and 2023.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/pov-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-∗ = Difference between 1999 and 2023 is not significant at 95% confidence interval.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023.</p>
 </div>
 <div class="highlight" markdown="1"> 
 
 ### How is poverty measured? 
 
-The Census still uses the federal definition for poverty that was first created in 1964. The original calculations were based on studies from the early 1960s that indicated that family food costs were about one-third of a family’s budget. But housing costs have risen much faster than food costs since 1964. Also, the current calculations don’t count non-cash government aid, like Child Tax Credits or housing subsidies, as income. And they aren’t adjusted for differences in costs of living in different parts of the country. Given these limitations, the Census began publishing a Supplemental Poverty Measure that incorporates up-to-date data on regional housing costs as well as several kinds of government aid.  According to the Census, the 2020 Supplemental Poverty Rate for the U.S. was 9.1 percent. The Official Poverty Rate that same year was 11.4 percent.[^8]  The Census Bureau does not calculate Supplemental Poverty Rates for geographies smaller than the nation as a whole.[^9]
+The Census still uses the federal definition for poverty that was first created in 1964. The original calculations were based on studies from the early 1960s that indicated that family food costs were about one-third of a family’s budget. But housing costs have risen much faster than food costs since 1964. Also, the current calculations don’t count non-cash government aid, like Child Tax Credits or housing subsidies, as income. And they aren’t adjusted for differences in costs of living in different parts of the country. Given these limitations, the Census began publishing a Supplemental Poverty Measure that incorporates up-to-date data on regional housing costs as well as several kinds of government aid. According to the Census, the 2023 Supplemental Poverty Rate for the U.S. was 12.9 percent. The Official Poverty Rate that same year was 11.1 percent.[^8] The Census Bureau does not calculate Supplemental Poverty Rates for geographies smaller than the nation as a whole.[^9]
 </div>
 
 The poverty rate for Black New Orleanians spiked when the 1980s “oil
@@ -389,23 +386,23 @@ remained about triple that of White New Orleanians.
 
 Large disparities in the poverty rate continue to be evident at all
 geographic levels. For example, in Metro New Orleans 26 percent of Black
-people, 22 percent of Hispanic people, and 20 percent of Asian people
-live in poverty compared to 10 percent of White people.
+people and 22 percent of Hispanic people live in poverty compared to 10
+percent of White people.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/povbyrace-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-∗ = In Orleans Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.   
-∗ = In Jefferson Parish, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
-∗ = In the New Orleans Metro Area, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
+**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
+∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
+∗ = In the New Orleans Metro Area, the difference between Black and Hispanic is not statistically significant.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023.</p>
 </div>
 
 Like the overall poverty rate, the child poverty rate in New Orleans
 decreased from 41 percent 1999 to 32 percent in 2023. In Jefferson, 23
-percent of children live in poverty and across the metro 25, both higher
-than the national rate.
+percent of children live in poverty and across the metro 25 percent,
+both higher than the national rate.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/childpov-1.png" style="display: block; margin: auto;" />
 
@@ -415,12 +412,12 @@ than the national rate.
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023.</p>
 </div>
 
-In Orleans Parish,43 percent of Black children live in poverty while 4
+In Orleans Parish, 43 percent of Black children live in poverty while 4
 percent of White children are poor. In New Orleans, child poverty rates
-peaked in 1989 for Black children and have fallen, but, at 43 percent,
-are still 10 times higher than poverty rate for White children in New
-Orleans. The poverty rate for White children has declined from about one
-in 10 children in poverty in 1979 to about one in 50 in 2023.
+peaked in 1989 for Black children and have fallen, but at 43 percent are
+still 10 times higher than poverty rate for White children in New
+Orleans. The poverty rate for White children has declined from about 1
+in 10 children in poverty in 1979 to about 1 in 50 in 2023.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/childpovhist-1.png" style="display: block; margin: auto;" />
 
@@ -435,19 +432,18 @@ in 10 children in poverty in 1979 to about one in 50 in 2023.
 
 While in Orleans, poverty rates for Black children are 10 times higher
 than for White children, in Jefferson Parish Black children experience
-poverty about 5 times higher rates than White children. In Metro New
-Orleans, 31 percent of Hispanic children live in poverty – higher than
+poverty about five times higher rates than White children. In Metro New
+Orleans, 31 percent of Hispanic children live in poverty — higher than
 their national peers of whom 22 percent live in poverty.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/childpovrace-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Notes**: Due to high margins of error, the comparison between any race and Asian is not statistically significant in Orleans Parish.   
+**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
 ∗ = In Orleans Parish, the difference between Black and Hispanic is not statistically significant.   
-∗ = In Jefferson Parish, the difference between Black and Asian, Black and Hispanic, and Hispanic and Asian is not statistically significant.   
-∗ = In the New Orleans Metro Area, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
-∗ = In United States, the difference between White and Asian is not statistically significant.   
+∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
+∗ = In the New Orleans Metro Area, the difference between Black and Hispanic is not statistically significant.     
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023.</p>
 </div>
 
@@ -461,7 +457,6 @@ transportation system and comprehensive evacuation plan.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-∗ = Difference between 2000 and 2023 is not significant at 95% confidence interval.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023.</p>
 </div>
 
@@ -538,7 +533,7 @@ was 5 percent in 2004 and has not significantly changed.
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
 **Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2023 is not significant at the 95% confidence interval for Orleans Parish. It is significant for all other geographies   
-**Notes**: 2004 data is not available for metro New Orleans.   
+**Notes**: 2004 data is not available for Metro New Orleans.   
 ∗ = Difference between 2004 and 2023 is not significant at 95% confidence interval.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2023.</p>
 </div>
@@ -588,7 +583,7 @@ Jefferson Parish.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Notes**: Due to high margins of error, the comparison between any race and Asian is not statistically significant in Orleans Parish.   
+**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
 ∗ = In Orleans Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In the New Orleans Metro Area, the difference between Black and Hispanic is not statistically significant.   
@@ -617,17 +612,17 @@ High housing costs can limit a region’s ability to attract and retain
 the workforce essential for a healthy economy.[^12] Severe housing cost
 burdens of more than 50 percent of household income indicate a serious
 problem in housing affordability. In 2004, the share of severely
-cost-burdened renters in New Orleans and the U.S. was 24 and 24 percent,
-respectively. In the 19 years since, that share has spiked to 34 percent
-in Orleans while growing to only 26 percent nationally. In Jefferson
-Parish, the share of renters paying more than 50 percent of household
-income on housing and utilities is 32 percent in 2023.
+cost-burdened renters in New Orleans and the U.S. was 24 percent. In the
+19 years since, that share has spiked to 34 percent in Orleans while
+growing to only 26 percent nationally. In Jefferson Parish, the share of
+renters paying more than 50 percent of household income on housing and
+utilities is 32 percent in 2023.
 
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/rentbur-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Notes**: 2004 data is not available for metro New Orleans.
+**Notes**: 2004 data is not available for Metro New Orleans.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2023.</p>
 </div>
@@ -641,7 +636,7 @@ cost burden for renters vs. homeowners, and that gap has widened.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Notes**: 2004 data is not available for metro New Orleans.
+**Notes**: 2004 data is not available for Metro New Orleans.
 
 ∗ = Difference between 2004 and 2023 is not significant at 95% confidence interval.
 
@@ -659,8 +654,8 @@ percent nationwide.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-**Notes**: 2004 data is not available for metro New Orleans
-
+**Notes**: 2004 data is not available for Metro New Orleans   
+∗ = Difference between 2004 and 2023 is not significant at 95% confidence interval.    
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2023.</p>
 </div>
 
@@ -681,8 +676,6 @@ percent of housing stock has been built since 1990.
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
 
-∗ = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
-
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023.</p>
 </div>
 
@@ -698,8 +691,6 @@ Orleans or across the nation (14 percent).
 <img src="https://s3.amazonaws.com/files.datacenterresearch/who-lives/2024/09/commute-1.png" style="display: block; margin: auto;" />
 
 <div class="source" style="clear: left; padding-left: 30px;" markdown="1"> 
-
-∗ = Difference between 2000 and 2023 is not significant at 95% confidence interval.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023.</p>
 </div>
@@ -773,7 +764,7 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
     <https://s3.amazonaws.com/gnocdc/reports/ProsperityIndex.pdf>.
 
 [^8]: The latest Supplemental Poverty Measure report can be found at
-    <https://www.census.gov/content/dam/Census/library/publications/2021/demo/p60-275.pdf>.
+    <https://www.census.gov/library/publications/2024/demo/p60-283.html>.
 
 [^9]: Guidance for how to approximate the Supplemental Poverty Measure
     using ACS geographies can be found at

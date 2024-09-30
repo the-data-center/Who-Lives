@@ -98,7 +98,7 @@ source(here("inline.R"))
 
 ```{r, echo=FALSE}
 makeCSS_highlight(
-"This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age.  This brief also covers 2023 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs.   In 2023, the official definition of the New Orleans metro area changed to exclude St. Tammany, because a smaller portion of workers who live in St. Tammany are commuting to work in Orleans, Jefferson, and other parishes on the south shore of Lake Pontchartrain. To learn more about how metro areas are defined and how this change came about read this [Research Note](https://www.datacenterresearch.org/reports_analysis/on-st-tammanys-split-from-the-new-orleans-metro/).") 
+"This brief examines the 2023 demographic data released by the U.S. Census Bureau covering race, ethnicity, and age. This brief also covers 2023 estimates from the Census Bureau's annual American Community Survey (ACS) on a range of important topics such as educational attainment, poverty, and housing costs. In 2023, the official definition of the New Orleans metro area changed to exclude St. Tammany, because a smaller portion of workers who live in St. Tammany are commuting to work in Orleans, Jefferson, and other parishes on the south shore of Lake Pontchartrain. To learn more about how metro areas are defined and how this change came about read this [Research Note](https://www.datacenterresearch.org/reports_analysis/on-st-tammanys-split-from-the-new-orleans-metro/).") 
 ```
 
 The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were living in the 7-parish New Orleans metro as of July `r yearPEP`, a 4.5 percent decrease from April 2020.[^1] The metro area now has `r round.off((metropop.current / metropop.2000)*100)` percent of its 2000 population of `r comma(metropop.2000)`. In this brief, we examine demographic data released by the U.S. Census Bureau and identify important changes in metro area parishes since 2000 (or the best benchmark available). 
@@ -106,7 +106,7 @@ The U.S. Census Bureau estimates that `r comma(metropop.current)` residents were
 
 ## Race/Ethnicity
 
-Compared to 2000, pre-Katrina, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.current)` fewer Black residents living in New Orleans (Orleans Parish), and there are `r comma(getvalue.white.no.2000 - getvalue.white.no.current)` fewer White residents as well as `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` more Hispanic residents.[^2] 
+Compared to 2000, pre-Katrina, there are now `r comma(getvalue.AA.no.2000-getvalue.AA.no.current)` fewer Black residents living in New Orleans (Orleans Parish), and there are `r comma(getvalue.white.no.2000 - getvalue.white.no.current)` fewer White residents, as well as `r comma(getvalue.Hispan.no.current - getvalue.Hispan.no.2000)` more Hispanic residents.[^2] 
 
 ```{r AAWhiteHispan, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 AAwhthispGraphic
@@ -140,7 +140,7 @@ makeCSS_source(
 )
 ```
 
-Between 2000 and 2023, the number of Hispanics in Jefferson Parish more than doubled – reaching `r comma(getvalue.hispan.jeff.current)` or more than `r round.off((getvalue.Hispanpct.jeff.current)*100)` percent of the total parish population. In Orleans and St. Bernard parishes, the Hispanic population nearly doubled – growing to `r comma(getvalue.hispan.orleans.current)` (`r round.off((getvalue.Hispanpct.orleans.current)*100)` percent of the population) in Orleans and `r comma(getvalue.hispan.bernard.current)` (`r round.off((getvalue.Hispanpct.bernard.current)*100)` percent of the population) in St. Bernard. The number of Hispanics St. Charles, St. John the Baptist, Plaquemines, and St. James more than doubled reaching `r comma(getvalue.hispan.charles.current)`, `r comma(getvalue.hispan.john.current)`, `r comma(getvalue.hispan.plaquemines.current)`, and `r comma(getvalue.hispan.james.current)` respectively. 
+Between 2000 and 2023, the number of Hispanics in Jefferson Parish more than doubled --- reaching `r comma(getvalue.hispan.jeff.current)` or more than `r round.off((getvalue.Hispanpct.jeff.current)*100)` percent of the total parish population. In Orleans and St. Bernard parishes, the Hispanic population nearly doubled --- growing to `r comma(getvalue.hispan.orleans.current)` (`r round.off((getvalue.Hispanpct.orleans.current)*100)` percent of the population) in Orleans and `r comma(getvalue.hispan.bernard.current)` (`r round.off((getvalue.Hispanpct.bernard.current)*100)` percent of the population) in St. Bernard. The number of Hispanics in St. Charles, St. John the Baptist, Plaquemines, and St. James more than doubled reaching `r comma(getvalue.hispan.charles.current)`, `r comma(getvalue.hispan.john.current)`, `r comma(getvalue.hispan.plaquemines.current)`, and `r comma(getvalue.hispan.james.current)` respectively. 
 
 As of July `r yearPEP`, there were `r comma(getvalue.Hispan.metro.current)` Hispanics in the metro area, representing `r round.off((getvalue.Hispanpct.metro.current)*100)` percent of the metro population. This is up from 2000 when there were `r comma(getvalue.hispanpop.metro.2000)` Hispanics, representing `r round.off((getvalue.Hispanpct.metro.2000)*100)` percent of the metro population. Despite these recent gains, the Hispanic share of the population in metro area parishes is below the average for the United States, which has grown from `r round.off((getvalue.Hispanpct.us.2000)*100)` percent to `r round.off((getvalue.Hispanpct.us.current)*100)` percent of the total U.S. population over these `r yearPEP-2000` years. 
 
@@ -164,11 +164,11 @@ makeCSS_source(
 )
 ```
 
-Hispanic is an umbrella term comprising multiple nationalities and ethnicities. Researchers have shown that most Hispanics prefer to identify by nationality rather than by pan-ethnic terms such as “Hispanic” and “Latino.”[^3] The nationalities of Hispanics residing in metro New Orleans are quite distinct from the national Hispanic profile.
+Hispanic is an umbrella term comprising multiple nationalities and ethnicities. Researchers have shown that most Hispanics prefer to identify by nationality rather than by pan-ethnic terms such as “Hispanic” and “Latino.”[^3] The nationalities of Hispanics residing in Metro New Orleans are quite distinct from the national Hispanic profile.
 
-In `r year`, the largest Hispanic group in metro New Orleans was Honduran, representing `r round.off((getvalue.Hon.current)*100)` percent of the Hispanic population. In comparison, Hondurans represent only `r round.off((getvalue.Hon.us.current)*100)` percent of the national Hispanic population. These figures point to metro New Orleans as a hub of Honduran migration.
+In `r year`, the largest Hispanic group in Metro New Orleans was Honduran, representing `r round.off((getvalue.Hon.current)*100)` percent of the Hispanic population. In comparison, Hondurans represent only `r round.off((getvalue.Hon.us.current)*100)` percent of the national Hispanic population. These figures point to Metro New Orleans as a hub of Honduran migration.
 
-Not to be ignored, the Mexican population represents `r round.off((getvalue.Mex.current)*100)` percent of the Hispanic population in metro New Orleans. Nevertheless, the Mexican population is much less prominent in the metro than nationally, where it represents `r round.off((getvalue.MexUS.current)*100)` percent of the Hispanic population.
+Not to be ignored, the Mexican population represents `r round.off((getvalue.Mex.current)*100)` percent of the Hispanic population in Metro New Orleans. Nevertheless, the Mexican population is much less prominent in the metro than nationally, where it represents `r round.off((getvalue.MexUS.current)*100)` percent of the Hispanic population.
 
 ```{r hispan2018, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
 chart.hispan2018.allparishes 
@@ -224,7 +224,7 @@ makeCSS_source(
 )
 ```
 
-Overall the youth population is substantially lower than pre-Katrina levels. The metro had `r comma(getvalue.under18.metro.2000)` children under 18 years in 2000 and only `r comma(getvalue.under18.metro.current)` in `r yearPEP`. More than half of this loss was driven by Orleans Parish, where the population under 18 has declined to `r comma(getvalue.under18.no.current)` from `r comma(getvalue.under18.no.2000)`. Jefferson Parish’s child population also declined from `r comma(getvalue.under18.jeff.2000)` to `r comma(getvalue.under18.jeff.current)`. The under 18 population is now `r round.off((getvalue.pct.under18.metro.current)*100)` percent of the metro population, down from 27 percent in 2000. 
+Overall, the youth population is substantially lower than pre-Katrina levels. The metro had `r comma(getvalue.under18.metro.2000)` children under 18 years in 2000 and only `r comma(getvalue.under18.metro.current)` in `r yearPEP`. More than half of this loss was driven by Orleans Parish, where the population under 18 has declined to `r comma(getvalue.under18.no.current)` from `r comma(getvalue.under18.no.2000)`. Jefferson Parish’s child population also declined from `r comma(getvalue.under18.jeff.2000)` to `r comma(getvalue.under18.jeff.current)`. The under 18 population is now `r round.off((getvalue.pct.under18.metro.current)*100)` percent of the metro population, down from 27 percent in 2000. 
 
 
 ```{r popunder18, fig.align='center', fig.width=7, fig.height=5, echo=FALSE, warning=FALSE, message=FALSE}
@@ -238,15 +238,15 @@ makeCSS_source(
 
 ```{r, echo=FALSE}
 makeCSS_highlight(
-"### Where is data for Plaquemines, St. Bernard, St. James, St. Charles, and St. John the Baptist?
+"### Where is data for Plaquemines, St. Bernard, St. James, St. Charles, and St. John the Baptist?
 
-Although race/ethnicity and age data is available for all seven parishes in metro New Orleans, most other demographic data (such as educational attainment, poverty, and homeownership) is available for only the two most populous parishes of Jefferson and Orleans, as well as the metro."
+Although race/ethnicity and age data is available for all seven parishes in Metro New Orleans, most other demographic data (such as educational attainment, poverty, and homeownership) is available for only the two most populous parishes of Jefferson and Orleans, as well as the metro."
 )
 ```
 
 ## Educational attainment, income, and employment
 
-Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^4] In New Orleans, `r round.off(getvalue.bachdeg.nopct*100)` percent of adults 25 and older had at least a bachelor’s degree in `r year` --- higher than the U.S. average of `r round.off(getvalue.bachdeg.USpct*100)` percent, and up from `r round.off( getvalue.bach.no.2000*100)` percent in 2000. The Jefferson Parish share of adults with a bachelor’s degree is `r round.off(getvalue.bachdeg.jeffpct*100)` percent up from `r round.off( getvalue.bach.jeff.2000*100)` percent in 2000. Overall the share of adults with a bachelor’s degree in Metro New Orleans from `r round.off(getvalue.bach.metro.2000*100)` to `r round.off(getvalue.bach.metro.current*100)` percent --- just short of the national average of `r round.off(getvalue.bachdeg.USpct*100)` percent. 
+Educational attainment is an important determinant of household incomes, workforce skills, and regional resiliency.[^4] In New Orleans, `r round.off(getvalue.bachdeg.nopct*100)` percent of adults 25 and older had at least a bachelor’s degree in `r year` --- higher than the U.S. average of `r round.off(getvalue.bachdeg.USpct*100)` percent, and up from `r round.off( getvalue.bach.no.2000*100)` percent in 2000. The Jefferson Parish share of adults with a bachelor’s degree is `r round.off(getvalue.bachdeg.jeffpct*100)` percent up from `r round.off( getvalue.bach.jeff.2000*100)` percent in 2000. Overall, the share of adults with a bachelor’s degree in Metro New Orleans from `r round.off(getvalue.bach.metro.2000*100)` to `r round.off(getvalue.bach.metro.current*100)` percent --- just short of the national average of `r round.off(getvalue.bachdeg.USpct*100)` percent. 
 
 ```{r bach, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 bachGraphic
@@ -257,7 +257,7 @@ makeCSS_source(
 )
 ```
 
-The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while `r round.off(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s, only `r round.off(getvalue.bachdeg.asian.nopct*100)` percent of Asian adults, `r round.off(getvalue.bachdeg.his.nopct*100)` percent of Hispanic adults, and `r round.off(getvalue.bachdeg.black.nopct*100)` percent of Black adults in New Orleans have a bachelor’s as of `r year`. 
+The share of New Orleans adults who have a bachelor’s degree has grown across racial and ethnic groups since 1980. But while `r round.off(getvalue.bachdeg.white.nopct*100)` percent of White adults in New Orleans have a bachelor’s, only `r round.off(getvalue.bachdeg.his.nopct*100)` percent of Hispanic adults, and `r round.off(getvalue.bachdeg.black.nopct*100)` percent of Black adults in New Orleans have a bachelor’s as of `r year`. 
 
 ```{r bachovertime, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
 EduAtt.hist_chart
@@ -276,14 +276,14 @@ bach.raceGeos_chart
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = In Orleans Parish, the difference between Hispanic and Asian is not statistically significant.   
+"**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
 ∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
-∗ = In the New Orleans Metro area, the difference between White and Asian and Black and Hispanic is not statistically significant.   
+∗ = In Metro New Orleans, the difference between Black and Hispanic is not statistically significant.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023."
 )
 ```
 
-The metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across Orleans, Jefferson, and the metro as a whole. The metro share of adults without a high school degree fell from 23 percent in 2000 to `r round.off(getvalue.noHSdeg.metropct*100)` percent in `r year`. In Jefferson Parish, `r round.off(getvalue.jeffHSdeg.nopct*100)` percent of adults 25 and older have less than a high school degree while in New Orleans only `r round.off(getvalue.noHSdeg.nopct*100)` percent of adults have less than a high school degree – lower than the national average. 
+The metro area increase in the share of adults with a bachelor’s degree or higher has been coupled with a decline in the share of adults with less than a high school degree. The proportion of adults 25 years and older with less than a high school education declined across Orleans, Jefferson, and the metro as a whole. The metro share of adults without a high school degree fell from 23 percent in 2000 to `r round.off(getvalue.noHSdeg.metropct*100)` percent in `r year`. In Jefferson Parish, `r round.off(getvalue.jeffHSdeg.nopct*100)` percent of adults 25 and older have less than a high school degree while in New Orleans only `r round.off(getvalue.noHSdeg.nopct*100)` percent of adults have less than a high school degree --- lower than the national average. 
 
 ```{r hs, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 hsGraphic
@@ -294,19 +294,19 @@ makeCSS_source(
 )
 ```
 
-The `r year` median household income in Orleans Parish is `r dollar(getvalue.medhh.no.current)` – 13 percent higher than in 2000 after controlling for inflation. Meanwhile, the median household income in Jefferson Parish, at `r dollar(getvalue.medhh.jeff.current)` is 12 percent lower than in 2000 after controlling for inflation. The `r year` Metro New Orleans median household income of `r dollar(getvalue.medhh.metro.current)`, `r dollar(getvalue.medhh.jeff.current)` for Jefferson Parish, and `r dollar(getvalue.medhh.no.current)` for the city of New Orleans are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.current)`. 
+The `r year` median household income in Orleans Parish is `r dollar(getvalue.medhh.no.current)` --- 13 percent higher than in 2000 after controlling for inflation. Meanwhile, the median household income in Jefferson Parish, at `r dollar(getvalue.medhh.jeff.current)` is 12 percent lower than in 2000 after controlling for inflation. The `r year` Metro New Orleans median household income of `r dollar(getvalue.medhh.metro.current)`, `r dollar(getvalue.medhh.jeff.current)` for Jefferson Parish, and `r dollar(getvalue.medhh.no.current)` for the city of New Orleans are significantly lower than the U.S. median of `r dollar(getvalue.medhh.us.current)`. 
 
 ```{r medhh, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 medhhGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = Difference between 1999 and 2023 is not significant at 95% confidence interval.   
+"**Notes**: 1999 data is not available for Metro New Orleans.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023."
 )
 ```
 
-In 1979, households with higher incomes were disproportionately in the parishes surrounding New Orleans, while lower income White, Hispanic, and Black households were more likely to live in the city.[^5] By `r year`, these patterns had changed with higher income White households more often living in the city such that income disparity within the city has escalated. In `r year`, Black households in New Orleans had a median income of only `r dollar(getvalue.medhh.black.no)`, while Hispanic households were at `r dollar(getvalue.medhh.hisp.no)` and White households at `r dollar(getvalue.medhh.white.no)`. 
+In 1979, households with higher incomes were disproportionately in the parishes surrounding New Orleans, while lower income White, Hispanic, and Black households were more likely to live in the city.[^5] By `r year`, these patterns had changed with higher income White households more often living in the city, such that income disparity within the city has escalated. In `r year`, Black households in New Orleans had a median income of only `r dollar(getvalue.medhh.black.no)`, while Hispanic households were at `r dollar(getvalue.medhh.hisp.no)`, and White households at `r dollar(getvalue.medhh.white.no)`. 
 
 ```{r medhhtime, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
 medhh.hist_chart
@@ -321,16 +321,15 @@ makeCSS_source(
 )
 ```
 
-In `r year`, Black households in New Orleans have incomes `r round.off((getvalue.medhh.blkwht.no.pctdiff*100))` percent less than White households. In Jefferson, Black households have a median income of `r dollar(round.off(getvalue.medhh.black.jeff))` which is `r round.off((getvalue.medhh.blkwht.jeff.pctdiff*100))` percent less than White households in that parish who have a median income of `r round.off((getvalue.medhh.white.jeff))`. Notably, Black households across the metro have a median income of `r round.off((getvalue.medhh.black.metro))`, which is well below their national peers (`r round.off((getvalue.medhh.black.us))`). And Asian households in Metro New Orleans have a median income of `r round.off((getvalue.medhh.asian.metro))` which is about 40 percent lower than their national peers (`r round.off((getvalue.medhh.asian.us))`). 
+In `r year`, Black households in New Orleans have incomes `r round.off((getvalue.medhh.blkwht.no.pctdiff*100))` percent less than White households. In Jefferson, Black households have a median income of `r dollar(round.off(getvalue.medhh.black.jeff))` which is `r round.off((getvalue.medhh.blkwht.jeff.pctdiff*100))` percent less than White households in that parish who have a median income of `r dollar(round.off((getvalue.medhh.white.jeff)))`. Notably, Black households across the metro have a median income of `r dollar(round.off((getvalue.medhh.black.metro)))`, which is well below their national peers (`r dollar(round.off((getvalue.medhh.black.us)))`). 
 
 ```{r medhhbyrace, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
 medhh.raceGeos_chart
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = In Orleans Parish, the difference between Black and Hispanic and Hispanic and Asian is not statistically significant.  
-∗ = In Jefferson Parish, the difference between White and Asian and Hispanic and Asian is not statistically significant.   
-∗ = In the New Orleans Metro Area, the difference between Hispanic and Asian is not statistically significant.   
+"**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
+∗ = In Orleans Parish, the difference between Black and Hispanic is not statistically significant.  
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023."
 )
@@ -344,9 +343,9 @@ employment.hist_chart
 
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = Change in time is not significant for White and Hispanic males.  
-∗ = Change in time is not significant for Black males for 2000-2010 and 2000-2023.
-∗ = Change in time is not significant for Black females for 2010-2023.   
+"∗ = Change in time is not significant for Hispanic Males.   
+∗ = Change in time is not significant for White and Black males and females for 2000-2010.     
+∗ = Change in time is not significant for Hispanic females for 2010-2023.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023."
 )
 ```
@@ -359,9 +358,10 @@ employ.raceGeos_chart
 
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: The Hispanic employment rate by gender is unavailable for Orleans Parish in 2023.   
+"**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
+∗ = In Orleans Parish, the difference between White and Hispanic males is not significant.   
 ∗ = In Jefferson Parish, the difference between White and Black males, White and Black females, White and Hispanic females, and Black and Hispanic females is not significant.   
-∗ = In the New Orleans Metro area, the difference between White and Hispanic females is not significant.   
+∗ = In Metro New Orleans, the difference between White and Hispanic females is not significant.   
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023."
 )
@@ -369,15 +369,14 @@ makeCSS_source(
 
 ## Poverty and access to vehicles and internet
 
-A high share of residents living below the poverty level indicates the economy is not providing many residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round.off((getvalue.pov.no.1999 )*100)` to `r round.off((getvalue.pov.no.current )*100)` percent between 1999 and `r year`while the Jefferson Parish poverty rate increased from `r round.off((getvalue.pov.jeff.1999)*100)` to `r round.off((getvalue.pov.jeff.current)*100)` percent. Across the U.S., the poverty rate increased by one percentage point between 1999 and `r year`. 
+A high share of residents living below the poverty level indicates the economy is not providing many residents with the ability to meet their most basic needs, including food, housing, and transportation. The poverty rate in New Orleans decreased from `r round.off((getvalue.pov.no.1999 )*100)` to `r round.off((getvalue.pov.no.current )*100)` percent between 1999 and `r year`, while the Jefferson Parish poverty rate increased from `r round.off((getvalue.pov.jeff.1999)*100)` to `r round.off((getvalue.pov.jeff.current)*100)` percent. Across the U.S., the poverty rate increased by one percentage point between 1999 and `r year`. 
 
 ```{r pov, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
 povGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = Difference between 1999 and 2023 is not significant at 95% confidence interval.   
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023."
 )
 ```   
 
@@ -385,7 +384,7 @@ makeCSS_source(
 makeCSS_highlight(
 "### How is poverty measured? 
 
-The Census still uses the federal definition for poverty that was first created in 1964. The original calculations were based on studies from the early 1960s that indicated that family food costs were about one-third of a family’s budget. But housing costs have risen much faster than food costs since 1964. Also, the current calculations don’t count non-cash government aid, like Child Tax Credits or housing subsidies, as income. And they aren’t adjusted for differences in costs of living in different parts of the country. Given these limitations, the Census began publishing a Supplemental Poverty Measure that incorporates up-to-date data on regional housing costs as well as several kinds of government aid.  According to the Census, the 2020 Supplemental Poverty Rate for the U.S. was 9.1 percent. The Official Poverty Rate that same year was 11.4 percent.[^8]  The Census Bureau does not calculate Supplemental Poverty Rates for geographies smaller than the nation as a whole.[^9]"
+The Census still uses the federal definition for poverty that was first created in 1964. The original calculations were based on studies from the early 1960s that indicated that family food costs were about one-third of a family’s budget. But housing costs have risen much faster than food costs since 1964. Also, the current calculations don’t count non-cash government aid, like Child Tax Credits or housing subsidies, as income. And they aren’t adjusted for differences in costs of living in different parts of the country. Given these limitations, the Census began publishing a Supplemental Poverty Measure that incorporates up-to-date data on regional housing costs as well as several kinds of government aid. According to the Census, the 2023 Supplemental Poverty Rate for the U.S. was 12.9 percent. The Official Poverty Rate that same year was 11.1 percent.[^8] The Census Bureau does not calculate Supplemental Poverty Rates for geographies smaller than the nation as a whole.[^9]"
 )
 ```
 
@@ -404,21 +403,21 @@ makeCSS_source(
 )
 ```
 
-Large disparities in the poverty rate continue to be evident at all geographic levels. For example, in Metro New Orleans `r round.off((getvalue.pov.black.metropct*100))` percent of Black people, `r round.off((getvalue.pov.hisp.metropct*100))` percent of Hispanic people, and `r round.off((getvalue.pov.asian.metropct*100))` percent of Asian people live in poverty compared to `r round.off((getvalue.pov.white.metropct*100))` percent of White people. 
+Large disparities in the poverty rate continue to be evident at all geographic levels. For example, in Metro New Orleans `r round.off((getvalue.pov.black.metropct*100))` percent of Black people and `r round.off((getvalue.pov.hisp.metropct*100))` percent of Hispanic people live in poverty compared to `r round.off((getvalue.pov.white.metropct*100))` percent of White people. 
 
 ```{r povbyrace, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
 pov.raceGeos_chart
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = In Orleans Parish, the difference between White and Asian, Black and Asian, and Hispanic and Asian is not statistically significant.   
-∗ = In Jefferson Parish, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
-∗ = In the New Orleans Metro Area, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
+"**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
+∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
+∗ = In the New Orleans Metro Area, the difference between Black and Hispanic is not statistically significant.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023."
 )
 ```
 
-Like the overall poverty rate, the child poverty rate in New Orleans decreased from `r round.off((getvalue.childpov.no.1999*100))` percent 1999 to `r round.off((getvalue.childpov.no.current*100))` percent in `r year`. In Jefferson, `r round.off((getvalue.childpov.jeff.current*100))` percent of children live in poverty and across the metro `r round.off((getvalue.childpov.metro.current*100))`, both higher than the national rate.
+Like the overall poverty rate, the child poverty rate in New Orleans decreased from `r round.off((getvalue.childpov.no.1999*100))` percent 1999 to `r round.off((getvalue.childpov.no.current*100))` percent in `r year`. In Jefferson, `r round.off((getvalue.childpov.jeff.current*100))` percent of children live in poverty and across the metro `r round.off((getvalue.childpov.metro.current*100))` percent, both higher than the national rate.
 
 ```{r childpov, fig.align='center', fig.width=8, fig.height=5, echo=FALSE}
 childpovGraphic
@@ -430,7 +429,7 @@ makeCSS_source(
 )
 ```
 
-In Orleans Parish,`r round.off((getvalue.childpov.black.nopct*100))` percent of Black children live in poverty while `r round.off((getvalue.childpov.white.nopct*100))` percent of White children are poor. In New Orleans, child poverty rates peaked in 1989 for Black children and have fallen, but, at `r round.off((getvalue.childpov.black.nopct*100))` percent, are still 10 times higher than poverty rate for White children in New Orleans. The poverty rate for White children has declined from about one in 10 children in poverty in 1979 to about one in 50 in `r year`. 
+In Orleans Parish, `r round.off((getvalue.childpov.black.nopct*100))` percent of Black children live in poverty while `r round.off((getvalue.childpov.white.nopct*100))` percent of White children are poor. In New Orleans, child poverty rates peaked in 1989 for Black children and have fallen, but at `r round.off((getvalue.childpov.black.nopct*100))` percent are still 10 times higher than poverty rate for White children in New Orleans. The poverty rate for White children has declined from about 1 in 10 children in poverty in 1979 to about 1 in 50 in `r year`. 
 
 ```{r childpovhist, fig.align='center', fig.width=10, fig.height=6, echo=FALSE}
 childPov.hist_chart
@@ -445,7 +444,7 @@ makeCSS_source(
 )
 ```
 
-While in Orleans, poverty rates for Black children are 10 times higher than for White children, in Jefferson Parish Black children experience poverty about 5 times higher rates than White children. In Metro New Orleans, `r round.off(getvalue.childpov.hisp.metropct*100)` percent of Hispanic children live in poverty – higher than their national peers of whom `r round.off(getvalue.childpov.hisp.uspct*100)` percent live in poverty. 
+While in Orleans, poverty rates for Black children are 10 times higher than for White children, in Jefferson Parish Black children experience poverty about five times higher rates than White children. In Metro New Orleans, `r round.off(getvalue.childpov.hisp.metropct*100)` percent of Hispanic children live in poverty --- higher than their national peers of whom `r round.off(getvalue.childpov.hisp.uspct*100)` percent live in poverty. 
 
 ```{r childpovrace, fig.align='center', fig.width=11, fig.height=6, echo=FALSE}
 childpov.raceGeos_chart
@@ -453,11 +452,10 @@ childpov.raceGeos_chart
 ```{r, echo=FALSE}
 makeCSS_source(
 
-"**Notes**: Due to high margins of error, the comparison between any race and Asian is not statistically significant in Orleans Parish.   
+"**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
 ∗ = In Orleans Parish, the difference between Black and Hispanic is not statistically significant.   
-∗ = In Jefferson Parish, the difference between Black and Asian, Black and Hispanic, and Hispanic and Asian is not statistically significant.   
-∗ = In the New Orleans Metro Area, the difference between Black and Hispanic, Black and Asian, and Hispanic and Asian is not statistically significant.   
-∗ = In United States, the difference between White and Asian is not statistically significant.   
+∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
+∗ = In the New Orleans Metro Area, the difference between Black and Hispanic is not statistically significant.     
 **Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023."
 
 )
@@ -471,8 +469,7 @@ vehGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = Difference between 2000 and 2023 is not significant at 95% confidence interval.   
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023."
 )
 ```
 
@@ -521,7 +518,7 @@ chart.mob.allparishes
 ```{r, echo=FALSE}
 makeCSS_source(
 "**Notes**: Share not included in the bar chart represents the population who lived in the same house one year ago (non-movers). For people living in the same house as a year ago, the difference between 2004 and 2023 is not significant at the 95% confidence interval for Orleans Parish. It is significant for all other geographies   
-**Notes**: 2004 data is not available for metro New Orleans.   
+**Notes**: 2004 data is not available for Metro New Orleans.   
 ∗ = Difference between 2004 and 2023 is not significant at 95% confidence interval.   
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2023."
 )
@@ -560,7 +557,7 @@ ho.raceGeos_chart
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: Due to high margins of error, the comparison between any race and Asian is not statistically significant in Orleans Parish.   
+"**Notes**: Due to high margins of error, data for Asians is not included in this chart.   
 ∗ = In Orleans Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In Jefferson Parish, the difference between Black and Hispanic is not statistically significant.   
 ∗ = In the New Orleans Metro Area, the difference between Black and Hispanic is not statistically significant.   
@@ -581,7 +578,7 @@ makeCSS_source(
 
 ## Housing costs and affordability, housing stock, and commuting
 
-High housing costs can limit a region’s ability to attract and retain the workforce essential for a healthy economy.[^12] Severe housing cost burdens of more than 50 percent of household income indicate a serious problem in housing affordability. In 2004, the share of severely cost-burdened renters in New Orleans and the U.S. was `r round.off((getvalue.rentbur.no.2004)*100)` and `r round.off((getvalue.rentbur.us.2004)*100)` percent, respectively. In the `r year-2004` years since, that share has spiked to `r round.off((getvalue.rentburpct.no.current)*100)` percent in Orleans while growing to only `r round.off((getvalue.rentburpct.us.current)*100)` percent nationally. In Jefferson Parish, the share of renters paying more than 50 percent of household income on housing and utilities is `r round.off((getvalue.rentbur.jeff.current)*100)` percent in `r year`. 
+High housing costs can limit a region’s ability to attract and retain the workforce essential for a healthy economy.[^12] Severe housing cost burdens of more than 50 percent of household income indicate a serious problem in housing affordability. In 2004, the share of severely cost-burdened renters in New Orleans and the U.S. was `r round.off((getvalue.rentbur.no.2004)*100)` percent. In the `r year-2004` years since, that share has spiked to `r round.off((getvalue.rentburpct.no.current)*100)` percent in Orleans while growing to only `r round.off((getvalue.rentburpct.us.current)*100)` percent nationally. In Jefferson Parish, the share of renters paying more than 50 percent of household income on housing and utilities is `r round.off((getvalue.rentbur.jeff.current)*100)` percent in `r year`. 
 
 
 ```{r rentbur, fig.align='center', fig.width=7, fig.height=5, echo=FALSE}
@@ -589,7 +586,7 @@ rentburGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: 2004 data is not available for metro New Orleans.
+"**Notes**: 2004 data is not available for Metro New Orleans.
 
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2023."
 )
@@ -602,7 +599,7 @@ hoburGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: 2004 data is not available for metro New Orleans.
+"**Notes**: 2004 data is not available for Metro New Orleans.
 
 ∗ = Difference between 2004 and 2023 is not significant at 95% confidence interval.
 
@@ -617,8 +614,8 @@ medrentGraphic
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"**Notes**: 2004 data is not available for metro New Orleans
-
+"**Notes**: 2004 data is not available for Metro New Orleans   
+∗ = Difference between 2004 and 2023 is not significant at 95% confidence interval.    
 **Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2004 and 2023."
 )
 ```
@@ -632,9 +629,7 @@ chart.yrbuilt.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = Difference between indicated measure and the U.S. is not significant at 95% confidence interval.
-
-**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from American Community Survey 2023."
 )
 ```
 
@@ -645,9 +640,7 @@ chart.commute.allparishes
 ```
 ```{r, echo=FALSE}
 makeCSS_source(
-"∗ = Difference between 2000 and 2023 is not significant at 95% confidence interval.
-
-**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023."
+"**Source**: The Data Center analysis of U.S. Census Bureau data from Census 2000 SF3 and American Community Survey 2023."
 )
 ```
 
@@ -681,7 +674,7 @@ Standard errors for Census 2000 and Census 2010 SF1 data are zero.
 
 [^7]: Vigdor J. and Ladd, H. (2010). Scaling the Digital Divide: Home Computer Technology and Student Achievement. Retrieved February 8, 2021 from http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.6663&rep=rep1&type=pdf.
 
-[^8]: The latest Supplemental Poverty Measure report can be found at https://www.census.gov/content/dam/Census/library/publications/2021/demo/p60-275.pdf. 
+[^8]: The latest Supplemental Poverty Measure report can be found at https://www.census.gov/library/publications/2024/demo/p60-283.html. 
 
 [^9]: Guidance for how to approximate the Supplemental Poverty Measure using ACS geographies can be found at https://www.census.gov/content/dam/Census/library/working-papers/2020/demo/SEHSD-WP2020-09.pdf. 
 

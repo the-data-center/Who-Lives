@@ -828,6 +828,9 @@ chart.commute.allparishes <- commuteforGraphic %>%
 ###############################
 
 #across geos median hh income bar chart
+medhh_with_stats <- medhh_with_stats %>%
+  filter(race != "Asian") %>%
+  mutate(var.fac = factor(race, levels = c("Black","White, non-Hispanic","Hispanic, any race")))
 
 medhh.raceGeos_chart <- medhh_with_stats %>%
   ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
@@ -842,7 +845,7 @@ medhh.raceGeos_chart <- medhh_with_stats %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = comma_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p3yellowochre90),
                     limits = levels(medhh_with_stats$var.fac)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
@@ -904,7 +907,7 @@ employ.raceGeos_chart <- employ_with_stats %>%
   theme(legend.title = element_blank(),
         legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
         plot.title = element_text(size=16, hjust = .5))  + 
-  labs(title = "Employment rate, for population 16-64 by race/ethnicity, 2023",
+  labs(title = "Employment rate, for population 16-64 years old by race/ethnicity, 2023",
        x="",
        y="",
        fill = "") +
@@ -939,6 +942,9 @@ ggsave(employment.hist_chart,filename = "indicator expansion drafts/graphics/emp
        width = 8, height = 6, units = "in")
 
 # Across geos educational attainment bar chart
+bach_with_stats <- bach_with_stats %>%
+  filter(race != "Asian") %>%
+  mutate(var.fac = factor(race, levels = c("Black","White, non-Hispanic","Hispanic, any race")))
 
 bach.raceGeos_chart <- bach_with_stats %>%
   ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
@@ -953,7 +959,7 @@ bach.raceGeos_chart <- bach_with_stats %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p3yellowochre90),
                     limits = levels(bach_with_stats$var.fac)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
@@ -989,6 +995,9 @@ ggsave(EduAtt.hist_chart,filename = "indicator expansion drafts/graphics/bach.hi
 
 # across geos pov bar chart
 
+pov_with_stats <- pov_with_stats %>%
+  filter(race != "Asian") %>%
+  mutate(var.fac = factor(race, levels = c("Black","White, non-Hispanic","Hispanic, any race")))
 
 
 pov.raceGeos_chart <- pov_with_stats %>%
@@ -1004,7 +1013,7 @@ pov.raceGeos_chart <- pov_with_stats %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p3yellowochre90),
                     limits = levels(pov_with_stats$var.fac)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
@@ -1041,6 +1050,10 @@ ggsave(totalPov.hist_chart,filename = "indicator expansion drafts/graphics/pov.h
 
 
 #child poverty
+childpov_with_stats <- childpov_with_stats %>%
+  filter(race != "Asian") %>%
+  mutate(var.fac = factor(race, levels = c("Black","White, non-Hispanic","Hispanic, any race")))
+
 
 childpov.raceGeos_chart <- childpov_with_stats %>%
   ggplot(aes(x=placename.fac, y=val, fill=var.fac)) + 
@@ -1055,7 +1068,7 @@ childpov.raceGeos_chart <- childpov_with_stats %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p3yellowochre90),
                     limits = levels(childpov_with_stats$var.fac)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),
@@ -1090,6 +1103,9 @@ ggsave(childPov.hist_chart,filename = "indicator expansion drafts/graphics/child
        width = 8, height = 6, units = "in")
 
 # Homeownership
+ho_with_stats <- ho_with_stats %>%
+  filter(race != "Asian") %>%
+  mutate(var.fac = factor(race, levels = c("Black","White, non-Hispanic","Hispanic, any race")))
 
 
 ho.raceGeos_chart <- ho_with_stats %>%
@@ -1105,7 +1121,7 @@ ho.raceGeos_chart <- ho_with_stats %>%
             size=2.75,
             family="Asap") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + 
-  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p2violet90,DCcolor.p3yellowochre90),
+  scale_fill_manual(values = c(DCcolor.p1darkblue90,DCcolor.p2green90,DCcolor.p3yellowochre90),
                     limits = levels(ho_with_stats$var.fac)) +
   themeDC_horizontal() +
   theme(legend.title = element_blank(),

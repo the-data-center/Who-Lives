@@ -199,7 +199,7 @@ load("inputs/medhhRaw.RData")
 load("inputs/medhhRaw2000.RData")
 medhh <- medhhRaw %>%
   left_join(medhhRaw2000 %>% select(-place), by = "placename") %>%
-  mutate(census2000 = MedianHHIncome_2000 *cpi99,
+  mutate(census2000 = ifelse(placename == "New Orleans Metro Area", 0, MedianHHIncome_2000 *cpi99),
          census2000MOE = MedianHHIncome_2000MOE * cpi99,
          significant = stattest(x=census2000,moex = census2000MOE, y=MedianHHIncome,moey=MedianHHIncomeMOE))
 
@@ -1051,7 +1051,7 @@ medhh.race_stattest <- medhhRaw_exp %>%
          sigall_asian = stattest(x=MedianHHIncome_asian, moex = MedianHHIncomeMOE_asian, y=MedianHHIncome, moey = MedianHHIncomeMOE)
   ) 
 
-medhh_stat_all <- medhh.race_stattest %>% select(place, placename, (contains("sigall")), (contains("MedianHHIncome") & !contains("MOE"))) %>%
+medhh_stat_all <- medhh.race_stattest %>% select(place, placename, (contains("sigall")), (contains("MedianHHIncome") & !contains("MOE") & !contains("asian"))) %>%
   pivot_longer(cols = c(-place, -placename, -contains("sig")), names_to = "race", values_to = "val") %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_all") %>% group_by(place, placename) %>%
   mutate(race = case_when(race == "MedianHHIncome" ~ "All",
@@ -1066,7 +1066,7 @@ medhh_stat_all <- medhh_stat_all %>%  group_by(place, placename, race) %>%
   mutate(val_lab = paste0("$", comma(val))) %>% select(-var, -placename) %>% unique()
 
 
-medhh_stat_race <- medhh.race_stattest %>% select(place, placename, (contains("sig") & !contains("all"))) %>%
+medhh_stat_race <- medhh.race_stattest %>% select(place, placename, (contains("sig") & !contains("all") & !contains("asian"))) %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
@@ -1074,7 +1074,7 @@ medhh_stat_race <- medhh.race_stattest %>% select(place, placename, (contains("s
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 medhh_with_stats <- medhh_stat_all %>% left_join(medhh_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson", "Metro", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
@@ -1384,22 +1384,22 @@ bach_stat_all <- bach_stat_all %>%  group_by(place, placename, race) %>%
   mutate(val_lab = paste0(round.off(val*100), "%")) %>% select(-var, -placename) %>% unique()
 
 bach_stat_race <- bach.race_stattest %>%
-  select(place, placename, (contains("sig") & !contains("all"))) %>%
+  select(place, placename, (contains("sig") & !contains("all")), -contains("asian")) %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
                                T ~ placename),
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
-bach_with_stats <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
-         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
+bach_with_stats <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>% filter(race != "All" & race != "Asian") %>%
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans", "Jefferson*", "Metro*", "United States")),
+         var.fac = factor(race, levels = c("Black","White, non-Hispanic","Hispanic, any race")))
 
 
 bach.totals <- bach_stat_all %>% left_join(bach_stat_race, by = "place") %>% unique() %>%
   filter(race == "All") %>%
   mutate(var.fac = factor(race, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")),
-         placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro", "United States")))
+         placename.fac = factor(placename.y, levels = c("Orleans", "Jefferson*", "Metro", "United States")))
 
 bach.race <- bach_exp %>%
   filter(var!="pctbach") %>%
@@ -1407,7 +1407,7 @@ bach.race <- bach_exp %>%
          var = ifelse(grepl("blk",var), "Black", var),
          var = ifelse(grepl("hisp",var), "Hispanic,\nany race", var),
          var = ifelse(grepl("wht",var), "White,\nnon-Hispanic", var)) %>%
-  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Asian","Hispanic,\nany race")))
+  mutate(var.fac = factor(.$var, levels = c("Black","White,\nnon-Hispanic","Hispanic,\nany race")))
 
 bach.totals_CSV <- bach.totals %>% ungroup() %>% select(placename.x, race, val) %>% 
   mutate(placename.x = ifelse(placename.x == "United States", "U.S.", placename.x)) %>%
@@ -1684,7 +1684,7 @@ pov_stattest <- povRaw_exp %>%
          sigall_asian = stattest(x=pctpov_asian, moex = moeprop_asian, y=pctpov, moey = moeprop)
   )
 
-pov_stat_all <- pov_stattest %>% select(place, placename, (contains("sig") & contains("all")), contains("pct")) %>%
+pov_stat_all <- pov_stattest %>% select(place, placename, (contains("sig") & contains("all")), contains("pct"), !contains("asian")) %>%
   pivot_longer(cols = contains("pct"), names_to = "race", values_to = "val") %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_all") %>% group_by(place, placename) %>%
   mutate(race = case_when(race == "pctpov" ~ "All",
@@ -1699,7 +1699,7 @@ pov_stat_all <- pov_stat_all %>%  group_by(place, placename, race) %>%
   mutate(val_lab = paste0(round.off(val*100), "%")) %>% select(-var, -placename) %>% unique()
   
 
-pov_stat_race <- pov_stattest %>% select(place, placename, (contains("sig") & !contains("all"))) %>%
+pov_stat_race <- pov_stattest %>% select(place, placename, (contains("sig") & !contains("all") & !contains("asian"))) %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
@@ -1707,7 +1707,7 @@ pov_stat_race <- pov_stattest %>% select(place, placename, (contains("sig") & !c
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 pov_with_stats <- pov_stat_all %>% left_join(pov_stat_race, by = "place") %>% unique() %>% filter(race != "All") %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans", "Jefferson*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 
@@ -1957,7 +1957,7 @@ childpov_stattest <- childpov_stattest.data%>%
   )
 
 ###
-childpov_stat_all <- childpov_stattest %>% select(place, placename, (contains("sig") & contains("all")), contains("pct")) %>%
+childpov_stat_all <- childpov_stattest %>% select(place, placename, (contains("sig") & contains("all")), contains("pct"), !contains("asian")) %>%
   pivot_longer(cols = contains("pct"), names_to = "race", values_to = "val") %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_all") %>% group_by(place, placename) %>%
   mutate(race = case_when(race == "pctBelowChildPov" ~ "All",
@@ -1972,7 +1972,7 @@ childpov_stat_all <- childpov_stat_all %>%  group_by(place, placename, race) %>%
   mutate(val_lab = paste0(round.off(val*100), "%")) %>% select(-var, -placename) %>% unique()
 
 
-childpov_stat_race <- childpov_stattest %>% select(place, placename, (contains("sig") & !contains("all"))) %>%
+childpov_stat_race <- childpov_stattest %>% select(place, placename, (contains("sig") & !contains("all") & !contains("asian"))) %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
@@ -1980,7 +1980,7 @@ childpov_stat_race <- childpov_stattest %>% select(place, placename, (contains("
          placename = case_when("no" %in% stat_race ~ paste0(placename, "*"),
                                T ~ placename)) %>% select(-stat_race) %>% unique()
 childpov_with_stats <- childpov_stat_all %>% left_join(childpov_stat_race, by = "place") %>% unique() %>% filter(race != "All" & !(race == "Asian" & place == "071")) %>%
-  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States*")),
+  mutate(placename.fac = factor(placename.y, levels = c("Orleans*", "Jefferson*", "Metro*", "United States")),
          var.fac = factor(race, levels = c("Black","White, non-Hispanic","Asian","Hispanic, any race")))
 
 ###
@@ -2158,7 +2158,7 @@ ho_stattest <- ho_stattest.data %>%
          sigall_asian = stattest(x=Ownerpct_asian, moex = Ownermoeprop_asian, y=Ownerpct, moey = Ownermoeprop)
   )
 
-ho_stat_all <- ho_stattest %>% select(place, placename, (contains("sig") & contains("all")), contains("pct")) %>%
+ho_stat_all <- ho_stattest %>% select(place, placename, (contains("sig") & contains("all")), contains("pct") &  !contains("asian")) %>%
   pivot_longer(cols = contains("pct"), names_to = "race", values_to = "val") %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_all") %>% group_by(place, placename) %>%
   mutate(race = case_when(race == "Ownerpct" ~ "All",
@@ -2173,7 +2173,7 @@ ho_stat_all <- ho_stat_all %>%  group_by(place, placename, race) %>%
   mutate(val_lab = paste0(round.off(val*100), "%")) %>% select(-var, -placename) %>% unique()
 
 
-ho_stat_race <- ho_stattest %>% select(place, placename, (contains("sig") & !contains("all"))) %>%
+ho_stat_race <- ho_stattest %>% select(place, placename, (contains("sig") & !contains("all") & !contains("asian"))) %>%
   pivot_longer(cols = contains("sig"), names_to = "var", values_to = "stat_race") %>% select(-var) %>% 
   group_by(place, placename) %>%
   mutate(placename = case_when(placename == "New Orleans Metro Area" ~ "Metro",
