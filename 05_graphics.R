@@ -56,6 +56,7 @@ AAwhthispGraphic <- AAWhiteHispan %>%
 #### 2 -  Demographic bar charts for 8 parishes, metro, and US ####
 
 ### PEP ###
+### PEP ###
 ParishDemoforGraphic <- ParishDemo %>%
   select(PlaceName,
          contains('pct'),
@@ -105,37 +106,6 @@ chart.demo.allparishes <- ParishDemoforGraphic %>%
   labs(title = "White, Black, Hispanic, and Asian, Metro New Orleans parishes and U.S.",
        x="",
        y="")
-
-####4 - -Hispanic population change by parish
-
-### PEP ###
-HispanicPopforGraphic  <- HispanicPop %>%
-  mutate(PlaceName.fac = factor(.$PlaceName,levels = c("Orleans", "Jefferson", "Plaquemines",
-                                                       "St. Bernard","St. Charles", "St. James", "St. John the Baptist"))) %>%
-  gather(-PlaceName,-PlaceName.fac,key = variable, value = value) %>%
-  mutate(description = ifelse(variable == "est2000", "2000", yearPEP.char)) %>%
-mutate(description.fac = factor(.$description, levels = c(yearPEP.char, "2000")))
-
-HispanicPopGraphic <- HispanicPopforGraphic %>%
-  ggplot(aes(PlaceName.fac, value, fill=description.fac, label = comma(value))) +
-  geom_bar(stat="identity",
-           position = position_dodge(),
-           width = .7,
-           color="gray50") +
-  geom_text(aes(label = comma(value)),position=position_dodge(width = .7), vjust = .5, hjust = -.5, size=2.75, family="Asap") +
-  scale_y_continuous(labels = comma_format(), expand = c(0,0), limits = c(0,90000)) +
-  scale_fill_manual(values = c(DCcolor.p1mediumblue, DCcolor.p1skyblue), guide = guide_legend(reverse = T)) +
-  themeDC_vertical() +
-  coord_flip()+     #it's sideways
-  theme(legend.title = element_blank(),
-        legend.text = element_text(margin = margin(t = 2, l = 4, b = 6, unit = "pt"), size = 12),
-        axis.text.x = element_text(size = 12, vjust=1),
-        axis.text.y = element_text(size = 12),
-        plot.title = element_text(hjust = .5)) +
-  labs(title = "Hispanic population change by parish",
-       x="",
-       y="")
-
 
 ####5- Hispanic population ofes in metro by year
 

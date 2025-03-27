@@ -741,15 +741,15 @@ totpoprace_2000 <- totpopraceRaw_tot %>%
 
 ParishDemo <- ParishDemo1  %>%
   mutate(placename2 = case_when(PlaceName == "Metro" ~ "New Orleans Metro Area",
-                                                        T ~ PlaceName)) %>%
+                                T ~ PlaceName)) %>%
   left_join(totpoprace_2000, by = c("placename2" = "placename", "raceSimple")) %>%
   
   
   pivot_wider(names_from = raceSimple, values_from = c(population, val2000)) %>%
   mutate(PlaceName = factor(PlaceName, levels = c("Orleans", "Jefferson", "Plaquemines",
                                                   "St. Bernard","St. Charles", "St. James",
-                                                  "St. John the Baptist", "New Orleans Metro Area", "United States"))) %>%
-         mutate(pctwhite = as.numeric(population_White)/ as.numeric(population_Total),
+                                                  "St. John the Baptist", "Metro", "United States"))) %>%
+  mutate(pctwhite = as.numeric(population_White)/ as.numeric(population_Total),
          pctblack = as.numeric(population_Black) / as.numeric(population_Total),
          pctasian = as.numeric(population_Asian) / as.numeric(population_Total),
          pcthisp = as.numeric(population_Hispanic) / as.numeric(population_Total),     
@@ -758,13 +758,13 @@ ParishDemo <- ParishDemo1  %>%
          black2000 = val2000_Black / val2000_Total,
          asian2000 = val2000_Asian / val2000_Total,
          hispanic2000 = val2000_Hispanic / val2000_Total
-  #    white2000=c(.266,.645,.688,.844,.705,.497,.51 ,.853,.547,.691),
-  #    black2000=c(.667,.227,.233,.076,.251,.492,.446,.098,.373,.121),
-  #    asian2000=c(.023,.031,.026,.013,.006,0   ,.005,.008,.021,.037),
-  # hispanic2000=c(.031,.071,.016,.051,.028,.006,.029,.025,.044,.125)
-  
+         #    white2000=c(.266,.645,.688,.844,.705,.497,.51 ,.853,.547,.691),
+         #    black2000=c(.667,.227,.233,.076,.251,.492,.446,.098,.373,.121),
+         #    asian2000=c(.023,.031,.026,.013,.006,0   ,.005,.008,.021,.037),
+         # hispanic2000=c(.031,.071,.016,.051,.028,.006,.029,.025,.044,.125)
+         
   ) #%>%
-  #.[-2,]
+#.[-2,]
 
 orleansdemo_csv <- ParishDemo %>% filter(PlaceName == "Orleans") %>% select(PlaceName, population_Total:population_Hispanic) %>% 
   pivot_longer(cols = -PlaceName, names_to = "race", values_to = "est2023") 
@@ -777,14 +777,15 @@ parishdemo_csv <- ParishDemo %>% select(PlaceName, pctwhite:hispanic2000) %>%
                           is.na(year) ~ "2023",
                           T ~ year),
          race = factor(case_when(grepl("white", race) ~ "White, non-Hispanic",
-                          grepl("black", race) ~ "Black",
-                          grepl("hisp", race) ~ "Hispanic, any race",
-                          grepl("asian", race) ~ "Asian"), levels = c("White, non-Hispanic", "Black", "Hispanic, any race", "Asian"))) %>% 
+                                 grepl("black", race) ~ "Black",
+                                 grepl("hisp", race) ~ "Hispanic, any race",
+                                 grepl("asian", race) ~ "Asian"), levels = c("White, non-Hispanic", "Black", "Hispanic, any race", "Asian"))) %>% 
   arrange(PlaceName, year) %>%
   pivot_wider(names_from = c(PlaceName, year), values_from = val) %>% 
   arrange(race) 
 write.csv(parishdemo_csv, "outputs/spreadsheets/ParishDemo.csv")
 #storage_write_csv(parishdemo_csv, cont_proj, "who_lives/2024/outputs/ParishDemo.csv")
+
 
 
 
